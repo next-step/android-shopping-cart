@@ -28,7 +28,7 @@ internal fun ProductListScreen(navHostController: NavHostController) {
                     IconButton(onClick = { navHostController.navigate(Navigation.Cart.route) }) {
                         Icon(
                             imageVector = Icons.Default.ShoppingCart,
-                            contentDescription = null,
+                            contentDescription = "장바구니",
                         )
                     }
                 },
