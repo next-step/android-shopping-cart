@@ -20,10 +20,10 @@ fun AppNavHost(
         composable(Navigation.ProductList.route) {
             ProductListScreen(navHostController)
         }
-        composable(Navigation.ProductList.route) {
+        composable(Navigation.ProductDetail.route) {
             ProductDetailScreen(navHostController)
         }
-        composable(Navigation.ProductList.route) {
+        composable(Navigation.Cart.route) {
             CartScreen(navHostController)
         }
     }
