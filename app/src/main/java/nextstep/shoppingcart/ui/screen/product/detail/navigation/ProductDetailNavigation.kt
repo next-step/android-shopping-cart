@@ -5,8 +5,8 @@ import androidx.navigation.compose.composable
 import nextstep.shoppingcart.ui.screen.product.detail.ProductDetailScreen
 
 const val ProductDetailNavigationRoute = "product_detail"
-fun NavGraphBuilder.productDetailScreen() {
+fun NavGraphBuilder.productDetailScreen(onClickBack: () -> Unit) {
     composable(route = ProductDetailNavigationRoute) {
-        ProductDetailScreen()
+        ProductDetailScreen(onClickBack = onClickBack)
     }
 }

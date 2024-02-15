@@ -6,8 +6,8 @@ import nextstep.shoppingcart.ui.screen.product.list.ProductListScreen
 
 const val ProductListNavigationRoute = "product_list"
 
-fun NavGraphBuilder.productListScreen() {
+fun NavGraphBuilder.productListScreen(onClickCart: () -> Unit) {
     composable(route = ProductListNavigationRoute) {
-        ProductListScreen()
+        ProductListScreen(onClickCart = onClickCart)
     }
 }
