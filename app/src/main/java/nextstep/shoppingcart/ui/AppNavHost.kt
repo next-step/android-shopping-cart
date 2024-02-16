@@ -18,13 +18,16 @@ fun AppNavHost(
         startDestination = Navigation.ProductList.route
     ) {
         composable(Navigation.ProductList.route) {
-            ProductListScreen(navHostController)
+            ProductListScreen(
+                onCartClick = { navHostController.navigate(Navigation.Cart.route) },
+                onProductClick = { navHostController.navigate(Navigation.ProductDetail.route) }
+            )
         }
         composable(Navigation.ProductDetail.route) {
-            ProductDetailScreen(navHostController)
+            ProductDetailScreen(onBackClick = { navHostController.popBackStack() })
         }
         composable(Navigation.Cart.route) {
-            CartScreen(navHostController)
+            CartScreen(onBackClick = { navHostController.popBackStack() })
         }
     }
 }

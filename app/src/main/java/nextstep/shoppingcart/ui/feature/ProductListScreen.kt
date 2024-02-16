@@ -12,18 +12,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import nextstep.shoppingcart.ui.navigation.Navigation
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductListScreen(navController: NavHostController) {
+fun ProductListScreen(
+    onProductClick: () -> Unit,
+    onCartClick: () -> Unit
+) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = "상품 목록") },
                 actions = {
-                    IconButton(onClick = { navController.navigate(Navigation.Cart.route) }) {
+                    IconButton(onClick = { onCartClick() }) {
                         Icon(
                             imageVector = Icons.Filled.ShoppingCart,
                             contentDescription = "장바구니"
@@ -35,7 +36,7 @@ fun ProductListScreen(navController: NavHostController) {
     ) { innerPadding ->
         Button(
             modifier = Modifier.padding(innerPadding),
-            onClick = { navController.navigate(Navigation.ProductDetail.route) },
+            onClick = { onProductClick() },
             content = {
                 Text(text = "ProductDetailScreen")
             }
