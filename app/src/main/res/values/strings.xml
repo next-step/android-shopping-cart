@@ -4,4 +4,7 @@
     <string name="products_screen_top_bar_title">상품 목록</string>
     <string name="products_screen_top_bar_button_cart_content_description">상품 목록</string>
 
+    <string name="product_details_screen_top_bar_title">상품 상세</string>
+    <string name="product_details_screen_top_bar_back_button_content_description">뒤로 가기</string>
+
 </resources>
