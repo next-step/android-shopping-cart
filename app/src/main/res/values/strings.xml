@@ -7,4 +7,6 @@
     <string name="product_details_screen_top_bar_title">상품 상세</string>
     <string name="product_details_screen_top_bar_back_button_content_description">뒤로 가기</string>
 
+    <string name="product_details_screen_put_in_cart_button">장바구니 담기</string>
+
 </resources>
