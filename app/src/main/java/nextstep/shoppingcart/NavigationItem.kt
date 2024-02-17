@@ -42,7 +42,11 @@ fun AppNavHost(
         }
 
         composable(NavigationItem.ProductDetail.route) {
-            ProductDetailScreen(navHostController)
+            ProductDetailScreen(
+                navController = navHostController,
+                productItemUiState = StubProductItemUiStates[0],
+                onPutInCartButtonClick = {},
+            )
         }
 
         composable(NavigationItem.Cart.route) {
