@@ -26,7 +26,11 @@ fun ProductsScreen(
         GridProductItems(
             modifier = Modifier.padding(innerPadding),
             productItemUiStates = productItemUiStates,
-            onItemClick = { navHostController.navigate(NavigationItem.ProductDetail.route) },
+            onItemClick = {
+                navHostController.currentBackStackEntry?.savedStateHandle
+                    ?.set(ProductItemUiState::class.java.name, it)
+                navHostController.navigate(NavigationItem.ProductDetail.route)
+            },
             onFloatingButtonClick = {},
         )
     }

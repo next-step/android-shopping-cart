@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import nextstep.shoppingcart.products.ProductItemUiState
 import nextstep.shoppingcart.products.ProductsScreen
 import nextstep.shoppingcart.products.StubProductItemUiStates
 import nextstep.shoppingcart.products.detail.ProductDetailScreen
@@ -42,9 +43,13 @@ fun AppNavHost(
         }
 
         composable(NavigationItem.ProductDetail.route) {
+            val productItemUiState = navHostController.previousBackStackEntry?.savedStateHandle
+                ?.get<ProductItemUiState>(ProductItemUiState::class.java.name)
+                ?: return@composable
+
             ProductDetailScreen(
                 navController = navHostController,
-                productItemUiState = StubProductItemUiStates[0],
+                productItemUiState = productItemUiState,
                 onPutInCartButtonClick = {},
             )
         }
