@@ -26,14 +26,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.products.ProductItemUiState
 import nextstep.shoppingcart.products.formatter.DefaultPriceFormatter
 import nextstep.shoppingcart.products.formatter.PriceFormatter
 
 @Composable
 fun ProductsItem(
-    productImageUrl: String,
-    productName: String,
-    productPrice: Int,
+    productItemUiState: ProductItemUiState,
     onItemClick: () -> Unit,
     onFloatingButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -43,14 +42,14 @@ fun ProductsItem(
         modifier = modifier.clickable(onClick = onItemClick)
     ) {
         ProductImageBox(
-            imageUrl = productImageUrl,
+            imageUrl = productItemUiState.productImageUrl,
             onFloatingButtonClick = onFloatingButtonClick,
         )
 
-        ProductName(name = productName)
+        ProductName(name = productItemUiState.productName)
 
         ProductPrice(
-            price = productPrice,
+            price = productItemUiState.productPrice,
             priceFormatter = productPriceFormatter,
         )
     }
@@ -130,9 +129,11 @@ private fun ProductPrice(
 @Composable
 fun ProductsItemPreview() {
     ProductsItem(
-        productImageUrl = "https://example.com/image.jpg",
-        productName = "PET보틀-원형(500ml)",
-        productPrice = 13_000,
+        productItemUiState = ProductItemUiState(
+            productImageUrl = "https://example.com/image.jpg",
+            productName = "PET보틀-원형(500ml)",
+            productPrice = 13_000,
+        ),
         onItemClick = {},
         onFloatingButtonClick = {},
     )
