@@ -3,8 +3,6 @@ package nextstep.shoppingcart
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -17,6 +15,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import nextstep.shoppingcart.products.ProductsScreen
+import nextstep.shoppingcart.products.StubProductItemUiStates
 
 sealed class NavigationItem(val route: String) {
 
@@ -35,7 +34,10 @@ fun AppNavHost(
         startDestination = startDestination,
     ) {
         composable(NavigationItem.Products.route) {
-            ProductsScreen(navHostController)
+            ProductsScreen(
+                navHostController = navHostController,
+                productItemUiStates = StubProductItemUiStates,
+            )
         }
 
         composable(NavigationItem.ProductDetail.route) {
