@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import nextstep.shoppingcart.products.ProductsScreen
 
 sealed class NavigationItem(val route: String) {
 
@@ -45,34 +46,6 @@ fun AppNavHost(
             CartScreen(navHostController)
         }
 
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ProductsScreen(navHostController: NavHostController) {
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = "상품 목록") },
-                actions = {
-                    IconButton(
-                        onClick = {
-                            navHostController.navigate(NavigationItem.Cart.route)
-                        },
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.ShoppingCart,
-                            contentDescription = "뒤로가기",
-                        )
-                    }
-                })
-        }
-    ) { innerPadding ->
-        Text(
-            modifier = Modifier.padding(innerPadding),
-            text = "Products",
-        )
     }
 }
 
