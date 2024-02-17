@@ -36,7 +36,7 @@ fun AppNavHost(
         composable(NavigationItem.ProductDetail.route) {
             val productItemUiState = navHostController.previousBackStackEntry?.savedStateHandle
                 ?.get<ProductItemUiState>(ProductItemUiState::class.java.name)
-                ?: return@composable
+                ?: ProductItemUiState.Stub
 
             ProductDetailScreen(
                 navController = navHostController,
