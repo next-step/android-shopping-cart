@@ -17,7 +17,7 @@ import nextstep.shoppingcart.products.StubProductItemUiStates
 @Composable
 fun GridProductItems(
     productItemUiStates: List<ProductItemUiState>,
-    onItemClick: () -> Unit,
+    onItemClick: (ProductItemUiState) -> Unit,
     onFloatingButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -42,7 +42,7 @@ fun GridProductItems(
 @Composable
 private fun TwoProductItemInRow(
     productItemUiStates: List<ProductItemUiState>,
-    onItemClick: () -> Unit,
+    onItemClick: (ProductItemUiState) -> Unit,
     onFloatingButtonClick: () -> Unit,
 ) {
     if (productItemUiStates.isEmpty()) {

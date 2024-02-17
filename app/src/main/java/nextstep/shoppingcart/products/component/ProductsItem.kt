@@ -34,13 +34,13 @@ import nextstep.shoppingcart.products.formatter.PriceFormatter
 @Composable
 fun ProductsItem(
     productItemUiState: ProductItemUiState,
-    onItemClick: () -> Unit,
+    onItemClick: (ProductItemUiState) -> Unit,
     onFloatingButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
     productPriceFormatter: PriceFormatter = DefaultPriceFormatter,
 ) {
     Column(
-        modifier = modifier.clickable(onClick = onItemClick)
+        modifier = modifier.clickable(onClick = { onItemClick(productItemUiState) })
     ) {
         ProductImageBox(
             imageUrl = productItemUiState.productImageUrl,
