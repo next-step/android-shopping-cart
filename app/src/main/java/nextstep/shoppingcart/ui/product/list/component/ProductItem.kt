@@ -32,6 +32,7 @@ import nextstep.shoppingcart.domain.model.Product
 @Composable
 internal fun ProductItem(
     product: Product,
+    onAddClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
@@ -49,7 +50,7 @@ internal fun ProductItem(
             )
 
             IconButton(
-                onClick = { /*TODO*/ },
+                onClick = onAddClick,
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(12.dp)
@@ -60,7 +61,7 @@ internal fun ProductItem(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "추가",
+                    contentDescription = "장바구니 추가",
                 )
             }
         }
@@ -88,6 +89,7 @@ private fun ProductItemPreview() {
         val product = Product(id = "1", name = "PET보틀-원형(500ml)", price = 42200, imageUrl = "")
         ProductItem(
             product = product,
+            onAddClick = { },
             modifier = Modifier.padding(12.dp),
         )
     }
