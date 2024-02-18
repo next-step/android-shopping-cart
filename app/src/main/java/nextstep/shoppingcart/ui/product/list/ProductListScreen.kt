@@ -1,6 +1,11 @@
 package nextstep.shoppingcart.ui.product.list
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -14,11 +19,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.navigation.Navigation
+import nextstep.shoppingcart.ui.product.list.component.ProductItem
 
 private val Products = listOf(
     Product(
@@ -64,16 +71,22 @@ internal fun ProductListScreen(
     navHostController: NavHostController,
 ) {
     ProductListScreen(
+        products = Products,
         onCartClick = {
             navHostController.navigate(Navigation.Cart.route)
         },
+        onProductAddClick = { /* TODO */ },
+        onProductItemClick = { /* TODO */ },
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ProductListScreen(
+    products: List<Product>,
     onCartClick: () -> Unit,
+    onProductAddClick: (Product) -> Unit,
+    onProductItemClick: (Product) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -90,7 +103,20 @@ internal fun ProductListScreen(
             )
         },
         content = { innerPadding ->
-            Text("상품 목록", modifier = Modifier.padding(innerPadding))
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                contentPadding = PaddingValues(vertical = 4.dp, horizontal = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.padding(innerPadding),
+            ) {
+                items(products) { product ->
+                    ProductItem(
+                        product = product,
+                        onAddClick = { onProductAddClick(product) },
+                        onItemClick = { onProductItemClick(product) },
+                    )
+                }
+            }
         },
     )
 }

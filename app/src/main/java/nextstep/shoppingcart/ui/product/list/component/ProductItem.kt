@@ -37,13 +37,16 @@ internal fun ProductItem(
     onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier
+            .clickable(onClick = onItemClick)
+            .padding(8.dp)
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .background(Color(0xFFEDEDED))
-                .clickable(onClick = onItemClick)
         ) {
             AsyncImage(
                 model = product.imageUrl,
@@ -94,7 +97,6 @@ private fun ProductItemPreview() {
             product = product,
             onAddClick = { },
             onItemClick = { },
-            modifier = Modifier.padding(12.dp),
         )
     }
 }
