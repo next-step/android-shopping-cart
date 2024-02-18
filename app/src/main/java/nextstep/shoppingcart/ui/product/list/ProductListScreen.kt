@@ -12,9 +12,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.navigation.Navigation
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,7 +25,7 @@ internal fun ProductListScreen(navHostController: NavHostController) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "상품 목록") },
+                title = { Text(text = stringResource(id = R.string.product_list_title)) },
                 actions = {
                     IconButton(onClick = { navHostController.navigate(Navigation.Cart.route) }) {
                         Icon(
