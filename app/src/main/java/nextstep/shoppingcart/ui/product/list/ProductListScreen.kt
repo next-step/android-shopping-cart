@@ -1,6 +1,11 @@
 package nextstep.shoppingcart.ui.product.list
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -12,20 +17,42 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import nextstep.shoppingcart.navigation.Navigation
+import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Products
+import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.ui.product.list.component.ProductItem
+
+@Composable
+internal fun ProductListScreen(
+    onCartClick: () -> Unit,
+    onProductItemClick: (Product) -> Unit,
+) {
+    ProductListScreen(
+        products = Products,
+        onCartClick = onCartClick,
+        onProductAddClick = { /* TODO */ },
+        onProductItemClick = onProductItemClick,
+    )
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ProductListScreen(navHostController: NavHostController) {
+internal fun ProductListScreen(
+    products: List<Product>,
+    onCartClick: () -> Unit,
+    onProductAddClick: (Product) -> Unit,
+    onProductItemClick: (Product) -> Unit,
+) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "상품 목록") },
+                title = { Text(text = stringResource(id = R.string.product_list_title)) },
                 actions = {
-                    IconButton(onClick = { navHostController.navigate(Navigation.Cart.route) }) {
+                    IconButton(onClick = onCartClick) {
                         Icon(
                             imageVector = Icons.Default.ShoppingCart,
                             contentDescription = "장바구니",
@@ -35,7 +62,23 @@ internal fun ProductListScreen(navHostController: NavHostController) {
             )
         },
         content = { innerPadding ->
-            Text("상품 목록", modifier = Modifier.padding(innerPadding))
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                contentPadding = PaddingValues(vertical = 4.dp, horizontal = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .testTag("products"),
+            ) {
+                items(products) { product ->
+                    ProductItem(
+                        product = product,
+                        onAddClick = { onProductAddClick(product) },
+                        onItemClick = { onProductItemClick(product) },
+                        modifier = Modifier.testTag(product.id)
+                    )
+                }
+            }
         },
     )
 }
@@ -44,6 +87,11 @@ internal fun ProductListScreen(navHostController: NavHostController) {
 @Composable
 private fun ProductListScreenPreview() {
     MaterialTheme {
-        ProductListScreen(navHostController = rememberNavController())
+        ProductListScreen(
+            products = Products,
+            onCartClick = {},
+            onProductAddClick = {},
+            onProductItemClick = {},
+        )
     }
 }

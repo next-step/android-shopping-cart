@@ -1,11 +1,14 @@
 package nextstep.shoppingcart.ui
 
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
+import nextstep.shoppingcart.data.productsTestData
 import nextstep.shoppingcart.navigation.Navigation
 import org.junit.Before
 import org.junit.Rule
@@ -63,5 +66,18 @@ class AppNavHostTest {
         // then
         val actual = navController.currentBackStackEntry?.destination?.route
         assert(actual == Navigation.ProductList.route)
+    }
+
+    @Test
+    fun 상품목록에서_상품을_클릭하면_상세화면이_보인다() {
+        // when
+        composeTestRule
+            .onNodeWithTag(productsTestData[0].id)
+            .performClick()
+
+        // then
+        composeTestRule
+            .onNodeWithTag("상품상세")
+            .assertIsDisplayed()
     }
 }
