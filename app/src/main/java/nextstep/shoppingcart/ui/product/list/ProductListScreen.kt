@@ -19,15 +19,28 @@ import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.navigation.Navigation
 
+@Composable
+internal fun ProductListScreen(
+    navHostController: NavHostController,
+) {
+    ProductListScreen(
+        onCartClick = {
+            navHostController.navigate(Navigation.Cart.route)
+        },
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ProductListScreen(navHostController: NavHostController) {
+internal fun ProductListScreen(
+    onCartClick: () -> Unit,
+) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = stringResource(id = R.string.product_list_title)) },
                 actions = {
-                    IconButton(onClick = { navHostController.navigate(Navigation.Cart.route) }) {
+                    IconButton(onClick = onCartClick) {
                         Icon(
                             imageVector = Icons.Default.ShoppingCart,
                             contentDescription = "장바구니",
