@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.product.list
+package nextstep.shoppingcart.ui.product.list.component
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -7,7 +7,6 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.ui.product.list.component.ProductItem
 import org.junit.Rule
 import org.junit.Test
 
