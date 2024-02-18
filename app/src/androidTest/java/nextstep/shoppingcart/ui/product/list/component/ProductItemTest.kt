@@ -6,7 +6,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
-import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.data.productsTestData
 import org.junit.Rule
 import org.junit.Test
 
@@ -19,7 +19,7 @@ class ProductItemTest {
     fun 상품의_이름은_그대로_출력한다() {
         // given
         val productName = "PET보틀-정사각"
-        val product = fakeProduct(name = productName)
+        val product = productsTestData[0].copy(name = productName)
 
         // when
         composeTestRule.setContent {
@@ -40,7 +40,7 @@ class ProductItemTest {
     fun 상품의_가격은_원화_단위로_출력한다() {
         // given
         val productPrice = 44100
-        val product = fakeProduct(price = productPrice)
+        val product = productsTestData[0].copy(price = productPrice)
 
         // when
         composeTestRule.setContent {
@@ -60,7 +60,7 @@ class ProductItemTest {
     @Test
     fun 장바구니_추가_버튼을_클릭할_수_있다() {
         // given
-        val product = fakeProduct()
+        val product = productsTestData[0]
 
         // when
         var clicked = false
@@ -82,7 +82,7 @@ class ProductItemTest {
     @Test
     fun 아이템을_클릭할_수_있다() {
         // given
-        val product = fakeProduct()
+        val product = productsTestData[0]
 
         // when
         var clicked = false
@@ -101,14 +101,4 @@ class ProductItemTest {
         assert(clicked)
     }
 
-    private fun fakeProduct(
-        name: String = "",
-        price: Int = 0,
-        imageUrl: String = "",
-    ) = Product(
-        id = "",
-        name = name,
-        price = price,
-        imageUrl = imageUrl,
-    )
 }
