@@ -14,7 +14,7 @@ import nextstep.shoppingcart.data.productsTestData
 import org.junit.Rule
 import org.junit.Test
 
-class ProductScreenTest {
+class ProductListScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
