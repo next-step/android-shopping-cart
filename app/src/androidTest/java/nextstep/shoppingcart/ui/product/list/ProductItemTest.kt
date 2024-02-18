@@ -4,6 +4,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.product.list.component.ProductItem
@@ -26,6 +27,7 @@ class ProductItemTest {
             ProductItem(
                 product = product,
                 onAddClick = { },
+                onItemClick = { },
             )
         }
 
@@ -46,6 +48,7 @@ class ProductItemTest {
             ProductItem(
                 product = product,
                 onAddClick = { },
+                onItemClick = { },
             )
         }
 
@@ -66,10 +69,33 @@ class ProductItemTest {
             ProductItem(
                 product = product,
                 onAddClick = { clicked = true },
+                onItemClick = { },
             )
         }
         composeTestRule
             .onNodeWithContentDescription("장바구니 추가")
+            .performClick()
+
+        // then
+        assert(clicked)
+    }
+
+    @Test
+    fun 아이템을_클릭할_수_있다() {
+        // given
+        val product = fakeProduct()
+
+        // when
+        var clicked = false
+        composeTestRule.setContent {
+            ProductItem(
+                product = product,
+                onAddClick = { },
+                onItemClick = { clicked = true },
+            )
+        }
+        composeTestRule
+            .onRoot()
             .performClick()
 
         // then

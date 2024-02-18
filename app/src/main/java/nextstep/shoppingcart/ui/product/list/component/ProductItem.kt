@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.ui.product.list.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -33,6 +34,7 @@ import nextstep.shoppingcart.domain.model.Product
 internal fun ProductItem(
     product: Product,
     onAddClick: () -> Unit,
+    onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
@@ -41,6 +43,7 @@ internal fun ProductItem(
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .background(Color(0xFFEDEDED))
+                .clickable(onClick = onItemClick)
         ) {
             AsyncImage(
                 model = product.imageUrl,
@@ -90,6 +93,7 @@ private fun ProductItemPreview() {
         ProductItem(
             product = product,
             onAddClick = { },
+            onItemClick = { },
             modifier = Modifier.padding(12.dp),
         )
     }
