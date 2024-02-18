@@ -12,19 +12,40 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import nextstep.shoppingcart.data.Products
+import nextstep.shoppingcart.domain.model.Product
+
+@Composable
+internal fun ProductDetailScreen(
+    productId: String,
+    onBackClick: () -> Unit,
+) {
+    val product = Products.find { it.id == productId }
+
+    if (product != null) {
+        ProductDetailScreen(
+            product = product,
+            onBackClick = onBackClick,
+            modifier = Modifier.testTag("상품상세")
+        )
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ProductDetailScreen(navHostController: NavHostController) {
+internal fun ProductDetailScreen(
+    product: Product,
+    onBackClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = "상품 상세") },
                 navigationIcon = {
-                    IconButton(onClick = { navHostController.popBackStack() }) {
+                    IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "뒤로가기",
@@ -36,6 +57,7 @@ internal fun ProductDetailScreen(navHostController: NavHostController) {
         content = { innerPadding ->
             Text("상품 상세", modifier = Modifier.padding(innerPadding))
         },
+        modifier = modifier,
     )
 }
 
@@ -43,6 +65,9 @@ internal fun ProductDetailScreen(navHostController: NavHostController) {
 @Composable
 private fun ProductDetailScreenPreview() {
     MaterialTheme {
-        ProductDetailScreen(navHostController = rememberNavController())
+        ProductDetailScreen(
+            product = Products[0],
+            onBackClick = { },
+        )
     }
 }

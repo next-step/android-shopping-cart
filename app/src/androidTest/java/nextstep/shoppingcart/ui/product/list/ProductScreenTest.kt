@@ -10,7 +10,6 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
-import kotlinx.coroutines.test.runTest
 import nextstep.shoppingcart.data.productsTestData
 import org.junit.Rule
 import org.junit.Test
@@ -90,7 +89,7 @@ class ProductScreenTest {
     }
 
     @Test
-    fun 상품_장바구니_버튼을_클릭할_수_있다() = runTest {
+    fun 상품_장바구니_버튼을_클릭할_수_있다() {
         // given
         var clickedProductId: String? = null
 
@@ -102,8 +101,6 @@ class ProductScreenTest {
                 onProductItemClick = { }
             )
         }
-
-        composeTestRule.awaitIdle()
 
         // when
         composeTestRule

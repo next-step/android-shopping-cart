@@ -21,25 +21,21 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.navigation.Navigation
 import nextstep.shoppingcart.ui.product.list.component.ProductItem
 
 @Composable
 internal fun ProductListScreen(
-    navHostController: NavHostController,
+    onCartClick: () -> Unit,
+    onProductItemClick: (Product) -> Unit,
 ) {
     ProductListScreen(
         products = Products,
-        onCartClick = {
-            navHostController.navigate(Navigation.Cart.route)
-        },
+        onCartClick = onCartClick,
         onProductAddClick = { /* TODO */ },
-        onProductItemClick = { /* TODO */ },
+        onProductItemClick = onProductItemClick,
     )
 }
 
@@ -91,6 +87,11 @@ internal fun ProductListScreen(
 @Composable
 private fun ProductListScreenPreview() {
     MaterialTheme {
-        ProductListScreen(navHostController = rememberNavController())
+        ProductListScreen(
+            products = Products,
+            onCartClick = {},
+            onProductAddClick = {},
+            onProductItemClick = {},
+        )
     }
 }
