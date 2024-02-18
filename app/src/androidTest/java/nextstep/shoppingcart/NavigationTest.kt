@@ -15,6 +15,25 @@ class NavigationTest {
     val composeTestRule = createComposeRule()
 
     @Test
+    fun 최초_실행_했을_때는_디폴트로_지정된_상품_목록_화면으로_이동한다() {
+        // given when
+        composeTestRule.setContent {
+            Surface(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                AppNavHost(
+                    navHostController = rememberNavController(),
+                )
+            }
+        }
+
+        // then
+        composeTestRule
+            .onNodeWithText("상품 목록")
+            .assertExists()
+    }
+
+    @Test
     fun 상품_목록_탭으로_이동할_수_있다() {
         // given when
         composeTestRule.setContent {
