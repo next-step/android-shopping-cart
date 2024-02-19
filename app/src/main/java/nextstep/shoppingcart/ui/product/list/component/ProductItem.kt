@@ -89,6 +89,7 @@ internal fun ProductItem(
 }
 
 @Preview(showBackground = true, widthDp = 200)
+@Preview(showBackground = true, widthDp = 150)
 @Composable
 private fun ProductItemPreview() {
     MaterialTheme {
