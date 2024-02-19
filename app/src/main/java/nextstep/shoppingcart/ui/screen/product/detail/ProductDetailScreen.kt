@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.component.ProductImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,14 +58,7 @@ fun ProductDetailScreen(
                 .fillMaxSize()
                 .padding(paddingValues = innerPadding)
         ) {
-            AsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(ratio = 1f),
-                model = product.imageUrl,
-                contentDescription = null,
-                placeholder = painterResource(id = R.drawable.ic_launcher_foreground)
-            )
+            ProductImage(product = product)
             Text(
                 modifier = Modifier.padding(all = 18.dp),
                 text = product.name,
