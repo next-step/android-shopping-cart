@@ -3,10 +3,13 @@
 
     <string name="product_list_title">상품 목록</string>
     <string name="product_list_price_fmt">%,d원</string>
-    
+
     <string name="product_detail_title">상품 상세</string>
     <string name="product_detail_price">금액</string>
     <string name="product_detail_price_fmt">%,d원</string>
     <string name="product_detail_button">장바구니 담기</string>
+
+    <string name="cart_title">장바구니</string>
     <string name="cart_item_price_fmt">%,d원</string>
+    <string name="cart_order_fmt">주문하기(%,d원)"</string>
 </resources>

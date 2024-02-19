@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -71,6 +72,7 @@ internal fun CartItem(
         modifier = modifier
             .border(1.dp, Color(0xFFAAAAAA), RoundedCornerShape(4.dp))
             .padding(vertical = 8.dp)
+            .testTag("장바구니::아이템")
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -84,7 +86,7 @@ internal fun CartItem(
             IconButton(onClick = onDeleteClick) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = "상품 장바구니 제거"
+                    contentDescription = "장바구니::아이템제거"
                 )
             }
         }
@@ -99,7 +101,9 @@ internal fun CartItem(
                 Text(
                     text = stringResource(id = R.string.cart_item_price_fmt, product.price * count),
                     style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.align(Alignment.End),
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .testTag("장바구니::아이템가격"),
                 )
                 Spacer(modifier = Modifier.height(4.dp))
 
@@ -126,11 +130,21 @@ private fun CountController(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
     ) {
-        IconButton(onClick = onMinusClick) {
+        IconButton(
+            onClick = onMinusClick,
+            modifier = Modifier.testTag("장바구니::아이템수량감소")
+        ) {
             Text(text = "-", style = MaterialTheme.typography.headlineMedium)
         }
-        Text(text = count.toString(), style = MaterialTheme.typography.headlineSmall)
-        IconButton(onClick = onPlusClick) {
+        Text(
+            text = count.toString(),
+            style = MaterialTheme.typography.headlineSmall,
+            modifier = Modifier.testTag("장바구니::아이템수량")
+        )
+        IconButton(
+            onClick = onPlusClick,
+            modifier = Modifier.testTag("장바구니::아이템수량증가")
+        ) {
             Text(text = "+", style = MaterialTheme.typography.headlineMedium)
         }
     }
