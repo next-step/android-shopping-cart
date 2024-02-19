@@ -3,11 +3,15 @@ package nextstep.shoppingcart.ui.cart.component
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -26,6 +30,33 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.component.ProductImage
+
+@Composable
+internal fun CartItemList(
+    products: List<Product>,
+    countByProductId: Map<String, Int>,
+    onDeleteClick: (Product) -> Unit,
+    onPlusClick: (Product) -> Unit,
+    onMinusClick: (Product) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    LazyColumn(
+        state = rememberLazyListState(),
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(12.dp),
+    ) {
+        items(products) { product ->
+            CartItem(
+                product = product,
+                count = countByProductId[product.id] ?: 0,
+                onDeleteClick = { onDeleteClick(product) },
+                onPlusClick = { onPlusClick(product) },
+                onMinusClick = { onMinusClick(product) },
+            )
+        }
+    }
+}
 
 @Composable
 internal fun CartItem(
@@ -107,33 +138,20 @@ private fun CountController(
 
 @Preview(showBackground = true)
 @Composable
-private fun CartItemPreview() {
+private fun CartItemListPreview() {
     MaterialTheme {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.padding(12.dp),
-        ) {
-            CartItem(
-                product = Products[0],
-                count = 1,
-                onDeleteClick = { },
-                onPlusClick = { },
-                onMinusClick = { },
-            )
-            CartItem(
-                product = Products[1],
-                count = 2,
-                onDeleteClick = { },
-                onPlusClick = { },
-                onMinusClick = { },
-            )
-            CartItem(
-                product = Products[2],
-                count = 6,
-                onDeleteClick = { },
-                onPlusClick = { },
-                onMinusClick = { },
-            )
-        }
+        val products = Products.take(3)
+        val countByProductId = mapOf(
+            Products[0].id to 1,
+            Products[1].id to 2,
+            Products[2].id to 6,
+        )
+        CartItemList(
+            products = products,
+            countByProductId = countByProductId,
+            onDeleteClick = { },
+            onPlusClick = { },
+            onMinusClick = { },
+        )
     }
 }
