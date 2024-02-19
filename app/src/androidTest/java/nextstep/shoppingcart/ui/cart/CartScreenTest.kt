@@ -1,6 +1,9 @@
 package nextstep.shoppingcart.ui.cart
 
-import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -25,7 +28,12 @@ internal class CartScreenTest {
         var clicked = false
         composeTestRule.setContent {
             CartScreen(
+                uiState = CartUiState(items = emptyList()),
                 onBackClick = { clicked = true },
+                onCartDeleteClick = {},
+                onCartPlusClick = {},
+                onCartMinusClick = {},
+                onOrderClick = {},
             )
         }
 
@@ -42,9 +50,18 @@ internal class CartScreenTest {
     fun 장바구니의_상품_갯수를_증가시키면_상품_수량이_증가한다() {
         // given
         composeTestRule.setContent {
+            var count by remember { mutableStateOf(0) }
             CartScreen(
-                products = productsTestData,
-                onBackClick = { },
+                uiState = CartUiState(
+                    items = listOf(
+                        CartItemUiState(productsTestData[0], count)
+                    )
+                ),
+                onBackClick = {},
+                onCartDeleteClick = {},
+                onCartPlusClick = { count++ },
+                onCartMinusClick = {},
+                onOrderClick = {},
             )
         }
 
@@ -68,42 +85,18 @@ internal class CartScreenTest {
     fun 장바구니의_상품_갯수를_감소시키면_상품_수량이_감소한다() {
         // given
         composeTestRule.setContent {
+            var count by remember { mutableStateOf(5) }
             CartScreen(
-                products = productsTestData,
-                onBackClick = { },
-            )
-        }
-
-        composeTestRule
-            .onAllNodesWithTag("장바구니::아이템수량증가")
-            .onFirst()
-            .apply {
-                performClick()
-                performClick()
-            }
-
-        // when
-        composeTestRule
-            .onAllNodesWithTag("장바구니::아이템수량감소")
-            .onFirst()
-            .apply {
-                performClick()
-            }
-
-        // then
-        composeTestRule
-            .onAllNodesWithTag("장바구니::아이템수량")
-            .onFirst()
-            .assertTextEquals("1")
-    }
-
-    @Test
-    fun 장바구니의_상품_갯수는_0보다_작을_수_없다() {
-        // given
-        composeTestRule.setContent {
-            CartScreen(
-                products = productsTestData,
-                onBackClick = { },
+                uiState = CartUiState(
+                    items = listOf(
+                        CartItemUiState(productsTestData[0], count)
+                    )
+                ),
+                onBackClick = {},
+                onCartDeleteClick = {},
+                onCartPlusClick = {},
+                onCartMinusClick = { count-- },
+                onOrderClick = {},
             )
         }
 
@@ -111,27 +104,31 @@ internal class CartScreenTest {
         composeTestRule
             .onAllNodesWithTag("장바구니::아이템수량감소")
             .onFirst()
-            .apply {
-                repeat(5) {
-                    performClick()
-                }
-            }
+            .performClick()
 
         // then
         composeTestRule
             .onAllNodesWithTag("장바구니::아이템수량")
             .onFirst()
-            .assertTextEquals("0")
+            .assertTextEquals("4")
     }
 
     @Test
     fun 장바구니의_상품_갯수를_증가시키면_상품의_가격이_갯수만큼_증가한다() {
         // given
-        val product = productsTestData[0].copy(price = 10000)
         composeTestRule.setContent {
+            var count by remember { mutableStateOf(0) }
             CartScreen(
-                products = listOf(product),
-                onBackClick = { },
+                uiState = CartUiState(
+                    items = listOf(
+                        CartItemUiState(productsTestData[0].copy(price = 10000), count)
+                    )
+                ),
+                onBackClick = {},
+                onCartDeleteClick = {},
+                onCartPlusClick = { count++ },
+                onCartMinusClick = {},
+                onOrderClick = {},
             )
         }
 
@@ -156,37 +153,45 @@ internal class CartScreenTest {
         // given
         composeTestRule.setContent {
             CartScreen(
-                products = listOf(
-                    productsTestData[0].copy(price = 10000),
-                    productsTestData[1].copy(price = 5000),
+                uiState = CartUiState(
+                    items = listOf(
+                        CartItemUiState(productsTestData[0].copy(price = 10000), 2),
+                        CartItemUiState(productsTestData[1].copy(price = 5000), 1),
+                    )
                 ),
-                onBackClick = { },
+                onBackClick = {},
+                onCartDeleteClick = {},
+                onCartPlusClick = {},
+                onCartMinusClick = {},
+                onOrderClick = {},
             )
         }
 
-        // when
-        composeTestRule
-            .onAllNodesWithTag("장바구니::아이템수량증가")[0]
-            .performClick()
-
-        composeTestRule
-            .onAllNodesWithTag("장바구니::아이템수량증가")[1]
-            .performClick()
-
-
         // then
         composeTestRule
-            .onNodeWithText("주문하기(15,000원)")
+            .onNodeWithText("주문하기(25,000원)")
             .assertIsDisplayed()
     }
 
     @Test
-    fun 장바구니에서_상품을_제거하면_보이지_않는다() {
+    fun 장바구니에서_상품을_제거할_수_있다() {
         // given
+        var deleteCalled = false
         composeTestRule.setContent {
             CartScreen(
-                products = productsTestData,
-                onBackClick = { },
+                uiState = CartUiState(
+                    items = listOf(
+                        CartItemUiState(productsTestData[0], 0)
+                    )
+                ),
+                onBackClick = {},
+                onCartDeleteClick = {
+                    assert(it.product.id == productsTestData[0].id)
+                    deleteCalled = true
+                },
+                onCartPlusClick = {},
+                onCartMinusClick = {},
+                onOrderClick = {},
             )
         }
 
@@ -197,8 +202,6 @@ internal class CartScreenTest {
             .performClick()
 
         // then
-        composeTestRule
-            .onAllNodesWithTag("장바구니::아이템")
-            .assertCountEquals(productsTestData.size - 1)
+        assert(deleteCalled)
     }
 }

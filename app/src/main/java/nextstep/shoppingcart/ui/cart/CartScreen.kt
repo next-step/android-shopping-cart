@@ -30,36 +30,46 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
-import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.cart.component.CartItemList
 
 @Composable
-internal fun CartScreen(
-    onBackClick: () -> Unit,
-    products: List<Product> = Products,
-) {
-    val productsState = remember(products) { mutableStateOf(products) }
-    var countByProductId: Map<String, Int> by remember { mutableStateOf(mapOf()) }
+internal fun CartScreen(onBackClick: () -> Unit) {
+    var uiState by remember {
+        val uiState = CartUiState(
+            items = Products.map {
+                CartItemUiState(product = it, count = 1)
+            }
+        )
+        mutableStateOf(uiState)
+    }
 
     CartScreen(
-        products = productsState.value,
+        uiState = uiState,
         onBackClick = onBackClick,
-        countByProductId = countByProductId,
-        onCartDeleteClick = { product ->
-            productsState.value = products.filter { it.id != product.id }
-            countByProductId = countByProductId.filterKeys { it != product.id }
+        onCartDeleteClick = { item ->
+            uiState = uiState.copy(
+                items = uiState.items.filter { it.product.id != item.product.id }
+            )
         },
-        onCartPlusClick = {
-            val nextValue = (countByProductId.getOrDefault(it.id, 0) + 1)
-            val nextCountByProductId = countByProductId.toMutableMap()
-            nextCountByProductId[it.id] = nextValue
-            countByProductId = nextCountByProductId
+        onCartPlusClick = { item ->
+            val nextItems = uiState.items.map {
+                if (it.product.id == item.product.id) {
+                    it.copy(count = it.count + 1)
+                } else {
+                    it
+                }
+            }
+            uiState = uiState.copy(items = nextItems)
         },
-        onCartMinusClick = {
-            val nextValue = (countByProductId.getOrDefault(it.id, 0) - 1).coerceAtLeast(0)
-            val nextCountByProductId = countByProductId.toMutableMap()
-            nextCountByProductId[it.id] = nextValue
-            countByProductId = nextCountByProductId
+        onCartMinusClick = { item ->
+            val nextItems = uiState.items.map {
+                if (it.product.id == item.product.id) {
+                    it.copy(count = (it.count - 1).coerceAtLeast(1))
+                } else {
+                    it
+                }
+            }
+            uiState = uiState.copy(items = nextItems)
         },
         onOrderClick = { /*TODO*/ })
 }
@@ -67,12 +77,11 @@ internal fun CartScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun CartScreen(
-    products: List<Product>,
+    uiState: CartUiState,
     onBackClick: () -> Unit,
-    countByProductId: Map<String, Int>,
-    onCartDeleteClick: (Product) -> Unit,
-    onCartPlusClick: (Product) -> Unit,
-    onCartMinusClick: (Product) -> Unit,
+    onCartDeleteClick: (CartItemUiState) -> Unit,
+    onCartPlusClick: (CartItemUiState) -> Unit,
+    onCartMinusClick: (CartItemUiState) -> Unit,
     onOrderClick: () -> Unit,
 ) {
     Scaffold(
@@ -91,8 +100,7 @@ internal fun CartScreen(
         },
         content = { innerPadding ->
             CartContent(
-                products = products,
-                countByProductId = countByProductId,
+                uiState = uiState,
                 onCartDeleteClick = onCartDeleteClick,
                 onCartPlusClick = onCartPlusClick,
                 onCartMinusClick = onCartMinusClick,
@@ -105,18 +113,16 @@ internal fun CartScreen(
 
 @Composable
 private fun CartContent(
-    products: List<Product>,
-    countByProductId: Map<String, Int>,
-    onCartDeleteClick: (Product) -> Unit,
-    onCartPlusClick: (Product) -> Unit,
-    onCartMinusClick: (Product) -> Unit,
+    uiState: CartUiState,
+    onCartDeleteClick: (CartItemUiState) -> Unit,
+    onCartPlusClick: (CartItemUiState) -> Unit,
+    onCartMinusClick: (CartItemUiState) -> Unit,
     onOrderClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         CartItemList(
-            products = products,
-            countByProductId = countByProductId,
+            items = uiState.items,
             onDeleteClick = onCartDeleteClick,
             onPlusClick = onCartPlusClick,
             onMinusClick = onCartMinusClick,
@@ -125,9 +131,7 @@ private fun CartContent(
                 .weight(1f)
         )
         OrderButton(
-            totalPrice = remember(products, countByProductId) {
-                products.sumOf { it.price * countByProductId.getOrDefault(it.id, 0) }
-            },
+            totalPrice = uiState.totalPrice,
             onClick = onOrderClick,
             modifier = Modifier.fillMaxWidth(),
         )

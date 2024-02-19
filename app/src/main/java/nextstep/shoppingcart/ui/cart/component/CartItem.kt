@@ -30,15 +30,15 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.ui.cart.CartItemUiState
 import nextstep.shoppingcart.ui.component.ProductImage
 
 @Composable
 internal fun CartItemList(
-    products: List<Product>,
-    countByProductId: Map<String, Int>,
-    onDeleteClick: (Product) -> Unit,
-    onPlusClick: (Product) -> Unit,
-    onMinusClick: (Product) -> Unit,
+    items: List<CartItemUiState>,
+    onDeleteClick: (CartItemUiState) -> Unit,
+    onPlusClick: (CartItemUiState) -> Unit,
+    onMinusClick: (CartItemUiState) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -47,13 +47,13 @@ internal fun CartItemList(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         contentPadding = PaddingValues(12.dp),
     ) {
-        items(products) { product ->
+        items(items) { item ->
             CartItem(
-                product = product,
-                count = countByProductId[product.id] ?: 0,
-                onDeleteClick = { onDeleteClick(product) },
-                onPlusClick = { onPlusClick(product) },
-                onMinusClick = { onMinusClick(product) },
+                product = item.product,
+                count = item.count,
+                onDeleteClick = { onDeleteClick(item) },
+                onPlusClick = { onPlusClick(item) },
+                onMinusClick = { onMinusClick(item) },
             )
         }
     }
@@ -154,15 +154,13 @@ private fun CountController(
 @Composable
 private fun CartItemListPreview() {
     MaterialTheme {
-        val products = Products.take(3)
-        val countByProductId = mapOf(
-            Products[0].id to 1,
-            Products[1].id to 2,
-            Products[2].id to 6,
+        val items = listOf(
+            CartItemUiState(Products[0], 1),
+            CartItemUiState(Products[1], 2),
+            CartItemUiState(Products[2], 6),
         )
         CartItemList(
-            products = products,
-            countByProductId = countByProductId,
+            items = items,
             onDeleteClick = { },
             onPlusClick = { },
             onMinusClick = { },
