@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -31,8 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -49,7 +46,8 @@ import nextstep.shoppingcart.model.Product
 @Composable
 fun ProductListScreen(
     productItems: List<Product>,
-    onClickCart: () -> Unit
+    onClickCart: () -> Unit,
+    onClickDetail: (Long) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -74,7 +72,7 @@ fun ProductListScreen(
             horizontalArrangement = Arrangement.spacedBy(space = 12.dp)
         ) {
             items(items = productItems) { item ->
-                Column(modifier = Modifier.clickable { }) {
+                Column(modifier = Modifier.clickable { onClickDetail(item.id) }) {
                     Box(
                         modifier = Modifier.fillMaxWidth(),
                         contentAlignment = Alignment.BottomEnd
@@ -123,6 +121,7 @@ fun ProductListScreen(
 private fun Preview() {
     ProductListScreen(
         productItems = Product.fixture,
-        onClickCart = {}
+        onClickCart = {},
+        onClickDetail = {}
     )
 }

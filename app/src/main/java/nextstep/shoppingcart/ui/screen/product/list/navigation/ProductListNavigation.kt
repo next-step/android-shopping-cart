@@ -7,11 +7,15 @@ import nextstep.shoppingcart.ui.screen.product.list.ProductListScreen
 
 const val ProductListNavigationRoute = "product_list"
 
-fun NavGraphBuilder.productListScreen(onClickCart: () -> Unit) {
+fun NavGraphBuilder.productListScreen(
+    onClickCart: () -> Unit,
+    onClickDetail: (Long) -> Unit
+) {
     composable(route = ProductListNavigationRoute) {
         ProductListScreen(
             productItems = Product.fixture,
-            onClickCart = onClickCart
+            onClickCart = onClickCart,
+            onClickDetail = onClickDetail
         )
     }
 }
