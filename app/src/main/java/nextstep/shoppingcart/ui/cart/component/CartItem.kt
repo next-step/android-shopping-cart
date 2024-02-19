@@ -51,6 +51,7 @@ internal fun CartItemList(
             CartItem(
                 product = item.product,
                 count = item.count,
+                totalPrice = item.totalPrice,
                 onDeleteClick = { onDeleteClick(item) },
                 onPlusClick = { onPlusClick(item) },
                 onMinusClick = { onMinusClick(item) },
@@ -63,6 +64,7 @@ internal fun CartItemList(
 internal fun CartItem(
     product: Product,
     count: Int,
+    totalPrice: Int,
     onDeleteClick: () -> Unit,
     onPlusClick: () -> Unit,
     onMinusClick: () -> Unit,
@@ -99,7 +101,7 @@ internal fun CartItem(
             Spacer(modifier = Modifier.weight(1f))
             Column(modifier = Modifier.align(Alignment.Bottom)) {
                 Text(
-                    text = stringResource(id = R.string.cart_item_price_fmt, product.price * count),
+                    text = stringResource(id = R.string.cart_item_price_fmt, totalPrice),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier
                         .align(Alignment.End)
