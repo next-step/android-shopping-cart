@@ -48,7 +48,9 @@ internal fun AppNavHost(
             )
         }
         composable(Navigation.Cart.route) {
-            CartScreen(navHostController)
+            CartScreen(
+                onBackClick = { navHostController.popBackStack() }
+            )
         }
     }
 }
