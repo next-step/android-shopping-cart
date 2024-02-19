@@ -24,12 +24,10 @@ internal fun AppNavHost(
         composable(Navigation.ProductList.route) {
             ProductListScreen(
                 onCartClick = {
-                    navHostController.navigate(Navigation.Cart.route)
+                    navHostController.navigateToCart()
                 },
                 onProductItemClick = { productId ->
-                    navHostController.navigate(
-                        route = "${Navigation.ProductDetail.route}/${productId.id}"
-                    )
+                    navHostController.navigateToProductDetail(productId.id)
                 },
             )
         }
@@ -53,4 +51,12 @@ internal fun AppNavHost(
             CartScreen(navHostController)
         }
     }
+}
+
+private fun NavHostController.navigateToCart() {
+    navigate(Navigation.Cart.route)
+}
+
+private fun NavHostController.navigateToProductDetail(productId: String) {
+    navigate(route = "${Navigation.ProductDetail.route}/$productId")
 }
