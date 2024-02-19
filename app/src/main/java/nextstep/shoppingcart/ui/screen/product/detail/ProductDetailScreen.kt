@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -79,10 +80,7 @@ fun ProductDetailScreen(
                     fontSize = 20.sp
                 )
                 Spacer(modifier = Modifier.weight(weight = 1f))
-                Text(
-                    text = stringResource(id = R.string.price, product.price),
-                    fontSize = 20.sp
-                )
+                PriceText(price = product.price, fontSize = 20.sp)
             }
         }
     }

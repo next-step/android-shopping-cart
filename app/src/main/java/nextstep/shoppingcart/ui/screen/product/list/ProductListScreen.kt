@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -30,17 +28,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -99,15 +93,18 @@ fun ProductListScreen(
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1
                     )
-                    Text(
+                    PriceText(
                         modifier = Modifier.padding(top = 2.dp),
-                        text = stringResource(id = R.string.price, item.price)
+                        price = item.price,
+                        fontSize = 16.sp
                     )
                 }
             }
         }
     }
 }
+
+
 
 @Preview
 @Composable
