@@ -34,6 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.CartRepository
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.component.CartButton
@@ -43,7 +44,6 @@ import nextstep.shoppingcart.ui.component.ProductImage
 internal fun ProductDetailScreen(
     productId: String,
     onBackClick: () -> Unit,
-    onProductAddClick: () -> Unit,
 ) {
     val product = Products.find { it.id == productId }
 
@@ -51,7 +51,9 @@ internal fun ProductDetailScreen(
         ProductDetailScreen(
             product = product,
             onBackClick = onBackClick,
-            onProductAddClick = onProductAddClick,
+            onProductAddClick = {
+                CartRepository.addToCart(product)
+            },
             modifier = Modifier.testTag("상품상세")
         )
     }
