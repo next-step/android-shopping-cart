@@ -1,7 +1,6 @@
 package nextstep.shoppingcart.ui.product.detail
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.ui.component.CartButton
 import nextstep.shoppingcart.ui.component.ProductImage
 
 @Composable
@@ -125,9 +125,12 @@ private fun ProductDetailContent(
                 )
             }
         }
-        ProductDetailCartButton(
+        CartButton(
+            text = stringResource(id = R.string.product_detail_button),
             onClick = onProductAddClick,
-            modifier = Modifier.align(Alignment.BottomCenter),
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
         )
     }
 }
@@ -147,27 +150,6 @@ private fun ProductDetailItem(label: String, text: String) {
         Text(text = label, style = MaterialTheme.typography.bodyMedium)
         Spacer(modifier = Modifier.weight(1f))
         Text(text = text, style = MaterialTheme.typography.bodyMedium)
-    }
-}
-
-@Composable
-private fun ProductDetailCartButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Box(
-        modifier = modifier
-            .background(Color(0xFF2196F3))
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .padding(12.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = stringResource(id = R.string.product_detail_button),
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
-            color = Color.White,
-        )
     }
 }
 
