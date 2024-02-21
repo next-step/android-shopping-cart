@@ -22,48 +22,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.CartRepository
 import nextstep.shoppingcart.data.Products
+import nextstep.shoppingcart.domain.model.Cart
 import nextstep.shoppingcart.ui.cart.component.CartItemList
 import nextstep.shoppingcart.ui.component.CartButton
 
 @Composable
 internal fun CartScreen(onBackClick: () -> Unit) {
-    var uiState by remember {
-        val uiState = CartUiState(
-            items = Products.map {
-                CartItemUiState(product = it, count = 1)
-            }
-        )
-        mutableStateOf(uiState)
-    }
-
+    var cart by remember { mutableStateOf(CartRepository.getCart()) }
     CartScreen(
-        uiState = uiState,
+        cart = cart,
         onBackClick = onBackClick,
         onCartDeleteClick = { item ->
-            uiState = uiState.copy(
-                items = uiState.items.filter { it.product.id != item.product.id }
-            )
+            cart = CartRepository.removeAllFromCart(item.product)
         },
         onCartPlusClick = { item ->
-            val nextItems = uiState.items.map {
-                if (it.product.id == item.product.id) {
-                    it.copy(count = it.count + 1)
-                } else {
-                    it
-                }
-            }
-            uiState = uiState.copy(items = nextItems)
+            cart = CartRepository.addToCart(item.product)
         },
         onCartMinusClick = { item ->
-            val nextItems = uiState.items.map {
-                if (it.product.id == item.product.id) {
-                    it.copy(count = (it.count - 1).coerceAtLeast(1))
-                } else {
-                    it
-                }
-            }
-            uiState = uiState.copy(items = nextItems)
+            cart = CartRepository.removeFromCart(item.product)
         },
         onOrderClick = { /*TODO*/ })
 }
@@ -71,11 +49,11 @@ internal fun CartScreen(onBackClick: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun CartScreen(
-    uiState: CartUiState,
+    cart: Cart,
     onBackClick: () -> Unit,
-    onCartDeleteClick: (CartItemUiState) -> Unit,
-    onCartPlusClick: (CartItemUiState) -> Unit,
-    onCartMinusClick: (CartItemUiState) -> Unit,
+    onCartDeleteClick: (Cart.Item) -> Unit,
+    onCartPlusClick: (Cart.Item) -> Unit,
+    onCartMinusClick: (Cart.Item) -> Unit,
     onOrderClick: () -> Unit,
 ) {
     Scaffold(
@@ -94,7 +72,7 @@ internal fun CartScreen(
         },
         content = { innerPadding ->
             CartContent(
-                uiState = uiState,
+                cart = cart,
                 onCartDeleteClick = onCartDeleteClick,
                 onCartPlusClick = onCartPlusClick,
                 onCartMinusClick = onCartMinusClick,
@@ -107,16 +85,16 @@ internal fun CartScreen(
 
 @Composable
 private fun CartContent(
-    uiState: CartUiState,
-    onCartDeleteClick: (CartItemUiState) -> Unit,
-    onCartPlusClick: (CartItemUiState) -> Unit,
-    onCartMinusClick: (CartItemUiState) -> Unit,
+    cart: Cart,
+    onCartDeleteClick: (Cart.Item) -> Unit,
+    onCartPlusClick: (Cart.Item) -> Unit,
+    onCartMinusClick: (Cart.Item) -> Unit,
     onOrderClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         CartItemList(
-            items = uiState.items,
+            items = cart.items,
             onDeleteClick = onCartDeleteClick,
             onPlusClick = onCartPlusClick,
             onMinusClick = onCartMinusClick,
@@ -125,7 +103,7 @@ private fun CartContent(
                 .weight(1f)
         )
         CartButton(
-            text = stringResource(id = R.string.cart_order_fmt, uiState.totalPrice),
+            text = stringResource(id = R.string.cart_order_fmt, cart.totalPrice),
             onClick = onOrderClick,
             modifier = Modifier.fillMaxWidth(),
         )
@@ -136,8 +114,16 @@ private fun CartContent(
 @Composable
 private fun CartScreenPreview() {
     MaterialTheme {
+        val cart = Cart(
+            items = Products.map { Cart.Item(it, 1) }
+        )
         CartScreen(
+            cart = cart,
             onBackClick = { },
+            onCartDeleteClick = {},
+            onCartPlusClick = {},
+            onCartMinusClick = {},
+            onOrderClick = {},
         )
     }
 }

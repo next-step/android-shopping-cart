@@ -29,16 +29,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
+import nextstep.shoppingcart.domain.model.Cart
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.ui.cart.CartItemUiState
 import nextstep.shoppingcart.ui.component.ProductImage
 
 @Composable
 internal fun CartItemList(
-    items: List<CartItemUiState>,
-    onDeleteClick: (CartItemUiState) -> Unit,
-    onPlusClick: (CartItemUiState) -> Unit,
-    onMinusClick: (CartItemUiState) -> Unit,
+    items: List<Cart.Item>,
+    onDeleteClick: (Cart.Item) -> Unit,
+    onPlusClick: (Cart.Item) -> Unit,
+    onMinusClick: (Cart.Item) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -157,9 +157,9 @@ private fun CountController(
 private fun CartItemListPreview() {
     MaterialTheme {
         val items = listOf(
-            CartItemUiState(Products[0], 1),
-            CartItemUiState(Products[1], 2),
-            CartItemUiState(Products[2], 6),
+            Cart.Item(Products[0], 1),
+            Cart.Item(Products[1], 2),
+            Cart.Item(Products[2], 6),
         )
         CartItemList(
             items = items,
