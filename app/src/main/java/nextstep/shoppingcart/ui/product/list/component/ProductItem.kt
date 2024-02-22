@@ -28,10 +28,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.component.CartCountController
+import nextstep.shoppingcart.ui.component.ProductImage
 
 @Composable
 internal fun ProductItem(
@@ -53,30 +53,20 @@ internal fun ProductItem(
                 .aspectRatio(1f)
                 .background(Color(0xFFEDEDED))
         ) {
-            AsyncImage(
-                model = product.imageUrl,
-                contentDescription = "상품 이미지",
+            ProductImage(
+                imageUrl = product.imageUrl,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
             )
 
-
             if (count == 0) {
-                IconButton(
+                AddButton(
                     onClick = onAddClick,
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(12.dp)
                         .size(42.dp),
-                    colors = IconButtonDefaults.iconButtonColors(
-                        containerColor = Color.White,
-                    )
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "장바구니 추가",
-                    )
-                }
+                )
             } else {
                 Surface(
                     shadowElevation = 2.dp,
@@ -107,6 +97,22 @@ internal fun ProductItem(
         Text(
             text = stringResource(id = R.string.product_list_price_fmt, product.price),
             style = MaterialTheme.typography.bodyMedium,
+        )
+    }
+}
+
+@Composable
+private fun AddButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+    IconButton(
+        onClick = onClick,
+        modifier = modifier.size(42.dp),
+        colors = IconButtonDefaults.iconButtonColors(
+            containerColor = Color.White,
+        )
+    ) {
+        Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = "장바구니 추가",
         )
     }
 }
