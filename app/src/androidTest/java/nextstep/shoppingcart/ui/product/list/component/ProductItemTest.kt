@@ -25,7 +25,9 @@ class ProductItemTest {
         composeTestRule.setContent {
             ProductItem(
                 product = product,
+                count = 0,
                 onAddClick = { },
+                onMinusClick = { },
                 onItemClick = { },
             )
         }
@@ -46,7 +48,9 @@ class ProductItemTest {
         composeTestRule.setContent {
             ProductItem(
                 product = product,
+                count = 0,
                 onAddClick = { },
+                onMinusClick = { },
                 onItemClick = { },
             )
         }
@@ -67,7 +71,9 @@ class ProductItemTest {
         composeTestRule.setContent {
             ProductItem(
                 product = product,
+                count = 0,
                 onAddClick = { clicked = true },
+                onMinusClick = { },
                 onItemClick = { },
             )
         }
@@ -89,7 +95,9 @@ class ProductItemTest {
         composeTestRule.setContent {
             ProductItem(
                 product = product,
+                count = 0,
                 onAddClick = { },
+                onMinusClick = { },
                 onItemClick = { clicked = true },
             )
         }

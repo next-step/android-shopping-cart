@@ -16,13 +16,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.CartRepository
 import nextstep.shoppingcart.data.Products
+import nextstep.shoppingcart.domain.model.Cart
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.product.list.component.ProductItem
 
@@ -31,10 +37,19 @@ internal fun ProductListScreen(
     onCartClick: () -> Unit,
     onProductItemClick: (Product) -> Unit,
 ) {
+    var cart by remember {
+        mutableStateOf(CartRepository.getCart())
+    }
     ProductListScreen(
+        cart = cart,
         products = Products,
         onCartClick = onCartClick,
-        onProductAddClick = { /* TODO */ },
+        onProductAddClick = {
+            cart = CartRepository.addToCart(it)
+        },
+        onProductMinusClick = {
+            cart = CartRepository.removeFromCart(it)
+        },
         onProductItemClick = onProductItemClick,
     )
 }
@@ -42,9 +57,11 @@ internal fun ProductListScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ProductListScreen(
+    cart: Cart,
     products: List<Product>,
     onCartClick: () -> Unit,
     onProductAddClick: (Product) -> Unit,
+    onProductMinusClick: (Product) -> Unit,
     onProductItemClick: (Product) -> Unit,
 ) {
     Scaffold(
@@ -73,7 +90,9 @@ internal fun ProductListScreen(
                 items(products) { product ->
                     ProductItem(
                         product = product,
+                        count = cart.items.find { it.product.id == product.id }?.count ?: 0,
                         onAddClick = { onProductAddClick(product) },
+                        onMinusClick = { onProductMinusClick(product) },
                         onItemClick = { onProductItemClick(product) },
                         modifier = Modifier.testTag(product.id)
                     )
@@ -88,9 +107,11 @@ internal fun ProductListScreen(
 private fun ProductListScreenPreview() {
     MaterialTheme {
         ProductListScreen(
+            cart = Cart(emptyList()),
             products = Products,
             onCartClick = {},
             onProductAddClick = {},
+            onProductMinusClick = {},
             onProductItemClick = {},
         )
     }

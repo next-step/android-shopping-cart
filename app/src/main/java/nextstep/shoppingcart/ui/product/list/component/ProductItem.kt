@@ -9,12 +9,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,11 +31,14 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.ui.component.CartCountController
 
 @Composable
 internal fun ProductItem(
     product: Product,
+    count: Int,
     onAddClick: () -> Unit,
+    onMinusClick: () -> Unit,
     onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -55,21 +60,39 @@ internal fun ProductItem(
                 contentScale = ContentScale.Crop,
             )
 
-            IconButton(
-                onClick = onAddClick,
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(12.dp)
-                    .size(42.dp),
-                colors = IconButtonDefaults.iconButtonColors(
-                    containerColor = Color.White,
-                )
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "장바구니 추가",
-                )
+
+            if (count == 0) {
+                IconButton(
+                    onClick = onAddClick,
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(12.dp)
+                        .size(42.dp),
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color.White,
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "장바구니 추가",
+                    )
+                }
+            } else {
+                Surface(
+                    shadowElevation = 2.dp,
+                    shape = RoundedCornerShape(4.dp),
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 12.dp),
+                ) {
+                    CartCountController(
+                        count = count,
+                        onPlusClick = onAddClick,
+                        onMinusClick = onMinusClick,
+                    )
+                }
             }
+
         }
 
         Text(
@@ -96,7 +119,9 @@ private fun ProductItemPreview() {
         val product = Product(id = "1", name = "PET보틀-원형(500ml)", price = 42200, imageUrl = "")
         ProductItem(
             product = product,
+            count = 0,
             onAddClick = { },
+            onMinusClick = { },
             onItemClick = { },
         )
     }
