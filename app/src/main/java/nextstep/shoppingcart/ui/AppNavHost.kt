@@ -2,12 +2,16 @@ package nextstep.shoppingcart.ui
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import nextstep.shoppingcart.ui.feature.CartScreen
 import nextstep.shoppingcart.ui.feature.ProductDetailScreen
-import nextstep.shoppingcart.ui.feature.ProductListScreen
+import nextstep.shoppingcart.ui.feature.ProductListScreenRouter
 import nextstep.shoppingcart.ui.navigation.Navigation
+
+internal const val PRODUCT_ID_ARG = "productId"
 
 @Composable
 fun AppNavHost(
@@ -18,13 +22,23 @@ fun AppNavHost(
         startDestination = Navigation.ProductList.route
     ) {
         composable(Navigation.ProductList.route) {
-            ProductListScreen(
+            ProductListScreenRouter(
                 onCartClick = { navHostController.navigate(Navigation.Cart.route) },
-                onProductClick = { navHostController.navigate(Navigation.ProductDetail.route) }
+                onProductClick = { productId -> navHostController.navigate("${Navigation.ProductDetail.route}/${productId}") }
             )
         }
-        composable(Navigation.ProductDetail.route) {
-            ProductDetailScreen(onBackClick = { navHostController.popBackStack() })
+        composable(
+            route = "${Navigation.ProductDetail.route}/{$PRODUCT_ID_ARG}",
+            arguments = listOf(
+                navArgument(PRODUCT_ID_ARG) { type = NavType.IntType },
+            ),
+        ) { backStackEntry ->
+            val productId = backStackEntry.arguments?.getInt(PRODUCT_ID_ARG) ?: -1
+            ProductDetailScreen(
+                productId = productId,
+                onBackClick = { navHostController.popBackStack() },
+                onAddCartClick = {}
+            )
         }
         composable(Navigation.Cart.route) {
             CartScreen(onBackClick = { navHostController.popBackStack() })
