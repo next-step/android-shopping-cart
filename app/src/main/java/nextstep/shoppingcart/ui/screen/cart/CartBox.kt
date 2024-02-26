@@ -7,13 +7,15 @@ object CartBox {
     val value: List<CartItem> get() = _value.toList()
 
     fun add(product: Product) {
-        _value.clear()
-        _value.map { cart ->
-            if (cart.product == product) {
-                cart.copy(count = cart.count.plus(other = 1))
-            } else {
-                cart
+        _value.add(CartItem(product = product))
+        val updatedItem = _value
+            .groupBy {
+                cartItem -> cartItem.product.id
             }
-        }.let(_value::addAll)
+            .map { (_, value) ->
+                CartItem(count = value.sumOf { it.count }, product = value.first().product)
+            }
+        _value.clear()
+        _value.addAll(updatedItem)
     }
 }
