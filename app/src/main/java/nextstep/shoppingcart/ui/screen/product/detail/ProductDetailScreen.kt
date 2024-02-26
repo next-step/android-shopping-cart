@@ -67,7 +67,7 @@ fun ProductDetailScreen(
         ) {
             ProductImage(
                 modifier = Modifier.fillMaxWidth(),
-                product = product
+                imageUrl = product.imageUrl
             )
             ProductTitle(
                 modifier = Modifier.padding(all = 18.dp),
