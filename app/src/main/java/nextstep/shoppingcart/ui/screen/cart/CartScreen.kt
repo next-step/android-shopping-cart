@@ -1,8 +1,27 @@
 package nextstep.shoppingcart.ui.screen.cart
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -10,16 +29,27 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.component.PriceText
+import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.screen.product.detail.BottomText
+import nextstep.shoppingcart.ui.screen.product.detail.ProductTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun CartScreen(onClickBack: () -> Unit = {}) {
+fun CartScreen(
+    cartBox: List<CartItem> = CartBox.value,
+    onClickBack: () -> Unit = {}
+) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -35,10 +65,127 @@ fun CartScreen(onClickBack: () -> Unit = {}) {
             )
         },
         content = { innerPadding ->
-            Text(
-                modifier = Modifier.padding(innerPadding),
-                text = stringResource(id = R.string.cart)
-            )
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues = innerPadding),
+                verticalArrangement = Arrangement.spacedBy(space = 16.dp)
+            ) {
+                items(items = cartBox) { item ->
+                    CartItem(item = item)
+                }
+                item {
+                    Spacer(modifier = Modifier.height(height = 66.dp))
+                }
+            }
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                BottomText(
+                    text = stringResource(id = R.string.order) +
+                            "(${stringResource(id = R.string.price_format, CartBox.totalPrice)})",
+                    onClick = {}
+                )
+            }
         },
+    )
+}
+
+@Composable
+private fun CartItem(item: CartItem) {
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 18.dp)
+            .fillMaxWidth()
+            .height(height = 150.dp)
+            .border(
+                border = BorderStroke(width = 1.dp, color = Color(0xFFAAAAAA)),
+                shape = RoundedCornerShape(size = 4.dp)
+            )
+            .padding(all = 18.dp)
+    ) {
+        CartHeader(title = item.product.name)
+        Row(
+            modifier = Modifier
+                .padding(top = 6.dp)
+                .fillMaxSize(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            ProductImage(imageUrl = item.product.imageUrl)
+            Column(
+                modifier = Modifier.padding(top = 18.dp),
+                horizontalAlignment = Alignment.End
+            ) {
+                PriceText(
+                    price = item.product.price,
+                    fontSize = 16.sp
+                )
+                CountIndicator(count = item.count.toString())
+            }
+        }
+        Spacer(modifier = Modifier.weight(weight = 1f))
+    }
+}
+
+@Composable
+private fun CountIndicator(count: String) {
+    Row(
+        modifier = Modifier.width(width = 126.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            modifier = Modifier
+                .weight(weight = 1f)
+                .fillMaxHeight(),
+            imageVector = Icons.Filled.KeyboardArrowDown,
+            contentDescription = stringResource(R.string.minus)
+        )
+        Text(
+            modifier = Modifier
+                .weight(weight = 1f)
+                .fillMaxHeight(),
+            text = count,
+            textAlign = TextAlign.Center,
+            fontSize = 22.sp
+        )
+        Image(
+            modifier = Modifier
+                .weight(weight = 1f)
+                .fillMaxHeight(),
+            imageVector = Icons.Filled.KeyboardArrowUp,
+            contentDescription = stringResource(R.string.plus)
+        )
+    }
+}
+
+@Composable
+private fun CartHeader(title: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(height = 24.dp)
+    ) {
+        ProductTitle(
+            modifier = Modifier.weight(weight = 1f),
+            title = title,
+            fontSize = 20.sp
+        )
+        Image(
+            imageVector = Icons.Filled.Clear,
+            contentDescription = stringResource(R.string.delete),
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun Preview() {
+    CartScreen(
+        cartBox = listOf(
+            CartItem(count = 2, product = Product.fixture.first()),
+            CartItem(count = 1, product = Product.fixture.last())
+        ),
+        onClickBack = {}
     )
 }

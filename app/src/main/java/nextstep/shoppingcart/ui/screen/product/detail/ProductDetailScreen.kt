@@ -91,7 +91,7 @@ fun ProductDetailScreen(
 }
 
 @Composable
-private fun BottomText(
+fun BottomText(
     modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit

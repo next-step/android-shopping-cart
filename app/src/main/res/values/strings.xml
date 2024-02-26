@@ -7,4 +7,8 @@
     <string name="price">금액</string>
     <string name="product_list">상품 목록</string>
     <string name="cart">장바구니</string>
+    <string name="order">주문하기</string>
+    <string name="minus">감소</string>
+    <string name="plus">증가</string>
+    <string name="delete">삭제</string>
 </resources>
