@@ -90,7 +90,7 @@ internal fun ProductListScreen(
                 items(products) { product ->
                     ProductItem(
                         product = product,
-                        count = cart.items.find { it.product.id == product.id }?.count ?: 0,
+                        count = cart.findItemByProductId(product.id)?.count ?: 0,
                         onAddClick = { onProductAddClick(product) },
                         onMinusClick = { onProductMinusClick(product) },
                         onItemClick = { onProductItemClick(product) },
