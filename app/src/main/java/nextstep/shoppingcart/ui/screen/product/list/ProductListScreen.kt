@@ -110,7 +110,7 @@ private fun CartAddImage() {
             .clickable { }
             .padding(all = 9.dp),
         imageVector = Icons.Filled.Add,
-        contentDescription = null,
+        contentDescription = stringResource(id = R.string.add_cart),
     )
 }
 
