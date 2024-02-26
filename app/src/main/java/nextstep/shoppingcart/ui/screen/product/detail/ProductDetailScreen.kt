@@ -65,7 +65,10 @@ fun ProductDetailScreen(
                 .fillMaxSize()
                 .padding(paddingValues = innerPadding)
         ) {
-            ProductImage(product = product)
+            ProductImage(
+                modifier = Modifier.fillMaxWidth(),
+                product = product
+            )
             ProductTitle(
                 modifier = Modifier.padding(all = 18.dp),
                 title = product.name,

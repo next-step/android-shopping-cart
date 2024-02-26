@@ -16,9 +16,7 @@ fun ProductImage(
     product: Product
 ) {
     AsyncImage(
-        modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(ratio = 1f),
+        modifier = modifier.aspectRatio(ratio = 1f),
         model = product.imageUrl,
         contentDescription = null,
         placeholder = painterResource(id = R.drawable.ic_launcher_foreground),

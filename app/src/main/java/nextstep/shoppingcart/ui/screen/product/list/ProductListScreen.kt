@@ -94,7 +94,10 @@ private fun ProductImage(item: Product) {
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.BottomEnd
     ) {
-        ProductImage(product = item)
+        ProductImage(
+            modifier = Modifier.fillMaxWidth(),
+            product = item
+        )
         CartAddImage()
     }
 }
