@@ -23,4 +23,10 @@ object CartBox {
         _value.clear()
         _value.addAll(updatedItem)
     }
+
+    fun removed(product: Product): List<CartItem> {
+        _value.find { it.product == product }
+            ?.let(_value::remove)
+        return _value.toList()
+    }
 }

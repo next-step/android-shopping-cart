@@ -3,6 +3,7 @@ package nextstep.shoppingcart.ui.screen.cart
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,6 +55,9 @@ fun CartScreen(
     cartBox: List<CartItem> = CartBox.value,
     onClickBack: () -> Unit = {}
 ) {
+    var cart by remember {
+       mutableStateOf(cartBox)
+    }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -71,8 +79,13 @@ fun CartScreen(
                     .padding(paddingValues = innerPadding),
                 verticalArrangement = Arrangement.spacedBy(space = 16.dp)
             ) {
-                items(items = cartBox) { item ->
-                    CartItem(item = item)
+                items(items = cart) { item ->
+                    CartItem(
+                        item = item,
+                        onDeleteItem = {
+                            cart = CartBox.removed(it)
+                        }
+                    )
                 }
                 item {
                     Spacer(modifier = Modifier.height(height = 66.dp))
@@ -93,7 +106,10 @@ fun CartScreen(
 }
 
 @Composable
-private fun CartItem(item: CartItem) {
+private fun CartItem(
+    item: CartItem,
+    onDeleteItem: (Product) -> Unit
+) {
     Column(
         modifier = Modifier
             .padding(horizontal = 18.dp)
@@ -105,7 +121,12 @@ private fun CartItem(item: CartItem) {
             )
             .padding(all = 18.dp)
     ) {
-        CartHeader(title = item.product.name)
+        CartHeader(
+            item = item.product,
+            onDeleteItem = {
+                onDeleteItem(it)
+            }
+        )
         Row(
             modifier = Modifier
                 .padding(top = 6.dp)
@@ -160,7 +181,10 @@ private fun CountIndicator(count: String) {
 }
 
 @Composable
-private fun CartHeader(title: String) {
+private fun CartHeader(
+    item: Product,
+    onDeleteItem: (Product) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -168,10 +192,13 @@ private fun CartHeader(title: String) {
     ) {
         ProductTitle(
             modifier = Modifier.weight(weight = 1f),
-            title = title,
+            title = item.name,
             fontSize = 20.sp
         )
         Image(
+            modifier = Modifier.clickable {
+                onDeleteItem(item)
+            },
             imageVector = Icons.Filled.Clear,
             contentDescription = stringResource(R.string.delete),
         )
