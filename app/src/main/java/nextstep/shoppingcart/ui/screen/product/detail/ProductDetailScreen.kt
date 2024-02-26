@@ -34,6 +34,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.screen.cart.CartBox
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,8 +78,10 @@ fun ProductDetailScreen(
             )
             Spacer(modifier = Modifier.weight(weight = 1f))
             BottomText(
-                modifier = Modifier.padding(vertical = 15.dp),
                 text = stringResource(R.string.add_cart),
+                onClick = {
+                    CartBox.add(product = product)
+                }
             )
         }
     }
@@ -87,13 +90,15 @@ fun ProductDetailScreen(
 @Composable
 private fun BottomText(
     modifier: Modifier = Modifier,
-    text: String
+    text: String,
+    onClick: () -> Unit
 ) {
     Text(
         modifier = modifier
             .fillMaxWidth()
             .background(color = Color(color = 0xFF2196F3))
-            .clickable { },
+            .clickable { onClick() }
+            .padding(vertical = 15.dp),
         text = text,
         textAlign = TextAlign.Center,
         fontSize = 20.sp,
