@@ -28,11 +28,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
@@ -47,12 +49,12 @@ fun ProductListScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "상품 목록") },
+                title = { Text(text = stringResource(R.string.product_list)) },
                 actions = {
                     IconButton(onClick = onClickCart) {
                         Icon(
                             imageVector = Icons.Filled.ShoppingCart,
-                            contentDescription = "장바구니"
+                            contentDescription = stringResource(R.string.cart)
                         )
                     }
                 },
@@ -103,8 +105,6 @@ fun ProductListScreen(
         }
     }
 }
-
-
 
 @Preview
 @Composable

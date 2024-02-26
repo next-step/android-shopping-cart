@@ -11,7 +11,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -20,12 +22,12 @@ fun CartScreen(onClickBack: () -> Unit = {}) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "장바구니") },
+                title = { Text(text = stringResource(id = R.string.cart)) },
                 navigationIcon = {
                     IconButton(onClick = { onClickBack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "뒤로가기",
+                            contentDescription = stringResource(id = R.string.go_back),
                         )
                     }
                 },
@@ -34,7 +36,7 @@ fun CartScreen(onClickBack: () -> Unit = {}) {
         content = { innerPadding ->
             Text(
                 modifier = Modifier.padding(innerPadding),
-                text = "장바구니"
+                text = stringResource(id = R.string.cart)
             )
         },
     )

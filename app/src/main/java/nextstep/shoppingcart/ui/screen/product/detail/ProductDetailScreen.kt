@@ -19,17 +19,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
@@ -46,12 +46,12 @@ fun ProductDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "상품 상세") },
+                title = { Text(text = stringResource(R.string.product_detail)) },
                 navigationIcon = {
                     IconButton(onClick = { onClickBack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "뒤로가기"
+                            contentDescription = stringResource(R.string.go_back)
                         )
                     }
                 },
@@ -76,7 +76,7 @@ fun ProductDetailScreen(
             Spacer(modifier = Modifier.weight(weight = 1f))
             BottomText(
                 modifier = Modifier.padding(vertical = 15.dp),
-                text = "장바구니 담기",
+                text = stringResource(R.string.add_cart),
             )
         }
     }
@@ -110,7 +110,7 @@ private fun ProductPrice(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = "금액",
+            text = stringResource(R.string.price),
             fontSize = 20.sp
         )
         Spacer(modifier = Modifier.weight(weight = 1f))
