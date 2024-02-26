@@ -41,10 +41,6 @@ internal fun AppNavHost(
             ProductDetailScreen(
                 productId = checkNotNull(productId),
                 onBackClick = { navHostController.popBackStack() },
-                onProductAddClick = {
-                    // TODO: 장바구니 담기
-                    navHostController.popBackStack()
-                }
             )
         }
         composable(Navigation.Cart.route) {

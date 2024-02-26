@@ -14,6 +14,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.data.productsTestData
+import nextstep.shoppingcart.domain.model.Cart
 import org.junit.Rule
 import org.junit.Test
 
@@ -28,7 +29,7 @@ internal class CartScreenTest {
         var clicked = false
         composeTestRule.setContent {
             CartScreen(
-                uiState = CartUiState(items = emptyList()),
+                cart = Cart(items = emptyList()),
                 onBackClick = { clicked = true },
                 onCartDeleteClick = {},
                 onCartPlusClick = {},
@@ -52,9 +53,9 @@ internal class CartScreenTest {
         composeTestRule.setContent {
             var count by remember { mutableStateOf(0) }
             CartScreen(
-                uiState = CartUiState(
+                cart = Cart(
                     items = listOf(
-                        CartItemUiState(productsTestData[0], count)
+                        Cart.Item(productsTestData[0], count)
                     )
                 ),
                 onBackClick = {},
@@ -87,9 +88,9 @@ internal class CartScreenTest {
         composeTestRule.setContent {
             var count by remember { mutableStateOf(5) }
             CartScreen(
-                uiState = CartUiState(
+                cart = Cart(
                     items = listOf(
-                        CartItemUiState(productsTestData[0], count)
+                        Cart.Item(productsTestData[0], count)
                     )
                 ),
                 onBackClick = {},
@@ -119,9 +120,9 @@ internal class CartScreenTest {
         composeTestRule.setContent {
             var count by remember { mutableStateOf(0) }
             CartScreen(
-                uiState = CartUiState(
+                cart = Cart(
                     items = listOf(
-                        CartItemUiState(productsTestData[0].copy(price = 10000), count)
+                        Cart.Item(productsTestData[0].copy(price = 10000), count)
                     )
                 ),
                 onBackClick = {},
@@ -153,10 +154,10 @@ internal class CartScreenTest {
         // given
         composeTestRule.setContent {
             CartScreen(
-                uiState = CartUiState(
+                cart = Cart(
                     items = listOf(
-                        CartItemUiState(productsTestData[0].copy(price = 10000), 2),
-                        CartItemUiState(productsTestData[1].copy(price = 5000), 1),
+                        Cart.Item(productsTestData[0].copy(price = 10000), 2),
+                        Cart.Item(productsTestData[1].copy(price = 5000), 1),
                     )
                 ),
                 onBackClick = {},
@@ -179,9 +180,9 @@ internal class CartScreenTest {
         var deleteCalled = false
         composeTestRule.setContent {
             CartScreen(
-                uiState = CartUiState(
+                cart = Cart(
                     items = listOf(
-                        CartItemUiState(productsTestData[0], 0)
+                        Cart.Item(productsTestData[0], 1),
                     )
                 ),
                 onBackClick = {},

@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.ui.product.list
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.filterToOne
 import androidx.compose.ui.test.hasParent
 import androidx.compose.ui.test.hasTestTag
@@ -11,10 +12,13 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
 import nextstep.shoppingcart.data.productsTestData
+import nextstep.shoppingcart.domain.model.Cart
 import org.junit.Rule
 import org.junit.Test
 
 class ProductListScreenTest {
+
+    private val cart = Cart(emptyList())
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -26,9 +30,11 @@ class ProductListScreenTest {
 
         composeTestRule.setContent {
             ProductListScreen(
+                cart = cart,
                 products = productsTestData,
                 onCartClick = { clicked = true },
                 onProductAddClick = { },
+                onProductMinusClick = { },
                 onProductItemClick = { }
             )
         }
@@ -47,9 +53,11 @@ class ProductListScreenTest {
         // given
         composeTestRule.setContent {
             ProductListScreen(
+                cart = cart,
                 products = productsTestData,
                 onCartClick = { },
                 onProductAddClick = { },
+                onProductMinusClick = { },
                 onProductItemClick = { }
             )
         }
@@ -72,9 +80,11 @@ class ProductListScreenTest {
 
         composeTestRule.setContent {
             ProductListScreen(
+                cart = cart,
                 products = productsTestData,
                 onCartClick = { },
                 onProductAddClick = { },
+                onProductMinusClick = { },
                 onProductItemClick = { clickedProductId = it.id }
             )
         }
@@ -95,9 +105,11 @@ class ProductListScreenTest {
 
         composeTestRule.setContent {
             ProductListScreen(
+                cart = cart,
                 products = productsTestData,
                 onCartClick = { },
                 onProductAddClick = { clickedProductId = it.id },
+                onProductMinusClick = { },
                 onProductItemClick = { }
             )
         }
@@ -110,5 +122,28 @@ class ProductListScreenTest {
 
         // then
         assert(clickedProductId == productsTestData[0].id)
+    }
+
+    @Test
+    fun 장바구니에_상품이_담겨있다면_상품_갯수만큼_수량이_출력된다() {
+        // given
+        val cart = cart.copy(
+            items = listOf(Cart.Item(productsTestData[0], 5))
+        )
+        composeTestRule.setContent {
+            ProductListScreen(
+                cart = cart,
+                products = listOf(productsTestData[0]),
+                onCartClick = { },
+                onProductAddClick = { },
+                onProductMinusClick = { },
+                onProductItemClick = { }
+            )
+        }
+
+        // then
+        composeTestRule
+            .onNodeWithTag("장바구니::아이템수량", true)
+            .assertTextEquals("5")
     }
 }

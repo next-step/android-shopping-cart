@@ -29,16 +29,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
+import nextstep.shoppingcart.domain.model.Cart
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.ui.cart.CartItemUiState
+import nextstep.shoppingcart.ui.component.CartCountController
 import nextstep.shoppingcart.ui.component.ProductImage
 
 @Composable
 internal fun CartItemList(
-    items: List<CartItemUiState>,
-    onDeleteClick: (CartItemUiState) -> Unit,
-    onPlusClick: (CartItemUiState) -> Unit,
-    onMinusClick: (CartItemUiState) -> Unit,
+    items: List<Cart.Item>,
+    onDeleteClick: (Cart.Item) -> Unit,
+    onPlusClick: (Cart.Item) -> Unit,
+    onMinusClick: (Cart.Item) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -109,7 +110,7 @@ internal fun CartItem(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
 
-                CountController(
+                CartCountController(
                     count = count,
                     onPlusClick = onPlusClick,
                     onMinusClick = onMinusClick,
@@ -120,46 +121,14 @@ internal fun CartItem(
     }
 }
 
-@Composable
-private fun CountController(
-    count: Int,
-    onPlusClick: () -> Unit,
-    onMinusClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-    ) {
-        IconButton(
-            onClick = onMinusClick,
-            modifier = Modifier.testTag("장바구니::아이템수량감소")
-        ) {
-            Text(text = "-", style = MaterialTheme.typography.headlineMedium)
-        }
-        Text(
-            text = count.toString(),
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.testTag("장바구니::아이템수량")
-        )
-        IconButton(
-            onClick = onPlusClick,
-            modifier = Modifier.testTag("장바구니::아이템수량증가")
-        ) {
-            Text(text = "+", style = MaterialTheme.typography.headlineMedium)
-        }
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 private fun CartItemListPreview() {
     MaterialTheme {
         val items = listOf(
-            CartItemUiState(Products[0], 1),
-            CartItemUiState(Products[1], 2),
-            CartItemUiState(Products[2], 6),
+            Cart.Item(Products[0], 1),
+            Cart.Item(Products[1], 2),
+            Cart.Item(Products[2], 6),
         )
         CartItemList(
             items = items,
