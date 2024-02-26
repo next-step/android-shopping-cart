@@ -84,6 +84,14 @@ fun CartScreen(
                         item = item,
                         onDeleteItem = {
                             cart = CartBox.removed(it)
+                        },
+                        onClickInc = {
+                            CartBox.add(it)
+                            cart = CartBox.value
+                        },
+                        onClickDec = {
+                            CartBox.remove(it)
+                            cart = CartBox.value
                         }
                     )
                 }
@@ -108,7 +116,9 @@ fun CartScreen(
 @Composable
 private fun CartItem(
     item: CartItem,
-    onDeleteItem: (Product) -> Unit
+    onDeleteItem: (Product) -> Unit,
+    onClickInc: (Product) -> Unit,
+    onClickDec: (Product) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -142,7 +152,11 @@ private fun CartItem(
                     price = item.product.price,
                     fontSize = 16.sp
                 )
-                CountIndicator(count = item.count.toString())
+                CountIndicator(
+                    count = item.count.toString(),
+                    onClickInc = { onClickInc(item.product) },
+                    onClickDec = { onClickDec(item.product) }
+                )
             }
         }
         Spacer(modifier = Modifier.weight(weight = 1f))
@@ -150,7 +164,11 @@ private fun CartItem(
 }
 
 @Composable
-private fun CountIndicator(count: String) {
+private fun CountIndicator(
+    count: String,
+    onClickInc: () -> Unit,
+    onClickDec: () -> Unit
+) {
     Row(
         modifier = Modifier.width(width = 126.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -158,7 +176,10 @@ private fun CountIndicator(count: String) {
         Image(
             modifier = Modifier
                 .weight(weight = 1f)
-                .fillMaxHeight(),
+                .fillMaxHeight()
+                .clickable {
+                   onClickDec()
+                },
             imageVector = Icons.Filled.KeyboardArrowDown,
             contentDescription = stringResource(R.string.minus)
         )
@@ -173,7 +194,10 @@ private fun CountIndicator(count: String) {
         Image(
             modifier = Modifier
                 .weight(weight = 1f)
-                .fillMaxHeight(),
+                .fillMaxHeight()
+                .clickable {
+                    onClickInc()
+                },
             imageVector = Icons.Filled.KeyboardArrowUp,
             contentDescription = stringResource(R.string.plus)
         )

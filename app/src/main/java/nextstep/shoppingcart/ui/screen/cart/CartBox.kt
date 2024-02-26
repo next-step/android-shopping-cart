@@ -24,6 +24,18 @@ object CartBox {
         _value.addAll(updatedItem)
     }
 
+    fun remove(product: Product) {
+        val updatedItem = _value.map {
+            if (it.product == product) {
+                it.copy(count = it.count.minus(other = 1))
+            } else {
+                it
+            }
+        }
+        _value.clear()
+        _value.addAll(updatedItem)
+    }
+
     fun removed(product: Product): List<CartItem> {
         _value.find { it.product == product }
             ?.let(_value::remove)
