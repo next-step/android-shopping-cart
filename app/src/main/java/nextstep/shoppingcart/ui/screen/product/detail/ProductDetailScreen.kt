@@ -59,43 +59,73 @@ fun ProductDetailScreen(
                 .padding(paddingValues = innerPadding)
         ) {
             ProductImage(product = product)
-            Text(
+            ProductTitle(
                 modifier = Modifier.padding(all = 18.dp),
-                text = product.name,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
+                title = product.name
             )
             Divider(modifier = Modifier.fillMaxWidth())
-            Row(
-                modifier = Modifier
-                    .padding(all = 18.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "금액",
-                    fontSize = 20.sp
-                )
-                Spacer(modifier = Modifier.weight(weight = 1f))
-                PriceText(price = product.price, fontSize = 20.sp)
-            }
+            ProductPrice(
+                modifier = Modifier.padding(all = 18.dp),
+                price = product.price
+            )
             Spacer(modifier = Modifier.weight(weight = 1f))
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(color = Color(color = 0xFF2196F3))
-                    .clickable {  }
-                    .padding(vertical = 15.dp),
+            BottomText(
+                modifier = Modifier.padding(vertical = 15.dp),
                 text = "장바구니 담기",
-                textAlign = TextAlign.Center,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
             )
         }
     }
+}
+
+@Composable
+private fun BottomText(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    Text(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(color = Color(color = 0xFF2196F3))
+            .clickable { },
+        text = text,
+        textAlign = TextAlign.Center,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.White,
+    )
+}
+
+@Composable
+private fun ProductPrice(
+    modifier: Modifier,
+    price: Int
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = "금액",
+            fontSize = 20.sp
+        )
+        Spacer(modifier = Modifier.weight(weight = 1f))
+        PriceText(price = price, fontSize = 20.sp)
+    }
+}
+
+@Composable
+private fun ProductTitle(
+    modifier: Modifier,
+    title: String
+) {
+    Text(
+        modifier = modifier,
+        text = title,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = 1
+    )
 }
 
 @Preview
