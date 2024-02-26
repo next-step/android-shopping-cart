@@ -141,3 +141,16 @@ private fun Preview() {
         onClickBack = {}
     )
 }
+
+@Preview(
+    name = "가로폭이 좁을 때",
+    showBackground = true,
+    widthDp = 100
+)
+@Composable
+private fun Preview1() {
+    ProductDetailScreen(
+        productId = 1,
+        onClickBack = {}
+    )
+}
