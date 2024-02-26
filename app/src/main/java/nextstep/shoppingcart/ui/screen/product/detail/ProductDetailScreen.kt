@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
@@ -66,7 +67,8 @@ fun ProductDetailScreen(
             ProductImage(product = product)
             ProductTitle(
                 modifier = Modifier.padding(all = 18.dp),
-                title = product.name
+                title = product.name,
+                fontSize = 24.sp
             )
             Divider(modifier = Modifier.fillMaxWidth())
             ProductPrice(
@@ -119,15 +121,16 @@ private fun ProductPrice(
 }
 
 @Composable
-private fun ProductTitle(
+fun ProductTitle(
     modifier: Modifier,
-    title: String
+    title: String,
+    fontSize: TextUnit
 ) {
     Text(
         modifier = modifier,
         text = title,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp,
+        fontSize = fontSize,
         overflow = TextOverflow.Ellipsis,
         maxLines = 1
     )
