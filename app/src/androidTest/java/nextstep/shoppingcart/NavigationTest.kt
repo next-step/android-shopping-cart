@@ -1,6 +1,8 @@
 package nextstep.shoppingcart
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithContentDescription
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -64,5 +66,22 @@ class NavigationTest {
         // then
         val current = navController.currentBackStackEntry?.destination?.route
         assert(current == Navigation.ProductList.route)
+    }
+
+    @Test
+    fun 상품목록_화면에서_상품을_클릭하면_상품상세화면으로_이동한다() {
+
+        // given
+        시작화면은_상품리스트_화면이다()
+
+        // when
+        composeTestRule
+            .onAllNodesWithContentDescription("상품 사진")
+            .onFirst()
+            .performClick()
+
+        // then
+        val current = navController.currentBackStackEntry?.destination?.route ?: ""
+        assert(Navigation.ProductDetail.route in current)
     }
 }
