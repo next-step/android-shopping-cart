@@ -6,11 +6,6 @@ object CartBox {
     private val _value = mutableListOf<CartItem>()
     val value: List<CartItem> get() = _value.toList()
 
-    val totalPrice: Int
-        get() = _value.sumOf {
-            it.count.times(other = it.product.price)
-        }
-
     fun add(product: Product) {
         _value.add(CartItem(product = product))
         val updatedItem = _value
@@ -40,5 +35,9 @@ object CartBox {
         _value.find { it.product == product }
             ?.let(_value::remove)
         return _value.toList()
+    }
+
+    fun clear() {
+        _value.clear()
     }
 }

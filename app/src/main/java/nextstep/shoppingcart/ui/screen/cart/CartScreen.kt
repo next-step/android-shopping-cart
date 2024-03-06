@@ -31,6 +31,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -38,6 +39,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -56,7 +59,12 @@ fun CartScreen(
     onClickBack: () -> Unit = {}
 ) {
     var cart by remember {
-       mutableStateOf(cartBox)
+        mutableStateOf(cartBox)
+    }
+    val totalPrice by remember(key1 = cart) {
+        mutableIntStateOf(
+            cart.sumOf { it.count.times(other = it.product.price) }
+        )
     }
     Scaffold(
         topBar = {
@@ -105,7 +113,7 @@ fun CartScreen(
             ) {
                 BottomText(
                     text = stringResource(id = R.string.order) +
-                            "(${stringResource(id = R.string.price_format, CartBox.totalPrice)})",
+                        "(${stringResource(id = R.string.price_format, totalPrice)})",
                     onClick = {}
                 )
             }
@@ -130,6 +138,9 @@ private fun CartItem(
                 shape = RoundedCornerShape(size = 4.dp)
             )
             .padding(all = 18.dp)
+            .semantics {
+                contentDescription = "CartItem"
+            }
     ) {
         CartHeader(
             item = item.product,
@@ -178,7 +189,7 @@ private fun CountIndicator(
                 .weight(weight = 1f)
                 .fillMaxHeight()
                 .clickable {
-                   onClickDec()
+                    onClickDec()
                 },
             imageVector = Icons.Filled.KeyboardArrowDown,
             contentDescription = stringResource(R.string.minus)
@@ -186,7 +197,10 @@ private fun CountIndicator(
         Text(
             modifier = Modifier
                 .weight(weight = 1f)
-                .fillMaxHeight(),
+                .fillMaxHeight()
+                .semantics {
+                    contentDescription = "Count"
+                },
             text = count,
             textAlign = TextAlign.Center,
             fontSize = 22.sp
