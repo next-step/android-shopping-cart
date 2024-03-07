@@ -24,6 +24,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,9 +39,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.component.CountIndicator
 import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.component.ProductTitle
+import nextstep.shoppingcart.ui.screen.cart.CartBox
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -96,19 +103,42 @@ private fun ProductImage(item: Product) {
             modifier = Modifier.fillMaxWidth(),
             imageUrl = item.imageUrl
         )
-        CartAddImage()
+        CartAddImage(product = item)
     }
 }
 
 @Composable
-private fun CartAddImage() {
+private fun CartAddImage(product: Product) {
+    var expanded by remember { mutableStateOf(false) }
+    var cartCount by remember {
+        mutableIntStateOf(1)
+    }
+    val modifier = Modifier
+        .padding(end = 12.dp, bottom = 12.dp)
+    if (expanded) {
+        CountIndicator(
+            modifier = modifier,
+            count = cartCount.toString(),
+            onClickInc = {
+                cartCount += 1
+                CartBox.add(product = product)
+            },
+            onClickDec = {
+                cartCount -= 1
+                CartBox.remove(product = product)
+            }
+        )
+        return
+    }
     Image(
-        modifier = Modifier
-            .padding(end = 12.dp, bottom = 12.dp)
+        modifier = modifier
             .size(size = 42.dp)
             .clip(shape = CircleShape)
             .background(color = Color.White)
-            .clickable { }
+            .clickable {
+                expanded = true
+                CartBox.add(product = product)
+            }
             .padding(all = 9.dp),
         imageVector = Icons.Filled.Add,
         contentDescription = stringResource(id = R.string.add_cart),
