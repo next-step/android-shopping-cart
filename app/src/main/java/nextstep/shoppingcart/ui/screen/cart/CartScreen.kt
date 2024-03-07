@@ -49,8 +49,8 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
-import nextstep.shoppingcart.ui.screen.product.detail.BottomText
-import nextstep.shoppingcart.ui.screen.product.detail.ProductTitle
+import nextstep.shoppingcart.ui.component.BottomText
+import nextstep.shoppingcart.ui.component.ProductTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
