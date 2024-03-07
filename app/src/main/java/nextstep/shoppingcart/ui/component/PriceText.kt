@@ -15,7 +15,7 @@ fun PriceText(
 ) {
     Text(
         modifier = modifier,
-        text = stringResource(id = R.string.price, price),
+        text = stringResource(id = R.string.price_format, price),
         fontSize = fontSize
     )
 }

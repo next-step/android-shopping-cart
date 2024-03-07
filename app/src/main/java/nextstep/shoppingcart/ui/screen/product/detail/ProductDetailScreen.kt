@@ -19,17 +19,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.screen.cart.CartBox
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,16 +44,18 @@ fun ProductDetailScreen(
     productId: Long,
     onClickBack: () -> Unit
 ) {
-    val product = Product.fixture.find { it.id == productId } ?: return
+    val product: Product = remember {
+        Product.fixture.find { it.id == productId } ?: Product()
+    }
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "상품 상세") },
+                title = { Text(text = stringResource(R.string.product_detail)) },
                 navigationIcon = {
                     IconButton(onClick = { onClickBack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "뒤로가기"
+                            contentDescription = stringResource(R.string.go_back)
                         )
                     }
                 },
@@ -58,49 +67,104 @@ fun ProductDetailScreen(
                 .fillMaxSize()
                 .padding(paddingValues = innerPadding)
         ) {
-            ProductImage(product = product)
-            Text(
+            ProductImage(
+                modifier = Modifier.fillMaxWidth(),
+                imageUrl = product.imageUrl
+            )
+            ProductTitle(
                 modifier = Modifier.padding(all = 18.dp),
-                text = product.name,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
+                title = product.name,
+                fontSize = 24.sp
             )
             Divider(modifier = Modifier.fillMaxWidth())
-            Row(
-                modifier = Modifier
-                    .padding(all = 18.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "금액",
-                    fontSize = 20.sp
-                )
-                Spacer(modifier = Modifier.weight(weight = 1f))
-                PriceText(price = product.price, fontSize = 20.sp)
-            }
+            ProductPrice(
+                modifier = Modifier.padding(all = 18.dp),
+                price = product.price
+            )
             Spacer(modifier = Modifier.weight(weight = 1f))
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(color = Color(color = 0xFF2196F3))
-                    .clickable {  }
-                    .padding(vertical = 15.dp),
-                text = "장바구니 담기",
-                textAlign = TextAlign.Center,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
+            BottomText(
+                text = stringResource(R.string.add_cart),
+                onClick = {
+                    CartBox.add(product = product)
+                }
             )
         }
     }
 }
 
+@Composable
+fun BottomText(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit
+) {
+    Text(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(color = Color(color = 0xFF2196F3))
+            .clickable { onClick() }
+            .padding(vertical = 15.dp)
+            .semantics {
+                contentDescription = "BottomText"
+            },
+        text = text,
+        textAlign = TextAlign.Center,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.White,
+    )
+}
+
+@Composable
+private fun ProductPrice(
+    modifier: Modifier,
+    price: Int
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = stringResource(R.string.price),
+            fontSize = 20.sp
+        )
+        Spacer(modifier = Modifier.weight(weight = 1f))
+        PriceText(price = price, fontSize = 20.sp)
+    }
+}
+
+@Composable
+fun ProductTitle(
+    modifier: Modifier,
+    title: String,
+    fontSize: TextUnit
+) {
+    Text(
+        modifier = modifier,
+        text = title,
+        fontWeight = FontWeight.Bold,
+        fontSize = fontSize,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = 1
+    )
+}
+
 @Preview
 @Composable
 private fun Preview() {
+    ProductDetailScreen(
+        productId = 1,
+        onClickBack = {}
+    )
+}
+
+@Preview(
+    name = "가로폭이 좁을 때",
+    showBackground = true,
+    widthDp = 100
+)
+@Composable
+private fun Preview1() {
     ProductDetailScreen(
         productId = 1,
         onClickBack = {}

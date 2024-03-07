@@ -28,14 +28,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.screen.product.detail.ProductTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,12 +48,12 @@ fun ProductListScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "상품 목록") },
+                title = { Text(text = stringResource(R.string.product_list)) },
                 actions = {
                     IconButton(onClick = onClickCart) {
                         Icon(
                             imageVector = Icons.Filled.ShoppingCart,
-                            contentDescription = "장바구니"
+                            contentDescription = stringResource(R.string.cart)
                         )
                     }
                 },
@@ -68,30 +69,11 @@ fun ProductListScreen(
         ) {
             items(items = productItems) { item ->
                 Column(modifier = Modifier.clickable { onClickDetail(item.id) }) {
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.BottomEnd
-                    ) {
-                        ProductImage(product = item)
-                        Image(
-                            modifier = Modifier
-                                .padding(end = 12.dp, bottom = 12.dp)
-                                .size(size = 42.dp)
-                                .clip(shape = CircleShape)
-                                .background(color = Color.White)
-                                .clickable { }
-                                .padding(all = 9.dp),
-                            imageVector = Icons.Filled.Add,
-                            contentDescription = null,
-                        )
-                    }
-                    Text(
+                    ProductImage(item)
+                    ProductTitle(
                         modifier = Modifier.padding(top = 8.dp),
-                        text = item.name,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp,
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
+                        title = item.name,
+                        fontSize = 16.sp
                     )
                     PriceText(
                         modifier = Modifier.padding(top = 2.dp),
@@ -104,7 +86,34 @@ fun ProductListScreen(
     }
 }
 
+@Composable
+private fun ProductImage(item: Product) {
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.BottomEnd
+    ) {
+        ProductImage(
+            modifier = Modifier.fillMaxWidth(),
+            imageUrl = item.imageUrl
+        )
+        CartAddImage()
+    }
+}
 
+@Composable
+private fun CartAddImage() {
+    Image(
+        modifier = Modifier
+            .padding(end = 12.dp, bottom = 12.dp)
+            .size(size = 42.dp)
+            .clip(shape = CircleShape)
+            .background(color = Color.White)
+            .clickable { }
+            .padding(all = 9.dp),
+        imageVector = Icons.Filled.Add,
+        contentDescription = stringResource(id = R.string.add_cart),
+    )
+}
 
 @Preview
 @Composable
