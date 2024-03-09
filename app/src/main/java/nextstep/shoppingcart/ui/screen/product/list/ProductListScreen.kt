@@ -26,7 +26,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -75,8 +74,26 @@ fun ProductListScreen(
             horizontalArrangement = Arrangement.spacedBy(space = 12.dp)
         ) {
             items(items = productItems) { item ->
+                var cartCount by remember {
+                    mutableIntStateOf(0)
+                }
                 Column(modifier = Modifier.clickable { onClickDetail(item.id) }) {
-                    ProductImage(item)
+                    ProductImage(
+                        item = item,
+                        cartCount = cartCount,
+                        onClickInc = {
+                            cartCount += 1
+                            CartBox.add(product = item)
+                        },
+                        onClickDec = {
+                            cartCount -= 1
+                            CartBox.remove(product = item)
+                        },
+                        onClickAdd = {
+                            cartCount = 1
+                            CartBox.add(product = item)
+                        }
+                    )
                     ProductTitle(
                         modifier = Modifier.padding(top = 8.dp),
                         title = item.name,
@@ -94,7 +111,13 @@ fun ProductListScreen(
 }
 
 @Composable
-private fun ProductImage(item: Product) {
+private fun ProductImage(
+    item: Product,
+    cartCount: Int,
+    onClickInc: () -> Unit,
+    onClickDec: () -> Unit,
+    onClickAdd: () -> Unit
+) {
     Box(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.BottomEnd
@@ -103,45 +126,34 @@ private fun ProductImage(item: Product) {
             modifier = Modifier.fillMaxWidth(),
             imageUrl = item.imageUrl
         )
-        CartAddImage(product = item)
-    }
-}
-
-@Composable
-private fun CartAddImage(product: Product) {
-    var cartCount by remember {
-        mutableIntStateOf(0)
-    }
-    val modifier = Modifier
-        .padding(end = 12.dp, bottom = 12.dp)
-    if (cartCount > 0) {
-        CountIndicator(
-            modifier = modifier,
-            count = cartCount,
-            onClickInc = {
-                cartCount += 1
-                CartBox.add(product = product)
-            },
-            onClickDec = {
-                cartCount -= 1
-                CartBox.remove(product = product)
-            }
+        val modifier = Modifier
+            .padding(end = 12.dp, bottom = 12.dp)
+        if (cartCount > 0) {
+            CountIndicator(
+                modifier = modifier,
+                count = cartCount,
+                onClickInc = {
+                    onClickInc()
+                },
+                onClickDec = {
+                    onClickDec()
+                }
+            )
+            return
+        }
+        Image(
+            modifier = modifier
+                .size(size = 42.dp)
+                .clip(shape = CircleShape)
+                .background(color = Color.White)
+                .clickable {
+                    onClickAdd()
+                }
+                .padding(all = 9.dp),
+            imageVector = Icons.Filled.Add,
+            contentDescription = stringResource(id = R.string.add_cart),
         )
-        return
     }
-    Image(
-        modifier = modifier
-            .size(size = 42.dp)
-            .clip(shape = CircleShape)
-            .background(color = Color.White)
-            .clickable {
-                cartCount = 1
-                CartBox.add(product = product)
-            }
-            .padding(all = 9.dp),
-        imageVector = Icons.Filled.Add,
-        contentDescription = stringResource(id = R.string.add_cart),
-    )
 }
 
 @Preview
