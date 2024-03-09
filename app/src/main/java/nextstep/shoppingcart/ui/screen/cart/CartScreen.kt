@@ -160,7 +160,7 @@ private fun CartItem(
                     fontSize = 16.sp
                 )
                 CountIndicator(
-                    count = item.count.toString(),
+                    count = item.count,
                     onClickInc = { onClickInc(item.product) },
                     onClickDec = { onClickDec(item.product) }
                 )

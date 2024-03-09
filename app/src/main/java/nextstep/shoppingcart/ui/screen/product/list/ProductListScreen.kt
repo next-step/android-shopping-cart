@@ -118,7 +118,7 @@ private fun CartAddImage(product: Product) {
     if (expanded) {
         CountIndicator(
             modifier = modifier,
-            count = cartCount.toString(),
+            count = cartCount,
             onClickInc = {
                 cartCount += 1
                 CartBox.add(product = product)
