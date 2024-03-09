@@ -109,13 +109,12 @@ private fun ProductImage(item: Product) {
 
 @Composable
 private fun CartAddImage(product: Product) {
-    var expanded by remember { mutableStateOf(false) }
     var cartCount by remember {
-        mutableIntStateOf(1)
+        mutableIntStateOf(0)
     }
     val modifier = Modifier
         .padding(end = 12.dp, bottom = 12.dp)
-    if (expanded) {
+    if (cartCount > 0) {
         CountIndicator(
             modifier = modifier,
             count = cartCount,
@@ -136,7 +135,7 @@ private fun CartAddImage(product: Product) {
             .clip(shape = CircleShape)
             .background(color = Color.White)
             .clickable {
-                expanded = true
+                cartCount = 1
                 CartBox.add(product = product)
             }
             .padding(all = 9.dp),
