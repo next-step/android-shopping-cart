@@ -30,6 +30,7 @@ import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.component.ProductTitle
 import nextstep.shoppingcart.ui.screen.cart.CartBox
+import nextstep.shoppingcart.ui.screen.cart.CartItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,7 +39,9 @@ fun ProductDetailScreen(
     onClickBack: () -> Unit
 ) {
     val product: Product = remember {
-        Product.fixture.find { it.id == productId } ?: Product()
+        CartItem.fixture.find { it.product.id == productId }
+            ?.product
+            ?: Product()
     }
     Scaffold(
         topBar = {

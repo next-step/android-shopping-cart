@@ -3,11 +3,13 @@ package nextstep.shoppingcart.ui.screen.cart
 import nextstep.shoppingcart.model.Product
 
 object CartBox {
-    private val _value = mutableListOf<CartItem>()
+    private val _value = mutableListOf<CartItem>().apply {
+        addAll(CartItem.fixture)
+    }
     val value: List<CartItem> get() = _value.toList()
 
     fun add(product: Product) {
-        _value.add(CartItem(product = product))
+        _value.add(CartItem(count = 1, product = product))
         val updatedItem = _value
             .groupBy {
                 cartItem -> cartItem.product.id
@@ -31,9 +33,16 @@ object CartBox {
         _value.addAll(updatedItem)
     }
 
-    fun removed(product: Product): List<CartItem> {
-        _value.find { it.product == product }
-            ?.let(_value::remove)
+    fun reset(product: Product): List<CartItem> {
+        val updatedItem = _value.map {
+            if (it.product == product) {
+                it.copy(count = 0)
+            } else {
+                it
+            }
+        }
+        _value.clear()
+        _value.addAll(updatedItem)
         return _value.toList()
     }
 

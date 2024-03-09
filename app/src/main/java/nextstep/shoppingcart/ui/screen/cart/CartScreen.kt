@@ -51,15 +51,15 @@ import nextstep.shoppingcart.ui.component.ProductTitle
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(
-    cartBox: List<CartItem> = CartBox.value,
-    onClickBack: () -> Unit = {}
+    cart: List<CartItem> = CartBox.value,
+    onClickBack: () -> Unit
 ) {
-    var cart by remember {
-        mutableStateOf(cartBox)
+    var cartBox by remember {
+        mutableStateOf(cart)
     }
-    val totalPrice by remember(key1 = cart) {
+    val totalPrice by remember(key1 = cartBox) {
         mutableIntStateOf(
-            cart.sumOf { it.count.times(other = it.product.price) }
+            cartBox.sumOf { it.count.times(other = it.product.price) }
         )
     }
     Scaffold(
@@ -83,19 +83,22 @@ fun CartScreen(
                     .padding(paddingValues = innerPadding),
                 verticalArrangement = Arrangement.spacedBy(space = 16.dp)
             ) {
-                items(items = cart) { item ->
+                items(items = cartBox) { item ->
+                    if (item.count < 1) {
+                        return@items
+                    }
                     CartItem(
                         item = item,
                         onDeleteItem = {
-                            cart = CartBox.removed(it)
+                            cartBox = CartBox.reset(it)
                         },
                         onClickInc = {
                             CartBox.add(it)
-                            cart = CartBox.value
+                            cartBox = CartBox.value
                         },
                         onClickDec = {
                             CartBox.remove(it)
-                            cart = CartBox.value
+                            cartBox = CartBox.value
                         }
                     )
                 }
@@ -199,9 +202,9 @@ private fun CartHeader(
 @Composable
 private fun Preview() {
     CartScreen(
-        cartBox = listOf(
-            CartItem(count = 2, product = Product.fixture.first()),
-            CartItem(count = 1, product = Product.fixture.last())
+        cart = listOf(
+            CartItem(count = 2, product = CartItem.fixture.first().product),
+            CartItem(count = 1, product = CartItem.fixture.last().product)
         ),
         onClickBack = {}
     )

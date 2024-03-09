@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -43,14 +44,18 @@ import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.component.ProductTitle
 import nextstep.shoppingcart.ui.screen.cart.CartBox
+import nextstep.shoppingcart.ui.screen.cart.CartItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen(
-    productItems: List<Product>,
+    cart: List<CartItem>,
     onClickCart: () -> Unit,
     onClickDetail: (Long) -> Unit
 ) {
+    val cartBox by remember {
+        mutableStateOf(cart)
+    }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -73,35 +78,35 @@ fun ProductListScreen(
             verticalArrangement = Arrangement.spacedBy(space = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(space = 12.dp)
         ) {
-            items(items = productItems) { item ->
+            items(items = cartBox) { item ->
                 var cartCount by remember {
-                    mutableIntStateOf(0)
+                    mutableIntStateOf(item.count)
                 }
-                Column(modifier = Modifier.clickable { onClickDetail(item.id) }) {
+                Column(modifier = Modifier.clickable { onClickDetail(item.product.id) }) {
                     ProductImage(
-                        item = item,
+                        item = item.product,
                         cartCount = cartCount,
                         onClickInc = {
                             cartCount += 1
-                            CartBox.add(product = item)
+                            CartBox.add(product = item.product)
                         },
                         onClickDec = {
                             cartCount -= 1
-                            CartBox.remove(product = item)
+                            CartBox.remove(product = item.product)
                         },
                         onClickAdd = {
                             cartCount = 1
-                            CartBox.add(product = item)
+                            CartBox.add(product = item.product)
                         }
                     )
                     ProductTitle(
                         modifier = Modifier.padding(top = 8.dp),
-                        title = item.name,
+                        title = item.product.name,
                         fontSize = 16.sp
                     )
                     PriceText(
                         modifier = Modifier.padding(top = 2.dp),
-                        price = item.price,
+                        price = item.product.price,
                         fontSize = 16.sp
                     )
                 }
@@ -160,7 +165,7 @@ private fun ProductImage(
 @Composable
 private fun Preview() {
     ProductListScreen(
-        productItems = Product.fixture,
+        cart = CartItem.fixture,
         onClickCart = {},
         onClickDetail = {}
     )
