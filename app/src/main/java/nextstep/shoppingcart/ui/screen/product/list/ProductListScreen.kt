@@ -24,6 +24,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,17 +39,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.component.CountIndicator
 import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
-import nextstep.shoppingcart.ui.screen.product.detail.ProductTitle
+import nextstep.shoppingcart.ui.component.ProductTitle
+import nextstep.shoppingcart.ui.screen.cart.CartBox
+import nextstep.shoppingcart.ui.screen.cart.CartItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen(
-    productItems: List<Product>,
+    cart: List<CartItem>,
     onClickCart: () -> Unit,
     onClickDetail: (Long) -> Unit
 ) {
+    val cartBox by remember {
+        mutableStateOf(cart)
+    }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -67,17 +78,35 @@ fun ProductListScreen(
             verticalArrangement = Arrangement.spacedBy(space = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(space = 12.dp)
         ) {
-            items(items = productItems) { item ->
-                Column(modifier = Modifier.clickable { onClickDetail(item.id) }) {
-                    ProductImage(item)
+            items(items = cartBox) { item ->
+                var cartCount by remember {
+                    mutableIntStateOf(item.count)
+                }
+                Column(modifier = Modifier.clickable { onClickDetail(item.product.id) }) {
+                    ProductImage(
+                        item = item.product,
+                        cartCount = cartCount,
+                        onClickInc = {
+                            cartCount += 1
+                            CartBox.add(product = item.product)
+                        },
+                        onClickDec = {
+                            cartCount -= 1
+                            CartBox.remove(product = item.product)
+                        },
+                        onClickAdd = {
+                            cartCount = 1
+                            CartBox.add(product = item.product)
+                        }
+                    )
                     ProductTitle(
                         modifier = Modifier.padding(top = 8.dp),
-                        title = item.name,
+                        title = item.product.name,
                         fontSize = 16.sp
                     )
                     PriceText(
                         modifier = Modifier.padding(top = 2.dp),
-                        price = item.price,
+                        price = item.product.price,
                         fontSize = 16.sp
                     )
                 }
@@ -87,7 +116,13 @@ fun ProductListScreen(
 }
 
 @Composable
-private fun ProductImage(item: Product) {
+private fun ProductImage(
+    item: Product,
+    cartCount: Int,
+    onClickInc: () -> Unit,
+    onClickDec: () -> Unit,
+    onClickAdd: () -> Unit
+) {
     Box(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.BottomEnd
@@ -96,30 +131,41 @@ private fun ProductImage(item: Product) {
             modifier = Modifier.fillMaxWidth(),
             imageUrl = item.imageUrl
         )
-        CartAddImage()
-    }
-}
-
-@Composable
-private fun CartAddImage() {
-    Image(
-        modifier = Modifier
+        val modifier = Modifier
             .padding(end = 12.dp, bottom = 12.dp)
-            .size(size = 42.dp)
-            .clip(shape = CircleShape)
-            .background(color = Color.White)
-            .clickable { }
-            .padding(all = 9.dp),
-        imageVector = Icons.Filled.Add,
-        contentDescription = stringResource(id = R.string.add_cart),
-    )
+        if (cartCount > 0) {
+            CountIndicator(
+                modifier = modifier,
+                count = cartCount,
+                onClickInc = {
+                    onClickInc()
+                },
+                onClickDec = {
+                    onClickDec()
+                }
+            )
+            return
+        }
+        Image(
+            modifier = modifier
+                .size(size = 42.dp)
+                .clip(shape = CircleShape)
+                .background(color = Color.White)
+                .clickable {
+                    onClickAdd()
+                }
+                .padding(all = 9.dp),
+            imageVector = Icons.Filled.Add,
+            contentDescription = stringResource(id = R.string.add_cart),
+        )
+    }
 }
 
 @Preview
 @Composable
 private fun Preview() {
     ProductListScreen(
-        productItems = Product.fixture,
+        cart = CartItem.fixture,
         onClickCart = {},
         onClickDetail = {}
     )

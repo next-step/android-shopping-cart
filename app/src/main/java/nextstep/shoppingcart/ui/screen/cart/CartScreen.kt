@@ -9,20 +9,16 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -41,29 +37,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.component.BottomText
+import nextstep.shoppingcart.ui.component.CountIndicator
 import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
-import nextstep.shoppingcart.ui.screen.product.detail.BottomText
-import nextstep.shoppingcart.ui.screen.product.detail.ProductTitle
+import nextstep.shoppingcart.ui.component.ProductTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(
-    cartBox: List<CartItem> = CartBox.value,
-    onClickBack: () -> Unit = {}
+    cart: List<CartItem> = CartBox.value,
+    onClickBack: () -> Unit
 ) {
-    var cart by remember {
-        mutableStateOf(cartBox)
+    var cartBox by remember {
+        mutableStateOf(cart)
     }
-    val totalPrice by remember(key1 = cart) {
+    val totalPrice by remember(key1 = cartBox) {
         mutableIntStateOf(
-            cart.sumOf { it.count.times(other = it.product.price) }
+            cartBox.sumOf { it.count.times(other = it.product.price) }
         )
     }
     Scaffold(
@@ -87,19 +83,22 @@ fun CartScreen(
                     .padding(paddingValues = innerPadding),
                 verticalArrangement = Arrangement.spacedBy(space = 16.dp)
             ) {
-                items(items = cart) { item ->
+                items(items = cartBox) { item ->
+                    if (item.count < 1) {
+                        return@items
+                    }
                     CartItem(
                         item = item,
                         onDeleteItem = {
-                            cart = CartBox.removed(it)
+                            cartBox = CartBox.reset(it)
                         },
                         onClickInc = {
                             CartBox.add(it)
-                            cart = CartBox.value
+                            cartBox = CartBox.value
                         },
                         onClickDec = {
                             CartBox.remove(it)
-                            cart = CartBox.value
+                            cartBox = CartBox.value
                         }
                     )
                 }
@@ -164,57 +163,13 @@ private fun CartItem(
                     fontSize = 16.sp
                 )
                 CountIndicator(
-                    count = item.count.toString(),
+                    count = item.count,
                     onClickInc = { onClickInc(item.product) },
                     onClickDec = { onClickDec(item.product) }
                 )
             }
         }
         Spacer(modifier = Modifier.weight(weight = 1f))
-    }
-}
-
-@Composable
-private fun CountIndicator(
-    count: String,
-    onClickInc: () -> Unit,
-    onClickDec: () -> Unit
-) {
-    Row(
-        modifier = Modifier.width(width = 126.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Image(
-            modifier = Modifier
-                .weight(weight = 1f)
-                .fillMaxHeight()
-                .clickable {
-                    onClickDec()
-                },
-            imageVector = Icons.Filled.KeyboardArrowDown,
-            contentDescription = stringResource(R.string.minus)
-        )
-        Text(
-            modifier = Modifier
-                .weight(weight = 1f)
-                .fillMaxHeight()
-                .semantics {
-                    contentDescription = "Count"
-                },
-            text = count,
-            textAlign = TextAlign.Center,
-            fontSize = 22.sp
-        )
-        Image(
-            modifier = Modifier
-                .weight(weight = 1f)
-                .fillMaxHeight()
-                .clickable {
-                    onClickInc()
-                },
-            imageVector = Icons.Filled.KeyboardArrowUp,
-            contentDescription = stringResource(R.string.plus)
-        )
     }
 }
 
@@ -247,9 +202,9 @@ private fun CartHeader(
 @Composable
 private fun Preview() {
     CartScreen(
-        cartBox = listOf(
-            CartItem(count = 2, product = Product.fixture.first()),
-            CartItem(count = 1, product = Product.fixture.last())
+        cart = listOf(
+            CartItem(count = 2, product = CartItem.fixture.first().product),
+            CartItem(count = 1, product = CartItem.fixture.last().product)
         ),
         onClickBack = {}
     )

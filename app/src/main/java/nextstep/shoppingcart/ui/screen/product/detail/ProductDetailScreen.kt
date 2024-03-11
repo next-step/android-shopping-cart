@@ -1,7 +1,5 @@
 package nextstep.shoppingcart.ui.screen.product.detail
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,22 +19,18 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.component.BottomText
 import nextstep.shoppingcart.ui.component.PriceText
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.component.ProductTitle
 import nextstep.shoppingcart.ui.screen.cart.CartBox
+import nextstep.shoppingcart.ui.screen.cart.CartItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,7 +39,9 @@ fun ProductDetailScreen(
     onClickBack: () -> Unit
 ) {
     val product: Product = remember {
-        Product.fixture.find { it.id == productId } ?: Product()
+        CartItem.fixture.find { it.product.id == productId }
+            ?.product
+            ?: Product()
     }
     Scaffold(
         topBar = {
@@ -93,29 +89,6 @@ fun ProductDetailScreen(
 }
 
 @Composable
-fun BottomText(
-    modifier: Modifier = Modifier,
-    text: String,
-    onClick: () -> Unit
-) {
-    Text(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(color = Color(color = 0xFF2196F3))
-            .clickable { onClick() }
-            .padding(vertical = 15.dp)
-            .semantics {
-                contentDescription = "BottomText"
-            },
-        text = text,
-        textAlign = TextAlign.Center,
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold,
-        color = Color.White,
-    )
-}
-
-@Composable
 private fun ProductPrice(
     modifier: Modifier,
     price: Int
@@ -131,22 +104,6 @@ private fun ProductPrice(
         Spacer(modifier = Modifier.weight(weight = 1f))
         PriceText(price = price, fontSize = 20.sp)
     }
-}
-
-@Composable
-fun ProductTitle(
-    modifier: Modifier,
-    title: String,
-    fontSize: TextUnit
-) {
-    Text(
-        modifier = modifier,
-        text = title,
-        fontWeight = FontWeight.Bold,
-        fontSize = fontSize,
-        overflow = TextOverflow.Ellipsis,
-        maxLines = 1
-    )
 }
 
 @Preview
