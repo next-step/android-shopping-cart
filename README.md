@@ -5,7 +5,7 @@
 - [v] ProductCard 컴포넌트 생성
   - [v] ProductCard 컴퍼넌트 상세 구현
   - [v] ProductCard 컴퍼넌트 프리뷰 추가
-- [] ProductList Screen 생성
-  - [] ProductList Screen 상세 구현
-  - [] ProductList Screen 프리뷰 추가
+- [v] ProductList Screen 생성
+  - [v] ProductList Screen 상세 구현
+  - [v] ProductList Screen 프리뷰 추가
 
