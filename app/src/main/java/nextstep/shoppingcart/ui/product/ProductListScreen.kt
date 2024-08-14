@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.ImmutableList
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.Products
@@ -40,7 +41,7 @@ internal fun ProductListRoute(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ProductListScreen(
-    products: List<Product>,
+    products: ImmutableList<Product>,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -54,9 +55,9 @@ internal fun ProductListScreen(
                         Image(
                             imageVector = Icons.Filled.ShoppingCart,
                             contentDescription =
-                                stringResource(
-                                    id = R.string.shopping_card_content_description,
-                                ),
+                            stringResource(
+                                id = R.string.shopping_card_content_description,
+                            ),
                         )
                     }
                 },
@@ -67,18 +68,18 @@ internal fun ProductListScreen(
         ProductListContent(
             products = products,
             modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(horizontal = 18.dp)
-                    .padding(top = 13.dp),
+            Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(horizontal = 18.dp)
+                .padding(top = 13.dp),
         )
     }
 }
 
 @Composable
 private fun ProductListContent(
-    products: List<Product>,
+    products: ImmutableList<Product>,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
