@@ -1,7 +1,7 @@
 # android-shopping-cart
 
 ## Step1 구현 목록
-- [] dummy data 생성
+- [x] dummy data 생성
 - [] Glide 설정
 - [] 타이틀 뷰 구현
 - [] 상품 아이템 뷰 구현
