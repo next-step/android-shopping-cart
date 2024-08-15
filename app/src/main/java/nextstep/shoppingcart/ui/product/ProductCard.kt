@@ -3,6 +3,7 @@ package nextstep.shoppingcart.ui.product
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
@@ -40,8 +40,10 @@ internal fun ProductCard(
         Text(
             text = product.name,
             overflow = TextOverflow.Ellipsis,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
+            style =
+                MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Bold,
+                ),
             maxLines = 1,
             modifier =
                 Modifier
@@ -53,9 +55,8 @@ internal fun ProductCard(
         )
         Text(
             text = stringResource(id = R.string.product_price, product.price),
-            fontSize = 16.sp,
-            modifier =
-                Modifier.padding(start = 4.dp),
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(start = 4.dp),
         )
     }
 }
