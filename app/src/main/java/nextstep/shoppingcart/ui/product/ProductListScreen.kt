@@ -67,10 +67,7 @@ internal fun ProductListScreen(
     ) { innerPadding ->
         ProductListContent(
             products = products,
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
+            modifier = Modifier.padding(innerPadding),
         )
     }
 }
