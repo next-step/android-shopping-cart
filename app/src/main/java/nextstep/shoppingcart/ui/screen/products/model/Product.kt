@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.screen.cart.model
+package nextstep.shoppingcart.ui.screen.products.model
 
 import androidx.compose.runtime.Stable
 

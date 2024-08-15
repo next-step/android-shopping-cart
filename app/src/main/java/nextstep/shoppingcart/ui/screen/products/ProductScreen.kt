@@ -1,6 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
-package nextstep.shoppingcart.ui.screen.cart
+package nextstep.shoppingcart.ui.screen.products
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -23,23 +21,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.toPersistentList
-import nextstep.shoppingcart.ui.screen.cart.component.CartItem
-import nextstep.shoppingcart.ui.screen.cart.model.Product
-import nextstep.shoppingcart.ui.screen.cart.model.dummyProducts
+import nextstep.shoppingcart.ui.component.CartItem
+import nextstep.shoppingcart.ui.screen.products.model.Product
+import nextstep.shoppingcart.ui.screen.products.model.dummyProducts
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun ShoppingCartRoute(
+fun ProductRoute(
     modifier: Modifier = Modifier
 ) {
-    ShoppingCartScreen(
+    ProductScreen(
         cartItems = dummyProducts.toPersistentList(),
         modifier = modifier
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ShoppingCartScreen(
+private fun ProductScreen(
     cartItems: PersistentList<Product>,
     modifier: Modifier = Modifier
 ) {
@@ -79,9 +78,9 @@ private fun ShoppingCartScreen(
 
 @Preview
 @Composable
-private fun ShoppingCartScreenPreview() {
+private fun ProductScreenPreview() {
     ShoppingCartTheme {
-        ShoppingCartScreen(
+        ProductScreen(
             cartItems = dummyProducts.toPersistentList(),
         )
     }
