@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.ui.product
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -35,7 +36,10 @@ internal fun ProductCard(
                     product.name,
                 ),
             contentScale = ContentScale.Crop,
-            modifier = Modifier.height(158.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(158.dp),
         )
 
         Text(
