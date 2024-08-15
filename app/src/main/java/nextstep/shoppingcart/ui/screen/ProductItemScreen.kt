@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.ui.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -33,7 +34,7 @@ fun ProductItem(product: Product) {
     Column(
         modifier = Modifier
             .width(156.dp)
-            .height(198.dp)
+            .height(IntrinsicSize.Min)
     ) {
         AsyncImage(
             model = product.imageUrl,
