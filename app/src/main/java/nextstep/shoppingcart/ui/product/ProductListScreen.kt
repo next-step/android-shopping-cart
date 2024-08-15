@@ -2,6 +2,7 @@ package nextstep.shoppingcart.ui.product
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -69,9 +70,7 @@ internal fun ProductListScreen(
             modifier =
             Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
-                .padding(horizontal = 18.dp)
-                .padding(top = 13.dp),
+                .padding(innerPadding),
         )
     }
 }
@@ -85,6 +84,11 @@ private fun ProductListContent(
         columns = GridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
+        contentPadding = PaddingValues(
+            start = 18.dp,
+            end = 18.dp,
+            top = 13.dp,
+        ),
         modifier = modifier,
     ) {
         items(products) { product ->
