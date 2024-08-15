@@ -18,8 +18,8 @@ import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -85,7 +85,7 @@ private fun ProductCardPreview(
 class ProductCardPreviewProvider :
     CollectionPreviewParameterProvider<Product>(
         collection =
-            Products
+            PRODUCT_LIST_MOCK_DATA
                 .take(3)
                 .mapIndexed { index, product ->
                     if (index == 2) {
