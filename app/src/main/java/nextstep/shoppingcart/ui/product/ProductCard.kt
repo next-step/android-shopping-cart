@@ -13,11 +13,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.model.Products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -73,29 +74,18 @@ private fun ProductCardPreview(
     }
 }
 
-class ProductCardPreviewProvider : PreviewParameterProvider<Product> {
-    override val values: Sequence<Product> =
-        sequenceOf(
-            Product(
-                id = 1,
-                name = "M3 MacBook Air",
-                price = 2000,
-                imgUrl =
-                    "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mac-card-40-macbook-air-m2-m3-202402?wid=1400&hei=1000&fmt=p-jpg&qlt=95&.v=1707259317253",
-            ),
-            Product(
-                id = 2,
-                name = "MacBook Pro",
-                price = 1000,
-                imgUrl =
-                    "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mac-card-40-macbookpro-14-16-202310?wid=1200&hei=1000&fmt=p-jpg&qlt=95&.v=1699558878477",
-            ),
-            Product(
-                id = 3,
-                name = "행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다.",
-                price = 800,
-                imgUrl =
-                    "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mac-card-40-imac-24-202310?wid=1200&hei=1000&fmt=jpeg&qlt=90&.v=1697229623322",
-            ),
-        )
-}
+class ProductCardPreviewProvider :
+    CollectionPreviewParameterProvider<Product>(
+        collection =
+            Products
+                .take(3)
+                .mapIndexed { index, product ->
+                    if (index == 2) {
+                        product.copy(
+                            name = "행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다. 행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다",
+                        )
+                    } else {
+                        product
+                    }
+                },
+    )
