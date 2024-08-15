@@ -15,6 +15,8 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,14 +30,13 @@ import nextstep.shoppingcart.ui.shopping.component.ProductListItem
 import nextstep.shoppingcart.ui.shopping.model.Product
 import nextstep.shoppingcart.ui.shopping.model.dummyProducts
 import nextstep.shoppingcart.ui.theme.TitleTextColor
-import nextstep.shoppingcart.ui.theme.Typography
 
 
 @Composable
-fun ProductListScreen(modifier: Modifier = Modifier) {
+fun ProductListScreen() {
     val productList = dummyProducts
     Scaffold(
-        modifier = modifier,
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             ProductListTopAppBar()
         }
@@ -58,14 +59,15 @@ fun ProductListTopAppBar() {
         actions = {
             IconButton(
                 onClick = { },
-                modifier = Modifier
-                    .size(48.dp)
-                    .padding(8.dp)
+                modifier = Modifier.size(48.dp),
+                colors = IconButtonDefaults.iconButtonColors(
+                    contentColor = Color.Black
+                )
             ) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
                     contentDescription = stringResource(id = R.string.shopping_cart),
-                    tint = Color.Black
+                    modifier = Modifier.size(24.dp)
                 )
             }
         }
@@ -78,7 +80,7 @@ fun ProductListTitle(modifier: Modifier = Modifier) {
         text = stringResource(id = R.string.product_list),
         modifier = modifier,
         color = TitleTextColor,
-        style = Typography.titleLarge
+        style = MaterialTheme.typography.titleLarge
     )
 }
 
