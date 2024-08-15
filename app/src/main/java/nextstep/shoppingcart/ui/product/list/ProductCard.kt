@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.product.list
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,8 +26,13 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 internal fun ProductCard(
     product: Product,
     modifier: Modifier = Modifier,
+    onCardClick: (Product) -> Unit = {},
 ) {
-    Column(modifier = modifier) {
+    Column(
+        modifier =
+            modifier
+                .clickable { onCardClick(product) },
+    ) {
         AsyncImage(
             model = product.imgUrl,
             contentDescription =

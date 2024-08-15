@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.Products
+import nextstep.shoppingcart.ui.product.detail.navigation.navigateToProductDetail
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -36,9 +37,20 @@ internal fun ProductListRoute(
     navController: NavHostController = rememberNavController(),
 ) {
     val products by remember { mutableStateOf(Products) }
+    val eventListener =
+        remember {
+            { event: ProductListEvent ->
+                when (event) {
+                    is ProductListEvent.NavigateToProductDetail -> {
+                        navController.navigateToProductDetail(event.productId)
+                    }
+                }
+            }
+        }
 
     ProductListScreen(
         products = products,
+        onProductListEvent = eventListener,
         modifier = modifier.fillMaxSize(),
     )
 }
@@ -47,6 +59,7 @@ internal fun ProductListRoute(
 @Composable
 internal fun ProductListScreen(
     products: List<Product>,
+    onProductListEvent: (ProductListEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -72,6 +85,7 @@ internal fun ProductListScreen(
     ) { innerPadding ->
         ProductListContent(
             products = products,
+            onProductListEvent = onProductListEvent,
             modifier = Modifier.padding(innerPadding),
         )
     }
@@ -80,6 +94,7 @@ internal fun ProductListScreen(
 @Composable
 private fun ProductListContent(
     products: List<Product>,
+    onProductListEvent: (ProductListEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -98,7 +113,14 @@ private fun ProductListContent(
             items = products,
             key = { product -> product.id },
         ) { product ->
-            ProductCard(product = product)
+            ProductCard(
+                product = product,
+                onCardClick = { product ->
+                    onProductListEvent(
+                        ProductListEvent.NavigateToProductDetail(productId = product.id),
+                    )
+                },
+            )
         }
     }
 }
@@ -107,6 +129,9 @@ private fun ProductListContent(
 @Composable
 private fun ProductListScreenPreview() {
     ShoppingCartTheme {
-        ProductListScreen(products = Products)
+        ProductListScreen(
+            products = Products,
+            onProductListEvent = {},
+        )
     }
 }

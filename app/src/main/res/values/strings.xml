@@ -4,4 +4,6 @@
     <string name="product_price">%,d원</string>
     <string name="product_list_toolbar_title">상품 목록</string>
     <string name="shopping_card_content_description">쇼핑카트 아이콘</string>
+    <string name="product_detail_toolbar_title">상품 상세</string>
+    <string name="navigate_back">뒤로 가기</string>
 </resources>

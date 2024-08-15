@@ -23,6 +23,8 @@ internal fun MainNavHost(
         productListScreen(
             navController = navController,
         )
-        productDetailScreen()
+        productDetailScreen(
+            navController = navController,
+        )
     }
 }
