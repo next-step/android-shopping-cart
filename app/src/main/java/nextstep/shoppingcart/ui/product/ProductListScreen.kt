@@ -91,7 +91,10 @@ private fun ProductListContent(
         ),
         modifier = modifier,
     ) {
-        items(products) { product ->
+        items(
+            items = products,
+            key = { product -> product.id },
+        ) { product ->
             ProductCard(product = product)
         }
     }
