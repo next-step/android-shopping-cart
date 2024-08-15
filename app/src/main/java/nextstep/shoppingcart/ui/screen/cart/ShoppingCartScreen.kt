@@ -2,8 +2,12 @@
 
 package nextstep.shoppingcart.ui.screen.cart
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -17,17 +21,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.toPersistentList
+import nextstep.shoppingcart.ui.screen.cart.component.CartItem
+import nextstep.shoppingcart.ui.screen.cart.model.Product
+import nextstep.shoppingcart.ui.screen.cart.model.dummyProducts
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ShoppingCartRoute(
     modifier: Modifier = Modifier
 ) {
-    ShoppingCartScreen(modifier)
+    ShoppingCartScreen(
+        cartItems = dummyProducts.toPersistentList(),
+        modifier = modifier
+    )
 }
 
 @Composable
-private fun ShoppingCartScreen(modifier: Modifier = Modifier) {
+private fun ShoppingCartScreen(
+    cartItems: PersistentList<Product>,
+    modifier: Modifier = Modifier
+) {
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -47,7 +62,18 @@ private fun ShoppingCartScreen(modifier: Modifier = Modifier) {
             )
         }
     ) {
-        Text(text = "sample", modifier = Modifier.padding(it))
+        LazyVerticalGrid(
+            modifier = Modifier.padding(it),
+            columns = GridCells.Fixed(2),
+            contentPadding = PaddingValues(top = 13.dp)
+        ) {
+            items(cartItems) { item ->
+                CartItem(
+                    product = item,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }
     }
 }
 
@@ -55,6 +81,8 @@ private fun ShoppingCartScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun ShoppingCartScreenPreview() {
     ShoppingCartTheme {
-        ShoppingCartScreen()
+        ShoppingCartScreen(
+            cartItems = dummyProducts.toPersistentList(),
+        )
     }
 }
