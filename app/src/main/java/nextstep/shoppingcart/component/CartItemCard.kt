@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -16,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import nextstep.shoppingcart.model.CartItem
 
 @Composable
@@ -30,7 +32,12 @@ internal fun CartItemCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1.1f),
-            model = cartItem.imageUrl,
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(cartItem.imageUrl)
+                .crossfade(true)  // 페이드 인 애니메이션
+//                .error(R.drawable.placeholder_error)  // 로드 실패 시 표시할 이미지
+//                .placeholder(R.drawable.placeholder_loading)  // 로딩 중에 표시할 이미지
+                .build(),
             contentDescription = cartItem.name
         )
 
