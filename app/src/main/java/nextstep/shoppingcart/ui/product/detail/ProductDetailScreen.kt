@@ -24,9 +24,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -37,6 +41,7 @@ import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Blue50
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 internal fun ProductDetailRoute(
@@ -170,4 +175,31 @@ private fun ProductDetailContent(
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun ProductDetailScreenPreview(
+    @PreviewParameter(ProductDetailPreviewProvider::class) product: Product,
+) {
+    ShoppingCartTheme {
+        ProductDetailScreen(
+            product = product,
+            navigateUp = {},
+        )
+    }
+}
+
+class ProductDetailPreviewProvider : PreviewParameterProvider<Product> {
+    override val values: Sequence<Product>
+        get() =
+            sequenceOf(
+                Product(
+                    id = 1,
+                    name = "Product Name",
+                    price = 10000,
+                    imgUrl =
+                        "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mac-card-40-macbookpro-14-16-202310?wid=1200&hei=1000&fmt=p-jpg&qlt=95&.v=1699558878477",
+                ),
+            )
 }
