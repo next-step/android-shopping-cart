@@ -17,10 +17,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.toPersistentList
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.CartItem
 import nextstep.shoppingcart.ui.screen.products.model.Product
 import nextstep.shoppingcart.ui.screen.products.model.dummyProducts
@@ -36,7 +38,6 @@ fun ProductRoute(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ProductScreen(
     cartItems: PersistentList<Product>,
@@ -44,27 +45,16 @@ private fun ProductScreen(
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = "상품 목록",
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                }, actions = {
-                    IconButton(onClick = { /*TODO*/ }, modifier = Modifier.size(48.dp)) {
-                        Icon(
-                            imageVector = Icons.Filled.ShoppingCart, contentDescription = "장바구니"
-                        )
-                    }
-                }
-            )
-        }
-    ) {
+        topBar = { ProductTopAppBar { /* TODO */ } }
+    ) { innerPadding ->
         LazyVerticalGrid(
-            modifier = Modifier.padding(it),
+            modifier = Modifier.padding(innerPadding),
             columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(top = 13.dp)
+            contentPadding = PaddingValues(
+                start = 18.dp,
+                end = 17.dp,
+                top = 13.dp
+            )
         ) {
             items(cartItems) { item ->
                 CartItem(
@@ -74,6 +64,33 @@ private fun ProductScreen(
             }
         }
     }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun ProductTopAppBar(
+    modifier: Modifier = Modifier,
+    onActionClick: () -> Unit,
+) {
+    CenterAlignedTopAppBar(
+        modifier = modifier,
+        title = {
+            Text(
+                text = stringResource(R.string.products_app_bar_title),
+                style = MaterialTheme.typography.titleLarge
+            )
+        }, actions = {
+            IconButton(
+                onClick = { onActionClick() },
+                modifier = Modifier.size(48.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ShoppingCart,
+                    contentDescription = stringResource(R.string.products_app_bar_action_description)
+                )
+            }
+        }
+    )
 }
 
 @Preview
