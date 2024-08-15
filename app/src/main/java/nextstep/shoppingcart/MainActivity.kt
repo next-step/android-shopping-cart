@@ -3,7 +3,7 @@ package nextstep.shoppingcart
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import nextstep.shoppingcart.ui.shopping.productlist.ProductList
+import nextstep.shoppingcart.ui.shopping.productlist.ProductListScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
@@ -11,7 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
-                ProductList()
+                ProductListScreen()
             }
         }
     }
