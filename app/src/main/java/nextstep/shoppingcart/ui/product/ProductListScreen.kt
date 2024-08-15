@@ -55,9 +55,9 @@ internal fun ProductListScreen(
                         Icon(
                             imageVector = Icons.Filled.ShoppingCart,
                             contentDescription =
-                            stringResource(
-                                id = R.string.shopping_card_content_description,
-                            ),
+                                stringResource(
+                                    id = R.string.shopping_card_content_description,
+                                ),
                         )
                     }
                 },
@@ -68,9 +68,9 @@ internal fun ProductListScreen(
         ProductListContent(
             products = products,
             modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
         )
     }
 }
@@ -84,11 +84,12 @@ private fun ProductListContent(
         columns = GridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
-        contentPadding = PaddingValues(
-            start = 18.dp,
-            end = 18.dp,
-            top = 13.dp,
-        ),
+        contentPadding =
+            PaddingValues(
+                start = 18.dp,
+                end = 18.dp,
+                top = 13.dp,
+            ),
         modifier = modifier,
     ) {
         items(
