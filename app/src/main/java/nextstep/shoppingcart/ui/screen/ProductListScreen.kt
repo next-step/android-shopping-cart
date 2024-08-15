@@ -18,11 +18,12 @@ import nextstep.shoppingcart.data.Product
 @Preview
 @Composable
 private fun ProductListPreview() {
-    val products: List<Product> = listOf(Product(
-        name = "PET보틀-정사각",
-        price = 10000,
-        imageUrl = "https://example.com/pet_bottle_square.jpg"
-    ),
+    val products: List<Product> = listOf(
+        Product(
+            name = "PET보틀-정사각",
+            price = 10000,
+            imageUrl = "https://example.com/pet_bottle_square.jpg"
+        ),
         Product(
             name = "PET보틀-밀크티",
             price = 12000,
@@ -47,14 +48,15 @@ private fun ProductListPreview() {
             name = "PET보틀-납작(2",
             price = 12000,
             imageUrl = "https://example.com/pet_bottle_flat_2.jpg"
-        ))
+        )
+    )
     ProductList(products)
 }
 
 @Composable
 fun ProductList(products: List<Product>) {
 
-    Scaffold (
+    Scaffold(
         topBar = {
             Title(title = "상품 목록") {
 
@@ -67,7 +69,7 @@ fun ProductList(products: List<Product>) {
                     .padding(paddingValues),
                 contentAlignment = Alignment.TopCenter
             ) {
-                LazyColumn() {
+                LazyColumn(modifier = Modifier.padding(top = 13.dp)) {
                     items(products.chunked(2)) { products ->
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(16.dp)

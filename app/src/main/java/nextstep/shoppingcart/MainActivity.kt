@@ -8,7 +8,20 @@ import nextstep.shoppingcart.ui.screen.ProductList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
-    val products: List<Product> = listOf(Product(
+    val products: List<Product> = getProducts()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            ShoppingCartTheme {
+                // A surface container using the 'background' color from the theme
+                ProductList(products)
+            }
+        }
+    }
+}
+
+fun getProducts(): List<Product> {
+    return listOf(Product(
         name = "PET보틀-정사각",
         price = 10000,
         imageUrl = "https://picsum.photos/156/158"
@@ -38,13 +51,4 @@ class MainActivity : ComponentActivity() {
             price = 12000,
             imageUrl = "https://picsum.photos/156/158"
         ))
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ShoppingCartTheme {
-                // A surface container using the 'background' color from the theme
-                ProductList(products)
-            }
-        }
-    }
 }

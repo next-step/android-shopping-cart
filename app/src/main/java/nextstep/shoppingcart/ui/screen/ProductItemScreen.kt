@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.data.Product
+import java.text.NumberFormat
+import java.util.Locale
 
 @Preview(showBackground = true)
 @Composable
@@ -45,7 +47,7 @@ fun ProductItem(product: Product) {
         )
         Column(
             modifier = Modifier
-                .padding(top = 4.dp)
+                .padding(top = 4.dp, start = 4.dp)
                 .fillMaxSize()
         ) {
             Text(
@@ -57,7 +59,7 @@ fun ProductItem(product: Product) {
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = "${product.price}원",
+                text = "${formatPrice(product.price)}원",
                 fontSize = 16.sp,
                 color = Color(0xFF333333),
                 maxLines = 1,
@@ -65,4 +67,10 @@ fun ProductItem(product: Product) {
             )
         }
     }
+}
+
+fun formatPrice(price: Int): String {
+    val format = NumberFormat.getNumberInstance(Locale.KOREA)
+    format.maximumFractionDigits = 0  // 소수점 이하를 표시하지 않음
+    return format.format(price)
 }
