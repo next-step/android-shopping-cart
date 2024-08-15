@@ -16,10 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
 import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -33,8 +33,8 @@ internal fun ProductCard(
             modifier
                 .clickable { onCardClick(product) },
     ) {
-        AsyncImage(
-            model = product.imgUrl,
+        ProductImage(
+            imgUrl = product.imgUrl,
             contentDescription =
                 stringResource(
                     id = R.string.product_image_content_description,

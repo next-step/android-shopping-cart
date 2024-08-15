@@ -31,11 +31,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Blue50
 
 @Composable
@@ -100,13 +100,14 @@ private fun ProductDetailContent(
         Column(
             modifier = Modifier.weight(1f),
         ) {
-            AsyncImage(
-                model = product.imgUrl,
+            ProductImage(
+                imgUrl = product.imgUrl,
                 contentDescription =
                     stringResource(
                         id = R.string.product_image_content_description,
                         product.name,
                     ),
+                placeholder = painterResource(id = R.drawable.image),
                 modifier = Modifier.fillMaxWidth(),
             )
             Text(
