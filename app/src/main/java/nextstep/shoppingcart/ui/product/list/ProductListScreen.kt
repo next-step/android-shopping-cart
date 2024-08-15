@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.model.Products
+import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.ui.product.detail.navigation.navigateToProductDetail
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
