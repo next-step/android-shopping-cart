@@ -38,7 +38,7 @@ class CartScreenTest {
         val cartItems = List(5) {
             CartItem(
                 name = "PET보틀 - ${it + 1}",
-                price = 10000f,
+                price = 10000,
                 imageUrl = "https://picsum.photos/500"
             )
         }

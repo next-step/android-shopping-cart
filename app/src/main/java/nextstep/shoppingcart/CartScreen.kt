@@ -17,6 +17,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.component.CartItemCard
@@ -42,7 +43,7 @@ private fun TopBar() {
     CenterAlignedTopAppBar(
         title = {
             Text(
-                text = "상품 목록",
+                text = stringResource(R.string.cart_screen_title),
                 style = MaterialTheme.typography.titleLarge,
             )
         },
@@ -86,7 +87,7 @@ private fun CartScreenPreview() {
             cartItems = List(20) {
                 CartItem(
                     name = "PET보틀 - 정사각형 모양",
-                    10000f,
+                    10000,
                     imageUrl = "https://picsum.photos/500"
                 )
             }

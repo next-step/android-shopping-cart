@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -18,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.CartItem
 
 @Composable
@@ -60,7 +62,7 @@ internal fun CartItemCard(
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
-                text = "${cartItem.price}원",
+                text = stringResource(R.string.won_unit, cartItem.price),
                 style = TextStyle(
                     fontWeight = FontWeight.W400,
                     fontSize = 16.sp,
@@ -79,7 +81,7 @@ private fun CartItemCardPreview() {
         CartItemCard(
             cartItem = CartItem(
                 name = "PET보틀-정사각형처럼 보이는 예쁜 보틀을 팔아요",
-                price = 10000f,
+                price = 10000,
                 imageUrl = "https://picsum.photos/500",
             ),
             modifier = Modifier.width(156.dp)
