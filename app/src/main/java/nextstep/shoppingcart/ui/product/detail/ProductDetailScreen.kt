@@ -100,7 +100,7 @@ internal fun ProductDetailScreen(
             product = product,
             onProductDetailEvent = onProductDetailEvent,
             modifier =
-                modifier
+                Modifier
                     .padding(paddingValues)
                     .fillMaxSize(),
         )
