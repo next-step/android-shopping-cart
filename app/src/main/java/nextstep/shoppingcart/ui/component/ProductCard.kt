@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.data.Product
-import java.text.DecimalFormat
 
 @Composable
 fun ProductCard(product: Product) {
