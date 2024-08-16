@@ -21,34 +21,46 @@ class MainActivity : ComponentActivity() {
 }
 
 fun getProducts(): List<Product> {
-    return listOf(Product(
-        name = "PET보틀-정사각",
-        price = 10000,
-        imageUrl = "https://picsum.photos/156/158"
-    ),
+    return listOf(
+        Product(
+            name = "PET보틀-정사각형",
+            price = 10000,
+            imageUrl = "https://picsum.photos/156/158"
+        ),
         Product(
             name = "PET보틀-밀크티",
             price = 12000,
             imageUrl = "https://picsum.photos/156/158"
         ),
         Product(
-            name = "PET보틀-정사각",
+            name = "PET보틀-정사각각형",
             price = 10000,
             imageUrl = "https://picsum.photos/156/158"
         ),
         Product(
-            name = "PET보틀-납작(2",
+            name = "PET보틀-납작(200ml)",
             price = 12000,
             imageUrl = "https://picsum.photos/156/158"
         ),
         Product(
-            name = "PET보틀-정사각",
+            name = "PET보틀-정사각형",
             price = 10000,
             imageUrl = "https://picsum.photos/156/158"
         ),
         Product(
-            name = "PET보틀-납작(2",
+            name = "PET보틀-납작(200ml)",
             price = 12000,
             imageUrl = "https://picsum.photos/156/158"
-        ))
+        ),
+        Product(
+            name = "PET보틀-정사각형",
+            price = 10000,
+            imageUrl = "https://picsum.photos/156/158"
+        ),
+        Product(
+            name = "PET보틀-납작(200ml)",
+            price = 12000,
+            imageUrl = "https://picsum.photos/156/158"
+        )
+    )
 }

@@ -18,14 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@Preview(showBackground = true)
-@Composable
-private fun TitlePreview() {
-    Title("상품 목록") {
-
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Title(
@@ -68,4 +60,12 @@ fun Title(
 
         }
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun TitlePreview() {
+    Title("상품 목록") {
+
+    }
 }

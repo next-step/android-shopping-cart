@@ -1,19 +1,40 @@
 package nextstep.shoppingcart.ui.screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.data.Product
+
+@Composable
+fun ProductList(products: List<Product>) {
+    Scaffold(
+        topBar = {
+            Title(title = "상품 목록") {
+
+            }
+        },
+        content = { paddingValues ->
+            LazyVerticalGrid(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .padding(start = 18.dp),
+                columns = GridCells.Fixed(2),
+            ) {
+                items(products) {
+                    ProductItem(
+                        product = it
+                    )
+                }
+            }
+        }
+    )
+}
 
 @Preview
 @Composable
@@ -51,38 +72,4 @@ private fun ProductListPreview() {
         )
     )
     ProductList(products)
-}
-
-@Composable
-fun ProductList(products: List<Product>) {
-
-    Scaffold(
-        topBar = {
-            Title(title = "상품 목록") {
-
-            }
-        },
-        content = { paddingValues ->
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentAlignment = Alignment.TopCenter
-            ) {
-                LazyColumn(modifier = Modifier.padding(top = 13.dp)) {
-                    items(products.chunked(2)) { products ->
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(16.dp)
-                        ) {
-                            products.forEach { product ->
-                                ProductItem(
-                                    product = product
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    )
 }
