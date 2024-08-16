@@ -35,7 +35,7 @@ fun ProductItem(product: Product) {
             Text(
                 text = product.name,
                 style = productTitleStyle,
-                color = Color(0xFF333333),
+                color = MaterialTheme.colorScheme.secondary,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
