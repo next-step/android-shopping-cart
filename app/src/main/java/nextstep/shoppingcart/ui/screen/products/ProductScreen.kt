@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.screen.products
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -31,10 +32,12 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductRoute(
+    onItemClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     ProductScreen(
         products = dummyProductModels.toPersistentList(),
+        onItemClick = onItemClick,
         modifier = modifier
     )
 }
@@ -42,6 +45,7 @@ fun ProductRoute(
 @Composable
 private fun ProductScreen(
     products: PersistentList<ProductModel>,
+    onItemClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -61,7 +65,7 @@ private fun ProductScreen(
             items(products) { item ->
                 Product(
                     productModel = item,
-                    modifier = Modifier
+                    modifier = Modifier.clickable { onItemClick() }
                 )
             }
         }
@@ -101,6 +105,7 @@ private fun ProductScreenPreview() {
     ShoppingCartTheme {
         ProductScreen(
             products = dummyProductModels.toPersistentList(),
+            onItemClick = { /* TODO */ }
         )
     }
 }
