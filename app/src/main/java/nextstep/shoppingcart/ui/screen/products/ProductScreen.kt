@@ -60,9 +60,13 @@ private fun ProductScreen(
                 start = 18.dp,
                 end = 18.dp
             ),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.Center,
         ) {
-            items(products) { item ->
+            items(
+                items = products,
+                key = { it.id }
+            ) { item ->
                 Product(
                     productModel = item,
                     modifier = Modifier.clickable { onItemClick(item.id) }
