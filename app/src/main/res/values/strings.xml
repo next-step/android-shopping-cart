@@ -2,4 +2,7 @@
     <string name="app_name">Shopping Cart</string>
     <string name="tob_bar_title">상품목록</string>
     <string name="content_description_shopping_cart">장바구니</string>
+    <string name="content_description_arrow_back">뒤로가기</string>
+    <string name="title_activity_product_detail">상품 상세</string>
+    <string name="price_format">%,d원</string>
 </resources>
