@@ -16,7 +16,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -29,6 +28,7 @@ import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.ui.cart.navigation.navigateToCart
 import nextstep.shoppingcart.ui.product.detail.navigation.navigateToProductDetail
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -44,6 +44,10 @@ internal fun ProductListRoute(
                 when (event) {
                     is ProductListEvent.NavigateToProductDetail -> {
                         navController.navigateToProductDetail(event.productId)
+                    }
+
+                    is ProductListEvent.NavigateToCart -> {
+                        navController.navigateToCart()
                     }
                 }
             }
@@ -70,7 +74,7 @@ internal fun ProductListScreen(
                     Text(text = stringResource(id = R.string.product_list_toolbar_title))
                 },
                 actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { onProductListEvent(ProductListEvent.NavigateToCart) }) {
                         Icon(
                             imageVector = Icons.Filled.ShoppingCart,
                             contentDescription =
