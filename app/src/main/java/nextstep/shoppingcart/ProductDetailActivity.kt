@@ -1,20 +1,29 @@
 package nextstep.shoppingcart
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.ui.data.SampleProductList.sampleProductList
-import nextstep.shoppingcart.ui.screen.ProductListScreen
+import nextstep.shoppingcart.ui.data.Product
+import nextstep.shoppingcart.ui.screen.ProductDetailScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
-class MainActivity : ComponentActivity() {
+class ProductDetailActivity : ComponentActivity() {
+
+    private val product: Product by lazy {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("product", Product::class.java)
+                ?: throw IllegalArgumentException("productId is required")
+        } else {
+            intent.getParcelableExtra("product")
+                ?: throw IllegalArgumentException("Product is required")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -23,26 +32,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ProductListScreen(sampleProductList)
+                    ProductDetailScreen(
+                        Modifier,
+                        product
+                    )
                 }
             }
         }
     }
 }
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ShoppingCartTheme {
-        Greeting("Android")
-    }
-}
-
