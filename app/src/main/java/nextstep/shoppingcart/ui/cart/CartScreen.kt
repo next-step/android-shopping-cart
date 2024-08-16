@@ -28,7 +28,7 @@ internal fun CartRoute(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartScreen(
+internal fun CartScreen(
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
