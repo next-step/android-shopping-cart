@@ -15,8 +15,10 @@ fun ShoppingCartNavHost(
         startDestination = PRODUCTS_ROUTE,
         modifier = modifier
     ) {
-        productsScreen {
-            // TODO
+        productsScreen { productId ->
+            navController.navigateToProductDetail(productId)
         }
+
+        productDetailScreen()
     }
 }

@@ -1,9 +1,11 @@
 package nextstep.shoppingcart.ui.screen.products.model
 
 import androidx.compose.runtime.Stable
+import java.util.UUID
 
 @Stable
 data class ProductModel(
+    val id: String = UUID.randomUUID().toString(),
     val name: String,
     val imageUrl: String,
     val price: Long,

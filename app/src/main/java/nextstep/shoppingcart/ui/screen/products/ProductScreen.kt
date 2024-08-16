@@ -32,7 +32,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductRoute(
-    onItemClick: () -> Unit,
+    onItemClick: (id: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     ProductScreen(
@@ -45,7 +45,7 @@ fun ProductRoute(
 @Composable
 private fun ProductScreen(
     products: PersistentList<ProductModel>,
-    onItemClick: () -> Unit,
+    onItemClick: (id: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -65,7 +65,7 @@ private fun ProductScreen(
             items(products) { item ->
                 Product(
                     productModel = item,
-                    modifier = Modifier.clickable { onItemClick() }
+                    modifier = Modifier.clickable { onItemClick(item.id) }
                 )
             }
         }

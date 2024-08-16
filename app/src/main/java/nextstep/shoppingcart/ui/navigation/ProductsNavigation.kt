@@ -7,7 +7,7 @@ import nextstep.shoppingcart.ui.screen.products.ProductRoute
 const val PRODUCTS_ROUTE = "products"
 
 fun NavGraphBuilder.productsScreen(
-    onItemClick: () -> Unit
+    onItemClick: (id: String) -> Unit
 ) {
     composable(
         route = PRODUCTS_ROUTE,

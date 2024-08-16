@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.screen.products.model.dummyProductModels
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.utils.ThemePreviews
@@ -36,21 +37,22 @@ import nextstep.shoppingcart.utils.ThemePreviews
 @Composable
 fun ProductDetailRoute(
     modifier: Modifier = Modifier,
-    price: Int,
-    itemName: String,
-    itemImageUrl: String
+    id: String,
 ) {
-    ProductDetailScreen(
-        modifier = modifier,
-        price = price,
-        itemName = itemName,
-        itemImageUrl = itemImageUrl
-    )
+    val product = dummyProductModels.find { it.id == id }
+    if (product != null) {
+        ProductDetailScreen(
+            modifier = modifier,
+            price = product.price,
+            itemName = product.name,
+            itemImageUrl = product.imageUrl
+        )
+    }
 }
 
 @Composable
 private fun ProductDetailScreen(
-    price: Int,
+    price: Long,
     itemName: String,
     itemImageUrl: String,
     modifier: Modifier = Modifier
@@ -105,7 +107,7 @@ private fun SoppingCartButton(
 
 @Composable
 private fun ProductDetailPrice(
-    price: Int,
+    price: Long,
     modifier: Modifier = Modifier
 ) {
     Row(
