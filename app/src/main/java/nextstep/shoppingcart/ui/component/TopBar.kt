@@ -3,9 +3,11 @@ package nextstep.shoppingcart.ui.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -34,6 +36,31 @@ fun ProductListTopBar(modifier: Modifier = Modifier) {
                 imageVector = Icons.Filled.ShoppingCart,
                 contentDescription = stringResource(id = R.string.text_shopping_cart_Icon_description)
             )
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProductDetailTopBar(modifier: Modifier = Modifier) {
+    TopAppBar(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(Color.White),
+        title = {
+            Text(
+                modifier = modifier.fillMaxWidth(),
+                text = stringResource(id = R.string.text_product_detail_title),
+                textAlign = TextAlign.Left
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = { }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = stringResource(id = R.string.text_back_Icon_description)
+                )
+            }
         }
     )
 }
