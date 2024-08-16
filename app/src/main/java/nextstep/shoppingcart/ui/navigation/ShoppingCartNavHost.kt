@@ -10,17 +10,23 @@ fun ShoppingCartNavHost(
     modifier: Modifier = Modifier,
 ) {
     val navController = rememberNavController()
+
     NavHost(
         navController = navController,
         startDestination = PRODUCTS_ROUTE,
         modifier = modifier
     ) {
-        productsScreen { productId ->
-            navController.navigateToProductDetail(productId)
-        }
+        productsScreen(
+            onCartClick = { navController.navigateToShoppingCart() },
+            onItemClick = { productId -> navController.navigateToProductDetail(productId) }
+        )
 
         productDetailScreen(
-            onCartClick = {},
+            onCartClick = { navController.navigateToShoppingCart() },
+            onNavigationClick = { navController.navigateUp() }
+        )
+
+        shoppingCartScreen(
             onNavigationClick = { navController.navigateUp() }
         )
     }

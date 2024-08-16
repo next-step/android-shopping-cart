@@ -154,7 +154,7 @@ private fun ProductDetailTopAppBar(
             IconButton(onClick = onNavigationClick) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.product_detail_navigation_icon_description)
+                    contentDescription = stringResource(R.string.back_button_navigation_icon_description)
                 )
             }
         }

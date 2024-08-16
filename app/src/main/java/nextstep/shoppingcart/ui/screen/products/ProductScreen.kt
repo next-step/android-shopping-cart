@@ -33,10 +33,12 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductRoute(
     onItemClick: (id: String) -> Unit,
+    onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     ProductScreen(
         products = dummyProductModels.toPersistentList(),
+        onCartClick = onCartClick,
         onItemClick = onItemClick,
         modifier = modifier
     )
@@ -46,11 +48,12 @@ fun ProductRoute(
 private fun ProductScreen(
     products: PersistentList<ProductModel>,
     onItemClick: (id: String) -> Unit,
+    onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = { ProductTopAppBar { /* TODO */ } }
+        topBar = { ProductTopAppBar { onCartClick() } }
     ) { innerPadding ->
         LazyVerticalGrid(
             modifier = Modifier.padding(innerPadding),
@@ -109,7 +112,8 @@ private fun ProductScreenPreview() {
     ShoppingCartTheme {
         ProductScreen(
             products = dummyProductModels.toPersistentList(),
-            onItemClick = { /* TODO */ }
+            onCartClick = { },
+            onItemClick = { }
         )
     }
 }
