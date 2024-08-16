@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +21,7 @@ fun Product(
 ) {
     Column(modifier = modifier) {
         ProductImage(
+            modifier = Modifier.aspectRatio(1f),
             productName = productModel.name,
             imageUrl = productModel.imageUrl
         )

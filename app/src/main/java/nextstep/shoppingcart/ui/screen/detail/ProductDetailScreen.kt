@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -75,7 +76,11 @@ private fun ProductDetailScreen(
                 .padding(it)
                 .verticalScroll(rememberScrollState()),
         ) {
-            ProductImage(productName = itemName, imageUrl = itemImageUrl)
+            ProductImage(
+                modifier = Modifier.aspectRatio(1f),
+                productName = itemName,
+                imageUrl = itemImageUrl
+            )
 
             Text(
                 text = itemName,
