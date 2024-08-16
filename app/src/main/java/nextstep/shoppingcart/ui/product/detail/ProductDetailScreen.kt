@@ -58,7 +58,7 @@ internal fun ProductDetailRoute(
         remember {
             { event: ProductDetailEvent ->
                 when (event) {
-                    is ProductDetailEvent.AddToCart -> {
+                    is ProductDetailEvent.OnApplyCartClick -> {
                         // TODO: Add to cart
                         navController.navigateToCart()
                     }
@@ -99,7 +99,7 @@ internal fun ProductDetailScreen(
         },
         bottomBar = {
             ApplyCartButton(
-                onClick = { onProductDetailEvent(ProductDetailEvent.AddToCart(product = product)) },
+                onClick = { onProductDetailEvent(ProductDetailEvent.OnApplyCartClick(product = product)) },
                 modifier =
                     Modifier
                         .fillMaxWidth()

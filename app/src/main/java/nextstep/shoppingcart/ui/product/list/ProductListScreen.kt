@@ -41,11 +41,11 @@ internal fun ProductListRoute(
         remember {
             { event: ProductListEvent ->
                 when (event) {
-                    is ProductListEvent.NavigateToProductDetail -> {
+                    is ProductListEvent.OnProductCardClick -> {
                         navController.navigateToProductDetail(event.productId)
                     }
 
-                    is ProductListEvent.NavigateToCart -> {
+                    is ProductListEvent.OnCartClick -> {
                         navController.navigateToCart()
                     }
                 }
@@ -79,7 +79,7 @@ internal fun ProductListScreen(
                             stringResource(
                                 id = R.string.shopping_card_content_description,
                             ),
-                        onClick = { onProductListEvent(ProductListEvent.NavigateToCart) },
+                        onClick = { onProductListEvent(ProductListEvent.OnCartClick) },
                     )
                 },
             )
@@ -120,7 +120,7 @@ private fun ProductListContent(
                 product = product,
                 onCardClick = {
                     onProductListEvent(
-                        ProductListEvent.NavigateToProductDetail(productId = product.id),
+                        ProductListEvent.OnProductCardClick(productId = product.id),
                     )
                 },
             )
