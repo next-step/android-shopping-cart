@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -36,7 +38,7 @@ import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.cart.navigation.navigateToCart
-import nextstep.shoppingcart.ui.component.NavigationBackButton
+import nextstep.shoppingcart.ui.component.AppBarIcon
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -84,8 +86,10 @@ internal fun ProductDetailScreen(
                     Text(text = stringResource(id = R.string.product_detail_toolbar_title))
                 },
                 navigationIcon = {
-                    NavigationBackButton(
-                        navigateUp = navigateUp,
+                    AppBarIcon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(id = R.string.navigate_back),
+                        onClick = navigateUp,
                     )
                 },
             )
@@ -96,9 +100,9 @@ internal fun ProductDetailScreen(
             product = product,
             onProductDetailEvent = onProductDetailEvent,
             modifier =
-                modifier
-                    .padding(paddingValues)
-                    .fillMaxSize(),
+            modifier
+                .padding(paddingValues)
+                .fillMaxSize(),
         )
     }
 }
@@ -134,17 +138,17 @@ private fun ProductDetailContent(
                         fontSize = 24.sp,
                     ),
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 18.dp, vertical = 18.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 18.dp, vertical = 18.dp),
             )
             Divider(modifier = Modifier.height(1.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 18.dp, vertical = 18.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 18.dp, vertical = 18.dp),
             ) {
                 Text(
                     text = stringResource(id = R.string.product_detail_price_title),
@@ -173,9 +177,9 @@ private fun ProductDetailContent(
                 ),
             shape = RectangleShape,
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(54.dp),
+            Modifier
+                .fillMaxWidth()
+                .height(54.dp),
         ) {
             Text(
                 text = stringResource(id = R.string.product_detail_btn_title),

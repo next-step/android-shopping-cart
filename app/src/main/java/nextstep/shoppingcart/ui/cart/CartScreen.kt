@@ -1,6 +1,8 @@
 package nextstep.shoppingcart.ui.cart
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -11,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.NavigationBackButton
+import nextstep.shoppingcart.ui.component.AppBarIcon
 
 @Composable
 internal fun CartRoute(
@@ -37,8 +39,10 @@ fun CartScreen(
                     Text(text = stringResource(id = R.string.cart_toolbar_title))
                 },
                 navigationIcon = {
-                    NavigationBackButton(
-                        navigateUp = navigateUp,
+                    AppBarIcon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(id = R.string.navigate_back),
+                        onClick = navigateUp,
                     )
                 },
             )

@@ -11,8 +11,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +27,7 @@ import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.cart.navigation.navigateToCart
+import nextstep.shoppingcart.ui.component.AppBarIcon
 import nextstep.shoppingcart.ui.product.detail.navigation.navigateToProductDetail
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -74,15 +73,14 @@ internal fun ProductListScreen(
                     Text(text = stringResource(id = R.string.product_list_toolbar_title))
                 },
                 actions = {
-                    IconButton(onClick = { onProductListEvent(ProductListEvent.NavigateToCart) }) {
-                        Icon(
-                            imageVector = Icons.Filled.ShoppingCart,
-                            contentDescription =
-                                stringResource(
-                                    id = R.string.shopping_card_content_description,
-                                ),
-                        )
-                    }
+                    AppBarIcon(
+                        imageVector = Icons.Filled.ShoppingCart,
+                        contentDescription =
+                            stringResource(
+                                id = R.string.shopping_card_content_description,
+                            ),
+                        onClick = { onProductListEvent(ProductListEvent.NavigateToCart) },
+                    )
                 },
             )
         },
