@@ -5,4 +5,4 @@
 
 ### functional requirements
 - [x] implement top bar
-- [ ] implement product grid list
+- [x] implement product grid list
