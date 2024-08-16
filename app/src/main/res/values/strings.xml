@@ -8,4 +8,5 @@
     <string name="navigate_back">뒤로 가기</string>
     <string name="product_detail_price_title">금액</string>
     <string name="product_detail_btn_title">장바구니 담기</string>
+    <string name="cart_toolbar_title">장바구니</string>
 </resources>
