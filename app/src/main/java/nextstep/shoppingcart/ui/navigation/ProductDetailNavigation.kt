@@ -14,7 +14,10 @@ fun NavController.navigateToProductDetail(productId: String) {
     navigate("$PRODUCT_DETAIL_ROUTE/$productId")
 }
 
-fun NavGraphBuilder.productDetailScreen() {
+fun NavGraphBuilder.productDetailScreen(
+    onNavigationClick: () -> Unit,
+    onCartClick: (id: String) -> Unit
+) {
     composable(
         route = "$PRODUCT_DETAIL_ROUTE/{$PRODUCT_DETAIL_ITEM_ID}",
         arguments = listOf(
@@ -25,7 +28,11 @@ fun NavGraphBuilder.productDetailScreen() {
     ) { backStackEntry ->
         val productId = backStackEntry.arguments?.getString(PRODUCT_DETAIL_ITEM_ID)
         if (productId != null) {
-            ProductDetailRoute(id = productId)
+            ProductDetailRoute(
+                id = productId,
+                onNavigationClick = onNavigationClick,
+                onCartClick = onCartClick
+            )
         }
     }
 }

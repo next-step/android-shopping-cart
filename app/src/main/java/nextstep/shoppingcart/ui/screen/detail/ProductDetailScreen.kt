@@ -37,6 +37,8 @@ import nextstep.shoppingcart.utils.ThemePreviews
 @Composable
 fun ProductDetailRoute(
     modifier: Modifier = Modifier,
+    onNavigationClick: () -> Unit,
+    onCartClick: (id: String) -> Unit,
     id: String,
 ) {
     val product = dummyProductModels.find { it.id == id }
@@ -45,7 +47,9 @@ fun ProductDetailRoute(
             modifier = modifier,
             price = product.price,
             itemName = product.name,
-            itemImageUrl = product.imageUrl
+            itemImageUrl = product.imageUrl,
+            onNavigationClick = onNavigationClick,
+            onCartClick = { onCartClick(id) },
         )
     }
 }
@@ -55,10 +59,12 @@ private fun ProductDetailScreen(
     price: Long,
     itemName: String,
     itemImageUrl: String,
+    onNavigationClick: () -> Unit,
+    onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
-        topBar = { ProductDetailTopAppBar {/* TODO */ } }
+        topBar = { ProductDetailTopAppBar { onNavigationClick() } }
     ) {
         Column(modifier.padding(it)) {
             ProductImage(productName = itemName, imageUrl = itemImageUrl)
@@ -78,7 +84,7 @@ private fun ProductDetailScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            SoppingCartButton { /* TODO */ }
+            SoppingCartButton { onCartClick() }
         }
     }
 }
@@ -189,7 +195,9 @@ private fun ProductDetailScreenPreview() {
         ProductDetailScreen(
             price = 1_900_000,
             itemName = "iPhone 15 Pro Max",
-            itemImageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg"
+            itemImageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+            onNavigationClick = {},
+            onCartClick = {}
         )
     }
 }

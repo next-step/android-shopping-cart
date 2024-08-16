@@ -19,6 +19,9 @@ fun ShoppingCartNavHost(
             navController.navigateToProductDetail(productId)
         }
 
-        productDetailScreen()
+        productDetailScreen(
+            onCartClick = {},
+            onNavigationClick = { navController.navigateUp() }
+        )
     }
 }
