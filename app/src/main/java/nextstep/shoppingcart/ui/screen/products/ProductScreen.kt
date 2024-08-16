@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.screen.products
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -51,15 +52,16 @@ private fun ProductScreen(
             modifier = Modifier.padding(innerPadding),
             columns = GridCells.Fixed(2),
             contentPadding = PaddingValues(
+                top = 13.dp,
                 start = 18.dp,
-                end = 17.dp,
-                top = 13.dp
-            )
+                end = 18.dp
+            ),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(products) { item ->
                 Product(
                     productModel = item,
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier
                 )
             }
         }
