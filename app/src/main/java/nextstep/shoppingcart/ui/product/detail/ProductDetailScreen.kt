@@ -100,9 +100,9 @@ internal fun ProductDetailScreen(
             product = product,
             onProductDetailEvent = onProductDetailEvent,
             modifier =
-            modifier
-                .padding(paddingValues)
-                .fillMaxSize(),
+                modifier
+                    .padding(paddingValues)
+                    .fillMaxSize(),
         )
     }
 }
@@ -138,17 +138,17 @@ private fun ProductDetailContent(
                         fontSize = 24.sp,
                     ),
                 modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 18.dp, vertical = 18.dp),
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 18.dp, vertical = 18.dp),
             )
             Divider(modifier = Modifier.height(1.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 18.dp, vertical = 18.dp),
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 18.dp, vertical = 18.dp),
             ) {
                 Text(
                     text = stringResource(id = R.string.product_detail_price_title),
@@ -177,9 +177,9 @@ private fun ProductDetailContent(
                 ),
             shape = RectangleShape,
             modifier =
-            Modifier
-                .fillMaxWidth()
-                .height(54.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .height(54.dp),
         ) {
             Text(
                 text = stringResource(id = R.string.product_detail_btn_title),
