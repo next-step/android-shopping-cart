@@ -126,56 +126,52 @@ private fun ProductDetailContent(
     var state = rememberScrollState()
 
     Column(
-        modifier = modifier,
+        modifier =
+            modifier
+                .verticalScroll(state),
     ) {
-        Column(
+        ProductImage(
+            imgUrl = product.imgUrl,
+            contentDescription =
+                stringResource(
+                    id = R.string.product_image_content_description,
+                    product.name,
+                ),
+            placeholder = painterResource(id = R.drawable.image),
             modifier =
                 Modifier
-                    .verticalScroll(state),
+                    .fillMaxWidth()
+                    .aspectRatio(1f),
+        )
+        Text(
+            text = product.name,
+            overflow = TextOverflow.Ellipsis,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(18.dp),
+        )
+        Divider(thickness = 1.dp)
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 18.dp, vertical = 18.dp),
         ) {
-            ProductImage(
-                imgUrl = product.imgUrl,
-                contentDescription =
-                    stringResource(
-                        id = R.string.product_image_content_description,
-                        product.name,
-                    ),
-                placeholder = painterResource(id = R.drawable.image),
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(1f),
+            Text(
+                text = stringResource(id = R.string.product_detail_price_title),
+                style = MaterialTheme.typography.titleMedium,
+                fontSize = 20.sp,
             )
             Text(
-                text = product.name,
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(18.dp),
+                text = stringResource(id = R.string.product_price, product.price),
+                style = MaterialTheme.typography.titleMedium,
+                fontSize = 20.sp,
             )
-            Divider(thickness = 1.dp)
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 18.dp, vertical = 18.dp),
-            ) {
-                Text(
-                    text = stringResource(id = R.string.product_detail_price_title),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontSize = 20.sp,
-                )
-                Text(
-                    text = stringResource(id = R.string.product_price, product.price),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontSize = 20.sp,
-                )
-            }
         }
     }
 }
