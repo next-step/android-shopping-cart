@@ -143,11 +143,9 @@ private fun ProductDetailContent(
             Text(
                 text = product.name,
                 overflow = TextOverflow.Ellipsis,
-                style =
-                    MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp,
-                    ),
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
                 modifier =
                     Modifier
                         .fillMaxWidth()
@@ -163,17 +161,13 @@ private fun ProductDetailContent(
             ) {
                 Text(
                     text = stringResource(id = R.string.product_detail_price_title),
-                    style =
-                        MaterialTheme.typography.titleMedium.copy(
-                            fontSize = 20.sp,
-                        ),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontSize = 20.sp,
                 )
                 Text(
                     text = stringResource(id = R.string.product_price, product.price),
-                    style =
-                        MaterialTheme.typography.titleMedium.copy(
-                            fontSize = 20.sp,
-                        ),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontSize = 20.sp,
                 )
             }
         }
