@@ -153,7 +153,7 @@ private fun ProductDetailContent(
                         .fillMaxWidth()
                         .padding(18.dp),
             )
-            Divider(modifier = Modifier.height(1.dp))
+            Divider(thickness = 1.dp)
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier =
