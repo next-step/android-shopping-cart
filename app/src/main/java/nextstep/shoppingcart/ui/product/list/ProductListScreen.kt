@@ -118,7 +118,7 @@ private fun ProductListContent(
         ) { product ->
             ProductCard(
                 product = product,
-                onCardClick = { product ->
+                onCardClick = {
                     onProductListEvent(
                         ProductListEvent.NavigateToProductDetail(productId = product.id),
                     )

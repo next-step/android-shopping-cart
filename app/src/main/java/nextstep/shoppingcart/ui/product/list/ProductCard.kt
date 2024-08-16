@@ -26,12 +26,12 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 internal fun ProductCard(
     product: Product,
     modifier: Modifier = Modifier,
-    onCardClick: (Product) -> Unit = {},
+    onCardClick: () -> Unit = {},
 ) {
     Column(
         modifier =
             modifier
-                .clickable { onCardClick(product) },
+                .clickable(onClick = onCardClick),
     ) {
         ProductImage(
             imgUrl = product.imgUrl,
