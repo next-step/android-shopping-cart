@@ -131,7 +131,6 @@ private fun ProductDetailContent(
         Column(
             modifier =
                 Modifier
-                    .weight(1f)
                     .verticalScroll(state),
         ) {
             ProductImage(
