@@ -75,7 +75,12 @@ fun ProductLazeColum(productList: List<Product>) {
         state = rememberLazyGridState()
     ) {
 
-        items(productList) { product ->
+        items(
+            items = productList,
+            key = { product ->
+                product.id
+            }
+        ) { product ->
             ProductCard(product)
         }
     }
