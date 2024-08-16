@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.utils.ThemePreviews
 
 @Composable
 fun ShoppingCartRoute(
@@ -66,7 +67,7 @@ private fun ShoppingCartTopAppBar(
     )
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 private fun ShoppingCartScreenPreview() {
     ShoppingCartScreen(onNavigationClick = {})
