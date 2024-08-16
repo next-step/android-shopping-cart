@@ -23,9 +23,9 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.toPersistentList
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.CartItem
-import nextstep.shoppingcart.ui.screen.products.model.Product
-import nextstep.shoppingcart.ui.screen.products.model.dummyProducts
+import nextstep.shoppingcart.ui.component.Product
+import nextstep.shoppingcart.ui.screen.products.model.ProductModel
+import nextstep.shoppingcart.ui.screen.products.model.dummyProductModels
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -33,14 +33,14 @@ fun ProductRoute(
     modifier: Modifier = Modifier
 ) {
     ProductScreen(
-        cartItems = dummyProducts.toPersistentList(),
+        products = dummyProductModels.toPersistentList(),
         modifier = modifier
     )
 }
 
 @Composable
 private fun ProductScreen(
-    cartItems: PersistentList<Product>,
+    products: PersistentList<ProductModel>,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -56,9 +56,9 @@ private fun ProductScreen(
                 top = 13.dp
             )
         ) {
-            items(cartItems) { item ->
-                CartItem(
-                    product = item,
+            items(products) { item ->
+                Product(
+                    productModel = item,
                     modifier = Modifier.padding(16.dp)
                 )
             }
@@ -98,7 +98,7 @@ private fun ProductTopAppBar(
 private fun ProductScreenPreview() {
     ShoppingCartTheme {
         ProductScreen(
-            cartItems = dummyProducts.toPersistentList(),
+            products = dummyProductModels.toPersistentList(),
         )
     }
 }
