@@ -1,13 +1,8 @@
-package nextstep.shoppingcart.model
+package nextstep.shoppingcart.data
 
-data class Product(
-    val id: Long,
-    val name: String,
-    val price: Int,
-    val imgUrl: String,
-)
+import nextstep.shoppingcart.domain.model.Product
 
-val Products =
+val PRODUCT_LIST_MOCK_DATA =
     listOf(
         Product(
             id = 1,
@@ -94,3 +89,19 @@ val Products =
                 "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mac-card-40-mac-mini-202301?wid=1200&hei=1000&fmt=p-jpg&qlt=95&.v=1670549737872",
         ),
     )
+
+interface Products {
+    fun findById(id: Long): Product?
+
+    fun getAll(): List<Product>
+}
+
+class ProductsImpl(
+    initial: List<Product> = PRODUCT_LIST_MOCK_DATA,
+) : Products {
+    private val products: List<Product> = initial.map { it.copy() }
+
+    override fun findById(id: Long): Product? = products.find { it.id == id }
+
+    override fun getAll(): List<Product> = products
+}

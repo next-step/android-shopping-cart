@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.product
+package nextstep.shoppingcart.ui.product.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,29 +11,50 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.model.Products
+import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
+import nextstep.shoppingcart.data.Products
+import nextstep.shoppingcart.data.ProductsImpl
+import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.ui.cart.navigation.navigateToCart
+import nextstep.shoppingcart.ui.component.AppBarIcon
+import nextstep.shoppingcart.ui.product.detail.navigation.navigateToProductDetail
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-internal fun ProductListRoute(modifier: Modifier = Modifier) {
-    val products by remember { mutableStateOf(Products) }
+internal fun ProductListRoute(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+) {
+    val products: Products = remember { ProductsImpl() }
+    val eventListener =
+        remember {
+            { event: ProductListEvent ->
+                when (event) {
+                    is ProductListEvent.OnProductCardClick -> {
+                        navController.navigateToProductDetail(event.productId)
+                    }
+
+                    is ProductListEvent.OnCartClick -> {
+                        navController.navigateToCart()
+                    }
+                }
+            }
+        }
 
     ProductListScreen(
-        products = products,
+        products = products.getAll(),
+        onProductListEvent = eventListener,
         modifier = modifier.fillMaxSize(),
     )
 }
@@ -42,6 +63,7 @@ internal fun ProductListRoute(modifier: Modifier = Modifier) {
 @Composable
 internal fun ProductListScreen(
     products: List<Product>,
+    onProductListEvent: (ProductListEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -51,15 +73,14 @@ internal fun ProductListScreen(
                     Text(text = stringResource(id = R.string.product_list_toolbar_title))
                 },
                 actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = Icons.Filled.ShoppingCart,
-                            contentDescription =
-                                stringResource(
-                                    id = R.string.shopping_card_content_description,
-                                ),
-                        )
-                    }
+                    AppBarIcon(
+                        imageVector = Icons.Filled.ShoppingCart,
+                        contentDescription =
+                            stringResource(
+                                id = R.string.shopping_card_content_description,
+                            ),
+                        onClick = { onProductListEvent(ProductListEvent.OnCartClick) },
+                    )
                 },
             )
         },
@@ -67,6 +88,7 @@ internal fun ProductListScreen(
     ) { innerPadding ->
         ProductListContent(
             products = products,
+            onProductListEvent = onProductListEvent,
             modifier = Modifier.padding(innerPadding),
         )
     }
@@ -75,6 +97,7 @@ internal fun ProductListScreen(
 @Composable
 private fun ProductListContent(
     products: List<Product>,
+    onProductListEvent: (ProductListEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -93,7 +116,14 @@ private fun ProductListContent(
             items = products,
             key = { product -> product.id },
         ) { product ->
-            ProductCard(product = product)
+            ProductCard(
+                product = product,
+                onCardClick = {
+                    onProductListEvent(
+                        ProductListEvent.OnProductCardClick(productId = product.id),
+                    )
+                },
+            )
         }
     }
 }
@@ -102,6 +132,9 @@ private fun ProductListContent(
 @Composable
 private fun ProductListScreenPreview() {
     ShoppingCartTheme {
-        ProductListScreen(products = Products)
+        ProductListScreen(
+            products = PRODUCT_LIST_MOCK_DATA,
+            onProductListEvent = {},
+        )
     }
 }

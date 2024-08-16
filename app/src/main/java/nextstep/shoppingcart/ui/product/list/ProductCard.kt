@@ -1,5 +1,6 @@
-package nextstep.shoppingcart.ui.product
+package nextstep.shoppingcart.ui.product.list
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,20 +16,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.model.Products
+import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
+import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 internal fun ProductCard(
     product: Product,
     modifier: Modifier = Modifier,
+    onCardClick: () -> Unit = {},
 ) {
-    Column(modifier = modifier) {
-        AsyncImage(
-            model = product.imgUrl,
+    Column(
+        modifier =
+            modifier
+                .clickable(onClick = onCardClick),
+    ) {
+        ProductImage(
+            imgUrl = product.imgUrl,
             contentDescription =
                 stringResource(
                     id = R.string.product_image_content_description,
@@ -79,7 +85,7 @@ private fun ProductCardPreview(
 class ProductCardPreviewProvider :
     CollectionPreviewParameterProvider<Product>(
         collection =
-            Products
+            PRODUCT_LIST_MOCK_DATA
                 .take(3)
                 .mapIndexed { index, product ->
                     if (index == 2) {
