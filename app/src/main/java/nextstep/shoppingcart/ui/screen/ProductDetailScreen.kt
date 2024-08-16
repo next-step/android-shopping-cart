@@ -30,7 +30,7 @@ import nextstep.shoppingcart.ui.data.Product
 fun ProductDetailScreen(modifier: Modifier, product: Product) {
     Scaffold(
         topBar = {
-            ProductDetailTopBar(modifier)
+            ProductDetailTopBar(modifier, R.string.text_product_detail_title)
         },
         bottomBar = {
             ProductBottomBar()

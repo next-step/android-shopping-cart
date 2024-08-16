@@ -4,6 +4,7 @@
     <string name="text_product_detail_title">상품 상세</string>
     <string name="text_price">금액</string>
     <string name="text_shopping_cart">장바구니 담기</string>
+    <string name="text_shopping_cart_title">장바구니</string>
     <string name="text_shopping_cart_Icon_description">쇼핑 카트 아이콘</string>
     <string name="text_back_Icon_description">뒤로 가기 아이콘</string>
     <string name="formatted_price">%1$,d원</string>

@@ -1,7 +1,9 @@
 package nextstep.shoppingcart.ui.component
 
 import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -20,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ShoppingCartActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +49,7 @@ fun ProductListTopBar(modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailTopBar(modifier: Modifier = Modifier) {
+fun ProductDetailTopBar(modifier: Modifier = Modifier, titleResource: Int) {
     val context = LocalContext.current
     TopAppBar(
         modifier = modifier
@@ -55,7 +58,7 @@ fun ProductDetailTopBar(modifier: Modifier = Modifier) {
         title = {
             Text(
                 modifier = modifier.fillMaxWidth(),
-                text = stringResource(id = R.string.text_product_detail_title),
+                text = stringResource(id = titleResource),
                 textAlign = TextAlign.Left
             )
         },
@@ -72,9 +75,14 @@ fun ProductDetailTopBar(modifier: Modifier = Modifier) {
 
 @Composable
 fun ProductBottomBar(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
     BottomAppBar(
         modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+                val intent = Intent(context, ShoppingCartActivity::class.java)
+                context.startActivity(intent)
+            },
         containerColor = Color(0xFF2196F3)
     ) {
         Text(
