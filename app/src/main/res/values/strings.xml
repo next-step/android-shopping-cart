@@ -7,5 +7,6 @@
     <string name="content_description_arrow_back">뒤로가기</string>
     <string name="title_activity_product_detail">상품 상세</string>
     <string name="title_activity_shopping_cart">장바구니</string>
+    <string name="add_to_cart">장바구니 담기</string>
     <string name="price_format">%,d원</string>
 </resources>

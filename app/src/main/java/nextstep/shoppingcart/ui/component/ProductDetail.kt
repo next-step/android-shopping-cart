@@ -88,7 +88,7 @@ fun ProductDetail(
                     .align(Alignment.BottomCenter)
             ) {
                 Text(
-                    text = "장바구니 담기",
+                    text = stringResource(id = R.string.add_to_cart),
                     style = MaterialTheme.typography.titleLarge
                 )
             }
