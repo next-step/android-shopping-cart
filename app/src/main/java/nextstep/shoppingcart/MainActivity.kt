@@ -3,44 +3,64 @@ package nextstep.shoppingcart
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.screen.ProductList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
+    val products: List<Product> = getProducts()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+                ProductList(products)
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
+fun getProducts(): List<Product> {
+    return listOf(
+        Product(
+            name = "PET보틀-정사각형",
+            price = 10000,
+            imageUrl = "https://picsum.photos/156/158"
+        ),
+        Product(
+            name = "PET보틀-밀크티",
+            price = 12000,
+            imageUrl = "https://picsum.photos/156/158"
+        ),
+        Product(
+            name = "PET보틀-정사각각형",
+            price = 10000,
+            imageUrl = "https://picsum.photos/156/158"
+        ),
+        Product(
+            name = "PET보틀-납작(200ml)",
+            price = 12000,
+            imageUrl = "https://picsum.photos/156/158"
+        ),
+        Product(
+            name = "PET보틀-정사각형",
+            price = 10000,
+            imageUrl = "https://picsum.photos/156/158"
+        ),
+        Product(
+            name = "PET보틀-납작(200ml)",
+            price = 12000,
+            imageUrl = "https://picsum.photos/156/158"
+        ),
+        Product(
+            name = "PET보틀-정사각형",
+            price = 10000,
+            imageUrl = "https://picsum.photos/156/158"
+        ),
+        Product(
+            name = "PET보틀-납작(200ml)",
+            price = 12000,
+            imageUrl = "https://picsum.photos/156/158"
+        )
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ShoppingCartTheme {
-        Greeting("Android")
-    }
 }
