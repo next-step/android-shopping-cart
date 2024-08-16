@@ -39,6 +39,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.ui.cart.navigation.navigateToCart
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -51,10 +52,22 @@ internal fun ProductDetailRoute(
 ) {
     val products: Products = remember { ProductsImpl() }
     val product = products.findById(productId) ?: return
+    val eventListener =
+        remember {
+            { event: ProductDetailEvent ->
+                when (event) {
+                    is ProductDetailEvent.AddToCart -> {
+                        // TODO: Add to cart
+                        navController.navigateToCart()
+                    }
+                }
+            }
+        }
 
     ProductDetailScreen(
         product = product,
         navigateUp = { navController.popBackStack() },
+        onProductDetailEvent = eventListener,
         modifier = modifier.fillMaxSize(),
     )
 }
@@ -64,6 +77,7 @@ internal fun ProductDetailRoute(
 internal fun ProductDetailScreen(
     product: Product,
     navigateUp: () -> Unit,
+    onProductDetailEvent: (ProductDetailEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -86,6 +100,7 @@ internal fun ProductDetailScreen(
     ) { paddingValues ->
         ProductDetailContent(
             product = product,
+            onProductDetailEvent = onProductDetailEvent,
             modifier =
                 modifier
                     .padding(paddingValues)
@@ -97,6 +112,7 @@ internal fun ProductDetailScreen(
 @Composable
 private fun ProductDetailContent(
     product: Product,
+    onProductDetailEvent: (ProductDetailEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -153,7 +169,9 @@ private fun ProductDetailContent(
             }
         }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                onProductDetailEvent(ProductDetailEvent.AddToCart(product = product))
+            },
             colors =
                 ButtonDefaults.buttonColors(
                     containerColor = Blue50,
@@ -186,6 +204,7 @@ private fun ProductDetailScreenPreview(
         ProductDetailScreen(
             product = product,
             navigateUp = {},
+            onProductDetailEvent = {},
         )
     }
 }
