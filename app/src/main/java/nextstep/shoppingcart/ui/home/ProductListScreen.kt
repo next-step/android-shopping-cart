@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.screen
+package nextstep.shoppingcart.ui.home
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,14 +11,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.ShoppingCartDestinations
+import nextstep.shoppingcart.ui.getProducts
 
 @Composable
-fun ProductList(products: List<Product>) {
+fun ProductList(
+    navController: NavController,
+    products: List<Product>
+) {
     Scaffold(
         topBar = {
-            Title(title = "상품 목록") {
-
+            Title(
+                title = "상품 목록"
+            ) {
+                navController.navigate(ShoppingCartDestinations.SHOPPING_CART)
             }
         },
         content = { paddingValues ->
@@ -32,6 +41,7 @@ fun ProductList(products: List<Product>) {
             ) {
                 items(products) {
                     ProductItem(
+                        navController = navController,
                         product = it
                     )
                 }
@@ -43,37 +53,5 @@ fun ProductList(products: List<Product>) {
 @Preview
 @Composable
 private fun ProductListPreview() {
-    val products: List<Product> = listOf(
-        Product(
-            name = "PET보틀-정사각",
-            price = 10000,
-            imageUrl = "https://example.com/pet_bottle_square.jpg"
-        ),
-        Product(
-            name = "PET보틀-밀크티",
-            price = 12000,
-            imageUrl = "https://example.com/pet_bottle_milktea.jpg"
-        ),
-        Product(
-            name = "PET보틀-정사각",
-            price = 10000,
-            imageUrl = "https://example.com/pet_bottle_square_2.jpg"
-        ),
-        Product(
-            name = "PET보틀-납작(2",
-            price = 12000,
-            imageUrl = "https://example.com/pet_bottle_flat_1.jpg"
-        ),
-        Product(
-            name = "PET보틀-정사각",
-            price = 10000,
-            imageUrl = "https://example.com/pet_bottle_square_3.jpg"
-        ),
-        Product(
-            name = "PET보틀-납작(2",
-            price = 12000,
-            imageUrl = "https://example.com/pet_bottle_flat_2.jpg"
-        )
-    )
-    ProductList(products)
+    ProductList(rememberNavController(), getProducts())
 }
