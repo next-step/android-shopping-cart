@@ -17,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.ProductDetailTopBar
 import nextstep.shoppingcart.ui.data.Product
@@ -37,8 +36,7 @@ fun ProductDetailScreen(modifier: Modifier, product: Product) {
                     .fillMaxWidth()
                     .padding(18.dp),
                 text = product.name,
-                style = MaterialTheme.typography.titleLarge,
-                fontSize = 24.sp,
+                style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
             )
 
@@ -55,18 +53,16 @@ fun ProductDetailScreen(modifier: Modifier, product: Product) {
             ) {
                 Text(
                     text = stringResource(id = R.string.text_price),
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.titleSmall,
                     textAlign = TextAlign.Start,
-                    fontSize = 20.sp
                 )
 
                 Spacer(modifier = Modifier.weight(1f))
 
                 Text(
                     text = stringResource(id = R.string.formatted_price, product.price),
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.titleSmall,
                     textAlign = TextAlign.End,
-                    fontSize = 20.sp
                 )
             }
         }
