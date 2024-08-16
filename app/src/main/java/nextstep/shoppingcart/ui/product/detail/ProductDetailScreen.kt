@@ -97,11 +97,19 @@ internal fun ProductDetailScreen(
                 },
             )
         },
+        bottomBar = {
+            ApplyCartButton(
+                onClick = { onProductDetailEvent(ProductDetailEvent.AddToCart(product = product)) },
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(54.dp),
+            )
+        },
         modifier = modifier,
     ) { paddingValues ->
         ProductDetailContent(
             product = product,
-            onProductDetailEvent = onProductDetailEvent,
             modifier =
                 Modifier
                     .padding(paddingValues)
@@ -113,7 +121,6 @@ internal fun ProductDetailScreen(
 @Composable
 private fun ProductDetailContent(
     product: Product,
-    onProductDetailEvent: (ProductDetailEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var state = rememberScrollState()
@@ -171,30 +178,35 @@ private fun ProductDetailContent(
                 )
             }
         }
-        Button(
-            onClick = {
-                onProductDetailEvent(ProductDetailEvent.AddToCart(product = product))
-            },
-            colors =
-                ButtonDefaults.buttonColors(
-                    containerColor = Blue50,
-                    contentColor = Color.White,
+    }
+}
+
+@Composable
+fun ApplyCartButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Button(
+        onClick = onClick,
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor = Blue50,
+                contentColor = Color.White,
+            ),
+        shape = RectangleShape,
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(54.dp),
+    ) {
+        Text(
+            text = stringResource(id = R.string.product_detail_btn_title),
+            style =
+                MaterialTheme.typography.bodyMedium.copy(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
                 ),
-            shape = RectangleShape,
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(54.dp),
-        ) {
-            Text(
-                text = stringResource(id = R.string.product_detail_btn_title),
-                style =
-                    MaterialTheme.typography.bodyMedium.copy(
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                    ),
-            )
-        }
+        )
     }
 }
 
