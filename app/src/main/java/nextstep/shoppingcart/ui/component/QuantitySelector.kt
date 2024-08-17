@@ -1,0 +1,82 @@
+package nextstep.shoppingcart.ui.component
+
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+
+@Composable
+fun QuantitySelector(
+    quantity: Int,
+    modifier: Modifier = Modifier,
+    onAddClick: () -> Unit = {},
+    onRemoveClick: () -> Unit = {},
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier,
+    ) {
+        IconButton(
+            onClick = onRemoveClick,
+            modifier = Modifier.weight(1f),
+        ) {
+            Text(
+                text = stringResource(id = R.string.remove),
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+            )
+        }
+
+        Text(
+            text = "$quantity",
+            textAlign = TextAlign.Center,
+            modifier = Modifier.weight(1f),
+        )
+
+        IconButton(
+            onClick = onAddClick,
+            modifier = Modifier.weight(1f),
+        ) {
+            Text(
+                text = stringResource(id = R.string.add),
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun QuantitySelectorPreview() {
+    ShoppingCartTheme {
+        var quantity by
+            remember {
+                mutableIntStateOf(1)
+            }
+        QuantitySelector(
+            quantity = quantity,
+            onAddClick = {
+                quantity++
+            },
+            onRemoveClick = {
+                if (quantity > 0) {
+                    quantity--
+                }
+            },
+        )
+    }
+}
