@@ -9,32 +9,27 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.ShoppingItem
-import nextstep.shoppingcart.component.ShoppingTopBar
-import nextstep.shoppingcart.model.dummyProductList
+import nextstep.shoppingcart.component.topbar.ShoppingListTopBar
+import nextstep.shoppingcart.model.productList
 
 @Composable
 fun ShoppingListScreen(
+    onClickDetail : (Int) -> Unit,
+    onClickCart : () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val products = remember {
-        dummyProductList
-    }
-
     Scaffold(
         modifier = modifier,
         topBar = {
-            ShoppingTopBar(
+            ShoppingListTopBar(
                 title = stringResource(id = R.string.shopping_list_title),
-                onClickCart = {
-
-                }
+                onClickCart = onClickCart
             )
         }
     ) { innerPadding ->
@@ -46,18 +41,18 @@ fun ShoppingListScreen(
                 vertical = 13.dp,
                 horizontal = 18.dp
             ),
-            columns = GridCells.Adaptive(
-                minSize = 156.dp
-            ),
+            columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             items(
-                items = products
+                items = productList
             ) { product ->
                 ShoppingItem(
                     product = product,
-                    onClick = {}
+                    onClick = {
+                        onClickDetail(product.id)
+                    }
                 )
             }
         }
@@ -67,5 +62,8 @@ fun ShoppingListScreen(
 @Preview(showBackground = true, name = "ShoppingListScreen")
 @Composable
 private fun Preview1() {
-    ShoppingListScreen()
+    ShoppingListScreen(
+        onClickDetail = {},
+        onClickCart = {}
+    )
 }
