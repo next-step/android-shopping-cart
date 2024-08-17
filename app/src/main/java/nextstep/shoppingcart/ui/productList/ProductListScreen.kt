@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.screen
+package nextstep.shoppingcart.ui.productList
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,10 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.ui.component.ProductCard
-import nextstep.shoppingcart.ui.component.ProductListTopBar
 import nextstep.shoppingcart.ui.data.Product
 import nextstep.shoppingcart.ui.data.SampleProductList.sampleProductList
+import nextstep.shoppingcart.ui.productList.component.ProductCard
+import nextstep.shoppingcart.ui.productList.component.ProductListTopBar
 
 
 @Composable

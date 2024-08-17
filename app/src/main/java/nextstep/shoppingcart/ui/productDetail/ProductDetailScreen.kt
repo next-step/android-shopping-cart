@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.screen
+package nextstep.shoppingcart.ui.productDetail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,17 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.BasicTopBar
-import nextstep.shoppingcart.ui.component.ProductBottomBar
-import nextstep.shoppingcart.ui.component.ProductOverview
-import nextstep.shoppingcart.ui.component.ProductPrice
 import nextstep.shoppingcart.ui.data.Product
+import nextstep.shoppingcart.ui.productDetail.component.ProductDetailTopBar
+import nextstep.shoppingcart.ui.productDetail.component.ProductOverview
+import nextstep.shoppingcart.ui.productDetail.component.ProductPrice
+import nextstep.shoppingcart.ui.productList.component.ProductBottomBar
 
 @Composable
 fun ProductDetailScreen(modifier: Modifier, product: Product) {
     Scaffold(topBar = {
-        BasicTopBar(modifier, R.string.text_product_detail_title)
+        ProductDetailTopBar(modifier)
     }, bottomBar = {
         ProductBottomBar()
     }) { paddingValue ->

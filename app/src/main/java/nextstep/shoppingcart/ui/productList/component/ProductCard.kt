@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.component
+package nextstep.shoppingcart.ui.productList.component
 
 import android.content.Intent
 import androidx.compose.foundation.clickable
@@ -18,9 +18,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.ProductDetailActivity
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.data.Product
+import nextstep.shoppingcart.ui.productDetail.ProductDetailActivity
 
 @Composable
 fun ProductCard(product: Product) {

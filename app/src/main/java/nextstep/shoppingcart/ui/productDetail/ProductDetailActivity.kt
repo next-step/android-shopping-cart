@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.ui.productDetail
 
 import android.os.Build
 import android.os.Bundle
@@ -9,7 +9,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import nextstep.shoppingcart.ui.data.Product
-import nextstep.shoppingcart.ui.screen.ProductDetailScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {

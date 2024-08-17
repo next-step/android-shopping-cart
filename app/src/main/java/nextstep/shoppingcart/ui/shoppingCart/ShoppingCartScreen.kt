@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.screen
+package nextstep.shoppingcart.ui.shoppingCart
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -6,14 +6,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.BasicTopBar
+import nextstep.shoppingcart.ui.shoppingCart.component.ShoppingCartTopBar
 
 @Composable
 fun ShoppingCardScreen(modifier: Modifier) {
     Scaffold(
         topBar = {
-            BasicTopBar(modifier, R.string.text_shopping_cart_title)
+            ShoppingCartTopBar(modifier)
         }
     ) { paddingValue ->
         Column(

@@ -4,7 +4,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.ui.data.Product
-import nextstep.shoppingcart.ui.screen.ProductDetailScreen
+import nextstep.shoppingcart.ui.productDetail.ProductDetailScreen
 import org.junit.Rule
 import org.junit.Test
 

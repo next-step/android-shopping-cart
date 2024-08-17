@@ -1,10 +1,9 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.ui.shoppingCart
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.ui.Modifier
-import nextstep.shoppingcart.ui.screen.ShoppingCardScreen
 
 class ShoppingCartActivity : ComponentActivity() {
 
