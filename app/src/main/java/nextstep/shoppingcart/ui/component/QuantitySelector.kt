@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -21,9 +22,9 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun QuantitySelector(
     quantity: Int,
+    onAddClick: () -> Unit,
+    onRemoveClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onAddClick: () -> Unit = {},
-    onRemoveClick: () -> Unit = {},
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -31,7 +32,10 @@ fun QuantitySelector(
     ) {
         IconButton(
             onClick = onRemoveClick,
-            modifier = Modifier.weight(1f),
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .testTag(stringResource(id = R.string.test_tag_quantity_selector_remove)),
         ) {
             Text(
                 text = stringResource(id = R.string.remove),
@@ -48,7 +52,10 @@ fun QuantitySelector(
 
         IconButton(
             onClick = onAddClick,
-            modifier = Modifier.weight(1f),
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .testTag(stringResource(id = R.string.test_tag_quantity_selector_add)),
         ) {
             Text(
                 text = stringResource(id = R.string.add),
