@@ -16,7 +16,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun BasicIconButton(
     imageVector: ImageVector,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
 ) {

@@ -76,6 +76,7 @@ fun CartCard(
 
                 BasicIconButton(
                     imageVector = Icons.Filled.Clear,
+                    onClick = onCancel,
                     modifier =
                         Modifier
                             .size(24.dp)
