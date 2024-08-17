@@ -2,4 +2,6 @@
     <string name="app_name">Shopping Cart</string>
     <string name="shopping_list_title">상품 목록</string>
     <string name="shopping_list_price_korean">%,d원</string>
+
+    <string name="shopping_detail_title">상품 상세</string>
 </resources>
