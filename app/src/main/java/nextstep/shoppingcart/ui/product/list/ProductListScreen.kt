@@ -24,7 +24,7 @@ import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.ui.component.AppBarIcon
+import nextstep.shoppingcart.ui.component.BasicIconButton
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -70,7 +70,7 @@ internal fun ProductListScreen(
                     Text(text = stringResource(id = R.string.product_list_toolbar_title))
                 },
                 actions = {
-                    AppBarIcon(
+                    BasicIconButton(
                         imageVector = Icons.Filled.ShoppingCart,
                         contentDescription =
                             stringResource(

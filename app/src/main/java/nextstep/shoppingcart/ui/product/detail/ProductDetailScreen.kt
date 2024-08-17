@@ -38,7 +38,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.ui.component.AppBarIcon
+import nextstep.shoppingcart.ui.component.BasicIconButton
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -87,7 +87,7 @@ internal fun ProductDetailScreen(
                     Text(text = stringResource(id = R.string.product_detail_toolbar_title))
                 },
                 navigationIcon = {
-                    AppBarIcon(
+                    BasicIconButton(
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = stringResource(id = R.string.navigate_back),
                         onClick = navigateUp,

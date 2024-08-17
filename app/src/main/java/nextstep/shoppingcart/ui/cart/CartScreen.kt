@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.AppBarIcon
+import nextstep.shoppingcart.ui.component.BasicIconButton
 
 @Composable
 internal fun CartRoute(
@@ -37,7 +37,7 @@ internal fun CartScreen(
                     Text(text = stringResource(id = R.string.cart_toolbar_title))
                 },
                 navigationIcon = {
-                    AppBarIcon(
+                    BasicIconButton(
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = stringResource(id = R.string.navigate_back),
                         onClick = navigateUp,
