@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -20,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.component.ShoppingTextButton
 import nextstep.shoppingcart.component.topbar.ShoppingDetailTopBar
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.productList
@@ -53,51 +56,65 @@ fun ShoppingDetailContent(
     product: Product,
     modifier: Modifier = Modifier
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
         modifier = modifier
     ) {
-        AsyncImage(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f),
-            model = product.imageUrl,
-            contentDescription = product.name,
-            contentScale = ContentScale.Crop
-        )
-        Text(
-            modifier = Modifier.padding(18.dp),
-            text = product.name,
-            style = MaterialTheme.typography.headlineSmall.copy(
-                lineHeight = 28.sp
-            ),
-            fontWeight = FontWeight.Bold
-        )
-        Divider()
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(18.dp)
-        ) {
-            Text(
+        Column(
+            modifier = Modifier.weight(1f).verticalScroll(scrollState)
+        ){
+            AsyncImage(
                 modifier = Modifier
-                    .wrapContentHeight()
-                    .weight(1f),
-                text = stringResource(id = R.string.shopping_list_price_korean, product.price),
-                style = MaterialTheme.typography.titleSmall
+                    .fillMaxWidth()
+                    .aspectRatio(1f),
+                model = product.imageUrl,
+                contentDescription = product.name,
+                contentScale = ContentScale.Crop
             )
             Text(
-                text = stringResource(id = R.string.shopping_list_price_korean, product.price),
-                style = MaterialTheme.typography.titleSmall
+                modifier = Modifier.padding(18.dp),
+                text = product.name,
+                style = MaterialTheme.typography.headlineSmall.copy(
+                    lineHeight = 28.sp
+                ),
+                fontWeight = FontWeight.Bold
             )
+            Divider()
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(18.dp)
+            ) {
+                Text(
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .weight(1f),
+                    text = stringResource(id = R.string.shopping_list_price_korean, product.price),
+                    style = MaterialTheme.typography.titleSmall
+                )
+                Text(
+                    text = stringResource(id = R.string.shopping_list_price_korean, product.price),
+                    style = MaterialTheme.typography.titleSmall
+                )
+            }
         }
+        ShoppingTextButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.shopping_detail_cart_button),
+            onClick = {
 
+            }
+        )
     }
 }
 
-@Preview
+@Preview(name = "ShoppingDetailScreen")
 @Composable
-private fun ShoppingDetailScreen() {
+private fun Preview1() {
     ShoppingCartTheme {
-        ShoppingDetailScreen(product = productList[1])
+        ShoppingDetailScreen(
+            product = productList[1]
+        )
     }
 }
