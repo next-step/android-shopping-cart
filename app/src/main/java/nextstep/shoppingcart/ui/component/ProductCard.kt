@@ -1,5 +1,7 @@
 package nextstep.shoppingcart.ui.component
 
+import android.content.Intent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,17 +11,29 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import nextstep.shoppingcart.ProductDetailActivity
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.data.Product
-import java.text.DecimalFormat
 
 @Composable
 fun ProductCard(product: Product) {
+    val context = LocalContext.current
     Column(
+        modifier = Modifier
+            .clickable {
+                val intent = Intent(context, ProductDetailActivity::class.java).apply {
+                    putExtra("product", product)
+                }
+                context.startActivity(intent)
+            }
+            .fillMaxWidth()
     ) {
         AsyncImage(
             modifier = Modifier.fillMaxSize(),
@@ -43,7 +57,7 @@ fun ProductCard(product: Product) {
             modifier = Modifier,
             textAlign = TextAlign.Left,
             style = MaterialTheme.typography.bodyMedium,
-            text = "${DecimalFormat("#,###").format(product.price)}원"
+            text = stringResource(id = R.string.formatted_price, product.price)
         )
     }
 }
