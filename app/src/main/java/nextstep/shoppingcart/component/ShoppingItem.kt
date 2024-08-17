@@ -24,7 +24,7 @@ import nextstep.shoppingcart.model.Product
 const val SHOPPING_ITEM_WIDTH = 156
 
 @Composable
-fun LazyGridItemScope.ShoppingItem(
+fun ShoppingItem(
     product: Product,
     onClick : () -> Unit,
     modifier: Modifier = Modifier
@@ -64,7 +64,7 @@ fun LazyGridItemScope.ShoppingItem(
 
 @Preview
 @Composable
-private fun LazyGridItemScope.PreviewShoppingItem() {
+private fun PreviewShoppingItem() {
     ShoppingItem(
         product = Product(
             imageUrl = "https://picsum.photos/id/0/5000/3333",
