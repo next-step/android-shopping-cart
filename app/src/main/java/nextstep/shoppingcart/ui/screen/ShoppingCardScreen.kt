@@ -7,13 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.ProductDetailTopBar
+import nextstep.shoppingcart.ui.component.BasicTopBar
 
 @Composable
 fun ShoppingCardScreen(modifier: Modifier) {
     Scaffold(
         topBar = {
-            ProductDetailTopBar(modifier, R.string.text_shopping_cart_title)
+            BasicTopBar(modifier, R.string.text_shopping_cart_title)
         }
     ) { innerPading ->
         Column(

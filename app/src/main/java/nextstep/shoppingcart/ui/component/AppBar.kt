@@ -49,12 +49,12 @@ fun ProductListTopBar(modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailTopBar(modifier: Modifier = Modifier, titleResource: Int) {
+fun BasicTopBar(modifier: Modifier = Modifier, titleResource: Int) {
     val context = LocalContext.current
     TopAppBar(
         modifier = modifier
-            .fillMaxWidth()
-            .background(Color.White),
+            .background(Color.White)
+            .fillMaxWidth(),
         title = {
             Text(
                 modifier = modifier.fillMaxWidth(),

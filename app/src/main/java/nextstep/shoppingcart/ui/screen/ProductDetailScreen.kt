@@ -22,15 +22,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.component.BasicTopBar
 import nextstep.shoppingcart.ui.component.ProductBottomBar
-import nextstep.shoppingcart.ui.component.ProductDetailTopBar
 import nextstep.shoppingcart.ui.data.Product
 
 @Composable
 fun ProductDetailScreen(modifier: Modifier, product: Product) {
     Scaffold(
         topBar = {
-            ProductDetailTopBar(modifier, R.string.text_product_detail_title)
+            BasicTopBar(modifier, R.string.text_product_detail_title)
         },
         bottomBar = {
             ProductBottomBar()
