@@ -17,16 +17,12 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.ShoppingItem
 import nextstep.shoppingcart.component.ShoppingTopBar
-import nextstep.shoppingcart.model.dummyProductList
+import nextstep.shoppingcart.model.productList
 
 @Composable
 fun ShoppingListScreen(
     modifier: Modifier = Modifier
 ) {
-    val products = remember {
-        dummyProductList
-    }
-
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -53,7 +49,7 @@ fun ShoppingListScreen(
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             items(
-                items = products
+                items = productList
             ) { product ->
                 ShoppingItem(
                     product = product,

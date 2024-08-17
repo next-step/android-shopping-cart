@@ -6,7 +6,7 @@ data class Product(
     val price : Int
 )
 
-val dummyProductList = listOf(
+val productList = listOf(
     Product(
         imageUrl = "https://picsum.photos/id/0/5000/3333",
         name = "신형 노트북",
