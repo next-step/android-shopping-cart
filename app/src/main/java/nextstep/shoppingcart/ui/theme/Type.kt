@@ -15,7 +15,6 @@ val RobotoMedium =
 val RobotoBold =
     FontFamily(Font(resId = R.font.roboto_bold, weight = FontWeight.W700))
 
-
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
