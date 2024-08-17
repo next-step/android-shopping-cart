@@ -35,6 +35,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
@@ -58,6 +59,7 @@ internal fun ProductDetailRoute(
                 when (event) {
                     is ProductDetailEvent.OnApplyCartClick -> {
                         // TODO: Add to cart
+                        Cart.add(event.product)
                         onCartClick()
                     }
                 }
