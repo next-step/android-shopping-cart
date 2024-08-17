@@ -19,30 +19,24 @@ import nextstep.shoppingcart.ui.data.Product
 
 @Composable
 fun ProductDetailScreen(modifier: Modifier, product: Product) {
-    Scaffold(
-        topBar = {
-            BasicTopBar(modifier, R.string.text_product_detail_title)
-        },
-        bottomBar = {
-            ProductBottomBar()
-        }
-    ) { innerPadding ->
+    Scaffold(topBar = {
+        BasicTopBar(modifier, R.string.text_product_detail_title)
+    }, bottomBar = {
+        ProductBottomBar()
+    }) { paddingValue ->
         Column(
-            modifier = modifier.padding(innerPadding)
+            modifier = modifier.padding(paddingValue)
         ) {
             ProductOverview(Modifier, product)
 
             Divider(
-                modifier = Modifier.fillMaxWidth(),
-                color = Color.Black,
-                thickness = 1.dp
+                modifier = Modifier.fillMaxWidth(), color = Color.Black, thickness = 1.dp
             )
 
             ProductPrice(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(18.dp),
-                product = product
+                    .padding(18.dp), product = product
             )
         }
     }

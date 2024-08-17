@@ -15,9 +15,9 @@ fun ShoppingCardScreen(modifier: Modifier) {
         topBar = {
             BasicTopBar(modifier, R.string.text_shopping_cart_title)
         }
-    ) { innerPading ->
+    ) { paddingValue ->
         Column(
-            modifier = Modifier.padding(innerPading)
+            modifier = Modifier.padding(paddingValue)
         ) {
 
         }

@@ -32,9 +32,9 @@ fun ProductListScreen(productList: List<Product>) {
                     .background(Color.White)
             )
         }
-    ) { innerPadding ->
+    ) { paddingValue ->
         Column(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(paddingValue)
         ) {
             ProductLazeColum(productList)
         }
