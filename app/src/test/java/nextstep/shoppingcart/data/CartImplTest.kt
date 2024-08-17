@@ -7,11 +7,11 @@ import junit.framework.TestCase.assertTrue
 import nextstep.shoppingcart.domain.model.Product
 import org.junit.Test
 
-class CartsImplTest {
+class CartImplTest {
     @Test
     fun 카트에_상품을_추가하면_카트_목록에_상품이_추가된다() {
         // given
-        val carts: Carts = CartsImpl()
+        val cart: Cart = CartImpl()
         val product =
             Product(
                 id = 1,
@@ -21,17 +21,17 @@ class CartsImplTest {
             )
 
         // when
-        carts.add(product)
+        cart.add(product)
 
         // then
-        assertEquals(1, carts.items.size)
-        assertNotNull(carts.items.find { it.product == product })
+        assertEquals(1, cart.items.size)
+        assertNotNull(cart.items.find { it.product == product })
     }
 
     @Test
     fun 카트에_상품을_삭제하면_카트_목록에_상품이_삭제된다() {
         // given
-        val carts: Carts = CartsImpl()
+        val cart: Cart = CartImpl()
         val product =
             Product(
                 id = 1,
@@ -39,21 +39,21 @@ class CartsImplTest {
                 price = 1000,
                 imgUrl = "https://image.com",
             )
-        carts.add(product)
+        cart.add(product)
 
         // when
-        carts.remove(product)
+        cart.remove(product)
 
         // then
-        assertEquals(0, carts.items.size)
-        assertNull(carts.items.find { it.product == product })
+        assertEquals(0, cart.items.size)
+        assertNull(cart.items.find { it.product == product })
     }
 
     // 전체 삭제
     @Test
     fun 카트에_상품을_전체_삭제하면_카트_목록이_비어있다() {
         // given
-        val carts: Carts = CartsImpl()
+        val cart: Cart = CartImpl()
         val product1 =
             Product(
                 id = 1,
@@ -68,21 +68,21 @@ class CartsImplTest {
                 price = 2000,
                 imgUrl = "https://image.com",
             )
-        carts.add(product1)
-        carts.add(product2)
+        cart.add(product1)
+        cart.add(product2)
 
         // when
-        carts.removeAll()
+        cart.removeAll()
 
         // then
-        assertTrue(carts.items.isEmpty())
+        assertTrue(cart.items.isEmpty())
     }
 
     // 상품이 중복 추가되었을 때 수량이 상승
     @Test
     fun 카트에_동일_상품이_추가되면_수량이_상승한다() {
         // given
-        val carts: Carts = CartsImpl()
+        val cart: Cart = CartImpl()
         val product =
             Product(
                 id = 1,
@@ -92,19 +92,19 @@ class CartsImplTest {
             )
 
         // when
-        carts.add(product)
-        carts.add(product)
+        cart.add(product)
+        cart.add(product)
 
         // then
-        assertEquals(1, carts.items.size)
-        assertEquals(2, carts.items.find { it.product == product }?.quantity)
+        assertEquals(1, cart.items.size)
+        assertEquals(2, cart.items.find { it.product == product }?.quantity)
     }
 
     // 상품이 중복 추가되었을 때 총 가격이 상승
     @Test
     fun 카트에_동일_상품이_추가되면_총_가격이_상승한다() {
         // given
-        val carts: Carts = CartsImpl()
+        val cart: Cart = CartImpl()
         val product =
             Product(
                 id = 1,
@@ -114,18 +114,18 @@ class CartsImplTest {
             )
 
         // when
-        carts.add(product)
-        carts.add(product)
+        cart.add(product)
+        cart.add(product)
 
         // then
-        assertEquals(2000, carts.totalPrice)
+        assertEquals(2000, cart.totalPrice)
     }
 
     // 상품이 중복 삭제되었을 때 수량이 감소
     @Test
     fun 카트에_동일_상품이_삭제되면_수량이_감소한다() {
         // given
-        val carts: Carts = CartsImpl()
+        val cart: Cart = CartImpl()
         val product =
             Product(
                 id = 1,
@@ -133,21 +133,21 @@ class CartsImplTest {
                 price = 1000,
                 imgUrl = "https://image.com",
             )
-        carts.add(product)
-        carts.add(product)
+        cart.add(product)
+        cart.add(product)
 
         // when
-        carts.remove(product)
+        cart.remove(product)
 
         // then
-        assertEquals(1, carts.items.find { it.product == product }?.quantity)
+        assertEquals(1, cart.items.find { it.product == product }?.quantity)
     }
 
     // 상품이 중복 삭제되었을 때 총 가격이 감소
     @Test
     fun 카트에_동일_상품이_삭제되면_총_가격이_감소한다() {
         // given
-        val carts: Carts = CartsImpl()
+        val cart: Cart = CartImpl()
         val product =
             Product(
                 id = 1,
@@ -155,12 +155,12 @@ class CartsImplTest {
                 price = 1000,
                 imgUrl = "https://image.com",
             )
-        carts.add(product)
+        cart.add(product)
 
         // when
-        carts.remove(product)
+        cart.remove(product)
 
         // then
-        assertEquals(0, carts.totalPrice)
+        assertEquals(0, cart.totalPrice)
     }
 }

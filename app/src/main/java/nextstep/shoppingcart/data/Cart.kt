@@ -3,7 +3,7 @@ package nextstep.shoppingcart.data
 import nextstep.shoppingcart.domain.model.CartItem
 import nextstep.shoppingcart.domain.model.Product
 
-interface Carts {
+interface Cart {
     val items: List<CartItem>
     val totalPrice: Int
 
@@ -14,7 +14,7 @@ interface Carts {
     fun removeAll(): List<CartItem>
 }
 
-class CartsImpl : Carts {
+class CartImpl : Cart {
     private val _items: MutableList<CartItem> = mutableListOf()
     override val items: List<CartItem>
         get() = _items
