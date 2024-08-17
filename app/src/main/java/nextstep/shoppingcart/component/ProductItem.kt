@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -34,11 +32,7 @@ fun ProductItem(
     val formattedAmount = remember(price) {
         NumberFormat.getNumberInstance(Locale.KOREA).format(price) + "원"
     }
-    Column(
-        modifier
-            .wrapContentWidth()
-            .wrapContentHeight()
-    ) {
+    Column {
         AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
