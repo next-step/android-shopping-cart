@@ -42,9 +42,7 @@ fun ShoppingListScreen(
                 vertical = 13.dp,
                 horizontal = 18.dp
             ),
-            columns = GridCells.Adaptive(
-                minSize = 156.dp
-            ),
+            columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
