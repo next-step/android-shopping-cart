@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.ShoppingItem
-import nextstep.shoppingcart.component.ShoppingListTopBar
+import nextstep.shoppingcart.component.topbar.ShoppingListTopBar
 import nextstep.shoppingcart.model.productList
 
 @Composable

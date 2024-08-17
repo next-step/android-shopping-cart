@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.component
+package nextstep.shoppingcart.component.topbar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.component.ShoppingDetailTopBar
+import nextstep.shoppingcart.component.topbar.ShoppingDetailTopBar
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.productList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
