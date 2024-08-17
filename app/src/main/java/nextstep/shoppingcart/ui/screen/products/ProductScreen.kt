@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.screen.products
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -31,10 +32,14 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductRoute(
+    onItemClick: (id: String) -> Unit,
+    onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     ProductScreen(
         products = dummyProductModels.toPersistentList(),
+        onCartClick = onCartClick,
+        onItemClick = onItemClick,
         modifier = modifier
     )
 }
@@ -42,11 +47,13 @@ fun ProductRoute(
 @Composable
 private fun ProductScreen(
     products: PersistentList<ProductModel>,
+    onItemClick: (id: String) -> Unit,
+    onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = { ProductTopAppBar { /* TODO */ } }
+        topBar = { ProductTopAppBar { onCartClick() } }
     ) { innerPadding ->
         LazyVerticalGrid(
             modifier = Modifier.padding(innerPadding),
@@ -56,12 +63,16 @@ private fun ProductScreen(
                 start = 18.dp,
                 end = 18.dp
             ),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.Center,
         ) {
-            items(products) { item ->
+            items(
+                items = products,
+                key = { it.id }
+            ) { item ->
                 Product(
                     productModel = item,
-                    modifier = Modifier
+                    modifier = Modifier.clickable { onItemClick(item.id) }
                 )
             }
         }
@@ -101,6 +112,8 @@ private fun ProductScreenPreview() {
     ShoppingCartTheme {
         ProductScreen(
             products = dummyProductModels.toPersistentList(),
+            onCartClick = { },
+            onItemClick = { }
         )
     }
 }
