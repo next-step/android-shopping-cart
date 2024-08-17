@@ -17,19 +17,37 @@ interface Carts {
 class CartsImpl : Carts {
     private val _items: MutableList<CartItem> = mutableListOf()
     override val items: List<CartItem>
-        get() = TODO("Not yet implemented")
+        get() = _items
+
     override val totalPrice: Int
-        get() = TODO("Not yet implemented")
+        get() = _items.sumOf { it.totalPrice }
 
     override fun add(product: Product): List<CartItem> {
-        TODO("Not yet implemented")
+        val find = _items.find { it.product == product }
+        if (find != null) {
+            val index = _items.indexOf(find)
+            _items[index] = find.copy(count = find.count + 1)
+        } else {
+            _items.add(CartItem(product, 1))
+        }
+        return items
     }
 
     override fun remove(product: Product): List<CartItem> {
-        TODO("Not yet implemented")
+        val find = _items.find { it.product == product }
+        if (find != null) {
+            if (find.count > 1) {
+                val index = _items.indexOf(find)
+                _items[index] = find.copy(count = find.count - 1)
+            } else {
+                _items.remove(find)
+            }
+        }
+        return items
     }
 
     override fun removeAll(): List<CartItem> {
-        TODO("Not yet implemented")
+        _items.clear()
+        return items
     }
 }
