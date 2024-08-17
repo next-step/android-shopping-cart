@@ -12,13 +12,32 @@ fun ShoppingNavHost(modifier: Modifier = Modifier) {
 
     NavHost(
         navController = navController,
-        startDestination = ShoppingRoute.PRODUCT_LIST
+        startDestination = ShoppingRoute.PRODUCT_LIST,
+        modifier = modifier
     ) {
         // 상품 목록
-        productList()
+        productList(
+            onClickItem = { product ->
+                navController.navigateToProductDetailScreen(product)
+            },
+            onClickShoppingCart = {
+                navController.navigateToShoppingCartScreen()
+            }
+        )
         // 상품 상세
-        productDetail()
+        productDetail(
+            onClickNavigateBack = {
+                navController.navigateUp()
+            },
+            onClickCartButton = {
+                navController.navigateToShoppingCartScreen()
+            }
+        )
         // 장바구니
-        shoppingCart()
+        shoppingCart(
+            onClickNavigateBack = {
+                navController.navigateUp()
+            }
+        )
     }
 }
