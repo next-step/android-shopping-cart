@@ -11,7 +11,7 @@ interface Cart {
 
     fun remove(product: Product): List<CartItem>
 
-    fun removeAll(): List<CartItem>
+    fun cancel(cartItem: CartItem): List<CartItem>
 }
 
 class CartImpl : Cart {
@@ -46,8 +46,8 @@ class CartImpl : Cart {
         return items
     }
 
-    override fun removeAll(): List<CartItem> {
-        _items.clear()
+    override fun cancel(cartItem: CartItem): List<CartItem> {
+        _items.remove(cartItem)
         return items
     }
 }

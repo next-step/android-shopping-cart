@@ -3,7 +3,6 @@ package nextstep.shoppingcart.data
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
 import junit.framework.TestCase.assertNull
-import junit.framework.TestCase.assertTrue
 import nextstep.shoppingcart.domain.model.Product
 import org.junit.Test
 
@@ -47,35 +46,6 @@ class CartImplTest {
         // then
         assertEquals(0, cart.items.size)
         assertNull(cart.items.find { it.product == product })
-    }
-
-    // 전체 삭제
-    @Test
-    fun 카트에_상품을_전체_삭제하면_카트_목록이_비어있다() {
-        // given
-        val cart: Cart = CartImpl()
-        val product1 =
-            Product(
-                id = 1,
-                name = "상품1",
-                price = 1000,
-                imgUrl = "https://image.com",
-            )
-        val product2 =
-            Product(
-                id = 2,
-                name = "상품2",
-                price = 2000,
-                imgUrl = "https://image.com",
-            )
-        cart.add(product1)
-        cart.add(product2)
-
-        // when
-        cart.removeAll()
-
-        // then
-        assertTrue(cart.items.isEmpty())
     }
 
     // 상품이 중복 추가되었을 때 수량이 상승
@@ -162,5 +132,27 @@ class CartImplTest {
 
         // then
         assertEquals(0, cart.totalPrice)
+    }
+
+    // 상품 취소
+    @Test
+    fun 카트에_상품을_취소하면_카트_목록에서_상품이_삭제된다() {
+        // given
+        val cart: Cart = CartImpl()
+        val product =
+            Product(
+                id = 1,
+                name = "상품1",
+                price = 1000,
+                imgUrl = "https://image.com",
+            )
+        val items = cart.add(product)
+
+        // when
+        cart.cancel(items.first())
+
+        // then
+        assertEquals(0, cart.items.size)
+        assertNull(cart.items.find { it.product == product })
     }
 }
