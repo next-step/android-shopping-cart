@@ -11,6 +11,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ShoppingCartScreen(
+    onClickBack : () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -18,9 +19,7 @@ fun ShoppingCartScreen(
         topBar = {
             ShoppingTopBarWithBack(
                 title = stringResource(id = R.string.shopping_cart_title),
-                onClickBack = {
-
-                }
+                onClickBack = onClickBack
             )
         }
     ) { innerPadding ->
@@ -32,6 +31,8 @@ fun ShoppingCartScreen(
 @Composable
 private fun Preview1() {
     ShoppingCartTheme {
-        ShoppingCartScreen()
+        ShoppingCartScreen(
+            onClickBack = {}
+        )
     }
 }

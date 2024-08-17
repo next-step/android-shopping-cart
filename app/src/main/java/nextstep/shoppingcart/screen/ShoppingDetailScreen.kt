@@ -34,6 +34,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ShoppingDetailScreen(
     productId: Int,
+    onClickCart : () -> Unit,
+    onClickBack : () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val product = productList.find { it.id == productId }
@@ -42,9 +44,7 @@ fun ShoppingDetailScreen(
         topBar = {
             ShoppingTopBarWithBack(
                 title = stringResource(id = R.string.shopping_detail_title),
-                onClickBack = {
-
-                }
+                onClickBack = onClickBack
             )
         }
     ) { innerPadding ->
@@ -58,7 +58,8 @@ fun ShoppingDetailScreen(
         }else {
             ShoppingDetailContent(
                 modifier = Modifier.padding(innerPadding),
-                product = product
+                product = product,
+                onClickCart = onClickCart
             )
         }
     }
@@ -67,6 +68,7 @@ fun ShoppingDetailScreen(
 @Composable
 fun ShoppingDetailContent(
     product: Product,
+    onClickCart : () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
@@ -117,9 +119,7 @@ fun ShoppingDetailContent(
         ShoppingTextButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.shopping_detail_cart_button),
-            onClick = {
-
-            }
+            onClick = onClickCart
         )
     }
 }
@@ -129,7 +129,9 @@ fun ShoppingDetailContent(
 private fun Preview1() {
     ShoppingCartTheme {
         ShoppingDetailScreen(
-            productId = 1
+            productId = 1,
+            onClickCart = {},
+            onClickBack = {}
         )
     }
 }

@@ -20,6 +20,8 @@ import nextstep.shoppingcart.model.productList
 
 @Composable
 fun ShoppingListScreen(
+    onClickDetail : (Int) -> Unit,
+    onClickCart : () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -27,9 +29,7 @@ fun ShoppingListScreen(
         topBar = {
             ShoppingListTopBar(
                 title = stringResource(id = R.string.shopping_list_title),
-                onClickCart = {
-
-                }
+                onClickCart = onClickCart
             )
         }
     ) { innerPadding ->
@@ -50,7 +50,9 @@ fun ShoppingListScreen(
             ) { product ->
                 ShoppingItem(
                     product = product,
-                    onClick = {}
+                    onClick = {
+                        onClickDetail(product.id)
+                    }
                 )
             }
         }
@@ -60,5 +62,8 @@ fun ShoppingListScreen(
 @Preview(showBackground = true, name = "ShoppingListScreen")
 @Composable
 private fun Preview1() {
-    ShoppingListScreen()
+    ShoppingListScreen(
+        onClickDetail = {},
+        onClickCart = {}
+    )
 }
