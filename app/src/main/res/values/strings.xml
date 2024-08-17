@@ -4,5 +4,8 @@
     <string name="shopping_list_price_korean">%,d원</string>
 
     <string name="shopping_detail_title">상품 상세</string>
+    <string name="shopping_detail_price_title">금액</string>
     <string name="shopping_detail_cart_button">장바구니 담기</string>
+
+    <string name="shopping_cart_title">장바구니</string>
 </resources>

@@ -90,7 +90,7 @@ fun ShoppingDetailContent(
                     modifier = Modifier
                         .wrapContentHeight()
                         .weight(1f),
-                    text = stringResource(id = R.string.shopping_list_price_korean, product.price),
+                    text = stringResource(id = R.string.shopping_detail_price_title),
                     style = MaterialTheme.typography.titleSmall
                 )
                 Text(
