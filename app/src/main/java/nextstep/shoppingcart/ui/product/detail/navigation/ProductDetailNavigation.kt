@@ -14,7 +14,10 @@ fun NavHostController.navigateToProductDetail(productId: Long) {
     navigate(PRODUCT_DETAIL_ROUTE.replace("{$PRODUCT_DETAIL_ID}", productId.toString()))
 }
 
-fun NavGraphBuilder.productDetailScreen(navController: NavHostController) {
+fun NavGraphBuilder.productDetailScreen(
+    onCartClick: () -> Unit,
+    onNavigateUp: () -> Unit,
+) {
     composable(
         route = PRODUCT_DETAIL_ROUTE,
         arguments =
@@ -30,7 +33,8 @@ fun NavGraphBuilder.productDetailScreen(navController: NavHostController) {
                 ?.let { productId ->
                     ProductDetailRoute(
                         productId = productId,
-                        navController = navController,
+                        onCartClick = onCartClick,
+                        onNavigateUp = onNavigateUp,
                     )
                 }
         },

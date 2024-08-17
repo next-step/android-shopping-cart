@@ -19,22 +19,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.ui.cart.navigation.navigateToCart
 import nextstep.shoppingcart.ui.component.AppBarIcon
-import nextstep.shoppingcart.ui.product.detail.navigation.navigateToProductDetail
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 internal fun ProductListRoute(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
+    onCartClick: () -> Unit = {},
+    onProductDetailClick: (Long) -> Unit = {},
 ) {
     val products: Products = remember { ProductsImpl() }
     val eventListener =
@@ -42,11 +39,11 @@ internal fun ProductListRoute(
             { event: ProductListEvent ->
                 when (event) {
                     is ProductListEvent.OnProductCardClick -> {
-                        navController.navigateToProductDetail(event.productId)
+                        onProductDetailClick(event.productId)
                     }
 
                     is ProductListEvent.OnCartClick -> {
-                        navController.navigateToCart()
+                        onCartClick()
                     }
                 }
             }

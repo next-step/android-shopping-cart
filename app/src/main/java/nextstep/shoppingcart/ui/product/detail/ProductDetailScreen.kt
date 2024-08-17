@@ -34,13 +34,10 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.ui.cart.navigation.navigateToCart
 import nextstep.shoppingcart.ui.component.AppBarIcon
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Blue50
@@ -50,7 +47,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 internal fun ProductDetailRoute(
     productId: Long,
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
+    onCartClick: () -> Unit = {},
+    onNavigateUp: () -> Unit = {},
 ) {
     val products: Products = remember { ProductsImpl() }
     val product = products.findById(productId) ?: return
@@ -60,7 +58,7 @@ internal fun ProductDetailRoute(
                 when (event) {
                     is ProductDetailEvent.OnApplyCartClick -> {
                         // TODO: Add to cart
-                        navController.navigateToCart()
+                        onCartClick()
                     }
                 }
             }
@@ -68,7 +66,7 @@ internal fun ProductDetailRoute(
 
     ProductDetailScreen(
         product = product,
-        navigateUp = { navController.popBackStack() },
+        navigateUp = onNavigateUp,
         onProductDetailEvent = eventListener,
         modifier = modifier.fillMaxSize(),
     )
