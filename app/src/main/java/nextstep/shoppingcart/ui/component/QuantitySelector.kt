@@ -2,7 +2,6 @@ package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -39,7 +39,7 @@ fun QuantitySelector(
         ) {
             Text(
                 text = stringResource(id = R.string.remove),
-                style = MaterialTheme.typography.titleLarge,
+                fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
             )
         }
@@ -47,7 +47,11 @@ fun QuantitySelector(
         Text(
             text = "$quantity",
             textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f),
+            fontSize = 22.sp,
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .testTag(stringResource(id = R.string.test_tag_quantity_selector_quantity)),
         )
 
         IconButton(
@@ -59,7 +63,7 @@ fun QuantitySelector(
         ) {
             Text(
                 text = stringResource(id = R.string.add),
-                style = MaterialTheme.typography.titleLarge,
+                fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
             )
         }

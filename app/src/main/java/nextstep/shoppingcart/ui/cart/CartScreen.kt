@@ -132,7 +132,8 @@ private fun CartContent(
                 onCancel = { onCancelClick(item) },
                 onAddQuantityClick = { onAddClick(item.product) },
                 onRemoveQuantityClick = { onRemoveClick(item.product) },
-                modifier = Modifier.testTag(stringResource(id = R.string.test_tag_cart_card)),
+                modifier = Modifier
+                    .testTag(stringResource(id = R.string.test_tag_cart_card)),
             )
         }
     }

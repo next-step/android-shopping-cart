@@ -17,4 +17,7 @@
     <string name="test_tag_quantity_selector_add">QuantitySelectorAdd</string>
     <string name="test_tag_cart_card_cancel">CartCardCancel</string>
     <string name="test_tag_cart_card">CartCard</string>
+    <string name="test_tag_quantity_selector_quantity">QuantitySelectorQuantity</string>
+    <string name="test_tag_cart_card_product_name">CartCardProductName</string>
+    <string name="test_tag_cart_card_price">CartCardPrice</string>
 </resources>
