@@ -28,6 +28,9 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
@@ -36,6 +39,7 @@ import nextstep.shoppingcart.domain.model.CartItem
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.component.BasicIconButton
 import nextstep.shoppingcart.ui.theme.Blue50
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 internal fun CartRoute(
@@ -161,4 +165,48 @@ private fun OrderButton(
             fontWeight = FontWeight.Bold,
         )
     }
+}
+
+@Preview
+@Composable
+private fun CartScreenPreview(
+    @PreviewParameter(CartScreenPreviewParameterProvider::class) items: List<CartItem>,
+) {
+    ShoppingCartTheme {
+        CartScreen(
+            items = items,
+            totalPrice = items.sumOf { it.totalPrice },
+            navigateUp = { },
+            onCancelClick = { },
+            onAddClick = { },
+            onRemoveClick = { },
+        )
+    }
+}
+
+class CartScreenPreviewParameterProvider : PreviewParameterProvider<List<CartItem>> {
+    override val values: Sequence<List<CartItem>>
+        get() =
+            sequenceOf(
+                listOf(
+                    CartItem(
+                        Product(
+                            id = 1,
+                            name = "Product 1",
+                            price = 1000,
+                            imgUrl = "https://www.example.com/product1.jpg",
+                        ),
+                        1,
+                    ),
+                    CartItem(
+                        Product(
+                            id = 2,
+                            name = "Product 2",
+                            price = 2000,
+                            imgUrl = "https://www.example.com/product2.jpg",
+                        ),
+                        2,
+                    ),
+                ),
+            )
 }
