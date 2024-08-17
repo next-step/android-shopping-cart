@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -69,7 +68,8 @@ private fun PreviewShoppingItem() {
         product = Product(
             imageUrl = "https://picsum.photos/id/0/5000/3333",
             name = "신형 노트북",
-            price = 2_000_000
+            price = 2_000_000,
+            id = 1
         ),
         onClick = {
 
