@@ -26,7 +26,7 @@ class CartsImpl : Carts {
         val find = _items.find { it.product == product }
         if (find != null) {
             val index = _items.indexOf(find)
-            _items[index] = find.copy(count = find.count + 1)
+            _items[index] = find.copy(quantity = find.quantity + 1)
         } else {
             _items.add(CartItem(product, 1))
         }
@@ -36,9 +36,9 @@ class CartsImpl : Carts {
     override fun remove(product: Product): List<CartItem> {
         val find = _items.find { it.product == product }
         if (find != null) {
-            if (find.count > 1) {
+            if (find.quantity > 1) {
                 val index = _items.indexOf(find)
-                _items[index] = find.copy(count = find.count - 1)
+                _items[index] = find.copy(quantity = find.quantity - 1)
             } else {
                 _items.remove(find)
             }

@@ -97,7 +97,7 @@ class CartsImplTest {
 
         // then
         assertEquals(1, carts.items.size)
-        assertEquals(2, carts.items.find { it.product == product }?.count)
+        assertEquals(2, carts.items.find { it.product == product }?.quantity)
     }
 
     // 상품이 중복 추가되었을 때 총 가격이 상승
@@ -140,7 +140,7 @@ class CartsImplTest {
         carts.remove(product)
 
         // then
-        assertEquals(1, carts.items.find { it.product == product }?.count)
+        assertEquals(1, carts.items.find { it.product == product }?.quantity)
     }
 
     // 상품이 중복 삭제되었을 때 총 가격이 감소
