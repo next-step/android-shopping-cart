@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ShoppingDetailTopBar(
+fun ShoppingTopBarWithBack(
     title: String,
     onClickBack: () -> Unit,
     modifier: Modifier = Modifier
@@ -40,7 +40,7 @@ fun ShoppingDetailTopBar(
 @Preview(name = "ShoppingDetailTopBar", showBackground = true)
 @Composable
 private fun Preview1() {
-    ShoppingDetailTopBar(
+    ShoppingTopBarWithBack(
         modifier = Modifier.fillMaxWidth(),
         title = "상품 목록",
         onClickBack = {}

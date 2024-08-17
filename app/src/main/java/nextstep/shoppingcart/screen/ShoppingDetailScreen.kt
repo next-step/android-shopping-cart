@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.ShoppingTextButton
-import nextstep.shoppingcart.component.topbar.ShoppingDetailTopBar
+import nextstep.shoppingcart.component.topbar.ShoppingTopBarWithBack
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.productList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -36,7 +36,7 @@ fun ShoppingDetailScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            ShoppingDetailTopBar(
+            ShoppingTopBarWithBack(
                 title = stringResource(id = R.string.shopping_detail_title),
                 onClickBack = {
 
