@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
@@ -15,11 +16,13 @@ fun ProductImage(
     imgUrl: String,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
+    contentScale: ContentScale = ContentScale.Fit,
     placeholder: Painter = ProductImageDefaults.placeholder,
 ) {
     AsyncImage(
         model = imgUrl,
         contentDescription = contentDescription,
+        contentScale = contentScale,
         placeholder = placeholder,
         modifier = modifier,
     )
