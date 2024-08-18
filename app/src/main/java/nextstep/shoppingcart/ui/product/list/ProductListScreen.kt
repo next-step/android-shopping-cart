@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.productList
+package nextstep.shoppingcart.ui.product.list
 
 import android.content.Intent
 import androidx.compose.foundation.background
@@ -18,12 +18,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.ui.data.Product
-import nextstep.shoppingcart.ui.data.SampleProductList.sampleProductList
-import nextstep.shoppingcart.ui.productDetail.ProductDetailActivity
-import nextstep.shoppingcart.ui.productList.component.ProductCard
-import nextstep.shoppingcart.ui.productList.component.ProductListTopBar
-import nextstep.shoppingcart.ui.shoppingCart.ShoppingCartActivity
+import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.SampleProductList.sampleProductList
+import nextstep.shoppingcart.ui.cart.CartActivity
+import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity
+import nextstep.shoppingcart.ui.product.list.component.ProductCard
+import nextstep.shoppingcart.ui.product.list.component.ProductListTopBar
 
 
 @Composable
@@ -36,7 +36,7 @@ fun ProductListScreen(productList: List<Product>) {
                     .fillMaxWidth()
                     .background(Color.White),
                 onClickCartIcon = {
-                    val intent = Intent(context, ShoppingCartActivity::class.java)
+                    val intent = Intent(context, CartActivity::class.java)
                     context.startActivity(intent)
                 }
             )

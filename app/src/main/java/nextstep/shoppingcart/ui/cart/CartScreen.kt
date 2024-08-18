@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.shoppingCart
+package nextstep.shoppingcart.ui.cart
 
 import android.app.Activity
 import androidx.compose.foundation.layout.Column
@@ -8,14 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.ui.shoppingCart.component.ShoppingCartTopBar
+import nextstep.shoppingcart.ui.cart.component.CartTopBar
 
 @Composable
-fun ShoppingCardScreen(modifier: Modifier) {
+fun CartScreen(modifier: Modifier) {
     val context = LocalContext.current
     Scaffold(
         topBar = {
-            ShoppingCartTopBar(modifier, onClickBackIcon = { (context as? Activity)?.finish() })
+            CartTopBar(modifier, onClickBackIcon = { (context as? Activity)?.finish() })
         }
     ) { paddingValue ->
         Column(
@@ -28,6 +28,6 @@ fun ShoppingCardScreen(modifier: Modifier) {
 
 @Preview
 @Composable
-private fun ShoppingCardScreenPreview() {
-    ShoppingCardScreen(Modifier)
+private fun CardScreenPreview() {
+    CartScreen(Modifier)
 }

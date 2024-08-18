@@ -10,8 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.ui.data.SampleProductList.sampleProductList
-import nextstep.shoppingcart.ui.productList.ProductListScreen
+import nextstep.shoppingcart.data.SampleProductList.sampleProductList
+import nextstep.shoppingcart.ui.product.list.ProductListScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {

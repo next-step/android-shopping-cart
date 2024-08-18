@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.productDetail.component
+package nextstep.shoppingcart.ui.product.detail.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.data.Product
+import nextstep.shoppingcart.data.Product
 
 @Composable
 fun ProductOverview(modifier: Modifier = Modifier, product: Product) {

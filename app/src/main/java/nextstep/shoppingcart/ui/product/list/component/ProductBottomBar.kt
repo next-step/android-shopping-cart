@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.productList.component
+package nextstep.shoppingcart.ui.product.list.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth

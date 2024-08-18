@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.productDetail
+package nextstep.shoppingcart.ui.product.detail
 
 import android.app.Activity
 import android.content.Intent
@@ -9,16 +9,15 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.ui.data.Product
-import nextstep.shoppingcart.ui.productDetail.component.ProductDetailTopBar
-import nextstep.shoppingcart.ui.productDetail.component.ProductOverview
-import nextstep.shoppingcart.ui.productDetail.component.ProductPrice
-import nextstep.shoppingcart.ui.productList.component.ProductBottomBar
-import nextstep.shoppingcart.ui.shoppingCart.ShoppingCartActivity
+import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.cart.CartActivity
+import nextstep.shoppingcart.ui.product.detail.component.ProductDetailTopBar
+import nextstep.shoppingcart.ui.product.detail.component.ProductOverview
+import nextstep.shoppingcart.ui.product.detail.component.ProductPrice
+import nextstep.shoppingcart.ui.product.list.component.ProductBottomBar
 
 @Composable
 fun ProductDetailScreen(modifier: Modifier, product: Product) {
@@ -34,7 +33,7 @@ fun ProductDetailScreen(modifier: Modifier, product: Product) {
         bottomBar = {
             ProductBottomBar(
                 onClickBottomBar = {
-                    val intent = Intent(context, ShoppingCartActivity::class.java)
+                    val intent = Intent(context, CartActivity::class.java)
                     context.startActivity(intent)
                 }
             )

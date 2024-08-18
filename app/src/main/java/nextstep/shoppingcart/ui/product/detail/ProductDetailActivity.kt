@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.productDetail
+package nextstep.shoppingcart.ui.product.detail
 
 import android.os.Build
 import android.os.Bundle
@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import nextstep.shoppingcart.ui.data.Product
+import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {

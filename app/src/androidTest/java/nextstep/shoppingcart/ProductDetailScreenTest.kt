@@ -3,8 +3,8 @@ package nextstep.shoppingcart
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import nextstep.shoppingcart.ui.data.Product
-import nextstep.shoppingcart.ui.productDetail.ProductDetailScreen
+import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.product.detail.ProductDetailScreen
 import org.junit.Rule
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.productList.component
+package nextstep.shoppingcart.ui.product.list.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.data.Product
+import nextstep.shoppingcart.data.Product
 
 @Composable
 fun ProductCard(product: Product, onClickCard: () -> Unit) {
@@ -63,7 +63,7 @@ private fun ProductCardPreview() {
     ProductCard(
         product = Product(
             id = 1231,
-            imgUrl = "https://duckduckgo.com/?q=periculis",
+            imgUrl = "https://picsum.photos/seed/1/200",
             name = "Mariana Webster",
             price = 8348
         ),

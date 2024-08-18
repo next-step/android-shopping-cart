@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.productDetail.component
+package nextstep.shoppingcart.ui.product.detail.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -47,5 +47,5 @@ fun ProductDetailTopBar(modifier: Modifier = Modifier, onClickBackIcon: () -> Un
 @Preview
 @Composable
 private fun ProductDetailTopBarPreview() {
-    ProductDetailTopBar(Modifier,{})
+    ProductDetailTopBar(Modifier, {})
 }
