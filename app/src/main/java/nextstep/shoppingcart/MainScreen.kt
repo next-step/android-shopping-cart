@@ -16,9 +16,16 @@ import nextstep.shoppingcart.component.main.MainTopBar
 import nextstep.shoppingcart.model.dummyProducts
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    onItemClick: (
+        name: String,
+        imageUrl: String,
+        price: Long
+    ) -> Unit,
+    onCartClick: () -> Unit,
+) {
     Scaffold(
-        topBar = { MainTopBar() }
+        topBar = { MainTopBar(onCartClick) }
     ) { paddingValues ->
         LazyVerticalGrid(
             modifier = Modifier
@@ -33,7 +40,15 @@ fun MainScreen() {
                     name = it.name,
                     imageUrl = it.imageUrl,
                     price = it.price,
-                    modifier = Modifier.clickable {  }
+                    modifier = Modifier.clickable (
+                        onClick = {
+                            onItemClick(
+                                it.name,
+                                it.imageUrl,
+                                it.price
+                            )
+                        }
+                    )
                 )
             }
 
@@ -44,5 +59,8 @@ fun MainScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun MainScreenPreview() {
-    MainScreen()
+    MainScreen(
+        onItemClick = { _, _, _ -> },
+        onCartClick = {},
+    )
 }

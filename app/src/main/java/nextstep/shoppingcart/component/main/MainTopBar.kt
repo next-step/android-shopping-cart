@@ -13,7 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 
 @Composable
-fun MainTopBar() {
+fun MainTopBar(
+    onCartClick: () -> Unit,
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -23,7 +25,7 @@ fun MainTopBar() {
         },
         navigationIcon = {},
         actions = {
-            IconButton(onClick = {}) {
+            IconButton(onClick = onCartClick) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
                     contentDescription = "shopping cart"
@@ -36,5 +38,5 @@ fun MainTopBar() {
 @Preview(showBackground = true)
 @Composable
 private fun MainTopBarPreview() {
-    MainTopBar()
+    MainTopBar(onCartClick = {})
 }

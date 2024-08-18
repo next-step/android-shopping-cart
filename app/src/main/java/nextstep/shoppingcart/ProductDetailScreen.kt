@@ -36,7 +36,11 @@ fun ProductDetailScreen(
     modifier: Modifier = Modifier
 ) {
     Scaffold(
-        topBar = { ProductDetailTopBar { onNavigationClick() } }
+        topBar = {
+            ProductDetailTopBar (
+                onNavigationClick = onNavigationClick
+            )
+        }
     ) {
         Column(
             modifier = modifier.padding(it)

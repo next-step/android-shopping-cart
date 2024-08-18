@@ -28,7 +28,7 @@ fun ProductItem(
     imageUrl: String,
     price: Long
 ) {
-    Column {
+    Column(modifier = modifier) {
         AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
