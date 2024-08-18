@@ -1,9 +1,11 @@
 [versions]
 coil = "2.7.0"
+navigation = "2.7.7"
 
 [libraries]
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 
 [plugins]
 

@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.screen
+package nextstep.shoppingcart.ui.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -66,6 +66,5 @@ fun Title(
 @Composable
 private fun TitlePreview() {
     Title("상품 목록") {
-
     }
 }
