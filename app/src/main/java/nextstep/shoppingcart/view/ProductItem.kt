@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.view
 
 import android.icu.text.NumberFormat
 import androidx.compose.foundation.layout.Column
@@ -14,10 +14,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
-import nextstep.shoppingcart.ui.theme.ProductImageHeight
-import nextstep.shoppingcart.ui.theme.ProductImageWidth
-import nextstep.shoppingcart.ui.theme.ProductNameBottomPadding
-import nextstep.shoppingcart.ui.theme.ProductNameMaxLine
+import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.view.ui.theme.ProductImageHeight
+import nextstep.shoppingcart.view.ui.theme.ProductImageWidth
+import nextstep.shoppingcart.view.ui.theme.ProductNameBottomPadding
+import nextstep.shoppingcart.view.ui.theme.ProductNameMaxLine
 import java.util.Locale
 
 @OptIn(ExperimentalGlideComposeApi::class)

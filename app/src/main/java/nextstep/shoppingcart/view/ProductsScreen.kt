@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.view
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.view.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductsScreen() {

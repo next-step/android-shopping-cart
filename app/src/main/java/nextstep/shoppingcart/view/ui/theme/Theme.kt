@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.theme
+package nextstep.shoppingcart.view.ui.theme
 
 import android.app.Activity
 import android.os.Build

@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,7 +33,7 @@ fun ProductsTopAppBar(modifier: Modifier = Modifier) {
             IconButton(onClick = { /* TODO: Handle action icon click */ }) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
-                    contentDescription = "Action Icon"
+                    contentDescription = "Cart Icon"
                 )
             }
         }
