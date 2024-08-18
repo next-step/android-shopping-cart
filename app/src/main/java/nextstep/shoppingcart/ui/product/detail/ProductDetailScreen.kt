@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.product.detail
 
+import android.content.Intent
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,6 +38,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.theme.Black10
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.Gray10
@@ -110,7 +112,14 @@ fun ProductDetailScreen(
                 }
 
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        context.startActivity(
+                            Intent(
+                                context,
+                                ShoppingCartActivity::class.java,
+                            )
+                        )
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Blue50,
                         contentColor = Color.White,
@@ -121,7 +130,7 @@ fun ProductDetailScreen(
                         .height(54.dp),
                 ) {
                     Text(
-                        text = stringResource(id = R.string.shopping_cart),
+                        text = stringResource(id = R.string.put_shopping_cart),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                     )

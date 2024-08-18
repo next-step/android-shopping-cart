@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity
 import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity.Companion.EXTRA_PRODUCT
 import nextstep.shoppingcart.ui.product.list.component.ProductListItem
@@ -43,7 +44,14 @@ fun ProductListScreen() {
                 title = { Text(text = stringResource(id = R.string.product_list)) },
                 actions = {
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                            context.startActivity(
+                                Intent(
+                                    context,
+                                    ShoppingCartActivity::class.java,
+                                )
+                            )
+                        },
                         modifier = Modifier,
                     ) {
                         Icon(
