@@ -64,7 +64,7 @@ fun ProductDetail(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = "금액",
+                text = stringResource(id = R.string.price_title),
                 style = MaterialTheme.typography.titleLarge
             )
             Text(
@@ -99,15 +99,13 @@ fun ProductDetail(
 @Preview
 @Composable
 private fun ProductDetailPreview() {
-    ShoppingCartTheme {
-        val productInfo = Product(
-            imageUrl = "https://image.msscdn.net/images/goods_img/20230425/3257548/3257548_16823548430020_500.jpg",
-            name = "루바토 브이넥 반팔 티셔츠 네이비",
-            price = 16371
-        )
-        ProductDetail(
-            productInfo,
-            modifier = Modifier.fillMaxSize()
-        )
-    }
+    val productInfo = Product(
+        imageUrl = "https://image.msscdn.net/images/goods_img/20230425/3257548/3257548_16823548430020_500.jpg",
+        name = "루바토 브이넥 반팔 티셔츠 네이비",
+        price = 16371
+    )
+    ProductDetail(
+        productInfo,
+        modifier = Modifier.fillMaxSize()
+    )
 }
