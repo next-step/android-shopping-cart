@@ -14,7 +14,6 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.test.platform.app.InstrumentationRegistry
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.data.FakeCart
 import nextstep.shoppingcart.domain.model.CartItem
 import nextstep.shoppingcart.domain.model.Product
 import org.junit.Rule
@@ -49,22 +48,23 @@ class CartScreenTest {
     fun 주문버튼에_장바구니에_담긴_총_상품의_가격이_보여진다() {
         // given
         composeTestRule.setContent {
-            val cart =
-                FakeCart().apply {
-                    add(
-                        Product(
-                            id = 1,
-                            name = "상품1",
-                            price = 1000,
-                            imgUrl = "https://image.com",
-                        ),
-                    )
-                }
-            val totalPrice = cart.totalPrice
+            val items =
+                listOf(
+                    CartItem(
+                        product =
+                            Product(
+                                id = 1,
+                                name = "상품1",
+                                price = 1000,
+                                imgUrl = "https://image.com",
+                            ),
+                        quantity = 1,
+                    ),
+                )
 
             CartScreen(
-                items = cart.items,
-                totalPrice = totalPrice,
+                items = items,
+                totalPrice = items.sumOf { it.totalPrice },
                 navigateUp = {},
                 onCancelClick = {},
                 onAddClick = {},
@@ -81,35 +81,30 @@ class CartScreenTest {
     fun 상품수량이_증가하였을_때_주문버튼에_변경된_가격이_보여진다() {
         // given
         composeTestRule.setContent {
-            val cart =
-                FakeCart(
-                    _items =
-                        mutableListOf<CartItem>().apply {
-                            add(
-                                CartItem(
-                                    product =
-                                        Product(
-                                            id = 1,
-                                            name = "상품1",
-                                            price = 1000,
-                                            imgUrl = "https://image.com",
-                                        ),
-                                    quantity = 1,
-                                ),
-                            )
-                        },
-                    incrementQuantity = true,
+            val initial =
+                listOf(
+                    CartItem(
+                        product =
+                            Product(
+                                id = 1,
+                                name = "상품1",
+                                price = 1000,
+                                imgUrl = "https://image.com",
+                            ),
+                        quantity = 1,
+                    ),
                 )
-            var totalPrice by remember { mutableStateOf(cart.totalPrice) }
+            val addedItems = initial.map { item -> item.copy(quantity = item.quantity + 1) }
+            var items by remember { mutableStateOf(initial) }
 
             CartScreen(
-                items = cart.items,
-                totalPrice = totalPrice,
+                items = items,
+                totalPrice = items.sumOf { it.totalPrice },
                 navigateUp = {},
                 onCancelClick = {},
                 onAddClick = {
-                    cart.add(it)
-                    totalPrice = cart.totalPrice
+                    assert(it == initial[0].product)
+                    items = addedItems
                 },
                 onRemoveClick = {},
             )
@@ -128,36 +123,31 @@ class CartScreenTest {
     fun 상품수량이_감소하였을_때_주문버튼에_변경된_가격이_보여진다() {
         // given
         composeTestRule.setContent {
-            val cart =
-                FakeCart(
-                    _items =
-                        mutableListOf<CartItem>().apply {
-                            add(
-                                CartItem(
-                                    product =
-                                        Product(
-                                            id = 1,
-                                            name = "상품1",
-                                            price = 1000,
-                                            imgUrl = "https://image.com",
-                                        ),
-                                    quantity = 2,
-                                ),
-                            )
-                        },
-                    decrementQuantity = true,
+            val initial =
+                listOf(
+                    CartItem(
+                        product =
+                            Product(
+                                id = 1,
+                                name = "상품1",
+                                price = 1000,
+                                imgUrl = "https://image.com",
+                            ),
+                        quantity = 2,
+                    ),
                 )
-            var totalPrice by remember { mutableStateOf(cart.totalPrice) }
+            val removedItems = initial.map { item -> item.copy(quantity = item.quantity - 1) }
+            var items by remember { mutableStateOf(initial) }
 
             CartScreen(
-                items = cart.items,
-                totalPrice = totalPrice,
+                items = items,
+                totalPrice = items.sumOf { it.totalPrice },
                 navigateUp = {},
                 onCancelClick = {},
                 onAddClick = {},
                 onRemoveClick = {
-                    cart.remove(it)
-                    totalPrice = cart.totalPrice
+                    assert(it == initial[0].product)
+                    items = removedItems
                 },
             )
         }
@@ -175,25 +165,28 @@ class CartScreenTest {
     @Test
     fun 상품주문_취소_클릭하면_상품이_삭제된다() {
         composeTestRule.setContent {
-            val cart =
-                FakeCart().apply {
-                    add(
-                        Product(
-                            id = 1,
-                            name = "상품1",
-                            price = 1000,
-                            imgUrl = "https://image.com",
-                        ),
-                    )
-                }
-            var items by remember { mutableStateOf(cart.items) }
+            val initial =
+                listOf(
+                    CartItem(
+                        product =
+                            Product(
+                                id = 1,
+                                name = "상품1",
+                                price = 1000,
+                                imgUrl = "https://image.com",
+                            ),
+                        quantity = 2,
+                    ),
+                )
+            var items by remember { mutableStateOf(initial) }
 
             CartScreen(
                 items = items,
                 totalPrice = items.sumOf { it.totalPrice },
                 navigateUp = {},
                 onCancelClick = { item ->
-                    items = cart.cancel(item)
+                    assert(item == initial[0])
+                    items = emptyList()
                 },
                 onAddClick = {},
                 onRemoveClick = {},
@@ -215,34 +208,31 @@ class CartScreenTest {
     fun 상품수량이_1인_담긴_상품을_감소시켰을_떄_상품이_삭제된다() {
         // given
         composeTestRule.setContent {
-            val cart =
-                FakeCart(
-                    _items =
-                        mutableListOf<CartItem>().apply {
-                            add(
-                                CartItem(
-                                    product =
-                                        Product(
-                                            id = 1,
-                                            name = "상품1",
-                                            price = 1000,
-                                            imgUrl = "https://image.com",
-                                        ),
-                                    quantity = 1,
-                                ),
-                            )
-                        },
-                    decrementQuantity = true,
+            val initial =
+                listOf(
+                    CartItem(
+                        product =
+                            Product(
+                                id = 1,
+                                name = "상품1",
+                                price = 1000,
+                                imgUrl = "https://image.com",
+                            ),
+                        quantity = 1,
+                    ),
                 )
-            var items by remember { mutableStateOf(cart.items) }
+            var items by remember { mutableStateOf(initial) }
 
             CartScreen(
                 items = items,
-                totalPrice = cart.totalPrice,
+                totalPrice = items.sumOf { it.totalPrice },
                 navigateUp = {},
                 onCancelClick = {},
                 onAddClick = {},
-                onRemoveClick = { items = cart.remove(it) },
+                onRemoveClick = {
+                    assert(it == initial[0].product)
+                    items = emptyList()
+                },
             )
         }
 
