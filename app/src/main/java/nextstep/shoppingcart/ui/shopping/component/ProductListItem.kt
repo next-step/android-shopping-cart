@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.shopping.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,11 +18,18 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.shopping.model.Product
-import nextstep.shoppingcart.ui.theme.ListItemTextColor
+import nextstep.shoppingcart.ui.theme.ItemTextColor
 
 @Composable
-fun ProductListItem(product: Product) {
-    Column {
+fun ProductListItem(
+    product: Product,
+    onClickItem: (Int) -> Unit
+) {
+    Column(
+        modifier = Modifier.clickable {
+            onClickItem.invoke(product.id)
+        }
+    ) {
         ListItemImage(product.imageUrl)
         ListItemName(
             name = product.name,
@@ -54,7 +62,7 @@ private fun ListItemName(
     Text(
         text = name,
         modifier = modifier,
-        color = ListItemTextColor,
+        color = ItemTextColor,
         fontWeight = FontWeight.Bold,
         overflow = TextOverflow.Ellipsis,
         maxLines = 1,
@@ -70,7 +78,7 @@ private fun ListItemPrice(
     Text(
         text = stringResource(id = R.string.item_price_format, price),
         modifier = modifier,
-        color = ListItemTextColor,
+        color = ItemTextColor,
         overflow = TextOverflow.Ellipsis,
         maxLines = 1,
         style = MaterialTheme.typography.bodyLarge

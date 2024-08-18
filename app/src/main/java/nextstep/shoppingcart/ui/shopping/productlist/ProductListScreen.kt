@@ -33,12 +33,17 @@ import nextstep.shoppingcart.ui.theme.TitleTextColor
 
 
 @Composable
-fun ProductListScreen() {
+fun ProductListScreen(
+    onClickItem: (Int) -> Unit,
+    onClickShoppingCart: () -> Unit
+) {
     val productList = dummyProducts
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            ProductListTopAppBar()
+            ProductListTopAppBar(
+                onClickShoppingCart = onClickShoppingCart
+            )
         }
     ) { paddingValues ->
         Box(
@@ -46,19 +51,24 @@ fun ProductListScreen() {
                 .fillMaxSize()
                 .padding(paddingValues),
         ) {
-            ProductItems(productList = productList)
+            ProductItems(
+                productList = productList,
+                onClickItem = onClickItem
+            )
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductListTopAppBar() {
+fun ProductListTopAppBar(
+    onClickShoppingCart: () -> Unit
+) {
     CenterAlignedTopAppBar(
         title = { ProductListTitle() },
         actions = {
             IconButton(
-                onClick = { },
+                onClick = { onClickShoppingCart.invoke() },
                 modifier = Modifier.size(48.dp),
                 colors = IconButtonDefaults.iconButtonColors(
                     contentColor = Color.Black
@@ -85,7 +95,10 @@ fun ProductListTitle(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ProductItems(productList: List<Product>) {
+fun ProductItems(
+    productList: List<Product>,
+    onClickItem: (Int) -> Unit
+) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(
@@ -101,7 +114,10 @@ fun ProductItems(productList: List<Product>) {
             items = productList,
             key = { it.imageUrl }
         ) {
-            ProductListItem(product = it)
+            ProductListItem(
+                product = it,
+                onClickItem = onClickItem
+            )
         }
     }
 }
@@ -109,11 +125,16 @@ fun ProductItems(productList: List<Product>) {
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    ProductListScreen()
+    ProductListScreen(
+        onClickItem = {},
+        onClickShoppingCart = {}
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun ProductListTopAppBarPreview() {
-    ProductListTopAppBar()
+    ProductListTopAppBar(
+        onClickShoppingCart = {}
+    )
 }
