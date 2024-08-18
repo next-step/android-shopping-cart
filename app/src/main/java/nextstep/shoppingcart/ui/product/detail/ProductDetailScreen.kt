@@ -2,11 +2,11 @@ package nextstep.shoppingcart.ui.product.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -34,14 +34,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.ui.cart.navigation.navigateToCart
-import nextstep.shoppingcart.ui.component.AppBarIcon
+import nextstep.shoppingcart.ui.component.BasicIconButton
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -50,7 +48,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 internal fun ProductDetailRoute(
     productId: Long,
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
+    onCartClick: () -> Unit = {},
+    onNavigateUp: () -> Unit = {},
 ) {
     val products: Products = remember { ProductsImpl() }
     val product = products.findById(productId) ?: return
@@ -60,7 +59,8 @@ internal fun ProductDetailRoute(
                 when (event) {
                     is ProductDetailEvent.OnApplyCartClick -> {
                         // TODO: Add to cart
-                        navController.navigateToCart()
+                        Cart.add(event.product)
+                        onCartClick()
                     }
                 }
             }
@@ -68,7 +68,7 @@ internal fun ProductDetailRoute(
 
     ProductDetailScreen(
         product = product,
-        navigateUp = { navController.popBackStack() },
+        navigateUp = onNavigateUp,
         onProductDetailEvent = eventListener,
         modifier = modifier.fillMaxSize(),
     )
@@ -89,7 +89,7 @@ internal fun ProductDetailScreen(
                     Text(text = stringResource(id = R.string.product_detail_toolbar_title))
                 },
                 navigationIcon = {
-                    AppBarIcon(
+                    BasicIconButton(
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = stringResource(id = R.string.navigate_back),
                         onClick = navigateUp,
@@ -102,8 +102,7 @@ internal fun ProductDetailScreen(
                 onClick = { onProductDetailEvent(ProductDetailEvent.OnApplyCartClick(product = product)) },
                 modifier =
                     Modifier
-                        .fillMaxWidth()
-                        .height(54.dp),
+                        .fillMaxWidth(),
             )
         },
         modifier = modifier,
@@ -180,27 +179,24 @@ private fun ProductDetailContent(
 fun ApplyCartButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    contentPaddingValues: PaddingValues = PaddingValues(vertical = 15.dp),
 ) {
     Button(
         onClick = onClick,
+        contentPadding = contentPaddingValues,
         colors =
             ButtonDefaults.buttonColors(
                 containerColor = Blue50,
                 contentColor = Color.White,
             ),
         shape = RectangleShape,
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .height(54.dp),
+        modifier = modifier,
     ) {
         Text(
             text = stringResource(id = R.string.product_detail_btn_title),
-            style =
-                MaterialTheme.typography.bodyMedium.copy(
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                ),
+            style = MaterialTheme.typography.bodyMedium,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
         )
     }
 }

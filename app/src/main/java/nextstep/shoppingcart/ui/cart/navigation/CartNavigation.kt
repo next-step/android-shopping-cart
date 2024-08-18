@@ -11,10 +11,10 @@ fun NavHostController.navigateToCart() {
     navigate(CART_ROUTE)
 }
 
-fun NavGraphBuilder.cartScreen(navController: NavHostController) {
+fun NavGraphBuilder.cartScreen(onNavigateUp: () -> Unit) {
     composable(CART_ROUTE) {
         CartRoute(
-            navController = navController,
+            onNavigateUp = onNavigateUp,
         )
     }
 }
