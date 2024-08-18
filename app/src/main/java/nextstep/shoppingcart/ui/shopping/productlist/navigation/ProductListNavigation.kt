@@ -1,13 +1,13 @@
-package nextstep.shoppingcart.navigation
+package nextstep.shoppingcart.ui.shopping.productlist.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import nextstep.shoppingcart.ui.shopping.model.Product
+import nextstep.shoppingcart.navigation.ShoppingRoute
 import nextstep.shoppingcart.ui.shopping.productlist.ProductListScreen
 
 
 fun NavGraphBuilder.productList(
-    onClickItem: (Product) -> Unit,
+    onClickItem: (Int) -> Unit,
     onClickShoppingCart: () -> Unit
 ) {
     composable(ShoppingRoute.PRODUCT_LIST) {

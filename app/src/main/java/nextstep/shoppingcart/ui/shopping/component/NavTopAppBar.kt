@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.ui.theme.TitleTextColor
 
@@ -42,5 +43,14 @@ fun NavTopAppBar(
                 )
             }
         }
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun NavTopAppBarPrev() {
+    NavTopAppBar(
+        title = "상품 상세",
+        onClickNavigateBack = { }
     )
 }

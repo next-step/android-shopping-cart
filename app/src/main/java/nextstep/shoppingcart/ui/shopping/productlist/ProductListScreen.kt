@@ -34,7 +34,7 @@ import nextstep.shoppingcart.ui.theme.TitleTextColor
 
 @Composable
 fun ProductListScreen(
-    onClickItem: (Product) -> Unit,
+    onClickItem: (Int) -> Unit,
     onClickShoppingCart: () -> Unit
 ) {
     val productList = dummyProducts
@@ -97,7 +97,7 @@ fun ProductListTitle(modifier: Modifier = Modifier) {
 @Composable
 fun ProductItems(
     productList: List<Product>,
-    onClickItem: (Product) -> Unit
+    onClickItem: (Int) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),

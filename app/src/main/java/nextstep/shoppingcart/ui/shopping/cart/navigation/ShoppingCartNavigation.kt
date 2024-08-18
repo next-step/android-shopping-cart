@@ -1,8 +1,9 @@
-package nextstep.shoppingcart.navigation
+package nextstep.shoppingcart.ui.shopping.cart.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import nextstep.shoppingcart.navigation.ShoppingRoute
 import nextstep.shoppingcart.ui.shopping.cart.ShoppingCartScreen
 
 

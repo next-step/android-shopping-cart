@@ -23,11 +23,11 @@ import nextstep.shoppingcart.ui.theme.ItemTextColor
 @Composable
 fun ProductListItem(
     product: Product,
-    onClickItem: (Product) -> Unit
+    onClickItem: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier.clickable {
-            onClickItem.invoke(product)
+            onClickItem.invoke(product.id)
         }
     ) {
         ListItemImage(product.imageUrl)

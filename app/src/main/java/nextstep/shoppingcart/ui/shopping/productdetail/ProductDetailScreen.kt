@@ -3,21 +3,25 @@ package nextstep.shoppingcart.ui.shopping.productdetail
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.shopping.component.NavTopAppBar
+import nextstep.shoppingcart.ui.shopping.model.dummyProducts
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.DividerColor
 import nextstep.shoppingcart.ui.theme.ItemTextColor
@@ -33,31 +38,40 @@ import nextstep.shoppingcart.ui.theme.ItemTextColor
 
 @Composable
 fun ProductDetailScreen(
-    name: String,
-    imageUrl: String,
-    price: Long,
+    productId: Int,
     onClickNavigateBack: () -> Unit,
     onClickCartButton: () -> Unit
 ) {
+    val product = remember {
+        dummyProducts.find { it.id == productId }
+    }
+    val scrollState = rememberScrollState()
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             ProductDetailTopAppBar(onClickNavigateBack)
+        },
+        bottomBar = {
+            CartButton(
+                onClickCartButton = { onClickCartButton() },
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     ) { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .verticalScroll(scrollState)
                 .padding(paddingValues)
         ) {
-            ProductDetailInfo(name, imageUrl, price)
-            CartButton(
-                onClickCartButton = { onClickCartButton() },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(54.dp)
-                    .align(Alignment.BottomCenter)
-            )
+            product?.let {
+                ProductDetailInfo(
+                    it.name,
+                    it.imageUrl,
+                    it.price
+                )
+            }
         }
     }
 }
@@ -84,11 +98,7 @@ fun ProductDetailInfo(
             name = name,
             modifier = Modifier.padding(18.dp)
         )
-        Divider(
-            modifier = Modifier.fillMaxWidth(),
-            thickness = 1.dp,
-            color = DividerColor
-        )
+        Divider(color = DividerColor)
         DetailPrice(
             price = price,
             modifier = Modifier.padding(18.dp)
@@ -103,7 +113,8 @@ fun DetailImage(imageUrl: String) {
         contentDescription = "",
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(1f)
+            .aspectRatio(1.0f),
+        placeholder = painterResource(id = R.drawable.ic_launcher_background)
     )
 }
 
@@ -116,8 +127,8 @@ fun DetailName(
         text = name,
         color = ItemTextColor,
         modifier = modifier,
-        fontSize = 24.sp,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.headlineSmall
     )
 }
 
@@ -156,7 +167,8 @@ fun CartButton(
         shape = RoundedCornerShape(0.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Blue50
-        )
+        ),
+        contentPadding = PaddingValues(vertical = 15.dp)
     ) {
         Text(
             text = stringResource(id = R.string.put_shopping_cart),
@@ -170,9 +182,7 @@ fun CartButton(
 @Composable
 private fun ProductDetailScreenPrev() {
     ProductDetailScreen(
-        "이름",
-        "이미지",
-        19_000_000L,
+        1,
         onClickNavigateBack = { },
         onClickCartButton = { }
     )
