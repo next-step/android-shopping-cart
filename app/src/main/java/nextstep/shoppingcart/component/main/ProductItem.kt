@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -29,9 +28,6 @@ fun ProductItem(
     imageUrl: String,
     price: Long
 ) {
-    val formattedAmount = remember(price) {
-        NumberFormat.getNumberInstance(Locale.KOREA).format(price) + "원"
-    }
     Column {
         AsyncImage(
             modifier = Modifier
@@ -56,7 +52,7 @@ fun ProductItem(
         )
         Text(
             modifier = Modifier.padding(start = 4.dp),
-            text = formattedAmount,
+            text = NumberFormat.getNumberInstance(Locale.KOREA).format(price) + "원",
             style = TextStyle(
                 fontSize = 16.sp,
                 lineHeight = 14.sp,
