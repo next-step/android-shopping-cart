@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.view.product.detail.ProductDetailActivity" />
+        <activity android:name=".ui.view.product.cartlist.ProductCartListActivity" />
     </application>
 
 </manifest>

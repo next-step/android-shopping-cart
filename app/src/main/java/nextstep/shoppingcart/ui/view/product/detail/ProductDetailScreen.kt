@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,6 +40,7 @@ import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.composable.InvalidAccessItem
 import nextstep.shoppingcart.ui.model.Product
+import nextstep.shoppingcart.ui.view.product.cartlist.ProductCartListActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,6 +48,7 @@ fun ProductDetailScreen(
     product: Product?,
     modifier: Modifier = Modifier,
 ) {
+    val context = LocalContext.current
     val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
     Scaffold(
         modifier = modifier
@@ -122,7 +125,7 @@ fun ProductDetailScreen(
                         contentColor = Color.White,
                         containerColor = Color(0xff2196F3)
                     ),
-                    onClick = { /*TODO*/ }
+                    onClick = { context.startActivity(ProductCartListActivity.newIntent(context)) }
                 ) {
                     Text(
                         text = stringResource(R.string.product_detail_put_in_shopping_cart_button),

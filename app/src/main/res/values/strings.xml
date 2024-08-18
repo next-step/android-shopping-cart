@@ -9,4 +9,5 @@
     <string name="invalid_access">잘못 된 접근 입니다.</string>
     <string name="product_detail_product_image">상품 이미지</string>
     <string name="product_detail_put_in_shopping_cart_button">장바구니 담기</string>
+    <string name="product_cart_list_title">장바구니</string>
 </resources>
