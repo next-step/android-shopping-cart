@@ -74,7 +74,6 @@ class CartScreenTest {
 
         // when && then
         orderButton
-            .assertExists()
             .assertTextContains("주문하기(1,000원)")
     }
 
@@ -122,7 +121,6 @@ class CartScreenTest {
 
         // then
         orderButton
-            .assertExists()
             .assertTextContains("주문하기(2,000원)")
     }
 
@@ -170,7 +168,6 @@ class CartScreenTest {
 
         // then
         orderButton
-            .assertExists()
             .assertTextContains("주문하기(1,000원)")
     }
 
