@@ -25,8 +25,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.model.Product
-import nextstep.shoppingcart.ui.model.dummyProducts
+import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity
 import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity.Companion.EXTRA_PRODUCT
 import nextstep.shoppingcart.ui.product.list.component.ProductListItem
