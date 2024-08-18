@@ -20,6 +20,16 @@ class CartCardTest {
     val composeTestRule = createComposeRule()
     private val context = InstrumentationRegistry.getInstrumentation().targetContext
 
+    private val addButton
+        get() =
+            composeTestRule
+                .onNodeWithTag(context.getString(R.string.test_tag_quantity_selector_add))
+
+    private val priceText
+        get() =
+            composeTestRule
+                .onNodeWithTag(context.getString(R.string.test_tag_cart_card_price))
+
     @Test
     fun 장바구니에_담긴_상품의_이름과_주문가격을_확인할_수_있다() {
         // given
@@ -49,8 +59,7 @@ class CartCardTest {
             .onNodeWithTag(context.getString(R.string.test_tag_cart_card_product_name))
             .assertTextContains("상품1")
 
-        composeTestRule
-            .onNodeWithTag(context.getString(R.string.test_tag_cart_card_price))
+        priceText
             .assertTextContains("2,000원")
     }
 
@@ -79,13 +88,11 @@ class CartCardTest {
         }
 
         // when
-        composeTestRule
-            .onNodeWithTag(context.getString(R.string.test_tag_quantity_selector_add))
+        addButton
             .performClick()
 
         // then
-        composeTestRule
-            .onNodeWithTag(context.getString(R.string.test_tag_cart_card_price))
+        priceText
             .assertTextContains("3,000원")
     }
 
@@ -119,8 +126,7 @@ class CartCardTest {
             .performClick()
 
         // then
-        composeTestRule
-            .onNodeWithTag(context.getString(R.string.test_tag_cart_card_price))
+        priceText
             .assertTextContains("1,000원")
     }
 }

@@ -15,7 +15,6 @@ import androidx.compose.ui.test.performClick
 import androidx.test.platform.app.InstrumentationRegistry
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.FakeCart
-import nextstep.shoppingcart.data.ShoppingCart
 import nextstep.shoppingcart.domain.model.CartItem
 import nextstep.shoppingcart.domain.model.Product
 import org.junit.Rule
@@ -25,7 +24,26 @@ class CartScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
     private val context: Context = InstrumentationRegistry.getInstrumentation().targetContext
-    private lateinit var cart: ShoppingCart
+
+    private val addButtons
+        get() =
+            composeTestRule
+                .onAllNodesWithTag(context.getString(R.string.test_tag_quantity_selector_add))
+
+    private val removeButtons
+        get() =
+            composeTestRule
+                .onAllNodesWithTag(context.getString(R.string.test_tag_quantity_selector_remove))
+
+    private val cancelButtons
+        get() =
+            composeTestRule
+                .onAllNodesWithTag(context.getString(R.string.test_tag_cart_card_cancel))
+
+    private val orderButton
+        get() =
+            composeTestRule
+                .onNodeWithTag(context.getString(R.string.test_tag_order_btn))
 
     @Test
     fun 주문버튼에_장바구니에_담긴_총_상품의_가격이_보여진다() {
@@ -55,8 +73,7 @@ class CartScreenTest {
         }
 
         // when && then
-        composeTestRule
-            .onNodeWithTag(context.getString(R.string.test_tag_order_btn))
+        orderButton
             .assertExists()
             .assertTextContains("주문하기(1,000원)")
     }
@@ -99,14 +116,12 @@ class CartScreenTest {
             )
         }
         // when
-        composeTestRule
-            .onAllNodesWithTag(context.getString(R.string.test_tag_quantity_selector_add))
+        addButtons
             .onFirst()
             .performClick()
 
         // then
-        composeTestRule
-            .onNodeWithTag(context.getString(R.string.test_tag_order_btn))
+        orderButton
             .assertExists()
             .assertTextContains("주문하기(2,000원)")
     }
@@ -149,14 +164,12 @@ class CartScreenTest {
             )
         }
         // when
-        composeTestRule
-            .onAllNodesWithTag(context.getString(R.string.test_tag_quantity_selector_remove))
+        removeButtons
             .onFirst()
             .performClick()
 
         // then
-        composeTestRule
-            .onNodeWithTag(context.getString(R.string.test_tag_order_btn))
+        orderButton
             .assertExists()
             .assertTextContains("주문하기(1,000원)")
     }
@@ -191,8 +204,7 @@ class CartScreenTest {
         }
 
         // when
-        composeTestRule
-            .onAllNodesWithTag(context.getString(R.string.test_tag_cart_card_cancel))
+        cancelButtons
             .onFirst()
             .performClick()
 
@@ -238,8 +250,7 @@ class CartScreenTest {
         }
 
         // when
-        composeTestRule
-            .onAllNodesWithTag(context.getString(R.string.test_tag_quantity_selector_remove))
+        removeButtons
             .onFirst()
             .performClick()
 
