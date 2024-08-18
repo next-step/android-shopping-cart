@@ -44,9 +44,7 @@ class CartCardTest {
             )
         }
 
-        // when
-
-        // then
+        // when && then
         composeTestRule
             .onNodeWithTag(context.getString(R.string.test_tag_cart_card_product_name))
             .assertTextContains("상품1")

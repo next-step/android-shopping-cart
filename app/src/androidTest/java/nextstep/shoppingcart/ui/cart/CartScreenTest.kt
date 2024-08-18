@@ -53,9 +53,8 @@ class CartScreenTest {
                 onRemoveClick = {},
             )
         }
-        // when
 
-        // then
+        // when && then
         composeTestRule
             .onNodeWithTag(context.getString(R.string.test_tag_order_btn))
             .assertExists()
