@@ -13,9 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.goods.Product
+import nextstep.shoppingcart.data.goods.impl.ProductRepositoryImpl
 import nextstep.shoppingcart.ui.ShoppingCartDestinations
-import nextstep.shoppingcart.ui.getProducts
 
 @Composable
 fun ProductList(
@@ -40,10 +40,9 @@ fun ProductList(
                 contentPadding = PaddingValues(top = 13.dp)
             ) {
                 items(products) {
-                    ProductItem(
-                        navController = navController,
-                        product = it
-                    )
+                    ProductItem(product = it) {
+                        navController.navigate(ShoppingCartDestinations.DETAIL_ROUTE + "/${it.productId}")
+                    }
                 }
             }
         }
@@ -53,5 +52,5 @@ fun ProductList(
 @Preview
 @Composable
 private fun ProductListPreview() {
-    ProductList(rememberNavController(), getProducts())
+    ProductList(rememberNavController(), ProductRepositoryImpl().getProducts())
 }

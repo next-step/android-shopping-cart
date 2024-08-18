@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -34,60 +36,28 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.goods.impl.ProductRepositoryImpl
 import nextstep.shoppingcart.ui.ShoppingCartDestinations
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductDetail(
     navController: NavController,
-    product: Product
+    productId: Int
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "상품 상세",
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.secondary
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
-                    }
-                }
-            )
+            ProductTopBar(navController)
         }, bottomBar = {
-            Button(
-                onClick = {
-                    navController.navigate(ShoppingCartDestinations.SHOPPING_CART)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(54.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF2196F3),
-                    contentColor = MaterialTheme.colorScheme.onPrimary
-                ),
-                shape = RectangleShape,
-                contentPadding = PaddingValues(0.dp)
-            ) {
-                Text(
-                    text = "장바구니 담기",
-                    style = MaterialTheme.typography.titleLarge,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier
-                )
-            }
+            ProductBottomBar(navController)
         }
     ) { paddingValues ->
+        val productRepository = ProductRepositoryImpl()
+        val product = productRepository.getProduct(productId) ?: return@Scaffold
         Column(
             modifier = Modifier
                 .padding(paddingValues)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AsyncImage(
@@ -112,7 +82,7 @@ fun ProductDetail(
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
                         .align(Alignment.CenterStart)
-                        .padding(start = 18.dp, end = 18.dp)
+                        .padding(horizontal = 18.dp)
                 )
             }
             Divider()
@@ -138,14 +108,51 @@ fun ProductDetail(
     }
 }
 
+@Composable
+private fun ProductBottomBar(navController: NavController) {
+    Button(
+        onClick = {
+            navController.navigate(ShoppingCartDestinations.SHOPPING_CART)
+        },
+        modifier = Modifier
+            .fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF2196F3),
+            contentColor = MaterialTheme.colorScheme.onPrimary
+        ),
+        shape = RectangleShape,
+        contentPadding = PaddingValues(16.dp)
+    ) {
+        Text(
+            text = "장바구니 담기",
+            style = MaterialTheme.typography.titleLarge,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+    }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun ProductTopBar(navController: NavController) {
+    TopAppBar(
+        title = {
+            Text(
+                text = "상품 상세",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.secondary
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = { navController.navigateUp() }) {
+                Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+            }
+        }
+    )
+}
+
 @Preview
 @Composable
 private fun ProductDetailPreview() {
-    val product = Product(
-        productId = 1,
-        imageUrl = "https://picsum.photos/156/158",
-        name = "상품 이름을 테스트해보겠습니다 말줄입이 되나요",
-        price = 1200000000
-    )
-    ProductDetail(rememberNavController(), product)
+    ProductDetail(rememberNavController(), 1)
 }

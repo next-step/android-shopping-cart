@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,24 +13,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.ui.ShoppingCartDestinations
+import nextstep.shoppingcart.data.goods.Product
 import nextstep.shoppingcart.ui.theme.productTitleStyle
 import java.text.NumberFormat
 import java.util.Locale
 
 @Composable
 fun ProductItem(
-    navController: NavController,
-    product: Product
+    product: Product,
+    onClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier.clickable {
-            navController.navigate(ShoppingCartDestinations.DETAIL_ROUTE + "/${product.productId}")
-        }
+        modifier = Modifier
+            .wrapContentWidth()
+            .clickable(onClick = onClick)
     ) {
         AsyncImage(
             model = product.imageUrl,
@@ -70,7 +68,9 @@ private fun ProductItemPreview() {
         name = "상품 이름을 테스트해보겠습니다 말줄입이 되나요",
         price = 1200000000
     )
-    ProductItem(rememberNavController(), product)
+    ProductItem(product) {
+
+    }
 }
 
 fun formatPrice(price: Int): String {
