@@ -22,6 +22,10 @@ fun ProductsScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 ProductsTopAppBar()
+                ProductsGrid(
+                    dummyProducts,
+                    modifier = Modifier.fillMaxSize()
+                )
             }
         }
     }
