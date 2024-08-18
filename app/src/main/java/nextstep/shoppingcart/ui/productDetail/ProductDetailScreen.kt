@@ -45,9 +45,7 @@ fun ProductDetailScreen(modifier: Modifier, product: Product) {
         ) {
             ProductOverview(Modifier, product)
 
-            Divider(
-                modifier = Modifier.fillMaxWidth(), color = Color.Black, thickness = 1.dp
-            )
+            Divider()
 
             ProductPrice(
                 modifier = Modifier
