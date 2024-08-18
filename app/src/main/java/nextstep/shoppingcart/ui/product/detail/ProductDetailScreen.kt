@@ -2,11 +2,11 @@ package nextstep.shoppingcart.ui.product.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -102,8 +102,7 @@ internal fun ProductDetailScreen(
                 onClick = { onProductDetailEvent(ProductDetailEvent.OnApplyCartClick(product = product)) },
                 modifier =
                     Modifier
-                        .fillMaxWidth()
-                        .height(54.dp),
+                        .fillMaxWidth(),
             )
         },
         modifier = modifier,
@@ -180,27 +179,24 @@ private fun ProductDetailContent(
 fun ApplyCartButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    contentPaddingValues: PaddingValues = PaddingValues(vertical = 15.dp),
 ) {
     Button(
         onClick = onClick,
+        contentPadding = contentPaddingValues,
         colors =
             ButtonDefaults.buttonColors(
                 containerColor = Blue50,
                 contentColor = Color.White,
             ),
         shape = RectangleShape,
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .height(54.dp),
+        modifier = modifier,
     ) {
         Text(
             text = stringResource(id = R.string.product_detail_btn_title),
-            style =
-                MaterialTheme.typography.bodyMedium.copy(
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                ),
+            style = MaterialTheme.typography.bodyMedium,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
         )
     }
 }

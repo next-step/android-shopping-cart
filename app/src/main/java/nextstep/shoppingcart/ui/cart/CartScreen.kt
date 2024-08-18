@@ -3,7 +3,6 @@ package nextstep.shoppingcart.ui.cart
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -92,7 +91,6 @@ internal fun CartScreen(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .height(54.dp)
                         .testTag(stringResource(id = R.string.test_tag_order_btn)),
             )
         },
@@ -143,9 +141,11 @@ private fun OrderButton(
     totalPrice: Int,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    contentPaddingValues: PaddingValues = PaddingValues(vertical = 15.dp),
 ) {
     Button(
         onClick = onClick,
+        contentPadding = contentPaddingValues,
         colors =
             ButtonDefaults.buttonColors(
                 containerColor = Blue50,
