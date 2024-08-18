@@ -17,7 +17,7 @@ import nextstep.shoppingcart.Product
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.component.ProductInfo
-import nextstep.shoppingcart.ui.component.ShoppingCartCenterAlignedTopBar
+import nextstep.shoppingcart.ui.component.ShoppingCartActionsTopBar
 
 @Composable
 fun ProductListScreen(
@@ -28,11 +28,8 @@ fun ProductListScreen(
 
     Scaffold(
         topBar = {
-            ShoppingCartCenterAlignedTopBar(
+            ShoppingCartActionsTopBar(
                 title = stringResource(id = R.string.tob_bar_product_list_title),
-                showNavigation = false,
-                showActions = true,
-                onNavigationClick = { },
                 onActionClick = {
                     val intent = Intent(context, ShoppingCartActivity::class.java)
                     context.startActivity(intent)

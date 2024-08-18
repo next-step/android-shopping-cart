@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.ShoppingCartCenterAlignedTopBar
+import nextstep.shoppingcart.ui.component.ShoppingCartNavigationTopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -17,14 +17,11 @@ fun ShoppingCartScreen(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     Scaffold(
         topBar = {
-            ShoppingCartCenterAlignedTopBar(
+            ShoppingCartNavigationTopBar(
                 title = stringResource(id = R.string.tob_bar_shopping_cart_title),
-                showNavigation = true,
-                showActions = false,
                 onNavigationClick = {
                     (context as? ComponentActivity)?.finish()
-                },
-                onActionClick = { }
+                }
             )
         },
         modifier = modifier.fillMaxSize()

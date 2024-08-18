@@ -14,37 +14,41 @@ import nextstep.shoppingcart.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShoppingCartCenterAlignedTopBar(
+fun ShoppingCartNavigationTopBar(
     title: String,
-    showNavigation: Boolean,
-    showActions: Boolean,
-    onNavigationClick: () -> Unit,
-    onActionClick: () -> Unit
+    onNavigationClick: () -> Unit
 ) {
     CenterAlignedTopAppBar(
         title = {
             Text(text = title)
         },
         navigationIcon = {
-            if (showNavigation) {
-                IconButton(onClick = onNavigationClick) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = stringResource(id = R.string.content_description_arrow_back)
-                    )
-                }
+            IconButton(onClick = onNavigationClick) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = stringResource(id = R.string.content_description_arrow_back)
+                )
             }
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ShoppingCartActionsTopBar(
+    title: String,
+    onActionClick: () -> Unit
+) {
+    CenterAlignedTopAppBar(
+        title = {
+            Text(text = title)
         },
         actions = {
-            if (showActions) {
-                IconButton(
-                    onClick = onActionClick
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.ShoppingCart,
-                        contentDescription = stringResource(id = R.string.content_description_shopping_cart)
-                    )
-                }
+            IconButton(onClick = onActionClick) {
+                Icon(
+                    imageVector = Icons.Filled.ShoppingCart,
+                    contentDescription = stringResource(id = R.string.content_description_shopping_cart)
+                )
             }
         }
     )

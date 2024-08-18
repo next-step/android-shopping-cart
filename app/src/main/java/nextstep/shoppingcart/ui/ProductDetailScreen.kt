@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.Product
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.ProductDetail
-import nextstep.shoppingcart.ui.component.ShoppingCartCenterAlignedTopBar
+import nextstep.shoppingcart.ui.component.ShoppingCartNavigationTopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -25,14 +25,11 @@ fun ProductDetailScreen(
 
     Scaffold(
         topBar = {
-            ShoppingCartCenterAlignedTopBar(
+            ShoppingCartNavigationTopBar(
                 title = stringResource(id = R.string.title_activity_product_detail),
-                showNavigation = true,
-                showActions = false,
                 onNavigationClick = {
                     (context as? ComponentActivity)?.finish()
-                },
-                onActionClick = { }
+                }
             )
         },
         modifier = modifier.fillMaxSize()
