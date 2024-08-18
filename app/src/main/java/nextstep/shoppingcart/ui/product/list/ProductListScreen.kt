@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.model.dummyProducts
 import nextstep.shoppingcart.ui.product.list.component.ProductListItem
 
@@ -35,15 +37,19 @@ fun ProductListScreen() {
             CenterAlignedTopAppBar(
                 title = { Text(text = stringResource(id = R.string.product_list)) },
                 actions = {
-                    Icon(
-                        imageVector = Icons.Filled.ShoppingCart,
-                        contentDescription = "shoppingCartIcon",
-                        tint = Color.Black,
+                    IconButton(
+                        onClick = { /*TODO*/ },
                         modifier = Modifier
-                            .padding(4.dp)
-                            .size(48.dp)
-                            .padding(8.dp),
-                    )
+                            .padding(end = 4.dp)
+                            .size(48.dp),
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.ShoppingCart,
+                            contentDescription = "shoppingCartIcon",
+                            tint = Color.Black,
+                            modifier = Modifier,
+                        )
+                    }
                 },
             )
         },
@@ -53,13 +59,14 @@ fun ProductListScreen() {
                 .fillMaxSize()
                 .padding(innerPadding),
         ) {
-            ProductListContent()
+            ProductListContent(products = dummyProducts)
         }
     }
 }
 
 @Composable
 private fun ProductListContent(
+    products: List<Product>,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -69,7 +76,7 @@ private fun ProductListContent(
         horizontalArrangement = Arrangement.spacedBy(13.dp),
         modifier = modifier,
     ) {
-        items(dummyProducts) {
+        items(products) {
             ProductListItem(
                 item = it,
                 onClick = { }, // todo: need to implement
