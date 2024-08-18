@@ -24,16 +24,17 @@ class ProductDetailActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                    val imageUrl = this.intent?.getStringExtra("imageUrl")
-                    val name = this.intent.getStringExtra("name")
-                    val price = this.intent.getIntExtra("price", 0)
+                    val product = intent.getParcelableExtra("product", Product::class.java)!!
 
                     ProductDetailScreen(
                         product = Product(
-                            imageUrl = imageUrl!!,
-                            name = name!!,
-                            price = price
-                        )
+                            imageUrl = product.imageUrl,
+                            name = product.name,
+                            price = product.price
+                        ),
+                        onNavigationClick = {
+                            finish()
+                        }
                     )
                 }
             }

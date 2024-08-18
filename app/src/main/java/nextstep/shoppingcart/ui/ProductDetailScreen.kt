@@ -1,13 +1,11 @@
 package nextstep.shoppingcart.ui
 
 import android.annotation.SuppressLint
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.Product
@@ -19,17 +17,14 @@ import nextstep.shoppingcart.ui.component.ShoppingCartNavigationTopBar
 @Composable
 fun ProductDetailScreen(
     product: Product,
+    onNavigationClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-
     Scaffold(
         topBar = {
             ShoppingCartNavigationTopBar(
                 title = stringResource(id = R.string.title_activity_product_detail),
-                onNavigationClick = {
-                    (context as? ComponentActivity)?.finish()
-                }
+                onNavigationClick = onNavigationClick
             )
         },
         modifier = modifier.fillMaxSize()
@@ -49,5 +44,8 @@ private fun ProductDetailScreenPreview() {
         name = "루바토 브이넥 반팔 티셔츠 네이비",
         price = 16371
     )
-    ProductDetailScreen(product)
+    ProductDetailScreen(
+        product = product,
+        onNavigationClick = { }
+    )
 }
