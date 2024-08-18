@@ -7,5 +7,8 @@
     <string name="text_shopping_cart_title">장바구니</string>
     <string name="text_shopping_cart_Icon_description">쇼핑 카트 아이콘</string>
     <string name="text_back_Icon_description">뒤로 가기 아이콘</string>
+    <string name="text_close_Icon_description">닫기 아이콘</string>
+    <string name="text_plus_Icon_description">더하기 아이콘</string>
+    <string name="text_minus_Icon_description">빼기 아이콘</string>
     <string name="formatted_price">%1$,d원</string>
 </resources>
