@@ -9,11 +9,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
@@ -24,13 +27,14 @@ fun ProductCard(product: Product, onClickCard: () -> Unit) {
     Column(
         modifier = Modifier
             .clickable(onClick = onClickCard)
-            .fillMaxWidth()
+            .fillMaxSize()
     ) {
         AsyncImage(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxWidth(),
             model = product.imgUrl,
             contentDescription = null,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
+            placeholder = ColorPainter(Color.White)
         )
         Text(
             modifier = Modifier
@@ -51,4 +55,18 @@ fun ProductCard(product: Product, onClickCard: () -> Unit) {
             text = stringResource(id = R.string.formatted_price, product.price)
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductCardPreview() {
+    ProductCard(
+        product = Product(
+            id = 1231,
+            imgUrl = "https://duckduckgo.com/?q=periculis",
+            name = "Mariana Webster",
+            price = 8348
+        ),
+        onClickCard = {}
+    )
 }

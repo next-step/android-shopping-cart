@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,4 +40,10 @@ fun ProductListTopBar(modifier: Modifier = Modifier, onClickCartIcon: () -> Unit
             }
         }
     )
+}
+
+@Preview
+@Composable
+private fun ProductListTopBarPreview() {
+    ProductListTopBar(Modifier,{})
 }

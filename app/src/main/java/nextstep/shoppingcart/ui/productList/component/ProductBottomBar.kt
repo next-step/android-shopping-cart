@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 
 @Composable
@@ -29,4 +30,10 @@ fun ProductBottomBar(modifier: Modifier = Modifier, onClickBottomBar: () -> Unit
             style = MaterialTheme.typography.bodyMedium,
         )
     }
+}
+
+@Preview
+@Composable
+private fun ProductBottomBarPreview() {
+    ProductBottomBar(Modifier, {})
 }
