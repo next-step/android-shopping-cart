@@ -49,10 +49,7 @@ fun ProductDetail(
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(18.dp)
         )
-        Divider(
-            color = Color.Gray,
-            thickness = 1.dp
-        )
+        Divider()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
