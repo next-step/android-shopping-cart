@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.productList
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,22 +15,30 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.ui.data.Product
 import nextstep.shoppingcart.ui.data.SampleProductList.sampleProductList
+import nextstep.shoppingcart.ui.productDetail.ProductDetailActivity
 import nextstep.shoppingcart.ui.productList.component.ProductCard
 import nextstep.shoppingcart.ui.productList.component.ProductListTopBar
+import nextstep.shoppingcart.ui.shoppingCart.ShoppingCartActivity
 
 
 @Composable
 fun ProductListScreen(productList: List<Product>) {
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             ProductListTopBar(
                 Modifier
                     .fillMaxWidth()
-                    .background(Color.White)
+                    .background(Color.White),
+                onClickCartIcon = {
+                    val intent = Intent(context, ShoppingCartActivity::class.java)
+                    context.startActivity(intent)
+                }
             )
         }
     ) { paddingValue ->
@@ -43,6 +52,8 @@ fun ProductListScreen(productList: List<Product>) {
 
 @Composable
 fun ProductLazeColum(productList: List<Product>) {
+    val context = LocalContext.current
+
     LazyVerticalGrid(
         modifier = Modifier
             .padding(horizontal = 18.dp)
@@ -59,7 +70,15 @@ fun ProductLazeColum(productList: List<Product>) {
                 product.id
             }
         ) { product ->
-            ProductCard(product)
+            ProductCard(
+                product = product,
+                onClickCard = {
+                    val intent = Intent(context, ProductDetailActivity::class.java).apply {
+                        putExtra("product", product)
+                    }
+                    context.startActivity(intent)
+                }
+            )
         }
     }
 }

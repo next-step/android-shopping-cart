@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.ui.productDetail.component
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
@@ -13,15 +12,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import nextstep.shoppingcart.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailTopBar(modifier: Modifier = Modifier) {
-    val context = LocalContext.current
+fun ProductDetailTopBar(modifier: Modifier = Modifier, onClickBackIcon: () -> Unit) {
     TopAppBar(
         modifier = modifier
             .background(Color.White)
@@ -34,7 +31,9 @@ fun ProductDetailTopBar(modifier: Modifier = Modifier) {
             )
         },
         navigationIcon = {
-            IconButton(onClick = { (context as? Activity)?.finish() }) {
+            IconButton(
+                onClick = onClickBackIcon
+            ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = stringResource(id = R.string.text_back_Icon_description)
