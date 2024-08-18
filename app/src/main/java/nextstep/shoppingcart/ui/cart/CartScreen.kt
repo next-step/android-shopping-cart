@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -101,7 +102,10 @@ internal fun CartScreen(
             onCancelClick = onCancelClick,
             onAddClick = onAddClick,
             onRemoveClick = onRemoveClick,
-            modifier = Modifier.padding(paddingValues),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(paddingValues),
         )
     }
 }
@@ -121,6 +125,7 @@ private fun CartContent(
                 vertical = 16.dp,
             ),
         verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier,
     ) {
         items(items) { item ->
