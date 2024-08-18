@@ -1,8 +1,8 @@
 package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -30,7 +30,7 @@ fun QuantitySelector(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier,
     ) {
-        IconButton(
+        TextButton(
             onClick = onRemoveClick,
             modifier =
                 Modifier
@@ -54,7 +54,7 @@ fun QuantitySelector(
                     .testTag(stringResource(id = R.string.test_tag_quantity_selector_quantity)),
         )
 
-        IconButton(
+        TextButton(
             onClick = onAddClick,
             modifier =
                 Modifier
