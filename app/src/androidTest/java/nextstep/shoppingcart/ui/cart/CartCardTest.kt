@@ -31,12 +31,12 @@ class CartCardTest {
                     price = 1000,
                     imgUrl = "https://example.com/image.jpg",
                 )
-            val quality = 2
+            val quantity = 2
             CartCard(
                 cartItem =
                     CartItem(
                         product = product,
-                        quantity = quality,
+                        quantity = quantity,
                     ),
                 onCancel = {},
                 onAddQuantityClick = {},
@@ -67,15 +67,15 @@ class CartCardTest {
                     price = 1000,
                     imgUrl = "https://example.com/image.jpg",
                 )
-            var quality by remember { mutableStateOf(2) }
+            var quantity by remember { mutableStateOf(2) }
             CartCard(
                 cartItem =
                     CartItem(
                         product = product,
-                        quantity = quality,
+                        quantity = quantity,
                     ),
                 onCancel = {},
-                onAddQuantityClick = { quality++ },
+                onAddQuantityClick = { quantity++ },
                 onRemoveQuantityClick = {},
             )
         }
@@ -102,16 +102,16 @@ class CartCardTest {
                     price = 1000,
                     imgUrl = "https://example.com/image.jpg",
                 )
-            var quality by remember { mutableStateOf(2) }
+            var quantity by remember { mutableStateOf(2) }
             CartCard(
                 cartItem =
                     CartItem(
                         product = product,
-                        quantity = quality,
+                        quantity = quantity,
                     ),
                 onCancel = {},
                 onAddQuantityClick = {},
-                onRemoveQuantityClick = { quality-- },
+                onRemoveQuantityClick = { quantity-- },
             )
         }
 
