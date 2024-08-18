@@ -1,10 +1,14 @@
-package nextstep.shoppingcart.ui.model
+package nextstep.shoppingcart.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Product(
     val name: String,
     val imageUrl: String,
     val price: Long,
-)
+) : Parcelable
 
 val dummyProducts: List<Product> = listOf(
     Product(

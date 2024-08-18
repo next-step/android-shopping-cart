@@ -1,16 +1,17 @@
-package nextstep.shoppingcart.ui.product.list
+package nextstep.shoppingcart.ui.cart
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
-class ProductListActivity : ComponentActivity() {
+class ShoppingCartActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
-                ProductListScreen()
+                ShoppingCartScreen()
             }
         }
     }
