@@ -3,7 +3,6 @@ package nextstep.shoppingcart.ui.cart
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -16,17 +15,13 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
@@ -35,6 +30,7 @@ import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.component.BasicIconButton
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.component.QuantitySelector
+import nextstep.shoppingcart.ui.theme.Gray10
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -44,18 +40,16 @@ fun CartCard(
     onAddQuantityClick: () -> Unit,
     onRemoveQuantityClick: () -> Unit,
     modifier: Modifier = Modifier,
-    border: CartCartDefaults.Border = CartCartDefaults.border(),
-    contentPaddingValues: PaddingValues = CartCartDefaults.contentPaddingValues(),
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(6.dp),
         modifier =
             modifier
                 .border(
-                    width = border.width,
-                    color = border.color,
-                    shape = border.shape,
-                ).padding(contentPaddingValues),
+                    width = 1.dp,
+                    color = Gray10,
+                    shape = RoundedCornerShape(4.dp),
+                ).padding(18.dp),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -108,26 +102,6 @@ fun CartCard(
             }
         }
     }
-}
-
-@Immutable
-object CartCartDefaults {
-    @Composable
-    fun border(): Border =
-        Border(
-            width = 1.dp,
-            color = Color.Gray,
-            shape = RoundedCornerShape(4.dp),
-        )
-
-    data class Border(
-        val width: Dp,
-        val color: Color,
-        val shape: Shape,
-    )
-
-    @Composable
-    fun contentPaddingValues(): PaddingValues = PaddingValues(18.dp)
 }
 
 @Preview(showBackground = true)
