@@ -9,7 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.ui.shoppinglist.ShoppingListScreen
+import androidx.navigation.compose.rememberNavController
+import nextstep.shoppingcart.ui.AppNavHost
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,12 +18,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White,
                 ) {
-                    ShoppingListScreen()
+                    AppNavHost(navController = rememberNavController())
                 }
             }
         }
@@ -33,6 +33,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ApplicationEntryPointPreview() {
     ShoppingCartTheme {
-        ShoppingListScreen()
+        AppNavHost(navController = rememberNavController())
     }
 }
