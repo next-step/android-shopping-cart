@@ -45,12 +45,19 @@ internal fun ProductListRoute(
                     is ProductListEvent.OnCartClick -> {
                         onCartClick()
                     }
+
+                    is ProductListEvent.OnAddToCartClick -> {
+                        TODO()
+                    }
+
+                    is ProductListEvent.OnAddQuantityClick -> TODO()
+                    is ProductListEvent.OnRemoveQuantityClick -> TODO()
                 }
             }
         }
 
     ProductListScreen(
-        products = products.getAll(),
+        items = TODO(),
         onProductListEvent = eventListener,
         modifier = modifier.fillMaxSize(),
     )
@@ -118,6 +125,21 @@ private fun ProductListContent(
                 onCardClick = {
                     onProductListEvent(
                         ProductListEvent.OnProductCardClick(productId = product.id),
+                    )
+                },
+                onAddToCartClick = {
+                    onProductListEvent(
+                        ProductListEvent.OnAddToCartClick(product = item.product),
+                    )
+                },
+                onAddQuantityClick = {
+                    onProductListEvent(
+                        ProductListEvent.OnAddQuantityClick(productItem = item),
+                    )
+                },
+                onRemoveQuantityClick = {
+                    onProductListEvent(
+                        ProductListEvent.OnRemoveQuantityClick(productItem = item),
                     )
                 },
             )
