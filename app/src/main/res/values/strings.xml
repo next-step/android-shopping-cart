@@ -8,4 +8,5 @@
     <string name="shopping_detail_title">상품 상세</string>
     <string name="shopping_detail_add_button_description">ShoppingDetailAddButton</string>
     <string name="shopping_detail_add_button">장바구니 담기</string>
+    <string name="shopping_detail_product_price">금액</string>
 </resources>
