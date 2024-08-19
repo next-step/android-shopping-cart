@@ -34,20 +34,22 @@ import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameter
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
-import nextstep.shoppingcart.domain.model.ProductItem
+import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.component.QuantitySelector
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 internal fun ProductCard(
-    item: ProductItem,
+    product: Product,
+    quantity: Int,
     modifier: Modifier = Modifier,
     onCardClick: () -> Unit = {},
     onAddToCartClick: () -> Unit = {},
     onAddQuantityClick: () -> Unit = {},
     onRemoveQuantityClick: () -> Unit = {},
 ) {
+    val isInCart = quantity > 0
     Column(
         modifier =
             modifier
@@ -55,11 +57,11 @@ internal fun ProductCard(
     ) {
         Box {
             ProductImage(
-                imgUrl = item.product.imgUrl,
+                imgUrl = product.imgUrl,
                 contentDescription =
                     stringResource(
                         id = R.string.product_image_content_description,
-                        item.product.name,
+                        product.name,
                     ),
                 contentScale = ContentScale.Crop,
                 modifier =
@@ -68,9 +70,13 @@ internal fun ProductCard(
                         .aspectRatio(1f),
             )
 
-            if (item.isInCart) {
+            /**
+             * Mock data 이미지 배경이 하얀색이라서 경계가 보이지 않아서 별도로 border를 추가하였음
+             */
+
+            if (isInCart) {
                 QuantitySelector(
-                    quantity = item.quantity,
+                    quantity = quantity,
                     onAddClick = onAddQuantityClick,
                     onRemoveClick = onRemoveQuantityClick,
                     modifier =
@@ -78,12 +84,13 @@ internal fun ProductCard(
                             .padding(horizontal = 15.dp, vertical = 12.dp)
                             .align(Alignment.BottomEnd)
                             .clip(shape = RoundedCornerShape(4.dp))
-                            .background(Color.White),
+                            .border(
+                                width = 1.dp,
+                                color = Color.Gray,
+                                shape = RoundedCornerShape(4.dp),
+                            ).background(Color.White),
                 )
             } else {
-                /**
-                 * Mock data 이미지 배경이 하얀색이라서 +버튼의 경계가 보이지 않아서 별도로 border를 추가하였음
-                 */
                 AddToCartButton(
                     onClick = onAddToCartClick,
                     modifier =
@@ -100,8 +107,8 @@ internal fun ProductCard(
             }
         }
         ProductCardDescription(
-            name = item.product.name,
-            price = item.product.price,
+            name = product.name,
+            price = product.price,
         )
     }
 }
@@ -161,22 +168,28 @@ private fun AddToCartButton(
 @Preview(showBackground = true)
 @Composable
 private fun ProductCardPreview(
-    @PreviewParameter(ProductCardPreviewProvider::class) item: ProductItem,
+    @PreviewParameter(ProductCardPreviewProvider::class) param: ProductCardPreviewParameter,
 ) {
     ShoppingCartTheme {
         ProductCard(
-            item = item,
+            product = param.product,
+            quantity = param.quantity,
         )
     }
 }
 
+data class ProductCardPreviewParameter(
+    val product: Product,
+    val quantity: Int,
+)
+
 class ProductCardPreviewProvider :
-    CollectionPreviewParameterProvider<ProductItem>(
+    CollectionPreviewParameterProvider<ProductCardPreviewParameter>(
         collection =
             PRODUCT_LIST_MOCK_DATA
                 .take(3)
                 .mapIndexed { index, product ->
-                    ProductItem(
+                    ProductCardPreviewParameter(
                         product =
                             if (index == 2) {
                                 product.copy(
@@ -185,7 +198,6 @@ class ProductCardPreviewProvider :
                             } else {
                                 product
                             },
-                        isInCart = index > 0,
                         quantity = index,
                     )
                 },
