@@ -44,7 +44,7 @@ class ShoppingListScreenTest {
     fun 상품을_클릭하면_상품_상세보기_뷰로_이동한다() {
         // given:
         // when:
-        composeTestRule.onAllNodesWithContentDescription("ShoppingListItem").onFirst()
+        composeTestRule.onAllNodesWithContentDescription("ShoppingItem").onFirst()
             .performClick()
 
         // then:
