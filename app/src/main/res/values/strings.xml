@@ -2,4 +2,8 @@
     <string name="app_name">Shopping Cart</string>
     <string name="won_unit">%1$s원</string>
     <string name="cart_screen_title">상품 목록</string>
+    <string name="put_in_shopping_cart">장바구니 담기</string>
+    <string name="amount_of_money">금액</string>
+    <string name="product_details">상품 상세</string>
+    <string name="amount_of_money_right">%1$s원</string>
 </resources>

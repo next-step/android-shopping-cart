@@ -34,7 +34,7 @@ internal fun ProductCard(
         AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1.1f),
+                .aspectRatio(1f),
             model = ImageRequest.Builder(LocalContext.current)
                 .data(product.imageUrl)
                 .crossfade(true)  // 페이드 인 애니메이션
