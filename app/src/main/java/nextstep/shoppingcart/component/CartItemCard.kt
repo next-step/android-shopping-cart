@@ -21,6 +21,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.CartItem
+import java.util.UUID
 
 @Composable
 internal fun CartItemCard(
@@ -37,8 +38,8 @@ internal fun CartItemCard(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(cartItem.imageUrl)
                 .crossfade(true)  // 페이드 인 애니메이션
-//                .error(R.drawable.placeholder_error)  // 로드 실패 시 표시할 이미지
-//                .placeholder(R.drawable.placeholder_loading)  // 로딩 중에 표시할 이미지
+                .error(R.drawable.ic_outline_image_not_supported_24)  // 로드 실패 시 표시할 이미지
+                .placeholder(R.drawable.ic_outline_image_search_24)  // 로딩 중에 표시할 이미지
                 .build(),
             contentDescription = cartItem.name
         )
@@ -80,6 +81,7 @@ private fun CartItemCardPreview() {
     MaterialTheme {
         CartItemCard(
             cartItem = CartItem(
+                id = UUID.randomUUID().toString(),
                 name = "PET보틀-정사각형처럼 보이는 예쁜 보틀을 팔아요",
                 price = 10000,
                 imageUrl = "https://picsum.photos/500",
