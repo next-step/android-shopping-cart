@@ -27,7 +27,8 @@ fun ProductDetailAppBar() {
         navigationIcon = {
             IconButton(
                 onClick = {
-
+                    val intent = Intent(context, ProductsActivity::class.java)
+                    context.startActivity(intent)
                 }
             ) {
                 Icon(
