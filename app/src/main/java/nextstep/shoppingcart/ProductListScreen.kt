@@ -20,19 +20,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.component.CartItemCard
-import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.component.ProductCard
+import nextstep.shoppingcart.model.Product
 import java.util.UUID
 
 @Composable
-internal fun CartScreen(
-    cartItems: List<CartItem>,
+internal fun ProductListScreen(
+    cartItems: List<Product>,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { CartTopBar() },
+        topBar = { ProductListTopBar() },
         content = { paddingValues ->
-            CartContent(paddingValues, cartItems)
+            ProductListContent(paddingValues, cartItems)
         }
     )
 
@@ -40,7 +40,7 @@ internal fun CartScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun CartTopBar() {
+private fun ProductListTopBar() {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -59,9 +59,9 @@ private fun CartTopBar() {
 }
 
 @Composable
-private fun CartContent(
+private fun ProductListContent(
     paddingValues: PaddingValues,
-    cartItems: List<CartItem>
+    cartItems: List<Product>
 ) {
     LazyVerticalGrid(
         modifier = Modifier
@@ -76,8 +76,8 @@ private fun CartContent(
             items = cartItems,
             key = { item -> item.id }
         ) { item ->
-            CartItemCard(
-                cartItem = item,
+            ProductCard(
+                product = item,
             )
         }
     }
@@ -85,11 +85,11 @@ private fun CartContent(
 
 @Preview
 @Composable
-private fun CartScreenPreview() {
+private fun ProductListScreenPreview() {
     MaterialTheme {
-        CartScreen(
+        ProductListScreen(
             cartItems = List(20) {
-                CartItem(
+                Product(
                     id = UUID.randomUUID().toString(),
                     name = "PET보틀 - 정사각형 모양",
                     10000,

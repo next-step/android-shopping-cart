@@ -1,6 +1,6 @@
 package nextstep.shoppingcart.model
 
-internal data class CartItem(
+internal data class Product(
     val id: String,
     val name: String,
     val price: Int,
