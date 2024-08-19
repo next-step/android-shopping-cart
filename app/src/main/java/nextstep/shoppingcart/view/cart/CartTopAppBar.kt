@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.view.cart
 
-import android.content.Intent
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -9,17 +8,16 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.view.product.ProductsActivity
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartTopAppBar() {
-    val context = LocalContext.current
+    val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
 
     TopAppBar(
         title = {
@@ -28,8 +26,7 @@ fun CartTopAppBar() {
         navigationIcon = {
             IconButton(
                 onClick = {
-                    val intent = Intent(context, ProductsActivity::class.java)
-                    context.startActivity(intent)
+                    onBackPressedDispatcher?.onBackPressed()
                 }
             ) {
                 Icon(
