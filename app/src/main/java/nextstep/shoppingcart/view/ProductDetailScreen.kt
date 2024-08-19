@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.view
 
-import android.content.Intent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -8,15 +7,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @Composable
-fun ProductsScreen() {
-    val context = LocalContext.current
-
+fun ProductDetailScreen() {
     ShoppingCartTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -26,19 +21,7 @@ fun ProductsScreen() {
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                ProductsTopAppBar()
-                ProductsGrid(
-                    dummyProducts,
-                    onItemClick = { product ->
-                        val intent = Intent(context, ProductDetailActivity::class.java).apply {
-                            putExtra("product_name", product.name)
-                            putExtra("product_image", product.imageUrl)
-                            putExtra("product_price", product.price)
-                        }
-                        context.startActivity(intent)
-                    },
-                    modifier = Modifier.fillMaxSize()
-                )
+                ProductDetailAppBar()
             }
         }
     }
@@ -46,8 +29,8 @@ fun ProductsScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun ProductsScreenPreview() {
+private fun ProductDetailScreenPreview() {
     ShoppingCartTheme {
-        ProductsScreen()
+        ProductDetailScreen()
     }
 }

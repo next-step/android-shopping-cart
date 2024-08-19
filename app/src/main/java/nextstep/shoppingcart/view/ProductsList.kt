@@ -20,6 +20,7 @@ const val gridCellsCount = 2
 @Composable
 fun ProductsGrid(
     products: List<Product>,
+    onItemClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -34,7 +35,7 @@ fun ProductsGrid(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.grid_vertical_space))
     ) {
         items(products) { product ->
-            ProductItem(product, modifier)
+            ProductItem(product, onItemClick, modifier)
         }
     }
 }
@@ -43,6 +44,6 @@ fun ProductsGrid(
 @Composable
 fun ProductsGridPreview() {
     ShoppingCartTheme {
-        ProductsGrid(dummyProducts)
+        ProductsGrid(dummyProducts, onItemClick = {})
     }
 }

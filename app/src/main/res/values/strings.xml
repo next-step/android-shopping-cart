@@ -2,7 +2,9 @@
     <string name="app_name">Shopping Cart</string>
     <string name="product_app_bar_title">상품 목록</string>
     <string name="product_app_bar_cart_icon_description">Cart Icon</string>
-    <string name="product_item_currency_unit">원</string>
+    <string name="product_item_currency_unit">%,d원</string>
     <string name="cart_app_bar_title">장바구니</string>
     <string name="cart_app_bar_back_icon_description">Cart Back</string>
+    <string name="product_detail_app_bar_title">상품 상세</string>
+    <string name="product_detail_app_bar_back_icon_description">Detail Back</string>
 </resources>
