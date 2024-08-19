@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -19,16 +20,12 @@ fun CartBottomBar(modifier: Modifier = Modifier, totalPrice: Int, onClickBottomB
     BottomAppBar(
         modifier
             .fillMaxWidth()
-            .clickable(onClick = onClickBottomBar),
+            .clickable(onClick = onClickBottomBar)
+            .testTag(stringResource(id =R.string.test_tag_cart_bottom_bar)),
         containerColor = Color(0xFF2196F3)
     ) {
         Text(
-            text = "${stringResource(id = R.string.text_shopping_cart_order)}(${
-                stringResource(
-                    id = R.string.formatted_price,
-                    totalPrice
-                )
-            })",
+            text = "${stringResource(id = R.string.text_shopping_cart_order)}(${stringResource(id = R.string.formatted_price, totalPrice)})",
             modifier = Modifier
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,

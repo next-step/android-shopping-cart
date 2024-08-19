@@ -12,4 +12,12 @@
     <string name="text_plus_Icon_description">더하기 아이콘</string>
     <string name="text_minus_Icon_description">빼기 아이콘</string>
     <string name="formatted_price">%1$,d원</string>
+
+    <string name="test_tag_cart_bottom_bar">CartBottomBar</string>
+    <string name="test_tag_cart_lazy_column">CartLazyColumn</string>
+    <string name="test_tag_remove_icon">CartCardRemoveIcon_%1$s</string>
+    <string name="test_tag_plus_icon">CartCardPlusIcon_%1$s</string>
+    <string name="test_tag_minus_icon">CartCardMinusIcon_%1$s</string>
+    <string name="test_tag_cart_card">CartCard_$s</string>
+
 </resources>

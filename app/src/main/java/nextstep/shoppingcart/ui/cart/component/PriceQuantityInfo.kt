@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -57,7 +58,10 @@ fun PriceQuantityInfo(
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = onClickMinus) {
+            IconButton(
+                modifier = Modifier.testTag(stringResource(id =R.string.test_tag_minus_icon, cartItem.product.name)),
+                onClick = onClickMinus
+            ) {
                 Icon(
                     imageVector = IconPack.IcMinus,
                     contentDescription = stringResource(id = R.string.text_minus_Icon_description)
@@ -70,7 +74,10 @@ fun PriceQuantityInfo(
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.bodyMedium
             )
-            IconButton(onClick = onClickPlus) {
+            IconButton(
+                modifier = Modifier.testTag(stringResource(id =R.string.test_tag_plus_icon, cartItem.product.name)),
+                onClick = onClickPlus
+            ) {
                 Icon(
                     imageVector = IconPack.IcPlus,
                     contentDescription = stringResource(id = R.string.text_plus_Icon_description)

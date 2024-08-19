@@ -13,7 +13,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.SampleProductList
 import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.ui.cart.component.CartBottomBar
@@ -35,7 +38,9 @@ fun CartScreen(modifier: Modifier) {
         }
     ) { paddingValue ->
         LazyColumn(
-            modifier = modifier.padding(paddingValue)
+            modifier = modifier
+                .padding(paddingValue)
+                .testTag(stringResource(id = R.string.test_tag_cart_lazy_column))
         ) {
             items(items) { item ->
                 CartCard(

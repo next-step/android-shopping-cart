@@ -4,6 +4,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.cart.CartItem
 import nextstep.shoppingcart.ui.cart.component.CartCard
 import org.junit.Rule
 import org.junit.Test
@@ -25,7 +26,7 @@ class CartCardTest {
 
         // when : 상품 카드를 노출한다.
         composeTestRule.setContent {
-            CartCard(Modifier, product)
+            CartCard(Modifier, CartItem(product,1),{},{},{})
         }
 
         // then : 상품의 이름이 노출되어야한다.
@@ -46,7 +47,7 @@ class CartCardTest {
 
         // when : 상품 카드를 노출한다.
         composeTestRule.setContent {
-            CartCard(Modifier, product)
+            CartCard(Modifier, CartItem(product,1),{},{},{})
         }
 
         // then : 상품의 가격이 노출되어야한다.

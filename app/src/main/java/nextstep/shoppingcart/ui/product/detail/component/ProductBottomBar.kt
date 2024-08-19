@@ -27,7 +27,7 @@ fun ProductBottomBar(modifier: Modifier = Modifier, onClickBottomBar: () -> Unit
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
             color = Color.White,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.headlineMedium,
         )
     }
 }

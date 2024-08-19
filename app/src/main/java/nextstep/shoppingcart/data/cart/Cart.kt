@@ -36,4 +36,8 @@ object Cart {
         _items.removeAll { it.product == product }
         return items
     }
+
+    fun itemAllClear() {
+        _items.clear()
+    }
 }

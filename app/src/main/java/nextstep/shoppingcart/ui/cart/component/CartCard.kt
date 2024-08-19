@@ -9,9 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.data.SampleProductList
 import nextstep.shoppingcart.data.cart.CartItem
@@ -28,7 +31,7 @@ fun CartCard(
         modifier = Modifier.padding(8.dp)
     ) {
         CartCardTopBar(
-            modifier = modifier,
+            modifier = modifier.testTag(stringResource(id = R.string.test_tag_cart_card)),
             product = cartItem.product,
             onClickCloseIcon = {onRemoveClick(cartItem)}
         )
