@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.theme
+package nextstep.shoppingcart.view.resource
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
