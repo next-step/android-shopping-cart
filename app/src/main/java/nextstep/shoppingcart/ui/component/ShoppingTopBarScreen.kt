@@ -10,12 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun ShoppingTopBar(navController: NavController, title: String) {
+fun ShoppingTopBar(title: String, onBackClick: () -> Unit) {
     TopAppBar(
         title = {
             Text(
@@ -25,7 +23,7 @@ fun ShoppingTopBar(navController: NavController, title: String) {
             )
         },
         navigationIcon = {
-            IconButton(onClick = { navController.navigateUp() }) {
+            IconButton(onClick = onBackClick) {
                 Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
             }
         }
@@ -35,7 +33,7 @@ fun ShoppingTopBar(navController: NavController, title: String) {
 @Preview
 @Composable
 private fun ShoppingTopBarPreview() {
-    ShoppingTopBar(rememberNavController(), title = "상품 상세")
+    ShoppingTopBar(title = "상품 상세") {
 
-
+    }
 }

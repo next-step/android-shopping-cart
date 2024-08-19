@@ -21,23 +21,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.data.cart.CartItem
 import nextstep.shoppingcart.data.goods.Product
 import nextstep.shoppingcart.ui.component.ShoppingTopBar
 
 @Composable
-fun ShoppingCart(navController: NavHostController) {
+fun ShoppingCart(
+    onBackClick: () -> Unit = {}
+) {
     var cartItems by remember {
         mutableStateOf(Cart.items)
     }
     Scaffold(
         topBar = {
             ShoppingTopBar(
-                navController,
-                title = "장바구니"
+                title = "장바구니",
+                onBackClick
             )
         },
         bottomBar = {
@@ -46,7 +46,6 @@ fun ShoppingCart(navController: NavHostController) {
             }
         }
     ) { paddingValues ->
-
         LazyColumn(
             modifier = Modifier.padding(paddingValues),
             contentPadding = PaddingValues(18.dp),
@@ -56,7 +55,7 @@ fun ShoppingCart(navController: NavHostController) {
                 CartProduct(
                     item = item,
                     onRemoveClick = {
-                        cartItems = Cart.removeOne(item.product)
+                        cartItems = Cart.removeAll(item.product)
                     },
                     onMinusClick = {
                         cartItems = Cart.removeOne(item.product)
@@ -114,7 +113,5 @@ private fun ShoppingCartPreview() {
             price = 12000
         )
     )
-    ShoppingCart(
-        navController = rememberNavController()
-    )
+    ShoppingCart()
 }

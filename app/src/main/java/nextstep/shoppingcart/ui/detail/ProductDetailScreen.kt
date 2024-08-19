@@ -27,29 +27,28 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.data.cart.Cart
+import nextstep.shoppingcart.data.goods.Product
 import nextstep.shoppingcart.data.goods.impl.ProductRepositoryImpl
-import nextstep.shoppingcart.ui.ShoppingCartDestinations
 import nextstep.shoppingcart.ui.component.ShoppingTopBar
 
 @Composable
 fun ProductDetail(
-    navController: NavController,
-    productId: Int
+    productId: Int,
+    onBackClick: () -> Unit,
+    onAddCartClick: () -> Unit
 ) {
     val productRepository = ProductRepositoryImpl()
     val product = productRepository.getProduct(productId) ?: return
     Scaffold(
         topBar = {
-            ShoppingTopBar(navController, "상품 상세")
+            ShoppingTopBar("상품 상세", onBackClick = onBackClick)
         }, bottomBar = {
-            ProductBottomBar {
-                Cart.addOne(product = product)
-                navController.navigate(ShoppingCartDestinations.SHOPPING_CART)
-            }
+            ProductBottomBar(onClick = {
+                Cart.addOne(product)
+                onAddCartClick()
+            })
         }
     ) { paddingValues ->
         Column(
@@ -109,7 +108,8 @@ fun ProductDetail(
 
 @Composable
 private fun ProductBottomBar(
-    onClick: () -> Unit) {
+    onClick: () -> Unit
+) {
     Button(
         onClick = onClick,
         modifier = Modifier
@@ -133,14 +133,12 @@ private fun ProductBottomBar(
 @Preview
 @Composable
 private fun ProductDetailPreview() {
-    ProductDetail(rememberNavController(), 1)
+    ProductDetail(1, {}, {})
 }
 
 @Preview
 @Composable
 private fun ProductBottomBarPreview() {
-    ProductBottomBar() {
-
+    ProductBottomBar {
     }
-    
 }

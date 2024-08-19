@@ -20,10 +20,6 @@ internal class CartScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    @Before
-    fun setup() {
-    }
-
     @Test
     fun 상품을_담으면_장바구니에_노출된다() {
         // when
@@ -36,7 +32,7 @@ internal class CartScreenTest {
                     price = 1200000000
                 )
             )
-            ShoppingCart(rememberNavController())
+            ShoppingCart()
         }
 
         // then
@@ -61,7 +57,7 @@ internal class CartScreenTest {
                     price = 12000
                 )
             )
-            ShoppingCart(rememberNavController())
+            ShoppingCart()
         }
 
         // then
@@ -82,7 +78,7 @@ internal class CartScreenTest {
                     price = 12000
                 )
             )
-            ShoppingCart(rememberNavController())
+            ShoppingCart()
         }
 
         // then
@@ -104,7 +100,7 @@ internal class CartScreenTest {
             Cart.addOne(
                 product = product
             )
-            ShoppingCart(rememberNavController())
+            ShoppingCart()
         }
 
         composeTestRule.onNodeWithContentDescription("Remove:${product.productId}")
@@ -131,7 +127,7 @@ internal class CartScreenTest {
             Cart.addOne(
                 product = product
             )
-            ShoppingCart(rememberNavController())
+            ShoppingCart()
         }
 
         composeTestRule.onNodeWithText("+")
@@ -161,7 +157,7 @@ internal class CartScreenTest {
             Cart.addOne(
                 product = product
             )
-            ShoppingCart(rememberNavController())
+            ShoppingCart()
         }
 
         composeTestRule.onNodeWithText("-")
@@ -188,7 +184,7 @@ internal class CartScreenTest {
             Cart.addOne(
                 product = product
             )
-            ShoppingCart(rememberNavController())
+            ShoppingCart()
         }
 
         composeTestRule.onNodeWithText("-")
