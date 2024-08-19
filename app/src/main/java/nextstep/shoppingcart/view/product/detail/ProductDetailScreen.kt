@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.view.product.detail
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,12 +14,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.view.cart.CartActivity
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @Composable
 fun ProductDetailScreen(product: Product) {
+    val context = LocalContext.current
+
     ShoppingCartTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -41,7 +46,13 @@ fun ProductDetailScreen(product: Product) {
                 Divider(modifier = Modifier.fillMaxWidth())
                 ProductDetailPriceText(product.price, Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.weight(1f))
-                ProductDetailButton(Modifier.fillMaxWidth())
+                ProductDetailButton(
+                    onButtonClick = {
+                        val intent = Intent(context, CartActivity::class.java)
+                        context.startActivity(intent)
+                    },
+                    Modifier.fillMaxWidth()
+                )
             }
         }
     }
