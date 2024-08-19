@@ -47,6 +47,12 @@ val productTitleStyle = TextStyle(
     color = Color(0xFF333333)
 )
 
+val cartTitleStyle = TextStyle(
+    fontWeight = FontWeight.Bold,
+    fontSize = 20.sp,
+    color = Color.Black
+)
+
 @Composable
 fun ShoppingCartTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
