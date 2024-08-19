@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,6 +18,7 @@ import com.bumptech.glide.integration.compose.placeholder
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 import java.util.Locale
 
 const val productNameMaxLine = 1
@@ -41,12 +43,14 @@ fun ProductItem(product: Product, modifier: Modifier = Modifier) {
         )
         val formattedPrice =
             NumberFormat.getNumberInstance(Locale.KOREAN).format(product.price)
-        Text(text = "${formattedPrice}원")
+        Text(text = "${formattedPrice}${stringResource(id = R.string.product_item_currency_unit)}")
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun ProductItemPreview() {
-    ProductItem(dummyProducts.first())
+    ShoppingCartTheme {
+        ProductItem(dummyProducts.first())
+    }
 }

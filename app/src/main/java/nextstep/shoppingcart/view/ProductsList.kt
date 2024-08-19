@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 const val gridCellsCount = 2
 
@@ -41,5 +42,7 @@ fun ProductsGrid(
 @Preview(showBackground = true)
 @Composable
 fun ProductsGridPreview() {
-    ProductsGrid(dummyProducts)
+    ShoppingCartTheme {
+        ProductsGrid(dummyProducts)
+    }
 }
