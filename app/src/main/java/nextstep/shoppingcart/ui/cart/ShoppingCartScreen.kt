@@ -14,7 +14,10 @@ import nextstep.shoppingcart.ui.component.ShoppingTopBar
 fun ShoppingCart(navController: NavHostController) {
     Scaffold(
         topBar = {
-            ShoppingTopBar(navController)
+            ShoppingTopBar(
+                navController,
+                title = "장바구니"
+            )
         }
     ) { paddingValues ->
         Column(

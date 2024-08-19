@@ -9,15 +9,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun ShoppingTopBar(navController: NavController) {
+fun ShoppingTopBar(navController: NavController, title: String) {
     TopAppBar(
         title = {
             Text(
-                text = "상품 상세",
+                text = title,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.secondary
             )
@@ -28,4 +30,12 @@ fun ShoppingTopBar(navController: NavController) {
             }
         }
     )
+}
+
+@Preview
+@Composable
+private fun ShoppingTopBarPreview() {
+    ShoppingTopBar(rememberNavController(), title = "상품 상세")
+
+
 }
