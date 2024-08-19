@@ -18,7 +18,7 @@ import nextstep.shoppingcart.ui.cart.CartActivity
 import nextstep.shoppingcart.ui.product.detail.component.ProductDetailTopBar
 import nextstep.shoppingcart.ui.product.detail.component.ProductOverview
 import nextstep.shoppingcart.ui.product.detail.component.ProductPrice
-import nextstep.shoppingcart.ui.product.list.component.ProductBottomBar
+import nextstep.shoppingcart.ui.product.detail.component.ProductBottomBar
 
 @Composable
 fun ProductDetailScreen(modifier: Modifier, product: Product) {
