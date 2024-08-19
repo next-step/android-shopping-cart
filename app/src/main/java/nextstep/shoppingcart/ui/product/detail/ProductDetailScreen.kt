@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.ui.cart.CartActivity
 import nextstep.shoppingcart.ui.product.detail.component.ProductDetailTopBar
 import nextstep.shoppingcart.ui.product.detail.component.ProductOverview
@@ -33,6 +34,7 @@ fun ProductDetailScreen(modifier: Modifier, product: Product) {
         bottomBar = {
             ProductBottomBar(
                 onClickBottomBar = {
+                    Cart.addOne(product)
                     val intent = Intent(context, CartActivity::class.java)
                     context.startActivity(intent)
                 }

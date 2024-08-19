@@ -22,7 +22,7 @@ import nextstep.shoppingcart.data.SampleProductList
 fun CartCardTopBar(
     modifier: Modifier = Modifier,
     product: Product,
-    onClickCloseIcon: () -> Unit = {}
+    onClickCloseIcon: () -> Unit
 ) {
     Row(
         modifier = modifier,
@@ -49,5 +49,5 @@ fun CartCardTopBar(
 @Preview(showBackground = true)
 @Composable
 private fun CartCardTopBarPreview() {
-    CartCardTopBar(Modifier, SampleProductList.sampleProductList[2])
+    CartCardTopBar(Modifier, SampleProductList.sampleProductList[2], {})
 }

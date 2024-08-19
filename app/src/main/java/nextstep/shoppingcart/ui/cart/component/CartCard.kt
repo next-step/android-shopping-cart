@@ -13,26 +13,32 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.data.SampleProductList.sampleProductList
+import nextstep.shoppingcart.data.SampleProductList
+import nextstep.shoppingcart.data.cart.CartItem
 
 @Composable
-fun CartCard(modifier: Modifier = Modifier, product: Product) {
+fun CartCard(
+    modifier: Modifier = Modifier,
+    cartItem: CartItem,
+    onMinusClick: (Product) -> Unit,
+    onPlusClick: (Product) -> Unit,
+    onRemoveClick: (CartItem) -> Unit
+) {
     Column(
         modifier = Modifier.padding(8.dp)
     ) {
         CartCardTopBar(
             modifier = modifier,
-            product = product,
-            onClickCloseIcon = {}
+            product = cartItem.product,
+            onClickCloseIcon = {onRemoveClick(cartItem)}
         )
         Row(
             modifier = modifier
                 .fillMaxWidth()
-
         ) {
             AsyncImage(
                 modifier = modifier.weight(1f),
-                model = product.imgUrl,
+                model = cartItem.product.imgUrl,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 placeholder = ColorPainter(Color.Black)
@@ -40,7 +46,9 @@ fun CartCard(modifier: Modifier = Modifier, product: Product) {
 
             PriceQuantityInfo(
                 modifier = Modifier.weight(1f),
-                product = product
+                cartItem = cartItem,
+                onClickMinus = { onMinusClick(cartItem.product) },
+                onClickPlus = {onPlusClick(cartItem.product)}
             )
         }
     }
@@ -53,7 +61,14 @@ fun CartCard(modifier: Modifier = Modifier, product: Product) {
 @Composable
 private fun CartCardPreview() {
     CartCard(
-        modifier = Modifier, product = sampleProductList[2]
+        modifier = Modifier,
+        cartItem = CartItem(
+            product = SampleProductList.sampleProductList[0],
+            count = 1
+        ),
+        {},
+        {},
+        {}
     )
 }
 
