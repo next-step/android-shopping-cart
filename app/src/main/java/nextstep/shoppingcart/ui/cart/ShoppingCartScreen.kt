@@ -53,9 +53,18 @@ fun ShoppingCart(navController: NavHostController) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(cartItems) { item ->
-                CartProduct(item) {
-                    cartItems = Cart.removeOne(item.product)
-                }
+                CartProduct(
+                    item = item,
+                    onRemoveClick = {
+                        cartItems = Cart.removeOne(item.product)
+                    },
+                    onMinusClick = {
+                        cartItems = Cart.removeOne(item.product)
+                    },
+                    onPlusClick = {
+                        cartItems = Cart.addOne(item.product)
+                    }
+                )
             }
         }
     }

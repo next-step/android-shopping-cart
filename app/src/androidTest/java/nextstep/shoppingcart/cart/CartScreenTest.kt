@@ -2,6 +2,7 @@ package nextstep.shoppingcart.cart
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -119,16 +120,85 @@ internal class CartScreenTest {
 
     @Test
     fun 담긴_상품의_수량을_증가시키면_상품_가격에_반영된다() {
+        // when
+        val product = Product(
+            productId = 1,
+            imageUrl = "https://picsum.photos/156/158",
+            name = "상품1",
+            price = 12000
+        )
+        composeTestRule.setContent {
+            Cart.addOne(
+                product = product
+            )
+            ShoppingCart(rememberNavController())
+        }
 
+        composeTestRule.onNodeWithText("+")
+            .assertExists()
+            .assertIsDisplayed()
+            .performClick()
+
+        // then
+        composeTestRule
+            .onNodeWithText("주문하기(24,000원)")
+            .assertIsDisplayed()
     }
 
     @Test
     fun 담긴_상품의_수량을_감소시키면_상품_가격에_반영된다() {
+        // when
+        val product = Product(
+            productId = 1,
+            imageUrl = "https://picsum.photos/156/158",
+            name = "상품1",
+            price = 12000
+        )
+        composeTestRule.setContent {
+            Cart.addOne(
+                product = product
+            )
+            Cart.addOne(
+                product = product
+            )
+            ShoppingCart(rememberNavController())
+        }
 
+        composeTestRule.onNodeWithText("-")
+            .assertExists()
+            .assertIsDisplayed()
+            .performClick()
+
+        // then
+        composeTestRule
+            .onNodeWithText("주문하기(12,000원)")
+            .assertIsDisplayed()
     }
 
     @Test
     fun 담긴_상품의_수량을_1보다_적게_하면_상품이_삭제된다() {
+        // when
+        val product = Product(
+            productId = 1,
+            imageUrl = "https://picsum.photos/156/158",
+            name = "상품1",
+            price = 12000
+        )
+        composeTestRule.setContent {
+            Cart.addOne(
+                product = product
+            )
+            ShoppingCart(rememberNavController())
+        }
 
+        composeTestRule.onNodeWithText("-")
+            .assertExists()
+            .assertIsDisplayed()
+            .performClick()
+
+        // then
+        composeTestRule
+            .onNodeWithText("주문하기(12,000원)")
+            .assertIsNotDisplayed()
     }
 }

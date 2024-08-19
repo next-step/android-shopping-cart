@@ -39,9 +39,10 @@ import nextstep.shoppingcart.ui.theme.cartTitleStyle
 @Composable
 fun CartProduct(
     item: CartItem,
-    onRemoveClick: () -> Unit
+    onRemoveClick: () -> Unit,
+    onMinusClick: () -> Unit,
+    onPlusClick: () -> Unit
 ) {
-    var quantity by remember { mutableStateOf(1) }
     val product = item.product
 
     Card(
@@ -111,20 +112,26 @@ fun CartProduct(
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+                        var quantity by remember { mutableStateOf(1) }
                         IconButton(
-                            onClick = { if (quantity > 1) quantity-- },
+                            onClick = {
+                                onMinusClick()
+                                if (quantity > 1) quantity--
+                            },
                             modifier = Modifier.size(42.dp)
                         ) {
                             Text("-", style = MaterialTheme.typography.titleLarge)
                         }
                         Text(
-                            text = "1",
+                            text = "$quantity",
                             modifier = Modifier.padding(horizontal = 14.dp),
-                            style = cartTitleStyle,
-
-                            )
+                            style = cartTitleStyle
+                        )
                         IconButton(
-                            onClick = { quantity++ },
+                            onClick = {
+                                onPlusClick()
+                                quantity++
+                            },
                             modifier = Modifier.size(42.dp)
                         ) {
                             Text("+", style = MaterialTheme.typography.titleLarge)
@@ -139,16 +146,18 @@ fun CartProduct(
 @Preview(showBackground = true)
 @Composable
 private fun CartProductPreview() {
+    val cardItem = CartItem(
+        Product(
+            productId = 1,
+            imageUrl = "https://picsum.photos/156/158",
+            name = "상품 이름을 테스트해보겠습니다 말줄입이 되나요",
+            price = 1200000000
+        ), 1
+    )
     CartProduct(
-        CartItem(
-            Product(
-                productId = 1,
-                imageUrl = "https://picsum.photos/156/158",
-                name = "상품 이름을 테스트해보겠습니다 말줄입이 되나요",
-                price = 1200000000
-            ), 1
-        )
-    ) {
-
-    }
+        cardItem,
+        onRemoveClick = {},
+        onMinusClick = {},
+        onPlusClick = {}
+    )
 }
