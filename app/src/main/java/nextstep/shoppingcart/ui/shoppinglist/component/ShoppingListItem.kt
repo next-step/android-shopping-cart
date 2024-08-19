@@ -40,7 +40,7 @@ fun ShoppingListItem(
     ) {
         AsyncImage(
             model = product.imageUrl,
-            contentDescription = stringResource(R.string.shopping_list_item_async_image),
+            contentDescription = stringResource(R.string.shopping_item_async_image),
             modifier = Modifier
                 .width(156.dp)
                 .height(156.dp),
