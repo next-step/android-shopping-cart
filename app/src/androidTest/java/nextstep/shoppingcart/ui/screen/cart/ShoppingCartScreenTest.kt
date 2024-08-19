@@ -65,9 +65,9 @@ class ShoppingCartScreenTest : BaseComposeTest() {
 
     @Test
     fun 장바구니_상품의_갯수를_증가시키면_증가한만큼_총_구매금액도_증가한다() {
+        val mockPrice = 10_000
         composeTestRule.setContent {
             var count by remember { mutableStateOf(0) }
-            val mockPrice = 10_000
             ShoppingCartScreen(
                 carItems = persistentListOf(CartItem(count = count, product = dummyProductModels[0].copy(price = mockPrice))),
                 onClearClick = { },
@@ -90,21 +90,21 @@ class ShoppingCartScreenTest : BaseComposeTest() {
 
     @Test
     fun 장바구니_상품의_갯수를_감소시키면_감소한만큼_총_구매금액도_증가한다() {
+        val mockPrice = 10_000
         composeTestRule.setContent {
             var count by remember { mutableStateOf(3) }
-            val mockPrice = 10_000
             ShoppingCartScreen(
                 carItems = persistentListOf(CartItem(count = count, product = dummyProductModels[0].copy(price = mockPrice))),
                 onClearClick = { },
-                onMinusClick = { },
-                onPlusClick = { count += 1 },
+                onMinusClick = { count -= 1 },
+                onPlusClick = { },
                 onOrderClick = { },
                 onNavigationClick = {},
             )
         }
 
         composeTestRule
-            .onNodeWithTag("장바구니 감소 증가 버튼")
+            .onNodeWithTag("장바구니 수량 감소 버튼")
             .performClick()
             .performClick()
 
@@ -115,8 +115,9 @@ class ShoppingCartScreenTest : BaseComposeTest() {
 
     @Test
     fun 장바구니_상품의_제거버튼을누르면_해당제품은_제거되어야한다() {
+        val mockName = "test"
+        val dummyProduct = dummyProductModels[0].copy(name = mockName)
         composeTestRule.setContent {
-            val dummyProduct = dummyProductModels[0].copy(name = "test")
             var itemList by remember {
                 mutableStateOf(listOf(CartItem(count = 2, product = dummyProduct)))
             }
@@ -134,7 +135,7 @@ class ShoppingCartScreenTest : BaseComposeTest() {
         }
 
         composeTestRule
-            .onNodeWithContentDescription("test 상품")
+            .onNodeWithContentDescription("$mockName 상품")
             .assertExists()
 
         composeTestRule
@@ -142,7 +143,7 @@ class ShoppingCartScreenTest : BaseComposeTest() {
             .performClick()
 
         composeTestRule
-            .onNodeWithContentDescription("test 상품")
+            .onNodeWithContentDescription("$mockName 상품")
             .assertDoesNotExist()
     }
 }
