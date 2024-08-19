@@ -50,7 +50,6 @@ fun ShoppingListItem(
                 start = 4.dp,
                 top = 8.dp,
                 bottom = 2.dp,
-                end = 20.dp,
             ),
             color = Color.Black,
             fontSize = 16.sp,
