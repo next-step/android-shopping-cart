@@ -4,9 +4,11 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
-import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.productlist.ProductListScreen
 import org.junit.Rule
 import org.junit.Test
+import java.util.UUID
 
 class CartScreenTest {
 
@@ -17,8 +19,9 @@ class CartScreenTest {
     fun 장바구니화면_타이틀과_아이콘이_보인다() {
         // given
         composeTestRule.setContent {
-            CartScreen(
-                cartItems = emptyList()
+            ProductListScreen(
+                products = emptyList(),
+                onProductClick = {},
             )
         }
 
@@ -36,15 +39,17 @@ class CartScreenTest {
     fun 장바구니화면_상품목록이_보인다() {
         // given
         val cartItems = List(5) {
-            CartItem(
+            Product(
+                id = UUID.randomUUID().toString(),
                 name = "PET보틀 - ${it + 1}",
                 price = 10000,
                 imageUrl = "https://picsum.photos/500"
             )
         }
         composeTestRule.setContent {
-            CartScreen(
-                cartItems = cartItems
+            ProductListScreen(
+                products = cartItems,
+                onProductClick = {},
             )
         }
 
