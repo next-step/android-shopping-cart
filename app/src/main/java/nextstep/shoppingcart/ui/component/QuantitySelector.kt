@@ -29,7 +29,7 @@ fun QuantitySelector(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier,
+        modifier = modifier.testTag(stringResource(id = R.string.test_tag_quantity_selector)),
     ) {
         TextButton(
             onClick = onRemoveClick,
