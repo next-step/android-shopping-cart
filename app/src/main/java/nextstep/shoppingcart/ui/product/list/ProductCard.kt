@@ -1,14 +1,25 @@
 package nextstep.shoppingcart.ui.product.list
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -18,38 +29,62 @@ import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameter
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
-import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.domain.model.ProductItem
 import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 internal fun ProductCard(
-    product: Product,
+    item: ProductItem,
     modifier: Modifier = Modifier,
     onCardClick: () -> Unit = {},
+    onAddToCartClick: () -> Unit = {},
+    onAddQuantityClick: () -> Unit = {},
+    onRemoveQuantityClick: () -> Unit = {},
 ) {
     Column(
         modifier =
             modifier
                 .clickable(onClick = onCardClick),
     ) {
-        ProductImage(
-            imgUrl = product.imgUrl,
-            contentDescription =
-                stringResource(
-                    id = R.string.product_image_content_description,
-                    product.name,
-                ),
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(158.dp),
-        )
+        Box {
+            ProductImage(
+                imgUrl = item.product.imgUrl,
+                contentDescription =
+                    stringResource(
+                        id = R.string.product_image_content_description,
+                        item.product.name,
+                    ),
+                modifier = Modifier.fillMaxWidth(),
+            )
 
+            if (item.isInCart) {
+                TODO("Add Quantity Selector")
+            } else {
+                /**
+                 * Mock data 이미지 배경이 하얀색이라서 +버튼의 경계가 보이지 않아서 별도로 border를 추가하였음
+                 */
+                AddToCartButton(
+                    onClick = onAddToCartClick,
+                    modifier =
+                        Modifier
+                            .padding(12.dp)
+                            .align(Alignment.BottomEnd)
+                            .border(
+                                width = 1.dp,
+                                color = Color.Gray,
+                                shape = CircleShape,
+                            ).size(42.dp)
+                            .testTag(stringResource(id = R.string.test_tag_product_cart_add)),
+                )
+            }
+        }
         ProductCardDescription(
-            name = product.name,
-            price = product.price,
+            name = item.product.name,
+            price = item.product.price,
         )
+    }
+}
 
 @Composable
 private fun ProductCardDescription(
@@ -59,7 +94,7 @@ private fun ProductCardDescription(
 ) {
     Column(modifier = modifier) {
         Text(
-            text = product.name,
+            text = name,
             overflow = TextOverflow.Ellipsis,
             style =
                 MaterialTheme.typography.titleMedium.copy(
@@ -75,9 +110,30 @@ private fun ProductCardDescription(
                     ),
         )
         Text(
-            text = stringResource(id = R.string.product_price, product.price),
+            text = stringResource(id = R.string.product_price, price),
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(start = 4.dp),
+        )
+    }
+}
+
+@Composable
+private fun AddToCartButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    IconButton(
+        onClick = onClick,
+        colors =
+            IconButtonDefaults.iconButtonColors(
+                containerColor = Color.White,
+            ),
+        modifier = modifier,
+    ) {
+        Icon(
+            imageVector = Icons.Filled.Add,
+            contentDescription = stringResource(id = R.string.add),
+            modifier = Modifier.size(24.dp),
         )
     }
 }
@@ -85,27 +141,32 @@ private fun ProductCardDescription(
 @Preview(showBackground = true)
 @Composable
 private fun ProductCardPreview(
-    @PreviewParameter(ProductCardPreviewProvider::class) product: Product,
+    @PreviewParameter(ProductCardPreviewProvider::class) item: ProductItem,
 ) {
     ShoppingCartTheme {
         ProductCard(
-            product = product,
+            item = item,
         )
     }
 }
 
 class ProductCardPreviewProvider :
-    CollectionPreviewParameterProvider<Product>(
+    CollectionPreviewParameterProvider<ProductItem>(
         collection =
             PRODUCT_LIST_MOCK_DATA
                 .take(3)
                 .mapIndexed { index, product ->
-                    if (index == 2) {
-                        product.copy(
-                            name = "행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다. 행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다",
-                        )
-                    } else {
-                        product
-                    }
+                    ProductItem(
+                        product =
+                            if (index == 2) {
+                                product.copy(
+                                    name = "행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다. 행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다",
+                                )
+                            } else {
+                                product
+                            },
+                        isInCart = index > 0,
+                        quantity = index,
+                    )
                 },
     )
