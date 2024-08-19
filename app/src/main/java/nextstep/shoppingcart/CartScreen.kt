@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.component.CartItemCard
 import nextstep.shoppingcart.model.CartItem
+import java.util.UUID
 
 @Composable
 internal fun CartScreen(
@@ -71,7 +72,10 @@ private fun CartContent(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(cartItems) { item ->
+        items(
+            items = cartItems,
+            key = { item -> item.id }
+        ) { item ->
             CartItemCard(
                 cartItem = item,
             )
@@ -86,11 +90,12 @@ private fun CartScreenPreview() {
         CartScreen(
             cartItems = List(20) {
                 CartItem(
+                    id = UUID.randomUUID().toString(),
                     name = "PET보틀 - 정사각형 모양",
                     10000,
                     imageUrl = "https://picsum.photos/500"
                 )
-            }
+            }.distinctBy { it.id }
         )
     }
 }
