@@ -1,17 +1,14 @@
 package nextstep.shoppingcart.ui.shoppinglist.component
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -22,42 +19,42 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.theme.RobotoRegular
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShoppingListTopBar(
     title: String,
+    onShoppingCartClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val shoppingListTopBarDescription = stringResource(R.string.shopping_list_top_bar_description)
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-            .fillMaxWidth()
-            .semantics { contentDescription = shoppingListTopBarDescription },
-    ) {
-        Spacer(modifier = Modifier.weight(1.5f))
-        Text(
-            text = title,
-            fontSize = 22.sp,
-            fontFamily = RobotoRegular,
-            modifier = Modifier.padding(vertical = 18.dp),
-        )
-        Spacer(modifier = Modifier.weight(1f))
-        Icon(
-            imageVector = Icons.Filled.ShoppingCart,
-            contentDescription = stringResource(R.string.shopping_list_top_bar_icon),
-            modifier = Modifier
-                .padding(14.dp)
-                .clickable {
-                    // navigateToShoppingCart
-                },
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-    }
+    CenterAlignedTopAppBar(
+        title = {
+            Text(
+                text = title,
+                fontSize = 22.sp,
+                fontFamily = RobotoRegular,
+                modifier = Modifier.padding(vertical = 18.dp),
+            )
+        },
+        actions = {
+            Icon(
+                imageVector = Icons.Filled.ShoppingCart,
+                contentDescription = stringResource(R.string.shopping_list_top_bar_icon),
+                modifier = Modifier
+                    .padding(14.dp)
+                    .clickable { onShoppingCartClick() },
+            )
+        },
+        modifier = modifier.semantics { contentDescription = shoppingListTopBarDescription },
+    )
 }
 
 @Preview
 @Composable
 private fun ShoppingCartTopBarPreview() {
-    ShoppingListTopBar(title = "상품 목록")
+    ShoppingListTopBar(
+        title = "상품 목록",
+        onShoppingCartClick = {},
+    )
 }
