@@ -24,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,6 +38,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.component.SoppingCartButton
 import nextstep.shoppingcart.ui.screen.products.model.ProductModel
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.utils.ThemePreviews
@@ -46,13 +48,20 @@ fun ShoppingCartRoute(
     modifier: Modifier = Modifier,
     onNavigationClick: () -> Unit,
 ) {
-    var carItems by remember { mutableStateOf(Cart.items) }
+    var cartItems by remember { mutableStateOf(Cart.items) }
+    val totalPrice by remember { derivedStateOf { cartItems.sumOf { it.totalPrice } } }
+    val onClearClick = remember { { item: ProductModel -> cartItems = Cart.removeAll(item) } }
+    val onMinusClick = remember { { item: ProductModel -> cartItems = Cart.removeOne(item) } }
+    val onPlusClick = remember { { item: ProductModel -> cartItems = Cart.addOne(item) } }
+
     ShoppingCartScreen(
-        carItems = carItems.toPersistentList(),
+        carItems = cartItems.toPersistentList(),
+        totalPrice = totalPrice,
         onNavigationClick = onNavigationClick,
-        onClearClick = { carItems = Cart.removeAll(it) },
-        onMinusClick = { carItems = Cart.removeOne(it) },
-        onPlusClick = { carItems = Cart.addOne(it) },
+        onClearClick = onClearClick,
+        onMinusClick = onMinusClick,
+        onPlusClick = onPlusClick,
+        onOrderClick = { /* TODO */ },
         modifier = modifier,
     )
 }
@@ -60,9 +69,11 @@ fun ShoppingCartRoute(
 @Composable
 private fun ShoppingCartScreen(
     carItems: PersistentList<CartItem>,
+    totalPrice: Int,
     onClearClick: (ProductModel) -> Unit,
     onMinusClick: (ProductModel) -> Unit,
     onPlusClick: (ProductModel) -> Unit,
+    onOrderClick: () -> Unit,
     onNavigationClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -70,6 +81,13 @@ private fun ShoppingCartScreen(
         modifier = modifier,
         topBar = {
             ShoppingCartTopAppBar(onNavigationClick = onNavigationClick)
+        },
+        bottomBar = {
+            SoppingCartButton(
+                text = stringResource(id = R.string.shopping_cart_order_with_total_price, totalPrice)
+            ) {
+                onOrderClick()
+            }
         }
     ) { innerPadding ->
         LazyColumn(
@@ -277,9 +295,11 @@ private fun ShoppingCartScreenPreview() {
                 count = 2
             ),
         ),
-        onNavigationClick = {},
+        totalPrice = 268600,
         onClearClick = {},
         onMinusClick = {},
         onPlusClick = {},
+        onOrderClick = {},
+        onNavigationClick = {},
     )
 }

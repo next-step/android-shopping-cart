@@ -11,8 +11,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -25,17 +23,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.component.SoppingCartButton
 import nextstep.shoppingcart.ui.screen.cart.Cart
 import nextstep.shoppingcart.ui.screen.products.model.dummyProductModels
-import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.utils.ThemePreviews
 
@@ -101,30 +97,8 @@ private fun ProductDetailScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            SoppingCartButton { onCartClick() }
+            SoppingCartButton(text = stringResource(R.string.product_detail_shopping_cart)) { onCartClick() }
         }
-    }
-}
-
-@Composable
-private fun SoppingCartButton(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
-) {
-    Button(
-        onClick = onClick,
-        modifier = modifier.fillMaxWidth(),
-        shape = RectangleShape,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Blue50,
-            contentColor = Color.White
-        )
-    ) {
-        Text(
-            text = stringResource(R.string.product_detail_shopping_cart),
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold
-        )
     }
 }
 
@@ -176,14 +150,6 @@ private fun ProductDetailTopAppBar(
             }
         }
     )
-}
-
-@ThemePreviews
-@Composable
-private fun SoppingCartButtonPreview() {
-    ShoppingCartTheme {
-        SoppingCartButton {}
-    }
 }
 
 @ThemePreviews

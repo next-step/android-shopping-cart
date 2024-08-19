@@ -10,4 +10,5 @@
     <string name="back_button_navigation_icon_description">뒤로가기</string>
     <string name="shopping_cart_app_bar_title">장바구니</string>
     <string name="shopping_cart_clear_button">shopping_cart_clear_button</string>
+    <string name="shopping_cart_order_with_total_price">주문하기(%,d원)</string>
 </resources>
