@@ -33,7 +33,7 @@ fun ProductsScreen() {
                     onItemClick = { product ->
                         val intent = Intent(context, ProductDetailActivity::class.java).apply {
                             putExtra("product_name", product.name)
-                            putExtra("product_image", product.imageUrl)
+                            putExtra("product_image_url", product.imageUrl)
                             putExtra("product_price", product.price)
                         }
                         context.startActivity(intent)
