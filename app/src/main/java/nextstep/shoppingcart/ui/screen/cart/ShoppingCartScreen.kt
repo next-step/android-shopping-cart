@@ -6,9 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
@@ -20,14 +24,20 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.screen.products.model.ProductModel
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.utils.ThemePreviews
 
@@ -36,33 +46,62 @@ fun ShoppingCartRoute(
     modifier: Modifier = Modifier,
     onNavigationClick: () -> Unit,
 ) {
+    var carItems by remember { mutableStateOf(Cart.items) }
     ShoppingCartScreen(
+        carItems = carItems.toPersistentList(),
+        onNavigationClick = onNavigationClick,
+        onClearClick = { carItems = Cart.removeAll(it) },
+        onMinusClick = { carItems = Cart.removeOne(it) },
+        onPlusClick = { carItems = Cart.addOne(it) },
         modifier = modifier,
-        onNavigationClick = onNavigationClick
     )
 }
 
 @Composable
 private fun ShoppingCartScreen(
-    modifier: Modifier = Modifier,
+    carItems: PersistentList<CartItem>,
+    onClearClick: (ProductModel) -> Unit,
+    onMinusClick: (ProductModel) -> Unit,
+    onPlusClick: (ProductModel) -> Unit,
     onNavigationClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
         topBar = {
             ShoppingCartTopAppBar(onNavigationClick = onNavigationClick)
         }
-    ) {
-
+    ) { innerPadding ->
+        LazyColumn(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize(),
+        ) {
+            items(
+                items = carItems,
+                key = { it.product.id },
+            ) {
+                ShoppingCartItem(
+                    name = it.product.name,
+                    price = it.product.price,
+                    imageUrl = it.product.imageUrl,
+                    count = it.count,
+                    onClearClick = { onClearClick(it.product) },
+                    onMinusClick = { onMinusClick(it.product) },
+                    onPlusClick = { onPlusClick(it.product) }
+                )
+            }
+        }
     }
 }
 
 @Composable
-fun ShoppingCartItem(
+private fun ShoppingCartItem(
     modifier: Modifier = Modifier,
     name: String,
     price: Int,
     count: Int,
+    imageUrl: String,
     onClearClick: () -> Unit,
     onMinusClick: () -> Unit,
     onPlusClick: () -> Unit
@@ -70,7 +109,8 @@ fun ShoppingCartItem(
     Column(
         modifier = modifier
             .padding(vertical = 16.dp, horizontal = 18.dp)
-            .size(324.dp, 150.dp)
+            .fillMaxWidth()
+            .height(150.dp)
             .border(1.dp, MaterialTheme.colorScheme.onSurface)
             .padding(18.dp)
     ) {
@@ -95,7 +135,11 @@ fun ShoppingCartItem(
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            ProductImage(modifier = Modifier.size(136.dp, 84.dp), productName = "", imageUrl = "")
+            ProductImage(
+                modifier = Modifier.size(136.dp, 84.dp),
+                productName = name,
+                imageUrl = imageUrl
+            )
 
             Column(
                 horizontalAlignment = Alignment.End
@@ -125,7 +169,7 @@ private fun ShoppingCartItemCounter(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         CounterTextButton(onClick = onMinusClick, text = "-")
-        Text(text = count.toString())
+        Text(text = count.toString(), style = MaterialTheme.typography.titleLarge)
         CounterTextButton(onClick = onPlusClick, text = "+")
     }
 }
@@ -139,8 +183,7 @@ private fun CounterTextButton(
     Box(
         modifier = modifier
             .size(42.dp)
-            .clickable { onClick() },
-        contentAlignment = Alignment.Center
+            .clickable { onClick() }, contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,
@@ -155,23 +198,17 @@ private fun ShoppingCartTopAppBar(
     modifier: Modifier = Modifier,
     onNavigationClick: () -> Unit,
 ) {
-    TopAppBar(
-        modifier = modifier,
-        title = {
-            Text(
-                text = stringResource(R.string.shopping_cart_app_bar_title),
-                style = MaterialTheme.typography.titleLarge
+    TopAppBar(modifier = modifier, title = {
+        Text(
+            text = stringResource(R.string.shopping_cart_app_bar_title), style = MaterialTheme.typography.titleLarge
+        )
+    }, navigationIcon = {
+        IconButton(onClick = onNavigationClick) {
+            Icon(
+                imageVector = Icons.Filled.ArrowBack, contentDescription = stringResource(R.string.back_button_navigation_icon_description)
             )
-        },
-        navigationIcon = {
-            IconButton(onClick = onNavigationClick) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.back_button_navigation_icon_description)
-                )
-            }
         }
-    )
+    })
 }
 
 @ThemePreviews
@@ -196,7 +233,8 @@ private fun ShoppingCartItemPreview() {
             count = 2,
             onClearClick = {},
             onMinusClick = {},
-            onPlusClick = {}
+            onPlusClick = {},
+            imageUrl = ""
         )
     }
 }
@@ -204,5 +242,44 @@ private fun ShoppingCartItemPreview() {
 @ThemePreviews
 @Composable
 private fun ShoppingCartScreenPreview() {
-    ShoppingCartScreen(onNavigationClick = {})
+    ShoppingCartScreen(
+        carItems = persistentListOf(
+            CartItem(
+                product = ProductModel(
+                    name = "iPhone 15 Pro Max",
+                    imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+                    price = 1_900_000
+                ),
+                count = 2
+            ),
+            CartItem(
+                product = ProductModel(
+                    name = "iPhone 15 Pro Max",
+                    imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+                    price = 1_900_000
+                ),
+                count = 2
+            ),
+            CartItem(
+                product = ProductModel(
+                    name = "iPhone 15 Pro Max",
+                    imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+                    price = 1_900_000
+                ),
+                count = 2
+            ),
+            CartItem(
+                product = ProductModel(
+                    name = "iPhone 15 Pro Max",
+                    imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+                    price = 1_900_000
+                ),
+                count = 2
+            ),
+        ),
+        onNavigationClick = {},
+        onClearClick = {},
+        onMinusClick = {},
+        onPlusClick = {},
+    )
 }

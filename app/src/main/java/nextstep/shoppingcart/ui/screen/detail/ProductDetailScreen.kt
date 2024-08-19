@@ -33,6 +33,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.screen.cart.Cart
 import nextstep.shoppingcart.ui.screen.products.model.dummyProductModels
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -53,14 +54,17 @@ fun ProductDetailRoute(
             itemName = product.name,
             itemImageUrl = product.imageUrl,
             onNavigationClick = onNavigationClick,
-            onCartClick = { onCartClick(id) },
+            onCartClick = {
+                Cart.addOne(product)
+                onCartClick(id)
+            },
         )
     }
 }
 
 @Composable
 private fun ProductDetailScreen(
-    price: Long,
+    price: Int,
     itemName: String,
     itemImageUrl: String,
     onNavigationClick: () -> Unit,
@@ -126,7 +130,7 @@ private fun SoppingCartButton(
 
 @Composable
 private fun ProductDetailPrice(
-    price: Long,
+    price: Int,
     modifier: Modifier = Modifier
 ) {
     Row(
