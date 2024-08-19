@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.productdetail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import java.text.NumberFormat
 import java.util.Locale
@@ -44,6 +45,8 @@ import java.util.UUID
 @Composable
 internal fun ProductDetailScreen(
     product: Product,
+    onAddToCartClick: () -> Unit,
+    onBackClick: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -189,6 +192,8 @@ private fun ProductDetailScreenPreview() {
             name = "PET보틀-원형(500ml)",
             price = 42_200,
             imageUrl = "https://picsum.photos/500",
-        )
+        ),
+        onBackClick = {},
+        onAddToCartClick = {},
     )
 }

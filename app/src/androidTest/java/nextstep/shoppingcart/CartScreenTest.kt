@@ -5,8 +5,10 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.productlist.ProductListScreen
 import org.junit.Rule
 import org.junit.Test
+import java.util.UUID
 
 class CartScreenTest {
 
@@ -18,7 +20,8 @@ class CartScreenTest {
         // given
         composeTestRule.setContent {
             ProductListScreen(
-                cartItems = emptyList()
+                products = emptyList(),
+                onProductClick = {},
             )
         }
 
@@ -37,6 +40,7 @@ class CartScreenTest {
         // given
         val cartItems = List(5) {
             Product(
+                id = UUID.randomUUID().toString(),
                 name = "PET보틀 - ${it + 1}",
                 price = 10000,
                 imageUrl = "https://picsum.photos/500"
@@ -44,7 +48,8 @@ class CartScreenTest {
         }
         composeTestRule.setContent {
             ProductListScreen(
-                cartItems = cartItems
+                products = cartItems,
+                onProductClick = {},
             )
         }
 

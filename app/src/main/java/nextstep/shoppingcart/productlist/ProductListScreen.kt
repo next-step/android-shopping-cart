@@ -1,5 +1,6 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.productlist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,19 +21,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.ProductCard
 import nextstep.shoppingcart.model.Product
 import java.util.UUID
 
 @Composable
 internal fun ProductListScreen(
-    cartItems: List<Product>,
+    products: List<Product>,
+    onProductClick: (Product) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { ProductListTopBar() },
         content = { paddingValues ->
-            ProductListContent(paddingValues, cartItems)
+            ProductListContent(
+                paddingValues, products, onProductClick
+            )
         }
     )
 
@@ -61,7 +66,8 @@ private fun ProductListTopBar() {
 @Composable
 private fun ProductListContent(
     paddingValues: PaddingValues,
-    cartItems: List<Product>
+    products: List<Product>,
+    onProductClick: (Product) -> Unit,
 ) {
     LazyVerticalGrid(
         modifier = Modifier
@@ -73,11 +79,12 @@ private fun ProductListContent(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(
-            items = cartItems,
+            items = products,
             key = { item -> item.id }
         ) { item ->
             ProductCard(
                 product = item,
+                modifier = Modifier.clickable { onProductClick(item) }
             )
         }
     }
@@ -88,14 +95,15 @@ private fun ProductListContent(
 private fun ProductListScreenPreview() {
     MaterialTheme {
         ProductListScreen(
-            cartItems = List(20) {
+            products = List(20) {
                 Product(
                     id = UUID.randomUUID().toString(),
                     name = "PET보틀 - 정사각형 모양",
                     10000,
                     imageUrl = "https://picsum.photos/500"
                 )
-            }.distinctBy { it.id }
+            }.distinctBy { it.id },
+            onProductClick = {},
         )
     }
 }
