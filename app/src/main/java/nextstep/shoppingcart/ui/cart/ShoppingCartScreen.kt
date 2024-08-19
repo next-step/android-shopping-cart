@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.ui.cart
 
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -21,16 +20,14 @@ import nextstep.shoppingcart.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShoppingCartScreen() {
-    val context = LocalContext.current
-
+fun ShoppingCartScreen(onBack: () -> Unit) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
                 title = { Text(text = stringResource(id = R.string.shopping_cart)) },
                 navigationIcon = {
-                    IconButton(onClick = { (context as ComponentActivity).finish() }) {
+                    IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "backDetail",
@@ -53,5 +50,5 @@ fun ShoppingCartScreen() {
 @Preview
 @Composable
 private fun ShoppingCartScreenPreview() {
-    ShoppingCartScreen()
+    ShoppingCartScreen(onBack = {})
 }

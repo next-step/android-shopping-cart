@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.ui.product.list
 
-import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,23 +19,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
-import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
-import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity
-import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity.Companion.EXTRA_PRODUCT
 import nextstep.shoppingcart.ui.product.list.component.ProductListItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductListScreen() {
-    val context = LocalContext.current
-
+fun ProductListScreen(
+    onShowShoppingCart: () -> Unit,
+    onShowProductDetail: (Product) -> Unit,
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -44,14 +40,7 @@ fun ProductListScreen() {
                 title = { Text(text = stringResource(id = R.string.product_list)) },
                 actions = {
                     IconButton(
-                        onClick = {
-                            context.startActivity(
-                                Intent(
-                                    context,
-                                    ShoppingCartActivity::class.java,
-                                )
-                            )
-                        },
+                        onClick = onShowShoppingCart,
                         modifier = Modifier,
                     ) {
                         Icon(
@@ -72,11 +61,7 @@ fun ProductListScreen() {
         ) {
             ProductListContent(
                 products = dummyProducts,
-                onClickItem = { product ->
-                    context.startActivity(Intent(context, ProductDetailActivity::class.java).apply {
-                        putExtra(EXTRA_PRODUCT, product)
-                    })
-                },
+                onClickItem = { onShowProductDetail(it) },
             )
         }
     }
@@ -107,5 +92,5 @@ private fun ProductListContent(
 @Preview
 @Composable
 private fun ProductListScreenPreview() {
-    ProductListScreen()
+    ProductListScreen(onShowShoppingCart = {}, onShowProductDetail = {})
 }

@@ -11,7 +11,7 @@ class ShoppingCartActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
-                ShoppingCartScreen()
+                ShoppingCartScreen(onBack = { finish() })
             }
         }
     }

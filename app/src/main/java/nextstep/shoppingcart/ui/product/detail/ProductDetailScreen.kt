@@ -1,7 +1,5 @@
 package nextstep.shoppingcart.ui.product.detail
 
-import android.content.Intent
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,7 +36,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.theme.Black10
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.Gray10
@@ -47,6 +44,8 @@ import nextstep.shoppingcart.ui.theme.Gray10
 @Composable
 fun ProductDetailScreen(
     product: Product,
+    onBack: () -> Unit,
+    onShowShoppingCart: () -> Unit,
 ) {
     val context = LocalContext.current
     Scaffold(
@@ -55,7 +54,7 @@ fun ProductDetailScreen(
             TopAppBar(
                 title = { Text(text = stringResource(id = R.string.product_detail)) },
                 navigationIcon = {
-                    IconButton(onClick = { (context as ComponentActivity).finish() }) {
+                    IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "backDetail",
@@ -112,14 +111,7 @@ fun ProductDetailScreen(
                 }
 
                 Button(
-                    onClick = {
-                        context.startActivity(
-                            Intent(
-                                context,
-                                ShoppingCartActivity::class.java,
-                            )
-                        )
-                    },
+                    onClick = onShowShoppingCart,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Blue50,
                         contentColor = Color.White,
@@ -150,5 +142,5 @@ private fun ProductDetailScreenPreview() {
         price = 1_900_000,
     )
 
-    ProductDetailScreen(product)
+    ProductDetailScreen(product = product, onBack = {}, onShowShoppingCart = {})
 }
