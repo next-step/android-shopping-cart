@@ -46,6 +46,18 @@ internal fun ProductCard(
                     .height(158.dp),
         )
 
+        ProductCardDescription(
+            name = product.name,
+            price = product.price,
+        )
+
+@Composable
+private fun ProductCardDescription(
+    name: String,
+    price: Int,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier = modifier) {
         Text(
             text = product.name,
             overflow = TextOverflow.Ellipsis,
