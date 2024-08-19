@@ -1,23 +1,31 @@
 package nextstep.shoppingcart
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.component.MainTopBar
 import nextstep.shoppingcart.component.ProductItem
+import nextstep.shoppingcart.component.main.MainTopBar
 import nextstep.shoppingcart.model.dummyProducts
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    onItemClick: (
+        name: String,
+        imageUrl: String,
+        price: Long
+    ) -> Unit,
+    onCartClick: () -> Unit,
+) {
     Scaffold(
-        topBar = { MainTopBar() }
+        topBar = { MainTopBar(onCartClick) }
     ) { paddingValues ->
         LazyVerticalGrid(
             modifier = Modifier
@@ -27,15 +35,23 @@ fun MainScreen() {
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            dummyProducts.forEach {
-                item {
-                    ProductItem(
-                        name = it.name,
-                        imageUrl = it.imageUrl,
-                        price = it.price
+            items(items = dummyProducts) {
+                ProductItem(
+                    name = it.name,
+                    imageUrl = it.imageUrl,
+                    price = it.price,
+                    modifier = Modifier.clickable (
+                        onClick = {
+                            onItemClick(
+                                it.name,
+                                it.imageUrl,
+                                it.price
+                            )
+                        }
                     )
-                }
+                )
             }
+
         }
     }
 }
@@ -43,5 +59,8 @@ fun MainScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun MainScreenPreview() {
-    MainScreen()
+    MainScreen(
+        onItemClick = { _, _, _ -> },
+        onCartClick = {},
+    )
 }
