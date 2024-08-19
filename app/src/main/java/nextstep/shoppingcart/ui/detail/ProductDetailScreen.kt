@@ -38,6 +38,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.data.goods.impl.ProductRepositoryImpl
 import nextstep.shoppingcart.ui.ShoppingCartDestinations
+import nextstep.shoppingcart.ui.component.ShoppingTopBar
 
 @Composable
 fun ProductDetail(
@@ -46,7 +47,7 @@ fun ProductDetail(
 ) {
     Scaffold(
         topBar = {
-            ProductTopBar(navController)
+            ShoppingTopBar(navController)
         }, bottomBar = {
             ProductBottomBar(navController)
         }
@@ -132,27 +133,15 @@ private fun ProductBottomBar(navController: NavController) {
     }
 }
 
-@Composable
-@OptIn(ExperimentalMaterial3Api::class)
-private fun ProductTopBar(navController: NavController) {
-    TopAppBar(
-        title = {
-            Text(
-                text = "상품 상세",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.secondary
-            )
-        },
-        navigationIcon = {
-            IconButton(onClick = { navController.navigateUp() }) {
-                Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
-            }
-        }
-    )
-}
-
 @Preview
 @Composable
 private fun ProductDetailPreview() {
     ProductDetail(rememberNavController(), 1)
+}
+
+@Preview
+@Composable
+private fun ProductBottomBarPreview() {
+    ProductBottomBar(navController = rememberNavController())
+    
 }
