@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.composable.InvalidAccessItem
+import nextstep.shoppingcart.ui.model.Cart
 import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.view.product.cartlist.ProductCartListActivity
 
@@ -125,7 +126,10 @@ fun ProductDetailScreen(
                         contentColor = Color.White,
                         containerColor = Color(0xff2196F3)
                     ),
-                    onClick = { context.startActivity(ProductCartListActivity.newIntent(context)) }
+                    onClick = {
+                        Cart.addOne(product)
+                        context.startActivity(ProductCartListActivity.newIntent(context))
+                    }
                 ) {
                     Text(
                         text = stringResource(R.string.product_detail_put_in_shopping_cart_button),
