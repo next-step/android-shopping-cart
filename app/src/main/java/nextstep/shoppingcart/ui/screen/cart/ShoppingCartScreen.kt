@@ -81,6 +81,7 @@ internal fun ShoppingCartScreen(
         },
         bottomBar = {
             SoppingCartButton(
+                modifier = Modifier.testTag("장바구니 주문 버튼"),
                 text = stringResource(
                     id = R.string.shopping_cart_order_with_total_price,
                     carItems.sumOf { it.totalPrice }

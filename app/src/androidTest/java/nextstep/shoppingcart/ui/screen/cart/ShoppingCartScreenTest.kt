@@ -59,4 +59,55 @@ class ShoppingCartScreenTest : BaseComposeTest() {
             .onNodeWithTag("장바구니 담긴 수량")
             .assertTextEquals("0")
     }
+
+
+    @Test
+    fun 장바구니_상품의_갯수를_증가시키면_증가한만큼_총_구매금액도_증가한다() {
+        composeTestRule.setContent {
+            var count by remember { mutableStateOf(0) }
+            val mockPrice = 10_000
+            ShoppingCartScreen(
+                carItems = persistentListOf(CartItem(count = count, product = dummyProductModels[0].copy(price = mockPrice))),
+                onClearClick = { },
+                onMinusClick = { },
+                onPlusClick = { count += 1 },
+                onOrderClick = { },
+                onNavigationClick = {},
+            )
+        }
+
+        composeTestRule
+            .onNodeWithTag("장바구니 수량 증가 버튼")
+            .performClick()
+            .performClick()
+
+        composeTestRule
+            .onNodeWithTag("장바구니 주문 버튼")
+            .assertTextEquals("주문하기(20,000원)")
+    }
+
+    @Test
+    fun 장바구니_상품의_갯수를_감소시키면_감소한만큼_총_구매금액도_증가한다() {
+        composeTestRule.setContent {
+            var count by remember { mutableStateOf(3) }
+            val mockPrice = 10_000
+            ShoppingCartScreen(
+                carItems = persistentListOf(CartItem(count = count, product = dummyProductModels[0].copy(price = mockPrice))),
+                onClearClick = { },
+                onMinusClick = { },
+                onPlusClick = { count += 1 },
+                onOrderClick = { },
+                onNavigationClick = {},
+            )
+        }
+
+        composeTestRule
+            .onNodeWithTag("장바구니 감소 증가 버튼")
+            .performClick()
+            .performClick()
+
+        composeTestRule
+            .onNodeWithTag("장바구니 주문 버튼")
+            .assertTextEquals("주문하기(10,000원)")
+    }
 }
