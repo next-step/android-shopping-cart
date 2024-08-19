@@ -1,13 +1,11 @@
 package nextstep.shoppingcart.cart
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
-import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.data.goods.Product
@@ -37,9 +35,7 @@ internal class CartScreenTest {
                     price = 1200000000
                 )
             )
-            ShoppingCart(navController = rememberNavController(),
-                cartItems = Cart.items
-            )
+            ShoppingCart(rememberNavController())
         }
 
         // then
@@ -52,35 +48,25 @@ internal class CartScreenTest {
             .assertIsNotDisplayed()
     }
 
-    @Composable
     @Test
     fun 담긴_상품_가격의_총합이_노출된다() {
         // when
-        val product = Product(
-            productId = 1,
-            imageUrl = "https://picsum.photos/156/158",
-            name = "상품1",
-            price = 12000
-        )
         composeTestRule.setContent {
             Cart.addOne(
-                product = product
+                product = Product(
+                    productId = 1,
+                    imageUrl = "https://picsum.photos/156/158",
+                    name = "상품1",
+                    price = 12000
+                )
             )
-            ShoppingCart(navController = rememberNavController(),
-                cartItems = Cart.items
-            )
+            ShoppingCart(rememberNavController())
         }
-
-        composeTestRule
-            .onNodeWithText("상품1")
-            .assertIsDisplayed()
-
-        Cart.removeOne(product)
 
         // then
         composeTestRule
-            .onNodeWithText("상품1")
-            .assertIsNotDisplayed()
+            .onNodeWithText("주문하기(12,000원)")
+            .assertExists()
     }
 
     @Test
@@ -95,9 +81,7 @@ internal class CartScreenTest {
                     price = 12000
                 )
             )
-            ShoppingCart(navController = rememberNavController(),
-                cartItems = Cart.items
-            )
+            ShoppingCart(rememberNavController())
         }
 
         // then
@@ -108,25 +92,29 @@ internal class CartScreenTest {
 
     @Test
     fun 담긴_상품을_제거할_수_있다() {
-// when
+        // when
+        val product = Product(
+            productId = 1,
+            imageUrl = "https://picsum.photos/156/158",
+            name = "상품1",
+            price = 12000
+        )
         composeTestRule.setContent {
             Cart.addOne(
-                product = Product(
-                    productId = 1,
-                    imageUrl = "https://picsum.photos/156/158",
-                    name = "상품1",
-                    price = 12000
-                )
+                product = product
             )
-            ShoppingCart(navController = rememberNavController(),
-                cartItems = Cart.items
-            )
+            ShoppingCart(rememberNavController())
         }
+
+        composeTestRule.onNodeWithContentDescription("Remove:${product.productId}")
+            .assertExists()
+            .assertIsDisplayed()
+            .performClick()
 
         // then
         composeTestRule
-            .onNodeWithText("주문하기(13,000원)")
-            .assertDoesNotExist()
+            .onNodeWithText("상품1")
+            .assertIsNotDisplayed()
     }
 
     @Test

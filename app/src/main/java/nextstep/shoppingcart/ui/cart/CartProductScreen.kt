@@ -32,7 +32,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.data.cart.CartItem
 import nextstep.shoppingcart.data.goods.Product
 import nextstep.shoppingcart.ui.theme.cartTitleStyle
@@ -81,7 +80,10 @@ fun CartProduct(
                     onClick = onRemoveClick,
                     modifier = Modifier.size(24.dp)
                 ) {
-                    Icon(Icons.Default.Close, contentDescription = "Remove")
+                    Icon(
+                        Icons.Default.Close,
+                        contentDescription = "Remove:${product.productId}"
+                    )
                 }
             }
             Row(
