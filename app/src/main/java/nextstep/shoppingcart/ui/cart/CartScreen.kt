@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -15,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.data.SampleProductList
 import nextstep.shoppingcart.data.cart.Cart
+import nextstep.shoppingcart.ui.cart.component.CartBottomBar
 import nextstep.shoppingcart.ui.cart.component.CartCard
 import nextstep.shoppingcart.ui.cart.component.CartTopBar
 
@@ -22,10 +24,14 @@ import nextstep.shoppingcart.ui.cart.component.CartTopBar
 fun CartScreen(modifier: Modifier) {
     val context = LocalContext.current
     var items by remember { mutableStateOf(Cart.items) }
+    val totalPrice = remember(items) { Cart.totalPrice }
 
     Scaffold(
         topBar = {
             CartTopBar(modifier, onClickBackIcon = { (context as? Activity)?.finish() })
+        },
+        bottomBar = {
+            CartBottomBar(modifier,totalPrice, {})
         }
     ) { paddingValue ->
         LazyColumn(

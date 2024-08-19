@@ -5,6 +5,7 @@
     <string name="text_price">금액</string>
     <string name="text_shopping_cart">장바구니 담기</string>
     <string name="text_shopping_cart_title">장바구니</string>
+    <string name="text_shopping_cart_order">주문하기</string>
     <string name="text_shopping_cart_Icon_description">쇼핑 카트 아이콘</string>
     <string name="text_back_Icon_description">뒤로 가기 아이콘</string>
     <string name="text_close_Icon_description">닫기 아이콘</string>
