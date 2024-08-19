@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.view
 
-import android.icu.text.NumberFormat
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
@@ -9,13 +8,12 @@ import org.junit.Rule
 import org.junit.Test
 import nextstep.shoppingcart.model.Product
 import org.junit.Before
-import java.util.Locale
 
 class ProductsGridTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
-    val products = listOf(
+    private val products = listOf(
         Product(
             name = "Test Product 1",
             price = 1_000,
@@ -37,13 +35,17 @@ class ProductsGridTest {
 
     @Test
     fun 각_상품의_이미지와_텍스트가_표시된다() {
-        products.forEach { product ->
-            composeTestRule.onNodeWithContentDescription(product.name)
-                .assertExists()
-                .assertIsDisplayed()
-            composeTestRule.onNodeWithText(product.name).assertExists()
-            val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREAN).format(product.price)
-            composeTestRule.onNodeWithText("${formattedPrice}원").assertExists()
-        }
+        composeTestRule.onNodeWithContentDescription(products[0].name)
+            .assertExists()
+            .assertIsDisplayed()
+        composeTestRule.onNodeWithText(products[0].name).assertExists()
+        composeTestRule.onNodeWithText("1,000원").assertExists()
+
+        composeTestRule.onNodeWithContentDescription(products[1].name)
+            .assertExists()
+            .assertIsDisplayed()
+        composeTestRule.onNodeWithText(products[1].name).assertExists()
+        composeTestRule.onNodeWithText("2,000원").assertExists()
+
     }
 }

@@ -10,6 +10,7 @@
 - [x] dummy data 변경
 - [x] GlideImage 사이즈 조정
 - [x] 테스트 코드 작성
+- [x] 피드백 1차 반영
 
 ## Step1 진행 중 의식의 흐름
 

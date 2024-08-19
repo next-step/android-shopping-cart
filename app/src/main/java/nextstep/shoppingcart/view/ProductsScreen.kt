@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.model.dummyProducts
-import nextstep.shoppingcart.view.ui.theme.ShoppingCartTheme
+import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @Composable
 fun ProductsScreen() {
