@@ -1,28 +1,28 @@
 package nextstep.shoppingcart.ui.component
 
-import android.content.Context
 import android.util.Log
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
-import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
-import coil.memory.MemoryCache
-import coil.util.DebugLogger
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 import nextstep.shoppingcart.data.model.Product
 import okhttp3.OkHttpClient
 import java.security.SecureRandom
@@ -55,12 +55,15 @@ fun ShoppingItemView(product: Product) {
 
     Column(
         modifier = Modifier
-            .width(156.dp)
-            .height(198.dp)
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(5.dp)
+            .background(Color.White),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
             modifier = Modifier
-                .width(156.dp)
+                .fillMaxWidth()
                 .height(158.dp),
             contentScale = ContentScale.Crop,
             model = product.imageUrl,
@@ -86,8 +89,27 @@ fun ShoppingItemView(product: Product) {
                 }
             }
         )
-        Text(text = product.name)
-        Text(text = product.price)
+        Text(
+            text = product.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 2.dp),
+            maxLines = 1,
+            softWrap = true,
+            fontWeight = FontWeight.Bold,
+            overflow = TextOverflow.Ellipsis,
+            color = Color.Black,
+        )
+        Text(
+            text = "${product.price}원",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 2.dp),
+            maxLines = 1,
+            softWrap = true,
+            overflow = TextOverflow.Ellipsis,
+            color = Color.Black
+        )
     }
 }
 
