@@ -2,12 +2,10 @@ package nextstep.shoppingcart.cart
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
-import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.data.goods.Product
 import nextstep.shoppingcart.ui.cart.ShoppingCart
@@ -19,6 +17,12 @@ internal class CartScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    @Before
+    fun setUp() {
+        // 각 테스트 실행 전에 Cart를 초기화합니다.
+        Cart.clear()
+    }
 
     @Test
     fun 상품을_담으면_장바구니에_노출된다() {

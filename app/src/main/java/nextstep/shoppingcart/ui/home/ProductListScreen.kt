@@ -37,7 +37,12 @@ fun ProductList(
                     .fillMaxSize()
                     .padding(paddingValues),
                 columns = GridCells.Fixed(2),
-                contentPadding = PaddingValues(top = 13.dp, start = 18.dp, end = 18.dp, bottom = 13.dp),
+                contentPadding = PaddingValues(
+                    top = 13.dp,
+                    start = 18.dp,
+                    end = 18.dp,
+                    bottom = 13.dp
+                ),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {

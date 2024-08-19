@@ -29,7 +29,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.data.cart.Cart
-import nextstep.shoppingcart.data.goods.Product
 import nextstep.shoppingcart.data.goods.impl.ProductRepositoryImpl
 import nextstep.shoppingcart.ui.component.ShoppingTopBar
 

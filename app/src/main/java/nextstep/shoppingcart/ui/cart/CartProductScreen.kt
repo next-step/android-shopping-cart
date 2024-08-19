@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.data.cart.CartItem
 import nextstep.shoppingcart.data.goods.Product
-import nextstep.shoppingcart.ui.component.CountController
+import nextstep.shoppingcart.ui.component.QuantitySelector
 import nextstep.shoppingcart.ui.theme.cartTitleStyle
 
 @Composable
@@ -79,7 +79,7 @@ fun CartProduct(
                         text = "${product.price}원",
                         style = MaterialTheme.typography.titleMedium
                     )
-                    CountController(item, onMinusClick, onPlusClick)
+                    QuantitySelector(item.count, onMinusClick, onPlusClick)
                 }
             }
         }

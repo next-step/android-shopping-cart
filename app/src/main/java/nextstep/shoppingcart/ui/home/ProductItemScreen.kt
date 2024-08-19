@@ -1,42 +1,88 @@
 package nextstep.shoppingcart.ui.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.data.goods.Product
+import nextstep.shoppingcart.ui.component.QuantitySelector
 import nextstep.shoppingcart.ui.theme.productTitleStyle
 import java.text.NumberFormat
 import java.util.Locale
 
 @Composable
 fun ProductItem(
-    product: Product,
-    onClick: () -> Unit
+    product: Product, onClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .wrapContentWidth()
             .clickable(onClick = onClick)
     ) {
-        AsyncImage(
-            model = product.imageUrl,
-            contentDescription = null,
-            modifier = Modifier
-                .aspectRatio(1f)
-        )
+        Box(contentAlignment = Alignment.BottomEnd) {
+            AsyncImage(
+                model = product.imageUrl,
+                contentDescription = null,
+                modifier = Modifier.aspectRatio(1f)
+            )
+            var cartItemSize by remember {
+                mutableStateOf(
+                    Cart.items.find { it.product == product }?.count ?: 0
+                )
+            }
+            if (cartItemSize == 0) {
+                AddProductButton(onClick = {
+                    cartItemSize += 1
+                    Cart.addOne(product)
+                }, Modifier.padding(12.dp))
+            } else {
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color.White
+                    ),
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(12.dp)
+                ) {
+                    QuantitySelector(initQuantity = cartItemSize, onMinusClick = {
+                        cartItemSize -= 1
+                        Cart.removeOne(product)
+                    }, onPlusClick = {
+                        cartItemSize += 1
+                        Cart.addOne(product)
+                    })
+                }
+            }
+        }
+
         Column(
-            modifier = Modifier
-                .padding(top = 4.dp, start = 4.dp)
+            modifier = Modifier.padding(top = 4.dp, start = 4.dp)
 
         ) {
             Text(
@@ -52,6 +98,29 @@ fun ProductItem(
                 color = MaterialTheme.colorScheme.secondary,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
+            )
+        }
+    }
+}
+
+@Composable
+private fun AddProductButton(onClick: () -> Unit, modifier: Modifier) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        shape = CircleShape,
+        elevation = CardDefaults.cardElevation(),
+        modifier = modifier
+            .size(42.dp)
+    ) {
+        IconButton(
+            onClick = onClick, modifier = Modifier.fillMaxWidth()
+        ) {
+            Image(
+                imageVector = Icons.Filled.Add,
+                contentDescription = "장바구니추가",
+                modifier = Modifier.size(24.dp)
             )
         }
     }
