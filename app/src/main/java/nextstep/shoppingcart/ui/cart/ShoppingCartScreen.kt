@@ -12,23 +12,27 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.data.cart.Cart
+import nextstep.shoppingcart.data.cart.CartItem
 import nextstep.shoppingcart.data.goods.Product
 import nextstep.shoppingcart.ui.component.ShoppingTopBar
 
 @Composable
 fun ShoppingCart(navController: NavHostController) {
+    var cartItems by remember {
+        mutableStateOf(Cart.items)
+    }
     Scaffold(
         topBar = {
             ShoppingTopBar(
@@ -37,18 +41,21 @@ fun ShoppingCart(navController: NavHostController) {
             )
         },
         bottomBar = {
-            CartProductBottomBar {
+            CartProductBottomBar(cartItems) {
 
             }
         }
     ) { paddingValues ->
+
         LazyColumn(
             modifier = Modifier.padding(paddingValues),
             contentPadding = PaddingValues(18.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(Cart.items) { item ->
-                CartProduct(item)
+            items(cartItems) { item ->
+                CartProduct(item) {
+                    cartItems = Cart.removeOne(item.product)
+                }
             }
         }
     }
@@ -56,8 +63,9 @@ fun ShoppingCart(navController: NavHostController) {
 
 @Composable
 private fun CartProductBottomBar(
-    onClick: () -> Unit) {
-    val totalPrice = remember { mutableIntStateOf(Cart.totalPrice) }
+    cartItems: List<CartItem>,
+    onClick: () -> Unit
+) {
     Button(
         onClick = onClick,
         modifier = Modifier
@@ -69,8 +77,9 @@ private fun CartProductBottomBar(
         shape = RectangleShape,
         contentPadding = PaddingValues(16.dp)
     ) {
+
         Text(
-            text = "주문하기(${"%,d".format(totalPrice.value)}원)",
+            text = "주문하기(${"%,d".format(cartItems.sumOf { it.totalPrice })}원)",
             style = MaterialTheme.typography.titleLarge,
             maxLines = 1,
         )
@@ -80,17 +89,23 @@ private fun CartProductBottomBar(
 @Preview
 @Composable
 private fun ShoppingCartPreview() {
-    Cart.addOne(product = Product(
-        productId = 1,
-        imageUrl = "https://picsum.photos/156/158",
-        name = "상품1",
-        price = 12000
-    ))
-    Cart.addOne(product = Product(
-        productId = 2,
-        imageUrl = "https://picsum.photos/156/158",
-        name = "상품2",
-        price = 12000
-    ))
-    ShoppingCart(navController = rememberNavController())
+    Cart.addOne(
+        product = Product(
+            productId = 1,
+            imageUrl = "https://picsum.photos/156/158",
+            name = "상품1",
+            price = 12000
+        )
+    )
+    Cart.addOne(
+        product = Product(
+            productId = 2,
+            imageUrl = "https://picsum.photos/156/158",
+            name = "상품2",
+            price = 12000
+        )
+    )
+    ShoppingCart(
+        navController = rememberNavController()
+    )
 }
