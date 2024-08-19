@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.view
+package nextstep.shoppingcart.view.product.detail
 
 import androidx.compose.runtime.Composable
 

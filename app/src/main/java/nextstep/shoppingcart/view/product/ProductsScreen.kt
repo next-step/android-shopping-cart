@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.view
+package nextstep.shoppingcart.view.product
 
 import android.content.Intent
 import androidx.compose.foundation.layout.Column
@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.view.product.detail.ProductDetailActivity
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @Composable

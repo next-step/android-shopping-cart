@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.view
+package nextstep.shoppingcart.view.product.detail
 
 import android.content.Intent
 import androidx.compose.material.icons.Icons
@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.view.product.ProductsActivity
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

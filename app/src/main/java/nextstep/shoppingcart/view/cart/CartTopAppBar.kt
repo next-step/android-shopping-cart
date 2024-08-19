@@ -1,42 +1,40 @@
-package nextstep.shoppingcart.view
+package nextstep.shoppingcart.view.cart
 
 import android.content.Intent
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.*
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.view.product.ProductsActivity
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductsTopAppBar() {
+fun CartTopAppBar() {
     val context = LocalContext.current
 
-    CenterAlignedTopAppBar(
+    TopAppBar(
         title = {
-            Text(
-                text = stringResource(id = R.string.product_app_bar_title),
-            )
+            Text(text = stringResource(id = R.string.cart_app_bar_title))
         },
         navigationIcon = {
-            IconButton(onClick = { /* TODO: Handle navigation icon click */ }) {
-
-            }
-        },
-        actions = {
             IconButton(
                 onClick = {
-                    val intent = Intent(context, CartActivity::class.java)
+                    val intent = Intent(context, ProductsActivity::class.java)
                     context.startActivity(intent)
                 }
             ) {
                 Icon(
-                    imageVector = Icons.Filled.ShoppingCart,
-                    contentDescription = stringResource(id = R.string.product_app_bar_cart_icon_description)
+                    Icons.Filled.ArrowBack,
+                    contentDescription = stringResource(id = R.string.cart_app_bar_back_icon_description)
                 )
             }
         }
@@ -45,8 +43,8 @@ fun ProductsTopAppBar() {
 
 @Preview(showBackground = true)
 @Composable
-fun ProductsTopAppBarPreview() {
+private fun CartTopAppBarPreview() {
     ShoppingCartTheme {
-        ProductsTopAppBar()
+        CartTopAppBar()
     }
 }

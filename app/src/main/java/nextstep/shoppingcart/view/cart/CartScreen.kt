@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.view
+package nextstep.shoppingcart.view.cart
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @Composable
-fun ProductDetailScreen() {
+fun CartScreen() {
     ShoppingCartTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -21,7 +21,7 @@ fun ProductDetailScreen() {
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                ProductDetailAppBar()
+                CartTopAppBar()
             }
         }
     }
@@ -29,8 +29,8 @@ fun ProductDetailScreen() {
 
 @Preview(showBackground = true)
 @Composable
-private fun ProductDetailScreenPreview() {
+private fun CartScreenPreview() {
     ShoppingCartTheme {
-        ProductDetailScreen()
+        CartScreen()
     }
 }

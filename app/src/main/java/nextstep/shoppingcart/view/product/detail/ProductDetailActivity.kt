@@ -1,14 +1,14 @@
-package nextstep.shoppingcart.view
+package nextstep.shoppingcart.view.product.detail
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 
-class CartActivity : ComponentActivity() {
+class ProductDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CartScreen()
+            ProductDetailScreen()
         }
     }
 }
