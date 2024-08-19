@@ -2,31 +2,24 @@ package nextstep.shoppingcart.ui.component
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import nextstep.shoppingcart.Cart
 import nextstep.shoppingcart.Product
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @SuppressLint("ResourceAsColor")
 @Composable
@@ -69,27 +62,14 @@ fun ProductDetail(
                 style = MaterialTheme.typography.titleLarge
             )
         }
-        Box(
+
+        ShoppingCartButton(
+            onClick = {
+                Cart.addOne(product = product)
+            },
+            buttonText = stringResource(id = R.string.add_to_cart),
             modifier = Modifier.fillMaxSize()
-        ) {
-            Button(
-                onClick = { /*TODO*/ },
-                shape = RectangleShape,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.blue),
-                    contentColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(54.dp)
-                    .align(Alignment.BottomCenter)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.add_to_cart),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-        }
+        )
     }
 }
 

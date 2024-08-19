@@ -10,4 +10,8 @@
     <string name="add_to_cart">장바구니 담기</string>
     <string name="price_title">금액</string>
     <string name="price_format">%,d원</string>
+    <string name="total_price_title">주문하기(%,d원)</string>
+    <string name="content_description_remove_item">%s 장바구니에서 삭제</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 </resources>
