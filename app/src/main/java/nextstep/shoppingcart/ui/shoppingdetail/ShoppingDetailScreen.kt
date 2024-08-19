@@ -25,7 +25,7 @@ import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 fun ShoppingDetailScreen(
     productId: Long,
     onBackClick: () -> Unit,
-    onAddClick: (productId: Long) -> Unit,
+    onAddClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
@@ -46,9 +46,7 @@ fun ShoppingDetailScreen(
         ShoppingDetailDivider()
         ShoppingDetailProductPrice(product = product)
         Spacer(modifier = Modifier.weight(weight = 1f))
-        ShoppingDetailProductAddButton(
-            onAddClick = { onAddClick(productId) },
-        )
+        ShoppingDetailProductAddButton(onAddClick = onAddClick)
     }
 }
 

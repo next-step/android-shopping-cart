@@ -10,7 +10,7 @@ import nextstep.shoppingcart.ui.shoppingdetail.navigation.ShoppingDetailRoute.RO
 
 fun NavGraphBuilder.shoppingDetailScreen(
     onBackClick: () -> Unit,
-    onAddClick: (productId: Long) -> Unit,
+    onAddClick: () -> Unit,
 ) {
     composable(
         route = "${ROUTE}/{productId}",
