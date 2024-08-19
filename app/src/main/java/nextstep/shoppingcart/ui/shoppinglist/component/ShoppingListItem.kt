@@ -17,8 +17,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
 import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 import nextstep.shoppingcart.ui.theme.RobotoBold
@@ -30,7 +30,7 @@ fun ShoppingListItem(
     onItemClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shoppingListItemDescription = stringResource(R.string.shopping_list_item_description)
+    val shoppingListItemDescription = stringResource(R.string.shopping_item_description)
 
     Column(
         modifier = modifier
@@ -38,9 +38,8 @@ fun ShoppingListItem(
             .clickable { onItemClick(product.id) }
             .semantics { contentDescription = shoppingListItemDescription },
     ) {
-        AsyncImage(
-            model = product.imageUrl,
-            contentDescription = stringResource(R.string.shopping_item_async_image),
+        ShoppingProductImage(
+            product = product,
             modifier = Modifier
                 .width(156.dp)
                 .height(156.dp),

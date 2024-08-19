@@ -21,8 +21,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.component.ShoppingTopBar
 import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 import nextstep.shoppingcart.ui.theme.RobotoBold
@@ -41,10 +41,9 @@ fun ShoppingDetailScreen(
             title = screenTitle,
             onBackClick = onBackClick,
         )
-        AsyncImage(
-            model = product.imageUrl,
-            contentDescription = stringResource(R.string.shopping_item_async_image),
-            modifier = Modifier
+        ShoppingProductImage(
+            product = product,
+            modifier = modifier
                 .width(360.dp)
                 .height(360.dp),
         )
@@ -80,6 +79,7 @@ fun ShoppingDetailScreen(
         }
     }
 }
+
 
 @Preview
 @Composable
