@@ -49,6 +49,44 @@ internal class CartScreenTest {
 
     @Test
     fun 담긴_상품_가격의_총합이_노출된다() {
+        // when
+        composeTestRule.setContent {
+            Cart.addOne(
+                product = Product(
+                    productId = 1,
+                    imageUrl = "https://picsum.photos/156/158",
+                    name = "상품1",
+                    price = 12000
+                )
+            )
+            ShoppingCart(rememberNavController())
+        }
+
+        // then
+        composeTestRule
+            .onNodeWithText("주문하기(12,000원)")
+            .assertExists()
+    }
+
+    @Test
+    fun 담긴_상품_가격의_총합이_다른_금액은_노출이_안된다() {
+        // when
+        composeTestRule.setContent {
+            Cart.addOne(
+                product = Product(
+                    productId = 1,
+                    imageUrl = "https://picsum.photos/156/158",
+                    name = "상품1",
+                    price = 12000
+                )
+            )
+            ShoppingCart(rememberNavController())
+        }
+
+        // then
+        composeTestRule
+            .onNodeWithText("주문하기(13,000원)")
+            .assertDoesNotExist()
     }
 
     @Test
