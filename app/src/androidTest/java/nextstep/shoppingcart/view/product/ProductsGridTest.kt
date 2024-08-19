@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.view
+package nextstep.shoppingcart.view.product
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -7,7 +7,6 @@ import androidx.compose.ui.test.assertIsDisplayed
 import org.junit.Rule
 import org.junit.Test
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.view.product.ProductsGrid
 import org.junit.Before
 
 class ProductsGridTest {
@@ -30,7 +29,10 @@ class ProductsGridTest {
     @Before
     fun setUp() {
         composeTestRule.setContent {
-            ProductsGrid(products = products)
+            ProductsGrid(
+                products = products,
+                onItemClick = { }
+            )
         }
     }
 

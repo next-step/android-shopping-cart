@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.view
+package nextstep.shoppingcart.view.product
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -7,7 +7,6 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import org.junit.Rule
 import org.junit.Test
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.view.product.ProductItem
 import org.junit.Before
 
 class ProductItemTest {
@@ -23,7 +22,8 @@ class ProductItemTest {
                     name = "Test Product",
                     price = 1_000,
                     imageUrl = "https://example.com/image.jpg"
-                )
+                ),
+                onItemClick = { }
             )
         }
     }

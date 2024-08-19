@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.view.product.detail
 
-import android.content.Intent
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -10,11 +9,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.view.product.ProductsActivity
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +31,7 @@ fun ProductDetailAppBar() {
             ) {
                 Icon(
                     Icons.Filled.ArrowBack,
-                    contentDescription = stringResource(id = R.string.cart_app_bar_back_icon_description)
+                    contentDescription = stringResource(id = R.string.product_detail_app_bar_back_icon_description)
                 )
             }
         }
