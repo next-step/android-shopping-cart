@@ -12,18 +12,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,23 +30,28 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.data.goods.impl.ProductRepositoryImpl
 import nextstep.shoppingcart.ui.ShoppingCartDestinations
+import nextstep.shoppingcart.ui.component.ShoppingTopBar
 
 @Composable
 fun ProductDetail(
     navController: NavController,
     productId: Int
 ) {
+    val productRepository = ProductRepositoryImpl()
+    val product = productRepository.getProduct(productId) ?: return
     Scaffold(
         topBar = {
-            ProductTopBar(navController)
+            ShoppingTopBar(navController, "상품 상세")
         }, bottomBar = {
-            ProductBottomBar(navController)
+            ProductBottomBar {
+                Cart.addOne(product = product)
+                navController.navigate(ShoppingCartDestinations.SHOPPING_CART)
+            }
         }
     ) { paddingValues ->
-        val productRepository = ProductRepositoryImpl()
-        val product = productRepository.getProduct(productId) ?: return@Scaffold
         Column(
             modifier = Modifier
                 .padding(paddingValues)
@@ -109,11 +108,10 @@ fun ProductDetail(
 }
 
 @Composable
-private fun ProductBottomBar(navController: NavController) {
+private fun ProductBottomBar(
+    onClick: () -> Unit) {
     Button(
-        onClick = {
-            navController.navigate(ShoppingCartDestinations.SHOPPING_CART)
-        },
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
@@ -132,27 +130,17 @@ private fun ProductBottomBar(navController: NavController) {
     }
 }
 
-@Composable
-@OptIn(ExperimentalMaterial3Api::class)
-private fun ProductTopBar(navController: NavController) {
-    TopAppBar(
-        title = {
-            Text(
-                text = "상품 상세",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.secondary
-            )
-        },
-        navigationIcon = {
-            IconButton(onClick = { navController.navigateUp() }) {
-                Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
-            }
-        }
-    )
-}
-
 @Preview
 @Composable
 private fun ProductDetailPreview() {
     ProductDetail(rememberNavController(), 1)
+}
+
+@Preview
+@Composable
+private fun ProductBottomBarPreview() {
+    ProductBottomBar() {
+
+    }
+    
 }
