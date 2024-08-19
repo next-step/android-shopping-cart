@@ -5,9 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 import nextstep.shoppingcart.ui.screen.BaseComposeTest
 import nextstep.shoppingcart.ui.screen.products.model.dummyProductModels
 import org.junit.Test
@@ -109,5 +111,38 @@ class ShoppingCartScreenTest : BaseComposeTest() {
         composeTestRule
             .onNodeWithTag("장바구니 주문 버튼")
             .assertTextEquals("주문하기(10,000원)")
+    }
+
+    @Test
+    fun 장바구니_상품의_제거버튼을누르면_해당제품은_제거되어야한다() {
+        composeTestRule.setContent {
+            val dummyProduct = dummyProductModels[0].copy(name = "test")
+            var itemList by remember {
+                mutableStateOf(listOf(CartItem(count = 2, product = dummyProduct)))
+            }
+            ShoppingCartScreen(
+                carItems = itemList.toPersistentList(),
+                onClearClick = { deletedProduct ->
+                    assert(dummyProduct.id == deletedProduct.id)
+                    itemList = itemList.filter { item -> item.product.id != dummyProduct.id }
+                },
+                onMinusClick = { },
+                onPlusClick = { },
+                onOrderClick = { },
+                onNavigationClick = {},
+            )
+        }
+
+        composeTestRule
+            .onNodeWithContentDescription("test 상품")
+            .assertExists()
+
+        composeTestRule
+            .onNodeWithContentDescription("장바구니 제거 버튼")
+            .performClick()
+
+        composeTestRule
+            .onNodeWithContentDescription("test 상품")
+            .assertDoesNotExist()
     }
 }

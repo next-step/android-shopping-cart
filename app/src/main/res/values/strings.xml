@@ -9,6 +9,6 @@
     <string name="product_detail_app_bar_title">상품 상세</string>
     <string name="back_button_navigation_icon_description">뒤로가기</string>
     <string name="shopping_cart_app_bar_title">장바구니</string>
-    <string name="shopping_cart_clear_button">shopping_cart_clear_button</string>
+    <string name="shopping_cart_clear_button">장바구니 제거 버튼</string>
     <string name="shopping_cart_order_with_total_price">주문하기(%,d원)</string>
 </resources>
