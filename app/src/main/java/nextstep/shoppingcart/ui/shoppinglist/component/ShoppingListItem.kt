@@ -30,7 +30,7 @@ fun ShoppingListItem(
     onItemClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shoppingListItemDescription = stringResource(R.string.shopping_item_description)
+    val shoppingListItemDescription = stringResource(id = R.string.shopping_item_description)
 
     Column(
         modifier = modifier
@@ -41,8 +41,8 @@ fun ShoppingListItem(
         ShoppingProductImage(
             product = product,
             modifier = Modifier
-                .width(156.dp)
-                .height(156.dp),
+                .width(width = 156.dp)
+                .height(height = 156.dp),
         )
         Text(
             text = product.name,

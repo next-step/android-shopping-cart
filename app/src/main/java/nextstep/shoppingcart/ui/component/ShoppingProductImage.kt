@@ -19,10 +19,10 @@ fun ShoppingProductImage(
 ) {
     AsyncImage(
         model = product.imageUrl,
-        contentDescription = stringResource(R.string.shopping_item_description),
+        contentDescription = stringResource(id = R.string.shopping_item_description),
         modifier = modifier
-            .width(360.dp)
-            .height(360.dp),
+            .width(width = 360.dp)
+            .height(height = 360.dp),
     )
 }
 

@@ -19,7 +19,7 @@ fun ShoppingListScreen(
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         ShoppingListTopBar(
-            title = stringResource(R.string.shopping_list_title),
+            title = stringResource(id = R.string.shopping_list_title),
             onShoppingCartClick = onShoppingCartClick,
         )
         ShoppingListLazyVerticalGrid(

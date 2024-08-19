@@ -20,7 +20,7 @@ fun ShoppingDetailProductTitle(product: Product) {
         fontSize = 24.sp,
         fontFamily = RobotoBold,
         maxLines = 1,
-        modifier = Modifier.padding(18.dp),
+        modifier = Modifier.padding(all = 18.dp),
     )
 }
 

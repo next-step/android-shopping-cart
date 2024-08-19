@@ -18,7 +18,7 @@ fun ShoppingDetailPriceText(
         fontSize = 20.sp,
         fontFamily = RobotoRegular,
         color = Color.Black,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 

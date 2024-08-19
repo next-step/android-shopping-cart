@@ -26,7 +26,7 @@ fun ShoppingListTopBar(
     onShoppingCartClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shoppingListTopBarIcon = stringResource(R.string.shopping_list_top_bar_icon)
+    val shoppingListTopBarIcon = stringResource(id = R.string.shopping_list_top_bar_icon)
 
     CenterAlignedTopAppBar(
         title = {
@@ -42,7 +42,7 @@ fun ShoppingListTopBar(
                 imageVector = Icons.Filled.ShoppingCart,
                 contentDescription = shoppingListTopBarIcon,
                 modifier = Modifier
-                    .padding(14.dp)
+                    .padding(all = 14.dp)
                     .clickable { onShoppingCartClick() }
                     .semantics { contentDescription = shoppingListTopBarIcon },
             )

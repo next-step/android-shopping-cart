@@ -15,8 +15,8 @@ fun ShoppingDetailDivider(
 ) {
     Divider(
         modifier = modifier
-            .height(2.dp)
-            .background(Color.Gray),
+            .height(height = 2.dp)
+            .background(color = Color.Gray),
     )
 }
 

@@ -15,7 +15,7 @@ fun NavGraphBuilder.shoppingDetailScreen(
     composable(
         route = "${ROUTE}/{productId}",
         arguments = listOf(
-            navArgument("productId") { type = NavType.LongType },
+            navArgument(name = "productId") { type = NavType.LongType },
         ),
     ) {
         val productId = it.arguments?.getLong("productId", -1) ?: -1
@@ -28,7 +28,7 @@ fun NavGraphBuilder.shoppingDetailScreen(
 }
 
 fun NavController.navigateToShoppingDetail(productId: Long) {
-    navigate("${ROUTE}/$productId")
+    navigate(route = "${ROUTE}/$productId")
 }
 
 object ShoppingDetailRoute {
