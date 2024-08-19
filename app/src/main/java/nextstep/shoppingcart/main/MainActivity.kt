@@ -9,12 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.cart.cartNavGraph
-import nextstep.shoppingcart.cart.navigateCart
-import nextstep.shoppingcart.productdetail.navigateProductDetail
 import nextstep.shoppingcart.productdetail.productDetailNavGraph
 import nextstep.shoppingcart.productlist.ProductListRoute
 import nextstep.shoppingcart.productlist.productListNavGraph
@@ -24,10 +20,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
+            val navController = rememberMainNavigator()
             ShoppingCartTheme {
                 MainScreen(
-                    navController = navController,
+                    mainNavigator = navController,
                 )
             }
         }
@@ -36,7 +32,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun MainScreen(
-    navController: NavHostController,
+    mainNavigator: MainNavigator,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -47,20 +43,20 @@ private fun MainScreen(
                     .fillMaxSize()
             ) {
                 NavHost(
-                    navController = navController,
+                    navController = mainNavigator.navController,
                     startDestination = ProductListRoute,
                 ) {
                     productListNavGraph(
-                        onProductClick = { product -> navController.navigateProductDetail(product) },
-                        onCartClick = { navController.navigateCart() },
+                        onProductClick = { product -> mainNavigator.navigateProductDetail(product) },
+                        onCartClick = { mainNavigator.navigateCart() },
                     )
 
                     productDetailNavGraph(
                         onAddToCartClick = {},
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { mainNavigator.popBackStack() }
                     )
 
-                    cartNavGraph(onBackClick = { navController.popBackStack() })
+                    cartNavGraph(onBackClick = { mainNavigator.popBackStack() })
                 }
             }
         }
