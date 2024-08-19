@@ -3,4 +3,11 @@
     <string name="product_list_title">상품 목록</string>
     <string name="product_list_shopping_card_content_description">장바구니 버튼</string>
     <string name="product_list_product_item_price_fmt">%1$,d원</string>
+    <string name="navigation_back">뒤로가기</string>
+    <string name="product_detail_title">상품 상세</string>
+    <string name="warning_icon">Warning Icon</string>
+    <string name="invalid_access">잘못 된 접근 입니다.</string>
+    <string name="product_detail_product_image">상품 이미지</string>
+    <string name="product_detail_put_in_shopping_cart_button">장바구니 담기</string>
+    <string name="product_cart_list_title">장바구니</string>
 </resources>

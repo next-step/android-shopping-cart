@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.ui.view.product.list
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,27 +18,35 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.model.dummyProducts
+import nextstep.shoppingcart.ui.view.product.cartlist.ProductCartListActivity
+import nextstep.shoppingcart.ui.view.product.detail.ProductDetailActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen() {
+    val context = LocalContext.current
     Scaffold(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(vertical = 4.dp),
+            .fillMaxSize(),
         topBar = {
             CenterAlignedTopAppBar(
+                modifier = Modifier
+                    .padding(vertical = 4.dp),
                 title = { Text(text = stringResource(R.string.product_list_title)) },
                 actions = {
                     Image(
                         modifier = Modifier
                             .size(48.dp)
-                            .padding(10.dp),
+                            .padding(10.dp)
+                            .clickable {
+                                context.startActivity(ProductCartListActivity.newIntent(context))
+                            },
                         imageVector = Icons.Filled.ShoppingCart,
                         contentDescription = stringResource(R.string.product_list_shopping_card_content_description)
                     )
@@ -58,7 +67,9 @@ fun ProductListScreen() {
             ) {
                 ProductListItem(
                     product = it,
-                    onClick = { product -> }
+                    onClick = { product ->
+                        context.startActivity(ProductDetailActivity.newIntent(context, product))
+                    }
                 )
             }
         }

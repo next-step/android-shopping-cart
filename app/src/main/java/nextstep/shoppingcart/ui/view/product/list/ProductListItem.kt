@@ -67,7 +67,11 @@ fun ProductListItem(
 @Composable
 private fun ProductListItemPreview() {
     ProductListItem(
-        product = dummyProducts.first(),
+        product = Product(
+            name = "Product Name",
+            price = 1000,
+            imageUrl = "https://example.com/image.jpg",
+        ),
         onClick = {},
     )
 }
