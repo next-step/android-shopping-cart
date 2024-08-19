@@ -29,9 +29,9 @@ internal fun CartScreen(
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { TopBar() },
+        topBar = { CartTopBar() },
         content = { paddingValues ->
-            Content(paddingValues, cartItems)
+            CartContent(paddingValues, cartItems)
         }
     )
 
@@ -39,7 +39,7 @@ internal fun CartScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun TopBar() {
+private fun CartTopBar() {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -58,7 +58,7 @@ private fun TopBar() {
 }
 
 @Composable
-private fun Content(
+private fun CartContent(
     paddingValues: PaddingValues,
     cartItems: List<CartItem>
 ) {
