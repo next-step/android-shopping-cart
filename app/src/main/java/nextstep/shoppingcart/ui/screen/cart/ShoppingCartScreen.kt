@@ -24,13 +24,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
@@ -49,14 +49,12 @@ fun ShoppingCartRoute(
     onNavigationClick: () -> Unit,
 ) {
     var cartItems by remember { mutableStateOf(Cart.items) }
-    val totalPrice by remember { derivedStateOf { cartItems.sumOf { it.totalPrice } } }
     val onClearClick = remember { { item: ProductModel -> cartItems = Cart.removeAll(item) } }
     val onMinusClick = remember { { item: ProductModel -> cartItems = Cart.removeOne(item) } }
     val onPlusClick = remember { { item: ProductModel -> cartItems = Cart.addOne(item) } }
 
     ShoppingCartScreen(
         carItems = cartItems.toPersistentList(),
-        totalPrice = totalPrice,
         onNavigationClick = onNavigationClick,
         onClearClick = onClearClick,
         onMinusClick = onMinusClick,
@@ -67,9 +65,8 @@ fun ShoppingCartRoute(
 }
 
 @Composable
-private fun ShoppingCartScreen(
+internal fun ShoppingCartScreen(
     carItems: PersistentList<CartItem>,
-    totalPrice: Int,
     onClearClick: (ProductModel) -> Unit,
     onMinusClick: (ProductModel) -> Unit,
     onPlusClick: (ProductModel) -> Unit,
@@ -84,7 +81,10 @@ private fun ShoppingCartScreen(
         },
         bottomBar = {
             SoppingCartButton(
-                text = stringResource(id = R.string.shopping_cart_order_with_total_price, totalPrice)
+                text = stringResource(
+                    id = R.string.shopping_cart_order_with_total_price,
+                    carItems.sumOf { it.totalPrice }
+                )
             ) {
                 onOrderClick()
             }
@@ -186,9 +186,9 @@ private fun ShoppingCartItemCounter(
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        CounterTextButton(onClick = onMinusClick, text = "-")
-        Text(text = count.toString(), style = MaterialTheme.typography.titleLarge)
-        CounterTextButton(onClick = onPlusClick, text = "+")
+        CounterTextButton(modifier = Modifier.testTag("장바구니 수량 감소 버튼"), onClick = onMinusClick, text = "-")
+        Text(modifier = Modifier.testTag("장바구니 담긴 수량"), text = count.toString(), style = MaterialTheme.typography.titleLarge)
+        CounterTextButton(modifier = Modifier.testTag("장바구니 수량 증가 버튼"), onClick = onPlusClick, text = "+")
     }
 }
 
@@ -295,7 +295,6 @@ private fun ShoppingCartScreenPreview() {
                 count = 2
             ),
         ),
-        totalPrice = 268600,
         onClearClick = {},
         onMinusClick = {},
         onPlusClick = {},
