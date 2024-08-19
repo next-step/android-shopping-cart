@@ -14,8 +14,8 @@ import nextstep.shoppingcart.ui.shoppinglist.navigation.shoppingListScreen
 @Composable
 fun AppNavHost(
     navController: NavHostController,
-    startDestination: String = ShoppingListRoute.ROUTE,
     modifier: Modifier = Modifier,
+    startDestination: String = ShoppingListRoute.ROUTE,
 ) {
     NavHost(
         modifier = modifier,
@@ -27,6 +27,9 @@ fun AppNavHost(
             onItemClick = navController::navigateToShoppingDetail,
         )
         shoppingCartScreen()
-        shoppingDetailScreen()
+        shoppingDetailScreen(
+            onBackClick = navController::popBackStack,
+            onAddClick = navController::navigateToShoppingCart,
+        )
     }
 }

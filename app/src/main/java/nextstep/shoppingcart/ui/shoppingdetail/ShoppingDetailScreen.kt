@@ -25,11 +25,12 @@ import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 fun ShoppingDetailScreen(
     productId: Long,
     onBackClick: () -> Unit,
+    onAddClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         val product = dummyProducts.find { it.id == productId } ?: throw IllegalArgumentException()
-        val screenTitle = stringResource(R.string.shopping_detail_title)
+        val screenTitle = stringResource(id = R.string.shopping_detail_title)
 
         ShoppingTopBar(
             title = screenTitle,
@@ -38,17 +39,18 @@ fun ShoppingDetailScreen(
         ShoppingProductImage(
             product = product,
             modifier = modifier
-                .width(360.dp)
-                .height(360.dp),
+                .width(width = 360.dp)
+                .height(height = 360.dp),
         )
         ShoppingDetailProductTitle(product = product)
         ShoppingDetailDivider()
         ShoppingDetailProductPrice(product = product)
-        Spacer(modifier = Modifier.weight(1f))
-        ShoppingDetailProductAddButton({})
+        Spacer(modifier = Modifier.weight(weight = 1f))
+        ShoppingDetailProductAddButton(
+            onAddClick = { onAddClick(productId) },
+        )
     }
 }
-
 
 @Preview
 @Composable
@@ -56,6 +58,7 @@ private fun ShoppingDetailScreenPreview() {
     ShoppingDetailScreen(
         productId = 0,
         onBackClick = {},
-        modifier = Modifier.background(Color.White)
+        onAddClick = {},
+        modifier = Modifier.background(color = Color.White),
     )
 }
