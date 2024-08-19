@@ -30,10 +30,13 @@ import java.util.UUID
 internal fun ProductListScreen(
     products: List<Product>,
     onProductClick: (Product) -> Unit,
+    onCartClick: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { ProductListTopBar() },
+        topBar = {
+            ProductListTopBar(onCartClick = onCartClick)
+        },
         content = { paddingValues ->
             ProductListContent(
                 paddingValues, products, onProductClick
@@ -45,11 +48,13 @@ internal fun ProductListScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ProductListTopBar() {
+private fun ProductListTopBar(
+    onCartClick: () -> Unit,
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
-                text = stringResource(R.string.cart_screen_title),
+                text = stringResource(R.string.productlist_screem_title),
                 style = MaterialTheme.typography.titleLarge,
             )
         },
@@ -57,7 +62,7 @@ private fun ProductListTopBar() {
             Icon(
                 imageVector = Icons.Filled.ShoppingCart,
                 contentDescription = "ShoppingCart",
-                modifier = Modifier
+                modifier = Modifier.clickable { onCartClick() }
             )
         }
     )
@@ -104,6 +109,7 @@ private fun ProductListScreenPreview() {
                 )
             }.distinctBy { it.id },
             onProductClick = {},
+            onCartClick = {},
         )
     }
 }

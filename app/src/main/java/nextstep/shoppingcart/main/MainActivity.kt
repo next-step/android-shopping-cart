@@ -12,10 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import nextstep.shoppingcart.navigation.ProductListRoute
-import nextstep.shoppingcart.navigation.navigateProductDetail
-import nextstep.shoppingcart.navigation.productDetailNavGraph
-import nextstep.shoppingcart.navigation.productListNavGraph
+import nextstep.shoppingcart.cart.cartNavGraph
+import nextstep.shoppingcart.cart.navigateCart
+import nextstep.shoppingcart.productdetail.navigateProductDetail
+import nextstep.shoppingcart.productdetail.productDetailNavGraph
+import nextstep.shoppingcart.productlist.ProductListRoute
+import nextstep.shoppingcart.productlist.productListNavGraph
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
@@ -49,13 +51,16 @@ private fun MainScreen(
                     startDestination = ProductListRoute,
                 ) {
                     productListNavGraph(
-                        onProductClick = { product ->
-                            navController.navigateProductDetail(product)
-                        }
+                        onProductClick = { product -> navController.navigateProductDetail(product) },
+                        onCartClick = { navController.navigateCart() },
                     )
 
-                    productDetailNavGraph(onAddToCartClick = {},
-                        onBackClick = { navController.popBackStack() })
+                    productDetailNavGraph(
+                        onAddToCartClick = {},
+                        onBackClick = { navController.popBackStack() }
+                    )
+
+                    cartNavGraph(onBackClick = { navController.popBackStack() })
                 }
             }
         }
