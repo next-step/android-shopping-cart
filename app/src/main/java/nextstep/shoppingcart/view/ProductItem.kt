@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,9 +17,9 @@ import com.bumptech.glide.integration.compose.placeholder
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
-import nextstep.shoppingcart.view.resource.ProductNameBottomPadding
-import nextstep.shoppingcart.view.resource.ProductNameMaxLine
 import java.util.Locale
+
+const val productNameMaxLine = 1
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -33,8 +34,8 @@ fun ProductItem(product: Product, modifier: Modifier = Modifier) {
         )
         Text(
             text = product.name,
-            modifier = modifier.padding(bottom = ProductNameBottomPadding),
-            maxLines = ProductNameMaxLine,
+            modifier = modifier.padding(bottom = dimensionResource(id = R.dimen.product_name_bottom_padding)),
+            maxLines = productNameMaxLine,
             overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.Bold
         )
