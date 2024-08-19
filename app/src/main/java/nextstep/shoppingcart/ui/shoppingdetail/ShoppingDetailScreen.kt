@@ -5,7 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ShoppingDetailScreen(modifier: Modifier = Modifier) {
+fun ShoppingDetailScreen(
+    productId: Long,
+    modifier: Modifier = Modifier,
+) {
     Column {
 
     }
