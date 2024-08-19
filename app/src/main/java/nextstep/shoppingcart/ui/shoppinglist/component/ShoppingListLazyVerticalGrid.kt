@@ -20,6 +20,7 @@ import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 @Composable
 fun ShoppingListLazyVerticalGrid(
     products: List<Product>,
+    onItemClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val shoppingListDescription = stringResource(R.string.shopping_list_description)
@@ -40,7 +41,10 @@ fun ShoppingListLazyVerticalGrid(
             items = products,
             key = { product -> product.id },
         ) {
-            ShoppingListItem(product = it)
+            ShoppingListItem(
+                product = it,
+                onItemClick = onItemClick,
+            )
         }
     }
 }
@@ -48,5 +52,8 @@ fun ShoppingListLazyVerticalGrid(
 @Preview
 @Composable
 private fun ShoppingListPreview() {
-    ShoppingListLazyVerticalGrid(products = dummyProducts)
+    ShoppingListLazyVerticalGrid(
+        products = dummyProducts,
+        onItemClick = {},
+    )
 }

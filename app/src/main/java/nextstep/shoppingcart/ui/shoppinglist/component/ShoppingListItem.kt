@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.shoppinglist.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -26,6 +27,7 @@ import nextstep.shoppingcart.ui.theme.RobotoRegular
 @Composable
 fun ShoppingListItem(
     product: Product,
+    onItemClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val shoppingListItemDescription = stringResource(R.string.shopping_list_item_description)
@@ -33,6 +35,7 @@ fun ShoppingListItem(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .clickable { onItemClick(product.id) }
             .semantics { contentDescription = shoppingListItemDescription },
     ) {
         AsyncImage(
@@ -76,5 +79,6 @@ fun ShoppingListItem(
 private fun ShoppingListItemPreview() {
     ShoppingListItem(
         product = dummyProducts[0],
+        onItemClick = {},
     )
 }
