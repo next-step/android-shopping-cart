@@ -6,4 +6,6 @@
     <string name="shopping_list_description">ShoppingList</string>
     <string name="shopping_top_bar_icon">ShoppingTopBarBackIcon</string>
     <string name="shopping_detail_title">상품 상세</string>
+    <string name="shopping_detail_add_button_description">ShoppingDetailAddButton</string>
+    <string name="shopping_detail_add_button">장바구니 담기</string>
 </resources>
