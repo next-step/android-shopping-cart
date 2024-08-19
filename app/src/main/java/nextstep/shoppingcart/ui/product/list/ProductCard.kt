@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.product.list
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
@@ -18,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -31,6 +34,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
 import nextstep.shoppingcart.domain.model.ProductItem
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.component.QuantitySelector
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -59,7 +63,17 @@ internal fun ProductCard(
             )
 
             if (item.isInCart) {
-                TODO("Add Quantity Selector")
+                QuantitySelector(
+                    quantity = item.quantity,
+                    onAddClick = onAddQuantityClick,
+                    onRemoveClick = onRemoveQuantityClick,
+                    modifier =
+                        Modifier
+                            .padding(horizontal = 15.dp, vertical = 12.dp)
+                            .align(Alignment.BottomEnd)
+                            .clip(shape = RoundedCornerShape(4.dp))
+                            .background(Color.White),
+                )
             } else {
                 /**
                  * Mock data 이미지 배경이 하얀색이라서 +버튼의 경계가 보이지 않아서 별도로 border를 추가하였음
