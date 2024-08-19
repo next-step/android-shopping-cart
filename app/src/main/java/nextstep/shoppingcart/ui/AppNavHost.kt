@@ -26,7 +26,7 @@ fun AppNavHost(
             onShoppingCartClick = navController::navigateToShoppingCart,
             onItemClick = navController::navigateToShoppingDetail,
         )
-        shoppingCartScreen()
+        shoppingCartScreen(onBackClick = navController::popBackStack)
         shoppingDetailScreen(
             onBackClick = navController::popBackStack,
             onAddClick = navController::navigateToShoppingCart,

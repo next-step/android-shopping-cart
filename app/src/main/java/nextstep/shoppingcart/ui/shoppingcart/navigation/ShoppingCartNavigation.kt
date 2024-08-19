@@ -6,9 +6,11 @@ import androidx.navigation.compose.composable
 import nextstep.shoppingcart.ui.shoppingcart.ShoppingCartScreen
 import nextstep.shoppingcart.ui.shoppingcart.navigation.ShoppingCartRoute.ROUTE
 
-fun NavGraphBuilder.shoppingCartScreen() {
+fun NavGraphBuilder.shoppingCartScreen(
+    onBackClick: () -> Unit,
+) {
     composable(route = ROUTE) {
-        ShoppingCartScreen()
+        ShoppingCartScreen(onBackClick = onBackClick)
     }
 }
 
