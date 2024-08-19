@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.shopping.model.Product
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.ItemTextColor
 
 @Composable
@@ -72,7 +72,7 @@ private fun ListItemName(
 
 @Composable
 private fun ListItemPrice(
-    price: Long,
+    price: Int,
     modifier: Modifier = Modifier
 ) {
     Text(
@@ -98,6 +98,6 @@ private fun ListItemNamePreview() {
 @Preview(showBackground = true)
 @Composable
 private fun ListItemPricePreview() {
-    val productPrice = 10_000_000L
+    val productPrice = 10_000_000
     ListItemPrice(price = productPrice)
 }
