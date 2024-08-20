@@ -14,15 +14,20 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.PRODUCT_LIST_MOCK_DATA
 import nextstep.shoppingcart.data.Products
 import nextstep.shoppingcart.data.ProductsImpl
+import nextstep.shoppingcart.domain.model.CartItem
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.component.BasicIconButton
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -34,6 +39,7 @@ internal fun ProductListRoute(
     onProductDetailClick: (Long) -> Unit = {},
 ) {
     val products: Products = remember { ProductsImpl() }
+    var carts by remember { mutableStateOf(Cart.items) }
     val eventListener =
         remember {
             { event: ProductListEvent ->
@@ -45,12 +51,25 @@ internal fun ProductListRoute(
                     is ProductListEvent.OnCartClick -> {
                         onCartClick()
                     }
+
+                    is ProductListEvent.OnAddToCartClick -> {
+                        carts = Cart.add(event.product)
+                    }
+
+                    is ProductListEvent.OnAddQuantityClick -> {
+                        carts = Cart.add(event.product)
+                    }
+
+                    is ProductListEvent.OnRemoveQuantityClick -> {
+                        carts = Cart.remove(event.product)
+                    }
                 }
             }
         }
 
     ProductListScreen(
-        products = products.getAll(),
+        items = products.getAll(),
+        carts = carts,
         onProductListEvent = eventListener,
         modifier = modifier.fillMaxSize(),
     )
@@ -59,7 +78,8 @@ internal fun ProductListRoute(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ProductListScreen(
-    products: List<Product>,
+    items: List<Product>,
+    carts: List<CartItem>,
     onProductListEvent: (ProductListEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -84,7 +104,8 @@ internal fun ProductListScreen(
         modifier = modifier,
     ) { innerPadding ->
         ProductListContent(
-            products = products,
+            items = items,
+            carts = carts,
             onProductListEvent = onProductListEvent,
             modifier = Modifier.padding(innerPadding),
         )
@@ -93,7 +114,8 @@ internal fun ProductListScreen(
 
 @Composable
 private fun ProductListContent(
-    products: List<Product>,
+    items: List<Product>,
+    carts: List<CartItem>,
     onProductListEvent: (ProductListEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -110,14 +132,30 @@ private fun ProductListContent(
         modifier = modifier,
     ) {
         items(
-            items = products,
-            key = { product -> product.id },
-        ) { product ->
+            items = items,
+            key = { item -> item.id },
+        ) { item ->
             ProductCard(
-                product = product,
+                product = item,
+                quantity = carts.find { it.product.id == item.id }?.quantity ?: 0,
                 onCardClick = {
                     onProductListEvent(
-                        ProductListEvent.OnProductCardClick(productId = product.id),
+                        ProductListEvent.OnProductCardClick(productId = item.id),
+                    )
+                },
+                onAddToCartClick = {
+                    onProductListEvent(
+                        ProductListEvent.OnAddToCartClick(product = item),
+                    )
+                },
+                onAddQuantityClick = {
+                    onProductListEvent(
+                        ProductListEvent.OnAddQuantityClick(product = item),
+                    )
+                },
+                onRemoveQuantityClick = {
+                    onProductListEvent(
+                        ProductListEvent.OnRemoveQuantityClick(product = item),
                     )
                 },
             )
@@ -130,7 +168,14 @@ private fun ProductListContent(
 private fun ProductListScreenPreview() {
     ShoppingCartTheme {
         ProductListScreen(
-            products = PRODUCT_LIST_MOCK_DATA,
+            items = PRODUCT_LIST_MOCK_DATA,
+            carts =
+                PRODUCT_LIST_MOCK_DATA.mapIndexed { index, product ->
+                    CartItem(
+                        product = product,
+                        quantity = if (index % 2 == 0) 1 else 0,
+                    )
+                },
             onProductListEvent = {},
         )
     }

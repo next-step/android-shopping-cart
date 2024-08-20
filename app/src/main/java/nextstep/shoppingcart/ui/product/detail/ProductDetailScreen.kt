@@ -58,7 +58,6 @@ internal fun ProductDetailRoute(
             { event: ProductDetailEvent ->
                 when (event) {
                     is ProductDetailEvent.OnApplyCartClick -> {
-                        // TODO: Add to cart
                         Cart.add(event.product)
                         onCartClick()
                     }
