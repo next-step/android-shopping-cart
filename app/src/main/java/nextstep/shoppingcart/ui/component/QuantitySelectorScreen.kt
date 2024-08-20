@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,7 +29,7 @@ fun QuantitySelector(
         verticalAlignment = Alignment.CenterVertically
     ) {
         var quantity by remember { mutableStateOf(initQuantity) }
-        IconButton(
+        TextButton(
             onClick = {
                 onMinusClick()
                 if (quantity > 1) quantity--
@@ -42,7 +43,7 @@ fun QuantitySelector(
             modifier = Modifier.padding(horizontal = 14.dp),
             style = cartTitleStyle
         )
-        IconButton(
+        TextButton(
             onClick = {
                 onPlusClick()
                 quantity++
