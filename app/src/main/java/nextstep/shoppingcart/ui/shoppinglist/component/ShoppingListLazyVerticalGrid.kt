@@ -14,8 +14,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.dummyProducts
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
-import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 
 @Composable
 fun ShoppingListLazyVerticalGrid(

@@ -7,9 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.dummyProducts
 import nextstep.shoppingcart.ui.shoppinglist.component.ShoppingListLazyVerticalGrid
 import nextstep.shoppingcart.ui.shoppinglist.component.ShoppingListTopBar
-import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 
 @Composable
 fun ShoppingListScreen(
