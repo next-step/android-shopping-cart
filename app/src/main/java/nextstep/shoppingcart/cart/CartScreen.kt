@@ -11,8 +11,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.common.component.NextStepTopAppBar
-import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.common.model.Product
+import nextstep.shoppingcart.common.model.dummyProducts
 
 @Composable
 internal fun CartScreen(

@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.model
+package nextstep.shoppingcart.common.model
 
 import kotlinx.serialization.Serializable
 import java.util.UUID

@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.model
+package nextstep.shoppingcart.common.model
 
 import android.os.Bundle
 import androidx.navigation.NavType

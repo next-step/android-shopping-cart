@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.common.component.ProductCard
-import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.common.model.Product
 
 @Composable
 internal fun ProductListContent(

@@ -15,11 +15,14 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.common.theme.NextStepTheme
 
 @Composable
-internal fun ProductDetailBottomBar() {
+internal fun ProductDetailBottomBar(
+    onAddToCartClick: () -> Unit,
+) {
     Surface(
         shadowElevation = 4.dp,
         modifier = Modifier.fillMaxWidth(),
         color = Color(0xFF2196F3),
+        onClick = onAddToCartClick,
     ) {
         Box(
             modifier = Modifier.fillMaxWidth(),

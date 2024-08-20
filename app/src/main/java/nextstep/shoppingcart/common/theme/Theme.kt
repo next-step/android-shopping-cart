@@ -77,7 +77,7 @@ fun ShoppingCartTheme(
 
 object NextStepTheme {
     val typography: Typography
-    @Composable
-    @ReadOnlyComposable
-    get() = LocalTypography.current
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalTypography.current
 }

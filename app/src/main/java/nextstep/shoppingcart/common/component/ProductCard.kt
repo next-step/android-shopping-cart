@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.common.model.Product
 import nextstep.shoppingcart.common.theme.NextStepTheme
 import java.util.UUID
 
