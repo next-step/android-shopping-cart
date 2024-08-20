@@ -3,6 +3,7 @@ package nextstep.shoppingcart.screen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -80,37 +81,35 @@ fun ShoppingDetailContent(
 
     Column(
         modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
     ) {
-        Column(
+        ShoppingDetailContentImage(
             modifier = Modifier
-                .weight(1f)
-                .verticalScroll(scrollState)
-        ) {
-            ShoppingDetailContentImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
-                product = product
-            )
+                .fillMaxWidth()
+                .aspectRatio(1f),
+            product = product
+        )
 
-            Text(
-                modifier = Modifier.padding(18.dp),
-                text = product.name,
-                style = MaterialTheme.typography.headlineSmall.copy(
-                    lineHeight = 28.sp
-                ),
-                fontWeight = FontWeight.Bold
-            )
+        Text(
+            modifier = Modifier.padding(18.dp),
+            text = product.name,
+            style = MaterialTheme.typography.headlineSmall.copy(
+                lineHeight = 28.sp
+            ),
+            fontWeight = FontWeight.Bold
+        )
 
-            Divider()
+        Divider()
+        ShoppingDetailContentPrice(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(18.dp),
+            product = product
+        )
 
-            ShoppingDetailContentPrice(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(18.dp),
-                product = product
-            )
-        }
+        Spacer(modifier = Modifier.weight(1f))
+
         ShoppingTextButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.shopping_detail_cart_button),
