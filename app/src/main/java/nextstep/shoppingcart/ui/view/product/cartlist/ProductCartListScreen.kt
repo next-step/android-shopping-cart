@@ -1,33 +1,18 @@
 package nextstep.shoppingcart.ui.view.product.cartlist
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.composable.DinoBottomCta
 import nextstep.shoppingcart.ui.composable.DinoTopAppBar
 import nextstep.shoppingcart.ui.model.Cart
 
@@ -35,9 +20,6 @@ import nextstep.shoppingcart.ui.model.Cart
 fun ProductCartListScreen(modifier: Modifier = Modifier) {
     var cartItems by remember {
         mutableStateOf(Cart.items)
-    }
-    val totalPrice by remember(cartItems) {
-        mutableLongStateOf(Cart.totalPrice)
     }
     val isCartEmpty by remember {
         derivedStateOf {
@@ -54,57 +36,29 @@ fun ProductCartListScreen(modifier: Modifier = Modifier) {
         }
     ) { paddingValues ->
         if (isCartEmpty) {
-            Column(
-                modifier = modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Image(
-                    modifier = Modifier.size(48.dp),
-                    imageVector = Icons.Filled.ShoppingCart,
-                    contentDescription = stringResource(R.string.product_cart_list_empty_icon)
-                )
-                Spacer(modifier = Modifier.size(16.dp))
-                Text(text = stringResource(R.string.product_cart_list_empty_message))
-            }
-
-        } else {
-            Box(
+            ProductCartListEmpty(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues = paddingValues)
-            ) {
-                LazyColumn {
-                    item {
-                        Spacer(modifier = Modifier.size(18.dp))
+            )
+        } else {
+            ProductCartListSuccess(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues = paddingValues),
+                cartItems = cartItems,
+                onQuantityChange = { cartItem, newQuantity ->
+                    cartItems = if (cartItem.count > newQuantity) {
+                        Cart.removeOne(cartItem.product)
+                    } else {
+                        Cart.addOne(cartItem.product)
                     }
-                    items(
-                        items = cartItems,
-                        key = { item -> item.product.name },
-                    ) { item ->
-                        ProductCartListItem(
-                            modifier = Modifier.padding(horizontal = 18.dp),
-                            product = item.product,
-                            quantity = item.count,
-                            onQuantityChange = { newQuantity ->
-                                if (item.count > newQuantity) {
-                                    cartItems = Cart.removeOne(item.product)
-                                } else {
-                                    cartItems = Cart.addOne(item.product)
-                                }
-                            },
-                            onClearClick = {
-                                cartItems = Cart.removeAll(item.product)
-                            }
-                        )
-                        Spacer(modifier = Modifier.size(18.dp))
-                    }
-                }
-                DinoBottomCta(
-                    ctaText = stringResource(R.string.product_cart_list_order_button, totalPrice),
-                    onClick = {}
-                )
-            }
+                },
+                onClearClick = { cartItem ->
+                    cartItems = Cart.removeAll(cartItem.product)
+                },
+                onBottomCtaClick = {}
+            )
         }
     }
 }
