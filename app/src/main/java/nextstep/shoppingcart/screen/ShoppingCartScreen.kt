@@ -7,11 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -24,6 +27,7 @@ import nextstep.shoppingcart.component.ShoppingTextButton
 import nextstep.shoppingcart.component.topbar.ShoppingTopBarWithBack
 import nextstep.shoppingcart.model.productList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+import nextstep.shoppingcart.util.Cart
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,8 +35,11 @@ fun ShoppingCartScreen(
     onClickBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var totalAmount by remember {
-        mutableIntStateOf(0)
+    val cartItemList by remember(Cart.items) {
+        mutableStateOf(Cart.items)
+    }
+    val totalAmount by remember(Cart.totalPrice) {
+        mutableIntStateOf(Cart.totalPrice)
     }
 
     Scaffold(
@@ -58,9 +65,9 @@ fun ShoppingCartScreen(
                 ),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                item {
+                items(cartItemList){ cartItem ->
                     CartItemComponent(
-                        product = productList[1],
+                        cartItem = cartItem,
                         onClickPlus = {
 
                         },

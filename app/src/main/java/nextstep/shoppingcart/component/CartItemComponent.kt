@@ -34,13 +34,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.productList
 import nextstep.shoppingcart.ui.theme.Gray10
 
 @Composable
 fun CartItemComponent(
-    product: Product,
+    cartItem: CartItem,
     onClickPlus : () -> Unit,
     onClickMinus : () -> Unit,
     onClickClose : () -> Unit,
@@ -57,7 +58,7 @@ fun CartItemComponent(
             .padding(18.dp)
     ) {
         CartItemHeader(
-            product = product,
+            product = cartItem.product,
             onClickClose = onClickClose
         )
         Row(
@@ -68,7 +69,7 @@ fun CartItemComponent(
                 modifier = Modifier
                     .height(84.dp)
                     .width(136.dp),
-                product = product
+                product = cartItem.product
             )
 
             Column(
@@ -77,10 +78,10 @@ fun CartItemComponent(
                 horizontalAlignment = Alignment.End
             ) {
                 CartItemPrice(
-                    product = product
+                    product = cartItem.product
                 )
                 CartItemCount(
-                    count = 1,
+                    count = cartItem.count,
                     onClickPlus = onClickPlus,
                     onClickMinus = onClickMinus
                 )
@@ -197,7 +198,10 @@ fun CartItemCount(
 @Composable
 private fun Preview1() {
     CartItemComponent(
-        product = productList.get(0),
+        cartItem = CartItem(
+            product = productList.get(0),
+            count = 0
+        ),
         onClickPlus = {},
         onClickMinus = {},
         onClickClose = {}
