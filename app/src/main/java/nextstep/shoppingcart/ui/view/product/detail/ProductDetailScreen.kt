@@ -2,7 +2,6 @@ package nextstep.shoppingcart.ui.view.product.detail
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -11,16 +10,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -30,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.composable.DinoBottomCta
 import nextstep.shoppingcart.ui.composable.DinoTopAppBar
 import nextstep.shoppingcart.ui.composable.InvalidAccessItem
 import nextstep.shoppingcart.ui.model.Cart
@@ -94,27 +90,13 @@ fun ProductDetailScreen(
                         )
                     }
                 }
-                Button(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.BottomCenter),
-                    shape = RectangleShape,
-                    contentPadding = PaddingValues(15.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.White,
-                        containerColor = Color(0xff2196F3)
-                    ),
+                DinoBottomCta(
+                    ctaText = stringResource(R.string.product_detail_put_in_shopping_cart_button),
                     onClick = {
                         Cart.addOne(product)
                         context.startActivity(ProductCartListActivity.newIntent(context))
                     }
-                ) {
-                    Text(
-                        text = stringResource(R.string.product_detail_put_in_shopping_cart_button),
-                        fontWeight = FontWeight.W700,
-                        fontSize = 20.sp,
-                    )
-                }
+                )
             }
         }
     }
