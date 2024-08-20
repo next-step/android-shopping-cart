@@ -17,9 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,10 +25,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.common.component.Image
 import nextstep.shoppingcart.ui.product.detail.component.PriceText
 import nextstep.shoppingcart.ui.product.detail.component.ShoppingCartButton
 import nextstep.shoppingcart.ui.theme.Black10
@@ -66,12 +63,8 @@ fun ProductDetailScreen(
                 .padding(innerPadding),
         ) {
             Column(modifier = Modifier) {
-                AsyncImage(
-                    model = ImageRequest.Builder(context).data(product.imageUrl).crossfade(true)
-                        .build(),
-                    placeholder = painterResource(R.drawable.ic_launcher_foreground),
-                    contentDescription = "productImage",
-                    contentScale = ContentScale.Crop,
+                Image(
+                    url = product.imageUrl,
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(1f),
