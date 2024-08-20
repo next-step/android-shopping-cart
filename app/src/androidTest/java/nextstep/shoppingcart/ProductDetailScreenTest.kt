@@ -33,9 +33,7 @@ class ProductDetailScreenTest {
         }
 
         // then : 상품의 가격정보가 숫자 포멧팅되어 노출되어야한다.
-        composeTestRule
-            .onNodeWithText("12,984원")
-            .assertExists()
+        composeTestRule.onNodeWithText("12,984원").assertExists()
     }
 
     @Test
@@ -54,9 +52,7 @@ class ProductDetailScreenTest {
         }
 
         // then : 상품의 가격정보가 숫자 포멧팅되어 노출되어야한다.
-        composeTestRule
-            .onNodeWithText("12984원")
-            .assertDoesNotExist()
+        composeTestRule.onNodeWithText("12984원").assertDoesNotExist()
     }
 
     // 상품 명 노출
@@ -76,10 +72,6 @@ class ProductDetailScreenTest {
         }
 
         // then :
-        composeTestRule
-            .onNodeWithText("라때")
-            .assertExists()
+        composeTestRule.onNodeWithText("라때").assertExists()
     }
-
-
 }
