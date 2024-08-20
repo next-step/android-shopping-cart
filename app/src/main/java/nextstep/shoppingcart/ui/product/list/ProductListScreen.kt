@@ -20,25 +20,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.data.SampleProductList.sampleProductList
-import nextstep.shoppingcart.ui.cart.CartActivity
 import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity
 import nextstep.shoppingcart.ui.product.list.component.ProductCard
 import nextstep.shoppingcart.ui.product.list.component.ProductListTopBar
 
 
 @Composable
-fun ProductListScreen(productList: List<Product>) {
-    val context = LocalContext.current
+fun ProductListScreen(productList: List<Product>, onClickCartIcon: () -> Unit) {
     Scaffold(
         topBar = {
             ProductListTopBar(
                 Modifier
                     .fillMaxWidth()
                     .background(Color.White),
-                onClickCartIcon = {
-                    val intent = Intent(context, CartActivity::class.java)
-                    context.startActivity(intent)
-                }
+                onClickCartIcon = onClickCartIcon
             )
         }
     ) { paddingValue ->
@@ -86,7 +81,9 @@ fun ProductLazeColum(productList: List<Product>) {
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    ProductListScreen(sampleProductList)
+    ProductListScreen(
+        productList = sampleProductList,
+        onClickCartIcon = {})
 }
 
 @Preview(showBackground = true)
