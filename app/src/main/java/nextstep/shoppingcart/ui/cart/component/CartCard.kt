@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.data.SampleProductList
 import nextstep.shoppingcart.data.cart.CartItem
 
 @Composable
@@ -65,7 +64,12 @@ fun CartCard(
 private fun CartCardPreview() {
     CartCard(
         cartItem = CartItem(
-            product = SampleProductList.sampleProductList[0],
+            product = Product(
+                id = 1,
+                imgUrl = "https://picsum.photos/seed/1/200",
+                name = "상품 1-이름이 너무 길다면 어떻게 할 것인가요?",
+                price = 3000
+            ),
             count = 1
         ),
         modifier = Modifier,
