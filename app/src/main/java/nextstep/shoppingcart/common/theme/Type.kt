@@ -14,6 +14,20 @@ data class Typography(
         lineHeight = 28.sp,
         letterSpacing = 0.5.sp
     ),
+    val roboto22B: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.W700,
+        fontSize = 22.sp,
+        lineHeight = 18.67.sp,
+        letterSpacing = 0.5.sp
+    ),
+    val roboto22N: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.W400,
+        fontSize = 22.sp,
+        lineHeight = 18.67.sp,
+        letterSpacing = 0.5.sp
+    ),
     val roboto20B: TextStyle = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.W700,
