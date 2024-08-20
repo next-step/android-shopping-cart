@@ -13,13 +13,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.R.string.shopping_detail_add_button
+import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.ui.component.ShoppingButton
 import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.component.ShoppingTopBar
 import nextstep.shoppingcart.ui.shoppingdetail.component.ShoppingDetailDivider
-import nextstep.shoppingcart.ui.shoppingdetail.component.ShoppingDetailProductAddButton
 import nextstep.shoppingcart.ui.shoppingdetail.component.ShoppingDetailProductPrice
 import nextstep.shoppingcart.ui.shoppingdetail.component.ShoppingDetailProductTitle
-import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 
 @Composable
 fun ShoppingDetailScreen(
@@ -46,7 +47,10 @@ fun ShoppingDetailScreen(
         ShoppingDetailDivider()
         ShoppingDetailProductPrice(product = product)
         Spacer(modifier = Modifier.weight(weight = 1f))
-        ShoppingDetailProductAddButton(onAddClick = onAddClick)
+        ShoppingButton(
+            onClick = onAddClick,
+            buttonTitle = stringResource(id = shopping_detail_add_button),
+        )
     }
 }
 
