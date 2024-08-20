@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.common.model.Product
 
 @Composable
-internal fun ProductListContent(
+internal fun ProductListScreenContent(
     paddingValues: PaddingValues,
     products: List<Product>,
     onProductClick: (Product) -> Unit,
@@ -32,7 +32,7 @@ internal fun ProductListContent(
             items = products,
             key = { item -> item.id }
         ) { item ->
-            ProductListCard(
+            ProductListScreenCard(
                 product = item,
                 modifier = Modifier.clickable { onProductClick(item) }
             )

@@ -15,6 +15,7 @@ internal fun NavGraphBuilder.cartNavGraph(
     composable<CartRoute> {
         CartScreen(
             cartItems = Cart.items,
+            totalPrice = Cart.totalPrice,
             onCountAddClick = { Cart.addOne(it.product) },
             onCountMinusClick = { Cart.removeOne(it.product) },
             onCartItemDeleteClick = { Cart.removeAll(it.product) },

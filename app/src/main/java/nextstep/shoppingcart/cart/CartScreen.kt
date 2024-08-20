@@ -10,13 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.cart.component.CartItemCard
+import nextstep.shoppingcart.cart.component.CartScreenBottomBar
 import nextstep.shoppingcart.common.component.NextStepTopAppBar
 import nextstep.shoppingcart.common.model.CartItem
 import nextstep.shoppingcart.common.model.dummyProducts
@@ -24,6 +24,7 @@ import nextstep.shoppingcart.common.model.dummyProducts
 @Composable
 internal fun CartScreen(
     cartItems: List<CartItem>,
+    totalPrice: Int,
     onCountAddClick: (CartItem) -> Unit,
     onCountMinusClick: (CartItem) -> Unit,
     onCartItemDeleteClick: (CartItem) -> Unit,
@@ -47,6 +48,12 @@ internal fun CartScreen(
                     .padding(paddingValues = paddingValues)
                     .fillMaxSize()
                     .padding(horizontal = 18.dp)
+            )
+        },
+        bottomBar = {
+            CartScreenBottomBar(
+                totalPrice = totalPrice,
+                onOrderButtonClick = {},
             )
         }
     )
@@ -84,6 +91,7 @@ private fun CartScreenPreview() {
 
     CartScreen(
         cartItems = cartItems,
+        totalPrice = cartItems.sumOf { it.totalPrice },
         onCountAddClick = {},
         onCountMinusClick = {},
         onCartItemDeleteClick = {},

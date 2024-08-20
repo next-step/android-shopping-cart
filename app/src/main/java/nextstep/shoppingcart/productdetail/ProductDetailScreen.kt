@@ -10,8 +10,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.common.component.NextStepTopAppBar
 import nextstep.shoppingcart.common.model.Product
-import nextstep.shoppingcart.productdetail.component.ProductDetailBottomBar
-import nextstep.shoppingcart.productdetail.component.ProductDetailContent
+import nextstep.shoppingcart.productdetail.component.ProductDetailScreenBottomBar
+import nextstep.shoppingcart.productdetail.component.ProductDetailScreenContent
 import java.util.UUID
 
 @Composable
@@ -29,14 +29,14 @@ internal fun ProductDetailScreen(
             )
         },
         content = { paddingValues ->
-            ProductDetailContent(
+            ProductDetailScreenContent(
                 product = product,
                 modifier = Modifier
                     .padding(paddingValues)
                     .fillMaxSize(),
             )
         },
-        bottomBar = { ProductDetailBottomBar(onAddToCartClick = onAddToCartClick) }
+        bottomBar = { ProductDetailScreenBottomBar(onAddToCartClick = onAddToCartClick) }
     )
 }
 

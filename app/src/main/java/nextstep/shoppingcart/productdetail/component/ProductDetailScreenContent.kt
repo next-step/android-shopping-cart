@@ -26,7 +26,7 @@ import java.text.NumberFormat
 import java.util.Locale
 
 @Composable
-internal fun ProductDetailContent(
+internal fun ProductDetailScreenContent(
     product: Product,
     modifier: Modifier,
 ) {

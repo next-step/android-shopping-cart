@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.common.model.Product
-import nextstep.shoppingcart.productlist.component.ProductListContent
-import nextstep.shoppingcart.productlist.component.ProductListTopBar
+import nextstep.shoppingcart.productlist.component.ProductListScreenContent
+import nextstep.shoppingcart.productlist.component.ProductListScreenTopBar
 import java.util.UUID
 
 @Composable
@@ -20,10 +20,10 @@ internal fun ProductListScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            ProductListTopBar(onCartClick = onCartClick)
+            ProductListScreenTopBar(onCartClick = onCartClick)
         },
         content = { paddingValues ->
-            ProductListContent(
+            ProductListScreenContent(
                 paddingValues, products, onProductClick
             )
         }

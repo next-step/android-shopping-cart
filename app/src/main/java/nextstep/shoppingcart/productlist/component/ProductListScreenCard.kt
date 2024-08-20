@@ -19,7 +19,7 @@ import nextstep.shoppingcart.common.theme.NextStepTheme
 import java.util.UUID
 
 @Composable
-internal fun ProductListCard(
+internal fun ProductListScreenCard(
     product: Product,
     modifier: Modifier = Modifier,
 ) {
@@ -58,7 +58,7 @@ internal fun ProductListCard(
 @Composable
 private fun ProductListCardPreview() {
     MaterialTheme {
-        ProductListCard(
+        ProductListScreenCard(
             product = Product(
                 id = UUID.randomUUID().toString(),
                 name = "PET보틀-정사각형처럼 보이는 예쁜 보틀을 팔아요",

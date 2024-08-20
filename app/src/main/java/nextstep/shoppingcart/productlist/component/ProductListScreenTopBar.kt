@@ -15,7 +15,7 @@ import nextstep.shoppingcart.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun ProductListTopBar(
+internal fun ProductListScreenTopBar(
     onCartClick: () -> Unit,
 ) {
     CenterAlignedTopAppBar(

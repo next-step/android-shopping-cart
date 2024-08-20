@@ -15,7 +15,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.common.theme.NextStepTheme
 
 @Composable
-internal fun ProductDetailBottomBar(
+internal fun ProductDetailScreenBottomBar(
     onAddToCartClick: () -> Unit,
 ) {
     Surface(
