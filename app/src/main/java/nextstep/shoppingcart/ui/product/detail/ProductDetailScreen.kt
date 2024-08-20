@@ -23,6 +23,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -101,12 +103,23 @@ fun ProductDetailScreen(
 
 @Preview
 @Composable
-private fun ProductDetailScreenPreview() {
-    val product = Product(
-        name = "iPhone 15 Pro Max",
-        imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
-        price = 1_900_000,
-    )
+private fun ProductDetailScreenPreview(
+    @PreviewParameter(ProductDetailScreenPreviewParameterProvider::class) param: Product,
+) {
+    ProductDetailScreen(product = param, onBack = {}, onShowShoppingCart = {})
+}
 
-    ProductDetailScreen(product = product, onBack = {}, onShowShoppingCart = {})
+private class ProductDetailScreenPreviewParameterProvider : PreviewParameterProvider<Product> {
+    override val values: Sequence<Product> = sequenceOf(
+        Product(
+            name = "iPhone 15 Pro Max",
+            imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+            price = 1_900_000,
+        ),
+        Product(
+            name = "iPhone 15 Pro Max / MacBook Pro 16 M3 Max",
+            imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+            price = 1_900_000,
+        ),
+    )
 }
