@@ -108,6 +108,22 @@ class CartTest {
         Assert.assertEquals(Cart.items.size, 0)
     }
 
+    @Test
+    fun 상품을_제거하면_장바구니_아이템은_없어진다() {
+        // given
+        val product = Product(
+            name = "iPhone 15 Pro Max",
+            imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+            price = 1_900_000,
+        )
+        Cart.addOne(product)
+        Cart.addOne(product)
 
+        // when
+        Cart.removeAll(product)
+
+        // then
+        Assert.assertEquals(Cart.items.size, 0)
+    }
 
 }
