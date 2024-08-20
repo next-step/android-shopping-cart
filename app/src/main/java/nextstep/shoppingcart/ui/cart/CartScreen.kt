@@ -44,8 +44,8 @@ fun CartScreen(modifier: Modifier) {
         ) {
             items(items) { item ->
                 CartCard(
-                    modifier,
-                    item,
+                    cartItem = item,
+                    modifier = modifier,
                     onMinusClick = { product -> items = Cart.removeOne(product) },
                     onPlusClick = { product -> items = Cart.addOne(product) },
                     onRemoveClick = { cartItem -> items = Cart.removeAll(cartItem.product) }

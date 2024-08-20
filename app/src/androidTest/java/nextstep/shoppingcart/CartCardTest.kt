@@ -27,8 +27,8 @@ class CartCardTest {
         // when : 상품 카드를 노출한다.
         composeTestRule.setContent {
             CartCard(
-                modifier = Modifier,
                 cartItem = CartItem(product, 1),
+                modifier = Modifier,
                 onMinusClick = {},
                 onPlusClick = {},
                 onRemoveClick = {}
@@ -54,8 +54,8 @@ class CartCardTest {
         // when : 상품 카드를 노출한다.
         composeTestRule.setContent {
             CartCard(
-                modifier = Modifier,
                 cartItem = CartItem(product, 1),
+                modifier = Modifier,
                 onMinusClick = {},
                 onPlusClick = {},
                 onRemoveClick = {}
