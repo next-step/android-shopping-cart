@@ -1,18 +1,13 @@
 package nextstep.shoppingcart.ui.product.detail
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -22,8 +17,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -36,8 +29,9 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.product.detail.component.PriceText
+import nextstep.shoppingcart.ui.product.detail.component.ShoppingCartButton
 import nextstep.shoppingcart.ui.theme.Black10
-import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.Gray10
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -91,47 +85,19 @@ fun ProductDetailScreen(
 
                 Divider(thickness = 1.dp, color = Gray10, modifier = Modifier.fillMaxWidth())
 
-                Row(
+                PriceText(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
                         .padding(18.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.price),
-                        color = Black10,
-                        fontSize = 20.sp,
-                    )
-                    Text(
-                        text = stringResource(id = R.string.price_format, product.price),
-                        color = Black10,
-                        fontSize = 20.sp,
-                    )
-                }
+                    price = product.price,
+                )
 
-                Button(
-                    onClick = onShowShoppingCart,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Blue50,
-                        contentColor = Color.White,
-                    ),
-                    shape = RectangleShape,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(54.dp),
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.put_shopping_cart),
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
+                ShoppingCartButton(onShowShoppingCart = onShowShoppingCart)
             }
         }
     }
 }
-
 
 @Preview
 @Composable
