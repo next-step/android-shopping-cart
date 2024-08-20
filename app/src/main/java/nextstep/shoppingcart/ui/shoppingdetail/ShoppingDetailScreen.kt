@@ -12,9 +12,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.R
 import nextstep.shoppingcart.R.string.shopping_detail_add_button
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.R.string.shopping_detail_title
+import nextstep.shoppingcart.data.Cart.findProductById
 import nextstep.shoppingcart.ui.component.ShoppingButton
 import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.component.ShoppingTopBar
@@ -30,8 +30,8 @@ fun ShoppingDetailScreen(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
-        val product = dummyProducts.find { it.id == productId } ?: throw IllegalArgumentException()
-        val screenTitle = stringResource(id = R.string.shopping_detail_title)
+        val product = findProductById(productId)
+        val screenTitle = stringResource(id = shopping_detail_title)
 
         ShoppingTopBar(
             title = screenTitle,

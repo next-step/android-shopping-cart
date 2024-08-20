@@ -8,7 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.R
+import nextstep.shoppingcart.R.string.shopping_item_description
 import nextstep.shoppingcart.data.dummyProducts
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
 
@@ -19,7 +19,7 @@ fun ShoppingProductImage(
 ) {
     AsyncImage(
         model = product.imageUrl,
-        contentDescription = stringResource(id = R.string.shopping_item_description),
+        contentDescription = stringResource(id = shopping_item_description),
         modifier = modifier
             .width(width = 360.dp)
             .height(height = 360.dp),

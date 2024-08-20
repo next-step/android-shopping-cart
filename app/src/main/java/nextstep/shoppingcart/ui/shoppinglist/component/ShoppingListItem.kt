@@ -17,7 +17,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.R
+import nextstep.shoppingcart.R.string.shopping_item_description
+import nextstep.shoppingcart.R.string.shopping_item_price_format
 import nextstep.shoppingcart.data.dummyProducts
 import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
@@ -30,7 +31,7 @@ fun ShoppingListItem(
     onItemClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shoppingListItemDescription = stringResource(id = R.string.shopping_item_description)
+    val shoppingListItemDescription = stringResource(id = shopping_item_description)
 
     Column(
         modifier = modifier
@@ -58,7 +59,7 @@ fun ShoppingListItem(
             overflow = TextOverflow.Ellipsis,
         )
         Text(
-            text = product.price.toString(),
+            text = stringResource(id = shopping_item_price_format, product.price),
             modifier = Modifier.padding(
                 start = 4.dp,
                 bottom = 4.dp,

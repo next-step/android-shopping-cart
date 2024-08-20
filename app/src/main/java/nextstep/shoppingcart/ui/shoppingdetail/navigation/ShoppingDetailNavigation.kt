@@ -19,6 +19,7 @@ fun NavGraphBuilder.shoppingDetailScreen(
         ),
     ) {
         val productId = it.arguments?.getLong("productId", -1) ?: -1
+
         ShoppingDetailScreen(
             productId = productId,
             onBackClick = onBackClick,

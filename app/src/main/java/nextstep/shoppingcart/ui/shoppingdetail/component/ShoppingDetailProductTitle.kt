@@ -13,14 +13,17 @@ import nextstep.shoppingcart.ui.shoppinglist.model.Product
 import nextstep.shoppingcart.ui.theme.RobotoBold
 
 @Composable
-fun ShoppingDetailProductTitle(product: Product) {
+fun ShoppingDetailProductTitle(
+    product: Product,
+    modifier: Modifier = Modifier,
+) {
     Text(
         text = product.name,
         color = Color.Black,
         fontSize = 24.sp,
         fontFamily = RobotoBold,
         maxLines = 1,
-        modifier = Modifier.padding(all = 18.dp),
+        modifier = modifier.padding(all = 18.dp),
     )
 }
 
