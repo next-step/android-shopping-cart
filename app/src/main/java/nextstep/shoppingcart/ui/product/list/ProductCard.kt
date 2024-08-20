@@ -16,8 +16,6 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -144,27 +142,6 @@ private fun ProductCardDescription(
             text = stringResource(id = R.string.product_price, price),
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(start = 4.dp),
-        )
-    }
-}
-
-@Composable
-private fun AddToCartButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    IconButton(
-        onClick = onClick,
-        colors =
-            IconButtonDefaults.iconButtonColors(
-                containerColor = Color.White,
-            ),
-        modifier = modifier,
-    ) {
-        Icon(
-            imageVector = Icons.Filled.Add,
-            contentDescription = stringResource(id = R.string.add),
-            modifier = Modifier.size(24.dp),
         )
     }
 }
