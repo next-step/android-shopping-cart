@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R.string.shopping_detail_add_button
 import nextstep.shoppingcart.R.string.shopping_detail_title
+import nextstep.shoppingcart.data.Cart.addOne
 import nextstep.shoppingcart.data.Cart.findProductById
 import nextstep.shoppingcart.ui.component.ShoppingButton
 import nextstep.shoppingcart.ui.component.ShoppingProductImage
@@ -48,7 +49,10 @@ fun ShoppingDetailScreen(
         ShoppingDetailProductPrice(product = product)
         Spacer(modifier = Modifier.weight(weight = 1f))
         ShoppingButton(
-            onClick = onAddClick,
+            onClick = {
+                addOne(product)
+                onAddClick()
+            },
             buttonTitle = stringResource(id = shopping_detail_add_button),
         )
     }
