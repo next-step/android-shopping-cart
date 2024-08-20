@@ -33,6 +33,7 @@ import nextstep.shoppingcart.component.topbar.ShoppingTopBarWithBack
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.productList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+import nextstep.shoppingcart.util.Cart
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,7 +66,10 @@ fun ShoppingDetailScreen(
             ShoppingDetailContent(
                 modifier = Modifier.padding(innerPadding),
                 product = product,
-                onClickCart = onClickCart
+                onClickCart = {
+                    Cart.addOne(product)
+                    onClickCart()
+                }
             )
         }
     }
