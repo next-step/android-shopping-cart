@@ -39,7 +39,7 @@ import nextstep.shoppingcart.model.productList
 import nextstep.shoppingcart.ui.theme.Gray10
 
 @Composable
-fun CartItem(
+fun CartItemComponent(
     product: Product,
     onClickPlus : () -> Unit,
     onClickMinus : () -> Unit,
@@ -196,7 +196,7 @@ fun CartItemCount(
 @Preview(name = "CartItemPreview")
 @Composable
 private fun Preview1() {
-    CartItem(
+    CartItemComponent(
         product = productList.get(0),
         onClickPlus = {},
         onClickMinus = {},

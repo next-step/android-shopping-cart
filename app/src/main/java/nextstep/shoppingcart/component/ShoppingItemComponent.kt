@@ -23,7 +23,7 @@ import nextstep.shoppingcart.model.Product
 const val SHOPPING_ITEM_WIDTH = 156
 
 @Composable
-fun ShoppingItem(
+fun ShoppingItemComponent(
     product: Product,
     onClick : () -> Unit,
     modifier: Modifier = Modifier
@@ -64,7 +64,7 @@ fun ShoppingItem(
 @Preview
 @Composable
 private fun PreviewShoppingItem() {
-    ShoppingItem(
+    ShoppingItemComponent(
         product = Product(
             imageUrl = "https://picsum.photos/id/0/5000/3333",
             name = "신형 노트북",

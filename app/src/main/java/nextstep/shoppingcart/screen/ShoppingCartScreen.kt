@@ -12,7 +12,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -20,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.component.CartItem
+import nextstep.shoppingcart.component.CartItemComponent
 import nextstep.shoppingcart.component.ShoppingTextButton
 import nextstep.shoppingcart.component.topbar.ShoppingTopBarWithBack
 import nextstep.shoppingcart.model.productList
@@ -60,7 +59,7 @@ fun ShoppingCartScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 item {
-                    CartItem(
+                    CartItemComponent(
                         product = productList[1],
                         onClickPlus = {
 
