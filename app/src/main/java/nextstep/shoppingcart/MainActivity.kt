@@ -1,5 +1,6 @@
 package nextstep.shoppingcart
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -48,7 +49,18 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ProductListScreen(products = products)
+                    ProductListScreen(
+                        products = products,
+                        onActionClick = {
+                            val intent = Intent(this, ShoppingCartActivity::class.java)
+                            startActivity(intent)
+                        },
+                        onProductClick = { product ->
+                            val intent = Intent(this, ProductDetailActivity::class.java)
+                            intent.putExtra("product", product)
+                            startActivity(intent)
+                        }
+                    )
                 }
             }
         }

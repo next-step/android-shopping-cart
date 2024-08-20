@@ -21,7 +21,12 @@ class ShoppingCartActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ShoppingCartScreen(modifier = Modifier.fillMaxSize())
+                    ShoppingCartScreen(
+                        onNavigationClick = {
+                            finish()
+                        },
+                        modifier = Modifier.fillMaxSize()
+                    )
                 }
             }
         }
