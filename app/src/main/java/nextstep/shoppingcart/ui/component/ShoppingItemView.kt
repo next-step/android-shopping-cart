@@ -2,6 +2,7 @@ package nextstep.shoppingcart.ui.component
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,7 +25,9 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.ui.theme.getColorScheme
 import okhttp3.OkHttpClient
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
@@ -34,6 +38,8 @@ import javax.net.ssl.X509TrustManager
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ShoppingItemView(product: Product) {
+    val colorScheme = getColorScheme()
+
     val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
         override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
         override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
@@ -58,7 +64,7 @@ fun ShoppingItemView(product: Product) {
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(5.dp)
-            .background(Color.White),
+            .background(colorScheme.background),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
@@ -98,17 +104,17 @@ fun ShoppingItemView(product: Product) {
             softWrap = true,
             fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis,
-            color = Color.Black,
+            color = if(isSystemInDarkTheme()) Color.White else Color.Black
         )
         Text(
-            text = "${product.price}원",
+            text = stringResource(id = R.string.product_price, product.price),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 2.dp),
             maxLines = 1,
             softWrap = true,
             overflow = TextOverflow.Ellipsis,
-            color = Color.Black
+            color = if(isSystemInDarkTheme()) Color.White else Color.Black
         )
     }
 }
@@ -117,6 +123,6 @@ fun ShoppingItemView(product: Product) {
 @Composable
 fun ShoppingItemViewPreview() {
     Surface {
-        ShoppingItemView(Product(name = "name", price = "price", description = "description"))
+        ShoppingItemView(Product(name = "name", price = 9999, description = "description"))
     }
 }

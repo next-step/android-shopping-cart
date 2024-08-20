@@ -1,8 +1,8 @@
 package nextstep.shoppingcart.data.model
 
 data class Product(
-    val imageUrl: String = "https://random.imagecdn.app/500/500",
+    val imageUrl: String = "https://picsum.photos/500",
     val name: String,
-    val price: String,
+    val price: Int,
     val description: String
 )

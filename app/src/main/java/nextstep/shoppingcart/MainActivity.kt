@@ -3,6 +3,7 @@ package nextstep.shoppingcart
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,6 +22,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,34 +36,36 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val listOfItems = listOf(
-            Product(name = "name", price = "10000", description = "description"),
-            Product(name = "name2", price = "15000", description = "description"),
-            Product(name = "name3", price = "12000", description = "description"),
-            Product(name = "name4", price = "9000", description = "description"),
-            Product(name = "name5", price = "5500", description = "description"),
-            Product(name = "name6", price = "125000", description = "description"),
-            Product(name = "name7", price = "9900", description = "description"),
-            Product(name = "name8", price = "52000", description = "description")
+            Product(name = "name", price = 10000, description = "description"),
+            Product(name = "name2", price = 15000, description = "description"),
+            Product(name = "name3", price = 12000, description = "description"),
+            Product(name = "name4", price = 9000, description = "description"),
+            Product(name = "name5", price = 5500, description = "description"),
+            Product(name = "name6", price = 125000, description = "description"),
+            Product(name = "name7", price = 9900, description = "description"),
+            Product(name = "name8", price = 52000, description = "description")
         )
         setContent {
             ShoppingCartTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.White),
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     Scaffold(
                         topBar = {
                             TopAppBar(
                                 title = {
                                     Text(
-                                        text = "상품 목록",
+                                        text = stringResource(id = R.string.product_list),
                                         modifier = Modifier.fillMaxWidth(),
                                         textAlign = TextAlign.Center
                                     )
                                 },
                                 actions = {
-                                    Icon(Icons.Filled.ShoppingCart, contentDescription = "Shopping Cart")
+                                    Icon(Icons.Filled.ShoppingCart, contentDescription = stringResource(id = R.string.app_name))
                                 }
                             )
                         },
