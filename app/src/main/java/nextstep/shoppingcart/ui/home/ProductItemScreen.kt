@@ -68,7 +68,7 @@ fun ProductItem(
                         .padding(12.dp)
                 ) {
                     QuantitySelector(
-                        initQuantity = itemCount,
+                        quantity = itemCount,
                         onMinusClick = onMinusClick,
                         onPlusClick = onPlusClick
                     )
