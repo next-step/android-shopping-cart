@@ -1,10 +1,8 @@
 package nextstep.shoppingcart.productdetail
 
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import nextstep.shoppingcart.R
 import nextstep.shoppingcart.common.model.Cart
 import nextstep.shoppingcart.common.model.dummyProducts
 import org.junit.Assert
@@ -32,6 +30,7 @@ internal class ProductDetailScreenTest {
             ProductDetailScreen(
                 product = dummyProducts.first(),
                 onBackClick = {},
+                onAddToCartClick = {},
             )
         }
 
