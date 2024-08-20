@@ -1,34 +1,47 @@
 package nextstep.shoppingcart.ui.theme
 
-import androidx.compose.material3.Typography
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-// Set of Material typography styles to start with
-val Typography = Typography(
-    bodyLarge = TextStyle(
+data class Typography(
+    val roboto24B: TextStyle = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.W700,
+        fontSize = 24.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.5.sp
+    ),
+    val roboto20B: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.W700,
+        fontSize = 20.sp,
+        lineHeight = 23.44.sp,
+    ),
+    val roboto16B: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.W700,
         fontSize = 16.sp,
+        lineHeight = 14.sp,
+        letterSpacing = 0.5.sp
+    ),
+    val roboto16N: TextStyle = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.W400,
+        fontSize = 16.sp,
+        lineHeight = 14.sp,
+        letterSpacing = 0.5.sp
+    ),
+
+    val sans20N: TextStyle = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.W400,
+        fontSize = 20.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
     ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
 )
+
+internal val LocalTypography = staticCompositionLocalOf { Typography() }

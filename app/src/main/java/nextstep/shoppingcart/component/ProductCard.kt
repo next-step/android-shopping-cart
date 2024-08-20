@@ -4,23 +4,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.theme.NextStepTheme
 import java.util.UUID
 
 @Composable
@@ -52,30 +49,20 @@ internal fun ProductCard(
         ) {
             Text(
                 text = product.name,
-                style = TextStyle(
-                    fontWeight = FontWeight.W700,
-                    fontSize = 16.sp,
-                    lineHeight = 14.sp,
-                    letterSpacing = 0.5.sp,
-                ),
+                style = NextStepTheme.typography.roboto16B,
                 maxLines = 1,
                 modifier = Modifier.fillMaxWidth(),
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
                 text = stringResource(R.string.won_unit, product.price),
-                style = TextStyle(
-                    fontWeight = FontWeight.W400,
-                    fontSize = 16.sp,
-                    lineHeight = 20.sp,
-                    letterSpacing = 0.5.sp
-                ),
+                style = NextStepTheme.typography.roboto16N,
             )
         }
     }
 }
 
-@Preview
+@Preview(widthDp = 600)
 @Composable
 private fun ProductCardPreview() {
     MaterialTheme {
@@ -86,7 +73,6 @@ private fun ProductCardPreview() {
                 price = 10000,
                 imageUrl = "https://picsum.photos/500",
             ),
-            modifier = Modifier.width(156.dp)
         )
     }
 }

@@ -21,17 +21,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.NextStepTopAppBar
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.theme.NextStepTheme
 import java.text.NumberFormat
 import java.util.Locale
 import java.util.UUID
@@ -97,12 +94,7 @@ private fun ProductDetailContent(
 
             Text(
                 text = product.name,
-                style = TextStyle(
-                    fontWeight = FontWeight.W700,
-                    fontSize = 24.sp,
-                    lineHeight = 28.sp,
-                    letterSpacing = 0.5.sp,
-                ),
+                style = NextStepTheme.typography.roboto24B,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(18.dp),
@@ -115,26 +107,18 @@ private fun ProductDetailContent(
                 .padding(18.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            TextStyle(
-                fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight.W400,
-                fontSize = 20.sp,
-                lineHeight = 24.sp,
-                letterSpacing = 0.5.sp,
-            ).let { style ->
-                Text(
-                    text = stringResource(R.string.amount_of_money),
-                    style = style
-                )
+            Text(
+                text = stringResource(R.string.amount_of_money),
+                style = NextStepTheme.typography.sans20N
+            )
 
-                Text(
-                    text = stringResource(
-                        R.string.amount_of_money_right,
-                        NumberFormat.getNumberInstance(Locale.KOREA).format(product.price)
-                    ),
-                    style = style,
-                )
-            }
+            Text(
+                text = stringResource(
+                    R.string.amount_of_money_right,
+                    NumberFormat.getNumberInstance(Locale.KOREA).format(product.price)
+                ),
+                style = NextStepTheme.typography.sans20N,
+            )
         }
     }
 }
@@ -153,11 +137,7 @@ private fun ProductDetailBottomBar() {
             Text(
                 text = stringResource(R.string.put_in_shopping_cart),
                 modifier = Modifier.padding(vertical = 15.dp),
-                style = TextStyle(
-                    fontWeight = FontWeight.W700,
-                    fontSize = 20.sp,
-                    lineHeight = 23.44.sp,
-                ),
+                style = NextStepTheme.typography.roboto20B,
                 color = Color.White,
             )
         }
