@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,6 +34,8 @@ import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.common.component.Image
 import nextstep.shoppingcart.ui.theme.Black10
 import nextstep.shoppingcart.ui.theme.Gray10
+
+const val CART_LIST_ITEM_CLOSE_TEST_TAG = "cartListItemClose"
 
 @Composable
 fun CartListItem(
@@ -64,7 +67,10 @@ fun CartListItem(
                         .weight(1f),
                 )
 
-                IconButton(onClick = onClickCancel) {
+                IconButton(
+                    onClick = onClickCancel,
+                    modifier = Modifier.testTag(CART_LIST_ITEM_CLOSE_TEST_TAG),
+                ) {
                     Icon(
                         imageVector = Icons.Filled.Close,
                         contentDescription = "close",

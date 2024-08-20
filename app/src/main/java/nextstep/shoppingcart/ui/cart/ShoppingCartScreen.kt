@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,6 +29,8 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.ui.cart.component.CartListItem
 import nextstep.shoppingcart.ui.common.component.Button
+
+const val SHOPPING_CART_ORDER_TEST_TAG = "shoppingCartOrder"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,7 +74,11 @@ fun ShoppingCartScreen(onBack: () -> Unit) {
                 }
             }
 
-            Button(text = stringResource(id = R.string.order_format, totalPrice), onClick = {})
+            Button(
+                text = stringResource(id = R.string.order_format, totalPrice),
+                onClick = {},
+                modifier = Modifier.testTag(SHOPPING_CART_ORDER_TEST_TAG),
+            )
         }
     }
 }
