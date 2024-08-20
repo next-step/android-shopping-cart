@@ -17,7 +17,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,10 +25,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.common.component.Button
 import nextstep.shoppingcart.ui.common.component.Image
 import nextstep.shoppingcart.ui.product.detail.component.PriceText
-import nextstep.shoppingcart.ui.product.detail.component.ShoppingCartButton
 import nextstep.shoppingcart.ui.theme.Black10
 import nextstep.shoppingcart.ui.theme.Gray10
 
@@ -40,7 +40,6 @@ fun ProductDetailScreen(
     onBack: () -> Unit,
     onShowShoppingCart: () -> Unit,
 ) {
-    val context = LocalContext.current
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -88,7 +87,13 @@ fun ProductDetailScreen(
                     price = product.price,
                 )
 
-                ShoppingCartButton(onShowShoppingCart = onShowShoppingCart)
+                Button(
+                    text = stringResource(id = R.string.put_shopping_cart),
+                    onClick = {
+                        Cart.addOne(product)
+                        onShowShoppingCart()
+                    },
+                )
             }
         }
     }
