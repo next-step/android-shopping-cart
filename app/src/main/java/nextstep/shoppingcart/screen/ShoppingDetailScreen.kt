@@ -37,11 +37,13 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ShoppingDetailScreen(
     productId: Int,
-    onClickCart : () -> Unit,
-    onClickBack : () -> Unit,
+    onClickCart: () -> Unit,
+    onClickBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val product = productList.find { it.id == productId }
+    val product = remember(productId) {
+        productList.find { it.id == productId }
+    }
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -51,14 +53,14 @@ fun ShoppingDetailScreen(
             )
         }
     ) { innerPadding ->
-        if(product == null){
+        if (product == null) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
-            ){
+            ) {
                 Text(text = "해당 상품을 조회할 수 없습니다.")
             }
-        }else {
+        } else {
             ShoppingDetailContent(
                 modifier = Modifier.padding(innerPadding),
                 product = product,
@@ -71,7 +73,7 @@ fun ShoppingDetailScreen(
 @Composable
 fun ShoppingDetailContent(
     product: Product,
-    onClickCart : () -> Unit,
+    onClickCart: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
@@ -83,15 +85,14 @@ fun ShoppingDetailContent(
             modifier = Modifier
                 .weight(1f)
                 .verticalScroll(scrollState)
-        ){
-            AsyncImage(
+        ) {
+            ShoppingDetailContentImage(
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(1f),
-                model = product.imageUrl,
-                contentDescription = product.name,
-                contentScale = ContentScale.Crop
+                product = product
             )
+
             Text(
                 modifier = Modifier.padding(18.dp),
                 text = product.name,
@@ -100,29 +101,55 @@ fun ShoppingDetailContent(
                 ),
                 fontWeight = FontWeight.Bold
             )
+
             Divider()
-            Row(
+
+            ShoppingDetailContentPrice(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(18.dp)
-            ) {
-                Text(
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .weight(1f),
-                    text = stringResource(id = R.string.shopping_detail_price_title),
-                    style = MaterialTheme.typography.titleSmall
-                )
-                Text(
-                    text = stringResource(id = R.string.shopping_list_price_korean, product.price),
-                    style = MaterialTheme.typography.titleSmall
-                )
-            }
+                    .padding(18.dp),
+                product = product
+            )
         }
         ShoppingTextButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.shopping_detail_cart_button),
             onClick = onClickCart
+        )
+    }
+}
+
+@Composable
+fun ShoppingDetailContentImage(
+    product: Product,
+    modifier: Modifier = Modifier
+) {
+    AsyncImage(
+        modifier = modifier,
+        model = product.imageUrl,
+        contentDescription = product.name,
+        contentScale = ContentScale.Crop
+    )
+}
+
+@Composable
+fun ShoppingDetailContentPrice(
+    product: Product,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+    ) {
+        Text(
+            modifier = Modifier
+                .wrapContentHeight()
+                .weight(1f),
+            text = stringResource(id = R.string.shopping_detail_price_title),
+            style = MaterialTheme.typography.titleSmall
+        )
+        Text(
+            text = stringResource(id = R.string.shopping_list_price_korean, product.price),
+            style = MaterialTheme.typography.titleSmall
         )
     }
 }
