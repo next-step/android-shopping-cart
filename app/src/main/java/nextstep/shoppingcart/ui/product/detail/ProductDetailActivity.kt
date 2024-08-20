@@ -1,10 +1,12 @@
 package nextstep.shoppingcart.ui.product.detail
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Suppress("DEPRECATION")
@@ -22,7 +24,18 @@ class ProductDetailActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
-                ProductDetailScreen(product)
+                ProductDetailScreen(
+                    product = product,
+                    onBack = { finish() },
+                    onShowShoppingCart = {
+                        startActivity(
+                            Intent(
+                                this,
+                                ShoppingCartActivity::class.java,
+                            )
+                        )
+                    },
+                )
             }
         }
     }
