@@ -1,5 +1,6 @@
-package nextstep.shoppingcart.ui.screen
+package nextstep.shoppingcart.ui.product.list
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,22 +15,30 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.ui.component.ProductCard
-import nextstep.shoppingcart.ui.component.ProductListTopBar
-import nextstep.shoppingcart.ui.data.Product
-import nextstep.shoppingcart.ui.data.SampleProductList.sampleProductList
+import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.SampleProductList.sampleProductList
+import nextstep.shoppingcart.ui.cart.CartActivity
+import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity
+import nextstep.shoppingcart.ui.product.list.component.ProductCard
+import nextstep.shoppingcart.ui.product.list.component.ProductListTopBar
 
 
 @Composable
 fun ProductListScreen(productList: List<Product>) {
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             ProductListTopBar(
                 Modifier
                     .fillMaxWidth()
-                    .background(Color.White)
+                    .background(Color.White),
+                onClickCartIcon = {
+                    val intent = Intent(context, CartActivity::class.java)
+                    context.startActivity(intent)
+                }
             )
         }
     ) { paddingValue ->
@@ -43,6 +52,8 @@ fun ProductListScreen(productList: List<Product>) {
 
 @Composable
 fun ProductLazeColum(productList: List<Product>) {
+    val context = LocalContext.current
+
     LazyVerticalGrid(
         modifier = Modifier
             .padding(horizontal = 18.dp)
@@ -59,7 +70,15 @@ fun ProductLazeColum(productList: List<Product>) {
                 product.id
             }
         ) { product ->
-            ProductCard(product)
+            ProductCard(
+                product = product,
+                onClickCard = {
+                    val intent = Intent(context, ProductDetailActivity::class.java).apply {
+                        putExtra("product", product)
+                    }
+                    context.startActivity(intent)
+                }
+            )
         }
     }
 }

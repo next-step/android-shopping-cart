@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.data
+package nextstep.shoppingcart.data
 
 object SampleProductList {
     val sampleProductList = buildList {

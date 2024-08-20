@@ -1,6 +1,5 @@
-package nextstep.shoppingcart.ui.component
+package nextstep.shoppingcart.ui.product.list.component
 
-import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,36 +9,32 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.ProductDetailActivity
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.data.Product
+import nextstep.shoppingcart.data.Product
 
 @Composable
-fun ProductCard(product: Product) {
-    val context = LocalContext.current
+fun ProductCard(product: Product, onClickCard: () -> Unit) {
     Column(
         modifier = Modifier
-            .clickable {
-                val intent = Intent(context, ProductDetailActivity::class.java).apply {
-                    putExtra("product", product)
-                }
-                context.startActivity(intent)
-            }
-            .fillMaxWidth()
+            .clickable(onClick = onClickCard)
+            .fillMaxSize()
     ) {
         AsyncImage(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxWidth(),
             model = product.imgUrl,
             contentDescription = null,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
+            placeholder = ColorPainter(Color.White)
         )
         Text(
             modifier = Modifier
@@ -60,4 +55,18 @@ fun ProductCard(product: Product) {
             text = stringResource(id = R.string.formatted_price, product.price)
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductCardPreview() {
+    ProductCard(
+        product = Product(
+            id = 1231,
+            imgUrl = "https://picsum.photos/seed/1/200",
+            name = "Mariana Webster",
+            price = 8348
+        ),
+        onClickCard = {}
+    )
 }
