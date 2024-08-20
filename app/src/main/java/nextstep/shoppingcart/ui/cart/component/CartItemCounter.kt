@@ -14,11 +14,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
+const val CART_ITEM_COUNTER_DECREASE_TEST_TAG = "decreaseCartItemCounter"
+const val CART_ITEM_COUNTER_INCREASE_TEST_TAG = "increaseCartItemCounter"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,7 +39,7 @@ fun CartItemCounter(
         Card(
             onClick = onClickDecrease,
             shape = RectangleShape,
-            modifier = Modifier.size(42.dp),
+            modifier = Modifier.size(42.dp).testTag(CART_ITEM_COUNTER_DECREASE_TEST_TAG),
         ) {
             Box(
                 modifier = Modifier
@@ -62,7 +66,7 @@ fun CartItemCounter(
         Card(
             onClick = onClickIncrease,
             shape = RectangleShape,
-            modifier = Modifier.size(42.dp),
+            modifier = Modifier.size(42.dp).testTag(CART_ITEM_COUNTER_INCREASE_TEST_TAG),
         ) {
             Box(
                 modifier = Modifier
