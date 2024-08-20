@@ -16,6 +16,8 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.common.component.ProductCard
 import nextstep.shoppingcart.common.model.Product
 import nextstep.shoppingcart.common.theme.NextStepTheme
+import java.text.NumberFormat
+import java.util.Locale
 import java.util.UUID
 
 @Composable
@@ -47,7 +49,10 @@ internal fun ProductListScreenCard(
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
-                text = stringResource(R.string.won_unit, product.price),
+                text = stringResource(
+                    R.string.won_unit,
+                    NumberFormat.getNumberInstance(Locale.KOREA).format(product.price)
+                ),
                 style = NextStepTheme.typography.roboto16N,
             )
         }

@@ -1,5 +1,10 @@
 package nextstep.shoppingcart.cart
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -13,12 +18,27 @@ internal fun NavGraphBuilder.cartNavGraph(
     onBackClick: () -> Unit,
 ) {
     composable<CartRoute> {
+        var cartItems by remember { mutableStateOf(Cart.items) }
+        var totalPrice by remember { mutableIntStateOf(Cart.totalPrice) }
+
         CartScreen(
-            cartItems = Cart.items,
-            totalPrice = Cart.totalPrice,
-            onCountAddClick = { Cart.addOne(it.product) },
-            onCountMinusClick = { Cart.removeOne(it.product) },
-            onCartItemDeleteClick = { Cart.removeAll(it.product) },
+            cartItems = cartItems,
+            totalPrice = totalPrice,
+            onCountAddClick = {
+                Cart.addOne(it.product)
+                cartItems = Cart.items
+                totalPrice = Cart.totalPrice
+            },
+            onCountMinusClick = {
+                Cart.removeOne(it.product)
+                cartItems = Cart.items
+                totalPrice = Cart.totalPrice
+            },
+            onCartItemDeleteClick = {
+                Cart.removeAll(it.product)
+                cartItems = Cart.items
+                totalPrice = Cart.totalPrice
+            },
             onBackClick = onBackClick
         )
     }

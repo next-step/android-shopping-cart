@@ -20,7 +20,10 @@ internal fun NavGraphBuilder.productDetailNavGraph(
         val product = navBackStackEntry.toRoute<ProductDetailRoute>().product
         ProductDetailScreen(
             product = product,
-            onAddToCartClick = { Cart.addOne(product) },
+            onAddToCartClick = {
+                Cart.addOne(product)
+                onBackClick()
+            },
             onBackClick = onBackClick,
         )
     }
