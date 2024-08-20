@@ -1,8 +1,5 @@
 package nextstep.shoppingcart.ui.view.product.detail
 
-import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,18 +9,13 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,38 +30,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.composable.DinoTopAppBar
 import nextstep.shoppingcart.ui.composable.InvalidAccessItem
 import nextstep.shoppingcart.ui.model.Cart
 import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.view.product.cartlist.ProductCartListActivity
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductDetailScreen(
     product: Product?,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
     Scaffold(
-        modifier = modifier
-            .fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(
-                modifier = Modifier.padding(vertical = 4.dp),
-                navigationIcon = {
-                    Image(
-                        modifier = Modifier
-                            .size(48.dp)
-                            .clickable { onBackPressedDispatcher?.onBackPressed() }
-                            .padding(10.dp),
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.navigation_back)
-                    )
-                },
-                title = {
-                    Text(text = stringResource(R.string.product_detail_title))
-                },
+            DinoTopAppBar(
+                text = stringResource(R.string.product_detail_title),
+                navigationBack = true
             )
         }
     ) { paddingValues ->
