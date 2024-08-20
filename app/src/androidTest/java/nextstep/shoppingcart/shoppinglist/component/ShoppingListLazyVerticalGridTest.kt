@@ -32,7 +32,8 @@ class ShoppingListLazyVerticalGridTest {
                         Product(
                             id = 3L, name = "", imageUrl = "", price = 0L
                         ),
-                    )
+                    ),
+                    onItemClick = {},
                 )
             }
         }
@@ -69,8 +70,9 @@ class ShoppingListLazyVerticalGridTest {
                         ),
                         Product(
                             id = 3L, name = "", imageUrl = "", price = 0L
-                        ),
-                    )
+                        )
+                    ),
+                    onItemClick = {},
                 )
             }
         }

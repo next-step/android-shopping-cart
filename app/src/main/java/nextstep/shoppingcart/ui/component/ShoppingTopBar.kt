@@ -1,13 +1,13 @@
-package nextstep.shoppingcart.ui.shoppinglist.component
+package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,14 +21,14 @@ import nextstep.shoppingcart.ui.theme.RobotoRegular
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShoppingListTopBar(
+fun ShoppingTopBar(
     title: String,
-    onShoppingCartClick: () -> Unit,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shoppingListTopBarIcon = stringResource(id = R.string.shopping_list_top_bar_icon)
+    val shoppingTopBarBackIcon = stringResource(id = R.string.shopping_top_bar_icon)
 
-    CenterAlignedTopAppBar(
+    TopAppBar(
         title = {
             Text(
                 text = title,
@@ -37,14 +37,14 @@ fun ShoppingListTopBar(
                 modifier = Modifier.padding(vertical = 18.dp),
             )
         },
-        actions = {
+        navigationIcon = {
             Icon(
-                imageVector = Icons.Filled.ShoppingCart,
-                contentDescription = shoppingListTopBarIcon,
+                imageVector = Icons.Filled.ArrowBack,
+                contentDescription = shoppingTopBarBackIcon,
                 modifier = Modifier
                     .padding(all = 14.dp)
-                    .clickable { onShoppingCartClick() }
-                    .semantics { contentDescription = shoppingListTopBarIcon },
+                    .clickable { onBackClick() }
+                    .semantics { contentDescription = shoppingTopBarBackIcon },
             )
         },
         modifier = modifier,
@@ -53,9 +53,9 @@ fun ShoppingListTopBar(
 
 @Preview
 @Composable
-private fun ShoppingCartTopBarPreview() {
-    ShoppingListTopBar(
-        title = "상품 목록",
-        onShoppingCartClick = {},
+private fun ShoppingTopBarPreview() {
+    ShoppingTopBar(
+        title = "테스트용",
+        onBackClick = {},
     )
 }

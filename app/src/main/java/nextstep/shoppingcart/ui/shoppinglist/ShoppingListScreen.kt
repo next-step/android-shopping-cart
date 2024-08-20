@@ -12,15 +12,28 @@ import nextstep.shoppingcart.ui.shoppinglist.component.ShoppingListTopBar
 import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 
 @Composable
-fun ShoppingListScreen(modifier: Modifier = Modifier) {
+fun ShoppingListScreen(
+    onShoppingCartClick: () -> Unit,
+    onItemClick: (productId: Long) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Column(modifier = modifier.fillMaxSize()) {
-        ShoppingListTopBar(title = stringResource(R.string.shopping_list_title))
-        ShoppingListLazyVerticalGrid(products = dummyProducts)
+        ShoppingListTopBar(
+            title = stringResource(id = R.string.shopping_list_title),
+            onShoppingCartClick = onShoppingCartClick,
+        )
+        ShoppingListLazyVerticalGrid(
+            products = dummyProducts,
+            onItemClick = onItemClick,
+        )
     }
 }
 
 @Preview
 @Composable
 private fun ShoppingListScreenPreview() {
-    ShoppingListScreen()
+    ShoppingListScreen(
+        onShoppingCartClick = {},
+        onItemClick = {},
+    )
 }

@@ -20,12 +20,13 @@ import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 @Composable
 fun ShoppingListLazyVerticalGrid(
     products: List<Product>,
+    onItemClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shoppingListDescription = stringResource(R.string.shopping_list_description)
+    val shoppingListDescription = stringResource(id = R.string.shopping_list_description)
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(count = 2),
         modifier = modifier
             .fillMaxSize()
             .padding(
@@ -33,14 +34,17 @@ fun ShoppingListLazyVerticalGrid(
                 vertical = 12.dp,
             )
             .semantics { contentDescription = shoppingListDescription },
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-        horizontalArrangement = Arrangement.spacedBy(20.dp),
+        verticalArrangement = Arrangement.spacedBy(space = 12.dp),
+        horizontalArrangement = Arrangement.spacedBy(space = 20.dp),
     ) {
         items(
             items = products,
             key = { product -> product.id },
         ) {
-            ShoppingListItem(product = it)
+            ShoppingListItem(
+                product = it,
+                onItemClick = onItemClick,
+            )
         }
     }
 }
@@ -48,5 +52,8 @@ fun ShoppingListLazyVerticalGrid(
 @Preview
 @Composable
 private fun ShoppingListPreview() {
-    ShoppingListLazyVerticalGrid(products = dummyProducts)
+    ShoppingListLazyVerticalGrid(
+        products = dummyProducts,
+        onItemClick = {},
+    )
 }
