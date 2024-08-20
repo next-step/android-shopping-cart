@@ -18,10 +18,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,7 +25,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.data.goods.Product
 import nextstep.shoppingcart.ui.component.QuantitySelector
 import nextstep.shoppingcart.ui.theme.productTitleStyle
@@ -38,29 +33,31 @@ import java.util.Locale
 
 @Composable
 fun ProductItem(
-    product: Product, onClick: () -> Unit
+    product: Product,
+    onClickItem: () -> Unit,
+    onMinusClick: () -> Unit,
+    onPlusClick: () -> Unit,
+    itemCount: Int = 0
 ) {
     Column(
         modifier = Modifier
             .wrapContentWidth()
-            .clickable(onClick = onClick)
+            .clickable(onClick = onClickItem)
     ) {
         Box(contentAlignment = Alignment.BottomEnd) {
             AsyncImage(
                 model = product.imageUrl,
                 contentDescription = null,
-                modifier = Modifier.aspectRatio(1f)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
             )
-            var cartItemSize by remember {
-                mutableStateOf(
-                    Cart.items.find { it.product == product }?.count ?: 0
+
+            if (itemCount == 0) {
+                AddProductButton(
+                    onClick = onPlusClick,
+                    Modifier.padding(12.dp)
                 )
-            }
-            if (cartItemSize == 0) {
-                AddProductButton(onClick = {
-                    cartItemSize += 1
-                    Cart.addOne(product)
-                }, Modifier.padding(12.dp))
             } else {
                 Card(
                     colors = CardDefaults.cardColors(
@@ -70,13 +67,11 @@ fun ProductItem(
                         .align(Alignment.BottomCenter)
                         .padding(12.dp)
                 ) {
-                    QuantitySelector(initQuantity = cartItemSize, onMinusClick = {
-                        cartItemSize -= 1
-                        Cart.removeOne(product)
-                    }, onPlusClick = {
-                        cartItemSize += 1
-                        Cart.addOne(product)
-                    })
+                    QuantitySelector(
+                        initQuantity = itemCount,
+                        onMinusClick = onMinusClick,
+                        onPlusClick = onPlusClick
+                    )
                 }
             }
         }
@@ -135,9 +130,7 @@ private fun ProductItemPreview() {
         name = "상품 이름을 테스트해보겠습니다 말줄입이 되나요",
         price = 1200000000
     )
-    ProductItem(product) {
-
-    }
+    ProductItem(product, {}, {}, {}, 0)
 }
 
 fun formatPrice(price: Int): String {

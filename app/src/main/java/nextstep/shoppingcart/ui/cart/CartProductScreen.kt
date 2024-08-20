@@ -79,7 +79,11 @@ fun CartProduct(
                         text = "${product.price}원",
                         style = MaterialTheme.typography.titleMedium
                     )
-                    QuantitySelector(item.count, onMinusClick, onPlusClick)
+                    QuantitySelector(
+                        item.count,
+                        onMinusClick,
+                        onPlusClick
+                    )
                 }
             }
         }
@@ -98,7 +102,6 @@ private fun CartProductTitle(
     ) {
         Text(
             modifier = Modifier
-                .fillMaxWidth()
                 .weight(1f),
             text = product.name,
             fontWeight = FontWeight.Bold,

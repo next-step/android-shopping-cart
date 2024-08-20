@@ -25,8 +25,7 @@ fun QuantitySelector(
     onPlusClick: () -> Unit
 ) {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.wrapContentWidth()
+        verticalAlignment = Alignment.CenterVertically
     ) {
         var quantity by remember { mutableStateOf(initQuantity) }
         IconButton(
