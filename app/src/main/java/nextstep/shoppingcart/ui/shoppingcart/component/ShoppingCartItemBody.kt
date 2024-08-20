@@ -52,7 +52,7 @@ fun ShoppingCartItemBody(
             ShoppingCartItemSumText(sum)
             ShoppingCountBar(
                 count = count,
-                onSubtractClick = { if (count <= 0) removeItem(product.id) else count -= 1 },
+                onSubtractClick = { if (count <= 1) removeItem(product.id) else count -= 1 },
                 onAddClick = { count += 1 },
             )
         }
