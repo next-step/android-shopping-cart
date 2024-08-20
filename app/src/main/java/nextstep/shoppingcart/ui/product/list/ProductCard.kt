@@ -149,37 +149,25 @@ private fun ProductCardDescription(
 @Preview(showBackground = true)
 @Composable
 private fun ProductCardPreview(
-    @PreviewParameter(ProductCardPreviewProvider::class) param: ProductCardPreviewParameter,
+    @PreviewParameter(ProductCardPreviewProvider::class) item: Pair<Product, Int>,
 ) {
     ShoppingCartTheme {
         ProductCard(
-            product = param.product,
-            quantity = param.quantity,
+            product = item.first,
+            quantity = item.second,
         )
     }
 }
 
-data class ProductCardPreviewParameter(
-    val product: Product,
-    val quantity: Int,
-)
+private val productMock = PRODUCT_LIST_MOCK_DATA.first()
 
 class ProductCardPreviewProvider :
-    CollectionPreviewParameterProvider<ProductCardPreviewParameter>(
+    CollectionPreviewParameterProvider<Pair<Product, Int>>(
         collection =
-            PRODUCT_LIST_MOCK_DATA
-                .take(3)
-                .mapIndexed { index, product ->
-                    ProductCardPreviewParameter(
-                        product =
-                            if (index == 2) {
-                                product.copy(
-                                    name = "행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다. 행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다",
-                                )
-                            } else {
-                                product
-                            },
-                        quantity = index,
-                    )
-                },
+            listOf(
+                productMock to 0,
+                productMock.copy(
+                    name = "행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다. 행운을 드립니다. 여러분께 드립니다. 삼태기로 퍼드립니다",
+                ) to 1,
+            ),
     )
