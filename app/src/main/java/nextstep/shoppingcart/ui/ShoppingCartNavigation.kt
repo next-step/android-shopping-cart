@@ -1,10 +1,6 @@
 package nextstep.shoppingcart.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -42,15 +38,20 @@ fun ShoppingCardNavigation() {
             })
         ) { backStackEntry ->
             val productId = backStackEntry.arguments?.getInt("productId") ?: -1
-            ProductDetail(navController = navController, productId)
+            ProductDetail(productId = productId, onBackClick = {
+                navController.navigateUp()
+            }, onAddCartClick = {
+                navController.navigate(ShoppingCartDestinations.SHOPPING_CART)
+            })
         }
         composable(route = ShoppingCartDestinations.SHOPPING_CART) {
-            ShoppingCart(navController = navController)
+            ShoppingCart {
+                navController.navigateUp()
+            }
         }
     }
 
 }
-
 
 
 @Preview
