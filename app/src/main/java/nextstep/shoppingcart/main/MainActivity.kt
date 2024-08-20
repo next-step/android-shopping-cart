@@ -14,7 +14,7 @@ import nextstep.shoppingcart.cart.cartNavGraph
 import nextstep.shoppingcart.productdetail.productDetailNavGraph
 import nextstep.shoppingcart.productlist.ProductListRoute
 import nextstep.shoppingcart.productlist.productListNavGraph
-import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+import nextstep.shoppingcart.common.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

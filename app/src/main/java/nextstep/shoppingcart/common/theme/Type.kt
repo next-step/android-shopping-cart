@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.theme
+package nextstep.shoppingcart.common.theme
 
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle

@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.component
+package nextstep.shoppingcart.common.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -17,7 +17,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.theme.NextStepTheme
+import nextstep.shoppingcart.common.theme.NextStepTheme
 import java.util.UUID
 
 @Composable

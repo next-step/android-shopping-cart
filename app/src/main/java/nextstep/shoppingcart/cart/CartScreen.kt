@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.component.NextStepTopAppBar
+import nextstep.shoppingcart.common.component.NextStepTopAppBar
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
 
