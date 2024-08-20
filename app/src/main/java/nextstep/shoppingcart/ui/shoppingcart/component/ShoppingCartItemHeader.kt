@@ -25,7 +25,7 @@ import nextstep.shoppingcart.ui.theme.RobotoBold
 @Composable
 fun ShoppingCartItemHeader(
     product: Product,
-    onRemoveClick: (productId: Long) -> Unit,
+    onRemoveClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val shoppingCartItemHeaderCloseButtonDescription =
@@ -45,7 +45,7 @@ fun ShoppingCartItemHeader(
             imageVector = Filled.Clear,
             contentDescription = shoppingCartItemHeaderCloseButtonDescription,
             modifier = Modifier
-                .clickable { onRemoveClick(product.id) }
+                .clickable { onRemoveClick() }
                 .semantics { contentDescription = shoppingCartItemHeaderCloseButtonDescription },
         )
     }

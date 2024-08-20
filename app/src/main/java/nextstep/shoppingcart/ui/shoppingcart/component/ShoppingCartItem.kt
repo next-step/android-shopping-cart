@@ -19,8 +19,12 @@ import nextstep.shoppingcart.ui.shoppinglist.model.Product
 @Composable
 fun ShoppingCartItem(
     product: Product,
+    onSubtractClick: () -> Unit,
+    onAddClick: () -> Unit,
+    sum: Long,
+    count: Int,
+    onRemoveClick: () -> Unit,
     modifier: Modifier = Modifier,
-    removeItem: (productId: Long) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -35,12 +39,15 @@ fun ShoppingCartItem(
     ) {
         ShoppingCartItemHeader(
             product = product,
-            onCloseClick = removeItem,
+            onRemoveClick = onRemoveClick,
         )
         Spacer(modifier = Modifier.height(height = 6.dp))
         ShoppingCartItemBody(
             product = product,
-            removeItem = removeItem,
+            onSubtractClick = onSubtractClick,
+            onAddClick = onAddClick,
+            sum = sum,
+            count = count,
         )
     }
 }
@@ -50,6 +57,10 @@ fun ShoppingCartItem(
 private fun ShoppingCartItemPreview() {
     ShoppingCartItem(
         product = dummyProducts[0],
-        removeItem = {},
+        onRemoveClick = {},
+        onSubtractClick = {},
+        onAddClick = {},
+        sum = 0L,
+        count = 0,
     )
 }
