@@ -35,7 +35,7 @@ fun ShoppingCartItemBody(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = modifier.fillMaxWidth(),
     ) {
-        var count by remember { mutableIntStateOf(0) }
+        var count by remember { mutableIntStateOf(1) }
         val sum by remember { derivedStateOf { product.price * count } }
 
         ShoppingProductImage(
