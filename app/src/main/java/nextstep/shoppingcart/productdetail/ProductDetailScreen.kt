@@ -9,7 +9,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.common.component.NextStepTopAppBar
-import nextstep.shoppingcart.common.model.Cart
 import nextstep.shoppingcart.common.model.Product
 import nextstep.shoppingcart.productdetail.component.ProductDetailBottomBar
 import nextstep.shoppingcart.productdetail.component.ProductDetailContent
@@ -18,12 +17,9 @@ import java.util.UUID
 @Composable
 internal fun ProductDetailScreen(
     product: Product,
+    onAddToCartClick: () -> Unit,
     onBackClick: () -> Unit,
 ) {
-    fun onAddToCartClick() {
-        Cart.addOne(product)
-    }
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -40,7 +36,7 @@ internal fun ProductDetailScreen(
                     .fillMaxSize(),
             )
         },
-        bottomBar = { ProductDetailBottomBar(onAddToCartClick = ::onAddToCartClick) }
+        bottomBar = { ProductDetailBottomBar(onAddToCartClick = onAddToCartClick) }
     )
 }
 
@@ -54,6 +50,7 @@ private fun ProductDetailScreenPreview() {
             price = 42_200,
             imageUrl = "https://picsum.photos/500",
         ),
+        onAddToCartClick = {},
         onBackClick = {},
     )
 }

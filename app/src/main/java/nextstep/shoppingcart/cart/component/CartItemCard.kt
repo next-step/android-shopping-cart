@@ -105,14 +105,16 @@ private fun CartItemDetails(
             modifier = Modifier.size(width = 134.dp, height = 84.dp)
         )
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 18.dp)
         ) {
             Text(
                 text = stringResource(
                     R.string.cart_item_card_won,
                     NumberFormat.getNumberInstance(Locale.KOREA).format(product.price)
                 ),
-                style = NextStepTheme.typography.sans20N,
+                style = NextStepTheme.typography.roboto16N,
                 textAlign = TextAlign.End,
                 maxLines = 1,
                 modifier = Modifier.fillMaxWidth()
