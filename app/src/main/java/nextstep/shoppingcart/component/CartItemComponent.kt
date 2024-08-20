@@ -164,7 +164,7 @@ fun CartItemCount(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = onClickPlus
+            onClick = onClickMinus
         ) {
             Text(
                 text = "-",
@@ -182,7 +182,7 @@ fun CartItemCount(
             textAlign = TextAlign.Center
         )
         IconButton(
-            onClick = onClickMinus
+            onClick = onClickPlus
         ) {
             Text(
                 text = "+",

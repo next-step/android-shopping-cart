@@ -35,12 +35,8 @@ fun ShoppingCartScreen(
     onClickBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val cartItemList by remember(Cart.items) {
-        mutableStateOf(Cart.items)
-    }
-    val totalAmount by remember(Cart.totalPrice) {
-        mutableIntStateOf(Cart.totalPrice)
-    }
+    var cartItemList by remember { mutableStateOf(Cart.items) }
+    val totalAmount by remember(cartItemList) { mutableIntStateOf(Cart.totalPrice) }
 
     Scaffold(
         modifier = modifier,
@@ -65,17 +61,19 @@ fun ShoppingCartScreen(
                 ),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(cartItemList){ cartItem ->
+                items(cartItemList) { cartItem ->
                     CartItemComponent(
                         cartItem = cartItem,
                         onClickPlus = {
-
+                            if(cartItem.count < 99){ // 최대 99개로 설정
+                                cartItemList = Cart.addOne(product = cartItem.product)
+                            }
                         },
                         onClickMinus = {
-
+                            cartItemList = Cart.removeOne(product = cartItem.product)
                         },
                         onClickClose = {
-
+                            cartItemList = Cart.removeAll(product = cartItem.product)
                         }
                     )
                 }
