@@ -8,7 +8,7 @@ data class ProductModel(
     val id: String = UUID.randomUUID().toString(),
     val name: String,
     val imageUrl: String,
-    val price: Long,
+    val price: Int,
 )
 
 val dummyProductModels: List<ProductModel> = listOf(

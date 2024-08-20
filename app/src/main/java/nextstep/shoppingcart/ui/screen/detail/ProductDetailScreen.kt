@@ -4,12 +4,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -19,18 +20,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.component.SoppingCartButton
+import nextstep.shoppingcart.ui.screen.cart.Cart
 import nextstep.shoppingcart.ui.screen.products.model.dummyProductModels
-import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.utils.ThemePreviews
 
@@ -41,7 +42,7 @@ fun ProductDetailRoute(
     onCartClick: (id: String) -> Unit,
     id: String,
 ) {
-    val product = dummyProductModels.find { it.id == id }
+    val product = remember { dummyProductModels.find { it.id == id } }
     if (product != null) {
         ProductDetailScreen(
             modifier = modifier,
@@ -49,14 +50,17 @@ fun ProductDetailRoute(
             itemName = product.name,
             itemImageUrl = product.imageUrl,
             onNavigationClick = onNavigationClick,
-            onCartClick = { onCartClick(id) },
+            onCartClick = {
+                Cart.addOne(product)
+                onCartClick(id)
+            },
         )
     }
 }
 
 @Composable
 private fun ProductDetailScreen(
-    price: Long,
+    price: Int,
     itemName: String,
     itemImageUrl: String,
     onNavigationClick: () -> Unit,
@@ -64,10 +68,19 @@ private fun ProductDetailScreen(
     modifier: Modifier = Modifier
 ) {
     Scaffold(
+        modifier = modifier,
         topBar = { ProductDetailTopAppBar { onNavigationClick() } }
     ) {
-        Column(modifier.padding(it)) {
-            ProductImage(productName = itemName, imageUrl = itemImageUrl)
+        Column(
+            modifier = Modifier
+                .padding(it)
+                .verticalScroll(rememberScrollState()),
+        ) {
+            ProductImage(
+                modifier = Modifier.aspectRatio(1f),
+                productName = itemName,
+                imageUrl = itemImageUrl
+            )
 
             Text(
                 text = itemName,
@@ -84,36 +97,14 @@ private fun ProductDetailScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            SoppingCartButton { onCartClick() }
+            SoppingCartButton(text = stringResource(R.string.product_detail_shopping_cart)) { onCartClick() }
         }
     }
 }
 
 @Composable
-private fun SoppingCartButton(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
-) {
-    Button(
-        onClick = onClick,
-        modifier = modifier.fillMaxWidth(),
-        shape = RectangleShape,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Blue50,
-            contentColor = Color.White
-        )
-    ) {
-        Text(
-            text = stringResource(R.string.product_detail_shopping_cart),
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
-
-@Composable
 private fun ProductDetailPrice(
-    price: Long,
+    price: Int,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -159,14 +150,6 @@ private fun ProductDetailTopAppBar(
             }
         }
     )
-}
-
-@ThemePreviews
-@Composable
-private fun SoppingCartButtonPreview() {
-    ShoppingCartTheme {
-        SoppingCartButton {}
-    }
 }
 
 @ThemePreviews
