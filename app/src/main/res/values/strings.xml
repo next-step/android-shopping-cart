@@ -10,4 +10,10 @@
     <string name="product_detail_product_image">상품 이미지</string>
     <string name="product_detail_put_in_shopping_cart_button">장바구니 담기</string>
     <string name="product_cart_list_title">장바구니</string>
+    <string name="product_cart_list_order_button">주문하기(%1$,d원)</string>
+    <string name="product_cart_list_clear_button_content_description">삭제 버튼</string>
+    <string name="product_cart_list_product_item_image_content_description">상품 이미지</string>
+    <string name="product_cart_list_product_item_price_fmt">%1$,d원</string>
+    <string name="product_cart_list_empty_icon">장바구니 아이콘</string>
+    <string name="product_cart_list_empty_message">장바구니가 비어 있습니다.</string>
 </resources>
