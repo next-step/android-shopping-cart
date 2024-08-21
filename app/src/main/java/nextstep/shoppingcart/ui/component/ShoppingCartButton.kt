@@ -16,9 +16,9 @@ import nextstep.shoppingcart.utils.ThemePreviews
 
 @Composable
 fun SoppingCartButton(
-    modifier: Modifier = Modifier,
     text: String,
-    onClick: () -> Unit
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     Button(
         onClick = onClick,
