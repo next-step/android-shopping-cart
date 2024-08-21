@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.shoppinglist.shoppinglist
+package nextstep.shoppingcart.shoppinglist.shoppinglist.navigation
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -13,7 +13,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class ShoppingListScreenTest {
+class ShoppingListScreenNavigationTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
