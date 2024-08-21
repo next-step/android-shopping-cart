@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.composable.DinoTopAppBar
+import nextstep.shoppingcart.ui.composable.DinoCenterTopAppBar
 import nextstep.shoppingcart.ui.model.dummyProducts
 import nextstep.shoppingcart.ui.view.product.cartlist.ProductCartListActivity
 import nextstep.shoppingcart.ui.view.product.detail.ProductDetailActivity
@@ -31,9 +31,8 @@ fun ProductListScreen() {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            DinoTopAppBar(
+            DinoCenterTopAppBar(
                 text = stringResource(R.string.product_list_title),
-                centeredTitle = true,
                 actions = {
                     Image(
                         modifier = Modifier
