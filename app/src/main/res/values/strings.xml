@@ -2,7 +2,8 @@
     <string name="app_name">Shopping Cart</string>
     <string name="shopping_list_top_bar_icon">ShoppingCartIcon</string>
     <string name="shopping_list_title">상품 목록</string>
-    <string name="shopping_item_description">ShoppingItem</string>
+    <string name="shopping_List_item_description">ShoppingListItem</string>
+    <string name="shopping_Product_Image">ShoppingProductImage</string>
     <string name="shopping_cart_item_description">ShoppingCartItem</string>
     <string name="shopping_list_description">ShoppingList</string>
     <string name="shopping_top_bar_icon">ShoppingTopBarBackIcon</string>
