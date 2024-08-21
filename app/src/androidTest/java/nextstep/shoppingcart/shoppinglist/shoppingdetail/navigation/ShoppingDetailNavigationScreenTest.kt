@@ -33,7 +33,7 @@ class ShoppingDetailNavigationScreenTest {
     }
 
     @Test
-    fun 뒤로가기_버튼을_누르면_상품_목록_뷰로_돌아간다() {
+    fun 뒤로가기_버튼을_클릭할_경우_이전뷰로_이동한다() {
         // given:
         // when:
         composeTestRule.onNodeWithContentDescription("ShoppingTopBarBackIcon").performClick()
@@ -46,7 +46,7 @@ class ShoppingDetailNavigationScreenTest {
     }
 
     @Test
-    fun 장바구니_버튼을_누르면_장바구니_뷰로_이동한다() {
+    fun 장바구니담기_버튼을_클릭할_경우_장바구니_뷰로_이동한다() {
         // given:
         // when:
         composeTestRule.onNodeWithContentDescription("ShoppingButton").performClick()

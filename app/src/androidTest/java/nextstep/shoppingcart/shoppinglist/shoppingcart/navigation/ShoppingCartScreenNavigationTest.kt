@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.shoppinglist.shoppingcart
+package nextstep.shoppingcart.shoppinglist.shoppingcart.navigation
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -13,7 +13,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class ShoppingCartScreenTest {
+class ShoppingCartScreenNavigationTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -31,7 +31,7 @@ class ShoppingCartScreenTest {
     }
 
     @Test
-    fun 상품_목록뷰에서_장바구니_뷰로_진입한_경우_뒤로가기_버튼을_누르면_상품_목록뷰로_돌아간다() {
+    fun 뒤로가기_버튼을_클릭할_경우_이전_뷰로_돌아간다1() {
         // given:
         composeTestRule.onNodeWithContentDescription("ShoppingCartIcon").performClick()
 
@@ -46,10 +46,10 @@ class ShoppingCartScreenTest {
     }
 
     @Test
-    fun 상품_상세보기뷰에서_장바구니_뷰로_진입한_경우_뒤로가기_버튼을_누르면_상품_상세보기뷰로_돌아간다() {
+    fun 뒤로가기_버튼을_클릭할_경우_이전_뷰로_돌아간다2() {
         // given:
         composeTestRule.onAllNodesWithContentDescription("ShoppingItem").onFirst().performClick()
-        composeTestRule.onNodeWithContentDescription("ShoppingDetailAddButton").performClick()
+        composeTestRule.onNodeWithContentDescription("ShoppingButton").performClick()
 
         // when:
         composeTestRule.onNodeWithContentDescription("ShoppingTopBarBackIcon").performClick()
