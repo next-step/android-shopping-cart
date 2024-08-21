@@ -28,7 +28,7 @@ import nextstep.shoppingcart.ui.theme.BlackTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShoppingCartScreen() {
+fun ProductListScreen() {
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
@@ -77,6 +77,6 @@ fun ShoppingCartScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun ShoppingCartScreenPreview() {
-    ShoppingCartScreen()
+fun ProductListScreenPreview() {
+    ProductListScreen()
 }
