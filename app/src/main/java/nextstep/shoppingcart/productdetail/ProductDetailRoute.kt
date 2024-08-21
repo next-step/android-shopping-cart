@@ -1,8 +1,8 @@
 package nextstep.shoppingcart.productdetail
 
 import kotlinx.serialization.Serializable
-import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.model.serializableType
+import nextstep.shoppingcart.common.model.Product
+import nextstep.shoppingcart.common.model.serializableType
 import kotlin.reflect.typeOf
 
 @Serializable

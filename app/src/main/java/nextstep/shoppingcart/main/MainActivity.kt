@@ -11,17 +11,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import nextstep.shoppingcart.cart.cartNavGraph
+import nextstep.shoppingcart.common.theme.NextStepTheme
 import nextstep.shoppingcart.productdetail.productDetailNavGraph
 import nextstep.shoppingcart.productlist.ProductListRoute
 import nextstep.shoppingcart.productlist.productListNavGraph
-import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberMainNavigator()
-            ShoppingCartTheme {
+            NextStepTheme {
                 MainScreen(
                     mainNavigator = navController,
                 )
@@ -52,7 +52,6 @@ private fun MainScreen(
                     )
 
                     productDetailNavGraph(
-                        onAddToCartClick = {},
                         onBackClick = { mainNavigator.popBackStack() }
                     )
 

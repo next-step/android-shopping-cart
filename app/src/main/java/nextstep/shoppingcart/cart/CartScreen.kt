@@ -1,22 +1,33 @@
 package nextstep.shoppingcart.cart
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.component.NextStepTopAppBar
-import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.cart.component.CartItemCard
+import nextstep.shoppingcart.cart.component.CartScreenBottomBar
+import nextstep.shoppingcart.common.component.NextStepTopAppBar
+import nextstep.shoppingcart.common.model.CartItem
+import nextstep.shoppingcart.common.model.dummyProducts
 
 @Composable
 internal fun CartScreen(
-    products: List<Product>,
+    cartItems: List<CartItem>,
+    totalPrice: Int,
+    onCountAddClick: (CartItem) -> Unit,
+    onCountMinusClick: (CartItem) -> Unit,
+    onCartItemDeleteClick: (CartItem) -> Unit,
     onBackClick: () -> Unit,
 ) {
     Scaffold(
@@ -29,10 +40,20 @@ internal fun CartScreen(
         },
         content = { paddingValues ->
             CartContent(
-                products = products,
+                cartItems = cartItems,
+                onCountAddClick = onCountAddClick,
+                onCountMinusClick = onCountMinusClick,
+                onCartItemDeleteClick = onCartItemDeleteClick,
                 modifier = Modifier
                     .padding(paddingValues = paddingValues)
                     .fillMaxSize()
+                    .padding(horizontal = 18.dp)
+            )
+        },
+        bottomBar = {
+            CartScreenBottomBar(
+                totalPrice = totalPrice,
+                onOrderButtonClick = {},
             )
         }
     )
@@ -40,15 +61,25 @@ internal fun CartScreen(
 
 @Composable
 private fun CartContent(
-    products: List<Product>,
+    cartItems: List<CartItem>,
+    onCountAddClick: (CartItem) -> Unit,
+    onCountMinusClick: (CartItem) -> Unit,
+    onCartItemDeleteClick: (CartItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(modifier = modifier) {
+    LazyColumn(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
         items(
-            items = products,
-            key = { item -> item.id }
-        ) {
-            // TODO: Step2 구현 내용이 아님
+            items = cartItems,
+            key = { item -> item.product.id }
+        ) { cartItem ->
+            CartItemCard(
+                cartItem = cartItem,
+                onCloseClick = { onCartItemDeleteClick(cartItem) },
+                onCountAddClick = { onCountAddClick(cartItem) },
+                onCountMinusClick = { onCountMinusClick(cartItem) })
         }
     }
 }
@@ -56,8 +87,14 @@ private fun CartContent(
 @Preview
 @Composable
 private fun CartScreenPreview() {
+    val cartItems by remember { mutableStateOf(dummyProducts.map { CartItem(it, count = 1) }) }
+
     CartScreen(
-        products = dummyProducts,
+        cartItems = cartItems,
+        totalPrice = cartItems.sumOf { it.totalPrice },
+        onCountAddClick = {},
+        onCountMinusClick = {},
+        onCartItemDeleteClick = {},
         onBackClick = {},
     )
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.cart.navigateCart
-import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.common.model.Product
 import nextstep.shoppingcart.productdetail.navigateProductDetail
 import nextstep.shoppingcart.productlist.ProductListRoute
 

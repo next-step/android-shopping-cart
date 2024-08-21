@@ -1,16 +1,15 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.productlist
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
-import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.productlist.ProductListScreen
+import nextstep.shoppingcart.common.model.Product
 import org.junit.Rule
 import org.junit.Test
 import java.util.UUID
 
-class CartScreenTest {
+class ProductListScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -22,6 +21,7 @@ class CartScreenTest {
             ProductListScreen(
                 products = emptyList(),
                 onProductClick = {},
+                onCartClick = {},
             )
         }
 
@@ -50,6 +50,7 @@ class CartScreenTest {
             ProductListScreen(
                 products = cartItems,
                 onProductClick = {},
+                onCartClick = {},
             )
         }
 

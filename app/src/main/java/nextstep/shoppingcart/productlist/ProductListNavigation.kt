@@ -6,8 +6,8 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.common.model.Product
+import nextstep.shoppingcart.common.model.dummyProducts
 
 internal fun NavController.navigateProductList() {
     navigate(ProductListRoute)
