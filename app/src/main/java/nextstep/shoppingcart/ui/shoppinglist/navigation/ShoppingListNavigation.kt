@@ -3,7 +3,7 @@ package nextstep.shoppingcart.ui.shoppinglist.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import nextstep.shoppingcart.ui.shoppinglist.ShoppingListScreen
-import nextstep.shoppingcart.ui.shoppinglist.navigation.ShoppingListRoute.ROUTE
+import nextstep.shoppingcart.ui.shoppinglist.navigation.ShoppingListDestination.ROUTE
 
 fun NavGraphBuilder.shoppingListScreen(
     onShoppingCartClick: () -> Unit,
@@ -17,6 +17,6 @@ fun NavGraphBuilder.shoppingListScreen(
     }
 }
 
-object ShoppingListRoute {
+object ShoppingListDestination {
     const val ROUTE = "ShoppingListScreen"
 }

@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import nextstep.shoppingcart.ui.shoppingdetail.ShoppingDetailScreen
-import nextstep.shoppingcart.ui.shoppingdetail.navigation.ShoppingDetailRoute.ROUTE
+import nextstep.shoppingcart.ui.shoppingdetail.navigation.ShoppingDetailDestination.ROUTE
 
 fun NavGraphBuilder.shoppingDetailScreen(
     onBackClick: () -> Unit,
@@ -32,6 +32,6 @@ fun NavController.navigateToShoppingDetail(productId: Long) {
     navigate(route = "${ROUTE}/$productId")
 }
 
-object ShoppingDetailRoute {
+object ShoppingDetailDestination {
     const val ROUTE = "ShoppingDetailScreen"
 }

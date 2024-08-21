@@ -4,7 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import nextstep.shoppingcart.ui.shoppingcart.ShoppingCartScreen
-import nextstep.shoppingcart.ui.shoppingcart.navigation.ShoppingCartRoute.ROUTE
+import nextstep.shoppingcart.ui.shoppingcart.navigation.ShoppingCartDestination.ROUTE
 
 fun NavGraphBuilder.shoppingCartScreen(
     onBackClick: () -> Unit,
@@ -18,6 +18,6 @@ fun NavController.navigateToShoppingCart() {
     navigate(route = ROUTE)
 }
 
-object ShoppingCartRoute {
+object ShoppingCartDestination {
     const val ROUTE = "ShoppingCartScreen"
 }
