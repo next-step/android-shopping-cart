@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import nextstep.shoppingcart.ui.shoppingdetail.ShoppingDetailScreen
+import nextstep.shoppingcart.ui.shoppingdetail.ShoppingDetailRoute
 import nextstep.shoppingcart.ui.shoppingdetail.navigation.ShoppingDetailDestination.ROUTE
 
 fun NavGraphBuilder.shoppingDetailScreen(
@@ -20,7 +20,7 @@ fun NavGraphBuilder.shoppingDetailScreen(
     ) {
         val productId = it.arguments?.getLong("productId", -1) ?: -1
 
-        ShoppingDetailScreen(
+        ShoppingDetailRoute(
             productId = productId,
             onBackClick = onBackClick,
             onAddClick = onAddClick,

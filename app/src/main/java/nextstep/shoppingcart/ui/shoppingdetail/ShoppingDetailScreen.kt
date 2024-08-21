@@ -13,28 +13,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R.string.shopping_detail_add_button
 import nextstep.shoppingcart.R.string.shopping_detail_title
-import nextstep.shoppingcart.data.Cart.addOne
-import nextstep.shoppingcart.data.Cart.findProductById
+import nextstep.shoppingcart.data.dummyProducts
 import nextstep.shoppingcart.ui.component.ShoppingButton
 import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.component.ShoppingTopBar
 import nextstep.shoppingcart.ui.shoppingdetail.component.ShoppingDetailDivider
 import nextstep.shoppingcart.ui.shoppingdetail.component.ShoppingDetailProductPrice
 import nextstep.shoppingcart.ui.shoppingdetail.component.ShoppingDetailProductTitle
+import nextstep.shoppingcart.ui.shoppinglist.model.Product
 
 @Composable
 fun ShoppingDetailScreen(
-    productId: Long,
+    product: Product,
     onBackClick: () -> Unit,
     onAddClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
-        val product = findProductById(productId)
-        val screenTitle = stringResource(id = shopping_detail_title)
-
         ShoppingTopBar(
-            title = screenTitle,
+            title = stringResource(id = shopping_detail_title),
             onBackClick = onBackClick,
         )
         ShoppingProductImage(
@@ -46,10 +43,7 @@ fun ShoppingDetailScreen(
         ShoppingDetailProductPrice(product = product)
         Spacer(modifier = Modifier.weight(weight = 1f))
         ShoppingButton(
-            onClick = {
-                addOne(product)
-                onAddClick()
-            },
+            onClick = onAddClick,
             buttonTitle = stringResource(id = shopping_detail_add_button),
         )
     }
@@ -59,7 +53,7 @@ fun ShoppingDetailScreen(
 @Composable
 private fun ShoppingDetailScreenPreview() {
     ShoppingDetailScreen(
-        productId = 0,
+        product = dummyProducts[0],
         onBackClick = {},
         onAddClick = {},
         modifier = Modifier.background(color = Color.White),
