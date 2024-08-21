@@ -48,7 +48,7 @@ class ShoppingCartScreenNavigationTest {
     @Test
     fun 뒤로가기_버튼을_클릭할_경우_이전_뷰로_돌아간다2() {
         // given:
-        composeTestRule.onAllNodesWithContentDescription("ShoppingItem").onFirst().performClick()
+        composeTestRule.onAllNodesWithContentDescription("ShoppingListItem").onFirst().performClick()
         composeTestRule.onNodeWithContentDescription("ShoppingButton").performClick()
 
         // when:

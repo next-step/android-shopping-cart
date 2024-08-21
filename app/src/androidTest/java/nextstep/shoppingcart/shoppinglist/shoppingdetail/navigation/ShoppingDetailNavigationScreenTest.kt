@@ -28,7 +28,7 @@ class ShoppingDetailNavigationScreenTest {
                 AppNavHost(navController = navController)
             }
         }.also {
-            it.onAllNodesWithContentDescription("ShoppingItem").onFirst().performClick()
+            it.onAllNodesWithContentDescription("ShoppingListItem").onFirst().performClick()
         }
     }
 

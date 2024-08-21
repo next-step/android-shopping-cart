@@ -44,7 +44,7 @@ class ShoppingListScreenNavigationTest {
     fun 상품을_클릭할_경우_상품상세보기_뷰로_이동한다1() {
         // given:
         // when:
-        composeTestRule.onAllNodesWithContentDescription("ShoppingItem").onFirst().performClick()
+        composeTestRule.onAllNodesWithContentDescription("ShoppingListItem").onFirst().performClick()
 
         // then:
         val actual = navController.currentBackStackEntry?.destination?.route
@@ -57,7 +57,7 @@ class ShoppingListScreenNavigationTest {
     fun 상품을_클릭할_경우_상품상세보기_뷰로_이동한다2() {
         // given:
         // when:
-        composeTestRule.onAllNodesWithContentDescription("ShoppingItem")[2].performClick()
+        composeTestRule.onAllNodesWithContentDescription("ShoppingListItem")[2].performClick()
 
         // then:
         val actual = navController.currentBackStackEntry?.destination?.route
