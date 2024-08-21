@@ -14,10 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.cart.Cart
 
 @Composable
 fun InteractiveProductImage(product: Product, modifier: Modifier = Modifier) {
@@ -33,14 +37,15 @@ fun InteractiveProductImage(product: Product, modifier: Modifier = Modifier) {
         SmallFloatingActionButton(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .size(26.dp),
-            onClick = { {} },
+                .size(26.dp)
+                .testTag(stringResource(id = R.string.test_tag_add_fab)),
+            onClick = { Cart.addOne(product) },
             containerColor = Color.White,
-            shape = CircleShape
+            shape = CircleShape,
         ) {
             Icon(
                 imageVector = Icons.Filled.Add,
-                contentDescription = "Floating action button.",
+                contentDescription = "Floating action button."
             )
         }
     }
