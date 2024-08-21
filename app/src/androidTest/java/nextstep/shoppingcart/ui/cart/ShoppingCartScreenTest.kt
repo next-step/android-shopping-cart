@@ -11,6 +11,7 @@ import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.cart.component.CART_ITEM_COUNTER_DECREASE_TEST_TAG
 import nextstep.shoppingcart.ui.cart.component.CART_ITEM_COUNTER_INCREASE_TEST_TAG
 import nextstep.shoppingcart.ui.cart.component.CART_LIST_ITEM_CLOSE_TEST_TAG
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -18,6 +19,11 @@ class ShoppingCartScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    @Before
+    fun setup() {
+        Cart.clear()
+    }
 
     @Test
     fun 상품을_담으면_장바구니_목록에_표시되어야_한다() {
