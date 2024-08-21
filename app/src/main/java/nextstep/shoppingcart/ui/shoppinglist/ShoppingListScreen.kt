@@ -10,9 +10,11 @@ import nextstep.shoppingcart.R.string.shopping_list_title
 import nextstep.shoppingcart.data.dummyProducts
 import nextstep.shoppingcart.ui.shoppinglist.component.ShoppingListLazyVerticalGrid
 import nextstep.shoppingcart.ui.shoppinglist.component.ShoppingListTopBar
+import nextstep.shoppingcart.ui.shoppinglist.model.Product
 
 @Composable
 fun ShoppingListScreen(
+    products: List<Product>,
     onShoppingCartClick: () -> Unit,
     onItemClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
@@ -23,7 +25,7 @@ fun ShoppingListScreen(
             onShoppingCartClick = onShoppingCartClick,
         )
         ShoppingListLazyVerticalGrid(
-            products = dummyProducts,
+            products = products,
             onItemClick = onItemClick,
         )
     }
@@ -33,6 +35,7 @@ fun ShoppingListScreen(
 @Composable
 private fun ShoppingListScreenPreview() {
     ShoppingListScreen(
+        products = dummyProducts,
         onShoppingCartClick = {},
         onItemClick = {},
     )
