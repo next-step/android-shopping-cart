@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.shoppinglist.screen
+package nextstep.shoppingcart.shoppinglist.shoppingcart
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
