@@ -26,7 +26,7 @@ class ProductListItemTest {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ProductListItem(item = item, onClick = {})
+            ProductListItem(item = item, count = 0, onClick = {})
         }
     }
 

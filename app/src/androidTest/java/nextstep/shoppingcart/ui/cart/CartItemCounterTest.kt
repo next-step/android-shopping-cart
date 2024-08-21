@@ -7,9 +7,9 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import nextstep.shoppingcart.ui.cart.component.CART_ITEM_COUNTER_DECREASE_TEST_TAG
-import nextstep.shoppingcart.ui.cart.component.CART_ITEM_COUNTER_INCREASE_TEST_TAG
-import nextstep.shoppingcart.ui.cart.component.CartItemCounter
+import nextstep.shoppingcart.ui.common.component.CART_ITEM_COUNTER_DECREASE_TEST_TAG
+import nextstep.shoppingcart.ui.common.component.CART_ITEM_COUNTER_INCREASE_TEST_TAG
+import nextstep.shoppingcart.ui.common.component.CartItemCounter
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule

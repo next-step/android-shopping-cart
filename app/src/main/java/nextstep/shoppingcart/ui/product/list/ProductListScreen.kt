@@ -83,7 +83,10 @@ private fun ProductListContent(
         items(products) {
             ProductListItem(
                 item = it,
+                count = 0,
                 onClick = onClickItem,
+                onClickCountIncrease = {},
+                onClickCountDecrease = {},
             )
         }
     }

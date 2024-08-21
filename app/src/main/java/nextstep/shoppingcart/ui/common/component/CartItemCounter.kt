@@ -1,11 +1,11 @@
-package nextstep.shoppingcart.ui.cart.component
+package nextstep.shoppingcart.ui.common.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -38,7 +37,7 @@ fun CartItemCounter(
     ) {
         Card(
             onClick = onClickDecrease,
-            shape = RectangleShape,
+            shape = RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp),
             modifier = Modifier.size(42.dp).testTag(CART_ITEM_COUNTER_DECREASE_TEST_TAG),
         ) {
             Box(
@@ -55,17 +54,17 @@ fun CartItemCounter(
             }
         }
 
-        Text(
-            text = count.toString(),
-            fontSize = 22.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .width(42.dp)
-                .align(Alignment.CenterVertically),
-        )
+        Box (modifier = Modifier.size(42.dp).background(color = Color.White)) {
+            Text(
+                text = count.toString(),
+                fontSize = 22.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.align(Alignment.Center),
+            )
+        }
         Card(
             onClick = onClickIncrease,
-            shape = RectangleShape,
+            shape = RoundedCornerShape(topEnd = 4.dp, bottomEnd = 4.dp),
             modifier = Modifier.size(42.dp).testTag(CART_ITEM_COUNTER_INCREASE_TEST_TAG),
         ) {
             Box(
