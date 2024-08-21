@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -29,9 +30,13 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun Product(
     productModel: ProductModel,
-    onClickProduct: (id: String) -> Unit,
-    modifier: Modifier = Modifier
+    count: Int,
+    onAddClick: (id: String) -> Unit,
+    onPlusClick: (id: String) -> Unit,
+    onMinusClick: (id: String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
+    val isShowCounter = count >= 1
     Column(modifier = modifier) {
         Box {
             ProductImage(
@@ -39,18 +44,33 @@ fun Product(
                 productName = productModel.name,
                 imageUrl = productModel.imageUrl
             )
-            IconButton(
-                onClick = { onClickProduct(productModel.id) },
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(bottom = 12.dp, end = 12.dp)
-                    .clip(CircleShape)
-                    .background(Color.White),
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Add,
-                    contentDescription = "${productModel.id} add button"
+
+
+            if (isShowCounter) {
+                ShoppingCartItemCounter(
+                    count = count,
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
+                        .background(Color.White),
+                    onMinusClick = { onMinusClick(productModel.id) },
+                    onPlusClick = { onPlusClick(productModel.id) }
                 )
+            } else {
+                IconButton(
+                    onClick = { onAddClick(productModel.id) },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(bottom = 12.dp, end = 12.dp)
+                        .clip(CircleShape)
+                        .background(Color.White),
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Add,
+                        contentDescription = "${productModel.id} add button"
+                    )
+                }
             }
         }
         Text(
@@ -68,7 +88,7 @@ fun Product(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "장바구니 수량 버튼 안보일때")
 @Composable
 private fun CartItemPreview() {
     ShoppingCartTheme {
@@ -78,7 +98,28 @@ private fun CartItemPreview() {
                 imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
                 price = 1_900_000
             ),
-            onClickProduct = {},
+            count = 0,
+            onAddClick = {},
+            onPlusClick = {},
+            onMinusClick = {},
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "장바구니 수량 버튼 보일때")
+@Composable
+private fun CartItemWithCartCounterPreview() {
+    ShoppingCartTheme {
+        Product(
+            productModel = ProductModel(
+                name = "iPhone 15 Pro Max",
+                imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+                price = 1_900_000,
+            ),
+            count = 10,
+            onAddClick = {},
+            onPlusClick = {},
+            onMinusClick = {},
         )
     }
 }

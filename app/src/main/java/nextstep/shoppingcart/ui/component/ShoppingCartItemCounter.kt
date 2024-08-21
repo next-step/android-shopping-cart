@@ -25,7 +25,7 @@ fun ShoppingCartItemCounter(
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(14.dp),
+        horizontalArrangement = Arrangement.spacedBy(14.dp, Alignment.CenterHorizontally),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         CounterTextButton(modifier = Modifier.testTag("장바구니 수량 감소 버튼"), onClick = onMinusClick, text = "-")

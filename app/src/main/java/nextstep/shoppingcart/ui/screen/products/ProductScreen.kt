@@ -2,7 +2,6 @@ package nextstep.shoppingcart.ui.screen.products
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -19,6 +18,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,6 +30,8 @@ import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.toPersistentList
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.Product
+import nextstep.shoppingcart.ui.screen.cart.Cart
+import nextstep.shoppingcart.ui.screen.cart.CartItem
 import nextstep.shoppingcart.ui.screen.products.model.ProductModel
 import nextstep.shoppingcart.ui.screen.products.model.dummyProductModels
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -37,10 +42,19 @@ fun ProductRoute(
     onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var cartItems by remember { mutableStateOf(Cart.items) }
+    val onMinusClick = remember { { item: ProductModel -> cartItems = Cart.removeOne(item) } }
+    val onPlusClick = remember { { item: ProductModel -> cartItems = Cart.addOne(item) } }
+    val onAddClick = remember { { item: ProductModel -> cartItems = Cart.addOne(item) } }
+
     ProductScreen(
         products = dummyProductModels.toPersistentList(),
+        cartItems = cartItems.toPersistentList(),
         onCartClick = onCartClick,
         onItemClick = onItemClick,
+        onAddClick = onAddClick,
+        onMinusClick = onMinusClick,
+        onPlusClick = onPlusClick,
         modifier = modifier
     )
 }
@@ -48,7 +62,11 @@ fun ProductRoute(
 @Composable
 private fun ProductScreen(
     products: PersistentList<ProductModel>,
+    cartItems: PersistentList<CartItem>,
     onItemClick: (id: String) -> Unit,
+    onAddClick: (ProductModel) -> Unit,
+    onPlusClick: (ProductModel) -> Unit,
+    onMinusClick: (ProductModel) -> Unit,
     onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -71,15 +89,14 @@ private fun ProductScreen(
                 items = products,
                 key = { it.id }
             ) { item ->
-                Box {
-                    Product(
-                        productModel = item,
-                        modifier = Modifier.clickable { onItemClick(item.id) },
-                        onClickProduct = {
-
-                        }
-                    )
-                }
+                Product(
+                    productModel = item,
+                    onAddClick = { onAddClick(item) },
+                    onPlusClick = { onPlusClick(item) },
+                    onMinusClick = { onMinusClick(item) },
+                    count = cartItems.find { it.product == item }?.count ?: 0,
+                    modifier = Modifier.clickable { onItemClick(item.id) },
+                )
             }
         }
     }
@@ -118,8 +135,12 @@ private fun ProductScreenPreview() {
     ShoppingCartTheme {
         ProductScreen(
             products = dummyProductModels.toPersistentList(),
-            onCartClick = { },
-            onItemClick = { }
+            cartItems = Cart.items.toPersistentList(),
+            onItemClick = { },
+            onAddClick = { },
+            onPlusClick = { },
+            onMinusClick = { },
+            onCartClick = { }
         )
     }
 }
