@@ -29,8 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.ui.shopping.component.NavTopAppBar
-import nextstep.shoppingcart.ui.shopping.model.dummyProducts
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.DividerColor
 import nextstep.shoppingcart.ui.theme.ItemTextColor
@@ -54,7 +55,12 @@ fun ProductDetailScreen(
         },
         bottomBar = {
             CartButton(
-                onClickCartButton = { onClickCartButton() },
+                onClickCartButton = {
+                    if (product != null) {
+                        Cart.addOne(product)
+                        onClickCartButton()
+                    }
+                },
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -90,7 +96,7 @@ fun ProductDetailTopAppBar(
 fun ProductDetailInfo(
     name: String,
     imageUrl: String,
-    price: Long
+    price: Int
 ) {
     Column {
         DetailImage(imageUrl)
@@ -134,7 +140,7 @@ fun DetailName(
 
 @Composable
 fun DetailPrice(
-    price: Long,
+    price: Int,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -200,7 +206,7 @@ private fun ProductDetailInfoPrev() {
     ProductDetailInfo(
         name = "PET보틀-원형(500ml)",
         imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
-        price = 19_000_000L
+        price = 19_000_000
     )
 }
 
@@ -213,7 +219,7 @@ private fun DetailNamePrev() {
 @Preview(showBackground = true)
 @Composable
 private fun DetailPricePrev() {
-    DetailPrice(price = 19_000_000L)
+    DetailPrice(price = 19_000_000)
 }
 
 @Preview(showBackground = true)

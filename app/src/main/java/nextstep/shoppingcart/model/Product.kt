@@ -1,11 +1,11 @@
-package nextstep.shoppingcart.ui.shopping.model
+package nextstep.shoppingcart.model
 
 
 data class Product(
     val id: Int,
     val name: String,
     val imageUrl: String,
-    val price: Long,
+    val price: Int,
 )
 
 val dummyProducts: List<Product> = listOf(

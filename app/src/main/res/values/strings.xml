@@ -8,4 +8,10 @@
     <string name="product_detail">상품 상세</string>
     <string name="put_shopping_cart">장바구니 담기</string>
     <string name="price">금액</string>
+
+    <string name="minus_operator">-</string>
+    <string name="plus_operator">+</string>
+    <string name="do_order">주문하기</string>
+    
+    <string name="cart_item_remove_btn_description">삭제 버튼</string>
 </resources>
