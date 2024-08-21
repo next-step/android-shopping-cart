@@ -1,8 +1,6 @@
 package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -21,7 +19,10 @@ import nextstep.shoppingcart.data.dummyProducts
 import nextstep.shoppingcart.ui.theme.BlackContent
 
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(
+    product: Product,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = Modifier
             .width(156.dp)
