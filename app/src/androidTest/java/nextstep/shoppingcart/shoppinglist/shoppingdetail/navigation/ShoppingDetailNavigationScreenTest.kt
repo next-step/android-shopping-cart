@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.shoppinglist.shoppingdetail
+package nextstep.shoppingcart.shoppinglist.shoppingdetail.navigation
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -13,7 +13,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class ShoppingDetailScreenTest {
+class ShoppingDetailNavigationScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -49,7 +49,7 @@ class ShoppingDetailScreenTest {
     fun 장바구니_버튼을_누르면_장바구니_뷰로_이동한다() {
         // given:
         // when:
-        composeTestRule.onNodeWithContentDescription("ShoppingDetailAddButton").performClick()
+        composeTestRule.onNodeWithContentDescription("ShoppingButton").performClick()
 
         // then:
         val currentScreen = navController.currentBackStackEntry?.destination?.route
