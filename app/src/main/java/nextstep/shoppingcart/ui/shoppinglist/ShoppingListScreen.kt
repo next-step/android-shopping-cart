@@ -6,24 +6,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.R
+import nextstep.shoppingcart.R.string.shopping_list_title
+import nextstep.shoppingcart.data.Products.dummyProducts
 import nextstep.shoppingcart.ui.shoppinglist.component.ShoppingListLazyVerticalGrid
 import nextstep.shoppingcart.ui.shoppinglist.component.ShoppingListTopBar
-import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
+import nextstep.shoppingcart.ui.shoppinglist.model.Product
 
 @Composable
 fun ShoppingListScreen(
+    products: List<Product>,
     onShoppingCartClick: () -> Unit,
     onItemClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         ShoppingListTopBar(
-            title = stringResource(id = R.string.shopping_list_title),
+            title = stringResource(id = shopping_list_title),
             onShoppingCartClick = onShoppingCartClick,
         )
         ShoppingListLazyVerticalGrid(
-            products = dummyProducts,
+            products = products,
             onItemClick = onItemClick,
         )
     }
@@ -33,6 +35,7 @@ fun ShoppingListScreen(
 @Composable
 private fun ShoppingListScreenPreview() {
     ShoppingListScreen(
+        products = dummyProducts,
         onShoppingCartClick = {},
         onItemClick = {},
     )

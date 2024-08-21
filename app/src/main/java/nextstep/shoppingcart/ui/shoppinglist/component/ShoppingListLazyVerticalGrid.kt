@@ -13,9 +13,9 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.R
+import nextstep.shoppingcart.R.string.shopping_list_description
+import nextstep.shoppingcart.data.Products.dummyProducts
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
-import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 
 @Composable
 fun ShoppingListLazyVerticalGrid(
@@ -23,7 +23,7 @@ fun ShoppingListLazyVerticalGrid(
     onItemClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shoppingListDescription = stringResource(id = R.string.shopping_list_description)
+    val shoppingListDescription = stringResource(id = shopping_list_description)
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(count = 2),
@@ -40,9 +40,9 @@ fun ShoppingListLazyVerticalGrid(
         items(
             items = products,
             key = { product -> product.id },
-        ) {
+        ) { product ->
             ShoppingListItem(
-                product = it,
+                product = product,
                 onItemClick = onItemClick,
             )
         }

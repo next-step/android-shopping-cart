@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.shoppinglist.component
+package nextstep.shoppingcart.shoppinglist.shoppinglist.component
 
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule

@@ -8,14 +8,14 @@ import nextstep.shoppingcart.ui.shoppingcart.navigation.navigateToShoppingCart
 import nextstep.shoppingcart.ui.shoppingcart.navigation.shoppingCartScreen
 import nextstep.shoppingcart.ui.shoppingdetail.navigation.navigateToShoppingDetail
 import nextstep.shoppingcart.ui.shoppingdetail.navigation.shoppingDetailScreen
-import nextstep.shoppingcart.ui.shoppinglist.navigation.ShoppingListRoute
+import nextstep.shoppingcart.ui.shoppinglist.navigation.ShoppingListDestination
 import nextstep.shoppingcart.ui.shoppinglist.navigation.shoppingListScreen
 
 @Composable
 fun AppNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    startDestination: String = ShoppingListRoute.ROUTE,
+    startDestination: String = ShoppingListDestination.ROUTE,
 ) {
     NavHost(
         modifier = modifier,

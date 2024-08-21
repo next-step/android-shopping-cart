@@ -3,9 +3,8 @@ package nextstep.shoppingcart.ui.shoppinglist.component
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,10 +16,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.R
+import nextstep.shoppingcart.R.string.shopping_List_item_description
+import nextstep.shoppingcart.R.string.shopping_item_price_format
+import nextstep.shoppingcart.data.Products.dummyProducts
 import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
-import nextstep.shoppingcart.ui.shoppinglist.model.dummyProducts
 import nextstep.shoppingcart.ui.theme.RobotoBold
 import nextstep.shoppingcart.ui.theme.RobotoRegular
 
@@ -30,7 +30,7 @@ fun ShoppingListItem(
     onItemClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shoppingListItemDescription = stringResource(id = R.string.shopping_item_description)
+    val shoppingListItemDescription = stringResource(id = shopping_List_item_description)
 
     Column(
         modifier = modifier
@@ -40,9 +40,7 @@ fun ShoppingListItem(
     ) {
         ShoppingProductImage(
             product = product,
-            modifier = Modifier
-                .width(width = 156.dp)
-                .height(height = 156.dp),
+            modifier = Modifier.size(size = 156.dp),
         )
         Text(
             text = product.name,
@@ -58,7 +56,7 @@ fun ShoppingListItem(
             overflow = TextOverflow.Ellipsis,
         )
         Text(
-            text = product.price.toString(),
+            text = stringResource(id = shopping_item_price_format, product.price),
             modifier = Modifier.padding(
                 start = 4.dp,
                 bottom = 4.dp,

@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.shoppinglist.screen
+package nextstep.shoppingcart.shoppinglist.shoppinglist.navigation
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -13,7 +13,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class ShoppingListScreenTest {
+class ShoppingListScreenNavigationTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -41,11 +41,10 @@ class ShoppingListScreenTest {
     }
 
     @Test
-    fun 상품을_클릭하면_상품_상세보기_뷰로_이동한다() {
+    fun 상품을_클릭할_경우_상품상세보기_뷰로_이동한다1() {
         // given:
         // when:
-        composeTestRule.onAllNodesWithContentDescription("ShoppingItem").onFirst()
-            .performClick()
+        composeTestRule.onAllNodesWithContentDescription("ShoppingListItem").onFirst().performClick()
 
         // then:
         val actual = navController.currentBackStackEntry?.destination?.route
@@ -55,7 +54,20 @@ class ShoppingListScreenTest {
     }
 
     @Test
-    fun 장바구니_아이콘을_클릭하면_장바구니_뷰로_이동한다() {
+    fun 상품을_클릭할_경우_상품상세보기_뷰로_이동한다2() {
+        // given:
+        // when:
+        composeTestRule.onAllNodesWithContentDescription("ShoppingListItem")[2].performClick()
+
+        // then:
+        val actual = navController.currentBackStackEntry?.destination?.route
+        val expected = "ShoppingDetailScreen/{productId}"
+
+        assert(actual == expected)
+    }
+
+    @Test
+    fun 장바구니_아이콘을_클릭할_경우_장바구니_뷰로_이동한다() {
         // given:
         // when:
         composeTestRule.onNodeWithContentDescription("ShoppingCartIcon").performClick()

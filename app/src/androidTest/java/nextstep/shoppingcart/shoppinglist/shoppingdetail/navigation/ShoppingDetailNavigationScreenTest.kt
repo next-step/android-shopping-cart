@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.shoppinglist.screen
+package nextstep.shoppingcart.shoppinglist.shoppingdetail.navigation
 
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -13,7 +13,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class ShoppingDetailScreenTest {
+class ShoppingDetailNavigationScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -28,12 +28,12 @@ class ShoppingDetailScreenTest {
                 AppNavHost(navController = navController)
             }
         }.also {
-            it.onAllNodesWithContentDescription("ShoppingItem").onFirst().performClick()
+            it.onAllNodesWithContentDescription("ShoppingListItem").onFirst().performClick()
         }
     }
 
     @Test
-    fun 뒤로가기_버튼을_누르면_상품_목록_뷰로_돌아간다() {
+    fun 뒤로가기_버튼을_클릭할_경우_이전뷰로_이동한다() {
         // given:
         // when:
         composeTestRule.onNodeWithContentDescription("ShoppingTopBarBackIcon").performClick()
@@ -46,10 +46,10 @@ class ShoppingDetailScreenTest {
     }
 
     @Test
-    fun 장바구니_버튼을_누르면_장바구니_뷰로_이동한다() {
+    fun 장바구니담기_버튼을_클릭할_경우_장바구니_뷰로_이동한다() {
         // given:
         // when:
-        composeTestRule.onNodeWithContentDescription("ShoppingDetailAddButton").performClick()
+        composeTestRule.onNodeWithContentDescription("ShoppingButton").performClick()
 
         // then:
         val currentScreen = navController.currentBackStackEntry?.destination?.route

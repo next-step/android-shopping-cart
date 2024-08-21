@@ -16,7 +16,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.R
+import nextstep.shoppingcart.R.string.shopping_top_bar_icon
 import nextstep.shoppingcart.ui.theme.RobotoRegular
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,7 +26,7 @@ fun ShoppingTopBar(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shoppingTopBarBackIcon = stringResource(id = R.string.shopping_top_bar_icon)
+    val shoppingTopBarBackIcon = stringResource(id = shopping_top_bar_icon)
 
     TopAppBar(
         title = {

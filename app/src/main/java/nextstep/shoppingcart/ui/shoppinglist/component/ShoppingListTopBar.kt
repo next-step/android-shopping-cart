@@ -2,7 +2,7 @@ package nextstep.shoppingcart.ui.shoppinglist.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.Icons.Filled
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,7 +16,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.R
+import nextstep.shoppingcart.R.string.shopping_list_top_bar_icon
 import nextstep.shoppingcart.ui.theme.RobotoRegular
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,7 +26,7 @@ fun ShoppingListTopBar(
     onShoppingCartClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val shoppingListTopBarIcon = stringResource(id = R.string.shopping_list_top_bar_icon)
+    val shoppingListTopBarIcon = stringResource(id = shopping_list_top_bar_icon)
 
     CenterAlignedTopAppBar(
         title = {
@@ -39,7 +39,7 @@ fun ShoppingListTopBar(
         },
         actions = {
             Icon(
-                imageVector = Icons.Filled.ShoppingCart,
+                imageVector = Filled.ShoppingCart,
                 contentDescription = shoppingListTopBarIcon,
                 modifier = Modifier
                     .padding(all = 14.dp)
