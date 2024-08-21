@@ -13,10 +13,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.R
-import nextstep.shoppingcart.R.*
-import nextstep.shoppingcart.R.string.*
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.R.string.shopping_list_description
+import nextstep.shoppingcart.data.Products.dummyProducts
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
 
 @Composable

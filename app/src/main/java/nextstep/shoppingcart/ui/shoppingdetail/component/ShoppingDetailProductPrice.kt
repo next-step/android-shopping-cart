@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R.string.shopping_detail_product_price
 import nextstep.shoppingcart.R.string.shopping_item_price_format
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.data.Products.dummyProducts
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
 
 @Composable

@@ -39,5 +39,5 @@ object Cart {
     }
 
     fun findProductById(productId: Long) =
-        dummyProducts.find { it.id == productId } ?: throw IllegalArgumentException()
+        items.find { it.product.id == productId } ?: throw IllegalArgumentException()
 }

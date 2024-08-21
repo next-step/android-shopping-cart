@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.data.Products.dummyProducts
 import nextstep.shoppingcart.ui.component.ShoppingCountBar
 import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.shoppinglist.model.Product

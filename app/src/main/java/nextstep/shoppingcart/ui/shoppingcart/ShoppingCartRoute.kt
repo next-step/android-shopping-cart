@@ -24,17 +24,17 @@ fun ShoppingCartRoute(
         total = total,
         onBackClick = onBackClick,
         onRemoveClick = { cartProductId ->
-            removeAll(findProductById(cartProductId))
+            removeAll(findProductById(cartProductId).product)
             cartProducts = items
             total = totalPrice
         },
         onAddClick = { cartProductId ->
-            addOne(findProductById(cartProductId))
+            addOne(findProductById(cartProductId).product)
             cartProducts = items
             total = totalPrice
         },
         onSubtractClick = { cartProductId ->
-            addOne(findProductById(cartProductId))
+            addOne(findProductById(cartProductId).product)
             cartProducts = items
             total = totalPrice
         },

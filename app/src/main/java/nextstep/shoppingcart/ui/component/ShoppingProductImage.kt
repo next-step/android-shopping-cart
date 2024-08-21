@@ -6,7 +6,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R.string.shopping_item_description
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.data.Products.dummyProducts
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
 
 @Composable

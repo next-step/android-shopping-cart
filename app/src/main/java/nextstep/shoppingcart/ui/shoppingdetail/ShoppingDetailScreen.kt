@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R.string.shopping_detail_add_button
 import nextstep.shoppingcart.R.string.shopping_detail_title
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.data.Products.dummyProducts
 import nextstep.shoppingcart.ui.component.ShoppingButton
 import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.component.ShoppingTopBar

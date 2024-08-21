@@ -2,7 +2,7 @@ package nextstep.shoppingcart.ui.shoppingdetail
 
 import androidx.compose.runtime.Composable
 import nextstep.shoppingcart.data.Cart.addOne
-import nextstep.shoppingcart.data.Cart.findProductById
+import nextstep.shoppingcart.data.Products.findProductById
 
 @Composable
 fun ShoppingDetailRoute(

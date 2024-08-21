@@ -1,7 +1,7 @@
 package nextstep.shoppingcart.ui.shoppinglist
 
 import androidx.compose.runtime.Composable
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.data.Products.dummyProducts
 
 @Composable
 fun ShoppingListRoute(

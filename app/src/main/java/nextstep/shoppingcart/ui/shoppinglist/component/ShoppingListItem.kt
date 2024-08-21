@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R.string.shopping_item_description
 import nextstep.shoppingcart.R.string.shopping_item_price_format
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.data.Products.dummyProducts
 import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
 import nextstep.shoppingcart.ui.theme.RobotoBold
