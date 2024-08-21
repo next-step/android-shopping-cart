@@ -24,7 +24,15 @@ class CartActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CartScreen(modifier = Modifier)
+                    var items by remember { mutableStateOf(Cart.items) }
+                    val totalPrice = remember(items) { Cart.totalPrice }
+
+                    CartScreen(
+                        modifier = Modifier,
+                        items = items,
+                        totalPrice = totalPrice,
+                        onItemsChange = { items = it }
+                    )
                 }
             }
         }
