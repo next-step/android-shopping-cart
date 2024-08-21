@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.ui.shopping.component.NavTopAppBar
 import nextstep.shoppingcart.ui.theme.Blue50
@@ -54,7 +55,12 @@ fun ProductDetailScreen(
         },
         bottomBar = {
             CartButton(
-                onClickCartButton = { onClickCartButton() },
+                onClickCartButton = {
+                    if (product != null) {
+                        Cart.addOne(product)
+                        onClickCartButton()
+                    }
+                },
                 modifier = Modifier.fillMaxWidth()
             )
         }

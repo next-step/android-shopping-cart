@@ -20,10 +20,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,11 +40,12 @@ import nextstep.shoppingcart.ui.theme.Gray10
 @Composable
 fun CartItemCard(
     cartItem: CartItem,
+    onClickAddItem: () -> Unit,
     onClickRemoveItem: () -> Unit,
+    onClickRemoveAll: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val product = cartItem.product
-    var count by remember { mutableStateOf(cartItem.count) }
 
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -77,7 +74,7 @@ fun CartItemCard(
                     imageVector = Icons.Filled.Close,
                     contentDescription = "",
                     modifier = Modifier.clickable {
-                        onClickRemoveItem.invoke()
+                        onClickRemoveAll.invoke()
                     }
                 )
             }
@@ -106,9 +103,13 @@ fun CartItemCard(
                         style = MaterialTheme.typography.bodyLarge
                     )
                     CartItemAmount(
-                        count,
-                        onClickRemoveCount = { count-- },
-                        onClickAddCount = { count++ }
+                        cartItem.count,
+                        onClickRemoveCount = {
+                            onClickRemoveItem.invoke()
+                        },
+                        onClickAddCount = {
+                            onClickAddItem.invoke()
+                        }
                     )
                 }
             }
@@ -163,6 +164,6 @@ private fun CartItemCardPrev() {
     val dummyCartItem = CartItem(dummyProduct, 1)
 
     Box(modifier = Modifier.padding(10.dp)) {
-        CartItemCard(dummyCartItem, {})
+        CartItemCard(dummyCartItem, {}, {}, {})
     }
 }
