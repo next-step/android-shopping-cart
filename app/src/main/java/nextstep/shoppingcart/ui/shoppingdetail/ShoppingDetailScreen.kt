@@ -4,8 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,9 +39,7 @@ fun ShoppingDetailScreen(
         )
         ShoppingProductImage(
             product = product,
-            modifier = modifier
-                .width(width = 360.dp)
-                .height(height = 360.dp),
+            modifier = modifier.size(size = 360.dp),
         )
         ShoppingDetailProductTitle(product = product)
         ShoppingDetailDivider()

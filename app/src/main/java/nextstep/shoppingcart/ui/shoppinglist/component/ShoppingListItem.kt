@@ -3,9 +3,8 @@ package nextstep.shoppingcart.ui.shoppinglist.component
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -41,9 +40,7 @@ fun ShoppingListItem(
     ) {
         ShoppingProductImage(
             product = product,
-            modifier = Modifier
-                .width(width = 156.dp)
-                .height(height = 156.dp),
+            modifier = Modifier.size(size = 156.dp),
         )
         Text(
             text = product.name,
