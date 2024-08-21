@@ -72,7 +72,7 @@ fun CartItemCard(
                 )
                 Image(
                     imageVector = Icons.Filled.Close,
-                    contentDescription = "",
+                    contentDescription = stringResource(id = R.string.cart_item_remove_btn_description),
                     modifier = Modifier.clickable {
                         onClickRemoveAll.invoke()
                     }
