@@ -10,6 +10,7 @@ import nextstep.shoppingcart.data.Cart.addOne
 import nextstep.shoppingcart.data.Cart.findProductById
 import nextstep.shoppingcart.data.Cart.items
 import nextstep.shoppingcart.data.Cart.removeAll
+import nextstep.shoppingcart.data.Cart.removeOne
 import nextstep.shoppingcart.data.Cart.totalPrice
 
 @Composable
@@ -34,7 +35,7 @@ fun ShoppingCartRoute(
             total = totalPrice
         },
         onSubtractClick = { cartProductId ->
-            addOne(findProductById(cartProductId).product)
+            removeOne(findProductById(cartProductId).product)
             cartProducts = items
             total = totalPrice
         },
