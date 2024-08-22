@@ -1,10 +1,7 @@
 package nextstep.shoppingcart
 
 import android.content.Context
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -48,9 +45,9 @@ class CartScreenTest {
         )
 
         composeTestRule.setContent {
-            var items by remember { mutableStateOf(Cart.items) }
+            val items = Cart.items
             val totalPrice = remember(items) { Cart.totalPrice }
-            CartScreen(modifier = Modifier, items, totalPrice, onItemsChange = { items = it })
+            CartScreen(modifier = Modifier, items, totalPrice, onItemsChange = { items })
         }
 
         val actual = "주문하기(3,000원)"
@@ -68,9 +65,9 @@ class CartScreenTest {
         )
 
         composeTestRule.setContent {
-            var items by remember { mutableStateOf(Cart.items) }
+            val items = Cart.items
             val totalPrice = remember(items) { Cart.totalPrice }
-            CartScreen(modifier = Modifier, items, totalPrice, onItemsChange = { items = it })
+            CartScreen(modifier = Modifier, items, totalPrice, onItemsChange = { items })
         }
 
         composeTestRule.onNodeWithTag(context.getString(R.string.test_tag_remove_icon, "상품 1"))
@@ -94,9 +91,9 @@ class CartScreenTest {
         )
 
         composeTestRule.setContent {
-            var items by remember { mutableStateOf(Cart.items) }
+            val items = Cart.items
             val totalPrice = remember(items) { Cart.totalPrice }
-            CartScreen(modifier = Modifier, items, totalPrice, onItemsChange = { items = it })
+            CartScreen(modifier = Modifier, items, totalPrice, onItemsChange = { items })
         }
 
         composeTestRule.onNodeWithTag(context.getString(R.string.test_tag_plus_icon, "상품 1"))
@@ -122,9 +119,9 @@ class CartScreenTest {
         )
 
         composeTestRule.setContent {
-            var items by remember { mutableStateOf(Cart.items) }
+            val items = Cart.items
             val totalPrice = remember(items) { Cart.totalPrice }
-            CartScreen(modifier = Modifier, items, totalPrice, onItemsChange = { items = it })
+            CartScreen(modifier = Modifier, items, totalPrice, onItemsChange = { items })
         }
 
         composeTestRule.onNodeWithTag(context.getString(R.string.test_tag_minus_icon, "상품 1"))
@@ -145,10 +142,10 @@ class CartScreenTest {
         )
 
         composeTestRule.setContent {
-            var items by remember { mutableStateOf(Cart.items) }
+            val items = Cart.items
             val totalPrice = remember(items) { Cart.totalPrice }
 
-            CartScreen(modifier = Modifier, items, totalPrice, onItemsChange = { items = it })
+            CartScreen(modifier = Modifier, items, totalPrice, onItemsChange = { items })
         }
 
         composeTestRule.onNodeWithTag(context.getString(R.string.test_tag_minus_icon, "상품 1"))

@@ -24,7 +24,7 @@ fun CartScreen(
     modifier: Modifier,
     items: List<CartItem>,
     totalPrice: Int,
-    onItemsChange: (List<CartItem>) -> Unit
+    onItemsChange: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -50,9 +50,9 @@ fun CartScreen(
                 CartCard(
                     cartItem = item,
                     modifier = modifier,
-                    onMinusClick = { onItemsChange(Cart.removeOne(it)) },
-                    onPlusClick = { onItemsChange(Cart.addOne(it)) },
-                    onRemoveClick = { onItemsChange(Cart.removeAll(it.product)) }
+                    onMinusClick = { (Cart.removeOne(it)) },
+                    onPlusClick = { (Cart.addOne(it)) },
+                    onRemoveClick = { (Cart.removeAll(it.product)) }
                 )
             }
         }

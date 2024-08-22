@@ -24,7 +24,7 @@ import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.data.cart.Cart.containProduct
 import nextstep.shoppingcart.data.cart.CartItem
-import nextstep.shoppingcart.ui.cart.component.InteractiveQuantity
+import nextstep.shoppingcart.ui.common.InteractiveQuantity
 
 @Composable
 fun InteractiveProductImage(

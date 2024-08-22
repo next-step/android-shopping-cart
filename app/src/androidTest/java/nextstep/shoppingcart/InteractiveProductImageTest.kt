@@ -1,10 +1,6 @@
 package nextstep.shoppingcart
 
 import android.content.Context
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -13,6 +9,8 @@ import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.data.cart.Cart
+import nextstep.shoppingcart.data.cart.Cart.addOne
+import nextstep.shoppingcart.data.cart.Cart.removeOne
 import nextstep.shoppingcart.data.cart.CartItem
 import nextstep.shoppingcart.ui.product.list.component.InteractiveProductImage
 import org.junit.Before
@@ -41,15 +39,15 @@ class InteractiveProductImageTest {
         )
 
         composeTestRule.setContent {
-            var items by remember { mutableStateOf(Cart.items) }
+            val items = Cart.items
 
             InteractiveProductImage(
                 product = product,
                 items = items,
                 modifier = Modifier,
-                onClickPlus = { items = Cart.addOne(product) },
-                onClickMinus = { items = Cart.removeOne(product) },
-                onClickFab = { items = Cart.addOne(product) }
+                onClickPlus = { addOne(product) },
+                onClickMinus = { removeOne(product) },
+                onClickFab = { addOne(product) }
             )
         }
 
@@ -77,15 +75,15 @@ class InteractiveProductImageTest {
 
         // when : 상품 카드를 노출한다.
         composeTestRule.setContent {
-            var items by remember { mutableStateOf(Cart.items) }
+            val items = Cart.items
 
             InteractiveProductImage(
                 product = product,
                 items = items,
                 modifier = Modifier,
-                onClickPlus = { items = Cart.addOne(product) },
-                onClickMinus = { items = Cart.removeOne(product) },
-                onClickFab = { items = Cart.addOne(product) }
+                onClickPlus = { Cart.addOne(product) },
+                onClickMinus = { Cart.removeOne(product) },
+                onClickFab = { Cart.addOne(product) }
             )
         }
 
@@ -107,15 +105,15 @@ class InteractiveProductImageTest {
         Cart.addOne(product)
 
         composeTestRule.setContent {
-            var items by remember { mutableStateOf(Cart.items) }
+            val items = Cart.items
 
             InteractiveProductImage(
                 product = product,
                 items = items,
                 modifier = Modifier,
-                onClickPlus = { items = Cart.addOne(product) },
-                onClickMinus = { items = Cart.removeOne(product) },
-                onClickFab = { items = Cart.addOne(product) }
+                onClickPlus = { Cart.addOne(product) },
+                onClickMinus = { Cart.removeOne(product) },
+                onClickFab = { Cart.addOne(product) }
             )
         }
 
@@ -142,15 +140,15 @@ class InteractiveProductImageTest {
         Cart.addOne(product)
 
         composeTestRule.setContent {
-            var items by remember { mutableStateOf(Cart.items) }
+            val items = Cart.items
 
             InteractiveProductImage(
                 product = product,
                 items = items,
                 modifier = Modifier,
-                onClickPlus = { items = Cart.addOne(product) },
-                onClickMinus = { items = Cart.removeOne(product) },
-                onClickFab = { items = Cart.addOne(product) }
+                onClickPlus = { Cart.addOne(product) },
+                onClickMinus = { Cart.removeOne(product) },
+                onClickFab = { Cart.addOne(product) }
             )
         }
 

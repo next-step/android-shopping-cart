@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.data.cart.CartItem
+import nextstep.shoppingcart.ui.common.InteractiveQuantity
 
 @Composable
 fun PriceQuantityInfo(
