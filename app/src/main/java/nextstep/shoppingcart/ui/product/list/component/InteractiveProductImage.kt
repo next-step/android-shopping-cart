@@ -9,10 +9,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,12 +23,18 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.data.cart.Cart.containProduct
+import nextstep.shoppingcart.data.cart.CartItem
 import nextstep.shoppingcart.ui.cart.component.InteractiveQuantity
 
 @Composable
-fun InteractiveProductImage(product: Product, modifier: Modifier = Modifier) {
-
-    var items by remember { mutableStateOf(Cart.items) }
+fun InteractiveProductImage(
+    product: Product,
+    items: List<CartItem>,
+    modifier: Modifier = Modifier,
+    onClickPlus: () -> Unit = {},
+    onClickMinus: () -> Unit = {},
+    onClickFab: () -> Unit = {}
+) {
 
     Box(modifier = Modifier) {
         AsyncImage(
@@ -47,16 +49,16 @@ fun InteractiveProductImage(product: Product, modifier: Modifier = Modifier) {
             InteractiveQuantity(
                 modifier = Modifier.align(Alignment.BottomEnd),
                 cartItem = items.find { it.product == product }!!,
-                onClickMinus = { items = Cart.removeOne(product) },
-                onClickPlus = { items = Cart.addOne(product)}
+                onClickMinus = { onClickMinus() },
+                onClickPlus = { onClickPlus() }
             )
         } else {
             SmallFloatingActionButton(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .size(26.dp)
-                    .testTag(stringResource(id = R.string.test_tag_add_fab) + product.name),
-                onClick = { items = Cart.addOne(product) },
+                    .testTag(stringResource(id = R.string.test_tag_add_fab, product.name)),
+                onClick = { onClickFab() },
                 containerColor = Color.White,
                 shape = CircleShape,
             ) {
@@ -78,7 +80,12 @@ private fun InteractiveProductImageFabPreview() {
             name = "Product Name",
             price = 1000,
             imgUrl = "https://www.example.com/image.jpg"
-        )
+        ),
+        items = emptyList(),
+        Modifier,
+        onClickPlus = {},
+        onClickMinus = {},
+        onClickFab = {}
     )
 }
 
@@ -99,6 +106,11 @@ private fun InteractiveProductImageQuantityPreview() {
             name = "Product Name",
             price = 1000,
             imgUrl = "https://www.example.com/image.jpg"
-        )
+        ),
+        items = emptyList(),
+        modifier = Modifier,
+        onClickPlus = {},
+        onClickMinus = {},
+        onClickFab = {}
     )
 }
