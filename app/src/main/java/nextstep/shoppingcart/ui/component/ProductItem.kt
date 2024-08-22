@@ -40,7 +40,8 @@ fun ProductItem(
             modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
             maxLines = 1,
             fontWeight = Bold,
-            color = BlackContent
+            color = BlackContent,
+            overflow = TextOverflow.Ellipsis
         )
         Text(
             text = product.price.toString(),
@@ -56,4 +57,16 @@ fun ProductItem(
 @Composable
 fun ProductItemPreview() {
     ProductItem(dummyProducts[0])
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LongNameProductItemPreview() {
+    ProductItem(
+        Product(
+            name = "iPhone 15 Pro Extra Ultra Premium",
+            imageUrl = "",
+            price = 10000000
+        )
+    )
 }
