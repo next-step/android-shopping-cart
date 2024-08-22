@@ -19,11 +19,13 @@ class ProductDetailActivity : ComponentActivity() {
 
         setContent {
             ProductDetailScreen(
-                product
-            ) {
-                val intent = Intent(this, CartActivity::class.java)
-                startActivity(intent)
-            }
+                product = product,
+                onNavigateToCart = {
+                    val intent = Intent(this, CartActivity::class.java)
+                    startActivity(intent)
+                },
+                onBack = { finish() },
+            )
         }
     }
 }

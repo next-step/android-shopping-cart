@@ -23,9 +23,7 @@ fun CartTopAppBar(onBack: () -> Unit) {
         },
         navigationIcon = {
             IconButton(
-                onClick = {
-                    onBack()
-                }
+                onClick = onBack
             ) {
                 Icon(
                     Icons.Filled.ArrowBack,

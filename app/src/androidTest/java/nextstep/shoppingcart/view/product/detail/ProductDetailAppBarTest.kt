@@ -1,7 +1,6 @@
 package nextstep.shoppingcart.view.product.detail
 
-import androidx.activity.ComponentActivity
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -12,12 +11,13 @@ import org.junit.Test
 class ProductDetailAppBarTest {
 
     @get:Rule
-    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+    val composeTestRule = createComposeRule()
+    private var isBackClicked = false
 
     @Before
     fun setUp() {
         composeTestRule.setContent {
-            ProductDetailAppBar()
+            ProductDetailAppBar(onBack = { isBackClicked = true })
         }
     }
 
@@ -36,11 +36,11 @@ class ProductDetailAppBarTest {
     }
 
     @Test
-    fun 뒤로가기_아이콘을_클릭하면_직전_화면으로_이동하여_상품_상세_화면이_종료된다() {
+    fun 뒤로가기_아이콘을_클릭하면_직전_화면으로_이동한다() {
         composeTestRule.onNodeWithContentDescription(
             "Detail Back"
         ).performClick()
 
-        assert(composeTestRule.activity.isFinishing)
+        assert(isBackClicked)
     }
 }

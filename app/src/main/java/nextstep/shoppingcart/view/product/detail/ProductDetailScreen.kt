@@ -18,7 +18,7 @@ import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @Composable
-fun ProductDetailScreen(product: Product, onNavigateToCart: () -> Unit) {
+fun ProductDetailScreen(product: Product, onNavigateToCart: () -> Unit, onBack: () -> Unit) {
     ShoppingCartTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -29,7 +29,7 @@ fun ProductDetailScreen(product: Product, onNavigateToCart: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top
             ) {
-                ProductDetailAppBar()
+                ProductDetailAppBar(onBack = onBack)
                 ProductDetailImage(
                     product.imageUrl,
                     product.name,
@@ -56,6 +56,6 @@ fun ProductDetailScreen(product: Product, onNavigateToCart: () -> Unit) {
 @Composable
 private fun ProductDetailScreenPreview() {
     ShoppingCartTheme {
-        ProductDetailScreen(Product("name", "imageUrl", 0)) {}
+        ProductDetailScreen(Product("name", "imageUrl", 0), {}, {})
     }
 }
