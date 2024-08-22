@@ -14,13 +14,15 @@ import nextstep.shoppingcart.R
 @Composable
 fun PriceLabel(
     price: Int,
-    style: TextStyle = LocalTextStyle.current,
+    modifier: Modifier = Modifier,
+    style: TextStyle,
     textAlign: TextAlign? = null,
 ) {
     Text(
         text = stringResource(id = R.string.price_format, price),
         style = style,
-        textAlign = textAlign
+        textAlign = textAlign,
+        modifier = modifier
     )
 }
 

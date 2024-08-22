@@ -25,9 +25,9 @@ fun ProductCounter(
     modifier: Modifier = Modifier
 ) {
     Row(
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End,
-        modifier = modifier
     ) {
         IconButton(
             onClick = onMinusClick,

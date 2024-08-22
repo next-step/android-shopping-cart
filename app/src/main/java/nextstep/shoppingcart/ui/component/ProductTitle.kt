@@ -11,8 +11,8 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun ProductTitle(
     title: String,
+    modifier: Modifier = Modifier,
     style: TextStyle,
-    modifier: Modifier = Modifier
 ) {
     Text(
         text = title,

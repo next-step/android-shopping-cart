@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.component
+package nextstep.shoppingcart.ui.cart
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -27,9 +27,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.CartItem
+import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.Product
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.component.PriceLabel
+import nextstep.shoppingcart.ui.component.ProductCounter
+import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.component.ProductTitle
 
 @Composable
 fun CartInfo(

@@ -13,14 +13,14 @@ import coil.compose.AsyncImage
 fun ProductImage(
     imageUrl: String,
     contentDescription: String,
+    modifier: Modifier = Modifier,
     contentScale: ContentScale,
-    modifier: Modifier = Modifier
 ) {
     AsyncImage(
         model = imageUrl,
         contentDescription = contentDescription,
+        modifier = modifier,
         contentScale = contentScale,
-        modifier = modifier
     )
 }
 

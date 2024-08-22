@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui
+package nextstep.shoppingcart.ui.detail
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,7 +10,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.Product
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.ProductDetail
 import nextstep.shoppingcart.ui.component.ShoppingCartNavigationTopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

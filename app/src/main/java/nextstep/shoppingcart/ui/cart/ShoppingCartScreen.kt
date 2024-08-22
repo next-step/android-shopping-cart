@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui
+package nextstep.shoppingcart.ui.cart
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -18,9 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.Cart
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.CartInfo
 import nextstep.shoppingcart.ui.component.ShoppingCartButton
 import nextstep.shoppingcart.ui.component.ShoppingCartNavigationTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme

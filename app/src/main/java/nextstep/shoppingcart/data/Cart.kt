@@ -1,4 +1,6 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.data
+
+import nextstep.shoppingcart.Product
 
 data class CartItem(
     val product: Product,

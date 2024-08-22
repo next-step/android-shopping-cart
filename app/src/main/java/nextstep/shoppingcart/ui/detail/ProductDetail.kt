@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.component
+package nextstep.shoppingcart.ui.detail
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -13,13 +13,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import nextstep.shoppingcart.Cart
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.Product
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.component.PriceLabel
+import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.component.ProductTitle
+import nextstep.shoppingcart.ui.component.ShoppingCartButton
 
 @SuppressLint("ResourceAsColor")
 @Composable
@@ -30,17 +34,18 @@ fun ProductDetail(
     Column(
         modifier = modifier
     ) {
-        AsyncImage(
-            model = product.imageUrl,
-            contentDescription = product.name,
+        ProductImage(
+            imageUrl = product.imageUrl,
+            contentDescription =  product.name,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(360.dp)
+                .height(360.dp),
+            contentScale = ContentScale.Crop
         )
-        Text(
-            text = product.name,
+        ProductTitle(
+            title = product.name,
+            modifier = Modifier.padding(18.dp),
             style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(18.dp)
         )
         Divider()
         Row(
@@ -57,8 +62,8 @@ fun ProductDetail(
                 text = stringResource(id = R.string.price_title),
                 style = MaterialTheme.typography.titleLarge
             )
-            Text(
-                text = stringResource(id = R.string.price_format, product.price),
+            PriceLabel(
+                price = product.price,
                 style = MaterialTheme.typography.titleLarge
             )
         }
