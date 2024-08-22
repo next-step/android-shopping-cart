@@ -1,24 +1,26 @@
 package nextstep.shoppingcart.ui.shopping.cart
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +30,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -51,7 +55,8 @@ fun CartItemCard(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(4.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = Color.White,
+            contentColor = Color.Black
         ),
         border = BorderStroke(1.dp, Gray10)
     ) {
@@ -65,12 +70,11 @@ fun CartItemCard(
             ) {
                 Text(
                     text = product.name,
-                    color = Color.Black,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     lineHeight = 24.sp
                 )
-                Image(
+                Icon(
                     imageVector = Icons.Filled.Close,
                     contentDescription = stringResource(id = R.string.cart_item_remove_btn_description),
                     modifier = Modifier.clickable {
@@ -97,9 +101,8 @@ fun CartItemCard(
                     modifier.padding(top = 18.dp)
                 ) {
                     Text(
-                        text = stringResource(id = R.string.item_price_format, product.price),
+                        text = stringResource(id = R.string.item_price_format, cartItem.totalPrice),
                         modifier = Modifier.align(Alignment.End),
-                        color = Color.Black,
                         style = MaterialTheme.typography.bodyLarge
                     )
                     CartItemAmount(
@@ -124,46 +127,61 @@ fun CartItemAmount(
     onClickAddCount: () -> Unit
 ) {
     Row(
+        modifier = Modifier.height(42.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = stringResource(id = R.string.minus_operator),
-            modifier = Modifier
-                .size(42.dp)
-                .clickable { onClickRemoveCount.invoke() },
-            color = Color.Black,
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
-        )
+        TextButton(
+            onClick = { onClickRemoveCount.invoke() },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.White,
+                contentColor = Color.Black
+            ),
+            contentPadding = PaddingValues(0.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.minus_operator),
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
         Text(
             text = count.toString(),
-            modifier = Modifier.size(42.dp),
-            color = Color.Black,
+            modifier = Modifier.width(42.dp),
             fontSize = 22.sp,
             fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Center
         )
-        Text(
-            text = stringResource(id = R.string.plus_operator),
-            modifier = Modifier
-                .size(42.dp)
-                .clickable { onClickAddCount.invoke() },
-            color = Color.Black,
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
-        )
+        TextButton(
+            onClick = { onClickAddCount.invoke() },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.White,
+                contentColor = Color.Black
+            ),
+            contentPadding = PaddingValues(0.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.plus_operator),
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun CartItemCardPrev() {
-    val dummyProduct = dummyProducts[0]
-    val dummyCartItem = CartItem(dummyProduct, 1)
-
+private fun CartItemCardPrev(
+    @PreviewParameter(CartItemPrevParamProvider::class) dummyCartItem: CartItem
+) {
     Box(modifier = Modifier.padding(10.dp)) {
         CartItemCard(dummyCartItem, {}, {}, {})
     }
+}
+
+class CartItemPrevParamProvider : PreviewParameterProvider<CartItem> {
+    override val values = sequenceOf(
+        CartItem(dummyProducts[0], 1),
+        CartItem(dummyProducts[1], 2),
+        CartItem(dummyProducts[2], 3)
+    )
 }
