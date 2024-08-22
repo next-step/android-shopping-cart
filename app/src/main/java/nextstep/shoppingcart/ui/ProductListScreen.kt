@@ -2,7 +2,9 @@ package nextstep.shoppingcart.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
@@ -14,11 +16,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,10 +29,10 @@ import nextstep.shoppingcart.ui.theme.BlackTitle
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen() {
-
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
+                modifier = Modifier.fillMaxWidth(),
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = Color.White,
                     titleContentColor = BlackTitle,
@@ -47,10 +47,11 @@ fun ProductListScreen() {
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
                             imageVector = Icons.Filled.ShoppingCart,
-                            contentDescription = "Cart"
+                            contentDescription = "Cart",
+                            modifier = Modifier.size(48.dp)
                         )
                     }
-                },
+                }
             )
         },
     ) { innerPadding ->
