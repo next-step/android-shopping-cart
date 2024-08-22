@@ -18,7 +18,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,10 +25,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import nextstep.shoppingcart.CartItem
 import nextstep.shoppingcart.Product
 import nextstep.shoppingcart.R
@@ -65,12 +62,10 @@ fun CartInfo(
                     .fillMaxWidth()
                     .height(24.dp)
             ) {
-                Text(
-                    text = cartItem.product.name,
+                ProductTitle(
+                    title = cartItem.product.name,
                     style = MaterialTheme.typography.titleMedium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.fillMaxHeight(),
+                    modifier = Modifier.fillMaxHeight()
                 )
                 IconButton(
                     onClick = onRemoveClick,
@@ -87,13 +82,13 @@ fun CartInfo(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                AsyncImage(
-                    model = cartItem.product.imageUrl,
+                ProductImage(
+                    imageUrl = cartItem.product.imageUrl,
                     contentDescription = cartItem.product.name,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .width(136.dp)
-                        .height(84.dp),
+                        .height(84.dp)
                 )
                 Column(
                     modifier = Modifier.padding(
@@ -102,39 +97,16 @@ fun CartInfo(
                     ),
                     horizontalAlignment = Alignment.End
                 ) {
-                    Text(
-                        text = stringResource(id = R.string.price_format, cartItem.totalPrice),
+                    PriceLabel(
+                        price = cartItem.totalPrice,
                         style = MaterialTheme.typography.titleSmall,
-                        textAlign = TextAlign.End,
+                        textAlign = TextAlign.End
                     )
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        IconButton(
-                            onClick = onMinusClick,
-                            modifier = Modifier.size(42.dp)
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.minus),
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                        }
-                        Text(
-                            text = cartItem.count.toString(),
-                            style = MaterialTheme.typography.titleLarge,
-                            modifier = Modifier.padding(horizontal = 14.dp)
-                        )
-                        IconButton(
-                            onClick = onPlusClick,
-                            modifier = Modifier.size(42.dp)
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.plus),
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                        }
-                    }
+                    ProductCounter(
+                        count = cartItem.count,
+                        onMinusClick = onMinusClick,
+                        onPlusClick = onPlusClick
+                    )
                 }
             }
         }
