@@ -35,8 +35,8 @@ const val SHOPPING_CART_ORDER_TEST_TAG = "shoppingCartOrder"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShoppingCartScreen(onBack: () -> Unit) {
-    var items by remember { mutableStateOf(Cart.items) }
-    val totalPrice = remember(items) { Cart.totalPrice }
+    val cartItems = Cart.items.toList()
+    val totalPrice = remember(cartItems) { Cart.totalPrice }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -64,12 +64,12 @@ fun ShoppingCartScreen(onBack: () -> Unit) {
                 contentPadding = PaddingValues(18.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(items) { item ->
+                items(cartItems) { item ->
                     CartListItem(
                         item = item,
-                        onClickIncrease = { items = Cart.addOne(item.product) },
-                        onClickDecrease = { items = Cart.removeOne(item.product) },
-                        onClickCancel = { items = Cart.removeAll(item.product) },
+                        onClickIncrease = { Cart.addOne(item.product) },
+                        onClickDecrease = { Cart.removeOne(item.product) },
+                        onClickCancel = { Cart.removeAll(item.product) },
                     )
                 }
             }

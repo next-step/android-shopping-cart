@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.common.component.CartItemCounter
 import nextstep.shoppingcart.ui.common.component.Image
 import nextstep.shoppingcart.ui.theme.Black10
 import nextstep.shoppingcart.ui.theme.Gray10

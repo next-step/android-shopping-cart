@@ -17,12 +17,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.ui.product.list.component.ProductListItem
@@ -61,7 +66,10 @@ fun ProductListScreen(
         ) {
             ProductListContent(
                 products = dummyProducts,
+                cartItems = Cart.items.toList(),
                 onClickItem = { onShowProductDetail(it) },
+                onClickCountIncrease = { Cart.addOne(it) },
+                onClickCountDecrease = { Cart.removeOne(it) },
             )
         }
     }
@@ -70,7 +78,10 @@ fun ProductListScreen(
 @Composable
 private fun ProductListContent(
     products: List<Product>,
+    cartItems: List<CartItem>,
     onClickItem: (Product) -> Unit,
+    onClickCountIncrease: (Product) -> Unit,
+    onClickCountDecrease: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -80,10 +91,13 @@ private fun ProductListContent(
         horizontalArrangement = Arrangement.spacedBy(13.dp),
         modifier = modifier,
     ) {
-        items(products) {
+        items(products) { product ->
             ProductListItem(
-                item = it,
+                item = product,
+                count = cartItems.find { it.product == product }?.count ?: 0,
                 onClick = onClickItem,
+                onClickCountIncrease = { onClickCountIncrease(product) },
+                onClickCountDecrease = { onClickCountDecrease(product) },
             )
         }
     }

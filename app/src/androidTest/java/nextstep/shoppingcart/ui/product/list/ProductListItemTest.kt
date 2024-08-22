@@ -26,7 +26,13 @@ class ProductListItemTest {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ProductListItem(item = item, onClick = {})
+            ProductListItem(
+                item = item,
+                count = 0,
+                onClickCountIncrease = {},
+                onClickCountDecrease = {},
+                onClick = {},
+            )
         }
     }
 
@@ -43,9 +49,7 @@ class ProductListItemTest {
         )
 
         //then
-        composeTestRule
-            .onNodeWithText(productName)
-            .assertExists()
+        composeTestRule.onNodeWithText(productName).assertExists()
     }
 
     @Test
@@ -61,9 +65,7 @@ class ProductListItemTest {
         )
 
         //then
-        composeTestRule
-            .onNodeWithText("1,900,000원")
-            .assertExists()
+        composeTestRule.onNodeWithText("1,900,000원").assertExists()
     }
 
 }
