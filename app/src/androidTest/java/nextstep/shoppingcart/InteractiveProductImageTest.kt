@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.data.cart.Cart
 import nextstep.shoppingcart.data.cart.CartItem
 import nextstep.shoppingcart.ui.product.list.component.InteractiveProductImage
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -19,6 +19,11 @@ class InteractiveProductImageTest {
     @get:Rule
     val composeTestRule = createComposeRule()
     val context: Context = ApplicationProvider.getApplicationContext()
+
+    @Before
+    fun setup() {
+        Cart.itemAllClear()
+    }
 
     @Test
     fun 상품의_더하기_fab버튼_클릭시_카트에_저장된다() {
@@ -36,7 +41,7 @@ class InteractiveProductImageTest {
 
         // when : 상품 카드의 더하기 fab버튼을 클릭한다.
         composeTestRule
-            .onNodeWithTag(context.getString(R.string.test_tag_add_fab))
+            .onNodeWithTag(context.getString(R.string.test_tag_add_fab) + product.name)
             .performClick()
 
         val actual = CartItem(product, 1)
@@ -56,12 +61,14 @@ class InteractiveProductImageTest {
         )
         Cart.addOne(product)
 
-        // when :
+        // when : 상품 카드를 노출한다.
         composeTestRule.setContent {
             InteractiveProductImage(product, Modifier)
         }
 
-        // then :
-
+        // then : 상품 카드에 수량 컴포넌트가 나타난다.
+        composeTestRule
+            .onNodeWithTag(context.getString(R.string.test_tag_interactive_quantity) + product.name)
+            .assertExists()
     }
 }
