@@ -17,7 +17,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.Product
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.PriceLabel
@@ -29,6 +28,7 @@ import nextstep.shoppingcart.ui.component.ShoppingCartButton
 @Composable
 fun ProductDetail(
     product: Product,
+    onAddToCart: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -69,9 +69,7 @@ fun ProductDetail(
         }
 
         ShoppingCartButton(
-            onClick = {
-                Cart.addOne(product = product)
-            },
+            onClick = onAddToCart,
             buttonText = stringResource(id = R.string.add_to_cart),
             modifier = Modifier.fillMaxSize()
         )
@@ -87,7 +85,8 @@ private fun ProductDetailPreview() {
         price = 16371
     )
     ProductDetail(
-        productInfo,
+        product = productInfo,
+        onAddToCart = { },
         modifier = Modifier.fillMaxSize()
     )
 }

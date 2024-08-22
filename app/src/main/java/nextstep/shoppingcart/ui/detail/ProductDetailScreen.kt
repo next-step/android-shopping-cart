@@ -10,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.Product
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.ui.component.ShoppingCartNavigationTopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -30,6 +31,7 @@ fun ProductDetailScreen(
     ) { innerPadding ->
         ProductDetail(
             product = product,
+            onAddToCart = { Cart.addOne(product = product) },
             modifier = Modifier.padding(innerPadding)
         )
     }
