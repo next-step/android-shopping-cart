@@ -28,7 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.data.CartItem
-import nextstep.shoppingcart.Product
+import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.PriceLabel
 import nextstep.shoppingcart.ui.component.ProductCounter

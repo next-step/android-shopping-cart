@@ -17,7 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.Product
+import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.PriceLabel
 import nextstep.shoppingcart.ui.component.ProductImage
@@ -80,6 +80,7 @@ fun ProductDetail(
 @Composable
 private fun ProductDetailPreview() {
     val productInfo = Product(
+        id = 1,
         imageUrl = "https://image.msscdn.net/images/goods_img/20230425/3257548/3257548_16823548430020_500.jpg",
         name = "루바토 브이넥 반팔 티셔츠 네이비",
         price = 16371

@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.Product
+import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.ShoppingCartActionsTopBar
 

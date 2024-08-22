@@ -8,6 +8,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.cart.ShoppingCartScreen
 import org.junit.Before
 import org.junit.Rule
@@ -21,6 +22,7 @@ internal class CartScreenTest {
     @Before
     fun setUp() {
         val product = Product(
+            id = 1,
             imageUrl = "https://image.msscdn.net/images/goods_img/20230425/3257548/3257548_16823548430020_500.jpg",
             name = "루바토 브이넥 반팔 티셔츠 네이비",
             price = 16371
