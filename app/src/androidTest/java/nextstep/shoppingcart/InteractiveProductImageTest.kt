@@ -1,6 +1,10 @@
 package nextstep.shoppingcart
 
 import android.content.Context
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -19,7 +23,7 @@ class InteractiveProductImageTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
-    val context: Context = ApplicationProvider.getApplicationContext()
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Before
     fun setup() {
@@ -37,12 +41,21 @@ class InteractiveProductImageTest {
         )
 
         composeTestRule.setContent {
-            InteractiveProductImage(product, Modifier)
+            var items by remember { mutableStateOf(Cart.items) }
+
+            InteractiveProductImage(
+                product = product,
+                items = items,
+                modifier = Modifier,
+                onClickPlus = { items = Cart.addOne(product) },
+                onClickMinus = { items = Cart.removeOne(product) },
+                onClickFab = { items = Cart.addOne(product) }
+            )
         }
 
         // when : 상품 카드의 더하기 fab버튼을 클릭한다.
         composeTestRule
-            .onNodeWithTag(context.getString(R.string.test_tag_add_fab) + product.name)
+            .onNodeWithTag(context.getString(R.string.test_tag_add_fab, product.name))
             .performClick()
 
         val actual = CartItem(product, 1)
@@ -64,7 +77,16 @@ class InteractiveProductImageTest {
 
         // when : 상품 카드를 노출한다.
         composeTestRule.setContent {
-            InteractiveProductImage(product, Modifier)
+            var items by remember { mutableStateOf(Cart.items) }
+
+            InteractiveProductImage(
+                product = product,
+                items = items,
+                modifier = Modifier,
+                onClickPlus = { items = Cart.addOne(product) },
+                onClickMinus = { items = Cart.removeOne(product) },
+                onClickFab = { items = Cart.addOne(product) }
+            )
         }
 
         // then : 상품 카드에 수량 컴포넌트가 나타난다.
@@ -85,7 +107,16 @@ class InteractiveProductImageTest {
         Cart.addOne(product)
 
         composeTestRule.setContent {
-            InteractiveProductImage(product, Modifier)
+            var items by remember { mutableStateOf(Cart.items) }
+
+            InteractiveProductImage(
+                product = product,
+                items = items,
+                modifier = Modifier,
+                onClickPlus = { items = Cart.addOne(product) },
+                onClickMinus = { items = Cart.removeOne(product) },
+                onClickFab = { items = Cart.addOne(product) }
+            )
         }
 
         // when : 상품 카드의 수량 컴포넌트를 클릭한다(더하기)
@@ -109,8 +140,18 @@ class InteractiveProductImageTest {
             price = 3000
         )
         Cart.addOne(product)
+
         composeTestRule.setContent {
-            InteractiveProductImage(product, Modifier)
+            var items by remember { mutableStateOf(Cart.items) }
+
+            InteractiveProductImage(
+                product = product,
+                items = items,
+                modifier = Modifier,
+                onClickPlus = { items = Cart.addOne(product) },
+                onClickMinus = { items = Cart.removeOne(product) },
+                onClickFab = { items = Cart.addOne(product) }
+            )
         }
 
         // when : - 버튼을 클릭하여 수량을 0으로 만든다.
@@ -118,10 +159,11 @@ class InteractiveProductImageTest {
             .onNodeWithTag(context.getString(R.string.test_tag_minus_icon, product.name))
             .performClick()
 
+        composeTestRule.waitForIdle()
 
         // then : fab컴포넌트가 나타난다.
         composeTestRule
-            .onNodeWithTag(context.getString(R.string.test_tag_add_fab) + product.name)
+            .onNodeWithTag(context.getString(R.string.test_tag_add_fab, product.name))
             .assertExists()
     }
 }
