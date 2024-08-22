@@ -1,10 +1,10 @@
 package nextstep.shoppingcart.view.cart
 
-import androidx.activity.ComponentActivity
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -12,12 +12,13 @@ import org.junit.Test
 class CartTopAppBarTest {
 
     @get:Rule
-    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+    val composeTestRule = createComposeRule()
+    private var isBackClicked = false
 
     @Before
     fun setUp() {
         composeTestRule.setContent {
-            CartTopAppBar()
+            CartTopAppBar(onBack = { isBackClicked = true })
         }
     }
 
@@ -36,11 +37,11 @@ class CartTopAppBarTest {
     }
 
     @Test
-    fun 뒤로가기_아이콘을_클릭하면_직전_화면으로_이동하여_장바구니_화면이_종료된다() {
+    fun 뒤로가기_아이콘을_클릭하면_콜백이_호출된다() {
         composeTestRule.onNodeWithContentDescription(
             "Cart Back"
         ).performClick()
 
-        assert(composeTestRule.activity.isFinishing)
+        assertTrue(isBackClicked)
     }
 }

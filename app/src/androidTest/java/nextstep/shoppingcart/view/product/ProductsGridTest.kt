@@ -49,6 +49,5 @@ class ProductsGridTest {
             .assertIsDisplayed()
         composeTestRule.onNodeWithText(products[1].name).assertExists()
         composeTestRule.onNodeWithText("2,000원").assertExists()
-
     }
 }

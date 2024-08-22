@@ -17,14 +17,12 @@ fun ProductDetailImage(
     productName: String,
     modifier: Modifier = Modifier
 ) {
-//    Column {
-        GlideImage(
-            model = productImageUrl,
-            contentDescription = productName,
-            loading = placeholder(R.drawable.ic_launcher_foreground),
-            modifier = modifier
-        )
-//    }
+    GlideImage(
+        model = productImageUrl,
+        contentDescription = productName,
+        loading = placeholder(R.drawable.ic_launcher_foreground),
+        modifier = modifier
+    )
 }
 
 @Preview(showBackground = true)

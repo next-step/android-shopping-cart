@@ -1,5 +1,18 @@
 # android-shopping-cart
 
+## Step3 구현 목록
+- [] Step2 피드백 반영
+- []
+- []
+- []
+- []
+- []
+
+## Step3 진행 중 의식의 흐름
+- 
+- 
+- 
+
 ## Step2 구현 목록
 
 - [x] Step1 피드백 반영
