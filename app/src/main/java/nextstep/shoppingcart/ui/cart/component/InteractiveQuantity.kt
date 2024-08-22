@@ -58,6 +58,7 @@ fun InteractiveQuantity(
             )
         }
         Text(
+            modifier = Modifier.testTag(stringResource(id = R.string.test_tag_quantity_text, cartItem.product.name)),
             text = cartItem.count.toString(),
             textAlign = TextAlign.Center,
             fontSize = 22.sp,

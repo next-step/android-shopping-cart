@@ -47,8 +47,8 @@ fun InteractiveProductImage(product: Product, modifier: Modifier = Modifier) {
             InteractiveQuantity(
                 modifier = Modifier.align(Alignment.BottomEnd),
                 cartItem = items.find { it.product == product }!!,
-                onClickMinus = {},
-                onClickPlus = {}
+                onClickMinus = { items = Cart.removeOne(product) },
+                onClickPlus = { items = Cart.addOne(product)}
             )
         } else {
             SmallFloatingActionButton(
