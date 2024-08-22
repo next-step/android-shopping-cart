@@ -81,7 +81,7 @@ private fun InteractiveProductImageFabPreview() {
             price = 1000,
             imgUrl = "https://www.example.com/image.jpg"
         ),
-        items = emptyList(),
+        items = Cart.items,
         Modifier,
         onClickPlus = {},
         onClickMinus = {},
@@ -107,7 +107,7 @@ private fun InteractiveProductImageQuantityPreview() {
             price = 1000,
             imgUrl = "https://www.example.com/image.jpg"
         ),
-        items = emptyList(),
+        items = Cart.items,
         modifier = Modifier,
         onClickPlus = {},
         onClickMinus = {},
