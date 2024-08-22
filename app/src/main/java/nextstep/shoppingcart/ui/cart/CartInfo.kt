@@ -121,6 +121,7 @@ fun CartInfo(
 @Composable
 private fun CartInfoPreview() {
     val product = Product(
+        id = 1,
         imageUrl = "https://image.msscdn.net/images/goods_img/20240516/4135365/4135365_17161647453804_500.jpg",
         name = "링클 체크 박시 오버핏 롤업 하프 셔츠 블루",
         price = 37400
