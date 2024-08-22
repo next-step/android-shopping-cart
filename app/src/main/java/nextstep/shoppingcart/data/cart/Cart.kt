@@ -40,4 +40,8 @@ object Cart {
     fun itemAllClear() {
         _items.clear()
     }
+
+    fun List<CartItem>.containProduct(product: Product): Boolean {
+        return any { it.product == product }
+    }
 }

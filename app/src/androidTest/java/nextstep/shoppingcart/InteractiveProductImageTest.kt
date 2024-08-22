@@ -44,4 +44,24 @@ class InteractiveProductImageTest {
         // then :
         assert(Cart.items.contains(actual))
     }
+
+    @Test
+    fun 카트에_상품이_존재할_경우_상품_카드에_수량_컴포넌트가_나타난다() {
+        // given : 상품 목록을 추가하고, 카트에 상품을 추가한다.
+        val product = Product(
+            id = 1,
+            imgUrl = "https://picsum.photos/seed/1/200",
+            name = "상품 1-이름이 너무 길다면 어떻게 할 것인가요?",
+            price = 3000
+        )
+        Cart.addOne(product)
+
+        // when :
+        composeTestRule.setContent {
+            InteractiveProductImage(product, Modifier)
+        }
+
+        // then :
+
+    }
 }

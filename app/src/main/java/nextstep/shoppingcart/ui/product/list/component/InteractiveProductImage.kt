@@ -9,6 +9,10 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,9 +26,14 @@ import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.data.cart.Cart
+import nextstep.shoppingcart.data.cart.Cart.containProduct
+import nextstep.shoppingcart.ui.cart.component.InteractiveQuantity
 
 @Composable
 fun InteractiveProductImage(product: Product, modifier: Modifier = Modifier) {
+
+    var items by remember { mutableStateOf(Cart.items) }
+
     Box(modifier = Modifier) {
         AsyncImage(
             modifier = Modifier.fillMaxWidth(),
@@ -34,26 +43,56 @@ fun InteractiveProductImage(product: Product, modifier: Modifier = Modifier) {
             placeholder = ColorPainter(Color.Black)
         )
 
-        SmallFloatingActionButton(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .size(26.dp)
-                .testTag(stringResource(id = R.string.test_tag_add_fab)),
-            onClick = { Cart.addOne(product) },
-            containerColor = Color.White,
-            shape = CircleShape,
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Add,
-                contentDescription = "Floating action button."
+        if (items.containProduct(product)) {
+            InteractiveQuantity(
+                modifier = Modifier.align(Alignment.BottomEnd),
+                cartItem = items.find { it.product == product }!!,
+                onClickMinus = {},
+                onClickPlus = {}
             )
+        } else {
+            SmallFloatingActionButton(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .size(26.dp)
+                    .testTag(stringResource(id = R.string.test_tag_add_fab) + product.name),
+                onClick = { items = Cart.addOne(product) },
+                containerColor = Color.White,
+                shape = CircleShape,
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "Floating action button."
+                )
+            }
         }
     }
 }
 
 @Preview
 @Composable
-private fun InteractiveProductImagePreview() {
+private fun InteractiveProductImageFabPreview() {
+    InteractiveProductImage(
+        product = Product(
+            id = 1,
+            name = "Product Name",
+            price = 1000,
+            imgUrl = "https://www.example.com/image.jpg"
+        )
+    )
+}
+
+@Preview
+@Composable
+private fun InteractiveProductImageQuantityPreview() {
+    Cart.addOne(
+        Product(
+            id = 1,
+            name = "Product Name",
+            price = 1000,
+            imgUrl = "https://www.example.com/image.jpg"
+        )
+    )
     InteractiveProductImage(
         product = Product(
             id = 1,

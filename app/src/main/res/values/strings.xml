@@ -20,5 +20,6 @@
     <string name="test_tag_minus_icon">CartCardMinusIcon_%1$s</string>
     <string name="test_tag_cart_card">CartCard_$s</string>
     <string name="test_tag_add_fab">AddFab</string>
+    <string name="test_tag_interactive_quantity">AddFab</string>
 
 </resources>
