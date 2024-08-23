@@ -32,11 +32,12 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CartItem(product: Product, modifier: Modifier = Modifier) {
+fun CartItemView(product: Product, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -77,6 +78,7 @@ fun CartItem(product: Product, modifier: Modifier = Modifier) {
                     model = product.imageUrl,
                     contentDescription = product.name,
                     loading = placeholder(R.drawable.ic_launcher_foreground),
+                    modifier = modifier.size(135.dp)
                 )
 
                 Column(
@@ -131,12 +133,6 @@ fun CartItem(product: Product, modifier: Modifier = Modifier) {
 @Composable
 private fun CartItemPreview() {
     ShoppingCartTheme {
-        CartItem(
-            Product(
-                "[최고심] 빅허그인형",
-                "",
-                43_000
-            )
-        )
+        CartItemView(product = dummyProducts.first())
     }
 }

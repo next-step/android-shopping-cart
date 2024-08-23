@@ -8,10 +8,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @Composable
-fun CartScreen(onBack: () -> Unit) {
+fun CartScreen(
+    cartItems: List<CartItem>,
+    onBack: () -> Unit
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -21,6 +26,7 @@ fun CartScreen(onBack: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CartTopAppBar(onBack = onBack)
+            CartList(cartItems = cartItems)
         }
     }
 }
@@ -29,6 +35,6 @@ fun CartScreen(onBack: () -> Unit) {
 @Composable
 private fun CartScreenPreview() {
     ShoppingCartTheme {
-        CartScreen(onBack = {})
+        CartScreen(listOf(CartItem(dummyProducts[0], 1)), onBack = {})
     }
 }

@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.model.Cart
+import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
@@ -43,6 +45,7 @@ fun ProductDetailScreen(product: Product, onNavigateToCart: () -> Unit, onBack: 
                 Spacer(modifier = Modifier.weight(1f))
                 ProductDetailButton(
                     onButtonClick = {
+                        Cart.addOne(product)
                         onNavigateToCart()
                     },
                     Modifier.fillMaxWidth()
