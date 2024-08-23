@@ -6,17 +6,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,14 +26,14 @@ fun ProductDetailScreen(
     price: Long,
     name: String,
     imageUrl: String,
-    onNavigationClick: () -> Unit,
+    onBackClick: () -> Unit,
     onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
             ProductDetailTopBar (
-                onNavigationClick = onNavigationClick
+                onBackClick = onBackClick
             )
         }
     ) {
@@ -80,7 +75,7 @@ private fun ProductDetailScreenPreview() {
         price = 1_900_000,
         name = "상품명",
         imageUrl = "",
-        onNavigationClick = {},
+        onBackClick = {},
         onCartClick = {}
     )
 }

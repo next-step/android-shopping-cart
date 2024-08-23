@@ -9,13 +9,13 @@ import nextstep.shoppingcart.component.cart.CartTopBar
 @Composable
 fun ShoppingCartScreen(
     modifier: Modifier = Modifier,
-    onNavigationClick: () -> Unit
+    onBackClick: () -> Unit
 ) {
     Scaffold(
         modifier = modifier,
         topBar = {
             CartTopBar(
-                onNavigationClick = onNavigationClick
+                onBackClick = onBackClick
             )
         }
     ) {
@@ -27,5 +27,5 @@ fun ShoppingCartScreen(
 @Preview
 @Composable
 private fun ShoppingCartScreenPreview() {
-    ShoppingCartScreen(onNavigationClick = {})
+    ShoppingCartScreen(onBackClick = {})
 }

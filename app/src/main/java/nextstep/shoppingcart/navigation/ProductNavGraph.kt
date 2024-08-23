@@ -50,14 +50,14 @@ fun ProductNavGraph(navController: NavHostController) {
                     name = name,
                     imageUrl = imageUrl,
                     onNavigationClick = { navController.navigateUp() },
-                    onCartClick = { navController.navigate("shoppingCart") })
+                    onBackClick = { navController.navigateUp() },
             }
         }
         composable(
             route = "shoppingCart"
         ) {
             ShoppingCartScreen(
-                onNavigationClick = { navController.navigateUp() }
+                onBackClick = { navController.navigateUp() }
             )
         }
     }
