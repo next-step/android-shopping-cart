@@ -20,12 +20,11 @@ import nextstep.shoppingcart.component.detail.AddToCartButton
 import nextstep.shoppingcart.component.detail.ProductDetailImage
 import nextstep.shoppingcart.component.detail.ProductDetailPrice
 import nextstep.shoppingcart.component.detail.ProductDetailTopBar
+import nextstep.shoppingcart.model.Product
 
 @Composable
 fun ProductDetailScreen(
-    price: Long,
-    name: String,
-    imageUrl: String,
+    product: Product,
     onBackClick: () -> Unit,
     onCartClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -41,11 +40,11 @@ fun ProductDetailScreen(
             modifier = modifier.padding(it)
         ) {
             ProductDetailImage(
-                name = name,
-                imageUrl = imageUrl
+                name = product.name,
+                imageUrl = product.imageUrl
             )
             Text(
-                text = name,
+                text = product.name,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.headlineSmall,
@@ -59,7 +58,7 @@ fun ProductDetailScreen(
                 .background(colorResource(id = R.color.gray))
             )
 
-            ProductDetailPrice(price)
+            ProductDetailPrice(product.price)
 
             Spacer(modifier = Modifier.weight(1f))
 
@@ -72,9 +71,7 @@ fun ProductDetailScreen(
 @Composable
 private fun ProductDetailScreenPreview() {
     ProductDetailScreen(
-        price = 1_900_000,
-        name = "상품명",
-        imageUrl = "",
+        product = Product ("상품명", "",1_900_000),
         onBackClick = {},
         onCartClick = {}
     )
