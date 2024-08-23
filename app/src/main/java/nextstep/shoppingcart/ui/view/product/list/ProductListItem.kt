@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -63,27 +64,11 @@ fun ProductListItem(
             )
 
             if (countInCart == 0) {
-                IconButton(
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .size(42.dp)
-                        .background(
-                            color = Color.White,
-                            shape = CircleShape
-                        )
-                        .padding(9.dp),
-                    onClick = {
-                        onQuantityChange(
-                            CartItem(product, countInCart),
-                            countInCart + 1
-                        )
-                    },
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Add,
-                        contentDescription = "",
-                    )
-                }
+                AddToCartButton(
+                    product = product,
+                    countInCart = countInCart,
+                    onQuantityChange = onQuantityChange
+                )
             } else {
                 Stepper(
                     modifier = Modifier
@@ -117,6 +102,35 @@ fun ProductListItem(
             text = stringResource(id = R.string.product_list_product_item_price_fmt, product.price),
             fontWeight = FontWeight(400),
             fontSize = 16.sp,
+        )
+    }
+}
+
+@Composable
+private fun BoxScope.AddToCartButton(
+    product: Product,
+    countInCart: Int,
+    onQuantityChange: (CartItem, Int) -> Unit,
+) {
+    IconButton(
+        modifier = Modifier.Companion
+            .align(Alignment.BottomEnd)
+            .size(42.dp)
+            .background(
+                color = Color.White,
+                shape = CircleShape
+            )
+            .padding(9.dp),
+        onClick = {
+            onQuantityChange(
+                CartItem(product, countInCart),
+                countInCart + 1
+            )
+        },
+    ) {
+        Icon(
+            imageVector = Icons.Filled.Add,
+            contentDescription = "",
         )
     }
 }
