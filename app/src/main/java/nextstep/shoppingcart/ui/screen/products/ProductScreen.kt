@@ -94,7 +94,7 @@ private fun ProductScreen(
                     onAddClick = { onAddClick(item) },
                     onPlusClick = { onPlusClick(item) },
                     onMinusClick = { onMinusClick(item) },
-                    count = cartItems.find { it.product == item }?.count ?: 0,
+                    count = remember { cartItems.find { it.product == item }?.count ?: 0 },
                     modifier = Modifier.clickable { onItemClick(item.id) },
                 )
             }
