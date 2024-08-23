@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.component.detail.ProductDetailButton
+import nextstep.shoppingcart.component.detail.AddToCartButton
 import nextstep.shoppingcart.component.detail.ProductDetailImage
 import nextstep.shoppingcart.component.detail.ProductDetailPrice
 import nextstep.shoppingcart.component.detail.ProductDetailTopBar
@@ -63,7 +63,7 @@ fun ProductDetailScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            ProductDetailButton { onCartClick() }
+            AddToCartButton { onCartClick() }
         }
     }
 }

@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 
 @Composable
-fun ProductDetailButton(
+fun AddToCartButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
@@ -40,5 +40,5 @@ fun ProductDetailButton(
 @Preview
 @Composable
 private fun ProductDetailButtonPreview() {
-    ProductDetailButton {}
+    AddToCartButton {}
 }
