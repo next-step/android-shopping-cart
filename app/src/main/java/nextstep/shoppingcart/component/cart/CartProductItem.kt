@@ -86,7 +86,7 @@ fun CartProductItem(
                     Icon(
                         modifier = Modifier.fillMaxSize(),
                         imageVector = Icons.Default.Close,
-                        contentDescription = "닫기"
+                        contentDescription = "$name close"
                     )
                 }
             }
@@ -105,8 +105,10 @@ fun CartProductItem(
                         height = 84.dp
                     )
                 )
-                Column(modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.End) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.End
+                ) {
                     Text(
                         text = NumberFormat.getNumberInstance(Locale.KOREA).format(price) + "원",
                         fontSize = 16.sp
@@ -123,7 +125,7 @@ fun CartProductItem(
                         ) {
                             Icon(
                                 imageVector = IconPack.Remove,
-                                contentDescription = "minus"
+                                contentDescription = "$name minus"
                             )
                         }
                         Text(
@@ -135,7 +137,7 @@ fun CartProductItem(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Add,
-                                contentDescription = "plus"
+                                contentDescription = "$name plus"
                             )
                         }
                     }
