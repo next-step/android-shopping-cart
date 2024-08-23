@@ -8,9 +8,9 @@ import nextstep.shoppingcart.component.cart.CartTopBar
 
 @Composable
 fun ShoppingCartScreen(
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit
-) {
+    ) {
     Scaffold(
         modifier = modifier,
         topBar = {

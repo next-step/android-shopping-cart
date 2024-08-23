@@ -63,7 +63,7 @@ fun ProductDetailScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            AddToCartButton { onCartClick() }
+            AddToCartButton(onClick = onCartClick)
         }
     }
 }

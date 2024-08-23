@@ -15,8 +15,8 @@ import nextstep.shoppingcart.R
 
 @Composable
 fun ProductDetailTopBar(
-    modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     TopAppBar(
         modifier = modifier,
@@ -40,5 +40,5 @@ fun ProductDetailTopBar(
 @Preview
 @Composable
 private fun ProductDetailTopAppBarPreview() {
-    ProductDetailTopBar {}
+    ProductDetailTopBar(onBackClick = {})
 }

@@ -23,11 +23,11 @@ import java.util.Locale
 
 @Composable
 fun ProductItem(
-    modifier: Modifier = Modifier,
     name: String,
     imageUrl: String,
-    price: Long
-) {
+    price: Long,
+    modifier: Modifier = Modifier,
+    ) {
     Column(modifier = modifier) {
         AsyncImage(
             modifier = Modifier

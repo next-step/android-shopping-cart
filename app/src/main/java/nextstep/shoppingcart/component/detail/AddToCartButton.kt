@@ -17,8 +17,8 @@ import nextstep.shoppingcart.R
 
 @Composable
 fun AddToCartButton(
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,
@@ -40,5 +40,5 @@ fun AddToCartButton(
 @Preview
 @Composable
 private fun ProductDetailButtonPreview() {
-    AddToCartButton {}
+    AddToCartButton(onClick =  {})
 }
