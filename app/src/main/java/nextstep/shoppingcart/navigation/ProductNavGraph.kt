@@ -3,6 +3,10 @@ package nextstep.shoppingcart.navigation
 import android.os.Build
 import android.os.Bundle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -13,6 +17,7 @@ import androidx.navigation.compose.composable
 import nextstep.shoppingcart.MainScreen
 import nextstep.shoppingcart.ProductDetailScreen
 import nextstep.shoppingcart.ShoppingCartScreen
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 
 fun NavController.navigate(
@@ -54,14 +59,26 @@ fun ProductNavGraph(navController: NavHostController) {
                 ProductDetailScreen(
                     product = product,
                     onBackClick = { navController.navigateUp() },
-                    onCartClick = { navController.navigate("shoppingCart") }
+                    onCartClick = {
+                        Cart.addOne(product)
+                        navController.navigate("shoppingCart")
+                    }
                 )
             }
         }
         composable(
             route = "shoppingCart"
         ) {
+            var cartItems by remember { mutableStateOf(Cart.items) }
+            val onItemCloseClick = remember { { item: Product -> cartItems = Cart.removeAll(item) } }
+            val onItemMinusClick = remember { { item: Product -> cartItems = Cart.removeOne(item) } }
+            val onItemPlusClick = remember { { item: Product -> cartItems = Cart.addOne(item) } }
             ShoppingCartScreen(
+                cartItem = cartItems,
+                onItemCloseClick = onItemCloseClick,
+                onItemMinusClick = onItemMinusClick,
+                onItemPlusClick = onItemPlusClick,
+                onOrderClick = {},
                 onBackClick = { navController.navigateUp() }
             )
         }
