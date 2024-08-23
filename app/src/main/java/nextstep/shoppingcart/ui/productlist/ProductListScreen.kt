@@ -5,15 +5,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.data.CartItem
+import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.component.ShoppingCartActionsTopBar
 
 @Composable
@@ -21,6 +27,39 @@ fun ProductListScreen(
     products: List<Product>,
     onActionClick: () -> Unit,
     onProductClick: (Product) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var cartItems by remember { mutableStateOf(Cart.items) }
+    val onMinusClick = remember {
+        { item: Product ->
+            cartItems = Cart.removeOne(item)
+        }
+    }
+    val onPlusClick = remember {
+        { item: Product ->
+            cartItems = Cart.addOne(item)
+        }
+    }
+
+    ProductListScreen(
+        products = products,
+        cartItems = cartItems,
+        onActionClick = onActionClick,
+        onProductClick = onProductClick,
+        onMinusClick = onMinusClick,
+        onPlusClick = onPlusClick,
+        modifier = modifier
+    )
+}
+
+@Composable
+private fun ProductListScreen(
+    products: List<Product>,
+    cartItems: List<CartItem>,
+    onActionClick: () -> Unit,
+    onProductClick: (Product) -> Unit,
+    onMinusClick: (Product) -> Unit,
+    onPlusClick: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -50,7 +89,10 @@ fun ProductListScreen(
             ) { product ->
                 ProductInfo(
                     product = product,
-                    onProductClick = onProductClick
+                    count = cartItems.find { it.product == product }?.count ?: 0,
+                    onProductClick = onProductClick,
+                    onMinusClick = onMinusClick,
+                    onPlusClick = onPlusClick
                 )
             }
         }

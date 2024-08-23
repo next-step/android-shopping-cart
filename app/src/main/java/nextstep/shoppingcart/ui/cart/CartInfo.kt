@@ -39,8 +39,8 @@ import nextstep.shoppingcart.ui.component.ProductTitle
 fun CartInfo(
     cartItem: CartItem,
     onRemoveClick: () -> Unit,
-    onMinusClick: () -> Unit,
-    onPlusClick: () -> Unit,
+    onMinusClick: (Product) -> Unit,
+    onPlusClick: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -108,8 +108,12 @@ fun CartInfo(
                     )
                     ProductCounter(
                         count = cartItem.count,
-                        onMinusClick = onMinusClick,
-                        onPlusClick = onPlusClick
+                        onMinusClick = {
+                            onMinusClick(cartItem.product)
+                        },
+                        onPlusClick = {
+                            onPlusClick(cartItem.product)
+                        }
                     )
                 }
             }

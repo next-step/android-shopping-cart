@@ -60,7 +60,10 @@ fun ShoppingCartScreen(
                     )
 
             ) {
-                items(cartItems) { cartItem ->
+                items(
+                    items = cartItems,
+                    key = { it.product.id }
+                ) { cartItem ->
                     CartInfo(
                         cartItem = cartItem,
                         onRemoveClick = {
