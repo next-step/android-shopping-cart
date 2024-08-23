@@ -20,15 +20,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.shopping.component.ProductListItem
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.ui.shopping.component.ProductListItem
 import nextstep.shoppingcart.ui.theme.TitleTextColor
 
 
@@ -99,6 +104,8 @@ fun ProductItems(
     productList: List<Product>,
     onClickItem: (Int) -> Unit
 ) {
+    var cartItems by remember { mutableStateOf(Cart.items) }
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(
@@ -114,9 +121,20 @@ fun ProductItems(
             items = productList,
             key = { it.imageUrl }
         ) {
+            val productCount = cartItems.find { cartItem ->
+                cartItem.product == it
+            }?.count
+
             ProductListItem(
                 product = it,
-                onClickItem = onClickItem
+                count = productCount ?: 0,
+                onClickItem = { onClickItem(it.id) },
+                onAddCount = {
+                    cartItems = Cart.addOne(it)
+                },
+                onRemoveCount = {
+                    cartItems = Cart.removeOne(it)
+                }
             )
         }
     }

@@ -9,10 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -61,16 +61,13 @@ fun ShoppingCartScreen(
                     CartItemCard(
                         cartItem = item,
                         onClickAddItem = {
-                            Cart.addOne(item.product)
-                            cartItems = Cart.items
+                            cartItems = Cart.addOne(item.product)
                         },
                         onClickRemoveItem = {
-                            Cart.removeOne(item.product)
-                            cartItems = Cart.items
+                            cartItems = Cart.removeOne(item.product)
                         },
                         onClickRemoveAll = {
-                            Cart.removeAll(item.product)
-                            cartItems = Cart.items
+                            cartItems = Cart.removeAll(item.product)
                         }
                     )
                 }
@@ -98,7 +95,7 @@ fun CartOrderButton(
         it.totalPrice
     }
 
-    Button(
+    TextButton(
         onClick = { },
         modifier = modifier,
         shape = RoundedCornerShape(0.dp),

@@ -26,19 +26,15 @@ internal class ShoppingCartScreenTest {
     @Before
     fun setUp() {
         Cart.removeAll(product)
+
+        Cart.addOne(product)
+        composeTestRule.setContent {
+            ShoppingCartScreen(onClickNavigateBack = {})
+        }
     }
 
     @Test
     fun 담긴_상품_가격의_총합이_노출된다() {
-        // given
-        Cart.addOne(product)
-
-        // when
-        composeTestRule.setContent {
-            ShoppingCartScreen(onClickNavigateBack = {})
-        }
-
-        // then
         composeTestRule
             .onNodeWithText("주문하기(10,000원)")
             .assertExists()
@@ -46,14 +42,6 @@ internal class ShoppingCartScreenTest {
 
     @Test
     fun 담긴_상품을_제거할_수_있다() {
-        // given
-        Cart.addOne(product)
-
-        // when
-        composeTestRule.setContent {
-            ShoppingCartScreen(onClickNavigateBack = {})
-        }
-
         // then
         composeTestRule
             .onNodeWithContentDescription("삭제 버튼")
@@ -65,13 +53,6 @@ internal class ShoppingCartScreenTest {
 
     @Test
     fun 담긴_상품의_수량을_증가시키면_상품_가격에_반영된다() {
-        // given
-        Cart.addOne(product)
-
-        // when
-        composeTestRule.setContent {
-            ShoppingCartScreen(onClickNavigateBack = {})
-        }
         composeTestRule
             .onNodeWithText("+")
             .performClick()
@@ -84,13 +65,6 @@ internal class ShoppingCartScreenTest {
 
     @Test
     fun 담긴_상품의_수량을_감소시키면_상품_가격에_반영된다() {
-        // given
-        Cart.addOne(product)
-
-        // when
-        composeTestRule.setContent {
-            ShoppingCartScreen(onClickNavigateBack = {})
-        }
         composeTestRule
             .onNodeWithText("-")
             .performClick()
@@ -103,13 +77,6 @@ internal class ShoppingCartScreenTest {
 
     @Test
     fun 담긴_상품의_수량을_1보다_적게_하면_상품이_삭제된다() {
-        // given
-        Cart.addOne(product)
-
-        // when
-        composeTestRule.setContent {
-            ShoppingCartScreen(onClickNavigateBack = {})
-        }
         composeTestRule
             .onNodeWithText("-")
             .performClick()
