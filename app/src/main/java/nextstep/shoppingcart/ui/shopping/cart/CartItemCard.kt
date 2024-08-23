@@ -27,7 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -124,10 +124,10 @@ private fun CartItemCardPrev(
     }
 }
 
-class CartItemPrevParamProvider : PreviewParameterProvider<CartItem> {
-    override val values = sequenceOf(
+class CartItemPrevParamProvider : CollectionPreviewParameterProvider<CartItem>(
+    listOf(
         CartItem(dummyProducts[0], 1),
         CartItem(dummyProducts[1], 2),
         CartItem(dummyProducts[2], 3)
     )
-}
+)

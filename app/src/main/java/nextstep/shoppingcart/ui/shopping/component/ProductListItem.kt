@@ -3,7 +3,6 @@ package nextstep.shoppingcart.ui.shopping.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,22 +39,23 @@ import nextstep.shoppingcart.ui.theme.ItemTextColor
 fun ProductListItem(
     product: Product,
     count: Int,
-    onClickItem: (Int) -> Unit,
+    onClickItem: () -> Unit,
     onAddCount: () -> Unit,
     onRemoveCount: () -> Unit
 ) {
     Column(
-        modifier = Modifier.clickable {
-            onClickItem.invoke(product.id)
-        }
+        modifier = Modifier.clickable { onClickItem() }
     ) {
-        Box(modifier = Modifier) {
+        Box {
             ListItemImage(product.imageUrl)
             ProductListQuantitySelector(
                 count = count,
-                onClickShowSelector = { onAddCount() },
-                onClickAddCount = { onAddCount() },
-                onClickRemoveCount = { onRemoveCount() }
+                onClickShowSelector = onAddCount,
+                onClickAddCount = onAddCount,
+                onClickRemoveCount = onRemoveCount,
+                modifier = Modifier
+                    .padding(12.dp)
+                    .align(Alignment.BottomEnd)
             )
         }
         ListItemName(
@@ -82,19 +82,17 @@ private fun ListItemImage(imageUrl: String) {
 }
 
 @Composable
-fun BoxScope.ProductListQuantitySelector(
+fun ProductListQuantitySelector(
     count: Int,
     onClickShowSelector: () -> Unit,
     onClickAddCount: () -> Unit,
-    onClickRemoveCount: () -> Unit
+    onClickRemoveCount: () -> Unit,
+    modifier: Modifier
 ) {
     if (count == 0) {
         IconButton(
             onClick = { onClickShowSelector() },
-            modifier = Modifier
-                .padding(12.dp)
-                .align(Alignment.BottomEnd)
-                .background(Color.White, CircleShape)
+            modifier = modifier.background(Color.White, CircleShape)
         ) {
             Icon(
                 imageVector = Icons.Filled.Add,
@@ -107,9 +105,7 @@ fun BoxScope.ProductListQuantitySelector(
             count = count,
             onClickRemoveCount = { onClickRemoveCount() },
             onClickAddCount = { onClickAddCount() },
-            modifier = Modifier
-                .padding(12.dp)
-                .align(Alignment.BottomCenter)
+            modifier = modifier
                 .height(42.dp)
                 .background(Color.White, RoundedCornerShape(4.dp))
         )

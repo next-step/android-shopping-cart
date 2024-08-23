@@ -61,16 +61,13 @@ fun ShoppingCartScreen(
                     CartItemCard(
                         cartItem = item,
                         onClickAddItem = {
-                            Cart.addOne(item.product)
-                            cartItems = Cart.items
+                            cartItems = Cart.addOne(item.product)
                         },
                         onClickRemoveItem = {
-                            Cart.removeOne(item.product)
-                            cartItems = Cart.items
+                            cartItems = Cart.removeOne(item.product)
                         },
                         onClickRemoveAll = {
-                            Cart.removeAll(item.product)
-                            cartItems = Cart.items
+                            cartItems = Cart.removeAll(item.product)
                         }
                     )
                 }

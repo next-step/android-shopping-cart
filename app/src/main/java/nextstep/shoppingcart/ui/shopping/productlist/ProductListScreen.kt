@@ -128,14 +128,12 @@ fun ProductItems(
             ProductListItem(
                 product = it,
                 count = productCount ?: 0,
-                onClickItem = onClickItem,
+                onClickItem = { onClickItem(it.id) },
                 onAddCount = {
-                    Cart.addOne(it)
-                    cartItems = Cart.items
+                    cartItems = Cart.addOne(it)
                 },
                 onRemoveCount = {
-                    Cart.removeOne(it)
-                    cartItems = Cart.items
+                    cartItems = Cart.removeOne(it)
                 }
             )
         }
