@@ -8,10 +8,8 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,16 +27,14 @@ fun ProductListScreen(
     onProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var cartItems by remember { mutableStateOf(Cart.items) }
-    val onMinusClick = remember {
-        { item: Product ->
-            cartItems = Cart.removeOne(item)
-        }
+    val cartItems by Cart.items.collectAsState()
+
+    val onMinusClick = { item: Product ->
+        Cart.removeOne(item)
     }
-    val onPlusClick = remember {
-        { item: Product ->
-            cartItems = Cart.addOne(item)
-        }
+
+    val onPlusClick = { item: Product ->
+        Cart.addOne(item)
     }
 
     ProductListScreen(

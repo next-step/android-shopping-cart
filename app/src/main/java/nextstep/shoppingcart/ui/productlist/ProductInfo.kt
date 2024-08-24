@@ -82,11 +82,12 @@ private fun ProductInfoPreview() {
             name = "루바토 브이넥 반팔 티셔츠 네이비",
             price = 16371
         )
-//        ProductInfo(
-//            product = productInfo,
-//            onProductClick = { },
-//            onMinusClick = { },
-//            onPlusClick = { }
-//        )
+        ProductInfo(
+            product = productInfo,
+            count = 0,
+            onProductClick = { },
+            onMinusClick = { },
+            onPlusClick = { }
+        )
     }
 }

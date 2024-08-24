@@ -1,5 +1,8 @@
 package nextstep.shoppingcart.data
 
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+
 data class CartItem(
     val product: Product,
     val count: Int,
@@ -8,37 +11,37 @@ data class CartItem(
 }
 
 object Cart {
-    private val _items: MutableList<CartItem> = mutableListOf()
-    val items: List<CartItem> get() = _items.toList()
+    private val _items = MutableStateFlow<List<CartItem>>(emptyList())
+    val items = _items.asStateFlow()
 
-    val totalPrice: Int get() = _items.sumOf { it.totalPrice }
+    val totalPrice: Int get() = _items.value.sumOf { it.totalPrice }
 
-    fun addOne(product: Product): List<CartItem> {
-        val item = _items.find { it.product == product }
-        if (item == null) {
-            _items.add(CartItem(product, 1))
+    fun addOne(product: Product) {
+        val currentItems = _items.value
+        val item = currentItems.find { it.product == product }
+        val newItems = if (item == null) {
+            currentItems + CartItem(product, 1)
         } else {
-            val index = _items.indexOf(item)
-            _items[index] = item.copy(count = item.count + 1)
-        }
-        return items
-    }
-
-    fun removeOne(product: Product): List<CartItem> {
-        _items.find { it.product == product }
-            ?.let { item ->
-                if (item.count > 1) {
-                    val index = _items.indexOf(item)
-                    _items[index] = item.copy(count = item.count - 1)
-                } else {
-                    _items.remove(item)
-                }
+            currentItems.map {
+                if (it.product == product) it.copy(count = it.count + 1) else it
             }
-        return items
+        }
+        _items.value = newItems
     }
 
-    fun removeAll(product: Product): List<CartItem> {
-        _items.removeAll { it.product == product }
-        return items
+    fun removeOne(product: Product) {
+        val currentItems = _items.value
+        val newItems = currentItems.mapNotNull { item ->
+            when {
+                item.product != product -> item
+                item.count > 1 -> item.copy(count = item.count - 1)
+                else -> null
+            }
+        }
+        _items.value = newItems
+    }
+
+    fun removeAll(product: Product) {
+        _items.value = _items.value.filter { it.product != product }
     }
 }
