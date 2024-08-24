@@ -15,10 +15,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.component.PriceLabel
 import nextstep.shoppingcart.ui.component.ProductCounter
-import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.component.ProductTitle
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -38,8 +38,8 @@ fun ProductInfo(
         horizontalAlignment = Alignment.Start,
     ) {
         Box {
-            ProductImage(
-                imageUrl = product.imageUrl,
+            AsyncImage(
+                model = product.imageUrl,
                 contentDescription = product.name,
                 modifier = Modifier
                     .fillMaxWidth()

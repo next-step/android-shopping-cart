@@ -27,11 +27,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.component.PriceLabel
-import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.component.ProductTitle
 import nextstep.shoppingcart.ui.component.QuantitySelector
 
@@ -86,8 +86,8 @@ fun CartInfo(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                ProductImage(
-                    imageUrl = cartItem.product.imageUrl,
+                AsyncImage(
+                    model = cartItem.product.imageUrl,
                     contentDescription = cartItem.product.name,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier

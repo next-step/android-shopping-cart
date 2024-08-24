@@ -17,10 +17,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.data.Product
+import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.component.PriceLabel
-import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.component.ProductTitle
 import nextstep.shoppingcart.ui.component.ShoppingCartButton
 
@@ -34,8 +34,8 @@ fun ProductDetail(
     Column(
         modifier = modifier
     ) {
-        ProductImage(
-            imageUrl = product.imageUrl,
+        AsyncImage(
+            model = product.imageUrl,
             contentDescription =  product.name,
             modifier = Modifier
                 .fillMaxWidth()
