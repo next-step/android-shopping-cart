@@ -3,24 +3,13 @@ package nextstep.shoppingcart.ui.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.R
 
 @Composable
 fun ProductCounter(
@@ -35,47 +24,13 @@ fun ProductCounter(
         horizontalArrangement = Arrangement.End,
     ) {
         if (count > 0) {
-            IconButton(
-                onClick = {
-                    onMinusClick()
-                },
-                modifier = Modifier.size(42.dp)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.minus),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-            Text(
-                text = count.toString(),
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(horizontal = 14.dp)
+            QuantitySelector(
+                count = count,
+                onMinusClick = onMinusClick,
+                onPlusClick = onPlusClick
             )
-            IconButton(
-                onClick = {
-                    onPlusClick()
-                },
-                modifier = Modifier.size(42.dp)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.plus),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
         } else {
-            IconButton(
-                onClick = {
-                    onPlusClick()
-                },
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .background(color = Color.White)
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Add,
-                    contentDescription = stringResource(id = R.string.add_to_cart)
-                )
-            }
+            AddToCartIcon(onPlusClick = onPlusClick)
         }
     }
 }

@@ -2,19 +2,12 @@ package nextstep.shoppingcart
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import nextstep.shoppingcart.data.Cart
-import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.productlist.ProductListScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
