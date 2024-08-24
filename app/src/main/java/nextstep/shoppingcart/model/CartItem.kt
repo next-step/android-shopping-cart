@@ -24,6 +24,10 @@ object Cart {
         return items
     }
 
+    fun getCountByProductName(productName: String): Int {
+        return items.find { it.product.name == productName }?.count ?: 0
+    }
+
     fun removeOne(product: Product): List<CartItem> {
         _items.find { it.product == product }
             ?.let { item ->

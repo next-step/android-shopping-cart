@@ -6,15 +6,22 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.view.resource.Blue50
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -31,6 +38,9 @@ fun CartScreen(
         bottomBar = {
             CartButton(
                 onButtonClick = onOrderClicked,
+                text = stringResource(id = R.string.cart_button, Cart.totalPrice),
+                fontSize = dimensionResource(id = R.dimen.product_detail_button_text_size).value.sp,
+                color = ButtonDefaults.buttonColors(Blue50),
                 modifier = Modifier.fillMaxWidth()
             )
         }

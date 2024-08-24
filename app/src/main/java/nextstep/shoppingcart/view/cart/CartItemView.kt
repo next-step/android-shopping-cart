@@ -18,6 +18,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +36,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
@@ -38,6 +44,12 @@ import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun CartItemView(product: Product, modifier: Modifier = Modifier) {
+    var itemCount by remember {
+        mutableStateOf(
+            Cart.getCountByProductName(product.name).toString()
+        )
+    }
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -51,7 +63,6 @@ fun CartItemView(product: Product, modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // 공통된 부분을 Stateless로 분리하기
                 Text(
                     text = product.name,
                     fontWeight = FontWeight.Bold,
@@ -100,7 +111,10 @@ fun CartItemView(product: Product, modifier: Modifier = Modifier) {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         IconButton(
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                Cart.removeOne(product)
+                                itemCount = Cart.getCountByProductName(product.name).toString()
+                            },
                             modifier = modifier.size(22.dp),
                         ) {
                             Icon(
@@ -109,12 +123,15 @@ fun CartItemView(product: Product, modifier: Modifier = Modifier) {
                             )
                         }
                         Text(
-                            text = "1",
+                            text = itemCount,
                             fontSize = 22.sp,
                             modifier = modifier
                         )
                         IconButton(
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                Cart.addOne(product)
+                                itemCount = Cart.getCountByProductName(product.name).toString()
+                            },
                             modifier = modifier.size(22.dp),
                         ) {
                             Icon(
