@@ -3,7 +3,6 @@ package nextstep.shoppingcart.ui.screen.cart
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,6 +37,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.component.ShoppingCartItemCounter
 import nextstep.shoppingcart.ui.component.SoppingCartButton
 import nextstep.shoppingcart.ui.screen.products.model.ProductModel
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -175,42 +175,6 @@ private fun ShoppingCartItem(
     }
 }
 
-@Composable
-private fun ShoppingCartItemCounter(
-    count: Int,
-    onMinusClick: () -> Unit,
-    onPlusClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(14.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        CounterTextButton(modifier = Modifier.testTag("장바구니 수량 감소 버튼"), onClick = onMinusClick, text = "-")
-        Text(modifier = Modifier.testTag("장바구니 담긴 수량"), text = count.toString(), style = MaterialTheme.typography.titleLarge)
-        CounterTextButton(modifier = Modifier.testTag("장바구니 수량 증가 버튼"), onClick = onPlusClick, text = "+")
-    }
-}
-
-@Composable
-private fun CounterTextButton(
-    text: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Box(
-        modifier = modifier
-            .size(42.dp)
-            .clickable { onClick() }, contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleLarge,
-        )
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ShoppingCartTopAppBar(
@@ -228,18 +192,6 @@ private fun ShoppingCartTopAppBar(
             )
         }
     })
-}
-
-@ThemePreviews
-@Composable
-private fun ShoppingCartItemCounterPreview() {
-    ShoppingCartTheme {
-        ShoppingCartItemCounter(
-            count = 200,
-            onMinusClick = {},
-            onPlusClick = {}
-        )
-    }
 }
 
 @ThemePreviews

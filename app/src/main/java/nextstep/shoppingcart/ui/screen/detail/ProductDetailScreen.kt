@@ -3,7 +3,6 @@ package nextstep.shoppingcart.ui.screen.detail
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -69,7 +68,8 @@ private fun ProductDetailScreen(
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = { ProductDetailTopAppBar { onNavigationClick() } }
+        topBar = { ProductDetailTopAppBar { onNavigationClick() } },
+        bottomBar = { SoppingCartButton(text = stringResource(R.string.product_detail_shopping_cart)) { onCartClick() } }
     ) {
         Column(
             modifier = Modifier
@@ -94,10 +94,6 @@ private fun ProductDetailScreen(
             Divider()
 
             ProductDetailPrice(price)
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            SoppingCartButton(text = stringResource(R.string.product_detail_shopping_cart)) { onCartClick() }
         }
     }
 }
