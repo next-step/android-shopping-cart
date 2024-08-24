@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.view.cart
 
+import android.util.Log
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -43,7 +44,7 @@ import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CartItemView(product: Product, modifier: Modifier = Modifier) {
+fun CartItemView(product: Product, onItemRemoved: () -> Unit, modifier: Modifier = Modifier) {
     var itemCount by remember {
         mutableStateOf(
             Cart.getCountByProductName(product.name).toString()
@@ -113,7 +114,12 @@ fun CartItemView(product: Product, modifier: Modifier = Modifier) {
                         IconButton(
                             onClick = {
                                 Cart.removeOne(product)
-                                itemCount = Cart.getCountByProductName(product.name).toString()
+                                val newCount = Cart.getCountByProductName(product.name)
+                                if (newCount == 0) {
+                                    onItemRemoved()
+                                } else {
+                                    itemCount = newCount.toString()
+                                }
                             },
                             modifier = modifier.size(22.dp),
                         ) {
@@ -150,6 +156,6 @@ fun CartItemView(product: Product, modifier: Modifier = Modifier) {
 @Composable
 private fun CartItemPreview() {
     ShoppingCartTheme {
-        CartItemView(product = dummyProducts.first())
+        CartItemView(product = dummyProducts.first(), onItemRemoved = {})
     }
 }
