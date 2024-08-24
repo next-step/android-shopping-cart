@@ -12,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.view.resource.Blue50
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
@@ -24,7 +25,7 @@ fun CartButton(onButtonClick: () -> Unit, modifier: Modifier = Modifier) {
         modifier = modifier.height(dimensionResource(id = R.dimen.product_detail_button_height)),
     ) {
         Text(
-            text = stringResource(id = R.string.cart_button, 10000),
+            text = stringResource(id = R.string.cart_button, Cart.totalPrice),
             fontSize = dimensionResource(id = R.dimen.product_detail_button_text_size).value.sp,
         )
     }
