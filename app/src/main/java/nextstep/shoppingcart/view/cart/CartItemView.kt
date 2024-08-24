@@ -44,7 +44,13 @@ import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CartItemView(product: Product, onItemRemoved: () -> Unit, modifier: Modifier = Modifier) {
+fun CartItemView(
+    product: Product,
+    onItemRemoved: () -> Unit,
+    onAddClicked: () -> Unit,
+    onRemoveClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     var itemCount by remember {
         mutableStateOf(
             Cart.getCountByProductName(product.name).toString()
@@ -122,6 +128,7 @@ fun CartItemView(product: Product, onItemRemoved: () -> Unit, modifier: Modifier
                                 } else {
                                     itemCount = newCount.toString()
                                 }
+                                onRemoveClicked()
                             },
                             modifier = modifier.size(22.dp),
                         ) {
@@ -139,6 +146,7 @@ fun CartItemView(product: Product, onItemRemoved: () -> Unit, modifier: Modifier
                             onClick = {
                                 Cart.addOne(product)
                                 itemCount = Cart.getCountByProductName(product.name).toString()
+                                onAddClicked()
                             },
                             modifier = modifier.size(22.dp),
                         ) {
@@ -158,6 +166,10 @@ fun CartItemView(product: Product, onItemRemoved: () -> Unit, modifier: Modifier
 @Composable
 private fun CartItemPreview() {
     ShoppingCartTheme {
-        CartItemView(product = dummyProducts.first(), onItemRemoved = {})
+        CartItemView(
+            product = dummyProducts.first(),
+            onItemRemoved = {},
+            onAddClicked = {},
+            onRemoveClicked = {})
     }
 }

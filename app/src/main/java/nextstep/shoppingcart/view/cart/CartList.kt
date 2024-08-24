@@ -23,6 +23,7 @@ fun CartList(
     cartItems: List<CartItem>,
     contentPadding: PaddingValues,
     verticalArrangement: Arrangement.Vertical,
+    onCountButtonClicked: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var items by remember { mutableStateOf(cartItems) }
@@ -37,6 +38,12 @@ fun CartList(
                 product = item.product,
                 onItemRemoved = {
                     items = Cart.removeAll(item.product)
+                },
+                onAddClicked = {
+                    onCountButtonClicked(item)
+                },
+                onRemoveClicked = {
+                    onCountButtonClicked(item)
                 },
                 modifier = modifier
             )
@@ -59,6 +66,7 @@ private fun CartListPreview() {
                 vertical = 16.dp,
             ),
             verticalArrangement = Arrangement.spacedBy(16.dp),
+            onCountButtonClicked = { }
         )
     }
 }

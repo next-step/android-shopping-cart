@@ -11,6 +11,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -31,6 +35,8 @@ fun CartScreen(
     onBack: () -> Unit,
     onOrderClicked: () -> Unit,
 ) {
+    var totalPrice by remember { mutableIntStateOf(Cart.totalPrice) }
+
     Scaffold(
         topBar = {
             CartTopAppBar(onBack = onBack)
@@ -38,7 +44,7 @@ fun CartScreen(
         bottomBar = {
             CartButton(
                 onButtonClick = onOrderClicked,
-                text = stringResource(id = R.string.cart_button, Cart.totalPrice),
+                text = stringResource(id = R.string.cart_button, totalPrice),
                 fontSize = dimensionResource(id = R.dimen.product_detail_button_text_size).value.sp,
                 color = ButtonDefaults.buttonColors(Blue50),
                 modifier = Modifier.fillMaxWidth()
@@ -58,6 +64,9 @@ fun CartScreen(
                     vertical = 16.dp,
                 ),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
+                onCountButtonClicked = {
+                    totalPrice = Cart.totalPrice
+                }
             )
         }
     }
