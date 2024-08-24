@@ -12,9 +12,11 @@ class CartActivity : ComponentActivity() {
 
         setContent {
             ShoppingCartTheme {
-                CartScreen(Cart.items) {
-                    finish()
-                }
+                CartScreen(
+                    Cart.items,
+                    onBack = { finish() },
+                    onOrderClicked = {}
+                )
             }
         }
     }

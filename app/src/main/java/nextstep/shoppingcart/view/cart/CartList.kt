@@ -2,7 +2,6 @@ package nextstep.shoppingcart.view.cart
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
@@ -16,15 +15,14 @@ import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 @Composable
 fun CartList(
     cartItems: List<CartItem>,
+    contentPadding: PaddingValues,
+    verticalArrangement: Arrangement.Vertical,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(
-            horizontal = 18.dp,
-            vertical = 16.dp
-        ),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = modifier,
+        contentPadding = contentPadding,
+        verticalArrangement = verticalArrangement
     ) {
         itemsIndexed(cartItems) { _, item ->
             CartItemView(item.product, modifier)
@@ -41,7 +39,12 @@ private fun CartListPreview() {
                 CartItem(dummyProducts[0], 1),
                 CartItem(dummyProducts[1], 1),
                 CartItem(dummyProducts[2], 1),
-            )
+            ),
+            contentPadding = PaddingValues(
+                horizontal = 18.dp,
+                vertical = 16.dp,
+            ),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         )
     }
 }
