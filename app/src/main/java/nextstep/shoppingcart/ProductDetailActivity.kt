@@ -10,7 +10,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.data.errorProduct
 import nextstep.shoppingcart.ui.detail.ProductDetailScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -27,7 +26,7 @@ class ProductDetailActivity : ComponentActivity() {
                 ) {
 
                     val product = intent.getParcelableExtra("product", Product::class.java)
-                        ?: errorProduct
+                        ?: Product.Error
 
                     ProductDetailScreen(
                         product = Product(
