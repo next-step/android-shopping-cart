@@ -72,7 +72,9 @@ fun CartItemView(product: Product, onItemRemoved: () -> Unit, modifier: Modifier
                     maxLines = 1,
                 )
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        onItemRemoved()
+                    },
                 ) {
                     Icon(
                         Icons.Filled.Close,
