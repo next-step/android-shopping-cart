@@ -13,15 +13,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.component.ProductItem
 import nextstep.shoppingcart.component.main.MainTopBar
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
 
 @Composable
 fun MainScreen(
-    onItemClick: (
-        name: String,
-        imageUrl: String,
-        price: Long
-    ) -> Unit,
+    onItemClick: (product: Product) -> Unit,
     onCartClick: () -> Unit,
 ) {
     Scaffold(
@@ -41,13 +38,7 @@ fun MainScreen(
                     imageUrl = it.imageUrl,
                     price = it.price,
                     modifier = Modifier.clickable (
-                        onClick = {
-                            onItemClick(
-                                it.name,
-                                it.imageUrl,
-                                it.price
-                            )
-                        }
+                        onClick = { onItemClick(it) }
                     )
                 )
             }
@@ -60,7 +51,7 @@ fun MainScreen(
 @Composable
 private fun MainScreenPreview() {
     MainScreen(
-        onItemClick = { _, _, _ -> },
+        onItemClick = { _-> },
         onCartClick = {},
     )
 }

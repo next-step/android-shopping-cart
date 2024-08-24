@@ -15,8 +15,8 @@ import nextstep.shoppingcart.R
 
 @Composable
 fun CartTopBar(
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onNavigationClick: () -> Unit,
 ) {
     TopAppBar(
         modifier = modifier,
@@ -27,7 +27,7 @@ fun CartTopBar(
             )
         },
         navigationIcon = {
-            IconButton(onClick = onNavigationClick) {
+            IconButton(onClick = onBackClick) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = "back"
@@ -39,6 +39,6 @@ fun CartTopBar(
 
 @Preview
 @Composable
-private fun CartTopBar() {
-    CartTopBar {}
+private fun CartTopBarPreview() {
+    CartTopBar(onBackClick = {})
 }

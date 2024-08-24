@@ -6,39 +6,33 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.component.detail.ProductDetailButton
+import nextstep.shoppingcart.component.detail.AddToCartButton
 import nextstep.shoppingcart.component.detail.ProductDetailImage
 import nextstep.shoppingcart.component.detail.ProductDetailPrice
 import nextstep.shoppingcart.component.detail.ProductDetailTopBar
+import nextstep.shoppingcart.model.Product
 
 @Composable
 fun ProductDetailScreen(
-    price: Long,
-    name: String,
-    imageUrl: String,
-    onNavigationClick: () -> Unit,
+    product: Product,
+    onBackClick: () -> Unit,
     onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
             ProductDetailTopBar (
-                onNavigationClick = onNavigationClick
+                onBackClick = onBackClick
             )
         }
     ) {
@@ -46,11 +40,11 @@ fun ProductDetailScreen(
             modifier = modifier.padding(it)
         ) {
             ProductDetailImage(
-                name = name,
-                imageUrl = imageUrl
+                name = product.name,
+                imageUrl = product.imageUrl
             )
             Text(
-                text = name,
+                text = product.name,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.headlineSmall,
@@ -64,11 +58,11 @@ fun ProductDetailScreen(
                 .background(colorResource(id = R.color.gray))
             )
 
-            ProductDetailPrice(price)
+            ProductDetailPrice(product.price)
 
             Spacer(modifier = Modifier.weight(1f))
 
-            ProductDetailButton { onCartClick() }
+            AddToCartButton(onClick = onCartClick)
         }
     }
 }
@@ -77,10 +71,8 @@ fun ProductDetailScreen(
 @Composable
 private fun ProductDetailScreenPreview() {
     ProductDetailScreen(
-        price = 1_900_000,
-        name = "상품명",
-        imageUrl = "",
-        onNavigationClick = {},
+        product = Product ("상품명", "",1_900_000),
+        onBackClick = {},
         onCartClick = {}
     )
 }
