@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,14 +19,14 @@ import nextstep.shoppingcart.R
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun DinoTopAppBar(
+fun DinoCenterTopAppBar(
     text: String,
     modifier: Modifier = Modifier,
     navigationBack: Boolean = false,
     actions: @Composable (RowScope.() -> Unit) = {},
 ) {
     val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
-    TopAppBar(
+    CenterAlignedTopAppBar(
         modifier = modifier.padding(vertical = 4.dp),
         navigationIcon = {
             if (navigationBack) {

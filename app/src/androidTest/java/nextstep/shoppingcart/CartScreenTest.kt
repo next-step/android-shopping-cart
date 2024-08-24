@@ -30,8 +30,6 @@ internal class CartScreenTest {
     fun 담긴_상품_가격의_총합이_노출된다() {
         // Given
         Cart.addOne(product)
-
-        // When
         composeTestRule.setContent {
             ProductCartListScreen()
         }
@@ -45,15 +43,15 @@ internal class CartScreenTest {
     fun 담긴_상품을_제거할_수_있다() {
         // Given
         Cart.addOne(product)
-
-        // When
         composeTestRule.setContent {
             ProductCartListScreen()
         }
 
-        // Then
+        // When
         composeTestRule.onNodeWithContentDescription("삭제 버튼")
             .performClick()
+
+        // Then
         composeTestRule.onNodeWithText("상품1")
             .assertDoesNotExist()
     }
@@ -62,15 +60,15 @@ internal class CartScreenTest {
     fun 담긴_상품의_수량을_증가시키면_상품_가격에_반영된다() {
         // Given
         Cart.addOne(product)
-
-        // When
         composeTestRule.setContent {
             ProductCartListScreen()
         }
 
-        // Then
+        // When
         composeTestRule.onNodeWithText("+")
             .performClick()
+
+        // Then
         composeTestRule.onNodeWithText("주문하기(20,000원)")
             .assertExists()
     }
@@ -80,15 +78,15 @@ internal class CartScreenTest {
         // Given
         Cart.addOne(product)
         Cart.addOne(product)
-
-        // When
         composeTestRule.setContent {
             ProductCartListScreen()
         }
 
-        // Then
+        // When
         composeTestRule.onNodeWithText("-")
             .performClick()
+
+        // Then
         composeTestRule.onNodeWithText("주문하기(10,000원)")
             .assertExists()
     }
@@ -97,15 +95,15 @@ internal class CartScreenTest {
     fun 담긴_상품의_수량을_1보다_적게_하면_상품이_삭제된다() {
         // Given
         Cart.addOne(product)
-
-        // When
         composeTestRule.setContent {
             ProductCartListScreen()
         }
 
-        // Then
+        // When
         composeTestRule.onNodeWithText("-")
             .performClick()
+
+        // Then
         composeTestRule.onNodeWithText("상품1")
             .assertDoesNotExist()
     }

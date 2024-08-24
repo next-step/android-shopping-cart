@@ -7,6 +7,10 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -67,5 +71,6 @@ fun Stepper(
 @Preview(showBackground = true)
 @Composable
 private fun StepperPreview() {
-    Stepper(3, { })
+    var count by remember { mutableIntStateOf(0) }
+    Stepper(count, { count = it })
 }
