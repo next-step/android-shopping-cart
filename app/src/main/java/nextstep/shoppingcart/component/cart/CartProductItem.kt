@@ -38,16 +38,15 @@ import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.IconPack
 import nextstep.shoppingcart.component.iconpack.Remove
+import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.Product
 import java.text.NumberFormat
 import java.util.Locale
 
 
 @Composable
 fun CartProductItem(
-    name: String,
-    imageUrl: String,
-    price: Long,
-    count: Int,
+    cartItem: CartItem,
     onCloseClick: () -> Unit,
     onPlusClick: () -> Unit,
     onMinusClick: () -> Unit,
@@ -76,7 +75,7 @@ fun CartProductItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = name,
+                    text = cartItem.product.name,
                     style = MaterialTheme.typography.headlineSmall
                 )
 
@@ -86,7 +85,7 @@ fun CartProductItem(
                     Icon(
                         modifier = Modifier.fillMaxSize(),
                         imageVector = Icons.Default.Close,
-                        contentDescription = "$name close"
+                        contentDescription = "${cartItem.product.name} close"
                     )
                 }
             }
@@ -98,8 +97,8 @@ fun CartProductItem(
 
                 ) {
                 AsyncImage(
-                    model = imageUrl,
-                    contentDescription = name,
+                    model = cartItem.product.imageUrl,
+                    contentDescription = cartItem.product.name,
                     modifier = Modifier.size(
                         width = 136.dp,
                         height = 84.dp
@@ -110,7 +109,9 @@ fun CartProductItem(
                     horizontalAlignment = Alignment.End
                 ) {
                     Text(
-                        text = NumberFormat.getNumberInstance(Locale.KOREA).format(price) + "원",
+                        text = NumberFormat
+                            .getNumberInstance(Locale.KOREA)
+                            .format(cartItem.product.price) + "원",
                         fontSize = 16.sp
                     )
                     Row(
@@ -125,11 +126,11 @@ fun CartProductItem(
                         ) {
                             Icon(
                                 imageVector = IconPack.Remove,
-                                contentDescription = "$name minus"
+                                contentDescription = "${cartItem.product.name} minus"
                             )
                         }
                         Text(
-                            text = count.toString(),
+                            text = cartItem.count.toString(),
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
                         IconButton(
@@ -137,7 +138,7 @@ fun CartProductItem(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Add,
-                                contentDescription = "$name plus"
+                                contentDescription = "${cartItem.product.name} plus"
                             )
                         }
                     }
@@ -153,11 +154,17 @@ fun CartProductItem(
 @Preview
 @Composable
 private fun CartProductPreview() {
-    CartProductItem(name = "iPhone 15 Pro Max",
-        imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
-        price = 1900000,
+    CartProductItem(
+        cartItem = CartItem(
+            product = Product(
+                name = "iPhone 15 Pro Max",
+                imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+                price = 1900000,
+            ),
+            count = 1
+        ),
         onCloseClick = {},
         onMinusClick = {},
         onPlusClick = {},
-        count = 1)
+    )
 }
