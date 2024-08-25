@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.component
+package nextstep.shoppingcart.component.main
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
+import nextstep.shoppingcart.component.common.ProductImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import java.text.NumberFormat
 import java.util.Locale
@@ -45,10 +45,10 @@ fun ProductItem(
                 .fillMaxWidth()
                 .aspectRatio(1f)
         ) {
-            AsyncImage(
+            ProductImage(
                 modifier = Modifier.fillMaxSize(),
-                model = imageUrl,
-                contentDescription = name,
+                imageUrl = cartItem.product.imageUrl,
+                contentDescription = cartItem.product.name,
             )
             FloatingActionButton(
                 onClick = onAddToCart,
