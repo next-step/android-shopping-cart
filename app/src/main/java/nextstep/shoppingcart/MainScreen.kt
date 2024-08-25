@@ -20,6 +20,7 @@ import nextstep.shoppingcart.model.dummyProducts
 fun MainScreen(
     onItemClick: (product: Product) -> Unit,
     onCartClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = { MainTopBar(onCartClick) }
