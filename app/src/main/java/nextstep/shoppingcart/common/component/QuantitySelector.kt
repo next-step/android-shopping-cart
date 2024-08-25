@@ -28,23 +28,34 @@ internal fun QuantitySelector(
 ) {
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(4.dp)
+        shape = RoundedCornerShape(4.dp),
     ) {
         Row(
-            horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             QuantityAdjustButton(
                 text = "-",
-                onClick = onCountMinusClick
+                onClick = onCountMinusClick,
+                modifier = Modifier.size(42.dp)
             )
-            Text(
-                text = count.toString(),
-                style = NextStepTheme.typography.roboto22N
-            )
+            Surface(
+                modifier = Modifier.size(42.dp),
+            ) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text = count.toString(),
+                        style = NextStepTheme.typography.roboto22N
+                    )
+                }
+            }
             QuantityAdjustButton(
                 text = "+",
-                onClick = onCountAddClick
+                onClick = onCountAddClick,
+                modifier = Modifier.size(42.dp),
             )
         }
     }
@@ -54,9 +65,10 @@ internal fun QuantitySelector(
 private fun QuantityAdjustButton(
     text: String,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Surface(
-        modifier = Modifier.size(48.dp),
+        modifier = modifier,
         onClick = onClick,
     ) {
         Box(

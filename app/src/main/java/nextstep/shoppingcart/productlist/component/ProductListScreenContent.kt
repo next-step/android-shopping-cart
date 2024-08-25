@@ -34,6 +34,9 @@ internal fun ProductListScreenContent(
         ) { item ->
             ProductListScreenCard(
                 product = item,
+                count = 0,
+                onCountAddClick = {},
+                onCountMinusClick = {},
                 modifier = Modifier.clickable { onProductClick(item) }
             )
         }
