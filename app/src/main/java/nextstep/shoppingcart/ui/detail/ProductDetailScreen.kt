@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui
+package nextstep.shoppingcart.ui.detail
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.Product
+import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.ProductDetail
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.ui.component.ShoppingCartNavigationTopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -31,6 +31,7 @@ fun ProductDetailScreen(
     ) { innerPadding ->
         ProductDetail(
             product = product,
+            onAddToCart = { Cart.addOne(product = product) },
             modifier = Modifier.padding(innerPadding)
         )
     }
@@ -40,6 +41,7 @@ fun ProductDetailScreen(
 @Composable
 private fun ProductDetailScreenPreview() {
     val product = Product(
+        id = 1,
         imageUrl = "https://image.msscdn.net/images/goods_img/20230425/3257548/3257548_16823548430020_500.jpg",
         name = "루바토 브이넥 반팔 티셔츠 네이비",
         price = 16371

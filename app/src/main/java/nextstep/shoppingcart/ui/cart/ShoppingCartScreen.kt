@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui
+package nextstep.shoppingcart.ui.cart
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -9,18 +9,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.Cart
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.component.CartInfo
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.ui.component.ShoppingCartButton
 import nextstep.shoppingcart.ui.component.ShoppingCartNavigationTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -31,9 +29,7 @@ fun ShoppingCartScreen(
     onNavigationClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var cartItems by remember {
-        mutableStateOf(Cart.items)
-    }
+    val cartItems by Cart.items.collectAsState()
 
     val totalPrice by remember(cartItems) {
         derivedStateOf {
@@ -61,17 +57,20 @@ fun ShoppingCartScreen(
                     )
 
             ) {
-                items(cartItems) { cartItem ->
+                items(
+                    items = cartItems,
+                    key = { it.product.id }
+                ) { cartItem ->
                     CartInfo(
                         cartItem = cartItem,
                         onRemoveClick = {
-                            cartItems = Cart.removeAll(cartItem.product)
+                            Cart.removeAll(cartItem.product)
                         },
                         onMinusClick = {
-                            cartItems = Cart.removeOne(cartItem.product)
+                            Cart.removeOne(cartItem.product)
                         },
                         onPlusClick = {
-                            cartItems = Cart.addOne(cartItem.product)
+                            Cart.addOne(cartItem.product)
                         }
                     )
                 }

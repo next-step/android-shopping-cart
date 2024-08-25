@@ -9,7 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import nextstep.shoppingcart.ui.ProductDetailScreen
+import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.detail.ProductDetailScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {
@@ -24,10 +25,12 @@ class ProductDetailActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                    val product = intent.getParcelableExtra("product", Product::class.java)!!
+                    val product = intent.getParcelableExtra("product", Product::class.java)
+                        ?: Product.Error
 
                     ProductDetailScreen(
                         product = Product(
+                            id = product.id,
                             imageUrl = product.imageUrl,
                             name = product.name,
                             price = product.price

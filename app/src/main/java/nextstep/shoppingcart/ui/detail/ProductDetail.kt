@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.component
+package nextstep.shoppingcart.ui.detail
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -13,18 +13,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.Cart
-import nextstep.shoppingcart.Product
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.component.PriceLabel
+import nextstep.shoppingcart.ui.component.ProductTitle
+import nextstep.shoppingcart.ui.component.ShoppingCartButton
 
 @SuppressLint("ResourceAsColor")
 @Composable
 fun ProductDetail(
     product: Product,
+    onAddToCart: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -32,15 +36,16 @@ fun ProductDetail(
     ) {
         AsyncImage(
             model = product.imageUrl,
-            contentDescription = product.name,
+            contentDescription =  product.name,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(360.dp)
+                .height(360.dp),
+            contentScale = ContentScale.Crop
         )
-        Text(
-            text = product.name,
+        ProductTitle(
+            title = product.name,
+            modifier = Modifier.padding(18.dp),
             style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(18.dp)
         )
         Divider()
         Row(
@@ -57,16 +62,14 @@ fun ProductDetail(
                 text = stringResource(id = R.string.price_title),
                 style = MaterialTheme.typography.titleLarge
             )
-            Text(
-                text = stringResource(id = R.string.price_format, product.price),
+            PriceLabel(
+                price = product.price,
                 style = MaterialTheme.typography.titleLarge
             )
         }
 
         ShoppingCartButton(
-            onClick = {
-                Cart.addOne(product = product)
-            },
+            onClick = onAddToCart,
             buttonText = stringResource(id = R.string.add_to_cart),
             modifier = Modifier.fillMaxSize()
         )
@@ -77,12 +80,14 @@ fun ProductDetail(
 @Composable
 private fun ProductDetailPreview() {
     val productInfo = Product(
+        id = 1,
         imageUrl = "https://image.msscdn.net/images/goods_img/20230425/3257548/3257548_16823548430020_500.jpg",
         name = "루바토 브이넥 반팔 티셔츠 네이비",
         price = 16371
     )
     ProductDetail(
-        productInfo,
+        product = productInfo,
+        onAddToCart = { },
         modifier = Modifier.fillMaxSize()
     )
 }
