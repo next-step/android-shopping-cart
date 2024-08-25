@@ -13,4 +13,17 @@
     <dimen name="product_detail_button_text_size">20sp</dimen>
     <dimen name="product_detail_button_height">54dp</dimen>
     <dimen name="product_detail_button_corner_radius">0dp</dimen>
+    <dimen name="cart_item_border">1dp</dimen>
+    <dimen name="cart_item_border_corner_radius">1dp</dimen>
+    <dimen name="cart_item_border_padding">18dp</dimen>
+    <dimen name="cart_item_name_size">20sp</dimen>
+    <dimen name="cart_item_price_size">20sp</dimen>
+    <dimen name="cart_item_image_size">135dp</dimen>
+    <dimen name="cart_item_quantity_padding_start">41dp</dimen>
+    <dimen name="cart_item_quantity_padding">11dp</dimen>
+    <dimen name="cart_item_add_icon_size">22dp</dimen>
+    <dimen name="cart_item_remove_icon_size">22dp</dimen>
+    <dimen name="cart_item_quantity_text_size">22sp</dimen>
+    <dimen name="cart_screen_list_padding_horizontal">18dp</dimen>
+    <dimen name="cart_screen_list_padding_vertical">16dp</dimen>
 </resources>

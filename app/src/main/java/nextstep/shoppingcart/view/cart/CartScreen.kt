@@ -83,8 +83,8 @@ fun CartScreen(
             CartList(
                 cartItems = items,
                 contentPadding = PaddingValues(
-                    horizontal = 18.dp,
-                    vertical = 16.dp,
+                    horizontal = dimensionResource(id = R.dimen.cart_screen_list_padding_horizontal),
+                    vertical = dimensionResource(id = R.dimen.cart_screen_list_padding_vertical),
                 ),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 onItemRemoved = ::handleItemRemoved,
@@ -93,7 +93,6 @@ fun CartScreen(
             )
         }
     }
-
 }
 
 @Preview(showBackground = true)

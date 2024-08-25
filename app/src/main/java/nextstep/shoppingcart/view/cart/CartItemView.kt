@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -49,8 +50,12 @@ fun CartItemView(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .border(1.dp, Color.Gray, shape = RoundedCornerShape(1.dp))
-            .padding(18.dp),
+            .border(
+                dimensionResource(id = R.dimen.cart_item_border),
+                Color.Gray,
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.cart_item_border_corner_radius))
+            )
+            .padding(dimensionResource(id = R.dimen.cart_item_border_padding)),
     ) {
         Column {
             Row(
@@ -61,7 +66,7 @@ fun CartItemView(
                 Text(
                     text = product.name,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
+                    fontSize = dimensionResource(id = R.dimen.cart_item_name_size).value.sp,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                 )
@@ -85,7 +90,7 @@ fun CartItemView(
                     model = product.imageUrl,
                     contentDescription = product.name,
                     loading = placeholder(R.drawable.ic_launcher_foreground),
-                    modifier = modifier.size(135.dp)
+                    modifier = modifier.size(dimensionResource(id = R.dimen.cart_item_image_size))
                 )
 
                 Column(
@@ -96,13 +101,16 @@ fun CartItemView(
                             id = R.string.product_item_currency_unit,
                             product.price
                         ),
-                        fontSize = 20.sp,
+                        fontSize = dimensionResource(id = R.dimen.cart_item_price_size).value.sp,
                         modifier = modifier
                     )
                     Row(
                         modifier = modifier
                             .fillMaxWidth()
-                            .padding(start = 41.dp, 11.dp),
+                            .padding(
+                                start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),
+                                dimensionResource(id = R.dimen.cart_item_quantity_padding)
+                            ),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -110,7 +118,7 @@ fun CartItemView(
                             onClick = {
                                 onRemoveClicked()
                             },
-                            modifier = modifier.size(22.dp),
+                            modifier = modifier.size(dimensionResource(id = R.dimen.cart_item_add_icon_size)),
                         ) {
                             Icon(
                                 Icons.Filled.KeyboardArrowDown,
@@ -119,14 +127,14 @@ fun CartItemView(
                         }
                         Text(
                             text = itemCount,
-                            fontSize = 22.sp,
+                            fontSize = dimensionResource(id = R.dimen.cart_item_quantity_text_size).value.sp,
                             modifier = modifier
                         )
                         IconButton(
                             onClick = {
                                 onAddClicked()
                             },
-                            modifier = modifier.size(22.dp),
+                            modifier = modifier.size(dimensionResource(id = R.dimen.cart_item_remove_icon_size)),
                         ) {
                             Icon(
                                 Icons.Filled.KeyboardArrowUp,
