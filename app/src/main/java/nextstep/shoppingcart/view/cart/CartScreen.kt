@@ -13,6 +13,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -37,6 +38,28 @@ fun CartScreen(
 ) {
     var totalPrice by remember { mutableIntStateOf(Cart.totalPrice) }
 
+    var items by remember { mutableStateOf(cartItems) }
+
+    fun handleItemRemoved(item: CartItem) {
+        items = Cart.removeAll(item.product)
+    }
+
+    fun handleAddClicked(item: CartItem) {
+        items = Cart.addOne(item.product)
+        totalPrice = Cart.totalPrice
+    }
+
+    fun handleRemoveClicked(item: CartItem) {
+        items = Cart.removeOne(item.product)
+        val newCount = Cart.getCountByProductName(item.product.name)
+        items = if (newCount == 0) {
+            Cart.removeAll(item.product)
+        } else {
+            items
+        }
+        totalPrice = Cart.totalPrice
+    }
+
     Scaffold(
         topBar = {
             CartTopAppBar(onBack = onBack)
@@ -58,15 +81,15 @@ fun CartScreen(
             color = MaterialTheme.colorScheme.background
         ) {
             CartList(
-                cartItems = cartItems,
+                cartItems = items,
                 contentPadding = PaddingValues(
                     horizontal = 18.dp,
                     vertical = 16.dp,
                 ),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
-                onCountButtonClicked = {
-                    totalPrice = Cart.totalPrice
-                }
+                onItemRemoved = ::handleItemRemoved,
+                onAddClicked = ::handleAddClicked,
+                onRemoveClicked = ::handleRemoveClicked,
             )
         }
     }

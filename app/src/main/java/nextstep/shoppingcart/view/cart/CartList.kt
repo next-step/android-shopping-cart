@@ -1,15 +1,10 @@
 package nextstep.shoppingcart.view.cart
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,29 +18,24 @@ fun CartList(
     cartItems: List<CartItem>,
     contentPadding: PaddingValues,
     verticalArrangement: Arrangement.Vertical,
-    onCountButtonClicked: (CartItem) -> Unit,
+    onItemRemoved: (CartItem) -> Unit,
+    onAddClicked: (CartItem) -> Unit,
+    onRemoveClicked: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var items by remember { mutableStateOf(cartItems) }
-
     LazyColumn(
         modifier = modifier,
         contentPadding = contentPadding,
         verticalArrangement = verticalArrangement
     ) {
-        itemsIndexed(items) { _, item ->
+        itemsIndexed(cartItems) { _, item ->
             CartItemView(
                 product = item.product,
-                onItemRemoved = {
-                    items = Cart.removeAll(item.product)
-                },
-                onAddClicked = {
-                    onCountButtonClicked(item)
-                },
-                onRemoveClicked = {
-                    onCountButtonClicked(item)
-                },
-                modifier = modifier
+                itemCount = Cart.getCountByProductName(item.product.name).toString(),
+                onItemRemoved = { onItemRemoved(item) },
+                onAddClicked = { onAddClicked(item) },
+                onRemoveClicked = { onRemoveClicked(item) },
+                modifier = modifier,
             )
         }
     }
@@ -66,7 +56,9 @@ private fun CartListPreview() {
                 vertical = 16.dp,
             ),
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            onCountButtonClicked = { }
+            onItemRemoved = {},
+            onAddClicked = {},
+            onRemoveClicked = {},
         )
     }
 }
