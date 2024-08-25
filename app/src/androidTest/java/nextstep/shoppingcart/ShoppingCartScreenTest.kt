@@ -53,9 +53,7 @@ class ShoppingCartScreenTest {
     fun 담긴_상품_가격의_총합이_노출된다() {
         // given
         composeTestRule.setContent {
-            val cartItems by remember {
-                mutableStateOf(fakeCartRepository.cartItems)
-            }
+            val cartItems = fakeCartRepository.cartItems
             ShoppingCartScreen(
                 cartItem = cartItems,
                 onItemCloseClick = {},
