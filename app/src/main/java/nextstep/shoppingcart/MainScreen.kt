@@ -38,6 +38,7 @@ fun MainScreen(
                     name = it.name,
                     imageUrl = it.imageUrl,
                     price = it.price,
+                    onAddToCart = { onItemClick(it) },
                     modifier = Modifier.clickable (
                         onClick = { onItemClick(it) }
                     )
