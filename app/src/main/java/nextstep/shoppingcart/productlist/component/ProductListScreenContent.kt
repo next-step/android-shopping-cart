@@ -11,13 +11,15 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.common.model.Product
+import nextstep.shoppingcart.productlist.ProductListScreenItem
 
 @Composable
 internal fun ProductListScreenContent(
     paddingValues: PaddingValues,
-    products: List<Product>,
-    onProductClick: (Product) -> Unit,
+    products: List<ProductListScreenItem>,
+    onCountAddClick: (ProductListScreenItem) -> Unit,
+    onCountMinusClick: (ProductListScreenItem) -> Unit,
+    onProductClick: (ProductListScreenItem) -> Unit,
 ) {
     LazyVerticalGrid(
         modifier = Modifier
@@ -30,13 +32,13 @@ internal fun ProductListScreenContent(
     ) {
         items(
             items = products,
-            key = { item -> item.id }
+            key = { item -> item.product.id }
         ) { item ->
             ProductListScreenCard(
-                product = item,
-                count = 0,
-                onCountAddClick = {},
-                onCountMinusClick = {},
+                product = item.product,
+                count = item.count,
+                onCountAddClick = { onCountAddClick(item) },
+                onCountMinusClick = { onCountMinusClick(item) },
                 modifier = Modifier.clickable { onProductClick(item) }
             )
         }

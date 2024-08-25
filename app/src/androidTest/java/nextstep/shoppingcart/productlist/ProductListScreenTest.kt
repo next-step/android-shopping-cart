@@ -22,6 +22,8 @@ class ProductListScreenTest {
                 products = emptyList(),
                 onProductClick = {},
                 onCartClick = {},
+                onCountAddClick = {},
+                onCountMinusClick = {},
             )
         }
 
@@ -39,11 +41,14 @@ class ProductListScreenTest {
     fun 장바구니화면_상품목록이_보인다() {
         // given
         val cartItems = List(5) {
-            Product(
-                id = UUID.randomUUID().toString(),
-                name = "PET보틀 - ${it + 1}",
-                price = 10000,
-                imageUrl = "https://picsum.photos/500"
+            ProductListScreenItem(
+                product = Product(
+                    id = UUID.randomUUID().toString(),
+                    name = "PET보틀 - ${it + 1}",
+                    price = 10000,
+                    imageUrl = "https://picsum.photos/500"
+                ),
+                count = 0,
             )
         }
         composeTestRule.setContent {
@@ -51,13 +56,15 @@ class ProductListScreenTest {
                 products = cartItems,
                 onProductClick = {},
                 onCartClick = {},
+                onCountAddClick = {},
+                onCountMinusClick = {},
             )
         }
 
         // then
         cartItems.forEach { item ->
             composeTestRule
-                .onNodeWithText(item.name)
+                .onNodeWithText(item.product.name)
                 .assertIsDisplayed()
         }
     }
