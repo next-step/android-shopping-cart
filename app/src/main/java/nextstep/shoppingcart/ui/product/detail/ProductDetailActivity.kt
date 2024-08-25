@@ -1,5 +1,7 @@
 package nextstep.shoppingcart.ui.product.detail
 
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {
@@ -33,7 +36,11 @@ class ProductDetailActivity : ComponentActivity() {
                 ) {
                     ProductDetailScreen(
                         product = product,
-                        onClickBackButton = { finish() }
+                        onClickBackButton = { finish() },
+                        onClickShoppingCartAddButton = {
+                            val intent = Intent(this, ShoppingCartActivity::class.java)
+                            startActivity(intent)
+                        }
                     )
                 }
             }

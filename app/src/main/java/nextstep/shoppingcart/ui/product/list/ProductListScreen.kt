@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.product.list
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.component.ProductItem
 import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity
 import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity.Companion.EXTRA_PRODUCT
@@ -34,6 +36,8 @@ import nextstep.shoppingcart.ui.theme.BlackTitle
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen() {
+    val context = LocalContext.current
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -49,7 +53,7 @@ fun ProductListScreen() {
                     )
                 },
                 actions = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { moveToShoppingCartScreen(context) }) {
                         Icon(
                             imageVector = Icons.Filled.ShoppingCart,
                             contentDescription = "Cart",
@@ -60,7 +64,6 @@ fun ProductListScreen() {
             )
         },
     ) { innerPadding ->
-        val context = LocalContext.current
 
         LazyVerticalGrid(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -84,6 +87,11 @@ fun ProductListScreen() {
             }
         }
     }
+}
+
+private fun moveToShoppingCartScreen(context: Context) {
+    val intent = Intent(context, ShoppingCartActivity::class.java)
+    context.startActivity(intent)
 }
 
 @Preview(showBackground = true)

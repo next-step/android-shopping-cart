@@ -26,8 +26,9 @@ import nextstep.shoppingcart.ui.theme.LineColor
 
 @Composable
 fun ProductDetailContent(
+    product: Product,
+    onClickShoppingCartAddButton: () -> Unit,
     modifier: Modifier = Modifier,
-    product: Product
 ) {
     Box(
         modifier = modifier.fillMaxSize()
@@ -75,7 +76,7 @@ fun ProductDetailContent(
             }
         }
         ProductDetailCartAddButton(
-            onClick = { /* TODO */ }
+            onClick = onClickShoppingCartAddButton
         )
     }
 }
@@ -88,6 +89,6 @@ fun ProductDetailContentPreview() {
             name = "PET보틀-원형(500ml)",
             imageUrl = "",
             price = 42200
-        )
+        ), {}
     )
 }

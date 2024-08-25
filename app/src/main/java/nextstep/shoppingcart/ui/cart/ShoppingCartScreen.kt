@@ -1,5 +1,6 @@
-package nextstep.shoppingcart.ui.product.detail
+package nextstep.shoppingcart.ui.cart
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -14,18 +15,14 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.data.Product
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailScreen(
-    product: Product,
+fun ShoppingCartScreen(
     onClickBackButton: () -> Unit,
-    onClickShoppingCartAddButton: () -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
@@ -37,7 +34,7 @@ fun ProductDetailScreen(
                 ),
                 title = {
                     Text(
-                        text = "상품 상세",
+                        text = "장바구니",
                         fontSize = 22.sp
                     )
                 },
@@ -48,29 +45,16 @@ fun ProductDetailScreen(
                             contentDescription = "뒤로 가기",
                             modifier = Modifier
                                 .size(48.dp)
+                                .clickable { onClickBackButton() }
                         )
                     }
                 }
             )
         },
         content = { paddingValues ->
-            ProductDetailContent(
-                modifier = Modifier.padding(paddingValues),
-                product = product,
-                onClickShoppingCartAddButton = onClickShoppingCartAddButton
+            ShoppingCartContent(
+                modifier = Modifier.padding(paddingValues)
             )
         }
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ProductDetailScreenPreview() {
-    ProductDetailScreen(
-        product = Product(
-            name = "aa",
-            price = 10000,
-            imageUrl = ""
-        ), {}, {}
     )
 }
