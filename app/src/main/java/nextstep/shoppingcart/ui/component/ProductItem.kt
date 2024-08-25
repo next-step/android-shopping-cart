@@ -16,11 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import nextstep.shoppingcart.Utils.formatPrice
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.data.dummyProducts
 import nextstep.shoppingcart.ui.theme.BlackContent
-import java.text.NumberFormat
-import java.util.Locale
 
 @Composable
 fun ProductItem(
@@ -28,8 +27,6 @@ fun ProductItem(
     onItemClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val formattedPrice = NumberFormat.getCurrencyInstance(Locale.KOREA).format(product.price)
-
     Column(
         modifier = Modifier
             .width(156.dp)
@@ -52,7 +49,7 @@ fun ProductItem(
             overflow = TextOverflow.Ellipsis
         )
         Text(
-            text = "${formattedPrice}원",
+            text = "${formatPrice(product.price)}원",
             fontSize = 16.sp,
             textAlign = TextAlign.Start,
             modifier = Modifier.fillMaxWidth().padding(top = 2.dp),

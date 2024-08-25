@@ -32,7 +32,8 @@ class ProductDetailActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     ProductDetailScreen(
-                        product = product
+                        product = product,
+                        onClickBackButton = { finish() }
                     )
                 }
             }
