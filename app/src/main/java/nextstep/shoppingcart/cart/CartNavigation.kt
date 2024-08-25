@@ -25,18 +25,15 @@ internal fun NavGraphBuilder.cartNavGraph(
             cartItems = cartItems,
             totalPrice = totalPrice,
             onCountAddClick = {
-                Cart.addOne(it.product)
-                cartItems = Cart.items
+                cartItems = Cart.addOne(it.product)
                 totalPrice = Cart.totalPrice
             },
             onCountMinusClick = {
-                Cart.removeOne(it.product)
-                cartItems = Cart.items
+                cartItems = Cart.removeOne(it.product)
                 totalPrice = Cart.totalPrice
             },
             onCartItemDeleteClick = {
-                Cart.removeAll(it.product)
-                cartItems = Cart.items
+                cartItems = Cart.removeAll(it.product)
                 totalPrice = Cart.totalPrice
             },
             onBackClick = onBackClick
