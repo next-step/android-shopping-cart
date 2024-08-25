@@ -12,5 +12,6 @@
     <string name="cart_delete">Cart Delete</string>
     <string name="cart_subtract">Cart Subtract</string>
     <string name="cart_add">Cart Add</string>
+    <string name="cart_remove">Cart Remove</string>
     <string name="cart_button">주문하기(%,d원)</string>
 </resources>

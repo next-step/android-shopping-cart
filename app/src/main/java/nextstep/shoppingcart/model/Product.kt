@@ -65,7 +65,7 @@ val dummyProducts: List<Product> = listOf(
     Product(
         name = "[최고심] 울지말고 강해져라 렌티큘러 카드",
         imageUrl = "https://insideobject.com/web/product/big/202209/99013e01296d6ad65dd44e3e439c3d57.png",
-        price = 4_790_000,
+        price = 5_000,
     ),
     Product(
         name = "[최고심] 당신 멋져 패브릭 포스터",

@@ -13,7 +13,7 @@ _# android-shopping-cart
     - [x] 수량 0인 경우
 - [x] 상품 가격 합계 구현
 - [x] CartItemView를 Stateless로 리팩터링
-- [] 테스트 코드 작성
+- [x] 테스트 코드 작성
 
 ## Step3 진행 중 의식의 흐름
 
@@ -26,8 +26,9 @@ _# android-shopping-cart
 - Scaffold에서 topBar, bottomBar를 사용해도 LazyColumn의 영역이 topBar, bottomBar를 침범하는 문제가 있었습니다.
   innerPadding의 존재를 발견해서 해결했습니다. 학습 목적에 중요한 부분이 아닐 수 있지만 상당히 많은 매몰비용이 발생했습니다.
 - CartItemView는 Stateless로 구성하려고 시도했습니다. 먼저 CartList로 상태 호이스팅 하도록 변경했다가 CartScreen에서 상태를 관리하고
-  CartList는 UI를 그리는 작업만 하도록 하는 것이 좋겠다고 생각되었습니다. 그리고 컴포넌트를 좀 더 나눌 수 있을 것 같지만 일단은 하나로 묶었습니다. 나중에 더 나누는 것도
-  좋을 것 같습니다.
+  CartList는 UI를 그리는 작업만 하도록 하는 것이 좋겠다고 생각되었습니다. 그리고 컴포넌트를 좀 더 나눌 수 있을 것 같지만 일단은 하나로 묶었습니다. 나중에 더 나누는
+  것도 좋을 것 같습니다.
+- CartScreen에 대한 테스트도 필요한가요? 내부에 포함된 컴포넌트에 대한 테스트를 작성하고 CartScreen 테스트 코드를 작성하다 보니 중복되어 작성하지 않았습니다.
 
 ## Step2 구현 목록
 

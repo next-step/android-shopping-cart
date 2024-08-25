@@ -114,7 +114,7 @@ fun CartItemView(
                         ) {
                             Icon(
                                 Icons.Filled.KeyboardArrowDown,
-                                contentDescription = stringResource(id = R.string.cart_add)
+                                contentDescription = stringResource(id = R.string.cart_remove)
                             )
                         }
                         Text(
