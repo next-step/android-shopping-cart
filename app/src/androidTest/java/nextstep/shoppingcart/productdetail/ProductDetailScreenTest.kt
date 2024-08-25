@@ -27,10 +27,9 @@ internal class ProductDetailScreenTest {
         // given
         val cartSize = cart.items.size
         composeTestRule.setContent {
-            ProductDetailScreen(
+            ProductDetailRoute(
                 product = dummyProducts.first(),
                 onBackClick = {},
-                onAddToCartClick = {},
             )
         }
 
