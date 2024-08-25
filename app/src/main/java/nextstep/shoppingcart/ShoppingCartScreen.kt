@@ -61,10 +61,7 @@ fun ShoppingCartScreen(
                 items = cartItem,
             ){
                 CartProductItem(
-                    name = it.product.name,
-                    imageUrl = it.product.imageUrl,
-                    price = it.product.price,
-                    count = it.count,
+                    cartItem = it,
                     onCloseClick = { onItemCloseClick(it.product) },
                     onPlusClick = { onItemPlusClick(it.product) },
                     onMinusClick = { onItemMinusClick(it.product) }

@@ -11,14 +11,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.component.ProductItem
+import nextstep.shoppingcart.component.main.ProductItem
 import nextstep.shoppingcart.component.main.MainTopBar
+import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
 
 @Composable
 fun MainScreen(
+    cartItems: List<CartItem>,
     onItemClick: (product: Product) -> Unit,
+    onAddCartClick: (product: Product) -> Unit,
+    onItemIncrease: (product: Product) -> Unit,
+    onItemDecrease: (product: Product) -> Unit,
     onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -26,7 +31,7 @@ fun MainScreen(
         topBar = { MainTopBar(onCartClick) }
     ) { paddingValues ->
         LazyVerticalGrid(
-            modifier = Modifier
+            modifier = modifier
                 .padding(paddingValues = paddingValues)
                 .padding(horizontal = 16.dp),
             columns = GridCells.Fixed(2),
@@ -35,12 +40,21 @@ fun MainScreen(
         ) {
             items(items = dummyProducts) {
                 ProductItem(
-                    name = it.name,
-                    imageUrl = it.imageUrl,
-                    price = it.price,
-                    onAddToCart = { onItemClick(it) },
+                    cartItem = CartItem(
+                        Product(
+                        it.name,
+                        it.imageUrl,
+                        it.price
+                    ),
+                        count = cartItems.find { cartItem ->
+                            cartItem.product == it
+                        }?.count ?: 0
+                    ),
+                    onAddToCart = { onAddCartClick(it) },
+                    onIncrease = { onItemIncrease(it) },
+                    onDecrease = { onItemDecrease(it) },
                     modifier = Modifier.clickable (
-                        onClick = { onItemClick(it) }
+                        onClick = { onItemClick(it) },
                     )
                 )
             }
@@ -53,7 +67,11 @@ fun MainScreen(
 @Composable
 private fun MainScreenPreview() {
     MainScreen(
+        cartItems = listOf(CartItem(dummyProducts.first(), 1)),
         onItemClick = { _-> },
         onCartClick = {},
+        onItemIncrease = {},
+        onItemDecrease = {},
+        onAddCartClick = {}
     )
 }

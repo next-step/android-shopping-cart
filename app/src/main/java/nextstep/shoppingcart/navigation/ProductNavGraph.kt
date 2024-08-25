@@ -39,14 +39,22 @@ fun ProductNavGraph(navController: NavHostController) {
         composable(
             route = "main"
         ) {
+            var cartItems by remember { mutableStateOf(Cart.items) }
+            val onAddToCart = remember { { item: Product -> cartItems = Cart.addOne(item) } }
+            val onItemMinusClick = remember { { item: Product -> cartItems = Cart.removeOne(item) } }
+            val onItemPlusClick = remember { { item: Product -> cartItems = Cart.addOne(item) } }
             MainScreen(
+                cartItems = cartItems,
                 onItemClick = { product ->
                     navController.navigate(
                         route = "productDetail",
                         args = bundleOf("product" to product)
                     )
                 },
-                onCartClick = { navController.navigate("shoppingCart") }
+                onCartClick = { navController.navigate("shoppingCart") },
+                onAddCartClick = { onItemPlusClick(it) },
+                onItemIncrease = { onItemPlusClick(it) },
+                onItemDecrease = { onItemMinusClick(it) }
             )
         }
         composable(route = "productDetail") { backStackEntry ->
