@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,6 +25,7 @@ import java.util.Locale
 @Composable
 fun ProductItem(
     product: Product,
+    onItemClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val formattedPrice = NumberFormat.getCurrencyInstance(Locale.KOREA).format(product.price)
@@ -31,6 +33,7 @@ fun ProductItem(
     Column(
         modifier = Modifier
             .width(156.dp)
+            .clickable(onClick = onItemClick)
     ) {
         AsyncImage(
             model = product.imageUrl,
@@ -61,7 +64,7 @@ fun ProductItem(
 @Preview(showBackground = true)
 @Composable
 fun ProductItemPreview() {
-    ProductItem(dummyProducts[0])
+    ProductItem(dummyProducts[0], {})
 }
 
 @Preview(showBackground = true)
@@ -73,5 +76,6 @@ fun LongNameProductItemPreview() {
             imageUrl = "",
             price = 10000000
         )
+        , {}
     )
 }
