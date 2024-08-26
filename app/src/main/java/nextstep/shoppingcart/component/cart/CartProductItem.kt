@@ -4,15 +4,12 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -22,38 +19,35 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.component.IconPack
-import nextstep.shoppingcart.component.iconpack.Remove
+import nextstep.shoppingcart.component.common.ProductImage
+import nextstep.shoppingcart.component.common.ProductQuantity
+import nextstep.shoppingcart.model.Cart
+import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.Product
 import java.text.NumberFormat
 import java.util.Locale
 
 
 @Composable
 fun CartProductItem(
-    name: String,
-    imageUrl: String,
-    price: Long,
-    count: Int,
+    cartItem: CartItem,
     onCloseClick: () -> Unit,
     onPlusClick: () -> Unit,
     onMinusClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -76,7 +70,7 @@ fun CartProductItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = name,
+                    text = cartItem.product.name,
                     style = MaterialTheme.typography.headlineSmall
                 )
 
@@ -86,7 +80,7 @@ fun CartProductItem(
                     Icon(
                         modifier = Modifier.fillMaxSize(),
                         imageVector = Icons.Default.Close,
-                        contentDescription = "$name close"
+                        contentDescription = "${cartItem.product.name} close"
                     )
                 }
             }
@@ -97,50 +91,30 @@ fun CartProductItem(
                 verticalAlignment = Alignment.Bottom
 
                 ) {
-                AsyncImage(
-                    model = imageUrl,
-                    contentDescription = name,
+                ProductImage(
                     modifier = Modifier.size(
                         width = 136.dp,
                         height = 84.dp
-                    )
+                    ),
+                    imageUrl = cartItem.product.imageUrl,
+                    contentDescription = cartItem.product.name,
                 )
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.End
                 ) {
                     Text(
-                        text = NumberFormat.getNumberInstance(Locale.KOREA).format(price) + "원",
+                        text = NumberFormat
+                            .getNumberInstance(Locale.KOREA)
+                            .format(cartItem.product.price) + "원",
                         fontSize = 16.sp
                     )
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 26.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        IconButton(
-                            onClick = onMinusClick,
-                        ) {
-                            Icon(
-                                imageVector = IconPack.Remove,
-                                contentDescription = "$name minus"
-                            )
-                        }
-                        Text(
-                            text = count.toString(),
-                            modifier = Modifier.padding(horizontal = 8.dp)
-                        )
-                        IconButton(
-                            onClick = onPlusClick,
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Add,
-                                contentDescription = "$name plus"
-                            )
-                        }
-                    }
+                    ProductQuantity(
+                        name = cartItem.product.name,
+                        count = cartItem.count,
+                        onPlusClick = onPlusClick,
+                        onMinusClick = onMinusClick
+                    )
                 }
 
             }
@@ -153,11 +127,18 @@ fun CartProductItem(
 @Preview
 @Composable
 private fun CartProductPreview() {
-    CartProductItem(name = "iPhone 15 Pro Max",
-        imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
-        price = 1900000,
+    var count by remember { mutableIntStateOf(1) }
+    CartProductItem(
+        cartItem = CartItem(
+            product = Product(
+                name = "iPhone 15 Pro Max",
+                imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
+                price = count.toLong() * 1_900_000,
+            ),
+            count = count
+        ),
         onCloseClick = {},
-        onMinusClick = {},
-        onPlusClick = {},
-        count = 1)
+        onMinusClick = { if(count > 1) count-- },
+        onPlusClick = { count++ },
+    )
 }

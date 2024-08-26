@@ -7,21 +7,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
-import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToIndex
-import nextstep.shoppingcart.model.Cart.totalPrice
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class CartScreenTest {
+class ShoppingCartScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -55,9 +53,7 @@ class CartScreenTest {
     fun 담긴_상품_가격의_총합이_노출된다() {
         // given
         composeTestRule.setContent {
-            val cartItems by remember {
-                mutableStateOf(fakeCartRepository.cartItems)
-            }
+            val cartItems = fakeCartRepository.cartItems
             ShoppingCartScreen(
                 cartItem = cartItems,
                 onItemCloseClick = {},

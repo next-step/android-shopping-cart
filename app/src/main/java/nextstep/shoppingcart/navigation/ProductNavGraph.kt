@@ -14,7 +14,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import nextstep.shoppingcart.MainScreen
+import nextstep.shoppingcart.ProductListScreen
 import nextstep.shoppingcart.ProductDetailScreen
 import nextstep.shoppingcart.ShoppingCartScreen
 import nextstep.shoppingcart.model.Cart
@@ -39,14 +39,22 @@ fun ProductNavGraph(navController: NavHostController) {
         composable(
             route = "main"
         ) {
-            MainScreen(
+            var cartItems by remember { mutableStateOf(Cart.items) }
+            val onAddToCart = remember { { item: Product -> cartItems = Cart.addOne(item) } }
+            val onItemMinusClick = remember { { item: Product -> cartItems = Cart.removeOne(item) } }
+            val onItemPlusClick = remember { { item: Product -> cartItems = Cart.addOne(item) } }
+            ProductListScreen(
+                cartItems = cartItems,
                 onItemClick = { product ->
                     navController.navigate(
                         route = "productDetail",
                         args = bundleOf("product" to product)
                     )
                 },
-                onCartClick = { navController.navigate("shoppingCart") }
+                onCartClick = { navController.navigate("shoppingCart") },
+                onAddCartClick = { onItemPlusClick(it) },
+                onItemIncrease = { onItemPlusClick(it) },
+                onItemDecrease = { onItemMinusClick(it) }
             )
         }
         composable(route = "productDetail") { backStackEntry ->

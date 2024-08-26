@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
+import nextstep.shoppingcart.component.common.ProductImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -14,11 +15,11 @@ fun ProductDetailImage(
     name: String,
     modifier: Modifier = Modifier,
 ) {
-    AsyncImage(
-        modifier = Modifier
+    ProductImage(
+        modifier = modifier
             .fillMaxWidth()
             .aspectRatio(1f),
-        model = imageUrl,
+        imageUrl = imageUrl,
         contentDescription = name,
     )
 }
