@@ -2,6 +2,7 @@ package nextstep.shoppingcart.view.cart
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -72,13 +73,11 @@ fun CartScreen(
                 color = ButtonDefaults.buttonColors(Blue50),
                 modifier = Modifier.fillMaxWidth()
             )
-        }
+        },
+        modifier = Modifier.fillMaxSize(),
     ) { innerPadding ->
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            color = MaterialTheme.colorScheme.background
+        Box(
+            modifier = Modifier.padding(innerPadding)
         ) {
             CartList(
                 cartItems = items,

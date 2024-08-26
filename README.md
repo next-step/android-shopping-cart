@@ -1,4 +1,10 @@
-_# android-shopping-cart
+# android-shopping-cart
+
+## Step4 구현 목록
+- [x] Step3 피드백 반영
+
+## Step4 진행 중 의식의 흐름
+-
 
 ## Step3 구현 목록
 
@@ -77,4 +83,4 @@ _# android-shopping-cart
   의도하지 않은 패딩으로 원하는 UI가 그려지지 않습니다. 그래서 별도의 Modifier를 내부에서 적용하도록 수정했습니다.
 - 각_상품의_이미지와_텍스트가_표시된다() 테스트 코드에서 val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREAN)
   .format(product.price)라는 로직을 사용하고 싶지 않습니다. 이런 경우엔 어떻게 테스트하면 좋을까요? ProductItemTest에서 검증된 사항이기도 하지만
-  리스트로 보여주는 부분에서 또 확인해야 안정감이 들 것 같아서 시도해 보았습니다._
+  리스트로 보여주는 부분에서 또 확인해야 안정감이 들 것 같아서 시도해 보았습니다.

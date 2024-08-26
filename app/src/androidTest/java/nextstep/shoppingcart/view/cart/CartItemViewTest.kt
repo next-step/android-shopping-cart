@@ -27,7 +27,7 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = "1",
+                    itemCount = 1,
                     onItemRemoved = {},
                     onAddClicked = {},
                     onRemoveClicked = {}
@@ -44,7 +44,7 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = "1",
+                    itemCount = 1,
                     onItemRemoved = {},
                     onAddClicked = {},
                     onRemoveClicked = {}
@@ -61,7 +61,7 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = "1",
+                    itemCount = 1,
                     onItemRemoved = {},
                     onAddClicked = {},
                     onRemoveClicked = {}
@@ -78,7 +78,7 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = "1",
+                    itemCount = 1,
                     onItemRemoved = {},
                     onAddClicked = {},
                     onRemoveClicked = {}
@@ -96,7 +96,7 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = "1",
+                    itemCount = 1,
                     onItemRemoved = { isRemoveClicked = true },
                     onAddClicked = {},
                     onRemoveClicked = {}
@@ -115,7 +115,7 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = "1",
+                    itemCount = 1,
                     onItemRemoved = {},
                     onAddClicked = { isAddClicked = true },
                     onRemoveClicked = {}
@@ -134,7 +134,7 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = "1",
+                    itemCount = 1,
                     onItemRemoved = {},
                     onAddClicked = {},
                     onRemoveClicked = { isRemoveOneClicked = true }

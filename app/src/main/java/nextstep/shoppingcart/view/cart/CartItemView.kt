@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -26,12 +25,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
@@ -40,26 +41,23 @@ import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 @Composable
 fun CartItemView(
     product: Product,
-    itemCount: String,
+    itemCount: Int,
     onItemRemoved: () -> Unit,
     onAddClicked: () -> Unit,
     onRemoveClicked: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
+        modifier = Modifier
             .border(
-                dimensionResource(id = R.dimen.cart_item_border),
-                Color.Gray,
+                width = dimensionResource(id = R.dimen.cart_item_border),
+                color = Color.Gray,
                 shape = RoundedCornerShape(dimensionResource(id = R.dimen.cart_item_border_corner_radius))
             )
             .padding(dimensionResource(id = R.dimen.cart_item_border_padding)),
     ) {
         Column {
             Row(
-                modifier = modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -69,6 +67,7 @@ fun CartItemView(
                     fontSize = dimensionResource(id = R.dimen.cart_item_name_size).value.sp,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
+                    modifier = Modifier.weight(1f),
                 )
                 IconButton(
                     onClick = {
@@ -77,12 +76,12 @@ fun CartItemView(
                 ) {
                     Icon(
                         Icons.Filled.Close,
-                        contentDescription = stringResource(id = R.string.cart_delete)
+                        contentDescription = stringResource(id = R.string.cart_delete) + " ${product.name}"
                     )
                 }
             }
             Row(
-                modifier = modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom
             ) {
@@ -90,7 +89,7 @@ fun CartItemView(
                     model = product.imageUrl,
                     contentDescription = product.name,
                     loading = placeholder(R.drawable.ic_launcher_foreground),
-                    modifier = modifier.size(dimensionResource(id = R.dimen.cart_item_image_size))
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.cart_item_image_size))
                 )
 
                 Column(
@@ -102,10 +101,9 @@ fun CartItemView(
                             product.price
                         ),
                         fontSize = dimensionResource(id = R.dimen.cart_item_price_size).value.sp,
-                        modifier = modifier
                     )
                     Row(
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxWidth()
                             .padding(
                                 start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),
@@ -118,27 +116,26 @@ fun CartItemView(
                             onClick = {
                                 onRemoveClicked()
                             },
-                            modifier = modifier.size(dimensionResource(id = R.dimen.cart_item_add_icon_size)),
+                            modifier = Modifier.size(dimensionResource(id = R.dimen.cart_item_add_icon_size)),
                         ) {
                             Icon(
                                 Icons.Filled.KeyboardArrowDown,
-                                contentDescription = stringResource(id = R.string.cart_remove)
+                                contentDescription = stringResource(id = R.string.cart_remove) + " ${product.name}"
                             )
                         }
                         Text(
-                            text = itemCount,
+                            text = itemCount.toString(),
                             fontSize = dimensionResource(id = R.dimen.cart_item_quantity_text_size).value.sp,
-                            modifier = modifier
                         )
                         IconButton(
                             onClick = {
                                 onAddClicked()
                             },
-                            modifier = modifier.size(dimensionResource(id = R.dimen.cart_item_remove_icon_size)),
+                            modifier = Modifier.size(dimensionResource(id = R.dimen.cart_item_remove_icon_size)),
                         ) {
                             Icon(
                                 Icons.Filled.KeyboardArrowUp,
-                                contentDescription = stringResource(id = R.string.cart_add)
+                                contentDescription = stringResource(id = R.string.cart_add) + " ${product.name}"
                             )
                         }
                     }
@@ -150,14 +147,26 @@ fun CartItemView(
 
 @Preview(showBackground = true)
 @Composable
-private fun CartItemPreview() {
+private fun CartItemPreview(
+    @PreviewParameter(CartItemPreviewParameterProvider::class) cartItem: CartItem
+) {
     ShoppingCartTheme {
         CartItemView(
-            product = dummyProducts.first(),
-            itemCount = "1",
+            product = cartItem.product,
+            itemCount = cartItem.count,
             onItemRemoved = {},
             onAddClicked = {},
             onRemoveClicked = {}
         )
     }
+}
+
+class CartItemPreviewParameterProvider : PreviewParameterProvider<CartItem> {
+    override val values = sequenceOf(
+        CartItem(product = dummyProducts.first(), count = 1),
+        CartItem(
+            product = Product("[최고심] 이건이름이매우긴상품이야살사람은사고말사람은말어", "http://www.abc.com", 1_000_000),
+            count = 100
+        ),
+    )
 }
