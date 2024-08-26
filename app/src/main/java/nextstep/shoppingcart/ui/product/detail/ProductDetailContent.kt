@@ -33,24 +33,11 @@ fun ProductDetailContent(
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        AsyncImage(
-            model = product.imageUrl,
-            contentDescription = product.name,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1.0f)
+        ProductImage(
+            imageUrl = product.imageUrl,
+            description = product.name
         )
-        Text(
-            text = product.name,
-            fontSize = 24.sp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(18.dp),
-            maxLines = 1,
-            fontWeight = Bold,
-            color = BlackContent,
-            overflow = TextOverflow.Ellipsis
-        )
+        ProductTitle(product.name)
         Divider(color = LineColor)
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -64,11 +51,7 @@ fun ProductDetailContent(
                 fontSize = 20.sp,
                 color = BlackContent
             )
-            Text(
-                text = "${formatPrice(product.price)}원",
-                fontSize = 20.sp,
-                color = BlackContent
-            )
+            ProductPrice(product.price)
         }
 
         Spacer(modifier = Modifier.weight(1.0f, true))
@@ -79,6 +62,41 @@ fun ProductDetailContent(
                 .fillMaxWidth()
         )
     }
+}
+
+@Composable
+fun ProductImage(imageUrl: String, description: String) {
+    AsyncImage(
+        model = imageUrl,
+        contentDescription = description,
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1.0f)
+    )
+}
+
+@Composable
+fun ProductTitle(name: String) {
+    Text(
+        text = name,
+        fontSize = 24.sp,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(18.dp),
+        maxLines = 1,
+        fontWeight = Bold,
+        color = BlackContent,
+        overflow = TextOverflow.Ellipsis
+    )
+}
+
+@Composable
+fun ProductPrice(price: Long) {
+    Text(
+        text = "${formatPrice(price)}원",
+        fontSize = 20.sp,
+        color = BlackContent
+    )
 }
 
 @Preview(showBackground = true)
