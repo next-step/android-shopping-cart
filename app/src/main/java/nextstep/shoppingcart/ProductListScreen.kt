@@ -67,7 +67,20 @@ fun ProductListScreen(
 @Composable
 private fun ProductListScreenPreview() {
     ProductListScreen(
-        cartItems = listOf(CartItem(dummyProducts.first(), 1)),
+        cartItems = listOf(
+            CartItem(
+                dummyProducts.first(),
+                1
+            ),
+            CartItem(
+                dummyProducts[1],
+                -30
+            ),
+            CartItem(
+                dummyProducts[2],
+                20
+            )
+        ),
         onItemClick = { _-> },
         onCartClick = {},
         onItemIncrease = {},
