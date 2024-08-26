@@ -27,7 +27,7 @@ fun BoxScope.ProductDetailCartAddButton(
 ) {
     TextButton(
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(54.dp)
             .align(Alignment.BottomCenter),

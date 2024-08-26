@@ -28,7 +28,7 @@ fun ProductItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .width(156.dp)
             .clickable(onClick = onItemClick)
     ) {

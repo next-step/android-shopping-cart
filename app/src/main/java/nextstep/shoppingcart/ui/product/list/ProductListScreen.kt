@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,7 +36,9 @@ import nextstep.shoppingcart.ui.theme.BlackTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductListScreen() {
+fun ProductListScreen(
+    modifier: Modifier = Modifier
+) {
     val context = LocalContext.current
 
     Scaffold(
@@ -63,6 +66,7 @@ fun ProductListScreen() {
                 }
             )
         },
+        modifier = modifier.fillMaxSize()
     ) { innerPadding ->
 
         LazyVerticalGrid(

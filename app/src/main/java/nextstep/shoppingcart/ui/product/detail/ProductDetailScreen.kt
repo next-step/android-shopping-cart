@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.product.detail
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -53,6 +54,7 @@ fun ProductDetailScreen(
                 }
             )
         },
+        modifier = modifier.fillMaxSize(),
         content = { paddingValues ->
             ProductDetailContent(
                 modifier = Modifier.padding(paddingValues),
