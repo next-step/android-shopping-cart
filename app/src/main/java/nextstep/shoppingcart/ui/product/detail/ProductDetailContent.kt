@@ -52,10 +52,7 @@ fun ProductDetailContent(
                 color = BlackContent,
                 overflow = TextOverflow.Ellipsis
             )
-            Divider(
-                color = LineColor,
-                thickness = 1.dp,
-            )
+            Divider(color = LineColor)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
