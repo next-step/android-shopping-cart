@@ -73,7 +73,10 @@ fun ProductDetailContent(
             }
         }
         ProductDetailCartAddButton(
-            onClick = onClickShoppingCartAddButton
+            onClick = onClickShoppingCartAddButton,
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
         )
     }
 }

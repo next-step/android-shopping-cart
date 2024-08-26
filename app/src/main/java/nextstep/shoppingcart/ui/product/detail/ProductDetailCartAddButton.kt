@@ -21,16 +21,13 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.ui.theme.Blue50
 
 @Composable
-fun BoxScope.ProductDetailCartAddButton(
+fun ProductDetailCartAddButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     TextButton(
         onClick = onClick,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(54.dp)
-            .align(Alignment.BottomCenter),
+        modifier = modifier.height(54.dp),
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors(
             contentColor = Color.White,
