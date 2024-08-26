@@ -21,7 +21,7 @@ fun ProductDetailPriceText(productPrice: Int, modifier: Modifier = Modifier) {
             .padding(dimensionResource(id = R.dimen.product_detail_name_padding)),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = "금액")
+        Text(text = stringResource(id = R.string.product_detail_price))
         Text(
             text = stringResource(id = R.string.product_item_currency_unit, productPrice),
             fontSize = dimensionResource(id = R.dimen.product_detail_price_size).value.sp,

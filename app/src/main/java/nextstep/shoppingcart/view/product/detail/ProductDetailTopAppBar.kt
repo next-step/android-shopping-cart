@@ -16,18 +16,14 @@ import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailAppBar() {
-    val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
-
+fun ProductDetailAppBar(onBack: () -> Unit) {
     TopAppBar(
         title = {
             Text(text = stringResource(id = R.string.product_detail_app_bar_title))
         },
         navigationIcon = {
             IconButton(
-                onClick = {
-                    onBackPressedDispatcher?.onBackPressed()
-                }
+                onClick = onBack
             ) {
                 Icon(
                     Icons.Filled.ArrowBack,
@@ -42,6 +38,6 @@ fun ProductDetailAppBar() {
 @Composable
 private fun ProductDetailAppBarPreview() {
     ShoppingCartTheme {
-        ProductDetailAppBar()
+        ProductDetailAppBar {}
     }
 }

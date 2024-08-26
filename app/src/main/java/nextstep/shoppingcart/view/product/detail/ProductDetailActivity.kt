@@ -1,9 +1,11 @@
 package nextstep.shoppingcart.view.product.detail
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.view.cart.CartActivity
 
 class ProductDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,7 +18,14 @@ class ProductDetailActivity : ComponentActivity() {
         val product = Product(productName, productImageUrl, productPrice)
 
         setContent {
-            ProductDetailScreen(product)
+            ProductDetailScreen(
+                product = product,
+                onNavigateToCart = {
+                    val intent = Intent(this, CartActivity::class.java)
+                    startActivity(intent)
+                },
+                onBack = { finish() },
+            )
         }
     }
 }

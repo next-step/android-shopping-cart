@@ -8,4 +8,10 @@
     <string name="product_detail_app_bar_title">상품 상세</string>
     <string name="product_detail_app_bar_back_icon_description">Detail Back</string>
     <string name="product_detail_button">장바구니 담기</string>
+    <string name="product_detail_price">금액</string>
+    <string name="cart_delete">Cart Delete</string>
+    <string name="cart_subtract">Cart Subtract</string>
+    <string name="cart_add">Cart Add</string>
+    <string name="cart_remove">Cart Remove</string>
+    <string name="cart_button">주문하기(%,d원)</string>
 </resources>

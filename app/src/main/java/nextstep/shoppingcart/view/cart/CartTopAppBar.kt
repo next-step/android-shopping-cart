@@ -16,18 +16,14 @@ import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartTopAppBar() {
-    val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
-
+fun CartTopAppBar(onBack: () -> Unit) {
     TopAppBar(
         title = {
             Text(text = stringResource(id = R.string.cart_app_bar_title))
         },
         navigationIcon = {
             IconButton(
-                onClick = {
-                    onBackPressedDispatcher?.onBackPressed()
-                }
+                onClick = onBack
             ) {
                 Icon(
                     Icons.Filled.ArrowBack,
@@ -42,6 +38,6 @@ fun CartTopAppBar() {
 @Composable
 private fun CartTopAppBarPreview() {
     ShoppingCartTheme {
-        CartTopAppBar()
+        CartTopAppBar(onBack = {})
     }
 }
