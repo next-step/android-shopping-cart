@@ -14,7 +14,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import nextstep.shoppingcart.MainScreen
+import nextstep.shoppingcart.ProductListScreen
 import nextstep.shoppingcart.ProductDetailScreen
 import nextstep.shoppingcart.ShoppingCartScreen
 import nextstep.shoppingcart.model.Cart
@@ -43,7 +43,7 @@ fun ProductNavGraph(navController: NavHostController) {
             val onAddToCart = remember { { item: Product -> cartItems = Cart.addOne(item) } }
             val onItemMinusClick = remember { { item: Product -> cartItems = Cart.removeOne(item) } }
             val onItemPlusClick = remember { { item: Product -> cartItems = Cart.addOne(item) } }
-            MainScreen(
+            ProductListScreen(
                 cartItems = cartItems,
                 onItemClick = { product ->
                     navController.navigate(

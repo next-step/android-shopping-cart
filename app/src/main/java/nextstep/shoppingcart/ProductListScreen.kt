@@ -18,7 +18,7 @@ import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
 
 @Composable
-fun MainScreen(
+fun ProductListScreen(
     cartItems: List<CartItem>,
     onItemClick: (product: Product) -> Unit,
     onAddCartClick: (product: Product) -> Unit,
@@ -65,8 +65,8 @@ fun MainScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun MainScreenPreview() {
-    MainScreen(
+private fun ProductListScreenPreview() {
+    ProductListScreen(
         cartItems = listOf(CartItem(dummyProducts.first(), 1)),
         onItemClick = { _-> },
         onCartClick = {},
