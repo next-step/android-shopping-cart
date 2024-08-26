@@ -1,9 +1,9 @@
 package nextstep.shoppingcart.ui.product.detail
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,53 +30,53 @@ fun ProductDetailContent(
     onClickShoppingCartAddButton: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Box(
+    Column(
         modifier = modifier.fillMaxSize()
     ) {
-        Column {
-            AsyncImage(
-                model = product.imageUrl,
-                contentDescription = product.name,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1.0f)
+        AsyncImage(
+            model = product.imageUrl,
+            contentDescription = product.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1.0f)
+        )
+        Text(
+            text = product.name,
+            fontSize = 24.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(18.dp),
+            maxLines = 1,
+            fontWeight = Bold,
+            color = BlackContent,
+            overflow = TextOverflow.Ellipsis
+        )
+        Divider(color = LineColor)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(18.dp),
+        ) {
+            Text(
+                text = "금액",
+                fontSize = 20.sp,
+                color = BlackContent
             )
             Text(
-                text = product.name,
-                fontSize = 24.sp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(18.dp),
-                maxLines = 1,
-                fontWeight = Bold,
-                color = BlackContent,
-                overflow = TextOverflow.Ellipsis
+                text = "${formatPrice(product.price)}원",
+                fontSize = 20.sp,
+                color = BlackContent
             )
-            Divider(color = LineColor)
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(18.dp),
-            ) {
-                Text(
-                    text = "금액",
-                    fontSize = 20.sp,
-                    color = BlackContent
-                )
-                Text(
-                    text = "${formatPrice(product.price)}원",
-                    fontSize = 20.sp,
-                    color = BlackContent
-                )
-            }
         }
+
+        Spacer(modifier = Modifier.weight(1.0f, true))
+
         ProductDetailCartAddButton(
             onClick = onClickShoppingCartAddButton,
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.BottomCenter)
         )
     }
 }
