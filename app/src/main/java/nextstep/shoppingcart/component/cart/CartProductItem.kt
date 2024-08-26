@@ -18,6 +18,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -28,6 +33,7 @@ import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.common.ProductImage
 import nextstep.shoppingcart.component.common.ProductQuantity
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import java.text.NumberFormat
@@ -121,17 +127,18 @@ fun CartProductItem(
 @Preview
 @Composable
 private fun CartProductPreview() {
+    var count by remember { mutableIntStateOf(1) }
     CartProductItem(
         cartItem = CartItem(
             product = Product(
                 name = "iPhone 15 Pro Max",
                 imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
-                price = 1900000,
+                price = count.toLong() * 1_900_000,
             ),
-            count = 1
+            count = count
         ),
         onCloseClick = {},
-        onMinusClick = {},
-        onPlusClick = {},
+        onMinusClick = { if(count > 1) count-- },
+        onPlusClick = { count++ },
     )
 }
