@@ -15,6 +15,11 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -111,18 +116,19 @@ fun ProductItem(
 @Composable
 private fun ProductItemPreview() {
     ShoppingCartTheme {
+        var count by remember { mutableIntStateOf(1) }
         ProductItem(
             cartItem = CartItem(
                 product = Product(
                     name = "iPhone 15 Pro Max",
                     imageUrl = "https://img.danawa.com/prod_img/500000/334/189/img/28189334_1.jpg",
-                    price = 1_900_000,
+                    price = 1_900_000
                 ),
-                count = 1
+                count = count
             ),
-            onAddToCart = {},
-            onIncrease = {},
-            onDecrease = {},
+            onAddToCart = { count++ },
+            onIncrease = { count++ },
+            onDecrease = { if(count > 0) count-- },
         )
     }
 }
