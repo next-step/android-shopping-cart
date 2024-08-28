@@ -4,12 +4,10 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.common.model.Cart
-import nextstep.shoppingcart.common.model.dummyProducts
+import nextstep.shoppingcart.common.model.Product
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.text.NumberFormat
-import java.util.Locale
 
 internal class CartScreenTest {
 
@@ -21,13 +19,29 @@ internal class CartScreenTest {
     @Before
     fun setup() {
         cart.clear()
-        dummyProducts.forEach {
-            cart.addOne(it)
-        }
     }
 
     @Test
     fun 장바구니에서_모든_품목들의_합이_표기된다() {
+        cart.apply {
+            addOne(
+                product = Product(
+                    id = "",
+                    name = "",
+                    price = 1000,
+                    imageUrl = null,
+                )
+            )
+            addOne(
+                product = Product(
+                    id = "",
+                    name = "",
+                    price = 1000,
+                    imageUrl = null,
+                )
+            )
+        }
+
         // given
         composeTestRule.setContent {
             CartScreen(
@@ -41,9 +55,7 @@ internal class CartScreenTest {
         }
 
         // then
-        val expectedTotalPrice =
-            NumberFormat.getNumberInstance(Locale.KOREA).format(cart.totalPrice)
-
+        val expectedTotalPrice = "2,000"
         composeTestRule
             .onNodeWithText("주문하기(${expectedTotalPrice}원)")
             .assertIsDisplayed()

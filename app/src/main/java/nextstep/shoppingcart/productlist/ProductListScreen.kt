@@ -13,9 +13,11 @@ import java.util.UUID
 
 @Composable
 internal fun ProductListScreen(
-    products: List<Product>,
-    onProductClick: (Product) -> Unit,
+    products: List<ProductListScreenItem>,
+    onProductClick: (ProductListScreenItem) -> Unit,
     onCartClick: () -> Unit,
+    onCountAddClick: (ProductListScreenItem) -> Unit,
+    onCountMinusClick: (ProductListScreenItem) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -24,7 +26,11 @@ internal fun ProductListScreen(
         },
         content = { paddingValues ->
             ProductListScreenContent(
-                paddingValues, products, onProductClick
+                paddingValues = paddingValues,
+                products = products,
+                onProductClick = onProductClick,
+                onCountAddClick = onCountAddClick,
+                onCountMinusClick = onCountMinusClick,
             )
         }
     )
@@ -36,15 +42,21 @@ private fun ProductListScreenPreview() {
     MaterialTheme {
         ProductListScreen(
             products = List(20) {
-                Product(
-                    id = UUID.randomUUID().toString(),
-                    name = "PET보틀 - 정사각형 모양",
-                    10000,
-                    imageUrl = "https://picsum.photos/500"
+                ProductListScreenItem(
+                    product = Product(
+                        id = UUID.randomUUID().toString(),
+                        name = "PET보틀 - 정사각형 모양",
+                        10000,
+                        imageUrl = "https://picsum.photos/500"
+                    ),
+                    count = 0,
                 )
-            }.distinctBy { it.id },
+
+            }.distinctBy { it.product.id },
             onProductClick = {},
             onCartClick = {},
+            onCountAddClick = {},
+            onCountMinusClick = {},
         )
     }
 }

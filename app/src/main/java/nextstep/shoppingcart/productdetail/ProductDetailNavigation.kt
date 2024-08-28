@@ -4,7 +4,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import nextstep.shoppingcart.common.model.Cart
 import nextstep.shoppingcart.common.model.Product
 
 internal fun NavController.navigateProductDetail(product: Product) {
@@ -18,12 +17,9 @@ internal fun NavGraphBuilder.productDetailNavGraph(
         typeMap = ProductDetailRoute.typeMap
     ) { navBackStackEntry ->
         val product = navBackStackEntry.toRoute<ProductDetailRoute>().product
-        ProductDetailScreen(
+
+        ProductDetailRoute(
             product = product,
-            onAddToCartClick = {
-                Cart.addOne(product)
-                onBackClick()
-            },
             onBackClick = onBackClick,
         )
     }

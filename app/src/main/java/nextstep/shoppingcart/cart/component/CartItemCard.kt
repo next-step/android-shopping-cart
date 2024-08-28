@@ -2,10 +2,8 @@ package nextstep.shoppingcart.cart.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -26,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.common.component.ProductCard
+import nextstep.shoppingcart.common.component.QuantitySelector
 import nextstep.shoppingcart.common.model.CartItem
 import nextstep.shoppingcart.common.model.Product
 import nextstep.shoppingcart.common.model.dummyProducts
@@ -124,54 +123,6 @@ private fun CartItemDetails(
                 onCountAddClick = onCountAddClick,
                 onCountMinusClick = onCountMinusClick,
                 modifier = Modifier.fillMaxWidth()
-            )
-        }
-    }
-}
-
-@Composable
-private fun QuantitySelector(
-    count: Int,
-    onCountAddClick: () -> Unit,
-    onCountMinusClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        QuantityAdjustButton(
-            text = "-",
-            onClick = onCountMinusClick
-        )
-        Text(
-            text = count.toString(),
-            style = NextStepTheme.typography.roboto22N
-        )
-        QuantityAdjustButton(
-            text = "+",
-            onClick = onCountAddClick
-        )
-    }
-}
-
-@Composable
-private fun QuantityAdjustButton(
-    text: String,
-    onClick: () -> Unit,
-) {
-    Surface(
-        modifier = Modifier.size(48.dp),
-        onClick = onClick,
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = text,
-                style = NextStepTheme.typography.roboto22B,
             )
         }
     }
