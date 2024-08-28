@@ -25,9 +25,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ProductListScreen(sampleProductList) {
-                        startActivity(Intent(this, CartActivity::class.java))
-                    }
+                    ProductListScreen(
+                        productList = sampleProductList,
+                        onClickCartIcon = { startActivity(Intent(this, CartActivity::class.java)) }
+                    )
                 }
             }
         }

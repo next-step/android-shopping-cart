@@ -24,7 +24,6 @@ fun CartScreen(
     modifier: Modifier,
     items: List<CartItem>,
     totalPrice: Int,
-    onItemsChange: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -50,9 +49,9 @@ fun CartScreen(
                 CartCard(
                     cartItem = item,
                     modifier = modifier,
-                    onMinusClick = { (Cart.removeOne(it)) },
-                    onPlusClick = { (Cart.addOne(it)) },
-                    onRemoveClick = { (Cart.removeAll(it.product)) }
+                    onMinusClick = { Cart.removeOne(it) },
+                    onPlusClick = { Cart.addOne(it) },
+                    onRemoveClick = { Cart.removeAll(it.product) }
                 )
             }
         }
@@ -63,5 +62,5 @@ fun CartScreen(
 @Composable
 private fun CardScreenPreview() {
     Cart.addOne(product = SampleProductList.sampleProductList[0])
-    CartScreen(Modifier, mutableListOf(), 0, {})
+    CartScreen(Modifier, mutableListOf(), 0)
 }

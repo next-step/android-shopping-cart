@@ -28,7 +28,6 @@ class CartActivity : ComponentActivity() {
                         modifier = Modifier,
                         items = items,
                         totalPrice = totalPrice,
-                        onItemsChange = { }
                     )
                 }
             }
