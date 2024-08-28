@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -115,6 +116,7 @@ fun CartItemHeader(
         )
         Image(
             modifier = Modifier
+                .testTag("CartItemClose")
                 .size(24.dp)
                 .clickable {
                     onCloseClick()
@@ -164,6 +166,8 @@ fun CartItemCount(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
+            modifier = Modifier
+                .testTag("CartItemMinus"),
             onClick = onMinusClick
         ) {
             Text(
@@ -182,6 +186,8 @@ fun CartItemCount(
             textAlign = TextAlign.Center
         )
         IconButton(
+            modifier = Modifier
+                .testTag("CartItemPlus"),
             onClick = onPlusClick
         ) {
             Text(
