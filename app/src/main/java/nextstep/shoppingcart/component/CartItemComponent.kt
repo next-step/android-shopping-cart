@@ -42,9 +42,9 @@ import nextstep.shoppingcart.ui.theme.Gray10
 @Composable
 fun CartItemComponent(
     cartItem: CartItem,
-    onClickPlus : () -> Unit,
-    onClickMinus : () -> Unit,
-    onClickClose : () -> Unit,
+    onPlusClick : () -> Unit,
+    onMinusClick : () -> Unit,
+    onCloseClick : () -> Unit,
     modifier: Modifier = Modifier,
     shape: Shape = RoundedCornerShape(4.dp),
     borderStroke: BorderStroke = BorderStroke(width = 1.dp, color = Gray10)
@@ -59,7 +59,7 @@ fun CartItemComponent(
     ) {
         CartItemHeader(
             product = cartItem.product,
-            onClickClose = onClickClose
+            onCloseClick = onCloseClick
         )
         Row(
             modifier = Modifier.padding(top = 6.dp),
@@ -82,8 +82,8 @@ fun CartItemComponent(
                 )
                 CartItemCount(
                     count = cartItem.count,
-                    onClickPlus = onClickPlus,
-                    onClickMinus = onClickMinus
+                    onPlusClick = onPlusClick,
+                    onMinusClick = onMinusClick
                 )
             }
         }
@@ -95,7 +95,7 @@ fun CartItemComponent(
 @Composable
 fun CartItemHeader(
     product: Product,
-    onClickClose : () -> Unit,
+    onCloseClick : () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -117,7 +117,7 @@ fun CartItemHeader(
             modifier = Modifier
                 .size(24.dp)
                 .clickable {
-                    onClickClose()
+                    onCloseClick()
                 },
             imageVector = Icons.Default.Close,
             contentDescription = "close"
@@ -155,8 +155,8 @@ fun CartItemPrice(
 @Composable
 fun CartItemCount(
     count: Int,
-    onClickPlus : () -> Unit,
-    onClickMinus : () -> Unit,
+    onPlusClick : () -> Unit,
+    onMinusClick : () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -164,7 +164,7 @@ fun CartItemCount(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = onClickMinus
+            onClick = onMinusClick
         ) {
             Text(
                 text = "-",
@@ -182,7 +182,7 @@ fun CartItemCount(
             textAlign = TextAlign.Center
         )
         IconButton(
-            onClick = onClickPlus
+            onClick = onPlusClick
         ) {
             Text(
                 text = "+",
@@ -202,8 +202,8 @@ private fun Preview1() {
             product = productList.get(0),
             count = 0
         ),
-        onClickPlus = {},
-        onClickMinus = {},
-        onClickClose = {}
+        onPlusClick = {},
+        onMinusClick = {},
+        onCloseClick = {}
     )
 }
