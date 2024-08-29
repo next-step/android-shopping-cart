@@ -13,9 +13,6 @@ class ProductDetailScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    // 테스트 해야할 항목
-    // 이미지 노출 - 테스트 방법이 뭘까? - 후순위
-
     // 상품 금액 노출
     @Test
     fun 전달받은_상품_데이터의_가격_정보가_숫자_포멧팅되어_노출한다() {
@@ -33,9 +30,7 @@ class ProductDetailScreenTest {
         }
 
         // then : 상품의 가격정보가 숫자 포멧팅되어 노출되어야한다.
-        composeTestRule
-            .onNodeWithText("12,984원")
-            .assertExists()
+        composeTestRule.onNodeWithText("12,984원").assertExists()
     }
 
     @Test
@@ -54,9 +49,7 @@ class ProductDetailScreenTest {
         }
 
         // then : 상품의 가격정보가 숫자 포멧팅되어 노출되어야한다.
-        composeTestRule
-            .onNodeWithText("12984원")
-            .assertDoesNotExist()
+        composeTestRule.onNodeWithText("12984원").assertDoesNotExist()
     }
 
     // 상품 명 노출
@@ -76,10 +69,6 @@ class ProductDetailScreenTest {
         }
 
         // then :
-        composeTestRule
-            .onNodeWithText("라때")
-            .assertExists()
+        composeTestRule.onNodeWithText("라때").assertExists()
     }
-
-
 }

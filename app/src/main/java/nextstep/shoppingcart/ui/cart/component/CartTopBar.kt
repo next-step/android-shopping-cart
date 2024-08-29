@@ -26,7 +26,7 @@ fun CartTopBar(modifier: Modifier = Modifier, onClickBackIcon: () -> Unit) {
             .fillMaxWidth(),
         title = {
             Text(
-                modifier = modifier.fillMaxWidth(),
+                modifier = Modifier,
                 text = stringResource(id = R.string.text_shopping_cart_title),
                 textAlign = TextAlign.Left
             )
@@ -45,5 +45,8 @@ fun CartTopBar(modifier: Modifier = Modifier, onClickBackIcon: () -> Unit) {
 @Preview
 @Composable
 private fun CartTopBarPreview() {
-    CartTopBar(Modifier, {})
+    CartTopBar(
+        modifier = Modifier,
+        onClickBackIcon = {}
+    )
 }

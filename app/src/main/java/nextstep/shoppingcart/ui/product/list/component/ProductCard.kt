@@ -9,33 +9,36 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.ColorPainter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.cart.Cart
+import nextstep.shoppingcart.data.cart.Cart.items
 
 @Composable
 fun ProductCard(product: Product, onClickCard: () -> Unit) {
+
+    val cartItems = items
+
     Column(
         modifier = Modifier
             .clickable(onClick = onClickCard)
             .fillMaxSize()
     ) {
-        AsyncImage(
-            modifier = Modifier.fillMaxWidth(),
-            model = product.imgUrl,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            placeholder = ColorPainter(Color.White)
+        InteractiveProductImage(
+            product = product,
+            items = cartItems,
+            modifier = Modifier,
+            onClickPlus = { Cart.addOne(product) },
+            onClickMinus = { Cart.removeOne(product) },
+            onClickFab = { Cart.addOne(product) }
         )
+
         Text(
             modifier = Modifier
                 .padding(vertical = 3.dp)

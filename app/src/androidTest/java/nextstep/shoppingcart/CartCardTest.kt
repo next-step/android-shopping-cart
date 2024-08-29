@@ -26,7 +26,13 @@ class CartCardTest {
 
         // when : 상품 카드를 노출한다.
         composeTestRule.setContent {
-            CartCard(Modifier, CartItem(product,1),{},{},{})
+            CartCard(
+                cartItem = CartItem(product, 1),
+                modifier = Modifier,
+                onMinusClick = {},
+                onPlusClick = {},
+                onRemoveClick = {}
+            )
         }
 
         // then : 상품의 이름이 노출되어야한다.
@@ -47,7 +53,13 @@ class CartCardTest {
 
         // when : 상품 카드를 노출한다.
         composeTestRule.setContent {
-            CartCard(Modifier, CartItem(product,1),{},{},{})
+            CartCard(
+                cartItem = CartItem(product, 1),
+                modifier = Modifier,
+                onMinusClick = {},
+                onPlusClick = {},
+                onRemoveClick = {}
+            )
         }
 
         // then : 상품의 가격이 노출되어야한다.
