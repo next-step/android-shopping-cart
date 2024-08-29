@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.component.ShoppingItem
+import nextstep.shoppingcart.component.ShoppingItemComponent
 import nextstep.shoppingcart.component.topbar.ShoppingListTopBar
 import nextstep.shoppingcart.model.productList
 
@@ -48,7 +48,7 @@ fun ShoppingListScreen(
             items(
                 items = productList
             ) { product ->
-                ShoppingItem(
+                ShoppingItemComponent(
                     product = product,
                     onClick = {
                         onClickDetail(product.id)
