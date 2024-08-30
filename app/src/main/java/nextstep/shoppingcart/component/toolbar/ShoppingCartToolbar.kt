@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,19 +23,25 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShoppingCartToolbar(
-	modifier: Modifier = Modifier
+	modifier: Modifier = Modifier,
+	actionIconClicked: () -> Unit = {}
 ) {
-	CenterAlignedTopAppBar(
-		modifier = modifier,
+	CenterAlignedTopAppBar(modifier = modifier,
 		title = {
 			Text(text = stringResource(id = R.string.product_list))
 		},
 		actions = {
-			Icon(
-				modifier = Modifier.padding(12.dp),
-				painter = painterResource(id = R.drawable.shopping_cart),
-				contentDescription = "장바구니 버튼"
-			)
+			IconButton(
+				modifier = Modifier.padding(12.dp, end = 0.dp),
+				onClick = {
+					actionIconClicked()
+				}
+			) {
+				Icon(
+					painter = painterResource(id = R.drawable.shopping_cart),
+					contentDescription = "장바구니 버튼"
+				)
+			}
 		}
 	)
 }
