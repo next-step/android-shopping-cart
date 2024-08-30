@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.util.getLocalCurrencyFormat
 import java.util.Locale
 
@@ -73,12 +74,14 @@ fun ShoppingItem(
 )
 @Composable
 fun ShoppingItemPreview() {
-    ShoppingItem(
-        modifier = Modifier
-            .wrapContentWidth()
-            .wrapContentHeight(),
-        productThumbnail = "https://picsum.photos/200/300",
-        productTitle = "상품명",
-        productPrice = 100000,
-    )
+    ShoppingCartTheme {
+        ShoppingItem(
+            modifier = Modifier
+                .wrapContentWidth()
+                .wrapContentHeight(),
+            productThumbnail = "https://picsum.photos/200/300",
+            productTitle = "상품명",
+            productPrice = 100000,
+        )
+    }
 }
