@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,8 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.Utils.formatPrice
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.component.PriceLabel
 import nextstep.shoppingcart.ui.theme.BlackContent
 import nextstep.shoppingcart.ui.theme.LineColor
 
@@ -92,10 +93,10 @@ fun ProductTitle(name: String) {
 
 @Composable
 fun ProductPrice(price: Long) {
-    Text(
-        text = "${formatPrice(price)}원",
-        fontSize = 20.sp,
-        color = BlackContent
+    PriceLabel(
+        price = price,
+        modifier = Modifier.wrapContentSize(),
+        textUnit = 20.sp
     )
 }
 

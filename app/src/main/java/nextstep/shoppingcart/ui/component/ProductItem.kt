@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.style.TextAlign
@@ -16,7 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.Utils.formatPrice
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.data.dummyProducts
 import nextstep.shoppingcart.ui.theme.BlackContent
@@ -48,12 +48,9 @@ fun ProductItem(
             color = BlackContent,
             overflow = TextOverflow.Ellipsis
         )
-        Text(
-            text = "${formatPrice(product.price)}원",
-            fontSize = 16.sp,
-            textAlign = TextAlign.Start,
-            modifier = Modifier.fillMaxWidth().padding(top = 2.dp),
-            color = BlackContent
+        PriceLabel(
+            price = product.price,
+            modifier =Modifier.fillMaxWidth().padding(top = 2.dp),
         )
     }
 }

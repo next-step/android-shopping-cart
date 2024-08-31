@@ -43,12 +43,11 @@ fun ProductDetailScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { onClickBackButton() }) {
+                    IconButton(onClick = onClickBackButton) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "뒤로 가기",
-                            modifier = Modifier
-                                .size(48.dp)
+                            modifier = Modifier.size(48.dp)
                         )
                     }
                 }
