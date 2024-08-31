@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.data.productList
-import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
+import nextstep.shoppingcart.ui.cart.CartActivity
 import nextstep.shoppingcart.ui.component.ProductItem
 import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity
 import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity.Companion.EXTRA_PRODUCT
@@ -94,7 +94,7 @@ fun ProductListScreen(
 }
 
 private fun moveToShoppingCartScreen(context: Context) {
-    val intent = Intent(context, ShoppingCartActivity::class.java)
+    val intent = Intent(context, CartActivity::class.java)
     context.startActivity(intent)
 }
 

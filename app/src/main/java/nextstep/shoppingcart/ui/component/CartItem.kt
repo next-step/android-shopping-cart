@@ -30,13 +30,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.data.model.CartItem
+import nextstep.shoppingcart.data.model.CartItemInfo
 import nextstep.shoppingcart.data.model.Product
 import nextstep.shoppingcart.ui.theme.Grey10
 
 @Composable
 fun ShoppingCartItem(
-    cartItem: CartItem,
+    cartItemInfo: CartItemInfo,
     onClickCloseButton: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -66,7 +66,7 @@ fun ShoppingCartItem(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = cartItem.product.name,
+                    text = cartItemInfo.product.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                     maxLines = 1
@@ -87,8 +87,8 @@ fun ShoppingCartItem(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 AsyncImage(
-                    model = cartItem.product.imageUrl,
-                    contentDescription = cartItem.product.name,
+                    model = cartItemInfo.product.imageUrl,
+                    contentDescription = cartItemInfo.product.name,
                     modifier = Modifier
                         .size(width = 136.dp, height = 84.dp)
                         .clip(RoundedCornerShape(8.dp))
@@ -98,7 +98,7 @@ fun ShoppingCartItem(
                     verticalArrangement = Arrangement.Bottom
                 ) {
                     PriceLabel(
-                        price = cartItem.product.price,
+                        price = cartItemInfo.product.price,
                         modifier = Modifier.align(Alignment.End)
                     )
                     Row(
@@ -107,7 +107,7 @@ fun ShoppingCartItem(
                     ) {
                         CounterButton("−", {})
                         Text(
-                            text = "${cartItem.count}",
+                            text = "${cartItemInfo.count}",
                             modifier = Modifier
                                 .fillMaxHeight()
                                 .wrapContentSize(Alignment.Center)
@@ -142,7 +142,7 @@ fun CounterButton(title: String, onClick: () -> Unit) {
 @Composable
 fun ShoppingCartItemPreview() {
     ShoppingCartItem(
-        cartItem = CartItem(
+        cartItemInfo = CartItemInfo(
             product = Product(name = "[든든] 동원 스위트콘", imageUrl = "", price = 99800),
             count = 1
         ), {}

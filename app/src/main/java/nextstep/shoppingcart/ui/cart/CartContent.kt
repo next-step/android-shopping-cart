@@ -11,14 +11,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Cart
-import nextstep.shoppingcart.data.model.CartItem
+import nextstep.shoppingcart.data.model.CartItemInfo
 import nextstep.shoppingcart.data.model.Product
 import nextstep.shoppingcart.ui.component.BlueBottomButton
 import nextstep.shoppingcart.ui.component.ShoppingCartItem
 
 @Composable
 fun ShoppingCartContent(
-    cartList: List<CartItem>,
+    cartList: List<CartItemInfo>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -30,7 +30,7 @@ fun ShoppingCartContent(
         ) {
             items(cartList) { item ->
                 ShoppingCartItem(
-                    cartItem = item,
+                    cartItemInfo = item,
                     onClickCloseButton = {},
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -50,11 +50,11 @@ fun ShoppingCartContent(
 fun ShoppingCartContentPreview() {
     ShoppingCartContent(
         cartList = listOf(
-            CartItem(
+            CartItemInfo(
                 product = Product("[든든] 동원 스위트콘", "", 99800),
                 count = 1
             ),
-            CartItem(
+            CartItemInfo(
                 product = Product("PET보틀-원형(500ml)", "", 84400),
                 count = 1
             )

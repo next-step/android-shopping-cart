@@ -11,7 +11,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.model.Product
-import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
+import nextstep.shoppingcart.ui.cart.CartActivity
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {
@@ -39,7 +39,7 @@ class ProductDetailActivity : ComponentActivity() {
                         onClickBackButton = { finish() },
                         onClickCartAddButton = {
                             Cart.addOne(product)
-                            startActivity(Intent(this, ShoppingCartActivity::class.java))
+                            startActivity(Intent(this, CartActivity::class.java))
                         }
                     )
                 }
