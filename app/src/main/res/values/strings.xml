@@ -2,5 +2,5 @@
     <string name="app_name">Shopping Cart</string>
 
     <string name="price_format">%,d원</string>
-    <string name="price_format_button_label">주문하기(%,d)원</string>
+    <string name="price_format_button_label">주문하기(%,d원)</string>
 </resources>

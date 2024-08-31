@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -39,7 +40,7 @@ fun CartContent(
                     onClickIncrease = onClickIncrease,
                     onClickDecrease = onClickDecrease,
                     onClickDelete = onClickDelete,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.testTag("cartItem").fillMaxWidth()
                 )
             }
         }
@@ -47,7 +48,9 @@ fun CartContent(
         BlueBottomButton(
             label = stringResource(id = R.string.price_format_button_label, Cart.totalPrice),
             onClick = { },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .testTag("orderButton")
+                .fillMaxWidth()
         )
     }
 }

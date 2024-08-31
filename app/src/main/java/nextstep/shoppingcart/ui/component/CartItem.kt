@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -75,8 +76,10 @@ fun CartItem(
                     maxLines = 1
                 )
                 IconButton(
+                    modifier = Modifier
+                        .testTag("deleteButton")
+                        .size(24.dp),
                     onClick = { onClickDelete(cartItemInfo.product) },
-                    modifier = Modifier.size(24.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Close,
@@ -144,7 +147,7 @@ fun CounterButton(title: String, onClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun ShoppingCartItemPreview() {
-    val product =  Product(name = "[든든] 동원 스위트콘", imageUrl = "", price = 99800)
+    val product = Product(name = "[든든] 동원 스위트콘", imageUrl = "", price = 99800)
     CartItem(
         cartItemInfo = CartItemInfo(
             product = product,
