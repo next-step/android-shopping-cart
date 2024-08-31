@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.data.model
+package nextstep.shoppingcart.model
 
 data class CartItemInfo(
     val product: Product,

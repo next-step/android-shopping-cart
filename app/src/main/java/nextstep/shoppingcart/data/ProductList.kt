@@ -1,6 +1,6 @@
 package nextstep.shoppingcart.data
 
-import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.model.Product
 
 val productList: List<Product> = listOf(
     Product(

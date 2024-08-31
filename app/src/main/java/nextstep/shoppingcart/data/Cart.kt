@@ -1,7 +1,7 @@
 package nextstep.shoppingcart.data
 
-import nextstep.shoppingcart.data.model.CartItemInfo
-import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.model.CartItemInfo
+import nextstep.shoppingcart.model.Product
 
 object Cart {
     private val _items: MutableList<CartItemInfo> = mutableListOf()

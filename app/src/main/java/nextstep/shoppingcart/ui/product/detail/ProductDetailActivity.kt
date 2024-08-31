@@ -10,7 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import nextstep.shoppingcart.data.Cart
-import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.cart.CartActivity
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 

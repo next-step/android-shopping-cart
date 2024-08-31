@@ -24,7 +24,7 @@ import nextstep.shoppingcart.data.Cart
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShoppingCartScreen(
-    onClickBackButton: () -> Unit,
+    onClickBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -42,13 +42,11 @@ fun ShoppingCartScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { onClickBackButton() }) {
+                    IconButton(onClick = { onClickBack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "뒤로 가기",
-                            modifier = Modifier
-                                .size(48.dp)
-                                .clickable { onClickBackButton() }
+                            modifier = Modifier.size(48.dp)
                         )
                     }
                 }

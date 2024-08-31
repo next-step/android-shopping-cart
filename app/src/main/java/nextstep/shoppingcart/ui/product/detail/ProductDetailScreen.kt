@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.model.Product
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

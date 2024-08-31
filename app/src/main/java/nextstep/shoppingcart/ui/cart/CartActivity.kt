@@ -19,7 +19,7 @@ class CartActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     ShoppingCartScreen(
-                        onClickBackButton = { finish() }
+                        onClickBack = { finish() },
                     )
                 }
             }
