@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.component.BlueBottomButton
 import nextstep.shoppingcart.ui.component.PriceLabel
 import nextstep.shoppingcart.ui.theme.BlackContent
 import nextstep.shoppingcart.ui.theme.LineColor
@@ -57,10 +58,10 @@ fun ProductDetailContent(
 
         Spacer(modifier = Modifier.weight(1.0f, true))
 
-        ProductDetailCartAddButton(
+        BlueBottomButton(
+            label = "장바구니 담기",
             onClick = onClickShoppingCartAddButton,
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
