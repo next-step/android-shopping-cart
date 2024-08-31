@@ -18,14 +18,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.model.Product
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductDetailScreen(
     product: Product,
     onClickBackButton: () -> Unit,
-    onClickShoppingCartAddButton: () -> Unit,
+    onClickCartAddButton: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -58,7 +58,7 @@ fun ProductDetailScreen(
             ProductDetailContent(
                 modifier = Modifier.padding(paddingValues),
                 product = product,
-                onClickShoppingCartAddButton = onClickShoppingCartAddButton
+                onClickCartAddButton = onClickCartAddButton
             )
         }
     )

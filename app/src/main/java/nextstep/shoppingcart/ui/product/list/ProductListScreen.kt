@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,7 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.data.productList
 import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.component.ProductItem
 import nextstep.shoppingcart.ui.product.detail.ProductDetailActivity
@@ -78,7 +78,7 @@ fun ProductListScreen(
                 .padding(vertical = 13.dp, horizontal = 18.dp)
                 .padding(innerPadding)
         ) {
-            items(dummyProducts) { product ->
+            items(productList) { product ->
                 ProductItem(
                     product = product,
                     onItemClick = {

@@ -1,11 +1,7 @@
 package nextstep.shoppingcart.data
 
-data class CartItem(
-    val product: Product,
-    val count: Int,
-) {
-    val totalPrice: Long get() = product.price * count
-}
+import nextstep.shoppingcart.data.model.CartItem
+import nextstep.shoppingcart.data.model.Product
 
 object Cart {
     private val _items: MutableList<CartItem> = mutableListOf()

@@ -11,14 +11,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Cart
-import nextstep.shoppingcart.data.CartItem
-import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.model.CartItem
+import nextstep.shoppingcart.data.model.Product
 import nextstep.shoppingcart.ui.component.BlueBottomButton
 import nextstep.shoppingcart.ui.component.ShoppingCartItem
 
 @Composable
 fun ShoppingCartContent(
-    cartItem: List<CartItem>,
+    cartList: List<CartItem>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -28,7 +28,7 @@ fun ShoppingCartContent(
         LazyColumn(
             modifier = Modifier.weight(1f)
         ) {
-            items(cartItem) { item ->
+            items(cartList) { item ->
                 ShoppingCartItem(
                     cartItem = item,
                     onClickCloseButton = {},
@@ -49,7 +49,7 @@ fun ShoppingCartContent(
 @Composable
 fun ShoppingCartContentPreview() {
     ShoppingCartContent(
-        cartItem = listOf(
+        cartList = listOf(
             CartItem(
                 product = Product("[든든] 동원 스위트콘", "", 99800),
                 count = 1

@@ -8,17 +8,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.data.productList
 import nextstep.shoppingcart.ui.theme.BlackContent
 
 @Composable
@@ -58,7 +56,7 @@ fun ProductItem(
 @Preview(showBackground = true)
 @Composable
 fun ProductItemPreview() {
-    ProductItem(dummyProducts[0], {})
+    ProductItem(productList[0], {})
 }
 
 @Preview(showBackground = true)

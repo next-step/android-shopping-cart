@@ -57,7 +57,7 @@ fun ShoppingCartScreen(
         modifier = modifier.fillMaxSize(),
         content = { paddingValues ->
             ShoppingCartContent(
-                cartItem = Cart.items,
+                cartList = Cart.items,
                 modifier = Modifier.padding(paddingValues)
             )
         }
