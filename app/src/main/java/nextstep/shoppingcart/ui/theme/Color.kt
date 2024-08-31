@@ -16,3 +16,5 @@ val BlackContent = Color(0xFF333333)
 val LineColor = Color(0xFFAAAAAA)
 
 val Blue50 = Color(0xFF2196F3)
+
+val Grey10 = Color(0xFFAAAAAA)

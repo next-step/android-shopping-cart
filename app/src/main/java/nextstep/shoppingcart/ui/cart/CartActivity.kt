@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
-class ShoppingCartActivity : ComponentActivity() {
+class CartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -19,7 +19,7 @@ class ShoppingCartActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     ShoppingCartScreen(
-                        onClickBackButton = { finish() }
+                        onClickBack = { finish() },
                     )
                 }
             }

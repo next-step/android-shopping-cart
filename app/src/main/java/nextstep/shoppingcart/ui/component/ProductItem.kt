@@ -10,15 +10,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.Utils.formatPrice
-import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.data.dummyProducts
+import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.data.productList
 import nextstep.shoppingcart.ui.theme.BlackContent
 
 @Composable
@@ -28,7 +26,7 @@ fun ProductItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .width(156.dp)
             .clickable(onClick = onItemClick)
     ) {
@@ -48,12 +46,9 @@ fun ProductItem(
             color = BlackContent,
             overflow = TextOverflow.Ellipsis
         )
-        Text(
-            text = "${formatPrice(product.price)}원",
-            fontSize = 16.sp,
-            textAlign = TextAlign.Start,
-            modifier = Modifier.fillMaxWidth().padding(top = 2.dp),
-            color = BlackContent
+        PriceLabel(
+            price = product.price,
+            modifier =Modifier.fillMaxWidth().padding(top = 2.dp),
         )
     }
 }
@@ -61,7 +56,7 @@ fun ProductItem(
 @Preview(showBackground = true)
 @Composable
 fun ProductItemPreview() {
-    ProductItem(dummyProducts[0], {})
+    ProductItem(productList[0], {})
 }
 
 @Preview(showBackground = true)
