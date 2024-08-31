@@ -9,7 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.data.model.Product
 import nextstep.shoppingcart.ui.cart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -36,9 +37,9 @@ class ProductDetailActivity : ComponentActivity() {
                     ProductDetailScreen(
                         product = product,
                         onClickBackButton = { finish() },
-                        onClickShoppingCartAddButton = {
-                            val intent = Intent(this, ShoppingCartActivity::class.java)
-                            startActivity(intent)
+                        onClickCartAddButton = {
+                            Cart.addOne(product)
+                            startActivity(Intent(this, ShoppingCartActivity::class.java))
                         }
                     )
                 }
