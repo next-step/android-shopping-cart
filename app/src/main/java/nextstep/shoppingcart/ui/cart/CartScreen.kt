@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.ui.cart
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,6 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,6 +30,10 @@ fun ShoppingCartScreen(
     onClickBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var cartList by remember {
+        mutableStateOf(Cart.items)
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -54,9 +61,12 @@ fun ShoppingCartScreen(
         },
         modifier = modifier.fillMaxSize(),
         content = { paddingValues ->
-            ShoppingCartContent(
-                cartList = Cart.items,
-                modifier = Modifier.padding(paddingValues)
+            CartContent(
+                cartList = cartList,
+                onClickIncrease = { product -> cartList = Cart.addOne(product) },
+                onClickDecrease = { product -> cartList = Cart.removeOne(product) },
+                onClickDelete = { product -> cartList = Cart.removeAll(product) },
+                modifier = Modifier.padding(paddingValues),
             )
         }
     )

@@ -30,14 +30,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.data.model.CartItemInfo
-import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.model.CartItemInfo
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.Grey10
 
 @Composable
-fun ShoppingCartItem(
+fun CartItem(
     cartItemInfo: CartItemInfo,
-    onClickCloseButton: () -> Unit,
+    onClickIncrease: (Product) -> Unit,
+    onClickDecrease: (Product) -> Unit,
+    onClickDelete: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -72,7 +75,7 @@ fun ShoppingCartItem(
                     maxLines = 1
                 )
                 IconButton(
-                    onClick = onClickCloseButton,
+                    onClick = { onClickDelete(cartItemInfo.product) },
                     modifier = Modifier.size(24.dp)
                 ) {
                     Icon(
@@ -105,14 +108,14 @@ fun ShoppingCartItem(
                         modifier = Modifier.height(42.dp),
                         verticalAlignment = Alignment.Bottom
                     ) {
-                        CounterButton("−", {})
+                        CounterButton("−") { onClickDecrease(cartItemInfo.product) }
                         Text(
                             text = "${cartItemInfo.count}",
                             modifier = Modifier
                                 .fillMaxHeight()
                                 .wrapContentSize(Alignment.Center)
                         )
-                        CounterButton("+", {})
+                        CounterButton("+") { onClickIncrease(cartItemInfo.product) }
                     }
                 }
             }
@@ -141,10 +144,14 @@ fun CounterButton(title: String, onClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun ShoppingCartItemPreview() {
-    ShoppingCartItem(
+    val product =  Product(name = "[든든] 동원 스위트콘", imageUrl = "", price = 99800)
+    CartItem(
         cartItemInfo = CartItemInfo(
-            product = Product(name = "[든든] 동원 스위트콘", imageUrl = "", price = 99800),
+            product = product,
             count = 1
-        ), {}
+        ),
+        onClickIncrease = { },
+        onClickDecrease = { },
+        onClickDelete = { }
     )
 }
