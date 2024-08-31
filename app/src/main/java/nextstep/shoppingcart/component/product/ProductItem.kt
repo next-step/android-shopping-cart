@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.component.item
+package nextstep.shoppingcart.component.product
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
