@@ -8,7 +8,6 @@ import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
