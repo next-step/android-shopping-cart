@@ -103,7 +103,7 @@ fun ShoppingCartScreen(
 }
 
 @Composable
-fun ColumnScope.CartList(
+fun CartList(
     cartItemList: List<CartItem>,
     onPlusClick : (CartItem) -> Unit,
     onMinusClick : (CartItem) -> Unit,
