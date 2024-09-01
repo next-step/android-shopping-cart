@@ -19,6 +19,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -73,7 +77,9 @@ fun CartItemComponent(
             )
 
             Column(
-                modifier = Modifier.fillMaxWidth().height(84.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(84.dp),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.End
             ) {
@@ -204,10 +210,33 @@ private fun Preview1() {
     CartItemComponent(
         cartItem = CartItem(
             product = productList.get(0),
-            count = 0
+            count = 1
         ),
-        onPlusClick = {},
-        onMinusClick = {},
-        onCloseClick = {}
+        onPlusClick = {  },
+        onMinusClick = { },
+        onCloseClick = {  }
     )
 }
+
+
+@Preview(name = "CartItemPreviewWithInteractiveMode")
+@Composable
+private fun Preview2() {
+    var count by remember { mutableStateOf(1) }
+    if(count >= 1){
+        CartItemComponent(
+            cartItem = CartItem(
+                product = productList.get(0),
+                count = count
+            ),
+            onPlusClick = { count++ },
+            onMinusClick = { count-- },
+            onCloseClick = { count = 0 }
+        )
+    }else {
+        Text(text = "Reset", modifier = Modifier.clickable { count = 1 })
+    }
+}
+
+
+
