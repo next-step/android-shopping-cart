@@ -67,7 +67,7 @@ fun NavGraphBuilder.shoppingCartScreen(
         route = SHOPPING_CART_ROUTE
     ) {
         ShoppingCartScreen(
-            onClickBack = onClickBack
+            onBackClick = onClickBack
         )
     }
 }

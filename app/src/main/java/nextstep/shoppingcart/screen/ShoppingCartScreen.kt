@@ -32,7 +32,7 @@ import nextstep.shoppingcart.util.Cart
 
 @Composable
 fun ShoppingCartScreen(
-    onClickBack: () -> Unit,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var cartItemList by remember { mutableStateOf(Cart.items) }
@@ -50,7 +50,7 @@ fun ShoppingCartScreen(
         onCloseClick = { cartItem ->
             cartItemList =  Cart.removeAll(product = cartItem.product)
         },
-        onBackClick = onClickBack,
+        onBackClick = onBackClick,
         modifier = modifier
     )
 }
@@ -142,7 +142,7 @@ fun ColumnScope.CartList(
 private fun Preview1() {
     ShoppingCartTheme {
         ShoppingCartScreen(
-            onClickBack = {}
+            onBackClick = {}
         )
     }
 }
