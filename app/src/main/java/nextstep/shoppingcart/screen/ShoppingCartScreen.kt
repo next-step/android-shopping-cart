@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,9 +38,9 @@ fun ShoppingCartScreen() {
 @Composable
 fun ShoppingCartScreen(
 	modifier: Modifier = Modifier,
-){
+) {
 	Scaffold(
-		modifier =  modifier,
+		modifier = modifier,
 		topBar = {
 			ShoppingCartToolbar()
 		}
@@ -61,7 +61,7 @@ fun ShoppingCartScreen(
 @Preview
 @Composable
 fun ShoppingCartScreenPreview() {
-	ShoppingCartTheme{
+	ShoppingCartTheme {
 		ShoppingCartScreen(
 			modifier = Modifier.background(Color.White)
 		)
