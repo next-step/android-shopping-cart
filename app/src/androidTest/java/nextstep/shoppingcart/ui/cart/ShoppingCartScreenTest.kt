@@ -59,7 +59,7 @@ internal class CartScreenTest {
 
         // then : "테스트 상품" 이름의 상품이 없어짐
         composeTestRule
-            .onNodeWithTag("테스트 상품")
+            .onNodeWithTag("cartItem")
             .assertDoesNotExist()
     }
 
