@@ -27,6 +27,7 @@ import nextstep.shoppingcart.component.CartItemComponent
 import nextstep.shoppingcart.component.ShoppingTextButton
 import nextstep.shoppingcart.component.topbar.ShoppingTopBarWithBack
 import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.productList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.util.Cart
 
@@ -140,6 +141,33 @@ fun CartList(
 @Preview(name = "ShoppingCartScreen")
 @Composable
 private fun Preview1() {
+    ShoppingCartTheme {
+        ShoppingCartScreen(
+            onBackClick = {}
+        )
+    }
+}
+
+@Preview(name = "ShoppingCartScreenWithAnItem")
+@Composable
+private fun Preview2() {
+    Cart.cleatCart()
+    Cart.addOne(productList[1])
+    ShoppingCartTheme {
+        ShoppingCartScreen(
+            onBackClick = {}
+        )
+    }
+}
+
+@Preview(name = "ShoppingCartScreenWithItems")
+@Composable
+private fun Preview3() {
+    Cart.cleatCart()
+    Cart.addOne(productList[2])
+    Cart.addOne(productList[3])
+    Cart.addOne(productList[4])
+    Cart.addOne(productList[5])
     ShoppingCartTheme {
         ShoppingCartScreen(
             onBackClick = {}
