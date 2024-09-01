@@ -29,7 +29,7 @@ const val SHOPPING_ITEM_THUMBNAIL_RATIO = 0.98f / 1f
  * 쇼핑카트 상품목록 상품 아이템
  **/
 @Composable
-fun ShoppingItem(
+fun ProductItem(
     modifier: Modifier = Modifier,
     productThumbnail:String,
     productTitle: String,
@@ -73,9 +73,9 @@ fun ShoppingItem(
     backgroundColor = 0xFFFFFFFFL
 )
 @Composable
-fun ShoppingItemPreview() {
+fun ProductItemPreview() {
     ShoppingCartTheme {
-        ShoppingItem(
+        ProductItem(
             modifier = Modifier
                 .wrapContentWidth()
                 .wrapContentHeight(),
