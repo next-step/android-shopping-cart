@@ -29,11 +29,9 @@ internal class CartScreenTest {
     @Test
     fun 담긴_상품_가격의_총합이_노출된다() {
         //GIVEN
-        val cartItemList by mutableStateOf(
-            listOf(
-                CartItem(product = productList[0], count = 1),
-                CartItem(product = productList[1], count = 2)
-            )
+        val cartItemList = listOf(
+            CartItem(product = productList[0], count = 1),
+            CartItem(product = productList[1], count = 2)
         )
         composeTestRule.setContent {
             ShoppingCartScreen(
