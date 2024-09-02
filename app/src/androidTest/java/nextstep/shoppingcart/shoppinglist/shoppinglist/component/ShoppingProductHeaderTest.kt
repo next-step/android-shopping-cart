@@ -67,7 +67,7 @@ class ShoppingProductHeaderTest {
         // then:
         composeTestRule.onNodeWithContentDescription("ShoppingProductAddButton")
             .assertIsDisplayed()
-        composeTestRule.onNodeWithContentDescription("ShoppingCountBarTotalCount")
+        composeTestRule.onNodeWithContentDescription("shoppingCountBarDescription")
             .assertIsNotDisplayed()
     }
 }

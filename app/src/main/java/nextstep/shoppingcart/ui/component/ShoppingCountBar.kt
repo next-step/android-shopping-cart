@@ -29,6 +29,7 @@ import nextstep.shoppingcart.R.drawable.ic_add
 import nextstep.shoppingcart.R.drawable.ic_subtract
 import nextstep.shoppingcart.R.string.shopping_count_bar_add_icon
 import nextstep.shoppingcart.R.string.shopping_count_bar_count
+import nextstep.shoppingcart.R.string.shopping_count_bar_description
 import nextstep.shoppingcart.R.string.shopping_count_bar_subtract_icon
 import nextstep.shoppingcart.R.string.shopping_count_bar_total_count
 import nextstep.shoppingcart.ui.theme.RobotoRegular
@@ -43,11 +44,14 @@ fun ShoppingCountBar(
     val shoppingCountBarSubtractIcon = stringResource(id = shopping_count_bar_subtract_icon)
     val shoppingCountBarAddIcon = stringResource(id = shopping_count_bar_add_icon)
     val shoppingCountBarTotalCount = stringResource(id = shopping_count_bar_total_count)
+    val shoppingCountBar = stringResource(shopping_count_bar_description)
 
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.background(color = Color.White),
+        modifier = modifier
+            .background(color = Color.White)
+            .semantics { contentDescription = shoppingCountBar },
     ) {
         Icon(
             painter = painterResource(id = ic_subtract),

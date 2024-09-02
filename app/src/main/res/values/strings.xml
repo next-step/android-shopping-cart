@@ -22,4 +22,5 @@
     <string name="shopping_cart_item_sum">ShoppingCartItemSum</string>
     <string name="shopping_product_add_button">ShoppingProductAddButton</string>
     <string name="shopping_product_add_button_description">shoppingProductAddButtonDescription</string>
+    <string name="shopping_count_bar_description">shoppingCountBarDescription</string>
 </resources>
