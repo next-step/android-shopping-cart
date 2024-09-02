@@ -61,11 +61,6 @@ fun ShoppingListItem(
         )
         Text(
             text = stringResource(id = shopping_item_price_format, product.price),
-            modifier = Modifier.padding(
-                start = 4.dp,
-                bottom = 4.dp,
-                end = 86.dp,
-            ),
             color = Color.Black,
             fontSize = 16.sp,
             fontFamily = RobotoRegular,
