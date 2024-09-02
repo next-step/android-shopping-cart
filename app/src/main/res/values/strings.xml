@@ -12,12 +12,15 @@
     <string name="shopping_detail_add_button">장바구니 담기</string>
     <string name="shopping_detail_product_price">금액</string>
     <string name="shopping_cart_title">장바구니</string>
-    <string name="shopping_cart_total_format">주문하기(%d)원</string>
-    <string name="shopping_item_price_format">%d원</string>
+    <string name="shopping_cart_total_format">주문하기(%,d)원</string>
+    <string name="shopping_item_price_format">%,d원</string>
     <string name="shopping_cart_item_header_close_button">ShoppingCartItemHeaderCloseButton</string>
     <string name="shopping_count_bar_subtract_icon">ShoppingCountBarSubtractIcon</string>
     <string name="shopping_count_bar_add_icon">ShoppingCountBarAddIcon</string>
     <string name="shopping_count_bar_count">%d</string>
     <string name="shopping_count_bar_total_count">ShoppingCountBarTotalCount</string>
     <string name="shopping_cart_item_sum">ShoppingCartItemSum</string>
+    <string name="shopping_product_add_button">ShoppingProductAddButton</string>
+    <string name="shopping_product_add_button_description">shoppingProductAddButtonDescription</string>
+    <string name="shopping_count_bar_description">shoppingCountBarDescription</string>
 </resources>

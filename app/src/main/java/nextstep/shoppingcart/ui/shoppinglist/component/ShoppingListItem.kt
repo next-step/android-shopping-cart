@@ -1,10 +1,10 @@
 package nextstep.shoppingcart.ui.shoppinglist.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R.string.shopping_List_item_description
 import nextstep.shoppingcart.R.string.shopping_item_price_format
 import nextstep.shoppingcart.data.Products.dummyProducts
-import nextstep.shoppingcart.ui.component.ShoppingProductImage
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
 import nextstep.shoppingcart.ui.theme.RobotoBold
 import nextstep.shoppingcart.ui.theme.RobotoRegular
@@ -28,6 +27,9 @@ import nextstep.shoppingcart.ui.theme.RobotoRegular
 fun ShoppingListItem(
     product: Product,
     onItemClick: (productId: Long) -> Unit,
+    onPutClick: (productId: Long) -> Unit,
+    onAddClick: (productId: Long) -> Unit,
+    onSubtractClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val shoppingListItemDescription = stringResource(id = shopping_List_item_description)
@@ -38,9 +40,11 @@ fun ShoppingListItem(
             .clickable { onItemClick(product.id) }
             .semantics { contentDescription = shoppingListItemDescription },
     ) {
-        ShoppingProductImage(
+        ShoppingProductHeader(
             product = product,
-            modifier = Modifier.size(size = 156.dp),
+            onPutClick = onPutClick,
+            onAddClick = onAddClick,
+            onSubtractClick = onSubtractClick,
         )
         Text(
             text = product.name,
@@ -57,11 +61,6 @@ fun ShoppingListItem(
         )
         Text(
             text = stringResource(id = shopping_item_price_format, product.price),
-            modifier = Modifier.padding(
-                start = 4.dp,
-                bottom = 4.dp,
-                end = 86.dp,
-            ),
             color = Color.Black,
             fontSize = 16.sp,
             fontFamily = RobotoRegular,
@@ -76,5 +75,9 @@ private fun ShoppingListItemPreview() {
     ShoppingListItem(
         product = dummyProducts[0],
         onItemClick = {},
+        onPutClick = {},
+        onAddClick = {},
+        onSubtractClick = {},
+        modifier = Modifier.background(Color.White),
     )
 }

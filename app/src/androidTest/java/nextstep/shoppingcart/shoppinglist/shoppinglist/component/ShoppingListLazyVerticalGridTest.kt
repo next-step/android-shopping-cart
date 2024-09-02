@@ -34,6 +34,9 @@ class ShoppingListLazyVerticalGridTest {
                         ),
                     ),
                     onItemClick = {},
+                    onPutClick = {},
+                    onAddClick = {},
+                    onSubtractClick = {},
                 )
             }
         }
@@ -73,6 +76,9 @@ class ShoppingListLazyVerticalGridTest {
                         )
                     ),
                     onItemClick = {},
+                    onPutClick = {},
+                    onAddClick = {},
+                    onSubtractClick = {},
                 )
             }
         }

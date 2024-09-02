@@ -1,7 +1,7 @@
 package nextstep.shoppingcart.ui.shoppingcart.component
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -21,7 +21,8 @@ fun ShoppingCartLazyColumn(
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(space = 16.dp),
-        modifier = modifier.padding(horizontal = 18.dp),
+        contentPadding = PaddingValues(horizontal = 18.dp),
+        modifier = modifier,
     ) {
         items(
             items = cartProducts,

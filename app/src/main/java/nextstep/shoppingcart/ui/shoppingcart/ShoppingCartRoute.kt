@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import nextstep.shoppingcart.data.Cart.addOne
-import nextstep.shoppingcart.data.Cart.findProductById
+import nextstep.shoppingcart.data.Cart.findCartProductById
 import nextstep.shoppingcart.data.Cart.items
 import nextstep.shoppingcart.data.Cart.removeAll
 import nextstep.shoppingcart.data.Cart.removeOne
@@ -25,17 +25,17 @@ fun ShoppingCartRoute(
         total = total,
         onBackClick = onBackClick,
         onRemoveClick = { cartProductId ->
-            removeAll(findProductById(cartProductId).product)
+            removeAll(findCartProductById(cartProductId).product)
             cartProducts = items
             total = totalPrice
         },
         onAddClick = { cartProductId ->
-            addOne(findProductById(cartProductId).product)
+            addOne(findCartProductById(cartProductId).product)
             cartProducts = items
             total = totalPrice
         },
         onSubtractClick = { cartProductId ->
-            removeOne(findProductById(cartProductId).product)
+            removeOne(findCartProductById(cartProductId).product)
             cartProducts = items
             total = totalPrice
         },

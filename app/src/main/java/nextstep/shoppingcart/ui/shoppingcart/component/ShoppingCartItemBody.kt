@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +40,6 @@ fun ShoppingCartItemBody(
         )
         Column(
             horizontalAlignment = Alignment.End,
-            modifier = Modifier.wrapContentWidth(),
         ) {
             Spacer(modifier = Modifier.height(height = 18.dp))
             ShoppingCartItemSumText(sum)

@@ -17,6 +17,9 @@ fun ShoppingListScreen(
     products: List<Product>,
     onShoppingCartClick: () -> Unit,
     onItemClick: (productId: Long) -> Unit,
+    onPutClick: (productId: Long) -> Unit,
+    onAddClick: (productId: Long) -> Unit,
+    onSubtractClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
@@ -27,6 +30,9 @@ fun ShoppingListScreen(
         ShoppingListLazyVerticalGrid(
             products = products,
             onItemClick = onItemClick,
+            onPutClick = onPutClick,
+            onAddClick = onAddClick,
+            onSubtractClick = onSubtractClick,
         )
     }
 }
@@ -38,5 +44,8 @@ private fun ShoppingListScreenPreview() {
         products = dummyProducts,
         onShoppingCartClick = {},
         onItemClick = {},
+        onPutClick = {},
+        onAddClick = {},
+        onSubtractClick = {},
     )
 }

@@ -35,8 +35,6 @@ fun ShoppingCartItem(
 
     Column(
         modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
             .border(
                 width = 1.dp,
                 color = Color.Gray,
@@ -60,7 +58,7 @@ fun ShoppingCartItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ShoppingCartItemPreview() {
     ShoppingCartItem(

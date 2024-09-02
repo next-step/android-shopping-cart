@@ -205,7 +205,7 @@ class ShoppingCartScreenTest {
 
         // then:
         composeTestRule.onNodeWithContentDescription("ShoppingButton")
-            .assertTextEquals("주문하기(1100)원")
+            .assertTextEquals("주문하기(1,100)원")
     }
 
     @Test
@@ -256,7 +256,7 @@ class ShoppingCartScreenTest {
 
         // then:
         composeTestRule.onNodeWithContentDescription("ShoppingButton")
-            .assertTextEquals("주문하기(1200)원")
+            .assertTextEquals("주문하기(1,200)원")
     }
 
     @Test
@@ -305,7 +305,7 @@ class ShoppingCartScreenTest {
 
         // then:
         composeTestRule.onNodeWithContentDescription("ShoppingButton")
-            .assertTextEquals("주문하기(1000)원")
+            .assertTextEquals("주문하기(1,000)원")
     }
 
     @Test
