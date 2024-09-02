@@ -2,6 +2,7 @@ package nextstep.shoppingcart.ui.shoppinglist.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,7 +18,6 @@ import nextstep.shoppingcart.ui.shoppinglist.model.Product
 @Composable
 fun ShoppingProductHeader(
     product: Product,
-    isContained: Boolean,
     onAddClick: (productId: Long) -> Unit,
 ) {
     Box(contentAlignment = Alignment.BottomEnd) {
@@ -27,14 +27,18 @@ fun ShoppingProductHeader(
                 .size(size = 156.dp)
                 .background(Color.Black),
         )
-        when (isContained) {
+        when (product.containedCount > 0) {
             true -> ShoppingCountBar(
-                count = 0,
+                count = product.containedCount,
                 onSubtractClick = { /*TODO*/ },
-                onAddClick = { /*TODO*/ }
+                onAddClick = { /*TODO*/ },
+                modifier = Modifier.padding(horizontal = 16.dp)
             )
 
-            false -> ShoppingProductAddButton(onAddButton = { onAddClick(product.id) })
+            false -> ShoppingProductAddButton(
+                onAddButton = { onAddClick(product.id) },
+                modifier = Modifier.padding(12.dp),
+            )
         }
     }
 }
@@ -44,7 +48,6 @@ fun ShoppingProductHeader(
 private fun ShoppingProductHeaderPreview() {
     ShoppingProductHeader(
         product = dummyProducts[0],
-        isContained = false,
         onAddClick = {},
     )
 }

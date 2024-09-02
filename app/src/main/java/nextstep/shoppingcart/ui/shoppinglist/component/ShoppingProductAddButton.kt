@@ -1,10 +1,12 @@
 package nextstep.shoppingcart.ui.shoppinglist.component
 
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,13 +28,16 @@ fun ShoppingProductAddButton(
         stringResource(id = shopping_product_add_button_description)
     val shoppingProductAddButton = stringResource(id = shopping_product_add_button)
 
-    FloatingActionButton(
+    Button(
         onClick = onAddButton,
         shape = CircleShape,
-        contentColor = Color.Black,
-        containerColor = Color.White,
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.Black,
+            containerColor = Color.White,
+        ),
+        contentPadding = PaddingValues(0.dp),
         modifier = modifier
-            .padding(12.dp)
+            .size(42.dp)
             .semantics { contentDescription = shoppingProductAddButtonDescription },
     ) {
         Icon(
