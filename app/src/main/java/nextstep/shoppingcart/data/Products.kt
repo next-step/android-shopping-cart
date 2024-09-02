@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.data
 
+import nextstep.shoppingcart.data.Cart.items
 import nextstep.shoppingcart.ui.shoppinglist.model.Product
 
 object Products {
@@ -56,4 +57,9 @@ object Products {
 
     fun findProductById(productId: Long) =
         dummyProducts.find { it.id == productId } ?: throw IllegalArgumentException()
+
+    fun List<Product>.updateProducts(): List<Product> = map { product ->
+        items.find { it.product.id == product.id }
+            ?.let { product.copy(containedCount = it.count) } ?: product
+    }
 }

@@ -26,9 +26,10 @@ import nextstep.shoppingcart.ui.theme.RobotoRegular
 @Composable
 fun ShoppingListItem(
     product: Product,
-    isContained: Boolean,
     onItemClick: (productId: Long) -> Unit,
+    onPutClick: (productId: Long) -> Unit,
     onAddClick: (productId: Long) -> Unit,
+    onSubtractClick: (productId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val shoppingListItemDescription = stringResource(id = shopping_List_item_description)
@@ -39,7 +40,12 @@ fun ShoppingListItem(
             .clickable { onItemClick(product.id) }
             .semantics { contentDescription = shoppingListItemDescription },
     ) {
-        ShoppingProductHeader(product, isContained, onAddClick)
+        ShoppingProductHeader(
+            product = product,
+            onPutClick = onPutClick,
+            onAddClick = onAddClick,
+            onSubtractClick = onSubtractClick,
+        )
         Text(
             text = product.name,
             modifier = Modifier.padding(
@@ -73,9 +79,10 @@ fun ShoppingListItem(
 private fun ShoppingListItemPreview() {
     ShoppingListItem(
         product = dummyProducts[0],
-        isContained = false,
         onItemClick = {},
+        onPutClick = {},
         onAddClick = {},
+        onSubtractClick = {},
         modifier = Modifier.background(Color.White),
     )
 }

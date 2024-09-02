@@ -18,25 +18,30 @@ import nextstep.shoppingcart.ui.shoppinglist.model.Product
 @Composable
 fun ShoppingProductHeader(
     product: Product,
+    onPutClick: (productId: Long) -> Unit,
     onAddClick: (productId: Long) -> Unit,
+    onSubtractClick: (productId: Long) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    Box(contentAlignment = Alignment.BottomEnd) {
+    Box(
+        contentAlignment = Alignment.BottomEnd,
+    ) {
         ShoppingProductImage(
             product = product,
-            modifier = Modifier
+            modifier = modifier
                 .size(size = 156.dp)
                 .background(Color.Black),
         )
         when (product.containedCount > 0) {
             true -> ShoppingCountBar(
                 count = product.containedCount,
-                onSubtractClick = { /*TODO*/ },
-                onAddClick = { /*TODO*/ },
-                modifier = Modifier.padding(horizontal = 16.dp)
+                onSubtractClick = { onSubtractClick(product.id) },
+                onAddClick = { onAddClick(product.id) },
+                modifier = Modifier.align(Alignment.BottomCenter),
             )
 
             false -> ShoppingProductAddButton(
-                onAddButton = { onAddClick(product.id) },
+                onAddButton = { onPutClick(product.id) },
                 modifier = Modifier.padding(12.dp),
             )
         }
@@ -47,7 +52,9 @@ fun ShoppingProductHeader(
 @Composable
 private fun ShoppingProductHeaderPreview() {
     ShoppingProductHeader(
-        product = dummyProducts[0],
+        product = dummyProducts[0].copy(containedCount = 2),
+        onPutClick = {},
         onAddClick = {},
+        onSubtractClick = {},
     )
 }
