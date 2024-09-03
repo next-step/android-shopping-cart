@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,8 +31,8 @@ fun ShoppingCartScreen(
     onClickBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var cartList by remember {
-        mutableStateOf(Cart.items)
+    val cartList by remember {
+        derivedStateOf { Cart.items }
     }
 
     Scaffold(
@@ -63,9 +64,9 @@ fun ShoppingCartScreen(
         content = { paddingValues ->
             CartContent(
                 cartList = cartList,
-                onClickIncrease = { product -> cartList = Cart.addOne(product) },
-                onClickDecrease = { product -> cartList = Cart.removeOne(product) },
-                onClickDelete = { product -> cartList = Cart.removeAll(product) },
+                onClickIncrease = { product -> Cart.addOne(product) },
+                onClickDecrease = { product -> Cart.removeOne(product) },
+                onClickDelete = { product -> Cart.removeAll(product) },
                 modifier = Modifier.padding(paddingValues),
             )
         }

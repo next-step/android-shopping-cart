@@ -21,12 +21,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.productList
 import nextstep.shoppingcart.ui.cart.CartActivity
 import nextstep.shoppingcart.ui.component.ProductItem
@@ -40,7 +44,9 @@ fun ProductListScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-
+    val cartList by remember {
+        derivedStateOf { Cart.items }
+    }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -68,7 +74,6 @@ fun ProductListScreen(
         },
         modifier = modifier.fillMaxSize()
     ) { innerPadding ->
-
         LazyVerticalGrid(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -79,14 +84,23 @@ fun ProductListScreen(
                 .padding(innerPadding)
         ) {
             items(productList) { product ->
+                val productCount by remember(cartList, product) {
+                    derivedStateOf {
+                        cartList.find { it.product == product }?.count ?: 0
+                    }
+                }
+
                 ProductItem(
+                    count = productCount,
                     product = product,
                     onItemClick = {
                         val intent = Intent(context, ProductDetailActivity::class.java).apply {
                             putExtra(EXTRA_PRODUCT, product)
                         }
                         context.startActivity(intent)
-                    }
+                    },
+                    onClickIncrease = { Cart.addOne(product) },
+                    onClickDecrease = { Cart.removeOne(product) },
                 )
             }
         }
