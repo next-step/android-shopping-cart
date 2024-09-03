@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
@@ -26,6 +27,9 @@ fun ProductsScreen(onNavigateToProductDetail: (String, String, Int) -> Unit) {
                 dummyProducts,
                 onItemClick = { product ->
                     onNavigateToProductDetail(product.name, product.imageUrl, product.price)
+                },
+                onItemButtonClick = { product ->
+                    Cart.addOne(product)
                 },
                 modifier = Modifier.fillMaxSize()
             )

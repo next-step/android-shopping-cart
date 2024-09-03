@@ -37,7 +37,12 @@ const val productNameMaxLine = 1
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun ProductItem(product: Product, onItemClick: (Product) -> Unit, modifier: Modifier = Modifier) {
+fun ProductItem(
+    product: Product,
+    onItemClick: (Product) -> Unit,
+    onItemButtonClick: (Product) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(modifier = modifier.clickable { onItemClick(product) }) {
         Box {
             GlideImage(
@@ -46,7 +51,7 @@ fun ProductItem(product: Product, onItemClick: (Product) -> Unit, modifier: Modi
                 loading = placeholder(R.drawable.ic_launcher_foreground),
             )
             CircularAddButton(
-                onClick = { /* TODO: Add action */ },
+                onClick = { onItemButtonClick(product) },
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(dimensionResource(id = R.dimen.product_item_circular_add_button_padding))
@@ -95,6 +100,6 @@ fun CircularAddButton(
 @Composable
 fun ProductItemPreview() {
     ShoppingCartTheme {
-        ProductItem(dummyProducts.first(), onItemClick = {})
+        ProductItem(dummyProducts.first(), onItemClick = {}, onItemButtonClick = {})
     }
 }

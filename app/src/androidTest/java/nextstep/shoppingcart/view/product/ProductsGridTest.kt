@@ -31,7 +31,8 @@ class ProductsGridTest {
         composeTestRule.setContent {
             ProductsGrid(
                 products = products,
-                onItemClick = { }
+                onItemClick = { },
+                onItemButtonClick = { }
             )
         }
     }

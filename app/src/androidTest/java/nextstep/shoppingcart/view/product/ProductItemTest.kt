@@ -23,7 +23,8 @@ class ProductItemTest {
                     price = 1_000,
                     imageUrl = "https://example.com/image.jpg"
                 ),
-                onItemClick = { }
+                onItemClick = { },
+                onItemButtonClick = { }
             )
         }
     }
