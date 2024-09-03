@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -120,7 +121,7 @@ fun AddButton(
     modifier: Modifier = Modifier
 ) {
     IconButton(
-        modifier = modifier,
+        modifier = modifier.testTag("AddButton"),
         colors = IconButtonDefaults.iconButtonColors(
             containerColor = Color.White,
             contentColor = Color.Black
@@ -142,6 +143,7 @@ fun CounterCard(
 ) {
     Row(
         modifier = modifier
+            .testTag("CounterCard")
             .clip(RoundedCornerShape(4.dp))
             .aspectRatio(3f)
             .background(Color.White),
@@ -156,7 +158,7 @@ fun CounterCard(
         )
 
         Text(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(1f).testTag("CounterCardText"),
             text = "$count",
             fontSize = 22.sp,
             fontWeight = FontWeight(400),
@@ -246,6 +248,66 @@ private fun Preview4() {
             count = count,
             onMinusClick = { if (count > 1) count--},
             onPlusClick = {  count++  }
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "ShoppingItemComponentCountEquals1")
+@Composable
+private fun Preview5() {
+    ShoppingCartTheme {
+        ShoppingItemComponent(
+            modifier = Modifier.width(200.dp),
+            product = Product(
+                imageUrl = "https://picsum.photos/id/0/5000/3333",
+                name = "신형 노트북",
+                price = 2_000_000,
+                id = 1
+            ),
+            onClick = {},
+            onMinusClick = {},
+            onPlusClick = {},
+            count = 1
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "ShoppingItemComponentCountEquals0")
+@Composable
+private fun Preview6() {
+    ShoppingCartTheme {
+        ShoppingItemComponent(
+            modifier = Modifier.width(200.dp),
+            product = Product(
+                imageUrl = "https://picsum.photos/id/0/5000/3333",
+                name = "신형 노트북",
+                price = 2_000_000,
+                id = 1
+            ),
+            onClick = {},
+            onMinusClick = {},
+            onPlusClick = {},
+            count = 0
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "ShoppingItemComponentCountEquals99")
+@Composable
+private fun Preview7() {
+    ShoppingCartTheme {
+        ShoppingItemComponent(
+            modifier = Modifier.width(200.dp),
+            product = Product(
+                imageUrl = "https://picsum.photos/id/0/5000/3333",
+                name = "신형 노트북",
+                price = 2_000_000,
+                id = 1
+            ),
+            onClick = {},
+            onMinusClick = {},
+            onPlusClick = {},
+            count = 99
         )
     }
 }
