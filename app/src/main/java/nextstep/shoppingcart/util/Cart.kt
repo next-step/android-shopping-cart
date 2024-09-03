@@ -10,7 +10,7 @@ object Cart {
     val totalPrice: Int get() = _items.sumOf { it.totalPrice }
 
     fun addOne(product: Product): List<CartItem> {
-        val item = _items.find { it.product == product }
+        val item = _items.find { it.product.id == product.id }
         if (item == null) {
             _items.add(CartItem(product, 1))
         } else {
@@ -21,7 +21,7 @@ object Cart {
     }
 
     fun removeOne(product: Product): List<CartItem> {
-        _items.find { it.product == product }
+        _items.find { it.product.id  == product.id  }
             ?.let { item ->
                 if (item.count > 1) {
                     val index = _items.indexOf(item)
@@ -34,7 +34,7 @@ object Cart {
     }
 
     fun removeAll(product: Product): List<CartItem> {
-        _items.removeAll { it.product == product }
+        _items.removeAll { it.product.id  == product.id  }
         return items
     }
 

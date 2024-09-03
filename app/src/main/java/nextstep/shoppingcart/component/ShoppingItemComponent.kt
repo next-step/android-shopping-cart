@@ -15,11 +15,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,12 +39,15 @@ import coil.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+import nextstep.shoppingcart.util.Cart
 
-const val SHOPPING_ITEM_WIDTH = 156
 
 @Composable
 fun ShoppingItemComponent(
     product: Product,
+    count : Int,
+    onPlusClick: (Product) -> Unit,
+    onMinusClick: (Product) -> Unit,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -66,14 +67,30 @@ fun ShoppingItemComponent(
                 contentDescription = product.name,
                 contentScale = ContentScale.Crop
             )
-            AddButton(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(12.dp),
-                onClick = {
+            if(count >= 1){
+                CounterCard(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(20.dp),
+                    onPlusClick = {
+                        if(count < 99) onPlusClick(product)
+                    },
+                    onMinusClick = {
+                        onMinusClick(product)
+                    },
+                    count = count
+                )
+            }else {
+                AddButton(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(12.dp),
+                    onClick = {
+                        onPlusClick(product)
+                    }
+                )
+            }
 
-                }
-            )
 
         }
 
@@ -131,7 +148,9 @@ fun CounterCard(
         verticalAlignment = Alignment.CenterVertically
     ) {
         CounterButton(
-            modifier = Modifier.weight(1f).fillMaxHeight(),
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight(),
             text = "-",
             onClick = onMinusClick
         )
@@ -144,7 +163,9 @@ fun CounterCard(
             textAlign = TextAlign.Center
         )
         CounterButton(
-            modifier = Modifier.weight(1f).fillMaxHeight(),
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight(),
             text = "+",
             onClick = onPlusClick
         )
@@ -181,9 +202,10 @@ private fun Preview1() {
                 price = 2_000_000,
                 id = 1
             ),
-            onClick = {
-
-            }
+            onClick = {},
+            onMinusClick = {},
+            onPlusClick = {},
+            count = 1
         )
     }
 
