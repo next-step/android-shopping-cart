@@ -26,4 +26,8 @@
     <dimen name="cart_item_quantity_text_size">22sp</dimen>
     <dimen name="cart_screen_list_padding_horizontal">18dp</dimen>
     <dimen name="cart_screen_list_padding_vertical">16dp</dimen>
+    <dimen name="product_item_circular_add_button_padding">12dp</dimen>
+    <dimen name="product_item_circular_add_button_size">42dp</dimen>
+    <dimen name="product_item_circular_add_button_content_padding">0dp</dimen>
+    <dimen name="product_item_circular_add_button_icon_size">24dp</dimen>
 </resources>
