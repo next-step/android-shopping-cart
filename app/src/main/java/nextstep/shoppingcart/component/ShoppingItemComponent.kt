@@ -223,22 +223,9 @@ private fun Preview2() {
     }
 }
 
-@Preview(showBackground = true, name = "QuantityCounterCard")
-@Composable
-private fun Preview3() {
-    ShoppingCartTheme {
-        CounterCard(
-            modifier = Modifier.width(126.dp),
-            count = 1,
-            onMinusClick = {},
-            onPlusClick = {}
-        )
-    }
-}
-
 @Preview(showBackground = true, name = "QuantityCounterCardWithInteraction")
 @Composable
-private fun Preview4() {
+private fun Preview3() {
     var count by remember {
         mutableStateOf(1)
     }
@@ -254,7 +241,7 @@ private fun Preview4() {
 
 @Preview(showBackground = true, name = "ShoppingItemComponentCountEquals1")
 @Composable
-private fun Preview5() {
+private fun Preview4() {
     ShoppingCartTheme {
         ShoppingItemComponent(
             modifier = Modifier.width(200.dp),
@@ -274,7 +261,7 @@ private fun Preview5() {
 
 @Preview(showBackground = true, name = "ShoppingItemComponentCountEquals0")
 @Composable
-private fun Preview6() {
+private fun Preview5() {
     ShoppingCartTheme {
         ShoppingItemComponent(
             modifier = Modifier.width(200.dp),
@@ -294,7 +281,7 @@ private fun Preview6() {
 
 @Preview(showBackground = true, name = "ShoppingItemComponentCountEquals99")
 @Composable
-private fun Preview7() {
+private fun Preview6() {
     ShoppingCartTheme {
         ShoppingItemComponent(
             modifier = Modifier.width(200.dp),
