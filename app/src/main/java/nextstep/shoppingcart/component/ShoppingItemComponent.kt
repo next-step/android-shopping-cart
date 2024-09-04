@@ -58,9 +58,7 @@ fun ShoppingItemComponent(
             onClick()
         }
     ) {
-        Box(
-            modifier = Modifier
-        ) {
+        Box {
             AsyncImage(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -92,8 +90,6 @@ fun ShoppingItemComponent(
                     }
                 )
             }
-
-
         }
 
         Text(
