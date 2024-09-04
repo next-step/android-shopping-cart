@@ -31,6 +31,7 @@ fun ProductsList(
     onAddClicked: (Product) -> Unit,
     onRemoveClicked: (Product) -> Unit,
     buttonClickState: Boolean,
+    setButtonClickState: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -55,6 +56,8 @@ fun ProductsList(
                             itemCount = Cart.getCountByProductName(product.name),
                             onAddClicked = { onAddClicked(product) },
                             onRemoveClicked = { onRemoveClicked(product) },
+                            buttonClickState = buttonClickState,
+                            setButtonClickState = setButtonClickState,
                             modifier = Modifier
                                 .align(Alignment.BottomEnd)
                                 .padding(dimensionResource(id = R.dimen.product_item_circular_add_button_padding))
@@ -88,7 +91,8 @@ fun ProductsListPreview() {
             onItemButtonClick = {},
             onAddClicked = {},
             onRemoveClicked = {},
-            buttonClickState = false
+            buttonClickState = false,
+            setButtonClickState = {}
         )
     }
 }

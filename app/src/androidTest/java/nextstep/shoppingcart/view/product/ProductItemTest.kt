@@ -24,7 +24,7 @@ class ProductItemTest {
                     imageUrl = "https://example.com/image.jpg"
                 ),
                 onItemClick = { },
-                onItemButtonClick = { }
+                content = { }
             )
         }
     }

@@ -32,7 +32,11 @@ class ProductsListTest {
             ProductsList(
                 products = products,
                 onItemClick = { },
-                onItemButtonClick = { }
+                onItemButtonClick = { },
+                onAddClicked = { },
+                onRemoveClicked = { },
+                buttonClickState = false,
+                setButtonClickState = { },
             )
         }
     }

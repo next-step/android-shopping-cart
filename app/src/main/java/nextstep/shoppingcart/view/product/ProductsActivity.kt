@@ -2,13 +2,16 @@ package nextstep.shoppingcart.view.product
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import nextstep.shoppingcart.model.Cart
+import nextstep.shoppingcart.model.CountState
 import nextstep.shoppingcart.view.product.detail.ProductDetailActivity
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
@@ -17,7 +20,7 @@ class ProductsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
-                var buttonClickState by remember { mutableStateOf(false) }
+                val countState = CountState.uiState.collectAsState()
 
                 ProductsScreen(
                     onItemClick = { product ->
@@ -29,18 +32,21 @@ class ProductsActivity : ComponentActivity() {
                         startActivity(intent)
                     },
                     onItemButtonClick = { product ->
-                        buttonClickState = !buttonClickState
+                        CountState.setUiState(!countState.value)
                         Cart.addOne(product)
                     },
                     onAddClicked = { product ->
-                        buttonClickState = !buttonClickState
+                        CountState.setUiState(!countState.value)
                         Cart.addOne(product)
                     },
                     onRemoveClicked = { product ->
-                        buttonClickState = !buttonClickState
+                        CountState.setUiState(!countState.value)
                         Cart.removeOne(product)
                     },
-                    buttonClickState = buttonClickState,
+                    buttonClickState = countState.value,
+                    setButtonClickState = { state ->
+                        CountState.setUiState(state)
+                    }
                 )
             }
         }

@@ -22,8 +22,8 @@ internal class CartScreenTest {
     )
 
     private val dummyCartItems = listOf(
-        CartItem(product = dummyProducts[0], count = 1),
-        CartItem(product = dummyProducts[1], count = 2)
+        CartItem(product = dummyProducts[0], count = 1, isShowCountButton = false),
+        CartItem(product = dummyProducts[1], count = 2, isShowCountButton = false)
     )
 
     @Test
@@ -38,6 +38,8 @@ internal class CartScreenTest {
                 CartScreen(
                     cartItems = dummyCartItems,
                     onBack = {},
+                    buttonClickState = false,
+                    setButtonClickState = { },
                     onOrderClicked = {}
                 )
             }
@@ -58,6 +60,8 @@ internal class CartScreenTest {
                 CartScreen(
                     cartItems = dummyCartItems,
                     onBack = {},
+                    buttonClickState = false,
+                    setButtonClickState = { },
                     onOrderClicked = {}
                 )
             }
@@ -80,6 +84,8 @@ internal class CartScreenTest {
                 CartScreen(
                     cartItems = dummyCartItems,
                     onBack = {},
+                    buttonClickState = false,
+                    setButtonClickState = { },
                     onOrderClicked = {}
                 )
             }
@@ -102,6 +108,8 @@ internal class CartScreenTest {
                 CartScreen(
                     cartItems = dummyCartItems,
                     onBack = {},
+                    buttonClickState = false,
+                    setButtonClickState = { },
                     onOrderClicked = {}
                 )
             }
@@ -124,6 +132,8 @@ internal class CartScreenTest {
                 CartScreen(
                     cartItems = dummyCartItems,
                     onBack = {},
+                    buttonClickState = false,
+                    setButtonClickState = { },
                     onOrderClicked = {}
                 )
             }

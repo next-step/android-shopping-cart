@@ -120,6 +120,8 @@ private fun CartItemPreview(
                     itemCount = cartItem.count,
                     onAddClicked = {},
                     onRemoveClicked = {},
+                    buttonClickState = false,
+                    setButtonClickState = {},
                     modifier = Modifier
                         .padding(
                             start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),

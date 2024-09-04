@@ -26,6 +26,8 @@ fun CartItemCountButton(
     itemCount: Int,
     onAddClicked: () -> Unit,
     onRemoveClicked: () -> Unit,
+    buttonClickState: Boolean,
+    setButtonClickState: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -36,6 +38,7 @@ fun CartItemCountButton(
         IconButton(
             onClick = {
                 onRemoveClicked()
+                setButtonClickState(!buttonClickState)
             },
             modifier = Modifier.size(dimensionResource(id = R.dimen.cart_item_add_icon_size)),
         ) {
@@ -51,6 +54,7 @@ fun CartItemCountButton(
         IconButton(
             onClick = {
                 onAddClicked()
+                setButtonClickState(!buttonClickState)
             },
             modifier = Modifier.size(dimensionResource(id = R.dimen.cart_item_remove_icon_size)),
         ) {
@@ -73,6 +77,8 @@ fun CartItemQuantityButtonPreview() {
         ),
         itemCount = 1,
         onAddClicked = { },
-        onRemoveClicked = { }
+        onRemoveClicked = { },
+        buttonClickState = false,
+        setButtonClickState = { }
     )
 }
