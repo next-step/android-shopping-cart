@@ -64,3 +64,11 @@
     - +버튼과 수량 조절 버튼 중에 장바구니에 담겨있는 개수에 따라 알맞게 보이는 기능
     - 상품 목록의 상품 수와 장바구니 상품 수 동기화
 3. 테스트
+
+## STEP-4-1
+1. 피드백 개선 사항
+    - ShoppingItemComponent Preview3 제거
+    - ShoppingItemComponent CounterCard - horizontalArrangement 활용
+    - count 99 조건 삭제
+      - 삭제 시 UI 확인
+    - 사용하지 않는 Modifier 생략
