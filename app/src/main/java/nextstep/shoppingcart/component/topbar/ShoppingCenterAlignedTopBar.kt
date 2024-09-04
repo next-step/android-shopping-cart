@@ -3,6 +3,7 @@ package nextstep.shoppingcart.component.topbar
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -47,7 +48,7 @@ fun ShoppingCenterAlignedTopBar(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(name = "ShoppingTopBar")
+@Preview(name = "ShoppingTopBarWithBack")
 @Composable
 private fun Preview1() {
     ShoppingCenterAlignedTopBar(
@@ -61,9 +62,32 @@ private fun Preview1() {
                     modifier = Modifier
                         .size(20.dp),
                     imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back"
+                )
+            }
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(name = "ShoppingTopBarWithCart")
+@Composable
+private fun Preview2() {
+    ShoppingCenterAlignedTopBar(
+        modifier = Modifier,
+        title = "title",
+        rightActionButtons = {
+            IconButton(
+                onClick = { }
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .size(20.dp),
+                    imageVector = Icons.Default.ShoppingCart,
                     contentDescription = "ShoppingCart"
                 )
             }
         }
     )
 }
+

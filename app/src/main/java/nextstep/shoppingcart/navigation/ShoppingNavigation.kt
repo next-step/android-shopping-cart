@@ -35,8 +35,8 @@ fun NavGraphBuilder.shoppingListScreen(
         route = SHOPPING_LIST_ROUTE
     ) {
         ShoppingListScreen(
-            onClickDetail = onClickDetail,
-            onClickCart = onClickCart
+            navigateToDetail = onClickDetail,
+            navigateToCart = onClickCart
         )
     }
 }
@@ -67,7 +67,7 @@ fun NavGraphBuilder.shoppingCartScreen(
         route = SHOPPING_CART_ROUTE
     ) {
         ShoppingCartScreen(
-            onClickBack = onClickBack
+            onBackClick = onClickBack
         )
     }
 }

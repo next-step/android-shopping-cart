@@ -27,12 +27,13 @@ import nextstep.shoppingcart.component.CartItemComponent
 import nextstep.shoppingcart.component.ShoppingTextButton
 import nextstep.shoppingcart.component.topbar.ShoppingTopBarWithBack
 import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.productList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.util.Cart
 
 @Composable
 fun ShoppingCartScreen(
-    onClickBack: () -> Unit,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var cartItemList by remember { mutableStateOf(Cart.items) }
@@ -50,7 +51,7 @@ fun ShoppingCartScreen(
         onCloseClick = { cartItem ->
             cartItemList =  Cart.removeAll(product = cartItem.product)
         },
-        onBackClick = onClickBack,
+        onBackClick = onBackClick,
         modifier = modifier
     )
 }
@@ -103,7 +104,7 @@ fun ShoppingCartScreen(
 }
 
 @Composable
-fun ColumnScope.CartList(
+fun CartList(
     cartItemList: List<CartItem>,
     onPlusClick : (CartItem) -> Unit,
     onMinusClick : (CartItem) -> Unit,
@@ -122,9 +123,7 @@ fun ColumnScope.CartList(
             CartItemComponent(
                 cartItem = cartItem,
                 onPlusClick = {
-                    if (cartItem.count < 99) { // 최대 99개로 설정
-                        onPlusClick(cartItem)
-                    }
+                    onPlusClick(cartItem)
                 },
                 onMinusClick = {
                     onMinusClick(cartItem)
@@ -142,7 +141,34 @@ fun ColumnScope.CartList(
 private fun Preview1() {
     ShoppingCartTheme {
         ShoppingCartScreen(
-            onClickBack = {}
+            onBackClick = {}
+        )
+    }
+}
+
+@Preview(name = "ShoppingCartScreenWithAnItem")
+@Composable
+private fun Preview2() {
+    Cart.cleatCart()
+    Cart.addOne(productList[1])
+    ShoppingCartTheme {
+        ShoppingCartScreen(
+            onBackClick = {}
+        )
+    }
+}
+
+@Preview(name = "ShoppingCartScreenWithItems")
+@Composable
+private fun Preview3() {
+    Cart.cleatCart()
+    Cart.addOne(productList[2])
+    Cart.addOne(productList[3])
+    Cart.addOne(productList[4])
+    Cart.addOne(productList[5])
+    ShoppingCartTheme {
+        ShoppingCartScreen(
+            onBackClick = {}
         )
     }
 }
