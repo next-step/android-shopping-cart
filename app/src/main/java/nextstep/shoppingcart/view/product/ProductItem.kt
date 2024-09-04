@@ -2,6 +2,7 @@ package nextstep.shoppingcart.view.product
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -15,7 +16,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -40,7 +40,7 @@ const val productNameMaxLine = 1
 fun ProductItem(
     product: Product,
     onItemClick: (Product) -> Unit,
-    onItemButtonClick: (Product) -> Unit,
+    content: @Composable BoxScope.() -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.clickable { onItemClick(product) }) {
@@ -50,12 +50,7 @@ fun ProductItem(
                 contentDescription = product.name,
                 loading = placeholder(R.drawable.ic_launcher_foreground),
             )
-            CircularAddButton(
-                onClick = { onItemButtonClick(product) },
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(dimensionResource(id = R.dimen.product_item_circular_add_button_padding))
-            )
+            content()
         }
         Text(
             text = product.name,
@@ -100,6 +95,6 @@ fun CircularAddButton(
 @Composable
 fun ProductItemPreview() {
     ShoppingCartTheme {
-        ProductItem(dummyProducts.first(), onItemClick = {}, onItemButtonClick = {})
+        ProductItem(dummyProducts.first(), onItemClick = {}, content = {})
     }
 }

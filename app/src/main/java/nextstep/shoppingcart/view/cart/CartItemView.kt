@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -41,10 +39,8 @@ import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 @Composable
 fun CartItemView(
     product: Product,
-    itemCount: Int,
     onItemRemoved: () -> Unit,
-    onAddClicked: () -> Unit,
-    onRemoveClicked: () -> Unit,
+    content: @Composable () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -102,43 +98,7 @@ fun CartItemView(
                         ),
                         fontSize = dimensionResource(id = R.dimen.cart_item_price_size).value.sp,
                     )
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),
-                                dimensionResource(id = R.dimen.cart_item_quantity_padding)
-                            ),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        IconButton(
-                            onClick = {
-                                onRemoveClicked()
-                            },
-                            modifier = Modifier.size(dimensionResource(id = R.dimen.cart_item_add_icon_size)),
-                        ) {
-                            Icon(
-                                Icons.Filled.KeyboardArrowDown,
-                                contentDescription = stringResource(id = R.string.cart_remove) + " ${product.name}"
-                            )
-                        }
-                        Text(
-                            text = itemCount.toString(),
-                            fontSize = dimensionResource(id = R.dimen.cart_item_quantity_text_size).value.sp,
-                        )
-                        IconButton(
-                            onClick = {
-                                onAddClicked()
-                            },
-                            modifier = Modifier.size(dimensionResource(id = R.dimen.cart_item_remove_icon_size)),
-                        ) {
-                            Icon(
-                                Icons.Filled.KeyboardArrowUp,
-                                contentDescription = stringResource(id = R.string.cart_add) + " ${product.name}"
-                            )
-                        }
-                    }
+                    content()
                 }
             }
         }
@@ -153,20 +113,31 @@ private fun CartItemPreview(
     ShoppingCartTheme {
         CartItemView(
             product = cartItem.product,
-            itemCount = cartItem.count,
             onItemRemoved = {},
-            onAddClicked = {},
-            onRemoveClicked = {}
+            content = {
+                CartItemCountButton(
+                    product = cartItem.product,
+                    itemCount = cartItem.count,
+                    onAddClicked = {},
+                    onRemoveClicked = {},
+                    modifier = Modifier
+                        .padding(
+                            start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),
+                            dimensionResource(id = R.dimen.cart_item_quantity_padding)
+                        )
+                )
+            }
         )
     }
 }
 
 class CartItemPreviewParameterProvider : PreviewParameterProvider<CartItem> {
     override val values = sequenceOf(
-        CartItem(product = dummyProducts.first(), count = 1),
+        CartItem(product = dummyProducts.first(), count = 1, isShowCountButton = false),
         CartItem(
             product = Product("[최고심] 이건이름이매우긴상품이야살사람은사고말사람은말어", "http://www.abc.com", 1_000_000),
-            count = 100
+            count = 100,
+            isShowCountButton = false
         ),
     )
 }

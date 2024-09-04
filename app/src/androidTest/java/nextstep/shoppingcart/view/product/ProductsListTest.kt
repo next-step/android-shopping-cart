@@ -9,7 +9,7 @@ import org.junit.Test
 import nextstep.shoppingcart.model.Product
 import org.junit.Before
 
-class ProductsGridTest {
+class ProductsListTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -29,7 +29,7 @@ class ProductsGridTest {
     @Before
     fun setUp() {
         composeTestRule.setContent {
-            ProductsGrid(
+            ProductsList(
                 products = products,
                 onItemClick = { },
                 onItemButtonClick = { }

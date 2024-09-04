@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.view.cart
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,6 +43,7 @@ fun CartScreen(
 
     fun handleItemRemoved(item: CartItem) {
         items = Cart.removeAll(item.product)
+        totalPrice = Cart.totalPrice
     }
 
     fun handleAddClicked(item: CartItem) {
@@ -98,11 +101,11 @@ private fun CartScreenPreview() {
     ShoppingCartTheme {
         CartScreen(
             listOf(
-                CartItem(dummyProducts[0], 1),
-                CartItem(dummyProducts[1], 1),
-                CartItem(dummyProducts[2], 1),
-                CartItem(dummyProducts[3], 1),
-                CartItem(dummyProducts[4], 1),
+                CartItem(dummyProducts[0], 1, false),
+                CartItem(dummyProducts[1], 1, false),
+                CartItem(dummyProducts[2], 1, false),
+                CartItem(dummyProducts[3], 1, false),
+                CartItem(dummyProducts[4], 1, false),
             ),
             onBack = {},
             onOrderClicked = {})
