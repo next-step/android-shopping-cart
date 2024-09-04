@@ -123,9 +123,7 @@ fun CartList(
             CartItemComponent(
                 cartItem = cartItem,
                 onPlusClick = {
-                    if (cartItem.count < 99) { // 최대 99개로 설정
-                        onPlusClick(cartItem)
-                    }
+                    onPlusClick(cartItem)
                 },
                 onMinusClick = {
                     onMinusClick(cartItem)
