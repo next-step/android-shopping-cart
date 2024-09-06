@@ -1,5 +1,8 @@
 package nextstep.shoppingcart.model
 
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
+
 data class CartItem(
     val product: Product,
     val count: Int,
@@ -9,32 +12,30 @@ data class CartItem(
 }
 
 object Cart {
-    private val _items: MutableList<CartItem> = mutableListOf()
-    val items: List<CartItem> get() = _items.toList()
+    private val _items: SnapshotStateList<CartItem> = mutableStateListOf()
+    val items: List<CartItem> get() = _items
 
-    val totalPrice: Int get() = _items.sumOf { it.totalPrice }
+    val totalPrice: Int get() = items.sumOf { it.totalPrice }
 
-    fun addOne(product: Product): List<CartItem> {
+    fun addOne(product: Product) {
         val item = _items.find { it.product == product }
         if (item == null) {
             _items.add(CartItem(product, 1, true))
-            val newItem = _items.find { it.product == product }
         } else {
-            val index = _items.indexOf(item)
+            val index = items.indexOf(item)
             _items[index] = item.copy(count = item.count + 1, isShowCountButton = true)
         }
-        return items
     }
 
     fun getCountByProductName(productName: String): Int {
-        return items.find { it.product.name == productName }?.count ?: 0
+        return _items.find { it.product.name == productName }?.count ?: 0
     }
 
     fun getButtonStateByProductName(productName: String): Boolean {
-        return items.find { it.product.name == productName }?.isShowCountButton ?: false
+        return _items.find { it.product.name == productName }?.isShowCountButton ?: false
     }
 
-    fun removeOne(product: Product): List<CartItem> {
+    fun removeOne(product: Product) {
         _items.find { it.product == product }
             ?.let { item ->
                 if (item.count > 1) {
@@ -44,16 +45,14 @@ object Cart {
                     _items.remove(item)
                 }
             }
-        return items
     }
 
     fun removeAll(product: Product): List<CartItem> {
         _items.removeAll { it.product == product }
-        return items
+        return _items
     }
 
     fun clear() {
         _items.clear()
     }
 }
-

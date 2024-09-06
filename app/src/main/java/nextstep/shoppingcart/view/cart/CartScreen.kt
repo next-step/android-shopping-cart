@@ -12,7 +12,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -24,7 +23,6 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.CartItem
-import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.view.resource.Blue50
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
@@ -34,31 +32,21 @@ fun CartScreen(
     cartItems: List<CartItem>,
     onBack: () -> Unit,
     onOrderClicked: () -> Unit,
-    buttonClickState: Boolean,
-    setButtonClickState: (Boolean) -> Unit
 ) {
     var totalPrice by remember { mutableIntStateOf(Cart.totalPrice) }
 
-    var items by remember { mutableStateOf(cartItems) }
-
     fun handleItemRemoved(item: CartItem) {
-        items = Cart.removeAll(item.product)
+        Cart.removeAll(item.product)
         totalPrice = Cart.totalPrice
     }
 
     fun handleAddClicked(item: CartItem) {
-        items = Cart.addOne(item.product)
+        Cart.addOne(item.product)
         totalPrice = Cart.totalPrice
     }
 
     fun handleRemoveClicked(item: CartItem) {
-        items = Cart.removeOne(item.product)
-        val newCount = Cart.getCountByProductName(item.product.name)
-        items = if (newCount == 0) {
-            Cart.removeAll(item.product)
-        } else {
-            items
-        }
+        Cart.removeOne(item.product)
         totalPrice = Cart.totalPrice
     }
 
@@ -81,7 +69,7 @@ fun CartScreen(
             modifier = Modifier.padding(innerPadding)
         ) {
             CartList(
-                cartItems = items,
+                cartItems = cartItems,
                 contentPadding = PaddingValues(
                     horizontal = dimensionResource(id = R.dimen.cart_screen_list_padding_horizontal),
                     vertical = dimensionResource(id = R.dimen.cart_screen_list_padding_vertical),
@@ -90,8 +78,6 @@ fun CartScreen(
                 onItemRemoved = ::handleItemRemoved,
                 onAddClicked = ::handleAddClicked,
                 onRemoveClicked = ::handleRemoveClicked,
-                buttonClickState = buttonClickState,
-                setButtonClickState = setButtonClickState
             )
         }
     }
@@ -102,17 +88,9 @@ fun CartScreen(
 private fun CartScreenPreview() {
     ShoppingCartTheme {
         CartScreen(
-            listOf(
-                CartItem(dummyProducts[0], 1, false),
-                CartItem(dummyProducts[1], 1, false),
-                CartItem(dummyProducts[2], 1, false),
-                CartItem(dummyProducts[3], 1, false),
-                CartItem(dummyProducts[4], 1, false),
-            ),
+            cartItems = Cart.items,
             onBack = {},
             onOrderClicked = {},
-            buttonClickState = false,
-            setButtonClickState = {}
         )
     }
 }

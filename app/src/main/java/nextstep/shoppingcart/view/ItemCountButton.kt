@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.view.cart
+package nextstep.shoppingcart.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -21,13 +21,11 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 
 @Composable
-fun CartItemCountButton(
+fun ItemCountButton(
     product: Product,
     itemCount: Int,
     onAddClicked: () -> Unit,
     onRemoveClicked: () -> Unit,
-    buttonClickState: Boolean,
-    setButtonClickState: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -38,7 +36,6 @@ fun CartItemCountButton(
         IconButton(
             onClick = {
                 onRemoveClicked()
-                setButtonClickState(!buttonClickState)
             },
             modifier = Modifier.size(dimensionResource(id = R.dimen.cart_item_add_icon_size)),
         ) {
@@ -54,7 +51,6 @@ fun CartItemCountButton(
         IconButton(
             onClick = {
                 onAddClicked()
-                setButtonClickState(!buttonClickState)
             },
             modifier = Modifier.size(dimensionResource(id = R.dimen.cart_item_remove_icon_size)),
         ) {
@@ -69,7 +65,7 @@ fun CartItemCountButton(
 @Preview(showBackground = true)
 @Composable
 fun CartItemQuantityButtonPreview() {
-    CartItemCountButton(
+    ItemCountButton(
         product = Product(
             name = "Product 1",
             price = 1000,
@@ -78,7 +74,5 @@ fun CartItemQuantityButtonPreview() {
         itemCount = 1,
         onAddClicked = { },
         onRemoveClicked = { },
-        buttonClickState = false,
-        setButtonClickState = { }
     )
 }

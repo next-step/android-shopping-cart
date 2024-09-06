@@ -33,6 +33,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.view.ItemCountButton
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -115,13 +116,11 @@ private fun CartItemPreview(
             product = cartItem.product,
             onItemRemoved = {},
             content = {
-                CartItemCountButton(
+                ItemCountButton(
                     product = cartItem.product,
                     itemCount = cartItem.count,
                     onAddClicked = {},
                     onRemoveClicked = {},
-                    buttonClickState = false,
-                    setButtonClickState = {},
                     modifier = Modifier
                         .padding(
                             start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),

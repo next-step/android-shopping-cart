@@ -1,24 +1,18 @@
 package nextstep.shoppingcart.view.product
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
-import nextstep.shoppingcart.view.cart.CartItemCountButton
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 const val gridCellsCount = 2
@@ -30,8 +24,6 @@ fun ProductsList(
     onItemButtonClick: (Product) -> Unit,
     onAddClicked: (Product) -> Unit,
     onRemoveClicked: (Product) -> Unit,
-    buttonClickState: Boolean,
-    setButtonClickState: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -49,32 +41,9 @@ fun ProductsList(
             ProductItem(
                 product = product,
                 onItemClick = onItemClick,
-                content = {
-                    if (Cart.getButtonStateByProductName(product.name)) {
-                        CartItemCountButton(
-                            product = product,
-                            itemCount = Cart.getCountByProductName(product.name),
-                            onAddClicked = { onAddClicked(product) },
-                            onRemoveClicked = { onRemoveClicked(product) },
-                            buttonClickState = buttonClickState,
-                            setButtonClickState = setButtonClickState,
-                            modifier = Modifier
-                                .align(Alignment.BottomEnd)
-                                .padding(dimensionResource(id = R.dimen.product_item_circular_add_button_padding))
-                                .background(
-                                    MaterialTheme.colorScheme.background
-                                )
-                        )
-
-                    } else {
-                        CircularAddButton(
-                            onClick = { onItemButtonClick(product) },
-                            modifier = Modifier
-                                .align(Alignment.BottomEnd)
-                                .padding(dimensionResource(id = R.dimen.product_item_circular_add_button_padding))
-                        )
-                    }
-                },
+                onItemButtonClick = onItemButtonClick,
+                onAddClicked = onAddClicked,
+                onRemoveClicked = onRemoveClicked,
                 modifier = modifier
             )
         }
@@ -91,8 +60,6 @@ fun ProductsListPreview() {
             onItemButtonClick = {},
             onAddClicked = {},
             onRemoveClicked = {},
-            buttonClickState = false,
-            setButtonClickState = {}
         )
     }
 }

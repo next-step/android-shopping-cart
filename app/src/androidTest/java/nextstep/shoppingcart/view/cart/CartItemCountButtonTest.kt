@@ -9,6 +9,7 @@ import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.view.ItemCountButton
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 import org.junit.Rule
 import org.junit.Test
@@ -31,13 +32,11 @@ class CartItemCountButtonTest {
         Cart.addOne(dummyProduct)
         composeTestRule.setContent {
             ShoppingCartTheme {
-                CartItemCountButton(
+                ItemCountButton(
                     product = dummyProduct,
                     itemCount = Cart.getCountByProductName(dummyProduct.name),
                     onAddClicked = { isAddClicked = true },
                     onRemoveClicked = { },
-                    buttonClickState = false,
-                    setButtonClickState = { },
                     modifier = Modifier
                         .padding(
                             start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),
@@ -56,13 +55,11 @@ class CartItemCountButtonTest {
         var isRemoveOneClicked = false
         composeTestRule.setContent {
             ShoppingCartTheme {
-                CartItemCountButton(
+                ItemCountButton(
                     product = dummyProduct,
                     itemCount = 1,
                     onAddClicked = { },
                     onRemoveClicked = { isRemoveOneClicked = true },
-                    buttonClickState = false,
-                    setButtonClickState = { },
                     modifier = Modifier
                         .padding(
                             start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),

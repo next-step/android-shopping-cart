@@ -1,8 +1,8 @@
 package nextstep.shoppingcart.view.product
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -16,6 +16,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -29,8 +30,10 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.view.ItemCountButton
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 const val productNameMaxLine = 1
@@ -40,7 +43,9 @@ const val productNameMaxLine = 1
 fun ProductItem(
     product: Product,
     onItemClick: (Product) -> Unit,
-    content: @Composable BoxScope.() -> Unit,
+    onItemButtonClick: (Product) -> Unit,
+    onAddClicked: (Product) -> Unit,
+    onRemoveClicked: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.clickable { onItemClick(product) }) {
@@ -50,7 +55,28 @@ fun ProductItem(
                 contentDescription = product.name,
                 loading = placeholder(R.drawable.ic_launcher_foreground),
             )
-            content()
+            if (Cart.getButtonStateByProductName(product.name)) {
+                ItemCountButton(
+                    product = product,
+                    itemCount = Cart.getCountByProductName(product.name),
+                    onAddClicked = { onAddClicked(product) },
+                    onRemoveClicked = { onRemoveClicked(product) },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(dimensionResource(id = R.dimen.product_item_circular_add_button_padding))
+                        .background(
+                            MaterialTheme.colorScheme.background
+                        )
+                )
+
+            } else {
+                CircularAddButton(
+                    onClick = { onItemButtonClick(product) },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(dimensionResource(id = R.dimen.product_item_circular_add_button_padding))
+                )
+            }
         }
         Text(
             text = product.name,
@@ -93,8 +119,27 @@ fun CircularAddButton(
 
 @Preview(showBackground = true)
 @Composable
-fun ProductItemPreview() {
+fun ProductItemAddedPreview() {
     ShoppingCartTheme {
-        ProductItem(dummyProducts.first(), onItemClick = {}, content = {})
+        ProductItem(
+            product = dummyProducts.first(),
+            onItemClick = {},
+            onItemButtonClick = {},
+            onAddClicked = {},
+            onRemoveClicked = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProductItemNotAddedPreview() {
+    ShoppingCartTheme {
+        ProductItem(product = dummyProducts.first(),
+            onItemClick = {},
+            onItemButtonClick = {},
+            onAddClicked = {},
+            onRemoveClicked = {}
+        )
     }
 }

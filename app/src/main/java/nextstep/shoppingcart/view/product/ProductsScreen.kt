@@ -18,8 +18,6 @@ fun ProductsScreen(
     onItemButtonClick: (Product) -> Unit,
     onAddClicked: (Product) -> Unit,
     onRemoveClicked: (Product) -> Unit,
-    buttonClickState: Boolean,
-    setButtonClickState: (Boolean) -> Unit
 ) {
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -34,10 +32,8 @@ fun ProductsScreen(
                 products = dummyProducts,
                 onItemClick = onItemClick,
                 onItemButtonClick = onItemButtonClick,
-                buttonClickState = buttonClickState,
                 onAddClicked = onAddClicked,
                 onRemoveClicked = onRemoveClicked,
-                setButtonClickState = setButtonClickState,
                 modifier = Modifier.fillMaxSize()
             )
         }
@@ -53,8 +49,6 @@ fun ProductsScreenPreview() {
             onItemButtonClick = {},
             onAddClicked = {},
             onRemoveClicked = {},
-            buttonClickState = false,
-            setButtonClickState = {}
         )
     }
 }

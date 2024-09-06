@@ -14,6 +14,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.dummyProducts
+import nextstep.shoppingcart.view.ItemCountButton
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @Composable
@@ -24,8 +25,6 @@ fun CartList(
     onItemRemoved: (CartItem) -> Unit,
     onAddClicked: (CartItem) -> Unit,
     onRemoveClicked: (CartItem) -> Unit,
-    buttonClickState: Boolean,
-    setButtonClickState: (Boolean) -> Unit
 ) {
     LazyColumn(
         contentPadding = contentPadding,
@@ -36,13 +35,11 @@ fun CartList(
                 product = item.product,
                 onItemRemoved = { onItemRemoved(item) },
                 content = {
-                    CartItemCountButton(
+                    ItemCountButton(
                         product = item.product,
                         itemCount = Cart.getCountByProductName(item.product.name),
                         onAddClicked = { onAddClicked(item) },
                         onRemoveClicked = { onRemoveClicked(item) },
-                        buttonClickState = buttonClickState,
-                        setButtonClickState = setButtonClickState,
                         modifier = Modifier
                             .padding(
                                 start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),
@@ -73,8 +70,6 @@ private fun CartListPreview() {
             onItemRemoved = {},
             onAddClicked = {},
             onRemoveClicked = {},
-            buttonClickState = false,
-            setButtonClickState = {}
         )
     }
 }

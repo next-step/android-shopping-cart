@@ -24,7 +24,9 @@ class ProductItemTest {
                     imageUrl = "https://example.com/image.jpg"
                 ),
                 onItemClick = { },
-                content = { }
+                onItemButtonClick = { },
+                onAddClicked = { },
+                onRemoveClicked = { }
             )
         }
     }

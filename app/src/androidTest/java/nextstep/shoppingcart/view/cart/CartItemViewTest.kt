@@ -10,6 +10,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.assertIsDisplayed
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.view.ItemCountButton
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 import org.junit.Rule
 import org.junit.Test
@@ -63,13 +64,11 @@ class CartItemViewTest {
                     product = dummyProduct,
                     onItemRemoved = {},
                     content = {
-                        CartItemCountButton(
+                        ItemCountButton(
                             product = dummyProduct,
                             itemCount = 1,
                             onAddClicked = {},
                             onRemoveClicked = {},
-                            buttonClickState = false,
-                            setButtonClickState = { },
                             modifier = Modifier
                                 .padding(
                                     start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),
@@ -108,13 +107,11 @@ class CartItemViewTest {
                     product = dummyProduct,
                     onItemRemoved = { isRemoveClicked = true },
                     content = {
-                        CartItemCountButton(
+                        ItemCountButton(
                             product = dummyProduct,
                             itemCount = 1,
                             onAddClicked = {},
                             onRemoveClicked = {},
-                            buttonClickState = false,
-                            setButtonClickState = { },
                             modifier = Modifier
                                 .padding(
                                     start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),

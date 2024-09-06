@@ -35,8 +35,6 @@ class ProductsListTest {
                 onItemButtonClick = { },
                 onAddClicked = { },
                 onRemoveClicked = { },
-                buttonClickState = false,
-                setButtonClickState = { },
             )
         }
     }
