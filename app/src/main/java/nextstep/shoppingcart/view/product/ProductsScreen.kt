@@ -8,11 +8,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 
 @Composable
-fun ProductsScreen(onNavigateToProductDetail: (String, String, Int) -> Unit) {
+fun ProductsScreen(
+    onItemClick: (Product) -> Unit,
+    onItemButtonClick: (Product) -> Unit,
+    onAddClicked: (Product) -> Unit,
+    onRemoveClicked: (Product) -> Unit,
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -22,11 +28,12 @@ fun ProductsScreen(onNavigateToProductDetail: (String, String, Int) -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ProductsTopAppBar()
-            ProductsGrid(
-                dummyProducts,
-                onItemClick = { product ->
-                    onNavigateToProductDetail(product.name, product.imageUrl, product.price)
-                },
+            ProductsList(
+                products = dummyProducts,
+                onItemClick = onItemClick,
+                onItemButtonClick = onItemButtonClick,
+                onAddClicked = onAddClicked,
+                onRemoveClicked = onRemoveClicked,
                 modifier = Modifier.fillMaxSize()
             )
         }
@@ -37,6 +44,11 @@ fun ProductsScreen(onNavigateToProductDetail: (String, String, Int) -> Unit) {
 @Composable
 fun ProductsScreenPreview() {
     ShoppingCartTheme {
-        ProductsScreen { _, _, _ -> }
+        ProductsScreen(
+            onItemClick = {},
+            onItemButtonClick = {},
+            onAddClicked = {},
+            onRemoveClicked = {},
+        )
     }
 }

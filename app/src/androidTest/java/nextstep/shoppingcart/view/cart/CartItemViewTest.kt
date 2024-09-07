@@ -1,11 +1,16 @@
 package nextstep.shoppingcart.view.cart
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.assertIsDisplayed
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.view.ItemCountButton
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 import org.junit.Rule
 import org.junit.Test
@@ -27,10 +32,8 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = 1,
                     onItemRemoved = {},
-                    onAddClicked = {},
-                    onRemoveClicked = {}
+                    content = {}
                 )
             }
         }
@@ -44,10 +47,8 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = 1,
                     onItemRemoved = {},
-                    onAddClicked = {},
-                    onRemoveClicked = {}
+                    content = {}
                 )
             }
         }
@@ -61,10 +62,20 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = 1,
                     onItemRemoved = {},
-                    onAddClicked = {},
-                    onRemoveClicked = {}
+                    content = {
+                        ItemCountButton(
+                            product = dummyProduct,
+                            itemCount = 1,
+                            onAddClicked = {},
+                            onRemoveClicked = {},
+                            modifier = Modifier
+                                .padding(
+                                    start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),
+                                    dimensionResource(id = R.dimen.cart_item_quantity_padding)
+                                )
+                        )
+                    }
                 )
             }
         }
@@ -78,10 +89,8 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = 1,
                     onItemRemoved = {},
-                    onAddClicked = {},
-                    onRemoveClicked = {}
+                    content = {}
                 )
             }
         }
@@ -96,53 +105,25 @@ class CartItemViewTest {
             ShoppingCartTheme {
                 CartItemView(
                     product = dummyProduct,
-                    itemCount = 1,
                     onItemRemoved = { isRemoveClicked = true },
-                    onAddClicked = {},
-                    onRemoveClicked = {}
+                    content = {
+                        ItemCountButton(
+                            product = dummyProduct,
+                            itemCount = 1,
+                            onAddClicked = {},
+                            onRemoveClicked = {},
+                            modifier = Modifier
+                                .padding(
+                                    start = dimensionResource(id = R.dimen.cart_item_quantity_padding_start),
+                                    dimensionResource(id = R.dimen.cart_item_quantity_padding)
+                                )
+                        )
+                    }
                 )
             }
         }
 
-        composeTestRule.onNodeWithContentDescription("Cart Delete").performClick()
+        composeTestRule.onNodeWithContentDescription("Cart Delete Test Product").performClick()
         assert(isRemoveClicked)
-    }
-
-    @Test
-    fun 장바구니에서_상품_수량_추가_버튼을_누르면_추가_콜백이_호출된다() {
-        var isAddClicked = false
-        composeTestRule.setContent {
-            ShoppingCartTheme {
-                CartItemView(
-                    product = dummyProduct,
-                    itemCount = 1,
-                    onItemRemoved = {},
-                    onAddClicked = { isAddClicked = true },
-                    onRemoveClicked = {}
-                )
-            }
-        }
-
-        composeTestRule.onNodeWithContentDescription("Cart Add").performClick()
-        assert(isAddClicked)
-    }
-
-    @Test
-    fun 장바구니에서_상품_수량_감소_버튼을_누르면_감소_콜백이_호출된다() {
-        var isRemoveOneClicked = false
-        composeTestRule.setContent {
-            ShoppingCartTheme {
-                CartItemView(
-                    product = dummyProduct,
-                    itemCount = 1,
-                    onItemRemoved = {},
-                    onAddClicked = {},
-                    onRemoveClicked = { isRemoveOneClicked = true }
-                )
-            }
-        }
-
-        composeTestRule.onNodeWithContentDescription("Cart Remove").performClick()
-        assert(isRemoveOneClicked)
     }
 }

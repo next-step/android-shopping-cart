@@ -5,10 +5,8 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.model.Cart
-import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.view.resource.ShoppingCartTheme
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -22,11 +20,6 @@ internal class CartScreenTest {
         Product(name = "Product 2", price = 2_000, imageUrl = "https://example.com/image2.jpg")
     )
 
-    private val dummyCartItems = listOf(
-        CartItem(product = dummyProducts[0], count = 1),
-        CartItem(product = dummyProducts[1], count = 2)
-    )
-
     @Test
     fun 담긴_상품_가격의_총합이_노출된다() {
         Cart.clear()
@@ -37,7 +30,7 @@ internal class CartScreenTest {
         composeTestRule.setContent {
             ShoppingCartTheme {
                 CartScreen(
-                    cartItems = dummyCartItems,
+                    cartItems = Cart.items,
                     onBack = {},
                     onOrderClicked = {}
                 )
@@ -57,7 +50,7 @@ internal class CartScreenTest {
         composeTestRule.setContent {
             ShoppingCartTheme {
                 CartScreen(
-                    cartItems = dummyCartItems,
+                    cartItems = Cart.items,
                     onBack = {},
                     onOrderClicked = {}
                 )
@@ -79,7 +72,7 @@ internal class CartScreenTest {
         composeTestRule.setContent {
             ShoppingCartTheme {
                 CartScreen(
-                    cartItems = dummyCartItems,
+                    cartItems = Cart.items,
                     onBack = {},
                     onOrderClicked = {}
                 )
@@ -88,7 +81,7 @@ internal class CartScreenTest {
 
         composeTestRule.onNodeWithText("Product 1").assertExists()
         composeTestRule.onNodeWithContentDescription("Cart Add Product 1").performClick()
-        composeTestRule.onNodeWithText("2,000원").assertExists()
+        composeTestRule.onNodeWithText("주문하기(6,000원)").assertExists()
     }
 
     @Test
@@ -101,7 +94,7 @@ internal class CartScreenTest {
         composeTestRule.setContent {
             ShoppingCartTheme {
                 CartScreen(
-                    cartItems = dummyCartItems,
+                    cartItems = Cart.items,
                     onBack = {},
                     onOrderClicked = {}
                 )
@@ -110,7 +103,7 @@ internal class CartScreenTest {
 
         composeTestRule.onNodeWithText("Product 2").assertExists()
         composeTestRule.onNodeWithContentDescription("Cart Remove Product 2").performClick()
-        composeTestRule.onNodeWithText("1,000원").assertExists()
+        composeTestRule.onNodeWithText("주문하기(3,000원)").assertExists()
     }
 
     @Test
@@ -123,7 +116,7 @@ internal class CartScreenTest {
         composeTestRule.setContent {
             ShoppingCartTheme {
                 CartScreen(
-                    cartItems = dummyCartItems,
+                    cartItems = Cart.items,
                     onBack = {},
                     onOrderClicked = {}
                 )

@@ -15,7 +15,7 @@ class CartActivity : ComponentActivity() {
                 CartScreen(
                     Cart.items,
                     onBack = { finish() },
-                    onOrderClicked = {}
+                    onOrderClicked = {},
                 )
             }
         }

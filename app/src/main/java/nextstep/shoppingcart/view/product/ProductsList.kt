@@ -18,9 +18,12 @@ import nextstep.shoppingcart.view.resource.ShoppingCartTheme
 const val gridCellsCount = 2
 
 @Composable
-fun ProductsGrid(
+fun ProductsList(
     products: List<Product>,
     onItemClick: (Product) -> Unit,
+    onItemButtonClick: (Product) -> Unit,
+    onAddClicked: (Product) -> Unit,
+    onRemoveClicked: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -35,15 +38,28 @@ fun ProductsGrid(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.grid_vertical_space))
     ) {
         items(products) { product ->
-            ProductItem(product, onItemClick, modifier)
+            ProductItem(
+                product = product,
+                onItemClick = onItemClick,
+                onItemButtonClick = onItemButtonClick,
+                onAddClicked = onAddClicked,
+                onRemoveClicked = onRemoveClicked,
+                modifier = modifier
+            )
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ProductsGridPreview() {
+fun ProductsListPreview() {
     ShoppingCartTheme {
-        ProductsGrid(dummyProducts, onItemClick = {})
+        ProductsList(
+            products = dummyProducts,
+            onItemClick = {},
+            onItemButtonClick = {},
+            onAddClicked = {},
+            onRemoveClicked = {},
+        )
     }
 }
