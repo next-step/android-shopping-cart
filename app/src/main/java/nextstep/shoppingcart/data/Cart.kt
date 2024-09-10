@@ -1,13 +1,13 @@
 package nextstep.shoppingcart.data
 
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import nextstep.shoppingcart.model.CartItemInfo
 import nextstep.shoppingcart.model.Product
 
 object Cart {
-    private val _items: MutableList<CartItemInfo> = mutableListOf()
+    private val _items: SnapshotStateList<CartItemInfo> = mutableStateListOf()
     val items: List<CartItemInfo> get() = _items.toList()
-
-    val totalPrice: Long get() = _items.sumOf { it.totalPrice }
 
     fun addOne(product: Product): List<CartItemInfo> {
         val item = _items.find { it.product == product }

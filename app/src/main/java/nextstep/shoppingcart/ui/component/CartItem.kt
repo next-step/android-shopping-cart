@@ -31,7 +31,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.model.CartItemInfo
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.Grey10
@@ -69,24 +68,10 @@ fun CartItem(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = cartItemInfo.product.name,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    maxLines = 1
+                TitleText(cartItemInfo.product.name)
+                CloseButton(
+                    onClick = { onClickDelete(cartItemInfo.product) }
                 )
-                IconButton(
-                    modifier = Modifier
-                        .testTag("deleteButton")
-                        .size(24.dp),
-                    onClick = { onClickDelete(cartItemInfo.product) },
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Close,
-                        contentDescription = "뒤로 가기",
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
             }
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -107,19 +92,11 @@ fun CartItem(
                         price = cartItemInfo.product.price,
                         modifier = Modifier.align(Alignment.End)
                     )
-                    Row(
-                        modifier = Modifier.height(42.dp),
-                        verticalAlignment = Alignment.Bottom
-                    ) {
-                        CounterButton("−") { onClickDecrease(cartItemInfo.product) }
-                        Text(
-                            text = "${cartItemInfo.count}",
-                            modifier = Modifier
-                                .fillMaxHeight()
-                                .wrapContentSize(Alignment.Center)
-                        )
-                        CounterButton("+") { onClickIncrease(cartItemInfo.product) }
-                    }
+                    Counter(
+                        onClickDecrease = { onClickDecrease(cartItemInfo.product) },
+                        onClickIncrease = { onClickIncrease(cartItemInfo.product) },
+                        count = cartItemInfo.count,
+                    )
                 }
             }
         }
@@ -127,19 +104,27 @@ fun CartItem(
 }
 
 @Composable
-fun CounterButton(title: String, onClick: () -> Unit) {
-    TextButton(
+fun TitleText(title: String) {
+    Text(
+        text = title,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+        maxLines = 1
+    )
+}
+
+@Composable
+fun CloseButton(onClick: () -> Unit) {
+    IconButton(
+        modifier = Modifier
+            .testTag("deleteButton")
+            .size(24.dp),
         onClick = onClick,
-        modifier = Modifier.size(42.dp)
     ) {
-        Text(
-            text = title,
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black,
-            modifier = Modifier
-                .fillMaxSize()
-                .wrapContentSize(Alignment.Center)
+        Icon(
+            imageVector = Icons.Filled.Close,
+            contentDescription = "뒤로 가기",
+            modifier = Modifier.fillMaxSize()
         )
     }
 }
