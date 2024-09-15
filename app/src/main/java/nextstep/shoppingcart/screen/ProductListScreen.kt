@@ -23,10 +23,10 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
  * @see
  * */
 @Composable
-fun ShoppingCartScreen(
+fun ProductListScreen(
 	navigateToManagementScreen: (clickedProductId: Int) -> Unit = {},
 ) {
-	ShoppingCartScreen(
+	ProductListScreen(
 		modifier = Modifier.fillMaxSize(),
 		navigateToProductDetailScreen = { clickedProductId ->
 			navigateToManagementScreen(clickedProductId)
@@ -40,7 +40,7 @@ fun ShoppingCartScreen(
  * preview 등에서 조작 하기 위해
  */
 @Composable
-fun ShoppingCartScreen(
+fun ProductListScreen(
 	modifier: Modifier = Modifier,
 	navigateToProductDetailScreen: (clickedProductId: Int) -> Unit = {},
 ) {
@@ -65,9 +65,9 @@ fun ShoppingCartScreen(
  */
 @Preview
 @Composable
-fun ShoppingCartScreenPreview() {
+fun ProductListScreenPreview() {
 	ShoppingCartTheme {
-		ShoppingCartScreen(
+		ProductListScreen(
 			modifier = Modifier.background(Color.White)
 		)
 	}

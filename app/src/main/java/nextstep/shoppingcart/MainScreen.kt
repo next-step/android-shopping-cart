@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import nextstep.shoppingcart.enums.ScreenRouteType
 import nextstep.shoppingcart.screen.ProductDetailScreen
-import nextstep.shoppingcart.screen.ShoppingCartScreen
+import nextstep.shoppingcart.screen.ProductListScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 /**
@@ -48,7 +48,7 @@ fun MainScreen(
         }
     ) {
         composable(route = ScreenRouteType.SHOPPING_ITEM_LIST.navRoute) {
-            ShoppingCartScreen(
+            ProductListScreen(
                 navigateToManagementScreen = { clickedProductId ->
                     navHostController.navigate(
                         route = ScreenRouteType.PRODUCT_DETAIL.navRoute+"?productId=$clickedProductId"
