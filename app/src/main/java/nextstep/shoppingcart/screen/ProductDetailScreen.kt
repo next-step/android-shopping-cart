@@ -83,8 +83,7 @@ private fun ProductDetailScreen(
     productThumbnail: String,
     addCartButtonClicked: (productId: Int) -> Unit = {},
     toolbarBackBtnClicked: () -> Unit = {},
-
-    ) {
+) {
     Scaffold(
         modifier = modifier,
         topBar = {

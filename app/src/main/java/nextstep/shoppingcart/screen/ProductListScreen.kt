@@ -24,12 +24,16 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
  * */
 @Composable
 fun ProductListScreen(
-	navigateToManagementScreen: (clickedProductId: Int) -> Unit = {},
+	navigateToProductDetailScreen: (clickedProductId: Int) -> Unit = {},
+	navigateToShoppingCartScreen: () -> Unit = {},
 ) {
 	ProductListScreen(
 		modifier = Modifier.fillMaxSize(),
 		navigateToProductDetailScreen = { clickedProductId ->
-			navigateToManagementScreen(clickedProductId)
+			navigateToProductDetailScreen(clickedProductId)
+		},
+		navigateToShoppingCartScreen = {
+			navigateToShoppingCartScreen()
 		}
 	)
 }
@@ -43,11 +47,16 @@ fun ProductListScreen(
 fun ProductListScreen(
 	modifier: Modifier = Modifier,
 	navigateToProductDetailScreen: (clickedProductId: Int) -> Unit = {},
+	navigateToShoppingCartScreen: () -> Unit = {},
 ) {
 	Scaffold(
 		modifier = modifier,
 		topBar = {
-			ShoppingCartToolbar()
+			ShoppingCartToolbar(
+				actionIconClicked = {
+					navigateToShoppingCartScreen()
+				}
+			)
 		}
 	) { contentPadding ->
 		ProductList(

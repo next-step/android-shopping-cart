@@ -15,6 +15,7 @@ import androidx.navigation.navArgument
 import nextstep.shoppingcart.enums.ScreenRouteType
 import nextstep.shoppingcart.screen.ProductDetailScreen
 import nextstep.shoppingcart.screen.ProductListScreen
+import nextstep.shoppingcart.screen.ShoppingCartScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 /**
@@ -49,9 +50,14 @@ fun MainScreen(
     ) {
         composable(route = ScreenRouteType.SHOPPING_ITEM_LIST.navRoute) {
             ProductListScreen(
-                navigateToManagementScreen = { clickedProductId ->
+                navigateToProductDetailScreen = { clickedProductId ->
                     navHostController.navigate(
                         route = ScreenRouteType.PRODUCT_DETAIL.navRoute+"?productId=$clickedProductId"
+                    )
+                },
+                navigateToShoppingCartScreen = {
+                    navHostController.navigate(
+                        route = ScreenRouteType.SHOPPING_CART.navRoute
                     )
                 }
             )
@@ -62,13 +68,25 @@ fun MainScreen(
             arguments = listOf(navArgument("productId") {
                 type = NavType.Companion.IntType; defaultValue = ERROR_PRODUCT_ID
             })
-        ) { navBackStackEntry->
-            val productId = navBackStackEntry.arguments?.getInt("productId")?:ERROR_PRODUCT_ID
+        ) { navBackStackEntry ->
+            val productId = navBackStackEntry.arguments?.getInt("productId") ?: ERROR_PRODUCT_ID
             ProductDetailScreen(
                 productId = productId,
                 addCartButtonClicked = {
-                    // TODO: 장바구니에 상품 추가 기능 구현
+                    navHostController.navigate(
+                        route = ScreenRouteType.SHOPPING_CART.navRoute
+                    )
                 },
+                toolbarBackBtnClicked = {
+                    navHostController.popBackStack()
+                }
+            )
+        }
+
+        composable(
+            route = ScreenRouteType.SHOPPING_CART.navRoute
+        ) {
+            ShoppingCartScreen(
                 toolbarBackBtnClicked = {
                     navHostController.popBackStack()
                 }
