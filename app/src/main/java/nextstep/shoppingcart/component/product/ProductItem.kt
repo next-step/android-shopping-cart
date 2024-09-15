@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.component.product
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
@@ -23,7 +24,7 @@ import java.util.Locale
 /**
  * 쇼핑카트 상품목록 상품 아이템 이미지 비율
  */
-const val SHOPPING_ITEM_THUMBNAIL_RATIO = 0.98f / 1f
+private const val SHOPPING_ITEM_THUMBNAIL_RATIO = 0.98f / 1f
 
 /**
  * 쇼핑카트 상품목록 상품 아이템
@@ -34,9 +35,12 @@ fun ProductItem(
     productThumbnail:String,
     productTitle: String,
     productPrice: Long,
+    onItemClick: () -> Unit = {},
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier.clickable {
+            onItemClick()
+        },
     ) {
         AsyncImage(
             contentScale = ContentScale.Crop,

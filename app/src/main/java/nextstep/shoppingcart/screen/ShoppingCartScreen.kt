@@ -22,11 +22,15 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
  *
  * @see
  * */
-
 @Composable
-fun ShoppingCartScreen() {
+fun ShoppingCartScreen(
+	navigateToManagementScreen: (clickedProductId: Int) -> Unit = {},
+) {
 	ShoppingCartScreen(
-		modifier = Modifier.fillMaxSize()
+		modifier = Modifier.fillMaxSize(),
+		navigateToProductDetailScreen = { clickedProductId ->
+			navigateToManagementScreen(clickedProductId)
+		}
 	)
 }
 
@@ -38,6 +42,7 @@ fun ShoppingCartScreen() {
 @Composable
 fun ShoppingCartScreen(
 	modifier: Modifier = Modifier,
+	navigateToProductDetailScreen: (clickedProductId: Int) -> Unit = {},
 ) {
 	Scaffold(
 		modifier = modifier,
@@ -48,9 +53,9 @@ fun ShoppingCartScreen(
 		ProductList(
 			modifier = Modifier.padding(10.dp),
 			contentPadding = contentPadding,
-			productList = shoppingItemMockList
-		) { _ -> // TODO: 추후 클릭 처리  로직 추가
-
+			productList = shoppingItemMockList,
+		) { clickedShoppingItem -> // 상품 클릭 시 상세 화면으로 이동
+			navigateToProductDetailScreen(clickedShoppingItem.id)
 		}
 	}
 }
