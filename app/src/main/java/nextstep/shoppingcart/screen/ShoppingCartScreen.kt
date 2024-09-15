@@ -10,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.toolbar.BackButtonToolbar
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 /**
  * Create Date: 2024. 9. 16.
@@ -63,5 +64,7 @@ private fun ShoppingCartScreen(
 @Composable
 @Preview
 fun ShoppingCartScreenPreview() {
-    ShoppingCartScreen()
+   ShoppingCartTheme {
+       ShoppingCartScreen()
+   }
 }

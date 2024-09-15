@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -18,16 +17,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import nextstep.shoppingcart.ERROR_PRODUCT_ID
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.button.AddCartButton
+import nextstep.shoppingcart.component.image.ProductImage
+import nextstep.shoppingcart.component.image.ProductImageRatioType
 import nextstep.shoppingcart.component.toolbar.BackButtonToolbar
 import nextstep.shoppingcart.mock.shoppingItemMockList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -69,7 +68,7 @@ fun ProductDetailScreen(
 /**
  * 상품 상세 썸네일 비율
  **/
-private const val PRODUCT_ITEM_THUMBNAIL_RATIO = 1f / 1f
+private const val PRODUCT_ITEM_THUMBNAIL_RATIO = 1f
 
 /**
  * 상품 상세 화면 screen
@@ -109,12 +108,9 @@ private fun ProductDetailScreen(
                 .wrapContentHeight()
                 .verticalScroll(rememberScrollState())
         ) {
-            AsyncImage(
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .aspectRatio(PRODUCT_ITEM_THUMBNAIL_RATIO),
-                model = productThumbnail,
-                contentDescription = "상품 이미지",
+            ProductImage(
+                productThumbnail = productThumbnail,
+                imageRatio = ProductImageRatioType.SHOPPING_ITEM_DETAIL_RATIO,
             )
             Text(
                 modifier = Modifier
