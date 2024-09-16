@@ -24,16 +24,16 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
  * */
 @Composable
 fun ProductListScreen(
-	navigateToProductDetailScreen: (clickedProductId: Int) -> Unit = {},
-	navigateToShoppingCartScreen: () -> Unit = {},
+	onProductItemClicked: (clickedProductId: Int) -> Unit = {},
+	onShoppingCartIconClicked: () -> Unit = {},
 ) {
 	ProductListScreen(
 		modifier = Modifier.fillMaxSize(),
-		navigateToProductDetailScreen = { clickedProductId ->
-			navigateToProductDetailScreen(clickedProductId)
+		onProductItemClicked = { clickedProductId ->
+			onProductItemClicked(clickedProductId)
 		},
-		navigateToShoppingCartScreen = {
-			navigateToShoppingCartScreen()
+		onShoppingCartIconClicked = {
+			onShoppingCartIconClicked()
 		}
 	)
 }
@@ -46,15 +46,15 @@ fun ProductListScreen(
 @Composable
 fun ProductListScreen(
 	modifier: Modifier = Modifier,
-	navigateToProductDetailScreen: (clickedProductId: Int) -> Unit = {},
-	navigateToShoppingCartScreen: () -> Unit = {},
+	onProductItemClicked: (clickedProductId: Int) -> Unit = {},
+	onShoppingCartIconClicked: () -> Unit = {},
 ) {
 	Scaffold(
 		modifier = modifier,
 		topBar = {
 			ShoppingCartToolbar(
 				actionIconClicked = {
-					navigateToShoppingCartScreen()
+					onShoppingCartIconClicked()
 				}
 			)
 		}
@@ -64,7 +64,7 @@ fun ProductListScreen(
 			contentPadding = contentPadding,
 			productList = shoppingItemMockList,
 		) { clickedShoppingItem -> // 상품 클릭 시 상세 화면으로 이동
-			navigateToProductDetailScreen(clickedShoppingItem.id)
+			onProductItemClicked(clickedShoppingItem.id)
 		}
 	}
 }

@@ -22,13 +22,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.ERROR_PRODUCT_ID
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.button.AddCartButton
 import nextstep.shoppingcart.component.image.ProductImage
 import nextstep.shoppingcart.component.image.ProductImageRatioType
 import nextstep.shoppingcart.component.toolbar.BackButtonToolbar
 import nextstep.shoppingcart.mock.shoppingItemMockList
+import nextstep.shoppingcart.navigation.ERROR_PRODUCT_ID
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.util.getLocalCurrencyFormat
 
@@ -64,11 +64,6 @@ fun ProductDetailScreen(
         )
     }
 }
-
-/**
- * 상품 상세 썸네일 비율
- **/
-private const val PRODUCT_ITEM_THUMBNAIL_RATIO = 1f
 
 /**
  * 상품 상세 화면 screen

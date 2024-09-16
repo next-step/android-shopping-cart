@@ -7,21 +7,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import nextstep.shoppingcart.enums.ScreenRouteType
-import nextstep.shoppingcart.screen.ProductDetailScreen
-import nextstep.shoppingcart.screen.ProductListScreen
+import nextstep.shoppingcart.navigation.productDetailScreen
+import nextstep.shoppingcart.navigation.productListScreen
+import nextstep.shoppingcart.navigation.shoppingCartScreen
 import nextstep.shoppingcart.screen.ShoppingCartScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
-/**
- * 상품 id가 에러가 있는 경우 -1로 처리
-**/
-const val ERROR_PRODUCT_ID = -1
 
 /**
  * Create Date: 2024. 9. 2.
@@ -41,57 +36,39 @@ fun MainScreen(
         modifier = modifier.padding(0.dp),
         navController = navHostController,
         startDestination = ScreenRouteType.SHOPPING_ITEM_LIST.navRoute,
-        enterTransition = {
-            EnterTransition.None
-        },
-        exitTransition = {
-            ExitTransition.None
-        }
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None }
     ) {
-        composable(route = ScreenRouteType.SHOPPING_ITEM_LIST.navRoute) {
-            ProductListScreen(
-                navigateToProductDetailScreen = { clickedProductId ->
-                    navHostController.navigate(
-                        route = ScreenRouteType.PRODUCT_DETAIL.navRoute+"?productId=$clickedProductId"
-                    )
-                },
-                navigateToShoppingCartScreen = {
-                    navHostController.navigate(
-                        route = ScreenRouteType.SHOPPING_CART.navRoute
-                    )
-                }
-            )
-        }
-
-        composable(
-            route = ScreenRouteType.PRODUCT_DETAIL.navRoute + "?productId={productId}",
-            arguments = listOf(navArgument("productId") {
-                type = NavType.Companion.IntType; defaultValue = ERROR_PRODUCT_ID
-            })
-        ) { navBackStackEntry ->
-            val productId = navBackStackEntry.arguments?.getInt("productId") ?: ERROR_PRODUCT_ID
-            ProductDetailScreen(
-                productId = productId,
-                addCartButtonClicked = {
-                    navHostController.navigate(
-                        route = ScreenRouteType.SHOPPING_CART.navRoute
-                    )
-                },
-                toolbarBackBtnClicked = {
-                    navHostController.popBackStack()
-                }
-            )
-        }
-
-        composable(
-            route = ScreenRouteType.SHOPPING_CART.navRoute
-        ) {
-            ShoppingCartScreen(
-                toolbarBackBtnClicked = {
-                    navHostController.popBackStack()
-                }
-            )
-        }
+        // 상품 리스트 화면
+        productListScreen(
+            onShoppingCartIconClicked = {
+                navHostController.navigate(
+                    route = ScreenRouteType.SHOPPING_CART.navRoute
+                )
+            },
+            onProductItemClicked = { clickedProductId ->
+                navHostController.navigate(
+                    route = ScreenRouteType.PRODUCT_DETAIL.navRoute + "?productId=$clickedProductId"
+                )
+            }
+        )
+        // 상품 상세 화면
+        productDetailScreen(
+            addCartButtonClicked = {
+                navHostController.navigate(
+                    route = ScreenRouteType.SHOPPING_CART.navRoute
+                )
+            },
+            toolbarBackBtnClicked = {
+                navHostController.popBackStack()
+            }
+        )
+        // 쇼핑카트 화면
+        shoppingCartScreen(
+            toolbarBackBtnClicked = {
+                navHostController.popBackStack()
+            }
+        )
     }
 }
 
