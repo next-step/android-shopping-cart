@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.navigation
 
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
@@ -11,6 +12,13 @@ import nextstep.shoppingcart.screen.ProductDetailScreen
  * 상품 id가 에러가 있는 경우 -1로 처리
  **/
 const val ERROR_PRODUCT_ID = -1
+
+/**
+ * 상품 상세 화면으로 이동
+ **/
+fun NavHostController.navigateToProductDetail(productId: Int) {
+    navigate(ScreenRouteType.PRODUCT_DETAIL.navRoute + "?productId=$productId")
+}
 
 /**
  * navigation product detail composable 구성용 확장 함수

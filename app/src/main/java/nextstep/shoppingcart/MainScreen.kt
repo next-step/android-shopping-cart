@@ -8,13 +8,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.enums.ScreenRouteType
+import nextstep.shoppingcart.navigation.navigateToProductDetail
+import nextstep.shoppingcart.navigation.navigateToShoppingCart
 import nextstep.shoppingcart.navigation.productDetailScreen
 import nextstep.shoppingcart.navigation.productListScreen
 import nextstep.shoppingcart.navigation.shoppingCartScreen
-import nextstep.shoppingcart.screen.ShoppingCartScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 
@@ -42,22 +42,16 @@ fun MainScreen(
         // 상품 리스트 화면
         productListScreen(
             onShoppingCartIconClicked = {
-                navHostController.navigate(
-                    route = ScreenRouteType.SHOPPING_CART.navRoute
-                )
+                navHostController.navigateToShoppingCart()
             },
             onProductItemClicked = { clickedProductId ->
-                navHostController.navigate(
-                    route = ScreenRouteType.PRODUCT_DETAIL.navRoute + "?productId=$clickedProductId"
-                )
+                navHostController.navigateToProductDetail(productId = clickedProductId)
             }
         )
         // 상품 상세 화면
         productDetailScreen(
             addCartButtonClicked = {
-                navHostController.navigate(
-                    route = ScreenRouteType.SHOPPING_CART.navRoute
-                )
+                navHostController.navigateToShoppingCart()
             },
             toolbarBackBtnClicked = {
                 navHostController.popBackStack()

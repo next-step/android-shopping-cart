@@ -1,9 +1,17 @@
 package nextstep.shoppingcart.navigation
 
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import nextstep.shoppingcart.enums.ScreenRouteType
 import nextstep.shoppingcart.screen.ShoppingCartScreen
+
+/**
+ * 장바구니 화면으로 이동
+ */
+fun NavHostController.navigateToShoppingCart() {
+    navigate(route = ScreenRouteType.SHOPPING_CART.navRoute)
+}
 
 /**
  * Shopping Cart Navigation
