@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import nextstep.shoppingcart.enums.ScreenRouteType
-import nextstep.shoppingcart.screen.ShoppingCartScreen
+import nextstep.shoppingcart.screen.ShoppingCartRoute
 
 /**
  * 장바구니 화면으로 이동
@@ -22,7 +22,7 @@ fun NavGraphBuilder.shoppingCartScreen(
     composable(
         route = ScreenRouteType.SHOPPING_CART.navRoute
     ) {
-        ShoppingCartScreen(
+        ShoppingCartRoute(
             toolbarBackBtnClicked = {
                 toolbarBackBtnClicked()
             }

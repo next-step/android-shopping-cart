@@ -3,7 +3,7 @@ package nextstep.shoppingcart.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import nextstep.shoppingcart.enums.ScreenRouteType
-import nextstep.shoppingcart.screen.ProductListScreen
+import nextstep.shoppingcart.screen.ProductListRoute
 
 
 /**
@@ -14,7 +14,7 @@ fun NavGraphBuilder.productListScreen(
     onShoppingCartIconClicked: () -> Unit,
 ){
     composable(route = ScreenRouteType.SHOPPING_ITEM_LIST.navRoute) {
-        ProductListScreen(
+        ProductListRoute(
             onProductItemClicked = { clickedProductId ->
                 onProductItemClicked(clickedProductId)
             },

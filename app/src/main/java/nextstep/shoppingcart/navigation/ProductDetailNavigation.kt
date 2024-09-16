@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import nextstep.shoppingcart.enums.ScreenRouteType
-import nextstep.shoppingcart.screen.ProductDetailScreen
+import nextstep.shoppingcart.screen.ProductDetailRoute
 
 /**
  * 상품 id가 에러가 있는 경우 -1로 처리
@@ -34,7 +34,7 @@ fun NavGraphBuilder.productDetailScreen(
         })
     ) { navBackStackEntry ->
         val productId = navBackStackEntry.arguments?.getInt("productId") ?: ERROR_PRODUCT_ID
-        ProductDetailScreen(
+        ProductDetailRoute(
             productId = productId,
             addCartButtonClicked = {
                 addCartButtonClicked()

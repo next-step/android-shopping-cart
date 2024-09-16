@@ -43,7 +43,7 @@ import nextstep.shoppingcart.util.getLocalCurrencyFormat
  * 외부로 클릭 처리 넘겨줌.
  **/
 @Composable
-fun ProductDetailScreen(
+fun ProductDetailRoute(
     productId: Int,
     addCartButtonClicked: (productId: Int) -> Unit = {},
     toolbarBackBtnClicked: () -> Unit = {},

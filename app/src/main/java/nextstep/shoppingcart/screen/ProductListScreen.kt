@@ -23,7 +23,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
  * @see
  * */
 @Composable
-fun ProductListScreen(
+fun ProductListRoute(
 	onProductItemClicked: (clickedProductId: Int) -> Unit = {},
 	onShoppingCartIconClicked: () -> Unit = {},
 ) {

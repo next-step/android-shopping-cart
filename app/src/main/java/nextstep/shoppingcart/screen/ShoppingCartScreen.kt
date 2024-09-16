@@ -22,7 +22,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 **/
 
 @Composable
-fun ShoppingCartScreen(
+fun ShoppingCartRoute(
     toolbarBackBtnClicked: () -> Unit = {},
 ) {
     ShoppingCartScreen(
