@@ -38,11 +38,14 @@ fun ProductList(
             items = productList,
             key = { item -> item.id }
         ) { item ->
-            ShoppingItem(
+            ProductItem(
                 modifier = Modifier.padding(5.dp),
                 productThumbnail = item.productThumbnail,
                 productTitle = item.productTitle,
-                productPrice = item.productPrice
+                productPrice = item.productPrice,
+                onItemClick = {
+                    onItemClick(item)
+                }
             )
         }
     }

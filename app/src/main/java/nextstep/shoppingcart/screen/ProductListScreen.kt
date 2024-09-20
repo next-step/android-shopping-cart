@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,11 +22,19 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
  *
  * @see
  * */
-
 @Composable
-fun ShoppingCartScreen() {
-	ShoppingCartScreen(
-		modifier = Modifier.fillMaxSize()
+fun ProductListRoute(
+	onProductItemClicked: (clickedProductId: Int) -> Unit = {},
+	onShoppingCartIconClicked: () -> Unit = {},
+) {
+	ProductListScreen(
+		modifier = Modifier.fillMaxSize(),
+		onProductItemClicked = { clickedProductId ->
+			onProductItemClicked(clickedProductId)
+		},
+		onShoppingCartIconClicked = {
+			onShoppingCartIconClicked()
+		}
 	)
 }
 
@@ -36,21 +44,27 @@ fun ShoppingCartScreen() {
  * preview 등에서 조작 하기 위해
  */
 @Composable
-fun ShoppingCartScreen(
+fun ProductListScreen(
 	modifier: Modifier = Modifier,
-){
+	onProductItemClicked: (clickedProductId: Int) -> Unit = {},
+	onShoppingCartIconClicked: () -> Unit = {},
+) {
 	Scaffold(
-		modifier =  modifier,
+		modifier = modifier,
 		topBar = {
-			ShoppingCartToolbar()
+			ShoppingCartToolbar(
+				actionIconClicked = {
+					onShoppingCartIconClicked()
+				}
+			)
 		}
 	) { contentPadding ->
 		ProductList(
 			modifier = Modifier.padding(10.dp),
 			contentPadding = contentPadding,
-			productList = shoppingItemMockList
-		) { _ -> // TODO: 추후 클릭 처리  로직 추가
-
+			productList = shoppingItemMockList,
+		) { clickedShoppingItem -> // 상품 클릭 시 상세 화면으로 이동
+			onProductItemClicked(clickedShoppingItem.id)
 		}
 	}
 }
@@ -60,9 +74,9 @@ fun ShoppingCartScreen(
  */
 @Preview
 @Composable
-fun ShoppingCartScreenPreview() {
-	ShoppingCartTheme{
-		ShoppingCartScreen(
+fun ProductListScreenPreview() {
+	ShoppingCartTheme {
+		ProductListScreen(
 			modifier = Modifier.background(Color.White)
 		)
 	}

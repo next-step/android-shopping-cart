@@ -1,7 +1,7 @@
 package nextstep.shoppingcart.component.product
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -9,41 +9,37 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
+import nextstep.shoppingcart.component.image.ProductImage
+import nextstep.shoppingcart.component.image.ProductImageRatioType
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.util.getLocalCurrencyFormat
 import java.util.Locale
 
-/**
- * 쇼핑카트 상품목록 상품 아이템 이미지 비율
- */
-const val SHOPPING_ITEM_THUMBNAIL_RATIO = 0.98f / 1f
 
 /**
  * 쇼핑카트 상품목록 상품 아이템
  **/
 @Composable
-fun ShoppingItem(
+fun ProductItem(
     modifier: Modifier = Modifier,
     productThumbnail:String,
     productTitle: String,
     productPrice: Long,
+    onItemClick: () -> Unit = {},
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier.clickable {
+            onItemClick()
+        },
     ) {
-        AsyncImage(
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .aspectRatio(SHOPPING_ITEM_THUMBNAIL_RATIO),
-            model = productThumbnail,
-            contentDescription = "상품 이미지",
+        ProductImage(
+            productThumbnail = productThumbnail,
+            imageRatio = ProductImageRatioType.SHOPPING_ITEM_THUMBNAIL_RATIO,
         )
         Text(
             modifier = Modifier.padding(start = 5.dp),
@@ -73,9 +69,9 @@ fun ShoppingItem(
     backgroundColor = 0xFFFFFFFFL
 )
 @Composable
-fun ShoppingItemPreview() {
+fun ProductItemPreview() {
     ShoppingCartTheme {
-        ShoppingItem(
+        ProductItem(
             modifier = Modifier
                 .wrapContentWidth()
                 .wrapContentHeight(),
