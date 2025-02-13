@@ -2,7 +2,6 @@ package nextstep.shoppingcart.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,7 +11,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.ShoppingCartTopBar
 import nextstep.shoppingcart.components.ShoppingCartTopBarActionType
 import nextstep.shoppingcart.data.FakeProductRepository
-import nextstep.shoppingcart.domain.Products
+import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable

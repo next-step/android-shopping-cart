@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import nextstep.shoppingcart.data.FakeProductRepository
-import nextstep.shoppingcart.domain.Products
+import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.screens.MainScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 

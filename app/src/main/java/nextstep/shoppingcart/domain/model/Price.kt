@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.domain
+package nextstep.shoppingcart.domain.model
 
 @JvmInline
 value class Price private constructor(val value: Int) {

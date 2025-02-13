@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.domain
+package nextstep.shoppingcart.domain.model
 
 class Products(initialProducts: List<Product>) {
     private val _value: MutableList<Product> = initialProducts.toMutableList()

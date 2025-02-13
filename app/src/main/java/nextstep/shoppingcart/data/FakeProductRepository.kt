@@ -1,9 +1,9 @@
 package nextstep.shoppingcart.data
 
-import nextstep.shoppingcart.domain.Price
-import nextstep.shoppingcart.domain.Product
-import nextstep.shoppingcart.domain.ProductRepository
-import nextstep.shoppingcart.domain.Products
+import nextstep.shoppingcart.domain.model.Price
+import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.domain.repository.ProductRepository
+import nextstep.shoppingcart.domain.model.Products
 
 object FakeProductRepository : ProductRepository {
     override fun getAllProducts(): Products {

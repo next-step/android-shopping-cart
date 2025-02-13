@@ -23,11 +23,11 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.FakeProductRepository
-import nextstep.shoppingcart.domain.Products
+import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun ProductListScreen(products: Products, modifier: Modifier = Modifier) {
+internal fun ProductListScreen(products: Products, modifier: Modifier = Modifier) {
     LazyVerticalGrid(
         modifier = modifier.padding(vertical = 12.dp, horizontal = 18.dp),
         columns = GridCells.Fixed(2),
