@@ -1,16 +1,20 @@
 package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.data.repository.ProductRepositoryImpl
 
 
 @Composable
 fun ProductListScreen(
-    modifier: Modifier = Modifier,
-    onTopBarButtonClick: () -> Unit
+    productList: List<Product>,
+    onTopBarButtonClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -19,12 +23,20 @@ fun ProductListScreen(
                 onClickButton = onTopBarButtonClick
             )
         },
-        content = { _ -> }
+        content = { innerPadding ->
+            ProductListContent(
+                productList = productList,
+                modifier = Modifier.padding(innerPadding)
+            )
+        }
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ShoppingCartScreenPreview() {
-    ProductListScreen {}
+    ProductListScreen(
+        productList = ProductRepositoryImpl.getProductList(),
+        onTopBarButtonClick = {}
+    )
 }

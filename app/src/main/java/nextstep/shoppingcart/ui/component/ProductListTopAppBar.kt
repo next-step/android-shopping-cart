@@ -46,7 +46,7 @@ fun ProductListTopAppBar(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ProductListTopAppBarPreview() {
     ProductListTopAppBar {}
