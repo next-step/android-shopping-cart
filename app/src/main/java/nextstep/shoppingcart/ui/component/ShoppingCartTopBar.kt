@@ -1,6 +1,8 @@
 package nextstep.shoppingcart.ui.component
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -76,8 +78,14 @@ fun ShoppingCartTopBar(
 @Composable
 private fun ShoppingCartTopBarPreview() {
     ShoppingCartTheme {
-        ShoppingCartTopBar(
-            type = ShoppingCartTopBarType.PRODUCT_LIST
-        )
+        Column(
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            ShoppingCartTopBarType.entries.forEach {
+                ShoppingCartTopBar(
+                    type = it
+                )
+            }
+        }
     }
 }
