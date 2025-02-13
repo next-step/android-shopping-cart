@@ -132,4 +132,12 @@ object FakeProductRepository : ProductRepository {
             )
         )
     }
+
+    fun getFirstProduct(): Product =
+        Product(
+            id = 1,
+            name = "Wireless Mouse",
+            price = Price.of(9500),
+            imageUrl = "https://media.istockphoto.com/id/1458492520/ko/%EC%82%AC%EC%A7%84/%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B2%A9%EB%A6%AC-%EB%90%9C-%EA%B2%80%EC%9D%80-%EC%83%89-%EB%AC%B4%EC%84%A0-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%A7%88%EC%9A%B0%EC%8A%A4.jpg?s=2048x2048&w=is&k=20&c=G4NKK2vawg36_ejtJ8U-v0kG9I1xfZ8E34SQd5-F-VQ="
+        )
 }
