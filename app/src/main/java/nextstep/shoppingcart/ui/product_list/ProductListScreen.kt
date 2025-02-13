@@ -20,9 +20,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -30,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.ui.designsystem.ProductListItem
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -37,14 +40,26 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun ProductListScreen(
     modifier: Modifier = Modifier
 ) {
-    val state by remember {
+    var state by remember {
         mutableStateOf(ProductListState())
     }
 
-    ProductListScreen(
-        state = state,
-        modifier = modifier,
-    )
+    // viewModel이 없으므로 여기서 아이템 목록을 가져온다.
+    LaunchedEffect(true) {
+        state = state.copy(isLoading = true)
+
+        state = state.copy(
+            products = dummyProducts,
+            isLoading = false,
+        )
+    }
+
+    if (!state.isLoading) {
+        ProductListScreen(
+            state = state,
+            modifier = modifier,
+        )
+    }
 }
 
 @Composable
