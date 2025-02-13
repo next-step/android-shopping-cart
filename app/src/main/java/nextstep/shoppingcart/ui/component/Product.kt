@@ -3,6 +3,7 @@ package nextstep.shoppingcart.ui.component
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -31,45 +32,54 @@ fun Product(
     model: ProductModel,
     modifier: Modifier = Modifier,
 ) {
-    with(model) {
-        Column(modifier = modifier) {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(imageUrl)
-                    .diskCacheKey(model.id.toString())
-                    .build(),
-                contentDescription = stringResource(
-                    R.string.product_image_accessibility_text,
-                    model.name
-                ),
-                contentScale = ContentScale.FillHeight,
-                error = painterResource(R.drawable.ic_connection_error),
-                placeholder = painterResource(R.drawable.loading_img),
-                modifier = Modifier.aspectRatio(1f),
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = name,
-                style = Typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-                maxLines = 1,
-                modifier = Modifier
-                    .heightIn(min = 20.dp)
-                    .padding(horizontal = 4.dp),
-                overflow = TextOverflow.Ellipsis,
-            )
-            Spacer(modifier = Modifier.height(2.dp))
-            Text(
-                text = stringResource(R.string.korean_price, priceText),
-                style = Typography.bodyMedium,
-                maxLines = 1,
-                modifier = Modifier
-                    .heightIn(min = 20.dp)
-                    .padding(horizontal = 4.dp),
-                overflow = TextOverflow.Ellipsis,
-            )
-        }
+    Column(modifier = modifier) {
+        Thumbnail(
+            id = model.id,
+            imageUrl = model.imageUrl,
+            name = model.name
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = model.name,
+            style = Typography.bodyMedium,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1,
+            modifier = Modifier
+                .heightIn(min = 20.dp)
+                .padding(horizontal = 4.dp),
+            overflow = TextOverflow.Ellipsis,
+        )
+        Spacer(modifier = Modifier.height(2.dp))
+        Text(
+            text = stringResource(R.string.korean_price_format, model.price),
+            style = Typography.bodyMedium,
+            maxLines = 1,
+            modifier = Modifier
+                .heightIn(min = 20.dp)
+                .padding(horizontal = 4.dp),
+            overflow = TextOverflow.Ellipsis,
+        )
     }
+}
+
+@Composable
+private fun Thumbnail(id: Long, imageUrl: String, name: String) {
+    AsyncImage(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(imageUrl)
+            .diskCacheKey(id.toString())
+            .build(),
+        contentDescription = stringResource(
+            R.string.product_image_accessibility_text,
+            name,
+        ),
+        contentScale = ContentScale.FillHeight,
+        error = painterResource(R.drawable.ic_connection_error),
+        placeholder = painterResource(R.drawable.loading_img),
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f),
+    )
 }
 
 @Preview(showBackground = true)

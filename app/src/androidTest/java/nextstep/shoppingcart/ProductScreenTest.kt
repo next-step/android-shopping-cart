@@ -1,14 +1,10 @@
 package nextstep.shoppingcart
 
-import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
 import nextstep.shoppingcart.model.ProductModel
-import nextstep.shoppingcart.model.dummyProducts
-import nextstep.shoppingcart.ui.ProductScreen
+import nextstep.shoppingcart.ui.ProductListScreen
 import org.junit.Rule
 import org.junit.Test
 
@@ -41,7 +37,7 @@ class ProductScreenTest {
     fun 상품목록의_아이템이_노출() {
         // given
         composeTestRule.setContent {
-            ProductScreen(products = products)
+            ProductListScreen(products = products)
         }
 
         // then

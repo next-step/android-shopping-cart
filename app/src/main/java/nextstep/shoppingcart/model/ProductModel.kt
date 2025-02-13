@@ -1,17 +1,11 @@
 package nextstep.shoppingcart.model
 
-import java.text.NumberFormat
-
 data class ProductModel(
     val id: Long,
     val imageUrl: String,
     val name: String,
     val price: Int,
-) {
-    val priceText = numberFormat.format(price)
-}
-
-private val numberFormat = NumberFormat.getNumberInstance()
+)
 
 val dummyProducts = listOf(
     ProductModel(

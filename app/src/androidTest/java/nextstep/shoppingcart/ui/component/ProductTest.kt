@@ -1,9 +1,9 @@
 package nextstep.shoppingcart.ui.component
 
-import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onChildren
-import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.model.ProductModel
 import org.junit.Rule
 import org.junit.Test
@@ -18,8 +18,8 @@ class ProductTest {
         val model = ProductModel(
             id = 6871,
             imageUrl = "http://www.bing.com/search?q=nominavi",
-            name = "Adan Sawyer",
-            price = 1281
+            name = "우유",
+            price = 2_000
         )
         composeTestRule.setContent {
             Product(model)
@@ -27,8 +27,13 @@ class ProductTest {
 
         // then
         composeTestRule
-            .onNodeWithTag("productItem")
-            .onChildren()
-            .assertCountEquals(3)
+            .onNodeWithText("우유")
+            .isDisplayed()
+        composeTestRule
+            .onNodeWithText("2,000원")
+            .isDisplayed()
+        composeTestRule
+            .onNodeWithContentDescription("우유 이미지")
+            .isDisplayed()
     }
 }
