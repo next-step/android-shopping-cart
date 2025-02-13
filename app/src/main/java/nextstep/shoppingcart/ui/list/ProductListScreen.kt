@@ -23,10 +23,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.mockProducts
 import nextstep.shoppingcart.designsystem.theme.TopBarTextColor
 import nextstep.shoppingcart.ui.list.component.ProductItem
-import nextstep.signup.R
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
