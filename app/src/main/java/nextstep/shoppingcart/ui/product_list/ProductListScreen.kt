@@ -2,8 +2,12 @@
 
 package nextstep.shoppingcart.ui.product_list
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Badge
@@ -25,6 +29,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.designsystem.ProductListItem
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -51,11 +57,17 @@ private fun ProductListScreen(
             ProductListTopBar(state.selectedItemCount)
         }
     ) { paddingValues ->
-        LazyColumn(
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
             modifier = modifier
                 .padding(paddingValues)
+                .padding(horizontal = 18.dp, vertical = 13.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
-
+            items(state.products) { product ->
+                ProductListItem(product)
+            }
         }
     }
 }
@@ -104,7 +116,35 @@ fun ProductListTopBar(
 private fun ProductListScreenPreview() {
     ShoppingCartTheme {
         ProductListScreen(
-            state = ProductListState(),
+            state = ProductListState(
+                products = listOf(
+                    Product(
+                        imageUrl = "",
+                        name = "PET-보틀-정사각형 정사각형 정사각형 ",
+                        price = 10_000
+                    ),
+                    Product(
+                        imageUrl = "",
+                        name = "PET-보틀-세모",
+                        price = 10_000_000
+                    ),
+                    Product(
+                        imageUrl = "",
+                        name = "PET-보틀-정사각형 정사각형 정사각형 ",
+                        price = 1_000_000_000,
+                    ),
+                    Product(
+                        imageUrl = "",
+                        name = "PET-보틀-정사각형 정사각형 정사각형 ",
+                        price = 10_000
+                    ),
+                    Product(
+                        imageUrl = "",
+                        name = "PET-보틀-정사각형 정사각형 정사각형 ",
+                        price = 10_000
+                    ),
+                )
+            ),
         )
     }
 }
