@@ -7,12 +7,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -20,15 +23,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.dummyProducts
@@ -66,12 +72,40 @@ private fun ProductListScreen(
     state: ProductListState,
     modifier: Modifier = Modifier,
 ) {
+    val lazyState = rememberLazyGridState()
+    val scope = rememberCoroutineScope()
+    val showScrollToTopButton by remember {
+        derivedStateOf {
+            lazyState.firstVisibleItemIndex >= 5
+        }
+    }
+
     Scaffold(
         topBar = {
             ProductListTopBar(state.selectedItemCount)
+        },
+        floatingActionButton = {
+            if (showScrollToTopButton) {
+                FloatingActionButton(
+                    modifier = Modifier
+                        .padding(bottom = 16.dp, end = 16.dp),
+                    onClick = {
+                        scope.launch {
+                            lazyState.animateScrollToItem(0)
+                        }
+                    },
+                    containerColor = MaterialTheme.colorScheme.primary
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowUp,
+                        contentDescription = null,
+                    )
+                }
+            }
         }
     ) { paddingValues ->
         LazyVerticalGrid(
+            state = lazyState,
             columns = GridCells.Fixed(2),
             modifier = modifier
                 .padding(paddingValues)
