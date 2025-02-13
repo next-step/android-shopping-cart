@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -91,7 +92,10 @@ fun ProductListTopBar(
                     contentDescription = stringResource(R.string.product_list_description_shopping_cart),
                 )
             }
-        }
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors().copy(
+            containerColor = Color.White,
+        )
     )
 }
 
