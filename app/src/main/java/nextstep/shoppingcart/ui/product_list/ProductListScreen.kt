@@ -66,8 +66,7 @@ fun ProductListTopBar(
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
-        modifier = modifier
-            .padding(horizontal = 8.dp),
+        modifier = modifier,
         title = {
             Text(
                 text = stringResource(R.string.product_list_screen_title),
@@ -85,7 +84,8 @@ fun ProductListTopBar(
                             Text("$addedItemCount")
                         }
                     }
-                }
+                },
+                modifier = Modifier.padding(end = 4.dp),
             ) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
