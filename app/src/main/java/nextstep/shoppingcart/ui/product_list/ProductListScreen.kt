@@ -132,7 +132,7 @@ private fun ProductListScreen(
 }
 
 @Composable
-fun ProductListTopBar(
+private fun ProductListTopBar(
     addedItemCount: Int,
     modifier: Modifier = Modifier,
 ) {
