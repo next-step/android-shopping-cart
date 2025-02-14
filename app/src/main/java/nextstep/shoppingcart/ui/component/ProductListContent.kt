@@ -26,10 +26,10 @@ internal fun ProductListContent(
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         items(
-            count = productList.size,
-            key = { productList[it].id }
-        ) { index ->
-            ProductItem(product = productList[index])
+            items = productList,
+            key = { it.id }
+        ) { product ->
+            ProductItem(product)
         }
     }
 }
