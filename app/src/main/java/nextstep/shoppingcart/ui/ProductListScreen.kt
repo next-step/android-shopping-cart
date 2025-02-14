@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.component
+package nextstep.shoppingcart.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -8,6 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.data.model.Product
 import nextstep.shoppingcart.data.repository.ProductRepositoryImpl
+import nextstep.shoppingcart.ui.component.ProductListContent
+import nextstep.shoppingcart.ui.component.ProductListTopAppBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 
