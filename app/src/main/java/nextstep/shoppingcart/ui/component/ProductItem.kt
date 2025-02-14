@@ -1,12 +1,6 @@
 package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,34 +12,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import coil3.compose.SubcomposeAsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun ProductItem(
+internal fun ProductItem(
     product: Product,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.testTag("ProductItem")
     ) {
-        SubcomposeAsyncImage(
-            model = product.imageUrl,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f),
-            contentDescription = null,
-            loading = {
-                CircularProgressIndicator()
-            },
-            error = {
-                Icon(
-                    imageVector = Icons.Filled.Warning,
-                    contentDescription = null
-                )
-            }
-        )
+        ProductImage(product.imageUrl)
         Text(
             text = product.name,
             maxLines = 1,
@@ -76,12 +55,14 @@ fun ProductItem(
 @Preview(showBackground = true)
 @Composable
 private fun ProductItemPreview() {
-    ProductItem(
-        Product(
-            id = 2300,
-            name = "Carmella Hardin",
-            imageUrl = "https://picsum.photos/200",
-            price = 6085
+    ShoppingCartTheme {
+        ProductItem(
+            Product(
+                id = 2300,
+                name = "Carmella Hardin",
+                imageUrl = "https://picsum.photos/200",
+                price = 6085
+            )
         )
-    )
+    }
 }
