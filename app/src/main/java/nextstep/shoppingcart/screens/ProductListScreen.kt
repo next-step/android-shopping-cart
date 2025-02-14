@@ -65,15 +65,17 @@ internal fun Product(
                 .aspectRatio(1.0f),
         )
         Spacer(Modifier.height(8.dp))
-        Column(modifier = Modifier.padding(start = 4.dp)) {
-            Text(
-                text = name,
-                fontWeight = FontWeight.Bold,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Text(stringResource(R.string.price_format, price))
-        }
+        Text(
+            text = name,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(start = 4.dp),
+        )
+        Text(
+            text = stringResource(R.string.price_format, price),
+            modifier = Modifier.padding(start = 4.dp),
+        )
     }
 }
 
