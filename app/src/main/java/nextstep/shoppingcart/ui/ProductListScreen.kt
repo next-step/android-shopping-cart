@@ -23,7 +23,9 @@ fun ProductListScreen(
     products: List<ProductModel>,
     modifier: Modifier = Modifier
 ) {
-    Column {
+    Column(
+        modifier = modifier
+    ) {
         ShoppingCartTopBar(
             titleResId = R.string.product_list,
             isCenter = true,

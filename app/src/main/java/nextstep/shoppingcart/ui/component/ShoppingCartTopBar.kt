@@ -98,6 +98,11 @@ private fun ShoppingCartTopBarPreview() {
                 isCenter = true,
                 showCartButton = true,
             )
+            ShoppingCartTopBar(
+                titleResId = R.string.cart,
+                isCenter = false,
+                onClickBack = {},
+            )
         }
     }
 }

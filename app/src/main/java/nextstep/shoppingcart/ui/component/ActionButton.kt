@@ -15,7 +15,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.ui.component.preview.ActionButtonParameterProvider
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.ui.theme.Typography
 
@@ -47,14 +49,16 @@ fun ActionButton(
 
 @Preview(showBackground = true)
 @Composable
-private fun ActionButtonPreview() {
+private fun ActionButtonPreview(
+    @PreviewParameter(ActionButtonParameterProvider::class) text: String,
+) {
     ShoppingCartTheme {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomCenter,
         ) {
             ActionButton(
-                text = "주문하기",
+                text = text,
                 onClick = {},
             )
         }
