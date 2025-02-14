@@ -8,10 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.data.model.Product
 import nextstep.shoppingcart.data.repository.ProductRepositoryImpl
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 
 @Composable
-fun ProductListScreen(
+internal fun ProductListScreen(
     productList: List<Product>,
     onTopBarButtonClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -35,8 +36,10 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ShoppingCartScreenPreview() {
-    ProductListScreen(
-        productList = ProductRepositoryImpl.getProductList(),
-        onTopBarButtonClick = {}
-    )
+    ShoppingCartTheme {
+        ProductListScreen(
+            productList = ProductRepositoryImpl.getProductList(),
+            onTopBarButtonClick = {}
+        )
+    }
 }
