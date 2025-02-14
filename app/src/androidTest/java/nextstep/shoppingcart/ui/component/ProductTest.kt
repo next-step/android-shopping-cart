@@ -12,17 +12,18 @@ class ProductTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
+    val product = ProductModel(
+        id = 6871,
+        imageUrl = "http://www.bing.com/search?q=nominavi",
+        name = "우유",
+        price = 2_000
+    )
+
     @Test
     fun 상품목록_아이템에_상품이미지_상품명_상품가가격_노출() {
         // given
-        val model = ProductModel(
-            id = 6871,
-            imageUrl = "http://www.bing.com/search?q=nominavi",
-            name = "우유",
-            price = 2_000
-        )
         composeTestRule.setContent {
-            Product(model)
+            Product(product)
         }
 
         // then

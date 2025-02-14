@@ -62,26 +62,6 @@ fun Product(
     }
 }
 
-@Composable
-private fun Thumbnail(id: Long, imageUrl: String, name: String) {
-    AsyncImage(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(imageUrl)
-            .diskCacheKey(id.toString())
-            .build(),
-        contentDescription = stringResource(
-            R.string.product_image_accessibility_text,
-            name,
-        ),
-        contentScale = ContentScale.FillHeight,
-        error = painterResource(R.drawable.ic_connection_error),
-        placeholder = painterResource(R.drawable.loading_img),
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1f),
-    )
-}
-
 @Preview(showBackground = true)
 @Composable
 private fun ProductPreview(@PreviewParameter(ProductParameterProvider::class) model: ProductModel) {

@@ -1,0 +1,33 @@
+package nextstep.shoppingcart.ui.component
+
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import nextstep.shoppingcart.R
+
+@Composable
+fun Thumbnail(id: Long, imageUrl: String, name: String) {
+    AsyncImage(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(imageUrl)
+            .diskCacheKey(id.toString())
+            .build(),
+        contentDescription = stringResource(
+            R.string.product_image_accessibility_text,
+            name,
+        ),
+        contentScale = ContentScale.FillHeight,
+        error = painterResource(R.drawable.ic_connection_error),
+        placeholder = painterResource(R.drawable.loading_img),
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f),
+    )
+}
