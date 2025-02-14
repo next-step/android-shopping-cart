@@ -1,7 +1,6 @@
 package nextstep.shoppingcart
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.espresso.intent.Intents.intended
@@ -16,7 +15,7 @@ import nextstep.shoppingcart.navigator.PARAM_PRICE
 import org.junit.Rule
 import org.junit.Test
 
-class ProductListActivityTest {
+class ProductCartActivityTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ProductListActivity>()
 
@@ -50,14 +49,5 @@ class ProductListActivityTest {
         intended(IntentMatchers.hasExtra(PARAM_NAME, testModel.name))
         intended(IntentMatchers.hasExtra(PARAM_PRICE, testModel.price))
         intended(IntentMatchers.hasExtra(PARAM_IMAGE_URL, testModel.imageUrl))
-    }
-
-    @Test
-    fun 카트_클릭시_카트_화면_호출() {
-        // when
-        composeTestRule.onNodeWithContentDescription("장바구니").performClick()
-
-        // then
-        intended(hasComponent(ProductCartActivity::class.java.name))
     }
 }

@@ -6,24 +6,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.ProductModel
+import nextstep.shoppingcart.navigator.toProductCart
+import nextstep.shoppingcart.ui.component.ActionButton
 import nextstep.shoppingcart.ui.component.ShoppingCartTopBar
 import nextstep.shoppingcart.ui.component.Thumbnail
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -35,10 +33,11 @@ fun ProductDetailScreen(
     onBackButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .navigationBarsPadding()
     ) {
         ShoppingCartTopBar(
             titleResId = R.string.product_detail,
@@ -77,28 +76,17 @@ fun ProductDetailScreen(
             modifier = modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomCenter,
         ) {
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .shadow(elevation = 8.dp),
-                onClick = {},
-                shape = RectangleShape,
-            ) {
-                Text(
-                    text = stringResource(R.string.add_cart),
-                    style = Typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 15.dp),
-                    textAlign = TextAlign.Center,
-                )
-            }
+            ActionButton(
+                text = stringResource(R.string.add_cart),
+                onClick = {
+                    context.toProductCart(model)
+                },
+            )
         }
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
     ShoppingCartTheme {
