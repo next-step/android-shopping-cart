@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.ui
 
-import android.content.res.Resources.Theme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,15 +32,18 @@ import nextstep.shoppingcart.ui.theme.Typography
 @Composable
 fun ProductDetailScreen(
     model: ProductModel,
-    modifier: Modifier = Modifier
+    onBackButtonClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .navigationBarsPadding()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .navigationBarsPadding()
+    ) {
         ShoppingCartTopBar(
             titleResId = R.string.product_detail,
             isCenter = false,
-            onClickBack = {},
+            onClickBack = onBackButtonClick,
         )
         Thumbnail(
             id = model.id,
@@ -101,7 +103,8 @@ fun ProductDetailScreen(
 private fun ProductListScreenPreview() {
     ShoppingCartTheme {
         ProductDetailScreen(
-            model = ProductModel(id = 7984L, imageUrl = "Adan", name = "Carina", price = 8399)
+            model = ProductModel(id = 7984L, imageUrl = "Adan", name = "Carina", price = 8399),
+            onBackButtonClick = {},
         )
     }
 }

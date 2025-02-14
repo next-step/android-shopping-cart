@@ -23,7 +23,10 @@ class ProductDetailScreenTest {
     fun 상품상세화면_이미지_상품명_금액_장바구니담기_버튼_노출() {
         // given
         composeTestRule.setContent {
-            ProductDetailScreen(product)
+            ProductDetailScreen(
+                model = product,
+                onBackButtonClick = {},
+            )
         }
 
         // then
