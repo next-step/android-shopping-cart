@@ -12,6 +12,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.ShoppingCartTopBar
 import nextstep.shoppingcart.components.ShoppingCartTopBarActionType
 import nextstep.shoppingcart.data.FakeProductRepository
+import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -19,6 +20,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 internal fun MainScreen(
     products: Products,
     onActionClick: () -> Unit,
+    onProductClick: (Product) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -33,6 +35,7 @@ internal fun MainScreen(
     ) { paddingValues ->
         ProductListScreen(
             products = products,
+            onProductClick = onProductClick,
             modifier = Modifier.padding(paddingValues)
         )
     }
@@ -45,6 +48,7 @@ private fun MainScreenPreview() {
         MainScreen(
             products = FakeProductRepository.getAllProducts(),
             onActionClick = {},
+            onProductClick = {},
         )
     }
 }

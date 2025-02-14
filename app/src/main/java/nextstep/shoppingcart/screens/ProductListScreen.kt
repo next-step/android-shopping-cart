@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,11 +24,16 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.FakeProductRepository
+import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-internal fun ProductListScreen(products: Products, modifier: Modifier = Modifier) {
+internal fun ProductListScreen(
+    products: Products,
+    onProductClick: (Product) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     LazyVerticalGrid(
         modifier = modifier.padding(vertical = 12.dp, horizontal = 18.dp),
         columns = GridCells.Fixed(2),
@@ -42,6 +48,7 @@ internal fun ProductListScreen(products: Products, modifier: Modifier = Modifier
                 imageUrl = product.imageUrl,
                 name = product.name,
                 price = product.price.value,
+                onProductClick = { onProductClick(product) }
             )
         }
     }
@@ -53,9 +60,12 @@ internal fun Product(
     imageUrl: String,
     name: String,
     price: Int,
+    onProductClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier.clickable(onClick = onProductClick),
+    ) {
         GlideImage(
             model = imageUrl,
             contentDescription = name,
@@ -85,6 +95,7 @@ private fun ProductListScreenPreview() {
     ShoppingCartTheme {
         ProductListScreen(
             products = FakeProductRepository.getAllProducts(),
+            onProductClick = {},
         )
     }
 }
@@ -98,6 +109,7 @@ private fun ProductPreview() {
             imageUrl = product.imageUrl,
             name = product.name,
             price = product.price.value,
+            onProductClick = {},
         )
     }
 }
