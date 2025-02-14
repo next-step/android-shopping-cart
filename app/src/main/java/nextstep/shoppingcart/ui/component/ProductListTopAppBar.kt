@@ -29,7 +29,8 @@ internal fun ProductListTopAppBar(
         title = {
             Text(
                 text = stringResource(R.string.product_list),
-                style = MaterialTheme.typography.titleLarge.copy(color = Color(0xFF1D1B20))
+                style = MaterialTheme.typography.titleLarge,
+                color = Color(0xFF1D1B20),
             )
         },
         actions = {
