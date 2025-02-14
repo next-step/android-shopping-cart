@@ -6,6 +6,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.ShoppingCartTopBar
@@ -22,7 +23,7 @@ internal fun MainScreen(
     Scaffold(
         topBar = {
             ShoppingCartTopBar(
-                title = R.string.product_list_top_bar_title,
+                title = stringResource(R.string.product_list_top_bar_title),
                 action = ShoppingCartTopBarActionType.CART,
                 onActionClick = onActionClick,
             )

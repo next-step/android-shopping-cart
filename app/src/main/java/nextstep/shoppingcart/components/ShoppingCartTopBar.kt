@@ -21,13 +21,13 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ShoppingCartTopBar(
-    @StringRes title: Int,
+    title: String,
     action: ShoppingCartTopBarActionType,
     onActionClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
-        title = { Text(text = stringResource(title)) },
+        title = { Text(text = title) },
         actions = {
             IconButton(
                 onClick = onActionClick,
@@ -58,7 +58,7 @@ internal enum class ShoppingCartTopBarActionType(
 private fun ShoppingCartTopBarPreview() {
     ShoppingCartTheme {
         ShoppingCartTopBar(
-            title = R.string.product_list_top_bar_title,
+            title = "상품 목록",
             action = ShoppingCartTopBarActionType.CART,
             onActionClick = {},
         )
