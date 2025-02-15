@@ -7,4 +7,6 @@
     <string name="back">뒤로가기</string>
     <string name="add_to_cart">장바구니 담기</string>
     <string name="price">금액</string>
+    <string name="title_activity_product_detail">ProductDetailActivity</string>
+    <string name="title_activity_cart">CartActivity</string>
 </resources>

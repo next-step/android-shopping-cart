@@ -33,6 +33,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductDetailScreen(
     product: Product,
+    onButtonClick: () -> Unit,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -44,7 +45,7 @@ fun ProductDetailScreen(
             )
         },
         bottomBar = {
-            ProductDetailBottomButton(onClick = {})
+            ProductDetailBottomButton(onClick = onButtonClick)
         }
     ) { innerPadding ->
         Column(
@@ -109,6 +110,7 @@ private fun ProductDetailScreenPreview() {
                 name = "셀프 마라탕 (기본 12000원)",
                 price = 85000000
             ),
+            onButtonClick = {},
             onBackPressed = {}
         )
     }
