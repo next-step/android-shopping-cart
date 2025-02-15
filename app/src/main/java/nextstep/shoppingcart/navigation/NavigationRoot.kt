@@ -1,7 +1,6 @@
 package nextstep.shoppingcart.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -30,7 +29,11 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
         route = "product"
     ) {
         composable(route = "product_list") {
-            ProductListScreen()
+            ProductListScreen(
+                onProductClick = {
+                    navController.navigate("product_detail")
+                }
+            )
         }
 
         composable(route = "product_detail") {

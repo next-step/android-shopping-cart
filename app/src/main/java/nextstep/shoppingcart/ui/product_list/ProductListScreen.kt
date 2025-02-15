@@ -5,6 +5,7 @@ package nextstep.shoppingcart.ui.product_list
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -54,7 +55,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductListScreen(
-    modifier: Modifier = Modifier
+    onProductClick: (Product) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     var state by rememberSaveable {
         mutableStateOf(ProductListState())
@@ -79,6 +81,7 @@ fun ProductListScreen(
     if (!state.isInitialLoading) {
         ProductListScreen(
             state = state,
+            onProductClick = onProductClick,
             modifier = modifier,
         )
     } else if (isLoadingShow) {
@@ -93,6 +96,7 @@ fun ProductListScreen(
 @Composable
 private fun ProductListScreen(
     state: ProductListState,
+    onProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val lazyState = rememberLazyGridState()
@@ -142,7 +146,14 @@ private fun ProductListScreen(
             contentPadding = PaddingValues(bottom = 100.dp)
         ) {
             items(state.products) { product ->
-                ProductListItem(product)
+                ProductListItem(
+                    product = product,
+                    modifier = Modifier.clickable(
+                        onClick = {
+                            onProductClick(product)
+                        }
+                    )
+                )
             }
         }
     }
@@ -221,6 +232,7 @@ private fun ProductListScreenPreview() {
                     ),
                 )
             ),
+            onProductClick = {},
         )
     }
 }
