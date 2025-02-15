@@ -36,7 +36,7 @@ import nextstep.shoppingcart.ui.theme.Typography
 @Composable
 internal fun ProductDetailScreen(
     product: Product,
-    onAddCartClick: (Product) -> Unit,
+    onAddCartClick: () -> Unit,
     onBackClick: () -> Unit,
 ) {
     Scaffold(
@@ -52,7 +52,7 @@ internal fun ProductDetailScreen(
     ) { paddingValues ->
         ProductDetail(
             product = product,
-            onAddCartClick = { onAddCartClick(product) },
+            onAddCartClick = onAddCartClick,
             addCartEnabled = product != Product.NotFound,
             modifier = Modifier.padding(paddingValues),
         )

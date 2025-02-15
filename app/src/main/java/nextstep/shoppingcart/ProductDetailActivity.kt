@@ -24,10 +24,15 @@ class ProductDetailActivity : ComponentActivity() {
             enableEdgeToEdge()
             ProductDetailScreen(
                 product = productRepository.getProductByIdOrNull(productId) ?: Product.NotFound,
-                onAddCartClick = {},
-                onBackClick = { onBackPressedDispatcher.onBackPressed() }
+                onAddCartClick = ::startCartActivity,
+                onBackClick = onBackPressedDispatcher::onBackPressed
             )
         }
+    }
+
+    private fun startCartActivity() {
+        val intent: Intent = CartActivity.getIntent(context = this)
+        startActivity(intent)
     }
 
     companion object {

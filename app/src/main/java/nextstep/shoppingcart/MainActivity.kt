@@ -1,5 +1,6 @@
 package nextstep.shoppingcart
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
             ShoppingCartTheme {
                 MainScreen(
                     products = products,
-                    onActionClick = { /* TODO: 장바구니 이동 로직 구현(2단계 미션) */ },
+                    onActionCartClick = ::startCartActivity,
                     onProductClick = ::startProductDetailActivity,
                 )
             }
@@ -28,7 +29,12 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun startProductDetailActivity(it: Product) {
-        val intent = ProductDetailActivity.getIntent(context = this, productId = it.id)
+        val intent: Intent = ProductDetailActivity.getIntent(context = this, productId = it.id)
+        startActivity(intent)
+    }
+
+    private fun startCartActivity() {
+        val intent: Intent = CartActivity.getIntent(context = this)
         startActivity(intent)
     }
 }

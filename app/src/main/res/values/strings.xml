@@ -15,4 +15,7 @@
     <!-- Product detail -->
     <string name="product_detail_top_bar_title">상품 상세</string>
     <string name="product_detail_add_cart">장바구니 담기</string>
+
+    <!-- Cart -->
+    <string name="cart_top_bar_title">장바구니</string>
 </resources>
