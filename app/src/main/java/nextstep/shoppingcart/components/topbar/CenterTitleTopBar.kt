@@ -64,7 +64,7 @@ internal fun CenterTitleTopBar(
 private fun CenterTitleTopBarPreview() {
     ShoppingCartTheme {
         CenterTitleTopBar(
-            title = "상품 상세",
+            title = "상품 목록",
         )
     }
 }
@@ -74,7 +74,7 @@ private fun CenterTitleTopBarPreview() {
 private fun CenterTitleTopBarWithNavigationBackPreview() {
     ShoppingCartTheme {
         CenterTitleTopBar(
-            title = "장바구니",
+            title = "상품 목록",
             navigationType = TopBarNavigationType.BACK,
         )
     }
