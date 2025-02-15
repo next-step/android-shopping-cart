@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.components.ShoppingCartTopBar
-import nextstep.shoppingcart.components.ShoppingCartTopBarActionType
+import nextstep.shoppingcart.components.topbar.ShoppingCartTopBar
+import nextstep.shoppingcart.components.topbar.TopBarActionType
 import nextstep.shoppingcart.data.FakeProductRepository
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.domain.model.Products
@@ -19,15 +19,15 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 internal fun MainScreen(
     products: Products,
-    onActionClick: () -> Unit,
+    onActionCartClick: () -> Unit,
     onProductClick: (Product) -> Unit,
 ) {
     Scaffold(
         topBar = {
             ShoppingCartTopBar(
                 title = stringResource(R.string.product_list_top_bar_title),
-                action = ShoppingCartTopBarActionType.CART,
-                onActionClick = onActionClick,
+                action = TopBarActionType.CART,
+                onActionClick = onActionCartClick,
             )
         },
         modifier = Modifier.fillMaxSize(),
@@ -47,7 +47,7 @@ private fun MainScreenPreview() {
     ShoppingCartTheme {
         MainScreen(
             products = FakeProductRepository.getAllProducts(),
-            onActionClick = {},
+            onActionCartClick = {},
             onProductClick = {},
         )
     }

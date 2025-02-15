@@ -1,10 +1,10 @@
 package nextstep.shoppingcart.components.topbar
 
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,9 +13,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun StartTitleTopBar(
+@OptIn(ExperimentalMaterial3Api::class)
+internal fun CenterTitleTopBar(
     title: String,
     modifier: Modifier = Modifier,
     navigationType: TopBarNavigationType? = null,
@@ -23,11 +23,13 @@ internal fun StartTitleTopBar(
     action: TopBarActionType? = null,
     onActionClick: () -> Unit = {},
 ) {
-    TopAppBar(
+    CenterAlignedTopAppBar(
         title = { Text(text = title) },
         navigationIcon = {
             navigationType?.let {
-                IconButton(onClick = onNavigationClick) {
+                IconButton(
+                    onClick = onNavigationClick,
+                ) {
                     Icon(
                         imageVector = it.icon,
                         contentDescription = stringResource(it.contentDescription),
@@ -37,10 +39,12 @@ internal fun StartTitleTopBar(
         },
         actions = {
             action?.let {
-                IconButton(onClick = onActionClick) {
+                IconButton(
+                    onClick = onActionClick,
+                ) {
                     Icon(
-                        imageVector = it.icon,
-                        contentDescription = stringResource(it.contentDescription),
+                        imageVector = action.icon,
+                        contentDescription = stringResource(action.contentDescription),
                     )
                 }
             }
@@ -52,9 +56,9 @@ internal fun StartTitleTopBar(
 
 @Preview
 @Composable
-private fun StartTitleTopBarPreview() {
+private fun CenterTitleTopBarPreview() {
     ShoppingCartTheme {
-        StartTitleTopBar(
+        CenterTitleTopBar(
             title = "상품 상세",
         )
     }
@@ -62,9 +66,9 @@ private fun StartTitleTopBarPreview() {
 
 @Preview
 @Composable
-private fun StartTitleTopBarWithNavigationBackPreview() {
+private fun CenterTitleTopBarWithNavigationBackPreview() {
     ShoppingCartTheme {
-        StartTitleTopBar(
+        CenterTitleTopBar(
             title = "장바구니",
             navigationType = TopBarNavigationType.BACK,
         )
@@ -73,9 +77,9 @@ private fun StartTitleTopBarWithNavigationBackPreview() {
 
 @Preview
 @Composable
-private fun StartTitleTopBarWithActionCartPreview() {
+private fun CenterTitleTopBarWithActionCartPreview() {
     ShoppingCartTheme {
-        StartTitleTopBar(
+        CenterTitleTopBar(
             title = "상품 목록",
             action = TopBarActionType.CART,
         )
@@ -84,9 +88,9 @@ private fun StartTitleTopBarWithActionCartPreview() {
 
 @Preview
 @Composable
-private fun StartTitleTopBarWithNavigationBackAndActionCartPreview() {
+private fun CenterTitleTopBarWithNavigationBackAndActionCartPreview() {
     ShoppingCartTheme {
-        StartTitleTopBar(
+        CenterTitleTopBar(
             title = "상품 상세",
             navigationType = TopBarNavigationType.BACK,
             action = TopBarActionType.CART,
