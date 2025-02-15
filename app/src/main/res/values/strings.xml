@@ -2,5 +2,5 @@
     <string name="app_name">Shopping Cart</string>
     <string name="product_list_screen_title">상품 목록</string>
     <string name="product_list_description_shopping_cart">Shipping cart</string>
-    <string name="product_price_format">%1$s원</string>
+    <string name="product_price_format">%1$,d원</string>
 </resources>

@@ -25,9 +25,6 @@ import coil3.compose.SubcomposeAsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
-import java.text.NumberFormat
-
-private val priceFormat = NumberFormat.getNumberInstance()
 
 @Composable
 fun ProductListItem(
@@ -69,7 +66,7 @@ fun ProductListItem(
                 .padding(top = 8.dp, start = 4.dp)
         )
         Text(
-            text = stringResource(R.string.product_price_format, priceFormat.format(product.price)),
+            text = stringResource(R.string.product_price_format, product.price),
             modifier = Modifier
                 .padding(start = 4.dp)
         )
