@@ -59,7 +59,7 @@ fun ProductListScreen(
     var state by rememberSaveable {
         mutableStateOf(ProductListState())
     }
-    val isLoadingShow by produceState(false) {
+    val isLoadingShow by produceState(state.isInitialLoading) {
         // 초기 로딩 시간이 0.5초 보다 오래 걸리는 경우에만 로딩바 보여주기
         delay(500L)
         value = true
