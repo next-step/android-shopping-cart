@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.components.topbar.ShoppingCartTopBar
+import nextstep.shoppingcart.components.topbar.CenterTitleTopBar
 import nextstep.shoppingcart.components.topbar.TopBarActionType
 import nextstep.shoppingcart.data.FakeProductRepository
 import nextstep.shoppingcart.domain.model.Product
@@ -24,7 +24,7 @@ internal fun MainScreen(
 ) {
     Scaffold(
         topBar = {
-            ShoppingCartTopBar(
+            CenterTitleTopBar(
                 title = stringResource(R.string.product_list_top_bar_title),
                 action = TopBarActionType.CART,
                 onActionClick = onActionCartClick,
