@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.toRoute
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.product_detail.ProductDetailScreen
 import nextstep.shoppingcart.ui.product_list.ProductListScreen
@@ -16,7 +17,7 @@ fun NavigationRoot(
     navController: NavHostController,
 ) {
     NavHost(
-        startDestination = "product",
+        startDestination = ProductDestination,
         navController = navController,
     ) {
         productGraph(navController)
@@ -24,21 +25,26 @@ fun NavigationRoot(
 }
 
 private fun NavGraphBuilder.productGraph(navController: NavController) {
-    navigation(
-        startDestination = "product_list",
-        route = "product"
+    navigation<ProductDestination>(
+        startDestination = ProductList,
     ) {
-        composable(route = "product_list") {
+        composable<ProductList> {
             ProductListScreen(
                 onProductClick = {
-                    navController.navigate("product_detail")
+                    navController.navigate(ProductDetail(it.imageUrl, it.name, it.price))
                 }
             )
         }
 
-        composable(route = "product_detail") {
+        composable<ProductDetail> { backstackEntry ->
+            val productDetail = backstackEntry.toRoute<ProductDetail>()
+
             ProductDetailScreen(
-                product = Product("", "", 0)
+                product = Product(
+                    imageUrl = productDetail.imageUrl,
+                    name = productDetail.name,
+                    price = productDetail.price
+                )
             )
         }
     }
