@@ -68,8 +68,3 @@ private fun ProductsList(
 ) {
 
 }
-
-@Composable
-private fun ProductsItem() {
-
-}
