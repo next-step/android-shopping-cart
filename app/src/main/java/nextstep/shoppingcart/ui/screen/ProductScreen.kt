@@ -18,32 +18,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductScreen() {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(text = stringResource(id = R.string.appbar_product_title))
-                },
-                actions = {
-                    IconButton(
-                        onClick = { }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.ShoppingCart,
-                            contentDescription = "Cart",
-                            tint = Color.Black
-                        )
-                    }
-                }
-            )
+            TopAppBar()
         },
     ) {
         Surface(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(it)
         ) {
 
@@ -51,8 +36,29 @@ fun ProductScreen() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar(modifier: Modifier = Modifier) {
+    CenterAlignedTopAppBar(
+        title = {
+            Text(text = stringResource(id = R.string.appbar_product_title))
+        },
+        actions = {
+            IconButton(
+                onClick = { }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ShoppingCart,
+                    contentDescription = "Cart",
+                    tint = Color.Black
+                )
+            }
+        }
+    )
+}
+
 @Preview
 @Composable
-fun ProductPreview() {
-    ProductScreen()
+fun AppbarPreview() {
+    TopAppBar()
 }
