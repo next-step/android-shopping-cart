@@ -47,11 +47,10 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductListScreen(
-    products: List<Product>,
     modifier: Modifier = Modifier
 ) {
     val state by remember {
-        mutableStateOf(ProductListState(products = products))
+        mutableStateOf(ProductListState())
     }
 
     ProductListScreen(
