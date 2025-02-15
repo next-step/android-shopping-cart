@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -23,7 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
@@ -109,12 +113,23 @@ private fun ProductItem(
             placeholder = painterResource(R.drawable.ic_launcher_background),
             error = painterResource(R.drawable.ic_launcher_background)
         )
-        Text(text = product.name, color = grey40, fontSize = 16.sp, fontWeight = FontWeight.W700)
+        Text(
+            text = product.name,
+            color = grey40,
+            fontSize = 16.sp,
+            maxLines = 1,
+            fontWeight = FontWeight.W700,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
+        )
         Text(
             text = stringResource(R.string.all_price_format).format(product.price),
             color = grey40,
             fontSize = 16.sp,
-            fontWeight = FontWeight.W400
+            maxLines = 1,
+            fontWeight = FontWeight.W400,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
@@ -145,18 +160,28 @@ private fun ProductsTopBarPreview() {
     }
 }
 
+class ProductItemParameterProvider : PreviewParameterProvider<String> {
+    override val values = sequenceOf(
+        "너무 너무 맛있는 엽떡과 허니콤보",
+        "하이디라오 훠궈"
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
-private fun ProductItemPreview() {
+private fun ProductItemPreview(
+    @PreviewParameter(ProductItemParameterProvider::class) productName: String
+) {
     MaterialTheme {
         ProductItem(
             Product(
                 id = 1L,
-                name = "상품1",
+                name = productName,
                 price = 10000L,
                 imageUrl = "https://picsum.photos/200",
             ),
-            onClick = {}
+            onClick = {},
+            modifier = Modifier.width(200.dp)
         )
     }
 }
