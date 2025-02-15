@@ -11,6 +11,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import nextstep.shoppingcart.ui.screen.utils.FormatUtils.formatMoney
 
 @Composable
 fun ProductItem(
@@ -37,7 +38,7 @@ fun ProductItem(
             fontWeight = FontWeight.W700,
         )
         Text(
-            text = "${price}원",
+            text = "${formatMoney(price)}원",
         )
     }
 }
