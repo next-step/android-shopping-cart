@@ -5,18 +5,28 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.Text
+import androidx.activity.enableEdgeToEdge
+import nextstep.shoppingcart.data.FakeProductRepository
+import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.domain.repository.ProductRepository
+import nextstep.shoppingcart.screens.ProductDetailScreen
 
 class ProductDetailActivity : ComponentActivity() {
     private val productId: Int by lazy {
         val value = intent.getIntExtra(PRODUCT_ID, ERROR_PRODUCT_ID)
         if (value == ERROR_PRODUCT_ID) throw IllegalArgumentException("productId is required") else value
     }
+    private val productRepository: ProductRepository = FakeProductRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Text(productId.toString())
+            enableEdgeToEdge()
+            ProductDetailScreen(
+                product = productRepository.getProductByIdOrNull(productId) ?: Product.NotFound,
+                onAddCartClick = {},
+                onBackClick = { onBackPressedDispatcher.onBackPressed() }
+            )
         }
     }
 
