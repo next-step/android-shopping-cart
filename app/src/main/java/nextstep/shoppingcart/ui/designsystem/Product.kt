@@ -114,7 +114,7 @@ fun ProductDetailItem(
         Text(
             text = product.name,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.headlineLarge,
+            style = MaterialTheme.typography.headlineMedium,
             maxLines = 1,
             modifier = Modifier
                 .padding(18.dp)
