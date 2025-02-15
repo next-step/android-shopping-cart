@@ -7,10 +7,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,6 +31,35 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.grey10
 import nextstep.shoppingcart.ui.theme.grey40
+
+@Composable
+fun ProductsScreen(
+    products: List<Product>,
+    onProductClick: (Product) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Scaffold(
+        modifier
+            .statusBarsPadding()
+            .navigationBarsPadding(),
+        topBar = { ProductsTopAppBar() }) { innerPadding ->
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier
+                .padding(innerPadding)
+                .padding(horizontal = 18.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+        ) {
+            items(products) { product ->
+                ProductItem(
+                    product = product,
+                    onClick = { onProductClick(product) },
+                )
+            }
+        }
+    }
+}
 
 @Composable
 private fun ProductsTopAppBar(modifier: Modifier = Modifier) {
@@ -80,6 +115,24 @@ private fun ProductItem(
             color = grey40,
             fontSize = 16.sp,
             fontWeight = FontWeight.W400
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductsScreenPreview() {
+    MaterialTheme {
+        ProductsScreen(
+            products = List(10) {
+                Product(
+                    id = it.toLong(),
+                    name = "상품$it",
+                    price = 10000L,
+                    imageUrl = "https://picsum.photos/200",
+                )
+            },
+            onProductClick = {}
         )
     }
 }
