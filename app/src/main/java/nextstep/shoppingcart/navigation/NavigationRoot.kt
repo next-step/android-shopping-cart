@@ -44,7 +44,10 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
                     imageUrl = productDetail.imageUrl,
                     name = productDetail.name,
                     price = productDetail.price
-                )
+                ),
+                navigateBack = {
+                    navController.popBackStack()
+                }
             )
         }
     }

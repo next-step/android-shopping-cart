@@ -13,6 +13,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -36,6 +37,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductDetailScreen(
     product: Product,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val state by remember {
@@ -44,6 +46,7 @@ fun ProductDetailScreen(
 
     ProductDetailScreen(
         state = state,
+        navigateBack,
         modifier = modifier,
     )
 }
@@ -51,11 +54,12 @@ fun ProductDetailScreen(
 @Composable
 private fun ProductDetailScreen(
     state: ProductDetailState,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         topBar = {
-            ProductDetailTopAppBar()
+            ProductDetailTopAppBar(navigateBack)
         }
     ) { paddingValues ->
         Column(
@@ -87,18 +91,25 @@ private fun ProductDetailScreen(
 }
 
 @Composable
-private fun ProductDetailTopAppBar(modifier: Modifier = Modifier) {
+private fun ProductDetailTopAppBar(
+    navigateBack: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     TopAppBar(
         modifier = modifier,
         title = {
             Text(stringResource(R.string.product_detail))
         },
         navigationIcon = {
-            Icon(
+            IconButton(
+                onClick = navigateBack,
                 modifier = Modifier.padding(horizontal = 8.dp),
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = stringResource(R.string.navigation_back),
-            )
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = stringResource(R.string.navigation_back),
+                )
+            }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors().copy(
             containerColor = Color.White,
@@ -116,6 +127,7 @@ private fun ProductDetailScreenPreview() {
                 name = "PET-보틀-정사각형 정사각형 정사각형 ",
                 price = 10_000
             ),
+            navigateBack = {},
         )
     }
 }
