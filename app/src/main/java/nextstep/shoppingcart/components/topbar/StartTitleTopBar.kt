@@ -16,15 +16,19 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun StartTitleTopBar(
-    title: String,
     modifier: Modifier = Modifier,
+    title: String = "",
     navigationType: TopBarNavigationType? = null,
     onNavigationClick: () -> Unit = {},
     action: TopBarActionType? = null,
     onActionClick: () -> Unit = {},
 ) {
     TopAppBar(
-        title = { Text(text = title) },
+        title = {
+            if (title.isNotEmpty()) {
+                Text(text = title)
+            }
+        },
         navigationIcon = {
             navigationType?.let {
                 IconButton(onClick = onNavigationClick) {
@@ -54,8 +58,16 @@ internal fun StartTitleTopBar(
 @Composable
 private fun StartTitleTopBarPreview() {
     ShoppingCartTheme {
+        StartTitleTopBar()
+    }
+}
+
+@Preview
+@Composable
+private fun StartTitleTopBarWithTitlePreview() {
+    ShoppingCartTheme {
         StartTitleTopBar(
-            title = "상품 상세",
+            title = "상품 상세"
         )
     }
 }
@@ -76,7 +88,7 @@ private fun StartTitleTopBarWithNavigationBackPreview() {
 private fun StartTitleTopBarWithActionCartPreview() {
     ShoppingCartTheme {
         StartTitleTopBar(
-            title = "상품 목록",
+            title = "상품 상세",
             action = TopBarActionType.CART,
         )
     }

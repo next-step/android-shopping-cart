@@ -19,8 +19,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun CenterTitleTopBar(
-    title: String,
     modifier: Modifier = Modifier,
+    title: String = "",
     navigationType: TopBarNavigationType? = null,
     onNavigationClick: () -> Unit = {},
     action: TopBarActionType? = null,
@@ -28,7 +28,11 @@ internal fun CenterTitleTopBar(
     onActionClick: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
-        title = { Text(text = title) },
+        title = {
+            if (title.isNotEmpty()) {
+                Text(text = title)
+            }
+        },
         navigationIcon = {
             navigationType?.let {
                 IconButton(
@@ -63,8 +67,16 @@ internal fun CenterTitleTopBar(
 @Composable
 private fun CenterTitleTopBarPreview() {
     ShoppingCartTheme {
+        CenterTitleTopBar()
+    }
+}
+
+@Preview
+@Composable
+private fun CenterTitleTopBarWithTitlePreview() {
+    ShoppingCartTheme {
         CenterTitleTopBar(
-            title = "상품 목록",
+            title = "상품 목록"
         )
     }
 }
@@ -96,7 +108,7 @@ private fun CenterTitleTopBarWithActionCartPreview() {
 private fun CenterTitleTopBarWithNavigationBackAndActionCartPreview() {
     ShoppingCartTheme {
         CenterTitleTopBar(
-            title = "상품 상세",
+            title = "상품 목록",
             navigationType = TopBarNavigationType.BACK,
             action = TopBarActionType.CART,
         )
