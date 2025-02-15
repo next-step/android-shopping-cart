@@ -18,11 +18,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.navigator.toProductCart
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,9 +33,11 @@ fun ShoppingCartTopBar(
     titleResId: Int,
     isCenter: Boolean,
     modifier: Modifier = Modifier,
-    onClickCart: (() -> Unit)? = null,
+    showCartButton: Boolean = false,
     onClickBack: (() -> Unit)? = null,
 ) {
+    val context = LocalContext.current
+
     TopAppBar(
         modifier = modifier,
         title = {
@@ -46,7 +50,7 @@ fun ShoppingCartTopBar(
         },
         actions = {
             TopBarIcon(
-                onClick = onClickCart,
+                onClick = { context.toProductCart() }.takeIf { showCartButton },
                 imageVector = Icons.Filled.ShoppingCart,
                 contentDescription = stringResource(R.string.cart)
             )
@@ -92,7 +96,12 @@ private fun ShoppingCartTopBarPreview() {
             ShoppingCartTopBar(
                 titleResId = R.string.product_list,
                 isCenter = true,
-                onClickCart = {}
+                showCartButton = true,
+            )
+            ShoppingCartTopBar(
+                titleResId = R.string.cart,
+                isCenter = false,
+                onClickBack = {},
             )
         }
     }
