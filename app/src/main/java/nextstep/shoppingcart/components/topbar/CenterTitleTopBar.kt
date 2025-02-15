@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package nextstep.shoppingcart.components.topbar
 
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -6,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +24,7 @@ internal fun CenterTitleTopBar(
     navigationType: TopBarNavigationType? = null,
     onNavigationClick: () -> Unit = {},
     action: TopBarActionType? = null,
+    scrollBehavior: TopAppBarScrollBehavior? = null,
     onActionClick: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
@@ -50,6 +54,7 @@ internal fun CenterTitleTopBar(
             }
         },
         colors = TopAppBarDefaults.topAppBarColors().copy(containerColor = Color.White),
+        scrollBehavior = scrollBehavior,
         modifier = modifier,
     )
 }

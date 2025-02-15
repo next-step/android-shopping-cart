@@ -35,7 +35,7 @@ internal fun ProductListScreen(
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
-        modifier = modifier.padding(vertical = 12.dp, horizontal = 18.dp),
+        modifier = modifier.padding(horizontal = 18.dp),
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
