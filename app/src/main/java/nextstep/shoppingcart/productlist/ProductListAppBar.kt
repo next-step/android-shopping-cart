@@ -25,7 +25,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductListAppBar(
     modifier: Modifier = Modifier,
-    onClickCart: () -> Unit = {}
+    onCartClicked: () -> Unit = {}
 ) {
     Box(
         modifier = modifier
@@ -43,7 +43,7 @@ fun ProductListAppBar(
                 .padding(end = 8.dp)
                 .size(48.dp)
                 .align(Alignment.CenterEnd)
-                .clickable(onClick = onClickCart),
+                .clickable(onClick = onCartClicked),
             contentAlignment = Alignment.Center
         ) {
             Icon(
