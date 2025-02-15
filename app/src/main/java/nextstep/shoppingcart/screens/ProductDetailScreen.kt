@@ -60,7 +60,6 @@ internal fun ProductDetailScreen(
     }
 }
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 internal fun ProductDetail(
     product: Product,
@@ -69,43 +68,59 @@ internal fun ProductDetail(
     addCartEnabled: Boolean = true,
 ) {
     Column(modifier = modifier) {
-        GlideImage(
-            model = product.imageUrl,
-            contentDescription = product.name,
-            contentScale = ContentScale.Crop,
-            loading = placeholder(R.drawable.ic_launcher_background),
-            failure = placeholder(ColorPainter(GrayAAAAAA)),
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1.0f),
-        )
-        Text(
-            text = product.name,
-            style = Typography.headlineSmall.copy(fontWeight = FontWeight.W700),
-            modifier = Modifier.padding(18.dp)
-        )
+        ProductImage(product = product)
+        ProductTitle(title = product.name)
         HorizontalDivider(color = GrayAAAAAA)
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(18.dp),
-        ) {
-            Text(
-                text = stringResource(R.string.price),
-                style = Typography.headlineSmall,
-            )
-            Text(
-                text = stringResource(R.string.price_format, product.price.value),
-                style = Typography.headlineSmall,
-            )
-        }
+        ProductPrice(price = product.price.value)
         Spacer(Modifier.weight(1f))
         MainButton(
             text = stringResource(R.string.product_detail_add_cart),
             onClick = onAddCartClick,
             enabled = addCartEnabled,
             modifier = Modifier.fillMaxWidth().height(54.dp),
+        )
+    }
+}
+
+@Composable
+@OptIn(ExperimentalGlideComposeApi::class)
+private fun ProductImage(product: Product) {
+    GlideImage(
+        model = product.imageUrl,
+        contentDescription = product.name,
+        contentScale = ContentScale.Crop,
+        loading = placeholder(R.drawable.ic_launcher_background),
+        failure = placeholder(ColorPainter(GrayAAAAAA)),
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1.0f),
+    )
+}
+
+@Composable
+private fun ProductTitle(title: String) {
+    Text(
+        text = title,
+        style = Typography.headlineSmall.copy(fontWeight = FontWeight.W700),
+        modifier = Modifier.padding(18.dp),
+    )
+}
+
+@Composable
+private fun ProductPrice(price: Int) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(18.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.price),
+            style = Typography.headlineSmall,
+        )
+        Text(
+            text = stringResource(R.string.price_format, price),
+            style = Typography.headlineSmall,
         )
     }
 }
