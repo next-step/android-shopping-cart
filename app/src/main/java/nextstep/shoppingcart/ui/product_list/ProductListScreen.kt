@@ -2,6 +2,9 @@
 
 package nextstep.shoppingcart.ui.product_list
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -74,7 +77,11 @@ private fun ProductListScreen(
             ProductListTopBar(state.selectedItemCount)
         },
         floatingActionButton = {
-            if (showScrollToTopButton) {
+            AnimatedVisibility(
+                visible = showScrollToTopButton,
+                enter = fadeIn(),
+                exit = fadeOut(),
+            ) {
                 FloatingActionButton(
                     modifier = Modifier
                         .padding(bottom = 16.dp, end = 16.dp),
