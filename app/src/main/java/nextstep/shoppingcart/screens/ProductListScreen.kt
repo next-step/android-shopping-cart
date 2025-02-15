@@ -45,10 +45,8 @@ internal fun ProductListScreen(
             items = products.value
         ) { product ->
             Product(
-                imageUrl = product.imageUrl,
-                name = product.name,
-                price = product.price.value,
-                onProductClick = { onProductClick(product) }
+                product = product,
+                onProductClick = { onProductClick(product) },
             )
         }
     }
@@ -57,9 +55,7 @@ internal fun ProductListScreen(
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 internal fun Product(
-    imageUrl: String,
-    name: String,
-    price: Int,
+    product: Product,
     onProductClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -67,8 +63,8 @@ internal fun Product(
         modifier = modifier.clickable(onClick = onProductClick),
     ) {
         GlideImage(
-            model = imageUrl,
-            contentDescription = name,
+            model = product.imageUrl,
+            contentDescription = product.name,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
@@ -76,14 +72,14 @@ internal fun Product(
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = name,
+            text = product.name,
             fontWeight = FontWeight.Bold,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.padding(start = 4.dp),
         )
         Text(
-            text = stringResource(R.string.price_format, price),
+            text = stringResource(R.string.price_format, product.price.value),
             modifier = Modifier.padding(start = 4.dp),
         )
     }
@@ -104,11 +100,8 @@ private fun ProductListScreenPreview() {
 @Composable
 private fun ProductPreview() {
     ShoppingCartTheme {
-        val product = FakeProductRepository.getFirstProduct()
         Product(
-            imageUrl = product.imageUrl,
-            name = product.name,
-            price = product.price.value,
+            product = FakeProductRepository.getFirstProduct(),
             onProductClick = {},
         )
     }
