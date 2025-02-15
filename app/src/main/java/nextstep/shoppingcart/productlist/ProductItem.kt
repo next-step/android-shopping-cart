@@ -73,6 +73,7 @@ private fun ProductItemPreview() {
     ShoppingCartTheme {
         ProductItem(
             product = Product(
+                id = "",
                 imageUrl = "https://picsum.photos/200",
                 name = "셀프 마라탕 (기본 12000원)",
                 price = 85000000
