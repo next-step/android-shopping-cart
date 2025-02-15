@@ -5,4 +5,5 @@
     <string name="shopping_cart">장바구니</string>
     <string name="product_detail">상품 상세</string>
     <string name="back">뒤로가기</string>
+    <string name="add_to_cart">장바구니 담기</string>
 </resources>
