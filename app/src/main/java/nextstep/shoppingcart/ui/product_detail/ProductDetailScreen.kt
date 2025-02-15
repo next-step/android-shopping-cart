@@ -2,12 +2,18 @@
 
 package nextstep.shoppingcart.ui.product_detail
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -18,11 +24,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.designsystem.ProductDetailItem
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -35,14 +43,14 @@ fun ProductDetailScreen(
     }
 
     ProductDetailScreen(
-        productDetailState = state,
+        state = state,
         modifier = modifier,
     )
 }
 
 @Composable
 private fun ProductDetailScreen(
-    productDetailState: ProductDetailState,
+    state: ProductDetailState,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -50,13 +58,31 @@ private fun ProductDetailScreen(
             ProductDetailTopAppBar()
         }
     ) { paddingValues ->
-        LazyColumn(
-            modifier = modifier.padding(paddingValues),
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(paddingValues)
         ) {
-            item {
-
+            ProductDetailItem(
+                product = state.product,
+                modifier = Modifier
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
+            )
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                onClick = {},
+                shape = RectangleShape,
+            ) {
+                Text(
+                    text = stringResource(R.string.product_detail_add_to_cart),
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(vertical = 4.dp),
+                )
             }
         }
+
     }
 }
 

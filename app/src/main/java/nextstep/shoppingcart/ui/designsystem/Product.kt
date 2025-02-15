@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.HorizontalDivider
@@ -113,9 +115,7 @@ fun ProductDetailItem(
         )
         Text(
             text = product.name,
-            overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.headlineMedium,
-            maxLines = 1,
             modifier = Modifier
                 .padding(18.dp)
         )
@@ -165,7 +165,8 @@ private fun ProductDetailPreview() {
                 imageUrl = "",
                 name = LoremIpsum(100).values.joinToString(""),
                 price = 999_999_999,
-            )
+            ),
+            modifier = Modifier.verticalScroll(rememberScrollState()),
         )
     }
 }
