@@ -11,4 +11,4 @@
 - 이전 피드백 반영 : MainActivity 뿐만 아니라, 각 화면에서 데이터 로딩 대응할 수 있도록 하기
 - [x] 상품 상세 화면 구현
 - [x] Navigation Component를 활용해 상품 목록 화면과 상품 상세 화면을 연결한다.
-- [ ] 빈 장바구니 화면을 추가하고, Navigation Component와 연결한다.
+- [x] 빈 장바구니 화면을 추가하고, Navigation Component와 연결한다.

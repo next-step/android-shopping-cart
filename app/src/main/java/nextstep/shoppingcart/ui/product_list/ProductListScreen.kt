@@ -55,6 +55,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductListScreen(
+    onBasketClick: () -> Unit,
     onProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -81,6 +82,7 @@ fun ProductListScreen(
     if (!state.isInitialLoading) {
         ProductListScreen(
             state = state,
+            onBasketClick = onBasketClick,
             onProductClick = onProductClick,
             modifier = modifier,
         )
@@ -96,6 +98,7 @@ fun ProductListScreen(
 @Composable
 private fun ProductListScreen(
     state: ProductListState,
+    onBasketClick: () -> Unit,
     onProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -109,7 +112,10 @@ private fun ProductListScreen(
 
     Scaffold(
         topBar = {
-            ProductListTopBar(state.selectedItemCount)
+            ProductListTopBar(
+                addedItemCount = state.selectedItemCount,
+                onBasketClick = onBasketClick,
+            )
         },
         floatingActionButton = {
             AnimatedVisibility(
@@ -162,6 +168,7 @@ private fun ProductListScreen(
 @Composable
 private fun ProductListTopBar(
     addedItemCount: Int,
+    onBasketClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
@@ -184,7 +191,11 @@ private fun ProductListTopBar(
                         }
                     }
                 },
-                modifier = Modifier.padding(end = 4.dp),
+                modifier = Modifier
+                    .padding(end = 4.dp)
+                    .clickable(
+                        onClick = onBasketClick
+                    ),
             ) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
@@ -233,6 +244,7 @@ private fun ProductListScreenPreview() {
                 )
             ),
             onProductClick = {},
+            onBasketClick = {},
         )
     }
 }

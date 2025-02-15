@@ -38,6 +38,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun ProductDetailScreen(
     product: Product,
     navigateBack: () -> Unit,
+    onAddBasketClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val state by remember {
@@ -46,7 +47,8 @@ fun ProductDetailScreen(
 
     ProductDetailScreen(
         state = state,
-        navigateBack,
+        navigateBack = navigateBack,
+        onAddBasketClick = onAddBasketClick,
         modifier = modifier,
     )
 }
@@ -55,6 +57,7 @@ fun ProductDetailScreen(
 private fun ProductDetailScreen(
     state: ProductDetailState,
     navigateBack: () -> Unit,
+    onAddBasketClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -76,7 +79,7 @@ private fun ProductDetailScreen(
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = {},
+                onClick = onAddBasketClick,
                 shape = RectangleShape,
             ) {
                 Text(
@@ -128,6 +131,7 @@ private fun ProductDetailScreenPreview() {
                 price = 10_000
             ),
             navigateBack = {},
+            onAddBasketClick = {},
         )
     }
 }

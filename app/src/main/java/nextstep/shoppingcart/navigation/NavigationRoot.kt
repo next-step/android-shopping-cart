@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.basket.BasketScreen
 import nextstep.shoppingcart.ui.product_detail.ProductDetailScreen
 import nextstep.shoppingcart.ui.product_list.ProductListScreen
 
@@ -32,6 +33,9 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
             ProductListScreen(
                 onProductClick = {
                     navController.navigate(ProductDetail(it.imageUrl, it.name, it.price))
+                },
+                onBasketClick = {
+                    navController.navigate(Basket)
                 }
             )
         }
@@ -45,6 +49,22 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
                     name = productDetail.name,
                     price = productDetail.price
                 ),
+                navigateBack = {
+                    navController.popBackStack()
+                },
+                onAddBasketClick = {
+                    navController.navigate(Basket) {
+                        popUpTo(ProductList) {
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                }
+            )
+        }
+
+        composable<Basket> {
+            BasketScreen(
                 navigateBack = {
                     navController.popBackStack()
                 }
