@@ -1,5 +1,7 @@
 package nextstep.shoppingcart.navigation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -20,6 +22,8 @@ fun NavigationRoot(
     NavHost(
         startDestination = ProductDestination,
         navController = navController,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None },
     ) {
         productGraph(navController)
     }
