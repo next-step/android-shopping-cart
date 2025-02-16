@@ -28,6 +28,9 @@
 
         <activity
             android:name=".ProductDetailActivity" />
+
+        <activity
+            android:name=".CartActivity" />
     </application>
 
 </manifest>

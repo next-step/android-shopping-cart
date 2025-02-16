@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
             ShoppingCartTheme {
                 ProductsScreen(
                     onClickCart = {
-                        // 장바구니 화면으로 이동
+                        goToCart()
                     },
                     onClickProductItem = {
                         goToProductDetail(it)
@@ -26,7 +26,8 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun goToCart() {
-
+        val intent = Intent(this, CartActivity::class.java)
+        startActivity(intent)
     }
 
     private fun goToProductDetail(product: Product) {
