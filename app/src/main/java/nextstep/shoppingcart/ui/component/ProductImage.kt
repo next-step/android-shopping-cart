@@ -1,7 +1,5 @@
 package nextstep.shoppingcart.ui.component
 
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.CircularProgressIndicator
@@ -18,11 +16,9 @@ internal fun ProductImage(
     modifier: Modifier = Modifier
 ) {
     SubcomposeAsyncImage(
+        modifier = modifier,
         model = url,
-        modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(1f),
-        contentDescription = null,
+        contentDescription = url,
         loading = {
             CircularProgressIndicator()
         },
