@@ -1,13 +1,10 @@
 package nextstep.shoppingcart.ui
 
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onChildren
-import androidx.compose.ui.test.onLast
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.model.ProductModel
 import org.junit.Rule
@@ -50,7 +47,6 @@ class ProductListScreenTest {
         composeTestRule.setContent {
             ProductListScreen(
                 products = products,
-                modifier = Modifier.testTag("productList"),
             )
         }
 
@@ -61,8 +57,7 @@ class ProductListScreenTest {
                 .assertIsDisplayed()
         }
         composeTestRule
-            .onAllNodesWithTag("productList")
-            .onLast()
+            .onNodeWithTag("productListLazyVerticalGrid")
             .onChildren()
             .assertCountEquals(products.size)
     }

@@ -6,21 +6,21 @@ import androidx.compose.ui.test.onNodeWithText
 import org.junit.Rule
 import org.junit.Test
 
-class ActionButtonTest {
+class PriceTextTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
     @Test
-    fun 버튼_노출() {
+    fun 가격에_세자리마디_콤마_마지막에_원_노출() {
         // given
-        val text = "장바구니 담기"
+        val price = 20_000
         composeTestRule.setContent {
-            ActionButton(text = text, onClick = {})
+            PriceText(price = price)
         }
 
         // then
         composeTestRule
-            .onNodeWithText(text)
+            .onNodeWithText("20,000원")
             .assertIsDisplayed()
     }
 }

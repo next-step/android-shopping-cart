@@ -4,9 +4,12 @@
     <string name="product_detail">상품 상세</string>
     <string name="cart">장바구니</string>
     <string name="back">뒤로가기</string>
-    <string name="korean_price_format">%,d 원</string>
+    <string name="korean_price_format">%,d원</string>
     <string name="product_image_accessibility_text">%s 이미지</string>
     <string name="price">금액</string>
     <string name="add_cart">장바구니 담기</string>
     <string name="order_with_total_price">주문하기(%s)</string>
+    <string name="clear">삭제</string>
+    <string name="add">담기</string>
+    <string name="remove">제거</string>
 </resources>
