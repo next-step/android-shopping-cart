@@ -10,12 +10,18 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.CartProductModel
 import nextstep.shoppingcart.model.dummyCartProductList
 import nextstep.shoppingcart.ui.component.ActionButton
@@ -28,6 +34,10 @@ fun ProductCartScreen(
     model: List<CartProductModel>,
     onBackButtonClick: () -> Unit,
 ) {
+    var items by remember { mutableStateOf(model) }
+    val totalPrice by remember(items) { mutableIntStateOf(Cart.totalPrice) }
+    val enableOrder by remember(items) { mutableStateOf(Cart.totalPrice > 0) }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -38,6 +48,8 @@ fun ProductCartScreen(
             )
         }
     ) { innerPadding ->
+
+
         Column(
             modifier = Modifier
                 .padding(innerPadding)
@@ -52,15 +64,23 @@ fun ProductCartScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(
-                    items = model,
+                    items = items,
                     key = { model -> model.id }
                 ) { model ->
-                    CartProduct(model)
+                    CartProduct(
+                        model = model,
+                        listUpdate = { items = it },
+                    )
                 }
             }
 
+
             ActionButton(
-                text = stringResource(R.string.order_with_total_price),
+                text = stringResource(
+                    R.string.order_with_total_price,
+                    stringResource(R.string.korean_price_format, totalPrice)
+                ),
+                enabled = enableOrder,
                 onClick = {},
             )
         }

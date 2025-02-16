@@ -12,7 +12,7 @@ class ProductTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    val product = ProductModel(
+    private val product = ProductModel(
         id = 6871,
         imageUrl = "http://www.bing.com/search?q=nominavi",
         name = "우유",

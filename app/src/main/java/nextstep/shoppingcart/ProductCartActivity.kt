@@ -3,7 +3,7 @@ package nextstep.shoppingcart
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import nextstep.shoppingcart.model.dummyCartProductList
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.ui.ProductCartScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -13,7 +13,7 @@ class ProductCartActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 ProductCartScreen(
-                    model = dummyCartProductList,
+                    model = Cart.items,
                     onBackButtonClick = {
                         onBackPressedDispatcher.onBackPressed()
                     }

@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.CartProductModel
 import nextstep.shoppingcart.model.ProductModel
 import nextstep.shoppingcart.ui.theme.Gray10
@@ -32,6 +33,7 @@ import nextstep.shoppingcart.ui.theme.Typography
 @Composable
 fun CartProduct(
     model: CartProductModel,
+    listUpdate: (List<CartProductModel>) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -56,7 +58,7 @@ fun CartProduct(
             Icon(
                 modifier = Modifier
                     .size(24.dp)
-                    .clickable { },
+                    .clickable { Cart.removeAll(model.product).let(listUpdate) },
                 imageVector = Icons.Filled.Clear,
                 contentDescription = stringResource(R.string.clear),
             )
@@ -83,8 +85,8 @@ fun CartProduct(
                     style = Typography.bodyMedium,
                 )
                 CountControlButton(
-                    count = model.count,
-                    countUpdate = {},
+                    model = model,
+                    listUpdate = listUpdate
                 )
             }
         }
@@ -105,6 +107,6 @@ private fun CartProductPreview() {
     )
 
     ShoppingCartTheme {
-        CartProduct(model)
+        CartProduct(model = model, listUpdate = {})
     }
 }

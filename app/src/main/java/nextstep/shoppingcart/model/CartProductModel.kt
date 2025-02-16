@@ -1,18 +1,19 @@
 package nextstep.shoppingcart.model
 
+
 data class CartProductModel(
     val product: ProductModel,
     val count: Int,
 ) {
     val id = product.id
     val name = product.name
-    val price = product.price * count
+    val totalPrice = product.price * count
 }
 
 val dummyCartProductList = listOf(
     CartProductModel(
         product = ProductModel(
-            id = 1,
+            id = 3,
             imageUrl = "https://fastly.picsum.photos/id/903/200/200.jpg?hmac=lxHKyjlQqAkKyuVGkgUCO_jdWkg3osj3nTuULFHZxH8",
             name = "우유",
             price = 1000

@@ -10,10 +10,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -22,15 +18,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Cart
+import nextstep.shoppingcart.model.CartProductModel
+import nextstep.shoppingcart.model.dummyCartProductList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.ui.theme.Typography
 
 @Composable
 fun CountControlButton(
-    count: Int,
-    countUpdate: (Int) -> Unit,
+    model: CartProductModel?,
+    listUpdate: (List<CartProductModel>) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    if (model == null) return
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
@@ -41,7 +41,7 @@ fun CountControlButton(
             modifier = Modifier
                 .size(iconSize)
                 .clickable {
-                    countUpdate(count.dec().coerceAtLeast(0))
+                    Cart.removeOne(model.product).let(listUpdate)
                 }
                 .padding(iconPadding),
             painter = painterResource(R.drawable.ic_remove),
@@ -50,7 +50,7 @@ fun CountControlButton(
 
         Text(
             modifier = Modifier.width(iconSize),
-            text = count.toString(),
+            text = model.count.toString(),
             style = Typography.bodyLarge,
             textAlign = TextAlign.Center,
         )
@@ -59,7 +59,7 @@ fun CountControlButton(
             modifier = Modifier
                 .size(iconSize)
                 .clickable {
-                    countUpdate(count.inc())
+                    Cart.addOne(model.product).let(listUpdate)
                 }
                 .padding(iconPadding),
             imageVector = Icons.Filled.Add,
@@ -72,10 +72,10 @@ fun CountControlButton(
 @Composable
 private fun CountControlButtonPreview() {
     ShoppingCartTheme {
-        var count by remember { mutableIntStateOf(1) }
+        val model = dummyCartProductList.first()
         CountControlButton(
-            count = count,
-            countUpdate = { count = it }
+            model = model,
+            listUpdate = {}
         )
     }
 }

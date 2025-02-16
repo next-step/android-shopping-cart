@@ -25,6 +25,7 @@ import nextstep.shoppingcart.ui.theme.Typography
 fun ActionButton(
     text: String,
     onClick: () -> Unit,
+    enabled: Boolean = true,
 ) {
     Button(
         modifier = Modifier
@@ -32,6 +33,7 @@ fun ActionButton(
             .shadow(elevation = 8.dp),
         onClick = onClick,
         shape = RectangleShape,
+        enabled = enabled,
     ) {
         Text(
             text = text,
