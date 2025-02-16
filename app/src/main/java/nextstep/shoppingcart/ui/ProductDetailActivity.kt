@@ -24,7 +24,9 @@ class ProductDetailActivity : ComponentActivity() {
             ShoppingCartTheme {
                 ProductDetailScreen(
                     product = product,
-                    onAddCartClick = {},
+                    onAddCartClick = {
+                        ProductCartActivity.open(this)
+                    },
                     onBackButtonClick = {
                         onBackPressedDispatcher.onBackPressed()
                     }
