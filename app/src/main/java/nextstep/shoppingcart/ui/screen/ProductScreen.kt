@@ -24,9 +24,9 @@ fun ProductScreen() {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopAppBar {
-                // TODO: Add Cart onClick Action
-            }
+            TopAppBar(
+                onClick = {}
+            )
         },
     ) {
         Surface(
