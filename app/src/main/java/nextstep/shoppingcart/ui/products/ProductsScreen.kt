@@ -79,6 +79,7 @@ private fun ProductsTopAppBar(
                 text = stringResource(R.string.products_top_bar_title),
                 color = grey10,
                 fontWeight = FontWeight.W400,
+                fontSize = 22.sp,
                 style = MaterialTheme.typography.bodyLarge,
             )
         },
