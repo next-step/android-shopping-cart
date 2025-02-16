@@ -7,22 +7,29 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import nextstep.shoppingcart.FakeProductsRepository
+import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.shoppingcart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val productId = intent.getLongExtra(PRODUCT_ID, 0)
+        val product = FakeProductsRepository.getProduct(productId)
         setContent {
             ShoppingCartTheme {
                 enableEdgeToEdge()
                 ProductDetailScreen(
-                    product = FakeProductsRepository.getProduct(productId),
-                    onAddProductClick = { /*TODO*/ },
+                    product = product,
+                    onAddProductClick = { handleAddProductClick(product) },
                     onBackButtonClick = { finish() }
                 )
             }
         }
+    }
+
+    private fun handleAddProductClick(product: Product) {
+        startActivity(ShoppingCartActivity.getIntent(this))
     }
 
     companion object {
