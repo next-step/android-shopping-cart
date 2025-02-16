@@ -41,13 +41,14 @@ import nextstep.shoppingcart.ui.theme.grey40
 fun ProductsScreen(
     products: List<Product>,
     onProductClick: (Product) -> Unit,
+    onShoppingCartActionClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier
             .statusBarsPadding()
             .navigationBarsPadding(),
-        topBar = { ProductsTopAppBar() }) { innerPadding ->
+        topBar = { ProductsTopAppBar(onShoppingCartActionClick) }) { innerPadding ->
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier
@@ -68,7 +69,10 @@ fun ProductsScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ProductsTopAppBar(modifier: Modifier = Modifier) {
+private fun ProductsTopAppBar(
+    onShoppingCartActionClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -83,7 +87,7 @@ private fun ProductsTopAppBar(modifier: Modifier = Modifier) {
                 painter = painterResource(R.drawable.ic_shopping_cart),
                 contentDescription = "장바구니",
                 modifier = Modifier
-                    .clickable(onClick = {})
+                    .clickable(onClick = onShoppingCartActionClick)
                     .padding(12.dp)
                     .size(24.dp),
             )
@@ -146,7 +150,8 @@ private fun ProductsScreenPreview() {
                     imageUrl = "https://picsum.photos/200",
                 )
             },
-            onProductClick = {}
+            onProductClick = {},
+            onShoppingCartActionClick = {}
         )
     }
 }
@@ -154,7 +159,7 @@ private fun ProductsScreenPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun ProductsTopBarPreview() {
-    ProductsTopAppBar()
+    ProductsTopAppBar(onShoppingCartActionClick = {})
 }
 
 class ProductItemParameterProvider : PreviewParameterProvider<String> {

@@ -8,6 +8,7 @@ import nextstep.shoppingcart.FakeProductsRepository
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.productdetail.ProductDetailActivity
 import nextstep.shoppingcart.ui.products.ProductsScreen
+import nextstep.shoppingcart.ui.shoppingcart.ShoppingCartActivity
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,7 +19,8 @@ class MainActivity : ComponentActivity() {
                 enableEdgeToEdge()
                 ProductsScreen(
                     products = FakeProductsRepository.getProducts(),
-                    onProductClick = { product -> handleProductClick(product) }
+                    onProductClick = { product -> handleProductClick(product) },
+                    onShoppingCartActionClick = ::handleShoppingCartActionClick,
                 )
             }
         }
@@ -26,6 +28,10 @@ class MainActivity : ComponentActivity() {
 
     private fun handleProductClick(product: Product) {
         startActivity(ProductDetailActivity.getIntent(this, product.id))
+    }
+
+    private fun handleShoppingCartActionClick() {
+        startActivity(ShoppingCartActivity.getIntent(this))
     }
 }
 

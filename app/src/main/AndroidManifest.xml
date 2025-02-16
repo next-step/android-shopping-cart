@@ -29,6 +29,11 @@
             android:exported="false"
             android:label="@string/label_product_detail"
             android:theme="@style/Theme.ShoppingCart" />
+        <activity
+            android:name=".ui.shoppingcart.ShoppingCartActivity"
+            android:exported="false"
+            android:label="@string/label_shopping_cart"
+            android:theme="@style/Theme.ShoppingCart" />
     </application>
 
 </manifest>
