@@ -1,10 +1,12 @@
 package nextstep.shoppingcart
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import nextstep.shoppingcart.data.FakeProductRepository
+import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.screens.MainScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -19,9 +21,20 @@ class MainActivity : ComponentActivity() {
             ShoppingCartTheme {
                 MainScreen(
                     products = products,
-                    onActionClick = { /* TODO: 장바구니 이동 로직 구현(2단계 미션) */ }
+                    onActionCartClick = ::startCartActivity,
+                    onProductClick = ::startProductDetailActivity,
                 )
             }
         }
+    }
+
+    private fun startProductDetailActivity(it: Product) {
+        val intent: Intent = ProductDetailActivity.getIntent(context = this, productId = it.id)
+        startActivity(intent)
+    }
+
+    private fun startCartActivity() {
+        val intent: Intent = CartActivity.getIntent(context = this)
+        startActivity(intent)
     }
 }

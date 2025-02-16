@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,13 +24,18 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.FakeProductRepository
+import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-internal fun ProductListScreen(products: Products, modifier: Modifier = Modifier) {
+internal fun ProductListScreen(
+    products: Products,
+    onProductClick: (Product) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     LazyVerticalGrid(
-        modifier = modifier.padding(vertical = 12.dp, horizontal = 18.dp),
+        modifier = modifier.padding(horizontal = 18.dp),
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -39,9 +45,8 @@ internal fun ProductListScreen(products: Products, modifier: Modifier = Modifier
             items = products.value
         ) { product ->
             Product(
-                imageUrl = product.imageUrl,
-                name = product.name,
-                price = product.price.value,
+                product = product,
+                onProductClick = { onProductClick(product) },
             )
         }
     }
@@ -50,30 +55,33 @@ internal fun ProductListScreen(products: Products, modifier: Modifier = Modifier
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 internal fun Product(
-    imageUrl: String,
-    name: String,
-    price: Int,
+    product: Product,
+    onProductClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier.clickable(onClick = onProductClick),
+    ) {
         GlideImage(
-            model = imageUrl,
-            contentDescription = name,
+            model = product.imageUrl,
+            contentDescription = product.name,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1.0f),
         )
         Spacer(Modifier.height(8.dp))
-        Column(modifier = Modifier.padding(start = 4.dp)) {
-            Text(
-                text = name,
-                fontWeight = FontWeight.Bold,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Text(stringResource(R.string.price_format, price))
-        }
+        Text(
+            text = product.name,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(start = 4.dp),
+        )
+        Text(
+            text = stringResource(R.string.price_format, product.price.value),
+            modifier = Modifier.padding(start = 4.dp),
+        )
     }
 }
 
@@ -83,6 +91,7 @@ private fun ProductListScreenPreview() {
     ShoppingCartTheme {
         ProductListScreen(
             products = FakeProductRepository.getAllProducts(),
+            onProductClick = {},
         )
     }
 }
@@ -91,11 +100,9 @@ private fun ProductListScreenPreview() {
 @Composable
 private fun ProductPreview() {
     ShoppingCartTheme {
-        val product = FakeProductRepository.getFirstProduct()
         Product(
-            imageUrl = product.imageUrl,
-            name = product.name,
-            price = product.price.value,
+            product = FakeProductRepository.getFirstProduct(),
+            onProductClick = {},
         )
     }
 }

@@ -1,9 +1,21 @@
 <resources>
     <string name="app_name">Shopping Cart</string>
 
+    <!-- Common -->
+    <string name="navigate_back">뒤로가기</string>
+    <string name="price">금액</string>
+
+    <!-- Format -->
     <string name="price_format">%,d원</string>
 
     <!-- Product list -->
     <string name="product_list_top_bar_title">상품 목록</string>
     <string name="product_list_top_bar_action_cart">장바구니 이동</string>
+
+    <!-- Product detail -->
+    <string name="product_detail_top_bar_title">상품 상세</string>
+    <string name="product_detail_add_cart">장바구니 담기</string>
+
+    <!-- Cart -->
+    <string name="cart_top_bar_title">장바구니</string>
 </resources>
