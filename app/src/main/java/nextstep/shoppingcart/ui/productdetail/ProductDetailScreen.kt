@@ -122,12 +122,12 @@ private fun ProductDetailContent(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailTopAppBar(
+private fun ProductDetailTopAppBar(
     onBackButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
-        title = { Text(text = "상품 상세") },
+        title = { Text(text = stringResource(R.string.product_detail_app_bar_title)) },
         navigationIcon = {
             IconButton(onClick = onBackButtonClick) {
                 Icon(
