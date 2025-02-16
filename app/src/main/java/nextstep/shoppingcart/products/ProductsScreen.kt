@@ -98,14 +98,17 @@ private fun ProductItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+    ) {
         AsyncImage(
             model = product.imageUrl,
             contentDescription = "상품 이미지",
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f)
-                .clickable(onClick = onClick),
+                .aspectRatio(1f),
             placeholder = painterResource(R.drawable.ic_launcher_background),
             error = painterResource(R.drawable.ic_launcher_background)
         )
