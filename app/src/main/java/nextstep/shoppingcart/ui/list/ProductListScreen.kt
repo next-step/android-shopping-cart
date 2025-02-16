@@ -66,7 +66,10 @@ fun ProductListScreen() {
             verticalArrangement = Arrangement.spacedBy(20.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(mockProducts) { item ->
+            items(
+                items = mockProducts,
+                key = { item -> item.id }
+            ) { item ->
                 ProductItem(item = item)
             }
         }
