@@ -34,7 +34,7 @@ fun ProductItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(160.dp),
-            model = item.thumbnailPath,
+            model = item.imageUrl,
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
