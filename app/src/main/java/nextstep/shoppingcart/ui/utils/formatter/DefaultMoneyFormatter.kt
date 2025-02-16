@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.screen.utils.formatter
+package nextstep.shoppingcart.ui.utils.formatter
 
 import java.text.NumberFormat
 import java.util.Locale

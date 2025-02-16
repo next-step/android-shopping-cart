@@ -11,8 +11,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import nextstep.shoppingcart.ui.screen.utils.formatter.DefaultMoneyFormatter
-import nextstep.shoppingcart.ui.screen.utils.formatter.MoneyFormatter
+import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
+import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 
 @Composable
 fun ProductItem(
