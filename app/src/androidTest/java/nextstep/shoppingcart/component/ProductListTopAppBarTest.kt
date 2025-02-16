@@ -17,9 +17,9 @@ class ProductListTopAppBarTest {
         var count = 0
 
         composeTestRule.setContent {
-            ProductListTopAppBar {
-                count++
-            }
+            ProductListTopAppBar(
+                onClickButton = { count++ }
+            )
         }
 
         composeTestRule

@@ -21,8 +21,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ProductListTopAppBar(
-    modifier: Modifier = Modifier,
-    onClickButton: () -> Unit
+    onClickButton: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
@@ -52,6 +52,8 @@ internal fun ProductListTopAppBar(
 @Composable
 private fun ProductListTopAppBarPreview() {
     ShoppingCartTheme {
-        ProductListTopAppBar {}
+        ProductListTopAppBar(
+            onClickButton = {}
+        )
     }
 }
