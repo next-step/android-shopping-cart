@@ -17,6 +17,7 @@ import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.screen.component.ProductItem
 import nextstep.shoppingcart.ui.screen.component.TopAppBar
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductScreen() {
@@ -88,4 +89,12 @@ fun ProductListPreview() {
     ProductListSection(
         products = fakeItemList
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProductScreenPreview() {
+    ShoppingCartTheme {
+        ProductScreen()
+    }
 }
