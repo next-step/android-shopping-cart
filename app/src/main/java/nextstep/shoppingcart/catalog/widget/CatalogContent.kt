@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.catalog.component.ProductGridItem
-import nextstep.shoppingcart.catalog.dummyProducts
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.util.DataUtil.dummyProducts
 
 @Composable
 fun CatalogContent(

@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
@@ -34,6 +35,8 @@ fun ProductGridItem(
         Text(
             product.name,
             style = Bold16,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
         Text(
             product.price.toPrice(),
@@ -46,7 +49,7 @@ fun ProductGridItem(
 @Composable
 private fun ProductGridItemPreview() {
     ProductGridItem(Product(
-        name = "아메리카노",
+        name = "엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마",
         price = 1000,
         imageUrl = "https://picsum.photos/id/30/1280/901"
     ))
