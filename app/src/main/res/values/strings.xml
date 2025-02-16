@@ -7,4 +7,5 @@
 
     <!-- product detail -->
     <string name="product_detail_price_title">금액</string>
+    <string name="product_detail_btn_add_product_in_cart">장바구니 담기</string>
 </resources>
