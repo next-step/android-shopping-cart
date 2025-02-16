@@ -55,6 +55,7 @@ internal fun ProductDetailContent(
                 lineHeight = 28.sp,
                 letterSpacing = 0.5.sp,
             ),
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             color = Color(0xFF333333),
         )
@@ -125,7 +126,8 @@ private fun PriceBar(
 @Composable
 private fun ProductDetailContentPreview() {
     ProductDetailContent(
-        product = ProductRepository.getProductById(1),
+        product = ProductRepository.getProductById(1)
+            .copy(name = "매우매우매우길어요매우매우매우길어요매우매우매우길어요매우매우매우길어요"),
         onAddCartClick = {}
     )
 }
