@@ -34,5 +34,3 @@ class MainActivity : ComponentActivity() {
         startActivity(ShoppingCartActivity.getIntent(this))
     }
 }
-
-
