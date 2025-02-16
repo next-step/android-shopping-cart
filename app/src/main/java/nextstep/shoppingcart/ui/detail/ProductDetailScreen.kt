@@ -3,10 +3,8 @@ package nextstep.shoppingcart.ui.detail
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,6 +37,7 @@ import nextstep.shoppingcart.designsystem.theme.DividerColor
 import nextstep.shoppingcart.designsystem.theme.TextColor
 import nextstep.shoppingcart.designsystem.theme.TopBarTextColor
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.detail.component.ProductPrice
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -104,24 +103,7 @@ fun ProductDetailScreen(
                 color = DividerColor
             )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(18.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.price_content),
-                    fontSize = 20.sp,
-                    color = TextColor
-                )
-                Text(
-                    text = stringResource(R.string.price, item.price),
-                    fontSize = 20.sp,
-                    color = TextColor
-                )
-            }
+            ProductPrice(item = item)
 
             Spacer(Modifier.weight(1f))
 
