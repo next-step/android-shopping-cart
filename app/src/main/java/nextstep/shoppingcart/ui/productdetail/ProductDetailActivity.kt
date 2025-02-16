@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.productdetail
+package nextstep.shoppingcart.ui.productdetail
 
 import android.content.Context
 import android.content.Intent

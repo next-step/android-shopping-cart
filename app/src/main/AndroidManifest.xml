@@ -15,7 +15,7 @@
         android:theme="@style/Theme.ShoppingCart"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ShoppingCart">
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".productdetail.ProductDetailActivity"
+            android:name=".ui.productdetail.ProductDetailActivity"
             android:exported="false"
             android:label="@string/label_product_detail"
             android:theme="@style/Theme.ShoppingCart" />

@@ -1,12 +1,13 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import nextstep.shoppingcart.FakeProductsRepository
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.productdetail.ProductDetailActivity
-import nextstep.shoppingcart.products.ProductsScreen
+import nextstep.shoppingcart.ui.productdetail.ProductDetailActivity
+import nextstep.shoppingcart.ui.products.ProductsScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
