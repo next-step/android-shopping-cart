@@ -12,13 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.common.CommonTopAppBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.ui.theme.blue50
 
@@ -49,7 +46,12 @@ fun ProductDetailScreen(
             .fillMaxSize()
             .navigationBarsPadding()
             .statusBarsPadding(),
-        topBar = { ProductDetailTopAppBar(onBackButtonClick = onBackButtonClick) }
+        topBar = {
+            CommonTopAppBar(
+                title = stringResource(R.string.product_detail_app_bar_title),
+                onBackButtonClick = onBackButtonClick
+            )
+        }
     ) { innerPadding ->
         Box(modifier = Modifier.fillMaxSize()) {
             ProductDetailContent(
@@ -118,26 +120,6 @@ private fun ProductDetailContent(
             )
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ProductDetailTopAppBar(
-    onBackButtonClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    TopAppBar(
-        title = { Text(text = stringResource(R.string.product_detail_app_bar_title)) },
-        navigationIcon = {
-            IconButton(onClick = onBackButtonClick) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_arrow_back),
-                    contentDescription = "상품 상세 뒤로가기"
-                )
-            }
-        },
-        modifier = modifier
-    )
 }
 
 @Preview(showSystemUi = true)
