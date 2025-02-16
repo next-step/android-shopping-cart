@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.ui.theme.grey10
 import nextstep.shoppingcart.ui.theme.grey40
 
@@ -132,7 +133,7 @@ private fun ProductItem(
 @Preview(showBackground = true)
 @Composable
 private fun ProductsScreenPreview() {
-    MaterialTheme {
+    ShoppingCartTheme {
         ProductsScreen(
             products = List(10) {
                 Product(
@@ -165,16 +166,14 @@ class ProductItemParameterProvider : PreviewParameterProvider<String> {
 private fun ProductItemPreview(
     @PreviewParameter(ProductItemParameterProvider::class) productName: String
 ) {
-    MaterialTheme {
-        ProductItem(
-            Product(
-                id = 1L,
-                name = productName,
-                price = 10000L,
-                imageUrl = "https://picsum.photos/200",
-            ),
-            onClick = {},
-            modifier = Modifier.width(200.dp)
-        )
-    }
+    ProductItem(
+        Product(
+            id = 1L,
+            name = productName,
+            price = 10000L,
+            imageUrl = "https://picsum.photos/200",
+        ),
+        onClick = {},
+        modifier = Modifier.width(200.dp)
+    )
 }
