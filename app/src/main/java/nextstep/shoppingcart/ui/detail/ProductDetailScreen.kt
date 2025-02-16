@@ -3,7 +3,6 @@ package nextstep.shoppingcart.ui.detail
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -18,9 +17,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -107,12 +106,12 @@ fun ProductDetailScreen(
 
             Spacer(Modifier.weight(1f))
 
-            Box(
+            TextButton(
+                onClick = { },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp)
-                    .background(Blue50),
-                contentAlignment = Alignment.Center
+                    .background(Blue50)
+                    .height(56.dp),
             ) {
                 Text(
                     text = stringResource(R.string.cart_content),
