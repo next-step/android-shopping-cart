@@ -4,33 +4,13 @@ import kotlinx.coroutines.delay
 import nextstep.shoppingcart.model.Product
 
 object DataUtil {
-    val dummyProducts = listOf(
+    val dummyProducts = List(99) { index ->
         Product(
             "PET보틀-원형(500ml)",
             42200,
-            "https://picsum.photos/id/30/1280/901"
-        ),
-        Product(
-            "PET보틀-원형(500ml)",
-            42200,
-            "https://picsum.photos/id/30/1280/901"
-        ),
-        Product(
-            "PET보틀-원형(500ml)",
-            42200,
-            "https://picsum.photos/id/30/1280/901"
-        ),
-        Product(
-            "PET보틀-원형(500ml)",
-            42200,
-            "https://picsum.photos/id/30/1280/901"
-        ),
-        Product(
-            "PET보틀-원형(500ml)",
-            42200,
-            "https://picsum.photos/id/30/1280/901"
-        ),
-    )
+            "https://picsum.photos/id/$index/1280/901"
+        )
+    }
 
     suspend fun getProducts(): List<Product> {
         delay(500)

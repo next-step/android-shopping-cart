@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.catalog.widget.CatalogContent
 import nextstep.shoppingcart.catalog.widget.CatalogTopBar
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.util.DataUtil.getProducts
 
 @Composable
@@ -38,5 +39,7 @@ fun CatalogScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun CatalogScreenPreview() {
-    CatalogScreen()
+    ShoppingCartTheme {
+        CatalogScreen()
+    }
 }

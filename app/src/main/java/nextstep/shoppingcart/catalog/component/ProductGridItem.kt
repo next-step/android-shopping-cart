@@ -15,6 +15,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.TypoTokens.Bold16
 import nextstep.shoppingcart.ui.theme.TypoTokens.Normal16
+import nextstep.shoppingcart.util.ImageUtil.getUrlIfNotPreview
 import nextstep.shoppingcart.util.NumberFormatUtil.toPrice
 
 @Composable
@@ -24,7 +25,7 @@ fun ProductGridItem(
 ) {
     Column(modifier = modifier) {
         AsyncImage(
-            model = product.imageUrl,
+            model = getUrlIfNotPreview(product.imageUrl),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             placeholder = painterResource(R.drawable.woori),
