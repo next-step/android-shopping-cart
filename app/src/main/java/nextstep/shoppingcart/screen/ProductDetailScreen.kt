@@ -154,11 +154,7 @@ private fun ProductDetailContent(
 @Composable
 private fun ProductDetailContentPreview() {
     ProductDetailContent(
-        product = Product(
-            imageUrl = "",
-            name = "상품 이름입니다",
-            price = 20000
-        ),
+        product = Product.mock,
         onClickAddToCart = { }
     )
 }

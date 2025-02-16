@@ -19,22 +19,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.products
 import nextstep.shoppingcart.view.ProductsList
 
 @Composable
-fun ProductsScreen() {
+fun ProductsScreen(
+    onClickCart: () -> Unit,
+    onClickProductItem: (Product) -> Unit
+) {
     Scaffold(
         topBar = {
             ProductsTopBar(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(64.dp)
+                    .height(64.dp),
+                onClickCart = onClickCart
             )
         }
     ) { innerPadding ->
         ProductsList(
             products = products,
+            onClickProductItem = onClickProductItem,
             modifier = Modifier
                 .padding(innerPadding)
         )
@@ -45,7 +51,7 @@ fun ProductsScreen() {
 @Composable
 private fun ProductsTopBar(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {}
+    onClickCart: () -> Unit = {}
 ) {
     Box(
         modifier = modifier
@@ -65,7 +71,7 @@ private fun ProductsTopBar(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
                 .clickable {
-                    onClick()
+                    onClickCart()
                 }
         )
     }

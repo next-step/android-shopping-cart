@@ -23,14 +23,15 @@ import nextstep.shoppingcart.model.Product
 @Composable
 fun ProductsItem(
     product: Product,
-    onClick: () -> Unit = {}
+    onClick: (Product) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .width(158.dp)
             .wrapContentHeight()
             .clickable {
-                onClick()
+                onClick(product)
             }
     ) {
         AsyncImage(
@@ -67,6 +68,7 @@ private fun ProductsItemPreview() {
             imageUrl = "",
             name = "상품명상품명상품명상품명상품명상품명상품명상품명",
             price = 10000
-        )
+        ),
+        onClick = {}
     )
 }
