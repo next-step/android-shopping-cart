@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -12,8 +13,9 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.data.model.Product
 
 @Composable
-fun ProductListContent(
+internal fun ProductListContent(
     productList: List<Product>,
+    onProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -25,10 +27,13 @@ fun ProductListContent(
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         items(
-            count = productList.size,
-            key = { productList[it].id }
-        ) { index ->
-            ProductItem(product = productList[index])
+            items = productList,
+            key = { it.id }
+        ) { product ->
+            ProductItem(
+                product = product,
+                onProductClick = onProductClick,
+            )
         }
     }
 }
@@ -37,13 +42,14 @@ fun ProductListContent(
 @Composable
 private fun ProductListContentPreview() {
     ProductListContent(
-        (0..100).map {
+        productList = (0..100).map {
             Product(
                 id = it,
                 imageUrl = "https://www.google.com/#q=tristique",
                 name = "상품_$it",
                 price = 3124
             )
-        }
+        },
+        onProductClick = {}
     )
 }

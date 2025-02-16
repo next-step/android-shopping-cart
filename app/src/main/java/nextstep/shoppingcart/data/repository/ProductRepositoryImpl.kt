@@ -2,9 +2,9 @@ package nextstep.shoppingcart.data.repository
 
 import nextstep.shoppingcart.data.model.Product
 
-object ProductRepositoryImpl : ProductRepository {
-    override fun getProductList(): List<Product> {
-        return listOf(
+object ProductRepository {
+    private val _productList: List<Product> =
+        listOf(
             Product(
                 id = 1,
                 imageUrl = "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg",
@@ -66,5 +66,12 @@ object ProductRepositoryImpl : ProductRepository {
                 price = 28000,
             ),
         )
+
+    fun getProductList(): List<Product> {
+        return _productList
+    }
+
+    fun getProductById(id: Int): Product {
+        return _productList.first { it.id == id }
     }
 }
