@@ -21,11 +21,13 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductListScreen(
     productList: List<Product>,
+    onProductClick: (id: String) -> Unit,
+    onCartClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = { ProductListAppBar() }
+        topBar = { ProductListAppBar(onCartClick = onCartClick) }
     ) { innerPadding ->
         LazyVerticalGrid(
             modifier = Modifier.fillMaxSize()
@@ -36,8 +38,8 @@ fun ProductListScreen(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(productList) {
-                ProductItem(product = it)
+            items(productList, key = { it.id }) {
+                ProductItem(product = it, onClick = { onProductClick(it.id) })
             }
         }
     }
@@ -48,7 +50,9 @@ fun ProductListScreen(
 private fun ProductListScreenPreview() {
     ShoppingCartTheme {
         ProductListScreen(
-            productList = products
+            productList = products,
+            onProductClick = {},
+            onCartClick = {}
         )
     }
 }
