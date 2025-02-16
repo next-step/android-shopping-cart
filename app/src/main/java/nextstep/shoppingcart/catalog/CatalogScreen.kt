@@ -8,6 +8,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.catalog.widget.CatalogContent
 import nextstep.shoppingcart.catalog.widget.CatalogTopBar
+import nextstep.shoppingcart.model.Product
+
+val dummyProducts = listOf(
+    Product(
+        "PET보틀-원형(500ml)",
+        42200,
+        "https://picsum.photos/id/30/1280/901"
+    ),
+    Product(
+        "PET보틀-원형(500ml)",
+        42200,
+        "https://picsum.photos/id/30/1280/901"
+    ),
+    Product(
+        "PET보틀-원형(500ml)",
+        42200,
+        "https://picsum.photos/id/30/1280/901"
+    ),
+    Product(
+        "PET보틀-원형(500ml)",
+        42200,
+        "https://picsum.photos/id/30/1280/901"
+    ),
+    Product(
+        "PET보틀-원형(500ml)",
+        42200,
+        "https://picsum.photos/id/30/1280/901"
+    ),
+)
 
 @Composable
 fun CatalogScreen(modifier: Modifier = Modifier) {
@@ -15,7 +44,10 @@ fun CatalogScreen(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize(),
         topBar = { CatalogTopBar() },
     ) { paddingValues ->
-        CatalogContent(modifier = Modifier.padding(paddingValues))
+        CatalogContent(
+            products = dummyProducts,
+            modifier = Modifier.padding(paddingValues)
+        )
     }
 }
 
