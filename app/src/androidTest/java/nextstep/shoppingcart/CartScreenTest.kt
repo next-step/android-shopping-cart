@@ -1,8 +1,8 @@
 package nextstep.shoppingcart
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.ui.cart.CartScreen
@@ -39,7 +39,7 @@ class CartScreenTest {
 
         //then
         composeTestRule
-            .onNode(hasContentDescription("back_icon"))
+            .onNodeWithContentDescription("back_icon")
             .assertIsDisplayed()
     }
 
@@ -54,7 +54,7 @@ class CartScreenTest {
         }
 
         //when
-        composeTestRule.onNode(hasContentDescription("back_icon")).performClick()
+        composeTestRule.onNodeWithContentDescription("back_icon").performClick()
 
         //then
         assert(backMessage == "back")

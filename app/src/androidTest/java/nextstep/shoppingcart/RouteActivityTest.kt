@@ -1,7 +1,7 @@
 package nextstep.shoppingcart
 
-import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.espresso.intent.Intents
@@ -53,8 +53,8 @@ class RouteActivityTest {
     fun should_not_show_cart_icon_when_click_cart_icon() {
 
         //when
-        composeTestRule.onNode(hasContentDescription("shopping_cart_icon")).performClick()
-
+        composeTestRule.onNodeWithContentDescription("shopping_cart_icon").performClick()
+        
         //then
         composeTestRule.onNodeWithText("상품 목록").assertDoesNotExist()
     }
@@ -63,7 +63,7 @@ class RouteActivityTest {
     fun should_show_cart_screen_when_click_shopping_cart_icon() {
 
         //when
-        composeTestRule.onNode(hasContentDescription("shopping_cart_icon")).performClick()
+        composeTestRule.onNodeWithContentDescription("shopping_cart_icon").performClick()
 
         //then
         intended(hasComponent(CartActivity::class.java.name))

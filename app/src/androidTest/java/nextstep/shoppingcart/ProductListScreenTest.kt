@@ -1,8 +1,8 @@
 package nextstep.shoppingcart
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.model.Product
@@ -41,7 +41,7 @@ class ProductListScreenTest {
 
         //then
         composeTestRule
-            .onNode(hasContentDescription("shopping_cart_icon"))
+            .onNodeWithContentDescription("shopping_cart_icon")
             .assertIsDisplayed()
     }
 
@@ -106,7 +106,9 @@ class ProductListScreenTest {
         }
 
         //when
-        composeTestRule.onNode(hasContentDescription("shopping_cart_icon")).performClick()
+        composeTestRule
+            .onNodeWithContentDescription("shopping_cart_icon")
+            .performClick()
 
         //then
         assertEquals(routeType, RouteType.ToCart)
