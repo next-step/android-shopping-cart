@@ -35,7 +35,7 @@ fun ProductPrice(
         )
 
         Text(
-            text = stringResource(R.string.price, item.price),
+            text = stringResource(R.string.price, item.getFormattedPrice()),
             fontSize = 20.sp,
             color = TextColor
         )
