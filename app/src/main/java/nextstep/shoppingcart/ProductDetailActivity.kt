@@ -1,5 +1,6 @@
 package nextstep.shoppingcart
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -38,11 +39,16 @@ class ProductDetailActivity : ComponentActivity() {
                         finish()
                     },
                     onClickAddToCart = {
-
+                        goToCart()
                     }
                 )
             }
         }
+    }
+
+    private fun goToCart() {
+        val intent = Intent(this, CartActivity::class.java)
+        startActivity(intent)
     }
 
     companion object {

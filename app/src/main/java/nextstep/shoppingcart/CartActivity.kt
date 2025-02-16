@@ -15,7 +15,7 @@ class CartActivity : ComponentActivity() {
             ShoppingCartTheme {
                 CartScreen(
                     onClickBack = {
-
+                        finish()
                     },
                 )
             }
