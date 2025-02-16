@@ -3,8 +3,6 @@ package nextstep.shoppingcart.products
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -15,6 +13,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -65,35 +65,30 @@ fun ProductsScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ProductsTopAppBar(modifier: Modifier = Modifier) {
-    Row(
+    CenterAlignedTopAppBar(
+        title = {
+            Text(
+                text = stringResource(R.string.products_top_bar_title),
+                color = grey10,
+                fontWeight = FontWeight.W400,
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        },
+        actions = {
+            Icon(
+                painter = painterResource(R.drawable.ic_shopping_cart),
+                contentDescription = "장바구니",
+                modifier = Modifier
+                    .clickable(onClick = {})
+                    .padding(12.dp)
+                    .size(24.dp),
+            )
+        },
         modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 4.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
-    ) {
-        Spacer(
-            modifier = Modifier
-                .padding(12.dp)
-                .size(24.dp)
-        )
-        Text(
-            text = stringResource(R.string.products_top_bar_title),
-            color = grey10,
-            fontWeight = FontWeight.W400,
-            style = MaterialTheme.typography.bodyLarge,
-        )
-        Icon(
-            painter = painterResource(R.drawable.ic_shopping_cart),
-            contentDescription = "장바구니",
-            modifier = Modifier
-                .clickable(onClick = {})
-                .padding(12.dp)
-                .size(24.dp),
-        )
-    }
+    )
 }
 
 @Composable
@@ -155,9 +150,7 @@ private fun ProductsScreenPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun ProductsTopBarPreview() {
-    MaterialTheme {
-        ProductsTopAppBar()
-    }
+    ProductsTopAppBar()
 }
 
 class ProductItemParameterProvider : PreviewParameterProvider<String> {
