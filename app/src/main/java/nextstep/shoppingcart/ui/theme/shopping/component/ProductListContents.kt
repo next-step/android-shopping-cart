@@ -15,7 +15,7 @@ fun ProductListContents(modifier: Modifier = Modifier, productItems: List<Produc
         modifier = modifier,
         columns = GridCells.Fixed(2),
     ) {
-        items(productItems) { item ->
+        items(items= productItems, key = {it.productId}) { item ->
             Product(item)
         }
     }
