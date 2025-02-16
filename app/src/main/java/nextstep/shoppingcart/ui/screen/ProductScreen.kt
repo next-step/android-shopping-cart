@@ -68,13 +68,13 @@ fun ProductListSection(
 
 @Preview(showBackground = true)
 @Composable
-fun AppbarPreview() {
+private fun AppbarPreview() {
     TopAppBar {}
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ProductItemPreview() {
+private fun ProductItemPreview() {
     ProductItem(
         imageUrl = "https://www.picsum.photos/200",
         title = "상품 이름",
@@ -84,7 +84,7 @@ fun ProductItemPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun ProductListPreview() {
+private fun ProductListPreview() {
     val fakeItemList = FakeData.products
     ProductListSection(
         products = fakeItemList
@@ -93,7 +93,7 @@ fun ProductListPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun ProductScreenPreview() {
+private fun ProductScreenPreview() {
     ShoppingCartTheme {
         ProductScreen()
     }
