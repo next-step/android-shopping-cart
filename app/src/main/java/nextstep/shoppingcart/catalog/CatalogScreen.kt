@@ -15,16 +15,28 @@ import nextstep.shoppingcart.catalog.widget.CatalogContent
 import nextstep.shoppingcart.catalog.widget.CatalogTopBar
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+import nextstep.shoppingcart.util.DataUtil.dummyProducts
 import nextstep.shoppingcart.util.DataUtil.getProducts
 
 @Composable
-fun CatalogScreen(modifier: Modifier = Modifier) {
+fun CatalogRoute(modifier: Modifier = Modifier) {
     var products by remember { mutableStateOf(listOf<Product>()) }
 
     LaunchedEffect(Unit) {
         products = getProducts()
     }
 
+    CatalogScreen(
+        products = products,
+        modifier = modifier,
+    )
+}
+
+@Composable
+fun CatalogScreen(
+    products: List<Product>,
+    modifier: Modifier = Modifier
+) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = { CatalogTopBar() },
@@ -40,6 +52,6 @@ fun CatalogScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun CatalogScreenPreview() {
     ShoppingCartTheme {
-        CatalogScreen()
+        CatalogScreen(dummyProducts)
     }
 }
