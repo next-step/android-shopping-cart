@@ -19,7 +19,7 @@ class ProductDetailActivity : ComponentActivity() {
                 ProductDetailScreen(
                     product = FakeProductsRepository.getProduct(productId),
                     onAddProductClick = { /*TODO*/ },
-                    onBackButtonClick = { /*TODO*/ }
+                    onBackButtonClick = { finish() }
                 )
             }
         }
