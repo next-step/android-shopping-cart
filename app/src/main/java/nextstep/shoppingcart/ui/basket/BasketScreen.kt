@@ -96,7 +96,9 @@ private fun BasketScreenPreview() {
     ShoppingCartTheme {
         BasketScreen(
             state = BasketState(),
-            navigateBack = {},
+            navigateBack = {
+                // no-op. just for preview
+            },
         )
     }
 }

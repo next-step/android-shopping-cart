@@ -252,8 +252,12 @@ private fun ProductListScreenPreview() {
                     ),
                 )
             ),
-            onProductClick = {},
-            onBasketClick = {},
+            onProductClick = {
+                // no-op. just for preview
+            },
+            onBasketClick = {
+                // no-op. just for preview
+            },
         )
     }
 }
