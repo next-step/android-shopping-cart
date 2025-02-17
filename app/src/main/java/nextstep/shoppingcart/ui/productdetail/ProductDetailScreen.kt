@@ -22,6 +22,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -110,13 +112,15 @@ private fun ProductDetailContent(
                 fontSize = 20.sp,
                 modifier = Modifier
                     .weight(1f)
+                    .semantics { contentDescription = "상품 금액 타이틀" }
             )
             Text(
                 text = stringResource(R.string.all_price_format, product.price),
                 fontSize = 20.sp,
+                textAlign = TextAlign.End,
                 modifier = Modifier
-                    .weight(3f),
-                textAlign = TextAlign.End
+                    .weight(3f)
+                    .semantics { contentDescription = "상품 금액" }
             )
         }
     }
