@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.ui.theme.shopping.lists
+import nextstep.shoppingcart.ui.theme.shopping.getProductsTestData
 import nextstep.shoppingcart.ui.theme.shopping.model.Product
 
 @Composable
@@ -24,5 +24,5 @@ fun ProductListContents(modifier: Modifier = Modifier, productItems: List<Produc
 @Preview(showBackground = true)
 @Composable
 private fun ProductListContentsPreview() {
-    ProductListContents(productItems = lists)
+    ProductListContents(productItems = getProductsTestData())
 }
