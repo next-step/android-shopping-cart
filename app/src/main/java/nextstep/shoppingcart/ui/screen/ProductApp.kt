@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 enum class ProductDestination(@StringRes val title: Int) {
     ProductList(title = R.string.appbar_product_title),
     ProductDetail(title = R.string.appbar_product_detail_title),
+    ShoppingCart(title = R.string.appbar_shopping_cart_title)
 }
 
 @Composable
@@ -36,13 +37,16 @@ fun ProductApp() {
 
     val fakeItemList = FakeData.products
     var seletedProduct by remember { mutableStateOf<Product?>(null) }
+    var addCartProduct by remember { mutableStateOf<Product?>(null) }
 
     Scaffold(
         topBar = {
             if (currentScreen == ProductDestination.ProductList) {
                 CenterAppBar(
                     title = stringResource(id = currentScreen.title),
-                    onClick = { }
+                    onClick = {
+                        navController.navigate(ProductDestination.ShoppingCart.name)
+                    }
                 )
             } else {
                 CustomAppBar(
@@ -75,8 +79,17 @@ fun ProductApp() {
                 route = ProductDestination.ProductDetail.name,
             ) { backStackEntry ->
                 ProductDetailScreen(
-                    product = seletedProduct!!
+                    product = seletedProduct!!,
+                    addProductClick = { product ->
+                        addCartProduct = product
+                        navController.navigate(ProductDestination.ShoppingCart.name)
+                    }
                 )
+            }
+            composable(
+                route = ProductDestination.ShoppingCart.name,
+            ) { backStackEntry ->
+                ShoppingCartScreen()
             }
         }
     }

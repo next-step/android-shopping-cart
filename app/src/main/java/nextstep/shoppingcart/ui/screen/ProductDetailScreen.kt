@@ -36,6 +36,7 @@ import nextstep.shoppingcart.R
 @Composable
 fun ProductDetailScreen(
     product: Product,
+    addProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -67,9 +68,7 @@ fun ProductDetailScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         ShoppingCartAddButton(
-            onClick = {
-
-            },
+            onClick = { addProductClick(product) },
         )
     }
 }
@@ -127,7 +126,7 @@ fun ShoppingCartAddButton(
     ) {
         Text(
             modifier = Modifier.padding(vertical = 15.dp),
-            text = stringResource(id = R.string.appbar_cart_add_button),
+            text = stringResource(id = R.string.cart_add_button),
             fontSize = 20.sp,
             fontWeight = FontWeight.W700,
             color = Color.White,
@@ -169,6 +168,7 @@ fun ProductDetailScreenPreview() {
             imageUrl = "https://picsum.photos/200/300",
             title = "상품 이름",
             price = 10000,
-        )
+        ),
+        addProductClick = { }
     )
 }
