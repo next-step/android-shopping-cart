@@ -57,8 +57,12 @@ class ProductCartItemTest {
             ProductCartItem(
                 cartItem = cartItemState,
                 onRemoveClick = {},
-                onIncreaseClick = { cartItemState = it },
-                onDecreaseClick = { cartItemState = it }
+                onIncreaseClick = {
+                    cartItemState = cartItemState.copy(count = cartItemState.count.inc())
+                },
+                onDecreaseClick = {
+                    cartItemState = cartItemState.copy(count = cartItemState.count.dec())
+                }
             )
         }
 

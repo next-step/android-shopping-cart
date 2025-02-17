@@ -45,8 +45,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 internal fun ProductCartItem(
     cartItem: CartItem,
     onRemoveClick: (Product) -> Unit,
-    onIncreaseClick: (CartItem) -> Unit,
-    onDecreaseClick: (CartItem) -> Unit,
+    onIncreaseClick: (Product) -> Unit,
+    onDecreaseClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -92,8 +92,8 @@ internal fun ProductCartItem(
                 )
                 ProductCounter(
                     cartItem = cartItem,
-                    onIncreaseClick = { onIncreaseClick(cartItem.copy(count = it)) },
-                    onDecreaseClick = { onDecreaseClick(cartItem.copy(count = it)) },
+                    onIncreaseClick = { onIncreaseClick(cartItem.product) },
+                    onDecreaseClick = { onDecreaseClick(cartItem.product) },
                     onRemoveClick = { onRemoveClick(cartItem.product) },
                 )
             }
@@ -141,8 +141,8 @@ private fun ProductCartItemTitle(
 private fun ProductCounter(
     cartItem: CartItem,
     onRemoveClick: () -> Unit,
-    onIncreaseClick: (Int) -> Unit,
-    onDecreaseClick: (Int) -> Unit,
+    onIncreaseClick: (Product) -> Unit,
+    onDecreaseClick: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val textStyle = remember {
@@ -164,7 +164,7 @@ private fun ProductCounter(
                 .testTag("${cartItem.productName}_decrease_button"),
             onClick = {
                 if (cartItem.count > 1) {
-                    onDecreaseClick(cartItem.count.dec())
+                    onDecreaseClick(cartItem.product)
                 } else {
                     onRemoveClick()
                 }
@@ -191,7 +191,7 @@ private fun ProductCounter(
             modifier = Modifier
                 .size(42.dp)
                 .testTag("${cartItem.productName}_increase_button"),
-            onClick = { onIncreaseClick(cartItem.count.inc()) }
+            onClick = { onIncreaseClick(cartItem.product) }
         ) {
             Text(
                 text = stringResource(R.string.increase_symbol),
@@ -217,8 +217,8 @@ private fun ProductCartItemPreview() {
         ProductCartItem(
             cartItem = cartItem,
             onRemoveClick = {},
-            onIncreaseClick = { cartItem = it },
-            onDecreaseClick = { cartItem = it },
+            onIncreaseClick = { cartItem = cartItem.copy(count = cartItem.count.inc()) },
+            onDecreaseClick = { cartItem = cartItem.copy(count = cartItem.count.dec()) },
         )
     }
 }
