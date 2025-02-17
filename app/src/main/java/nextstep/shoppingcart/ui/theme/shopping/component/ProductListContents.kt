@@ -10,12 +10,12 @@ import nextstep.shoppingcart.ui.theme.shopping.getProductsTestData
 import nextstep.shoppingcart.ui.theme.shopping.model.Product
 
 @Composable
-fun ProductListContents(modifier: Modifier = Modifier, productItems: List<Product>) {
+fun ProductListContents(productItems: List<Product>, modifier: Modifier = Modifier) {
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(2),
     ) {
-        items(items= productItems, key = {it.productId}) { item ->
+        items(items = productItems, key = { it.productId }) { item ->
             Product(item)
         }
     }
