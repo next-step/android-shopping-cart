@@ -67,20 +67,21 @@ private fun ProductDetailContent(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        AsyncImage(
-            model = product.imageUrl,
-            contentDescription = "product image",
-            modifier = Modifier.aspectRatio(1f)
+        ProductDetailImage(
+            imageUrl = product.imageUrl
         )
 
-        Spacer(modifier = Modifier.height(18.dp))
+        Spacer(
+            modifier = Modifier.height(18.dp)
+        )
 
-        Text(
-            text = product.name,
-            fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 1,
+        ProductDetailTitle(
+            title = product.name,
+            modifier = Modifier.padding(horizontal = 18.dp)
+        )
+
+        ProductDetailDescription(
+            price = product.formattedPrice,
             modifier = Modifier.padding(horizontal = 18.dp)
         )
 
@@ -90,39 +91,79 @@ private fun ProductDetailContent(
             modifier = Modifier.padding(vertical = 18.dp)
         )
 
-        Row(
-            modifier = Modifier.padding(horizontal = 18.dp)
-        ) {
-            Text(
-                text = stringResource(id = R.string.product_detail_price),
-                fontWeight = FontWeight.Normal,
-                fontSize = 20.sp,
-                modifier = Modifier.weight(1f)
-            )
-            Text(
-                text = product.formattedPrice,
-                fontWeight = FontWeight.Normal,
-                fontSize = 20.sp,
-            )
-        }
-
         Spacer(modifier = Modifier.weight(1f))
 
+        AddToCartButton(onClickAddToCart = onClickAddToCart)
+
+    }
+}
+
+@Composable
+fun ProductDetailImage(imageUrl: String) {
+    AsyncImage(
+        model = imageUrl,
+        contentDescription = "product image",
+        modifier = Modifier.aspectRatio(1f)
+    )
+}
+
+@Composable
+private fun ProductDetailTitle(
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = title,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = 1,
+        modifier = modifier
+    )
+}
+
+@Composable
+private fun ProductDetailDescription(
+    price: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+    ) {
         Text(
-            text = stringResource(id = R.string.product_detail_cart_button),
+            text = stringResource(id = R.string.product_detail_price),
+            fontWeight = FontWeight.Normal,
             fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primary)
-                .padding(16.dp)
-                .fillMaxWidth()
-                .clickable {
-                    onClickAddToCart()
-                }
+            modifier = Modifier.weight(1f)
+        )
+        Text(
+            text = price,
+            fontWeight = FontWeight.Normal,
+            fontSize = 20.sp,
         )
     }
+}
+
+
+@Composable
+private fun AddToCartButton(
+    onClickAddToCart: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = stringResource(id = R.string.product_detail_cart_button),
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.White,
+        textAlign = TextAlign.Center,
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.primary)
+            .padding(16.dp)
+            .fillMaxWidth()
+            .clickable {
+                onClickAddToCart()
+            }
+    )
 }
 
 @Preview
