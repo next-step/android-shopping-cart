@@ -29,7 +29,7 @@ class LazyVerticalGridTest {
                 id = 1,
                 name = "PET-보틀-정사각형정사각형정사각형정사각형1",
                 price = 10000,
-                thumbnailPath = "https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20181030_239%2Fcomscience1_1540871845728YC8OA_JPEG%2F01.jpg&type=a340"
+                imageUrl = "https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20181030_239%2Fcomscience1_1540871845728YC8OA_JPEG%2F01.jpg&type=a340"
             )
         )
 
@@ -55,7 +55,7 @@ class LazyVerticalGridTest {
                 id = it,
                 name = "PET-보틀-정사각형정사각형정사각형정사각형$it",
                 price = (10000 + it),
-                thumbnailPath = "$it"
+                imageUrl = "$it"
             )
         }
 

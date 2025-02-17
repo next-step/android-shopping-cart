@@ -66,4 +66,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.bundles.coil3)
+    androidTestImplementation(libs.androidx.espresso.intents)
 }
