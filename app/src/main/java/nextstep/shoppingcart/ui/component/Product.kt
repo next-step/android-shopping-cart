@@ -97,7 +97,7 @@ private fun ProductThumbnail(
                         .size(42.dp)
                         .padding(13.dp),
                     imageVector = Icons.Filled.Add,
-                    contentDescription = stringResource(R.string.add),
+                    contentDescription = stringResource(R.string.add_product),
                 )
             }
         } else {
