@@ -23,7 +23,7 @@ import coil3.compose.AsyncImage
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.Black
 import nextstep.shoppingcart.ui.theme.Gray
-import nextstep.signup.R
+import nextstep.shoppingcart.R
 
 @Composable
 fun ProductItem(

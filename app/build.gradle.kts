@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "nextstep.signup"
+    namespace = "nextstep.shoppingcart"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "nextstep.signup"
+        applicationId = "nextstep.shoppingcart"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
