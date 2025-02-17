@@ -70,23 +70,34 @@ fun ProductDetailScreen(
                 color = LightGray
             )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(18.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.price),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-
-                Text(
-                    text = stringResource(R.string.format_price_won, product.price),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
+            ProductDetailField(
+                modifier = Modifier.padding(18.dp),
+                title = stringResource(R.string.price),
+                content = stringResource(R.string.format_price_won, product.price)
+            )
         }
+    }
+}
+
+@Composable
+private fun ProductDetailField(
+    title: String,
+    content: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+        Text(
+            text = content,
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
 
