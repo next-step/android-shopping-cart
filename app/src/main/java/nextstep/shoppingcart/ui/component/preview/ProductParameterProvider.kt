@@ -22,6 +22,7 @@ private val default = ProductModel(
 private val invalidImage = default.copy(
     id = 1L,
     imageUrl = "",
+    count = 1,
 )
 private val longName = default.copy(
     id = 2L,

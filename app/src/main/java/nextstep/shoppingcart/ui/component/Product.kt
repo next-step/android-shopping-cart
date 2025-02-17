@@ -1,6 +1,8 @@
 package nextstep.shoppingcart.ui.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -8,15 +10,26 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.CartProductModel
 import nextstep.shoppingcart.model.ProductModel
 import nextstep.shoppingcart.navigator.toProductDetail
 import nextstep.shoppingcart.ui.component.preview.ProductParameterProvider
@@ -33,14 +46,7 @@ fun Product(
     Column(modifier = modifier.clickable {
         context.toProductDetail(model)
     }) {
-        Thumbnail(
-            id = model.id,
-            imageUrl = model.imageUrl,
-            name = model.name,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
-        )
+        ProductThumbnail(model)
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = model.name,
@@ -61,6 +67,54 @@ fun Product(
     }
 }
 
+@Composable
+private fun ProductThumbnail(
+    model: ProductModel,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        contentAlignment = Alignment.BottomEnd
+    ) {
+        Thumbnail(
+            id = model.id,
+            imageUrl = model.imageUrl,
+            name = model.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f)
+        )
+
+        if (model.count == 0) {
+            Box(modifier = Modifier.padding(12.dp)) {
+                Icon(
+                    modifier = Modifier
+                        .clip(shape = CircleShape)
+                        .clickable {}
+                        .background(color = Color.White)
+                        .size(42.dp)
+                        .padding(13.dp),
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = stringResource(R.string.add),
+                )
+            }
+        } else {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 12.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                CountControlButton(
+                    model = CartProductModel(
+                        product = model,
+                        count = model.count,
+                    ),
+                    listUpdate = {},
+                )
+            }
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
