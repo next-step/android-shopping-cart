@@ -11,11 +11,6 @@ import nextstep.shoppingcart.cart.widget.CartTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun CartRoute(modifier: Modifier = Modifier) {
-    CartScreen(modifier = modifier)
-}
-
-@Composable
 fun CartScreen(modifier: Modifier = Modifier) {
     Scaffold(
         modifier = modifier.fillMaxSize(),

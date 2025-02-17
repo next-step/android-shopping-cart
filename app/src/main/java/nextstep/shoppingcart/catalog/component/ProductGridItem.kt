@@ -53,6 +53,7 @@ fun ProductGridItem(
 private fun ProductGridItemPreview() {
     ProductGridItem(
         product = Product(
+            id = 1,
             name = "엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마",
             price = 1000,
             imageUrl = "https://picsum.photos/id/30/1280/901"

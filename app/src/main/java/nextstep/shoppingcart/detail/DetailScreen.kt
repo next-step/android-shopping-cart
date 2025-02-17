@@ -7,18 +7,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import nextstep.shoppingcart.detail.widget.DetailContent
 import nextstep.shoppingcart.detail.widget.DetailTopBar
+import nextstep.shoppingcart.model.Product
 
 @Composable
-fun DetailRoute(modifier: Modifier = Modifier) {
-    DetailScreen(modifier = modifier)
-}
-
-@Composable
-fun DetailScreen(modifier: Modifier = Modifier) {
+fun DetailScreen(
+    product: Product,
+    modifier: Modifier = Modifier,
+) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = { DetailTopBar() }
     ) { paddingValues ->
-        DetailContent(modifier = Modifier.padding(paddingValues))
+        DetailContent(
+            product = product,
+            modifier = Modifier.padding(paddingValues)
+        )
     }
 }

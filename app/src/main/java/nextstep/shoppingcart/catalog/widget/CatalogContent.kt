@@ -18,7 +18,7 @@ import nextstep.shoppingcart.util.DataUtil.dummyProducts
 @Composable
 fun CatalogContent(
     products: List<Product>,
-    navigateToDetail: () -> Unit,
+    navigateToDetail: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -33,7 +33,7 @@ fun CatalogContent(
         items(products) { product ->
             ProductGridItem(
                 product = product,
-                onClickItem = { navigateToDetail.invoke() }
+                onClickItem = navigateToDetail,
             )
         }
     }

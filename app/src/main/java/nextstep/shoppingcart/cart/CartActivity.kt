@@ -12,7 +12,7 @@ class CartActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
-                CartRoute()
+                CartScreen()
             }
         }
     }

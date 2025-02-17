@@ -6,6 +6,7 @@ import nextstep.shoppingcart.model.Product
 object DataUtil {
     val dummyProducts = List(99) { index ->
         Product(
+            index,
             "PET보틀-원형(500ml)",
             42200,
             "https://picsum.photos/id/$index/1280/901"
