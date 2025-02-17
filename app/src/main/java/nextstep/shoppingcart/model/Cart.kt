@@ -1,7 +1,12 @@
 package nextstep.shoppingcart.model
 
+import androidx.compose.runtime.mutableLongStateOf
+
 
 object Cart {
+    private var _updatedTime = mutableLongStateOf(System.currentTimeMillis())
+    val updateTime = _updatedTime
+
     private val _items: MutableList<CartProductModel> = mutableListOf()
     val items: List<CartProductModel> get() = _items.toList()
 
@@ -15,6 +20,7 @@ object Cart {
             val index = _items.indexOf(item)
             _items[index] = item.copy(count = item.count + 1)
         }
+        updated()
         return items
     }
 
@@ -28,15 +34,26 @@ object Cart {
                     _items.remove(item)
                 }
             }
+        updated()
         return items
     }
 
     fun removeAll(product: ProductModel): List<CartProductModel> {
         _items.removeAll { it.product == product }
+        updated()
         return items
     }
 
     fun init() {
         _items.clear()
+        updated()
+    }
+
+    fun productCount(model: ProductModel): Int {
+        return items.firstOrNull { it.id == model.id }?.count ?: 0
+    }
+
+    private fun updated() {
+        _updatedTime.longValue = System.currentTimeMillis()
     }
 }

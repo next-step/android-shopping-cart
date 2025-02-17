@@ -33,7 +33,6 @@ import nextstep.shoppingcart.ui.theme.Typography
 @Composable
 fun CartProduct(
     model: CartProductModel,
-    listUpdate: (List<CartProductModel>) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -58,7 +57,7 @@ fun CartProduct(
             Icon(
                 modifier = Modifier
                     .size(24.dp)
-                    .clickable { Cart.removeAll(model.product).let(listUpdate) },
+                    .clickable { Cart.removeAll(model.product) },
                 imageVector = Icons.Filled.Clear,
                 contentDescription = stringResource(R.string.clear),
             )
@@ -85,8 +84,9 @@ fun CartProduct(
                     style = Typography.bodyMedium,
                 )
                 CountControlButton(
-                    model = model,
-                    listUpdate = listUpdate
+                    count = model.count,
+                    onAddClick = { Cart.addOne(model.product) },
+                    onRemoveClick = { Cart.removeOne(model.product) },
                 )
             }
         }
@@ -107,6 +107,6 @@ private fun CartProductPreview() {
     )
 
     ShoppingCartTheme {
-        CartProduct(model = model, listUpdate = {})
+        CartProduct(model = model)
     }
 }

@@ -15,7 +15,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.ProductModel
+import nextstep.shoppingcart.model.Cart
+import nextstep.shoppingcart.model.CartProductModel
 import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.ui.component.Product
 import nextstep.shoppingcart.ui.component.ShoppingCartTopBar
@@ -23,7 +24,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductListScreen(
-    products: List<ProductModel>,
+    items: List<CartProductModel>,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -48,10 +49,10 @@ fun ProductListScreen(
                 contentPadding = PaddingValues(horizontal = 18.dp, vertical = 13.dp)
             ) {
                 items(
-                    items = products,
+                    items = items,
                     key = { model -> model.id }
                 ) { model ->
-                    Product(model)
+                    Product(model.product, model.count)
                 }
             }
         }
@@ -64,6 +65,6 @@ fun ProductListScreen(
 @Composable
 private fun ProductScreenPreview() {
     ShoppingCartTheme {
-        ProductListScreen(dummyProducts)
+        ProductListScreen(dummyProducts.map { CartProductModel(it, Cart.productCount(it)) })
     }
 }

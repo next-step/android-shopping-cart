@@ -23,16 +23,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.Cart
-import nextstep.shoppingcart.model.CartProductModel
 import nextstep.shoppingcart.model.dummyCartProductList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.ui.theme.Typography
 
 @Composable
 fun CountControlButton(
-    model: CartProductModel,
-    listUpdate: (List<CartProductModel>) -> Unit,
+    count: Int,
+    onAddClick: () -> Unit,
+    onRemoveClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -49,7 +48,7 @@ fun CountControlButton(
             modifier = Modifier
                 .size(iconSize)
                 .clickable {
-                    Cart.removeOne(model.product).let(listUpdate)
+                    onRemoveClick.invoke()
                 }
                 .padding(iconPadding),
             painter = painterResource(R.drawable.ic_remove),
@@ -58,7 +57,7 @@ fun CountControlButton(
 
         Text(
             modifier = Modifier.width(iconSize),
-            text = model.count.toString(),
+            text = count.toString(),
             style = Typography.bodyLarge,
             textAlign = TextAlign.Center,
         )
@@ -67,7 +66,7 @@ fun CountControlButton(
             modifier = Modifier
                 .size(iconSize)
                 .clickable {
-                    Cart.addOne(model.product).let(listUpdate)
+                    onAddClick.invoke()
                 }
                 .padding(iconPadding),
             imageVector = Icons.Filled.Add,
@@ -86,8 +85,9 @@ private fun CountControlButtonPreview() {
             contentAlignment = Alignment.Center,
         ) {
             CountControlButton(
-                model = model,
-                listUpdate = {}
+                count = 3,
+                onAddClick = {},
+                onRemoveClick = {},
             )
         }
     }

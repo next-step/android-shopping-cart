@@ -5,7 +5,6 @@ data class ProductModel(
     val imageUrl: String,
     val name: String,
     val price: Int,
-    val count: Int = 0,
 )
 
 val dummyProducts = listOf(

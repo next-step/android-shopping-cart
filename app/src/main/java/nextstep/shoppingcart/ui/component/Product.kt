@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.CartProductModel
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.ProductModel
 import nextstep.shoppingcart.navigator.toProductDetail
 import nextstep.shoppingcart.ui.component.preview.ProductParameterProvider
@@ -39,6 +39,7 @@ import nextstep.shoppingcart.ui.theme.Typography
 @Composable
 fun Product(
     model: ProductModel,
+    count: Int,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
@@ -46,7 +47,7 @@ fun Product(
     Column(modifier = modifier.clickable {
         context.toProductDetail(model)
     }) {
-        ProductThumbnail(model)
+        ProductThumbnail(model = model, count = count)
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = model.name,
@@ -70,9 +71,11 @@ fun Product(
 @Composable
 private fun ProductThumbnail(
     model: ProductModel,
+    count: Int,
     modifier: Modifier = Modifier
 ) {
     Box(
+        modifier = modifier,
         contentAlignment = Alignment.BottomEnd
     ) {
         Thumbnail(
@@ -84,12 +87,12 @@ private fun ProductThumbnail(
                 .aspectRatio(1f)
         )
 
-        if (model.count == 0) {
+        if (count == 0) {
             Box(modifier = Modifier.padding(12.dp)) {
                 Icon(
                     modifier = Modifier
                         .clip(shape = CircleShape)
-                        .clickable {}
+                        .clickable { Cart.addOne(model) }
                         .background(color = Color.White)
                         .size(42.dp)
                         .padding(13.dp),
@@ -104,12 +107,11 @@ private fun ProductThumbnail(
                     .padding(bottom = 12.dp),
                 contentAlignment = Alignment.Center
             ) {
+
                 CountControlButton(
-                    model = CartProductModel(
-                        product = model,
-                        count = model.count,
-                    ),
-                    listUpdate = {},
+                    count = count,
+                    onAddClick = { Cart.addOne(model) },
+                    onRemoveClick = { Cart.removeOne(model) },
                 )
             }
         }
@@ -120,6 +122,6 @@ private fun ProductThumbnail(
 @Composable
 private fun ProductPreview(@PreviewParameter(ProductParameterProvider::class) model: ProductModel) {
     ShoppingCartTheme {
-        Product(model)
+        Product(model = model, count = 0)
     }
 }
