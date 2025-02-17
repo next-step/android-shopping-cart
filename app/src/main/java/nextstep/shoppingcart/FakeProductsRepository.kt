@@ -13,4 +13,13 @@ object FakeProductsRepository {
             )
         }
     }
+
+    fun getProduct(id: Long): Product {
+        return Product(
+            id = id,
+            name = "상품$id",
+            price = 10000L,
+            imageUrl = "https://picsum.photos/200",
+        )
+    }
 }

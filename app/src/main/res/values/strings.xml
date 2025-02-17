@@ -1,5 +1,18 @@
 <resources>
     <string name="app_name">Shopping Cart</string>
-    <string name="products_top_bar_title">상품 목록</string>
+    <string name="label_product_detail">상품 상세</string>
+    <string name="label_shopping_cart">장바구니</string>
     <string name="all_price_format">%,d원</string>
+
+    <!-- products -->
+    <string name="products_top_bar_title">상품 목록</string>
+
+    <!-- product detail -->
+    <string name="product_detail_app_bar_title">상품 상세</string>
+    <string name="product_detail_price_title">금액</string>
+    <string name="product_detail_btn_add_product_in_cart">장바구니 담기</string>
+
+    <!-- shopping cart -->
+    <string name="shopping_cart_app_bar_title">장바구니</string>
+
 </resources>
