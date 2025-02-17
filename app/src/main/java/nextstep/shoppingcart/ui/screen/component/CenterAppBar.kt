@@ -10,19 +10,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import nextstep.shoppingcart.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(
+fun CenterAppBar(
     modifier: Modifier = Modifier,
+    title: String,
     onClick: () -> Unit
 ) {
     CenterAlignedTopAppBar(
         title = {
-            Text(text = stringResource(id = R.string.appbar_product_title))
+            Text(text = title)
         },
         actions = {
             IconButton(
