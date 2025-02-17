@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.common.ProductImage
 import nextstep.shoppingcart.common.ShoppingCartAppBar
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.LightGray
@@ -53,20 +54,10 @@ fun ProductDetailScreen(
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
         ) {
-            if (LocalInspectionMode.current) {
-                Image(
-                    modifier = Modifier.aspectRatio(1f),
-                    painter = painterResource(R.drawable.ic_launcher_background),
-                    contentDescription = null
-                )
-            } else {
-                AsyncImage(
-                    modifier = Modifier.aspectRatio(1f),
-                    placeholder = ColorPainter(Color.LightGray),
-                    model = product.imageUrl,
-                    contentDescription = null
-                )
-            }
+            ProductImage(
+                modifier = Modifier.aspectRatio(1f),
+                imageUrl = product.imageUrl
+            )
 
             Text(
                 modifier = Modifier.padding(18.dp),
