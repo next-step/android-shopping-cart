@@ -136,7 +136,7 @@ fun ShoppingCartAddButton(
 
 @Preview(showBackground = true)
 @Composable
-fun TitleSectorPreview() {
+private fun TitleSectorPreview() {
     TitleSector(
         title = "상품 이름",
     )
@@ -144,7 +144,7 @@ fun TitleSectorPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun PriceSectorPreview() {
+private fun PriceSectorPreview() {
     PriceSector(
         price = 10000,
     )
@@ -152,7 +152,7 @@ fun PriceSectorPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun ShoppingCartAddButtonPreview() {
+private fun ShoppingCartAddButtonPreview() {
     ShoppingCartAddButton(
         onClick = {
 
@@ -162,7 +162,7 @@ fun ShoppingCartAddButtonPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun ProductDetailScreenPreview() {
+private fun ProductDetailScreenPreview() {
     ProductDetailScreen(
         product = Product(
             imageUrl = "https://picsum.photos/200/300",
