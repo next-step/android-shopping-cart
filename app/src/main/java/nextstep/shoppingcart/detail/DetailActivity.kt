@@ -1,5 +1,7 @@
 package nextstep.shoppingcart.detail
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,5 +15,9 @@ class DetailActivity : ComponentActivity() {
                 DetailRoute()
             }
         }
+    }
+
+    companion object {
+        fun newIntent(context: Context) = Intent(context, DetailActivity::class.java)
     }
 }

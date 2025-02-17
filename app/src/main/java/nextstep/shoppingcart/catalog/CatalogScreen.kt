@@ -19,7 +19,11 @@ import nextstep.shoppingcart.util.DataUtil.dummyProducts
 import nextstep.shoppingcart.util.DataUtil.getProducts
 
 @Composable
-fun CatalogRoute(modifier: Modifier = Modifier) {
+fun CatalogRoute(
+    navigateToDetail: () -> Unit,
+    navigateToCart: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     var products by remember { mutableStateOf(listOf<Product>()) }
 
     LaunchedEffect(Unit) {
@@ -28,6 +32,8 @@ fun CatalogRoute(modifier: Modifier = Modifier) {
 
     CatalogScreen(
         products = products,
+        navigateToDetail = navigateToDetail,
+        navigateToCart = navigateToCart,
         modifier = modifier,
     )
 }
@@ -35,14 +41,17 @@ fun CatalogRoute(modifier: Modifier = Modifier) {
 @Composable
 fun CatalogScreen(
     products: List<Product>,
+    navigateToDetail: () -> Unit,
+    navigateToCart: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        topBar = { CatalogTopBar() },
+        topBar = { CatalogTopBar(navigateToCart = navigateToCart) },
     ) { paddingValues ->
         CatalogContent(
             products = products,
+            navigateToDetail = navigateToDetail,
             modifier = Modifier.padding(paddingValues)
         )
     }
@@ -52,6 +61,10 @@ fun CatalogScreen(
 @Composable
 private fun CatalogScreenPreview() {
     ShoppingCartTheme {
-        CatalogScreen(dummyProducts)
+        CatalogScreen(
+            products = dummyProducts,
+            navigateToDetail = {},
+            navigateToCart = {},
+        )
     }
 }

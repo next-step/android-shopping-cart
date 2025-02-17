@@ -16,7 +16,10 @@ import nextstep.shoppingcart.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CatalogTopBar(modifier: Modifier = Modifier) {
+fun CatalogTopBar(
+    navigateToCart: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -26,7 +29,7 @@ fun CatalogTopBar(modifier: Modifier = Modifier) {
             )
         },
         actions = {
-            IconButton(onClick = {}) {
+            IconButton(onClick = { navigateToCart.invoke() }) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
                     contentDescription = Icons.Filled.ShoppingCart.name,
@@ -40,5 +43,5 @@ fun CatalogTopBar(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun CatalogTopBarPreview() {
-    CatalogTopBar()
+    CatalogTopBar(navigateToCart = {})
 }
