@@ -7,6 +7,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.detail.ProductDetailScreen
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
@@ -128,9 +129,10 @@ class ProductDetailScreenTest {
 
 
     @Test
-    fun should_send_back_message_when_click_back_button() {
+    fun should_occur_back_event_when_click_back_button() {
         //given
-        var backMessage = ""
+        var isOccurBackEvent = false
+
         val item = Product(
             id = 1,
             name = "테스트 상품",
@@ -138,7 +140,7 @@ class ProductDetailScreenTest {
             imageUrl = ""
         )
         composeTestRule.setContent {
-            ProductDetailScreen(item = item, onBack = { backMessage = "back" })
+            ProductDetailScreen(item = item, onBack = { isOccurBackEvent = true })
         }
 
         //when
@@ -147,7 +149,7 @@ class ProductDetailScreenTest {
             .performClick()
 
         //then
-        assert(backMessage == "back")
+        assertTrue(isOccurBackEvent)
     }
 
 }

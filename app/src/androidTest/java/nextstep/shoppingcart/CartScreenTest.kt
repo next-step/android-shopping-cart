@@ -6,6 +6,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.ui.cart.CartScreen
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
@@ -44,19 +45,19 @@ class CartScreenTest {
     }
 
     @Test
-    fun should_send_back_message_when_click_back_button() {
+    fun should_occur_back_event_when_click_back_button() {
         //given
-        var backMessage = ""
+        var isOccurBackEvent = false
 
 
         composeTestRule.setContent {
-            CartScreen(onBack = { backMessage = "back" })
+            CartScreen(onBack = { isOccurBackEvent = true })
         }
 
         //when
         composeTestRule.onNodeWithContentDescription("back_icon").performClick()
 
         //then
-        assert(backMessage == "back")
+        assertTrue(isOccurBackEvent)
     }
 }
