@@ -6,4 +6,6 @@
     <string name="price">금액</string>
     <string name="add_shopping_cart">장바구니 담기</string>
     <string name="shopping_cart">장바구니</string>
+    <string name="decrease_symbol">-</string>
+    <string name="increase_symbol">+</string>
 </resources>
