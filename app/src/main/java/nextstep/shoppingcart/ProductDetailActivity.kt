@@ -7,7 +7,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import nextstep.shoppingcart.data.FakeProductRepository
+import nextstep.shoppingcart.data.InMemoryCartRepository
 import nextstep.shoppingcart.domain.model.Product
+import nextstep.shoppingcart.domain.repository.CartRepository
 import nextstep.shoppingcart.domain.repository.ProductRepository
 import nextstep.shoppingcart.screens.ProductDetailScreen
 
@@ -17,14 +19,21 @@ class ProductDetailActivity : ComponentActivity() {
         if (value == ERROR_PRODUCT_ID) throw IllegalArgumentException("productId is required") else value
     }
     private val productRepository: ProductRepository = FakeProductRepository
+    private val cartRepository: CartRepository = InMemoryCartRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val product = productRepository.getProductByIdOrNull(productId) ?: Product.NotFound
+
         setContent {
             enableEdgeToEdge()
             ProductDetailScreen(
-                product = productRepository.getProductByIdOrNull(productId) ?: Product.NotFound,
-                onAddCartClick = ::startCartActivity,
+                product = product,
+                onAddCartClick = {
+                    cartRepository.addOne(product)
+                    startCartActivity()
+                },
                 onBackClick = onBackPressedDispatcher::onBackPressed
             )
         }

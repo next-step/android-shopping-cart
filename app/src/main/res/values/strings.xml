@@ -18,4 +18,8 @@
 
     <!-- Cart -->
     <string name="cart_top_bar_title">장바구니</string>
+    <string name="cart_item_counter_minus">−</string>
+    <string name="cart_item_counter_plus">+</string>
+    <string name="cart_item_remove_all_decription">장바구니 상품 삭제</string>
+    <string name="cart_item_order_button_text_format">주문하기(%,d원)</string>
 </resources>
