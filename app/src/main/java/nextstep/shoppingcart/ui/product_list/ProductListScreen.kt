@@ -5,6 +5,7 @@ package nextstep.shoppingcart.ui.product_list
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,7 +35,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -62,10 +62,13 @@ fun ProductListScreen(
     var state by rememberSaveable {
         mutableStateOf(ProductListState())
     }
-    val isLoadingShow by produceState(state.isInitialLoading) {
-        // 초기 로딩 시간이 0.5초 보다 오래 걸리는 경우에만 로딩바 보여주기
+
+    // 초기 로딩 시간이 0.5초 보다 오래 걸리는 경우에만 로딩바 보여주기
+    LaunchedEffect(state.isInitialLoading) {
         delay(500L)
-        value = true
+        state = state.copy(
+            isLoadingShow = true,
+        )
     }
 
     // Unit으로 설정할 경우, configuration change가 발생해도 호출된다.
@@ -79,20 +82,26 @@ fun ProductListScreen(
         )
     }
 
-    if (!state.isInitialLoading) {
-        ProductListScreen(
-            state = state,
-            onBasketClick = onBasketClick,
-            onProductClick = onProductClick,
-            modifier = modifier,
-        )
-    } else if (isLoadingShow) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
-            )
+    if (state.isInitialLoading) {
+        if (state.isLoadingShow) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background),
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
         }
+        return
     }
+    ProductListScreen(
+        state = state,
+        onBasketClick = onBasketClick,
+        onProductClick = onProductClick,
+        modifier = modifier,
+    )
 }
 
 @Composable

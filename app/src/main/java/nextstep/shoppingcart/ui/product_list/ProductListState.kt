@@ -6,7 +6,8 @@ import nextstep.shoppingcart.model.Product
 
 @Parcelize
 data class ProductListState(
-    var isInitialLoading: Boolean = true,
+    val isInitialLoading: Boolean = true,
+    val isLoadingShow: Boolean = false,
     val products: List<Product> = emptyList(),
     val selectedItemCount: Int = 0,
 ): Parcelable
