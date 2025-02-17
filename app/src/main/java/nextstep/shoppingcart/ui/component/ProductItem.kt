@@ -9,13 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.util.formatCurrency
 
 @Composable
 fun ProductItem(
@@ -43,7 +44,7 @@ fun ProductItem(
                 .padding(top = 4.dp, start = 4.dp),
         )
         Text(
-            text = formatCurrency(product.price),
+            text = stringResource(id = R.string.currency_unit, product.price),
             fontSize = 16.sp,
             fontWeight = FontWeight.W400,
             modifier = Modifier
@@ -55,7 +56,7 @@ fun ProductItem(
 
 @Preview(showBackground = true)
 @Composable
-fun ProductItemPreview() {
+private fun ProductItemPreview() {
     ProductItem(
         product = Product(
             id = 1,

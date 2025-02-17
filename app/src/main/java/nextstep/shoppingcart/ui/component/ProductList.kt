@@ -3,9 +3,9 @@ package nextstep.shoppingcart.ui.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,24 +20,20 @@ fun ProductList(
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 18.dp),
+        modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(18.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
-        contentPadding = PaddingValues(vertical = 18.dp),
+        contentPadding = PaddingValues(18.dp),
     ) {
-        items(products.size) { index ->
-            ProductItem(
-                product = products[index],
-            )
+        items(products) { product ->
+            ProductItem(product)
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ProductListPreview() {
+private fun ProductListPreview() {
     ProductList(
         products = products,
     )
