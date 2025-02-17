@@ -23,14 +23,14 @@ import nextstep.shoppingcart.model.Product
 fun ProductImage(
     item: Product,
     modifier: Modifier = Modifier,
-    painter: AsyncImagePainter = rememberAsyncImagePainter(item.imageUrl)
+    painter: AsyncImagePainter = rememberAsyncImagePainter(item.imageUrl),
+    contentScale: ContentScale = ContentScale.Crop
 ) {
     val state by painter.state.collectAsState()
 
     Box(
         modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(1f), contentAlignment = Alignment.Center
+            .fillMaxWidth(), contentAlignment = Alignment.Center
     ) {
         when (state) {
             is AsyncImagePainter.State.Loading, AsyncImagePainter.State.Empty -> {
@@ -43,7 +43,7 @@ fun ProductImage(
                     painter = painter,
                     contentDescription = "product_image",
                     modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
+                    contentScale = contentScale
                 )
             }
         }
