@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +17,7 @@ import nextstep.shoppingcart.data.products
 @Composable
 fun ProductList(
     products: List<Product>,
+    onProductClick: (Product) -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -26,7 +28,12 @@ fun ProductList(
         contentPadding = PaddingValues(18.dp),
     ) {
         items(products) { product ->
-            ProductItem(product)
+            ProductItem(
+                product = product,
+                modifier = Modifier.clickable {
+                    onProductClick(product)
+                },
+            )
         }
     }
 }
