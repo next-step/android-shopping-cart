@@ -22,6 +22,9 @@ class CountControlButtonTest {
     private val initCount = 3
     private var items by mutableStateOf(Cart.items)
 
+    private val addButton get() = composeTestRule.onNodeWithContentDescription("담기")
+    private val removeButton get() = composeTestRule.onNodeWithContentDescription("제거")
+
     @Before
     fun setup() {
         Cart.init()
@@ -44,22 +47,17 @@ class CountControlButtonTest {
     @Test
     fun 담기_숫자_제거_버튼_노출() {
         // then
-        composeTestRule
-            .onNodeWithContentDescription("담기")
-            .assertIsDisplayed()
+        addButton.assertIsDisplayed()
         composeTestRule
             .onNodeWithText("$initCount")
             .assertIsDisplayed()
-        composeTestRule
-            .onNodeWithContentDescription("제거")
-            .assertIsDisplayed()
+        removeButton.assertIsDisplayed()
     }
 
     @Test
     fun 담기_버튼_클릭시_카운트_증가() {
         // when
-        composeTestRule
-            .onNodeWithContentDescription("담기")
+        addButton.assertIsDisplayed()
             .performClick()
 
         // then
@@ -71,8 +69,7 @@ class CountControlButtonTest {
     @Test
     fun 제거_버튼_클릭시_카운트_감소() {
         // when
-        composeTestRule
-            .onNodeWithContentDescription("제거")
+        removeButton
             .performClick()
 
         // then

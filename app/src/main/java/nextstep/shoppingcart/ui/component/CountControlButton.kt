@@ -26,11 +26,10 @@ import nextstep.shoppingcart.ui.theme.Typography
 
 @Composable
 fun CountControlButton(
-    model: CartProductModel?,
+    model: CartProductModel,
     listUpdate: (List<CartProductModel>) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    if (model == null) return
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,

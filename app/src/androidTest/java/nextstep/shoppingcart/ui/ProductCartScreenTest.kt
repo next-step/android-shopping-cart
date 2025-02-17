@@ -30,6 +30,9 @@ class ProductCartScreenTest {
         name = productName,
         price = productPrice,
     )
+    private val addButton get() = composeTestRule.onNodeWithContentDescription("담기")
+    private val removeButton get() = composeTestRule.onNodeWithContentDescription("제거")
+    private val clearButton get() = composeTestRule.onNodeWithContentDescription("삭제")
 
     @Before
     fun setup() {
@@ -50,9 +53,10 @@ class ProductCartScreenTest {
         }
 
         // then
+        val productList = composeTestRule
+            .onNodeWithTag("productCartLazyColumn")
         Cart.items.forEach { item ->
-            composeTestRule
-                .onNodeWithTag("productCartLazyColumn")
+            productList
                 .performScrollToNode(hasText(item.name))
                 .assertIsDisplayed()
         }
@@ -71,7 +75,7 @@ class ProductCartScreenTest {
 
         // then
         composeTestRule
-            .onNodeWithText("주문하기(${String.format("%,d원", productPrice)})")
+            .onNodeWithText("주문하기(2,000원)")
             .assertIsDisplayed()
             .assertIsEnabled()
     }
@@ -88,16 +92,14 @@ class ProductCartScreenTest {
             )
         }
         // when
-        composeTestRule
-            .onNodeWithContentDescription("삭제")
-            .performClick()
+        clearButton.performClick()
 
         // then
         composeTestRule
             .onNodeWithText(productName)
             .assertIsNotDisplayed()
         composeTestRule
-            .onNodeWithText("주문하기(${String.format("%,d원", 0)})")
+            .onNodeWithText("주문하기(0원)")
             .assertIsDisplayed()
             .assertIsNotEnabled()
     }
@@ -114,13 +116,11 @@ class ProductCartScreenTest {
             )
         }
         // when
-        composeTestRule
-            .onNodeWithContentDescription("제거")
-            .performClick()
+        removeButton.performClick()
 
         // then
         composeTestRule
-            .onNodeWithText("주문하기(${String.format("%,d원", productPrice * count.dec())})")
+            .onNodeWithText("주문하기(4,000원)")
             .assertIsDisplayed()
             .assertIsEnabled()
     }
@@ -136,15 +136,13 @@ class ProductCartScreenTest {
             )
         }
         // when
-        composeTestRule
-            .onNodeWithContentDescription("제거")
-            .performClick()
+        removeButton.performClick()
 
         // then
         composeTestRule.onNodeWithText(productName)
             .assertIsNotDisplayed()
         composeTestRule
-            .onNodeWithText("주문하기(${String.format("%,d원", 0)})")
+            .onNodeWithText("주문하기(0원)")
             .assertIsDisplayed()
     }
 
@@ -160,13 +158,11 @@ class ProductCartScreenTest {
             )
         }
         // when
-        composeTestRule
-            .onNodeWithContentDescription("담기")
-            .performClick()
+        addButton.performClick()
 
         // then
         composeTestRule
-            .onNodeWithText("주문하기(${String.format("%,d원", productPrice * count.inc())})")
+            .onNodeWithText("주문하기(8,000원)")
             .assertIsDisplayed()
     }
 

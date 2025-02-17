@@ -12,6 +12,10 @@ class ShoppingCartTopBarTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
+    private val cartButton get() = composeTestRule.onNodeWithContentDescription("장바구니")
+    private val backButton get() = composeTestRule.onNodeWithContentDescription("뒤로가기")
+
+
     @Test
     fun 탑바에_타이틀과_장바구니_아이콘_노출() {
         // given
@@ -27,8 +31,7 @@ class ShoppingCartTopBarTest {
         composeTestRule
             .onNodeWithText("상품 목록")
             .assertIsDisplayed()
-        composeTestRule
-            .onNodeWithContentDescription("장바구니")
+        cartButton
             .assertIsDisplayed()
     }
 
@@ -48,11 +51,9 @@ class ShoppingCartTopBarTest {
         composeTestRule
             .onNodeWithText("상품 목록")
             .assertIsDisplayed()
-        composeTestRule
-            .onNodeWithContentDescription("장바구니")
+        cartButton
             .assertIsDisplayed()
-        composeTestRule
-            .onNodeWithContentDescription("뒤로가기")
+        backButton
             .assertIsDisplayed()
     }
 }
