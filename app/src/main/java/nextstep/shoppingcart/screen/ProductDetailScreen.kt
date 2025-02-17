@@ -80,7 +80,7 @@ private fun ProductDetailContent(
             modifier = Modifier.padding(horizontal = 18.dp)
         )
 
-        ProductDetailDescription(
+        ProductDetailPrice(
             price = product.formattedPrice,
             modifier = Modifier.padding(horizontal = 18.dp)
         )
@@ -123,7 +123,7 @@ private fun ProductDetailTitle(
 }
 
 @Composable
-private fun ProductDetailDescription(
+private fun ProductDetailPrice(
     price: String,
     modifier: Modifier = Modifier
 ) {
@@ -166,7 +166,7 @@ private fun AddToCartButton(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ProductDetailContentPreview() {
     ProductDetailContent(
@@ -174,3 +174,28 @@ private fun ProductDetailContentPreview() {
         onClickAddToCart = { }
     )
 }
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductDetailTitlePreview() {
+    ProductDetailTitle(
+        title = "긴제목입니다긴제목입니다긴제목입니다긴제목입니다긴제목입니다긴제목입니다"
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductDetailPricePreview() {
+    ProductDetailPrice(
+        price = "100,000원"
+    )
+}
+
+
+@Preview(showBackground = true)
+@Composable
+private fun AddToCartButtonPreview() {
+    AddToCartButton(onClickAddToCart = { })
+}
+
+
