@@ -75,15 +75,12 @@ fun ProductDetailScreen(
             }
         }
     ) { innerPadding ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            ProductDetailContent(
-                product = product,
-                modifier = Modifier
-                    .padding(paddingValues = innerPadding)
-                    .verticalScroll(rememberScrollState())
-            )
-
-        }
+        ProductDetailContent(
+            product = product,
+            modifier = Modifier
+                .padding(paddingValues = innerPadding)
+                .verticalScroll(rememberScrollState())
+        )
     }
 }
 
@@ -111,23 +108,26 @@ private fun ProductDetailContent(
                 .padding(18.dp)
         )
         HorizontalDivider()
-        Row(Modifier.padding(18.dp)) {
-            Text(
-                text = stringResource(R.string.product_detail_price_title),
-                fontSize = 20.sp,
-                modifier = Modifier
-                    .weight(1f)
-                    .semantics { contentDescription = "상품 금액 타이틀" }
-            )
-            Text(
-                text = stringResource(R.string.all_price_format, product.price),
-                fontSize = 20.sp,
-                textAlign = TextAlign.End,
-                modifier = Modifier
-                    .weight(3f)
-                    .semantics { contentDescription = "상품 금액" }
-            )
-        }
+        ProductPriceContent(price = product.price, modifier = Modifier.padding(18.dp))
+    }
+}
+
+@Composable
+private fun ProductPriceContent(price: Long, modifier: Modifier = Modifier) {
+    Row(modifier = modifier) {
+        Text(
+            text = stringResource(R.string.product_detail_price_title),
+            fontSize = 20.sp,
+            modifier = Modifier
+                .weight(1f)
+        )
+        Text(
+            text = stringResource(R.string.all_price_format, price),
+            fontSize = 20.sp,
+            textAlign = TextAlign.End,
+            modifier = Modifier
+                .weight(3f)
+        )
     }
 }
 
