@@ -3,6 +3,7 @@ package nextstep.shoppingcart.ui.detail
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,7 +41,8 @@ import nextstep.shoppingcart.ui.detail.component.ProductPrice
 fun ProductDetailScreen(
     item: Product,
     modifier: Modifier = Modifier,
-    onBack: () -> Unit = {}
+    onBack: () -> Unit = {},
+    onCart: (Product) -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -70,7 +72,10 @@ fun ProductDetailScreen(
                 .padding(contentPadding)
         ) {
 
-            ProductImage(item = item)
+            ProductImage(
+                item = item,
+                modifier = Modifier.aspectRatio(1f)
+            )
 
             Text(
                 text = item.name,
@@ -96,7 +101,7 @@ fun ProductDetailScreen(
             Spacer(Modifier.weight(1f))
 
             TextButton(
-                onClick = { },
+                onClick = { onCart(item) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Blue50)

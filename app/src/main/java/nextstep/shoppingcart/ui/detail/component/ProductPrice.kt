@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.designsystem.theme.TextColor
+import nextstep.shoppingcart.ext.getFormattedPrice
 import nextstep.shoppingcart.model.Product
 
 
@@ -35,7 +36,7 @@ fun ProductPrice(
         )
 
         Text(
-            text = stringResource(R.string.price, item.getFormattedPrice()),
+            text = stringResource(R.string.price, item.price.getFormattedPrice()),
             fontSize = 20.sp,
             color = TextColor
         )
