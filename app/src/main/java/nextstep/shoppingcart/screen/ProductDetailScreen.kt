@@ -158,7 +158,7 @@ private fun AddToCartButton(
         textAlign = TextAlign.Center,
         modifier = modifier
             .background(MaterialTheme.colorScheme.primary)
-            .padding(16.dp)
+            .padding(vertical = 16.dp)
             .fillMaxWidth()
             .clickable {
                 onClickAddToCart()
