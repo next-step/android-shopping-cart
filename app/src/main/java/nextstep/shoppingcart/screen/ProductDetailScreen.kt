@@ -12,16 +12,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.view.DefaultNavigationBackTopBar
 
 @Composable
 fun ProductDetailScreen(
@@ -44,7 +39,8 @@ fun ProductDetailScreen(
 ) {
     Scaffold(
         topBar = {
-            ProductDetailTopBar(
+            DefaultNavigationBackTopBar(
+                title = stringResource(id = R.string.product_detail_top_bar_title),
                 onClickBack = onClickBack
             )
         }
@@ -56,27 +52,6 @@ fun ProductDetailScreen(
                 .padding(paddingValues)
         )
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ProductDetailTopBar(
-    onClickBack: () -> Unit,
-) {
-    TopAppBar(
-        title = {
-            Text(
-                text = stringResource(id = R.string.product_detail_top_bar_title),
-                fontWeight = FontWeight.Normal,
-                fontSize = 20.sp
-            )
-        },
-        navigationIcon = {
-            IconButton(onClick = onClickBack) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
-            }
-        }
-    )
 }
 
 @Composable
