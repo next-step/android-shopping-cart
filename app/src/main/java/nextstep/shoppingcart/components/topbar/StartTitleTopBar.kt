@@ -16,37 +16,21 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun StartTitleTopBar(
+    title: String,
+    navigationType: TopBarNavigationType,
+    onNavigationClick: () -> Unit,
     modifier: Modifier = Modifier,
-    title: String = "",
-    navigationType: TopBarNavigationType? = null,
-    onNavigationClick: () -> Unit = {},
-    action: TopBarActionType? = null,
-    onActionClick: () -> Unit = {},
 ) {
     TopAppBar(
         title = {
-            if (title.isNotEmpty()) {
-                Text(text = title)
-            }
+            Text(text = title)
         },
         navigationIcon = {
-            navigationType?.let {
-                IconButton(onClick = onNavigationClick) {
-                    Icon(
-                        imageVector = it.icon,
-                        contentDescription = stringResource(it.contentDescription),
-                    )
-                }
-            }
-        },
-        actions = {
-            action?.let {
-                IconButton(onClick = onActionClick) {
-                    Icon(
-                        imageVector = it.icon,
-                        contentDescription = stringResource(it.contentDescription),
-                    )
-                }
+            IconButton(onClick = onNavigationClick) {
+                Icon(
+                    imageVector = navigationType.icon,
+                    contentDescription = stringResource(navigationType.contentDescription),
+                )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors().copy(containerColor = Color.White),
@@ -58,50 +42,10 @@ internal fun StartTitleTopBar(
 @Composable
 private fun StartTitleTopBarPreview() {
     ShoppingCartTheme {
-        StartTitleTopBar()
-    }
-}
-
-@Preview
-@Composable
-private fun StartTitleTopBarWithTitlePreview() {
-    ShoppingCartTheme {
-        StartTitleTopBar(
-            title = "상품 상세"
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun StartTitleTopBarWithNavigationBackPreview() {
-    ShoppingCartTheme {
         StartTitleTopBar(
             title = "장바구니",
             navigationType = TopBarNavigationType.BACK,
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun StartTitleTopBarWithActionCartPreview() {
-    ShoppingCartTheme {
-        StartTitleTopBar(
-            title = "상품 상세",
-            action = TopBarActionType.CART,
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun StartTitleTopBarWithNavigationBackAndActionCartPreview() {
-    ShoppingCartTheme {
-        StartTitleTopBar(
-            title = "상품 상세",
-            navigationType = TopBarNavigationType.BACK,
-            action = TopBarActionType.CART,
+            onNavigationClick = {},
         )
     }
 }

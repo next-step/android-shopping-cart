@@ -19,42 +19,24 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun CenterTitleTopBar(
+    title: String,
+    action: TopBarActionType,
+    onActionClick: () -> Unit,
     modifier: Modifier = Modifier,
-    title: String = "",
-    navigationType: TopBarNavigationType? = null,
-    onNavigationClick: () -> Unit = {},
-    action: TopBarActionType? = null,
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    onActionClick: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
         title = {
-            if (title.isNotEmpty()) {
-                Text(text = title)
-            }
-        },
-        navigationIcon = {
-            navigationType?.let {
-                IconButton(
-                    onClick = onNavigationClick,
-                ) {
-                    Icon(
-                        imageVector = it.icon,
-                        contentDescription = stringResource(it.contentDescription),
-                    )
-                }
-            }
+            Text(text = title)
         },
         actions = {
-            action?.let {
-                IconButton(
-                    onClick = onActionClick,
-                ) {
-                    Icon(
-                        imageVector = action.icon,
-                        contentDescription = stringResource(action.contentDescription),
-                    )
-                }
+            IconButton(
+                onClick = onActionClick,
+            ) {
+                Icon(
+                    imageVector = action.icon,
+                    contentDescription = stringResource(action.contentDescription),
+                )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors().copy(containerColor = Color.White),
@@ -67,50 +49,10 @@ internal fun CenterTitleTopBar(
 @Composable
 private fun CenterTitleTopBarPreview() {
     ShoppingCartTheme {
-        CenterTitleTopBar()
-    }
-}
-
-@Preview
-@Composable
-private fun CenterTitleTopBarWithTitlePreview() {
-    ShoppingCartTheme {
-        CenterTitleTopBar(
-            title = "상품 목록"
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun CenterTitleTopBarWithNavigationBackPreview() {
-    ShoppingCartTheme {
-        CenterTitleTopBar(
-            title = "상품 목록",
-            navigationType = TopBarNavigationType.BACK,
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun CenterTitleTopBarWithActionCartPreview() {
-    ShoppingCartTheme {
         CenterTitleTopBar(
             title = "상품 목록",
             action = TopBarActionType.CART,
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun CenterTitleTopBarWithNavigationBackAndActionCartPreview() {
-    ShoppingCartTheme {
-        CenterTitleTopBar(
-            title = "상품 목록",
-            navigationType = TopBarNavigationType.BACK,
-            action = TopBarActionType.CART,
+            onActionClick = {},
         )
     }
 }
