@@ -7,6 +7,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.detail.ProductDetailScreen
+import nextstep.shoppingcart.util.CartUtil
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -150,6 +151,29 @@ class ProductDetailScreenTest {
 
         //then
         assertTrue(isOccurBackEvent)
+    }
+
+    @Test
+    fun should_cart_item_when_click_cart_button() {
+
+        //given
+        val item = Product(
+            id = 1,
+            name = "테스트 상품",
+            price = 10000,
+            imageUrl = ""
+        )
+        composeTestRule.setContent {
+            ProductDetailScreen(item = item, onCart = { item -> CartUtil.addOne(item) })
+        }
+
+        //when
+        composeTestRule
+            .onNodeWithText("장바구니 담기")
+            .performClick()
+
+        //then
+        assertTrue(CartUtil.items.find { it.product.id == item.id } != null)
     }
 
 }
