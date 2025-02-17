@@ -1,6 +1,6 @@
 package nextstep.shoppingcart.ui.component
 
-import androidx.compose.ui.test.isDisplayed
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -12,7 +12,7 @@ class ProductTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    val product = ProductModel(
+    private val product = ProductModel(
         id = 6871,
         imageUrl = "http://www.bing.com/search?q=nominavi",
         name = "우유",
@@ -29,12 +29,12 @@ class ProductTest {
         // then
         composeTestRule
             .onNodeWithText("우유")
-            .isDisplayed()
+            .assertIsDisplayed()
         composeTestRule
             .onNodeWithText("2,000원")
-            .isDisplayed()
+            .assertIsDisplayed()
         composeTestRule
             .onNodeWithContentDescription("우유 이미지")
-            .isDisplayed()
+            .assertIsDisplayed()
     }
 }

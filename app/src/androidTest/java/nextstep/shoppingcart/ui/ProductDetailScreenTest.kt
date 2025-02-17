@@ -1,6 +1,6 @@
 package nextstep.shoppingcart.ui
 
-import androidx.compose.ui.test.isDisplayed
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -31,16 +31,16 @@ class ProductDetailScreenTest {
 
         // then
         composeTestRule
-            .onNodeWithContentDescription("삽겹살 이미지")
-            .isDisplayed()
+            .onNodeWithContentDescription("삼겹살 이미지")
+            .assertIsDisplayed()
         composeTestRule
             .onNodeWithText("삼겹살")
-            .isDisplayed()
+            .assertIsDisplayed()
         composeTestRule
             .onNodeWithText("12,000원")
-            .isDisplayed()
+            .assertIsDisplayed()
         composeTestRule
             .onNodeWithText("장바구니 담기")
-            .isDisplayed()
+            .assertIsDisplayed()
     }
 }

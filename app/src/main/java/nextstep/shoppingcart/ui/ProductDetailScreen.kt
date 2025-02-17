@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.ProductModel
 import nextstep.shoppingcart.navigator.toProductCart
 import nextstep.shoppingcart.ui.component.ActionButton
@@ -89,6 +90,7 @@ fun ProductDetailScreen(
                 ActionButton(
                     text = stringResource(R.string.add_cart),
                     onClick = {
+                        Cart.addOne(model)
                         context.toProductCart(model)
                     },
                 )

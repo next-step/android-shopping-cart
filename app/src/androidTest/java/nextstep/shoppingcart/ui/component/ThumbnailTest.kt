@@ -1,6 +1,6 @@
 package nextstep.shoppingcart.ui.component
 
-import androidx.compose.ui.test.isDisplayed
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import org.junit.Rule
@@ -26,7 +26,7 @@ class ThumbnailTest {
 
         // then
         composeTestRule
-            .onNodeWithContentDescription("이미지 나무")
-            .isDisplayed()
+            .onNodeWithContentDescription("나무 이미지")
+            .assertIsDisplayed()
     }
 }

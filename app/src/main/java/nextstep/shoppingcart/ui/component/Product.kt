@@ -12,13 +12,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.ProductModel
 import nextstep.shoppingcart.navigator.toProductDetail
 import nextstep.shoppingcart.ui.component.preview.ProductParameterProvider
@@ -55,14 +53,10 @@ fun Product(
             overflow = TextOverflow.Ellipsis,
         )
         Spacer(modifier = Modifier.height(2.dp))
-        Text(
-            text = stringResource(R.string.korean_price_format, model.price),
+        PriceText(
+            price = model.price,
             style = Typography.bodyMedium,
-            maxLines = 1,
-            modifier = Modifier
-                .heightIn(min = 20.dp)
-                .padding(horizontal = 4.dp),
-            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(horizontal = 4.dp)
         )
     }
 }

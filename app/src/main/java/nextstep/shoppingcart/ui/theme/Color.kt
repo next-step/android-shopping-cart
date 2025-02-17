@@ -3,6 +3,7 @@ package nextstep.shoppingcart.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val Blue = Color(0xFF2196F3)
+val Gray10 = Color(0xFFAAAAAA)
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
