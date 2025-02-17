@@ -28,7 +28,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.common.ProductImage
 import nextstep.shoppingcart.common.ShoppingCartAppBar
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.theme.LightGray
+import nextstep.shoppingcart.ui.theme.Gray10
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -67,7 +67,7 @@ fun ProductDetailScreen(
             )
 
             HorizontalDivider(
-                color = LightGray
+                color = Gray10
             )
 
             ProductDetailField(
