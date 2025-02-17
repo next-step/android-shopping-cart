@@ -3,7 +3,6 @@ package nextstep.shoppingcart.ui.detail
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,15 +20,14 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.designsystem.component.ProductImage
 import nextstep.shoppingcart.designsystem.theme.Blue50
 import nextstep.shoppingcart.designsystem.theme.DividerColor
 import nextstep.shoppingcart.designsystem.theme.TextColor
@@ -71,14 +69,8 @@ fun ProductDetailScreen(
                 .fillMaxSize()
                 .padding(contentPadding)
         ) {
-            AsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
-                model = item.imageUrl,
-                contentDescription = "product_image",
-                contentScale = ContentScale.Crop
-            )
+
+            ProductImage(item = item)
 
             Text(
                 text = item.name,
