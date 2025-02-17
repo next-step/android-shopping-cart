@@ -73,7 +73,7 @@ internal fun CartList(
 }
 
 @Composable
-internal fun CartItem(
+private fun CartItem(
     cartItem: CartItem,
     onAddOneClick: () -> Unit,
     onRemoveOneClick: () -> Unit,
