@@ -30,7 +30,10 @@ fun CatalogContent(
             .fillMaxSize(),
     ) {
         items(products) { product ->
-            ProductGridItem(product)
+            ProductGridItem(
+                product = product,
+                onClickItem = {}
+            )
         }
     }
 }
