@@ -29,7 +29,7 @@ fun ProductListTopBar(
     rightIconContentDescription: String = "",
     onLeftIconClicked: () -> Unit = {},
     onRightIconClicked: () -> Unit = {},
-    ) {
+) {
     Box(
         modifier = modifier
             .height(64.dp)
@@ -46,17 +46,21 @@ fun ProductListTopBar(
             Icon(
                 imageVector = leftIcon,
                 contentDescription = leftIconContentDescription,
-                modifier = Modifier.align(Alignment.CenterStart).clickable {
-                    onLeftIconClicked()
-                }
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .clickable {
+                        onLeftIconClicked()
+                    }
             )
         }
         rightIcon?.let { rightIcon ->
             Icon(
                 imageVector = rightIcon, contentDescription = rightIconContentDescription,
-                modifier = Modifier.align(Alignment.CenterEnd).clickable {
-                    onRightIconClicked()
-                }
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .clickable {
+                        onRightIconClicked()
+                    }
             )
         }
     }

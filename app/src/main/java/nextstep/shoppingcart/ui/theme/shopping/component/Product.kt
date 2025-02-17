@@ -21,7 +21,8 @@ fun Product(product: Product, modifier: Modifier = Modifier) {
             model = product.imageUrl,
             contentDescription = null,
             modifier = Modifier
-                .fillMaxWidth().padding(horizontal = 6.dp),
+                .fillMaxWidth()
+                .padding(horizontal = 6.dp),
             contentScale = ContentScale.Crop
         )
         Text(

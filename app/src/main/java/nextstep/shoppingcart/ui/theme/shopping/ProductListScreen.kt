@@ -34,7 +34,8 @@ fun ProductListScreen(listUiState: ProductListUiState, modifier: Modifier = Modi
             ) { contentPadding ->
                 ProductListContents(
                     modifier = Modifier
-                        .padding(contentPadding).padding(horizontal = 12.dp),
+                        .padding(contentPadding)
+                        .padding(horizontal = 12.dp),
                     productItems = listUiState.products
                 )
             }
