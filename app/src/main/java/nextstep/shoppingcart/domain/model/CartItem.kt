@@ -2,7 +2,7 @@ package nextstep.shoppingcart.domain.model
 
 data class CartItem(
     val product: Product,
-    val count: Int,
+    val count: Count,
 ) {
-    val totalPrice: Int get() = product.price.value * count
+    val totalPrice: Int get() = product.price.value * count.value
 }
