@@ -6,6 +6,7 @@
     <string name="product_detail_title">상품 상세</string>
     <string name="product_detail_add_to_cart">장바구니 담기</string>
     <string name="product_detail_price">가격</string>
+    <string name="product_cart_title">장바구니</string>
 
     <string name="product_image_description">Product Image</string>
     <string name="title_icon_back_description">Back</string>
