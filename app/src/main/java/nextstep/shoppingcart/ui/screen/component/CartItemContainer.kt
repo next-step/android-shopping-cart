@@ -28,7 +28,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.ui.theme.Gray10
@@ -122,19 +121,6 @@ fun CartItemBottomSector(
                 .padding(end = 10.dp)
         )
     }
-}
-
-@Composable
-fun ProductImage(
-    imageUrl: String,
-    contentDescription: String,
-    modifier: Modifier = Modifier,
-) {
-    AsyncImage(
-        model = imageUrl,
-        contentDescription = contentDescription,
-        modifier = modifier,
-    )
 }
 
 @Composable

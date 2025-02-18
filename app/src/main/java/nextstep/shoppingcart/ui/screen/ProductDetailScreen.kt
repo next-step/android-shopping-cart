@@ -32,6 +32,7 @@ import nextstep.shoppingcart.ui.theme.Gray10
 import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
 import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.screen.component.ProductImage
 
 @Composable
 fun ProductDetailScreen(
@@ -43,10 +44,9 @@ fun ProductDetailScreen(
         modifier = modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.Start,
     ) {
-        AsyncImage(
-            model = product.imageUrl,
+        ProductImage(
+            imageUrl = product.imageUrl,
             contentDescription = "Product Image",
-            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
