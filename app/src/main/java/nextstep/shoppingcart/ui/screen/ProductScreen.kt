@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.ui.screen.component.ProductItem
+import nextstep.shoppingcart.ui.screen.component.ProductItemContainer
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -44,7 +44,7 @@ private fun ProductListSection(
         contentPadding = PaddingValues(vertical = 13.dp),
     ) {
         items(products) { product ->
-            ProductItem(
+            ProductItemContainer(
                 imageUrl = product.imageUrl,
                 title = product.title,
                 price = product.price,

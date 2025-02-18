@@ -14,7 +14,7 @@ import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
 import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 
 @Composable
-fun ProductItem(
+fun ProductItemContainer(
     title: String,
     price: Int,
     imageUrl: String,
@@ -46,7 +46,7 @@ fun ProductItem(
 @Preview(showBackground = true)
 @Composable
 private fun ProductItemPreview() {
-    ProductItem(
+    ProductItemContainer(
         imageUrl = "https://www.picsum.photos/200",
         title = "상품 이름",
         price = 10000,
