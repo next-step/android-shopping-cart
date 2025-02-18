@@ -12,6 +12,7 @@ import nextstep.shoppingcart.ext.getFormattedPrice
 import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.cart.CartListScreen
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
@@ -38,6 +39,29 @@ class CartListScreenTest {
         composeTestRule
             .onNodeWithText("주문하기(${cartList.sumOf { it.totalPrice }.getFormattedPrice()})")
             .assertIsDisplayed()
+    }
+
+    @Test
+    fun `주문하기_클릭시_주문하기_이벤트가_발생하여야_한다`() {
+        //given
+        val cartList = listOf(
+            Cart(Product(1, "상품1", 1000, ""), 1),
+            Cart(Product(2, "상품2", 2000, ""), 2),
+            Cart(Product(3, "상품3", 3000, ""), 3),
+            Cart(Product(4, "상품4", 4000, ""), 4),
+        )
+        var isSendOrderEvent = false
+
+        composeTestRule.setContent {
+            CartListScreen(cartList, onOrder = { isSendOrderEvent = true })
+        }
+
+        //when
+        composeTestRule
+            .onNodeWithText("주문하기(${cartList.sumOf { it.totalPrice }.getFormattedPrice()})")
+            .performClick()
+
+        assertTrue(isSendOrderEvent)
     }
 
     @Test

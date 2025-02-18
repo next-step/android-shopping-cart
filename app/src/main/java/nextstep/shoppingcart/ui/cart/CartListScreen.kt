@@ -30,7 +30,8 @@ fun CartListScreen(
     modifier: Modifier = Modifier,
     onDelete: (Cart) -> Unit = {},
     onAdd: (Cart) -> Unit = {},
-    onRemove: (Cart) -> Unit = {}
+    onRemove: (Cart) -> Unit = {},
+    onOrder : () -> Unit = {}
 ) {
     Column(modifier = modifier) {
         LazyColumn(
@@ -44,7 +45,7 @@ fun CartListScreen(
             }
         }
         TextButton(
-            onClick = { },
+            onClick = onOrder,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Blue50)
