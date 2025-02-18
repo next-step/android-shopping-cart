@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -52,13 +53,13 @@ fun ProductListSection(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         contentPadding = PaddingValues(vertical = 13.dp),
     ) {
-        items(products.size) { index ->
+        items(products) { product ->
             ProductItem(
-                imageUrl = products[index].imageUrl,
-                title = products[index].title,
-                price = products[index].price,
+                imageUrl = product.imageUrl,
+                title = product.title,
+                price = product.price,
                 modifier = Modifier.clickable(
-                    onClick = { onProductClick(products[index]) }
+                    onClick = { onProductClick(product) }
                 )
             )
         }
