@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.data.repository.ProductRepository
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -25,6 +26,7 @@ class ProductDetailActivity : ComponentActivity() {
                 ProductDetailScreen(
                     product = product,
                     onAddCartClick = {
+                        CartRepository.addOne(product)
                         ProductCartActivity.open(this)
                     },
                     onBackButtonClick = {

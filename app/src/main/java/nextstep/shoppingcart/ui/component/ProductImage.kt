@@ -6,6 +6,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.SubcomposeAsyncImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -18,6 +19,7 @@ internal fun ProductImage(
     SubcomposeAsyncImage(
         modifier = modifier,
         model = url,
+        contentScale = ContentScale.Crop,
         contentDescription = url,
         loading = {
             CircularProgressIndicator()
