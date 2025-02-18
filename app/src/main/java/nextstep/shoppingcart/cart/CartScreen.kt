@@ -1,19 +1,72 @@
 package nextstep.shoppingcart.cart
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.R
+import nextstep.shoppingcart.common.ShoppingCartAppBar
+import nextstep.shoppingcart.common.ShoppingCartButton
+import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.dummyCartItem
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun CartScreen(modifier: Modifier = Modifier) {
+fun CartScreen(
+    cartItems: List<CartItem>,
+    onBackPressed: () -> Unit,
+    onButtonClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val totalPrice = remember(key1 = cartItems) { cartItems.sumOf { it.totalPrice } }
 
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            ShoppingCartAppBar(
+                title = stringResource(R.string.shopping_cart),
+                onBackPressed = onBackPressed
+            )
+        },
+        bottomBar = {
+            ShoppingCartButton(
+                onClick = onButtonClick,
+                text = stringResource(R.string.order_format_price_won, totalPrice)
+            )
+        }
+    ) { innerPadding ->
+        LazyColumn(
+            modifier = Modifier.fillMaxSize().padding(innerPadding),
+            contentPadding = PaddingValues(18.dp)
+        ) {
+            items(cartItems, key = { it.product.id }) { cartItem ->
+                CartProductItem(
+                    cartItem = cartItem,
+                    onCloseClick = { /*TODO*/ },
+                    onPlusClick = { /*TODO*/ },
+                    onMinusClick = { /*TODO*/ }
+                )
+            }
+        }
+    }
 }
 
 @Preview
 @Composable
 private fun CartScreenPreview() {
     ShoppingCartTheme {
-        CartScreen()
+        CartScreen(
+            cartItems = listOf(dummyCartItem, dummyCartItem),
+            onBackPressed = {},
+            onButtonClick = {}
+        )
     }
 }
