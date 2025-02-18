@@ -1,5 +1,6 @@
 package nextstep.shoppingcart
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,8 +15,23 @@ class ProductListActivity : ComponentActivity() {
         val uiState = ProductListUiState.Products(getProductsTestData())
         setContent {
             ShoppingCartTheme {
-                ProductListScreen(uiState)
+                ProductListScreen(
+                    listUiState = uiState,
+                    navigateToProductDetail = { id -> navigateToProductDetail(id) },
+                    navigateToCart = { navigateToCart() },
+                )
             }
         }
+    }
+
+    private fun navigateToProductDetail(productId: String) {
+        val intent = Intent(this, ProductDetailActivity::class.java)
+        intent.putExtra("productId", productId)
+        startActivity(intent)
+    }
+
+    private fun navigateToCart() {
+        val intent = Intent(this, CartActivity::class.java)
+        startActivity(intent)
     }
 }

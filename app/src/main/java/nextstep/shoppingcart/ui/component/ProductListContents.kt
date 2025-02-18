@@ -10,13 +10,19 @@ import nextstep.shoppingcart.model.product.Product
 import nextstep.shoppingcart.ui.getProductsTestData
 
 @Composable
-fun ProductListContents(productItems: List<Product>, modifier: Modifier = Modifier) {
+fun ProductListContents(
+    productItems: List<Product>,
+    navigateToProductDetail: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(2),
     ) {
         items(items = productItems, key = { it.productId }) { item ->
-            Product(item)
+            Product(
+                product = item,
+                navigateToProductDetail = { id -> navigateToProductDetail(id) })
         }
     }
 }
@@ -24,5 +30,8 @@ fun ProductListContents(productItems: List<Product>, modifier: Modifier = Modifi
 @Preview(showBackground = true)
 @Composable
 private fun ProductListContentsPreview() {
-    ProductListContents(productItems = getProductsTestData())
+    ProductListContents(
+        productItems = getProductsTestData(),
+        navigateToProductDetail = {},
+    )
 }

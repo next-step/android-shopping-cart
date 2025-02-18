@@ -17,7 +17,12 @@ import nextstep.shoppingcart.ui.component.ProductListTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun ProductListScreen(listUiState: ProductListUiState, modifier: Modifier = Modifier) {
+fun ProductListScreen(
+    listUiState: ProductListUiState,
+    modifier: Modifier = Modifier,
+    navigateToProductDetail: (String) -> Unit = {},
+    navigateToCart: () -> Unit = {},
+) {
     when (listUiState) {
 
         ProductListUiState.Loading -> {
@@ -29,14 +34,18 @@ fun ProductListScreen(listUiState: ProductListUiState, modifier: Modifier = Modi
                 modifier = modifier
                     .fillMaxSize(),
                 topBar = {
-                    ProductListTopBar(topBarTitle = "상품 목록", rightIcon = Icons.Filled.ShoppingCart)
+                    ProductListTopBar(
+                        topBarTitle = "상품 목록",
+                        rightIcon = Icons.Filled.ShoppingCart,
+                        onRightIconClicked = { navigateToCart() })
                 },
             ) { contentPadding ->
                 ProductListContents(
                     modifier = Modifier
                         .padding(contentPadding)
                         .padding(horizontal = 12.dp),
-                    productItems = listUiState.products
+                    productItems = listUiState.products,
+                    navigateToProductDetail = { id -> navigateToProductDetail(id) },
                 )
             }
         }
@@ -49,7 +58,6 @@ fun ProductListScreen(listUiState: ProductListUiState, modifier: Modifier = Modi
             // Empty 뷰
         }
     }
-
 }
 
 @Preview(showBackground = true)
