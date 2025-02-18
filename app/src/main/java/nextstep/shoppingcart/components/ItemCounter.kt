@@ -30,17 +30,13 @@ internal fun ItemCounter(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(
+        ItemCounterButton(
+            itemCounterButtonType = ItemCounterButtonType.MINUS,
             onClick = onRemoveOneClick,
             modifier = Modifier
                 .weight(1f)
                 .aspectRatio(1f)
-        ) {
-            Text(
-                text = stringResource(R.string.cart_item_counter_minus),
-                style = Typography.titleLarge.copy(fontWeight = FontWeight.W700),
-            )
-        }
+        )
         Text(
             text = count.toString(),
             modifier = Modifier
@@ -49,18 +45,39 @@ internal fun ItemCounter(
                 .wrapContentSize(),
             style = Typography.titleLarge,
         )
-        IconButton(
+        ItemCounterButton(
+            itemCounterButtonType = ItemCounterButtonType.PLUS,
             onClick = onAddOneClick,
             modifier = Modifier
                 .weight(1f)
                 .aspectRatio(1f)
-        ) {
-            Text(
-                text = stringResource(R.string.cart_item_counter_plus),
-                style = Typography.titleLarge.copy(fontWeight = FontWeight.W700),
-            )
-        }
+        )
     }
+}
+
+@Composable
+fun ItemCounterButton(
+    itemCounterButtonType: ItemCounterButtonType,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = modifier,
+    ) {
+        Text(
+            text = when (itemCounterButtonType) {
+                ItemCounterButtonType.MINUS -> stringResource(R.string.cart_item_counter_minus)
+                ItemCounterButtonType.PLUS -> stringResource(R.string.cart_item_counter_plus)
+            },
+            style = Typography.titleLarge.copy(fontWeight = FontWeight.W700),
+        )
+    }
+}
+
+enum class ItemCounterButtonType {
+    PLUS,
+    MINUS,
 }
 
 @Preview(showBackground = true)
