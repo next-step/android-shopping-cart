@@ -3,7 +3,6 @@ package nextstep.shoppingcart.ui.cart
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -36,7 +35,6 @@ fun CartListScreen(
     Column(modifier = modifier) {
         LazyColumn(
             Modifier
-                .fillMaxSize()
                 .padding(horizontal = 18.dp, vertical = 16.dp)
                 .weight(1f),
             verticalArrangement = Arrangement.spacedBy(16.dp)
