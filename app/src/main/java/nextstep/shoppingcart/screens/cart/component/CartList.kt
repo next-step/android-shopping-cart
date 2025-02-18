@@ -55,7 +55,7 @@ internal fun CartList(
 ) {
     LazyColumn(
         contentPadding = PaddingValues(vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(18.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier,
     ) {
         items(key = { it.product.id }, items = cart.items) { cartItem ->
