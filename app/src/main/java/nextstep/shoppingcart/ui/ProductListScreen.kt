@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.theme.shopping
+package nextstep.shoppingcart.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,11 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.model.product.Product
+import nextstep.shoppingcart.model.product.ProductListUiState
+import nextstep.shoppingcart.ui.component.ProductListContents
+import nextstep.shoppingcart.ui.component.ProductListTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
-import nextstep.shoppingcart.ui.theme.shopping.component.ProductListContents
-import nextstep.shoppingcart.ui.theme.shopping.component.ProductListTopBar
-import nextstep.shoppingcart.ui.theme.shopping.model.Product
-import nextstep.shoppingcart.ui.theme.shopping.model.ProductListUiState
 
 @Composable
 fun ProductListScreen(listUiState: ProductListUiState, modifier: Modifier = Modifier) {

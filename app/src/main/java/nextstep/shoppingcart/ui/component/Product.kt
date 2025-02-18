@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.theme.shopping.component
+package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +12,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import nextstep.shoppingcart.ui.theme.shopping.model.Product
+import nextstep.shoppingcart.model.product.Product
 
 @Composable
 fun Product(product: Product, modifier: Modifier = Modifier) {
