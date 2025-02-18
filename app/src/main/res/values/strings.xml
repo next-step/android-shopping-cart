@@ -8,4 +8,5 @@
     <string name="price">금액</string>
     <string name="product_detail_add_to_cart">장바구니 담기</string>
     <string name="basket">장바구니</string>
+    <string name="basket_order">주문하기(%1$,d원)</string>
 </resources>
