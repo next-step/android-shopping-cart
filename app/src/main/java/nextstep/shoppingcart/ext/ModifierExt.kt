@@ -6,4 +6,4 @@ import androidx.compose.ui.semantics.semantics
 
 
 fun Modifier.setContentDescription(desc: String): Modifier =
-    this then semantics { contentDescription = desc }
+    semantics { contentDescription = desc }
