@@ -48,8 +48,8 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.repository.ProductRepository
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.model.dummyProducts
 import nextstep.shoppingcart.ui.designsystem.ProductListItem
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -58,6 +58,7 @@ fun ProductListScreen(
     onBasketClick: () -> Unit,
     onProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
+    productRepository: ProductRepository = ProductRepository.inject(),
 ) {
     var state by rememberSaveable {
         mutableStateOf(ProductListState())
@@ -74,10 +75,8 @@ fun ProductListScreen(
     // Unit으로 설정할 경우, configuration change가 발생해도 호출된다.
     // 따라서 초기로딩이 되지 않은 경우에만 호출되도록 관련 state를 key로 설정
     LaunchedEffect(state.isInitialLoading) {
-        delay(700L)
-
         state = state.copy(
-            products = dummyProducts,
+            products = productRepository.fetch(),
             isInitialLoading = false,
         )
     }

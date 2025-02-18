@@ -11,3 +11,12 @@ fun Product.toEntity(): ProductEntity {
         price = price
     )
 }
+
+fun ProductEntity.toUi(): Product {
+    return Product(
+        id = id,
+        imageUrl = imageUrl,
+        name = name,
+        price = price,
+    )
+}
