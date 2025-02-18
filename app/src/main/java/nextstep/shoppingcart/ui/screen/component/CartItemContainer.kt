@@ -30,13 +30,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.CartItem
+import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.Gray10
 import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
 import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 
 @Composable
-fun CartItemBox(
+fun CartItemContainer(
     cartItem: CartItem,
+    onCartItemDelete: () -> Unit,
+    onMinusCartItem: () -> Unit,
+    onPlusCartItem: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -48,15 +52,15 @@ fun CartItemBox(
         Column {
             CartItemTopSector(
                 title = cartItem.product.title,
-                onCartItemDelete = {
-
-                },
+                onCartItemDelete = onCartItemDelete,
             )
             Spacer(modifier = Modifier.height(6.dp))
             CartItemBottomSector(
                 imageUrl = cartItem.product.imageUrl,
                 price = cartItem.product.price,
                 count = cartItem.count,
+                onMinusCartItem = onMinusCartItem,
+                onPlusCartItem = onPlusCartItem,
             )
         }
     }
@@ -65,7 +69,7 @@ fun CartItemBox(
 @Composable
 fun CartItemTopSector(
     title: String,
-    onCartItemDelete: () -> Unit = { },
+    onCartItemDelete: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -91,6 +95,8 @@ fun CartItemBottomSector(
     imageUrl: String,
     price: Int,
     count: Int,
+    onMinusCartItem: () -> Unit,
+    onPlusCartItem: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -110,12 +116,8 @@ fun CartItemBottomSector(
         CartItemInfo(
             price = price,
             count = count,
-            onMinusCartItem = {
-
-            },
-            onPlusCartItem = {
-
-            },
+            onMinusCartItem = onMinusCartItem,
+            onPlusCartItem = onPlusCartItem,
             modifier = modifier
                 .weight(1f)
                 .padding(end = 10.dp)
@@ -244,6 +246,9 @@ private fun QuantityAdjusButtonPreview() {
 private fun ProductTopSectorPreview() {
     CartItemTopSector(
         title = "상품 이름",
+        onCartItemDelete = {
+
+        },
     )
 }
 
@@ -254,20 +259,35 @@ private fun ProductBottomSectorPreview() {
         imageUrl = "https://www.picsum.photos/200",
         price = 10000,
         count = 2,
+        onMinusCartItem = {
+
+        },
+        onPlusCartItem = {
+
+        },
     )
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun CartItemBoxPreview() {
-    CartItemBox(
+    CartItemContainer(
         cartItem = CartItem(
-            product = nextstep.shoppingcart.data.Product(
+            product = Product(
+                imageUrl = "https://www.picsum.photos/200",
                 title = "상품 이름",
                 price = 10000,
-                imageUrl = "https://www.picsum.photos/200",
             ),
             count = 2,
         ),
+        onCartItemDelete = {
+
+        },
+        onMinusCartItem = {
+
+        },
+        onPlusCartItem = {
+
+        },
     )
 }
