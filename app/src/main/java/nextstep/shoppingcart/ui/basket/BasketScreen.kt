@@ -2,6 +2,7 @@
 
 package nextstep.shoppingcart.ui.basket
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -87,7 +88,9 @@ private fun BasketScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(vertical = 16.dp)
                     .weight(1f),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 items(state.cartItems, key = { it.product.id }) {
                     CartListItem(
@@ -95,6 +98,7 @@ private fun BasketScreen(
                         onRemoveCartItemClick = onRemoveCartItemClick,
                         onIncreaseQuantityClick = onIncreaseQuantityClick,
                         onDecreaseQuantityClick = onDecreaseQuantityClick,
+                        modifier = Modifier.padding(horizontal = 18.dp),
                     )
                 }
             }
