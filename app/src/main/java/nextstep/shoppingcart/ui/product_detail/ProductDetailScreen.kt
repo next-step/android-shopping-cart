@@ -30,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.designsystem.ProductDetailItem
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -40,6 +41,7 @@ fun ProductDetailScreen(
     navigateBack: () -> Unit,
     onAddBasketClick: () -> Unit,
     modifier: Modifier = Modifier,
+    cartRepository: CartRepository = CartRepository.inject(),
 ) {
     val state by remember {
         mutableStateOf(ProductDetailState(product = product))
@@ -48,7 +50,10 @@ fun ProductDetailScreen(
     ProductDetailScreen(
         state = state,
         navigateBack = navigateBack,
-        onAddBasketClick = onAddBasketClick,
+        onAddBasketClick = {
+            cartRepository.addOne(product)
+            onAddBasketClick()
+        },
         modifier = modifier,
     )
 }
