@@ -24,6 +24,7 @@ import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.screen.component.CenterAppBar
 import nextstep.shoppingcart.ui.screen.component.BackAppBar
 import androidx.compose.runtime.setValue
+import nextstep.shoppingcart.ui.screen.component.BackIconButton
 
 enum class ProductDestination(@StringRes val title: Int) {
     ProductList(title = R.string.appbar_product_title),
@@ -57,11 +58,11 @@ fun ProductApp() {
                     title = stringResource(id = currentScreen.title),
                     navigationIcon = {
                         navController.previousBackStackEntry?.let {
-                            IconButton(onClick = {
-                                navController.popBackStack()
-                            }) {
-                                Icon(Icons.Filled.ArrowBack, contentDescription = "Back Button")
-                            }
+                            BackIconButton(
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
                         }
                     },
                 )
