@@ -118,7 +118,7 @@ fun ProductDetailScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ProductDetailScreenPreview() {
     val item = Product(

@@ -54,7 +54,7 @@ fun CartTitle(
 }
 
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun CartTitlePreview() {
     val cart = Cart(

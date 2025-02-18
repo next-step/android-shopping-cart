@@ -62,7 +62,7 @@ fun CartAmount(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun CartAmountPreview() {
     val cart = Cart(

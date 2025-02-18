@@ -36,7 +36,7 @@ fun CartItem(
 }
 
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun CartItemPreview() {
 

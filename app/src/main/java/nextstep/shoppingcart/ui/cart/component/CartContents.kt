@@ -72,7 +72,7 @@ fun CartContents(
 }
 
 
-@Preview(heightDp = 150)
+@Preview(showBackground = true, heightDp = 150)
 @Composable
 private fun CartContentsPreview() {
     val cart = Cart(

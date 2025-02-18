@@ -60,7 +60,7 @@ fun ProductItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ProductItemPreview() {
     ProductItem(item = mockProducts[0])

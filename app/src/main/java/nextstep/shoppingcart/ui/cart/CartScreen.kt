@@ -75,7 +75,7 @@ fun CartScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun CartScreenPreview() {
     ShoppingCartTheme {
