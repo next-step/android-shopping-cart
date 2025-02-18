@@ -18,7 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.ui.screen.component.BackAppBar
+import nextstep.shoppingcart.ui.screen.component.DefaultAppBar
 import nextstep.shoppingcart.ui.screen.component.BackIconButton
 import nextstep.shoppingcart.ui.screen.component.CenterAppBar
 
@@ -50,7 +50,7 @@ fun ProductApp() {
                     }
                 )
             } else {
-                BackAppBar(
+                DefaultAppBar(
                     title = stringResource(id = currentScreen.title),
                     navigationIcon = {
                         navController.previousBackStackEntry?.let {

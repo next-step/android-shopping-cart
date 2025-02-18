@@ -9,9 +9,9 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BackAppBar(
+fun DefaultAppBar(
     title: String,
-    navigationIcon: @Composable (() -> Unit),
+    navigationIcon: @Composable (() -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
     TopAppBar(
@@ -19,19 +19,15 @@ fun BackAppBar(
             Text(title)
         },
         modifier = modifier,
-        navigationIcon = navigationIcon
+        navigationIcon = navigationIcon?: {}
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun BackAppBarPreview() {
-    BackAppBar(
+private fun DefaultAppBarPreview() {
+    DefaultAppBar(
         title = "상품 상세",
-        navigationIcon = {
-            BackIconButton(
-                onBackClick = { }
-            )
-        }
+        navigationIcon = { }
     )
 }
