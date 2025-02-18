@@ -90,40 +90,21 @@ private fun CartItem(
             )
             .padding(18.dp),
     ) {
-        CartItemHeader(
+        CartItemTitle(
             title = cartItem.product.name,
             onRemoveAllClick = onRemoveAllClick,
             modifier = Modifier.fillMaxWidth(),
         )
-        Row {
-            CartItemImage(
-                product = cartItem.product,
-                modifier = Modifier
-                    .weight(1f)
-                    .aspectRatio(1.6f),
-            )
-            Spacer(Modifier.width(26.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Spacer(Modifier.height(24.dp))
-                Text(
-                    text = stringResource(R.string.price_format, cartItem.product.price.value),
-                    textAlign = TextAlign.End,
-                    style = Typography.bodyLarge,
-                    modifier = Modifier.fillMaxWidth()
-                )
-                ItemCounter(
-                    count = cartItem.count.value,
-                    onRemoveOneClick = onRemoveOneClick,
-                    onAddOneClick = onAddOneClick,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-            }
-        }
+        CartItemContent(
+            cartItem = cartItem,
+            onRemoveOneClick = onRemoveOneClick,
+            onAddOneClick = onAddOneClick,
+        )
     }
 }
 
 @Composable
-private fun CartItemHeader(
+private fun CartItemTitle(
     title: String,
     onRemoveAllClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -147,6 +128,33 @@ private fun CartItemHeader(
 }
 
 @Composable
+private fun CartItemContent(
+    cartItem: CartItem,
+    onRemoveOneClick: () -> Unit,
+    onAddOneClick: () -> Unit,
+) {
+    Row {
+        CartItemImage(
+            product = cartItem.product,
+            modifier = Modifier
+                .weight(1f)
+                .aspectRatio(1.6f),
+        )
+        Spacer(Modifier.width(26.dp))
+        Column(modifier = Modifier.weight(1f)) {
+            Spacer(Modifier.height(24.dp))
+            CartItemPrice(cartItem.product.price.value)
+            ItemCounter(
+                count = cartItem.count.value,
+                onRemoveOneClick = onRemoveOneClick,
+                onAddOneClick = onAddOneClick,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+    }
+}
+
+@Composable
 @OptIn(ExperimentalGlideComposeApi::class)
 private fun CartItemImage(product: Product, modifier: Modifier = Modifier) {
     GlideImage(
@@ -156,6 +164,16 @@ private fun CartItemImage(product: Product, modifier: Modifier = Modifier) {
         failure = placeholder(ColorPainter(GrayAAAAAA)),
         contentScale = ContentScale.Crop,
         modifier = modifier,
+    )
+}
+
+@Composable
+private fun CartItemPrice(price: Int) {
+    Text(
+        text = stringResource(R.string.price_format, price),
+        textAlign = TextAlign.End,
+        style = Typography.bodyLarge,
+        modifier = Modifier.fillMaxWidth()
     )
 }
 
