@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.screen.component.ProductItem
-import nextstep.shoppingcart.ui.screen.component.CenterAppBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -64,25 +63,6 @@ fun ProductListSection(
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun AppbarPreview() {
-    CenterAppBar(
-        title = "상품 목록",
-        onClick = { }
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun ProductItemPreview() {
-    ProductItem(
-        imageUrl = "https://www.picsum.photos/200",
-        title = "상품 이름",
-        price = 10000,
-    )
 }
 
 @Preview(showBackground = true)
