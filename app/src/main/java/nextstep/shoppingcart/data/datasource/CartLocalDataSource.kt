@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.asFlow
 import nextstep.shoppingcart.data.model.CartItemEntity
 import nextstep.shoppingcart.data.model.ProductEntity
 
-class CartRemoteDataSource {
+class CartLocalDataSource {
 
     private val _items: MutableList<CartItemEntity> = mutableListOf()
     val items: Flow<CartItemEntity>
