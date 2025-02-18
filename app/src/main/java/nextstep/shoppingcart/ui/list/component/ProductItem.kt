@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.mockProducts
-import nextstep.shoppingcart.designsystem.component.ProductImage
 import nextstep.shoppingcart.designsystem.theme.TextColor
 import nextstep.shoppingcart.ext.getFormattedPrice
 import nextstep.shoppingcart.model.Product
@@ -25,7 +24,10 @@ import nextstep.shoppingcart.model.Product
 fun ProductItem(
     modifier: Modifier = Modifier,
     item: Product,
-    onClick: (Product) -> Unit = {}
+    count: Int,
+    onClick: (Product) -> Unit = {},
+    onAdd: (Product) -> Unit = {},
+    onRemove: (Product) -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -33,9 +35,12 @@ fun ProductItem(
             .clickable { onClick(item) }
     ) {
 
-        ProductImage(
+        ProductImageContainer(
             item = item,
-            modifier = Modifier.aspectRatio(1f)
+            count = count,
+            modifier = Modifier.aspectRatio(1f),
+            onAdd = onAdd,
+            onRemove = onRemove
         )
 
         Text(
@@ -63,5 +68,5 @@ fun ProductItem(
 @Preview(showBackground = true)
 @Composable
 private fun ProductItemPreview() {
-    ProductItem(item = mockProducts[0])
+    ProductItem(item = mockProducts[0], count = 0)
 }
