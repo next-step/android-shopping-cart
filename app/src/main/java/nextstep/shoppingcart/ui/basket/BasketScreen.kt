@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.onEach
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.repository.CartRepository
+import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.ui.designsystem.CartListItem
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -57,6 +58,9 @@ fun BasketScreen(
     BasketScreen(
         state = state,
         navigateBack = navigateBack,
+        onRemoveCartItemClick = { cartRepository.removeAll(it.product) },
+        onIncreaseQuantityClick = { cartRepository.addOne(it.product) },
+        onDecreaseQuantityClick = { cartRepository.removeOne(it.product) },
         modifier = modifier,
     )
 }
@@ -65,6 +69,9 @@ fun BasketScreen(
 private fun BasketScreen(
     state: BasketState,
     navigateBack: () -> Unit,
+    onRemoveCartItemClick: (CartItem) -> Unit,
+    onIncreaseQuantityClick: (CartItem) -> Unit,
+    onDecreaseQuantityClick: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -83,14 +90,21 @@ private fun BasketScreen(
                     .weight(1f),
             ) {
                 items(state.cartItems, key = { it.product.id }) {
-                    CartListItem(it)
+                    CartListItem(
+                        cartItem = it,
+                        onRemoveCartItemClick = onRemoveCartItemClick,
+                        onIncreaseQuantityClick = onIncreaseQuantityClick,
+                        onDecreaseQuantityClick = onDecreaseQuantityClick,
+                    )
                 }
             }
 
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = { },
+                onClick = {
+                    // 주문하기는 미구현.
+                },
                 shape = RectangleShape,
             ) {
                 Text(
@@ -136,9 +150,10 @@ private fun BasketScreenPreview() {
     ShoppingCartTheme {
         BasketScreen(
             state = BasketState(),
-            navigateBack = {
-                // no-op. just for preview
-            },
+            navigateBack = {},
+            onRemoveCartItemClick = {},
+            onIncreaseQuantityClick = {},
+            onDecreaseQuantityClick = {},
         )
     }
 }
