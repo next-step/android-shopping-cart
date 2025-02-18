@@ -18,8 +18,8 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.screen.component.CenterAppBar
-import nextstep.shoppingcart.ui.screen.component.CustomAppBar
 import androidx.compose.runtime.setValue
+import nextstep.shoppingcart.ui.screen.component.BackAppBar
 
 enum class ProductDestination(@StringRes val title: Int) {
     ProductList(title = R.string.appbar_product_title),
@@ -49,7 +49,7 @@ fun ProductApp() {
                     }
                 )
             } else {
-                CustomAppBar(
+                BackAppBar(
                     title = stringResource(id = currentScreen.title),
                     canNavigateBack = navController.previousBackStackEntry != null,
                     backButton = { navController.popBackStack() }

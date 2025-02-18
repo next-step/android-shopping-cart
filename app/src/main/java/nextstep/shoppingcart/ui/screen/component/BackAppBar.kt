@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomAppBar(
+fun BackAppBar(
     title: String,
     canNavigateBack: Boolean,
     backButton: () -> Unit,
