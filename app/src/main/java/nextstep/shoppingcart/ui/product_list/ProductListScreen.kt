@@ -226,26 +226,31 @@ private fun ProductListScreenPreview() {
             state = ProductListState(
                 products = listOf(
                     Product(
+                        id = "",
                         imageUrl = "",
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
                         price = 10_000
                     ),
                     Product(
+                        id = "",
                         imageUrl = "",
                         name = "PET-보틀-세모",
                         price = 10_000_000
                     ),
                     Product(
+                        id = "",
                         imageUrl = "",
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
                         price = 1_000_000_000,
                     ),
                     Product(
+                        id = "",
                         imageUrl = "",
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
                         price = 10_000
                     ),
                     Product(
+                        id = "",
                         imageUrl = "",
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
                         price = 10_000

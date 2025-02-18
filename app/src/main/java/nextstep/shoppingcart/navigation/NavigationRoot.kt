@@ -36,7 +36,14 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
         composable<ProductList> {
             ProductListScreen(
                 onProductClick = {
-                    navController.navigate(ProductDetail(it.imageUrl, it.name, it.price))
+                    navController.navigate(
+                        ProductDetail(
+                            id = it.id,
+                            imageUrl = it.imageUrl,
+                            name = it.name,
+                            price = it.price,
+                        )
+                    )
                 },
                 onBasketClick = {
                     navController.navigate(Basket)
@@ -49,6 +56,7 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
 
             ProductDetailScreen(
                 product = Product(
+                    id = productDetail.id,
                     imageUrl = productDetail.imageUrl,
                     name = productDetail.name,
                     price = productDetail.price

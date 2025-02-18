@@ -146,6 +146,7 @@ private fun ProductListItemPreview() {
     ShoppingCartTheme {
         ProductListItem(
             product = Product(
+                id = "",
                 imageUrl = "",
                 name = LoremIpsum(100).values.joinToString(""),
                 price = 999_999_999,
@@ -162,6 +163,7 @@ private fun ProductDetailPreview() {
     ShoppingCartTheme {
         ProductDetailItem(
             product = Product(
+                id = "",
                 imageUrl = "",
                 name = LoremIpsum(100).values.joinToString(""),
                 price = 999_999_999,

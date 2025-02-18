@@ -126,6 +126,7 @@ private fun ProductDetailScreenPreview() {
     ShoppingCartTheme {
         ProductDetailScreen(
             product = Product(
+                id = "",
                 imageUrl = "",
                 name = "PET-보틀-정사각형 정사각형 정사각형 ",
                 price = 10_000
