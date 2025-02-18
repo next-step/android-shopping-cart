@@ -12,7 +12,9 @@ class CartActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
-                CartScreen()
+                CartScreen(
+                    popBackStack = { finish() },
+                )
             }
         }
     }

@@ -11,10 +11,15 @@ import nextstep.shoppingcart.cart.widget.CartTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun CartScreen(modifier: Modifier = Modifier) {
+fun CartScreen(
+    popBackStack: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        topBar = { CartTopBar() }
+        topBar = {
+            CartTopBar(popBackStack)
+        },
     ) { paddingValue ->
         CartContent(modifier = Modifier.padding(paddingValue))
     }
@@ -24,6 +29,6 @@ fun CartScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun CartScreenPreview() {
     ShoppingCartTheme {
-        CartScreen()
+        CartScreen({})
     }
 }

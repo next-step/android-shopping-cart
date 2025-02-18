@@ -13,4 +13,19 @@ object TypoTokens {
         fontWeight = FontWeight.Bold,
         fontSize = 16.sp,
     )
+
+    val Normal20 = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 20.sp,
+    )
+
+    val Bold20 = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+    )
+
+    val Bold24 = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+    )
 }

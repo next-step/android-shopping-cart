@@ -30,7 +30,10 @@ fun CatalogContent(
             .padding(horizontal = 16.dp)
             .fillMaxSize(),
     ) {
-        items(products) { product ->
+        items(
+            items = products,
+            key = { it.id },
+        ) { product ->
             ProductGridItem(
                 product = product,
                 onClickItem = navigateToDetail,

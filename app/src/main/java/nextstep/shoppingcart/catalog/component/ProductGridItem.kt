@@ -28,7 +28,7 @@ fun ProductGridItem(
     Column(modifier = modifier.clickable { onClickItem.invoke(product) }) {
         AsyncImage(
             model = getUrlIfNotPreview(product.imageUrl),
-            contentDescription = null,
+            contentDescription = "${product.name} image",
             contentScale = ContentScale.Crop,
             placeholder = painterResource(R.drawable.woori),
             modifier = Modifier

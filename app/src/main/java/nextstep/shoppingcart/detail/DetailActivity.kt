@@ -23,10 +23,13 @@ class DetailActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 if (product != null) {
-                    DetailScreen(product)
+                    DetailScreen(
+                        product = product,
+                        popBackstack = { finish() },
+                    )
                 } else {
                     Box(modifier = Modifier.fillMaxSize()) {
-                        Text("Empty")
+                        Text("Empty View") // 임시 Empty View
                     }
                 }
             }
