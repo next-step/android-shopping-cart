@@ -28,7 +28,7 @@ import coil3.compose.AsyncImage
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.Black33
 import nextstep.shoppingcart.ui.theme.Blue50
-import nextstep.shoppingcart.ui.theme.GrayA
+import nextstep.shoppingcart.ui.theme.Gray10
 import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
 import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 import nextstep.shoppingcart.R
@@ -60,7 +60,7 @@ fun ProductDetailScreen(
                 .fillMaxWidth()
                 .padding(top = 18.dp)
                 .height(1.dp)
-                .background(GrayA),
+                .background(Gray10),
         )
         PriceSector(
             price = product.price,
