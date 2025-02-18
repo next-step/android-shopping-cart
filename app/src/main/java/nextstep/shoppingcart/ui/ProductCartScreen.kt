@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -12,9 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.model.CartItem
+import nextstep.shoppingcart.data.model.Product
 import nextstep.shoppingcart.data.repository.CartRepository
+import nextstep.shoppingcart.data.repository.ProductRepository
 import nextstep.shoppingcart.ui.component.BackNavigationAppBar
-import nextstep.shoppingcart.ui.component.ProductCartContent
+import nextstep.shoppingcart.ui.component.BlueButtonBottomBar
+import nextstep.shoppingcart.ui.component.ProductCartList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -24,9 +29,41 @@ internal fun ProductCartScreen(
 ) {
     var cartItems by remember { mutableStateOf(CartRepository.cartItems) }
     val totalPrice = remember(cartItems) { CartRepository.totalPrice }
+    val orderButtonEnabled: Boolean by remember(totalPrice) { derivedStateOf { totalPrice > 0 } }
 
-    Scaffold(
+    ProductCartScreen(
         modifier = modifier.fillMaxSize(),
+        cartItems = cartItems,
+        totalPrice = totalPrice,
+        orderButtonEnabled = orderButtonEnabled,
+        onBackButtonClick = onBackButtonClick,
+        onRemoveClick = {
+            cartItems = CartRepository.removeAll(it)
+        },
+        onIncreaseClick = {
+            cartItems = CartRepository.addOne(it)
+        },
+        onDecreaseClick = {
+            cartItems = CartRepository.removeOne(it)
+        },
+        onOrderClick = { /*todo*/ },
+    )
+}
+
+@Composable
+internal fun ProductCartScreen(
+    cartItems: List<CartItem>,
+    totalPrice: Int,
+    orderButtonEnabled: Boolean,
+    onBackButtonClick: () -> Unit,
+    onRemoveClick: (Product) -> Unit,
+    onIncreaseClick: (Product) -> Unit,
+    onDecreaseClick: (Product) -> Unit,
+    onOrderClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Scaffold(
+        modifier = modifier,
         topBar = {
             BackNavigationAppBar(
                 title = stringResource(R.string.shopping_cart),
@@ -34,31 +71,47 @@ internal fun ProductCartScreen(
             )
         },
         content = { innerPadding ->
-            ProductCartContent(
+            ProductCartList(
                 modifier = Modifier.padding(innerPadding),
                 cartItems = cartItems,
-                totalPrice = totalPrice,
-                onRemoveClick = {
-                    cartItems = CartRepository.removeAll(it)
-                },
-                onIncreaseClick = {
-                    cartItems = CartRepository.addOne(it)
-                },
-                onDecreaseClick = {
-                    cartItems = CartRepository.removeOne(it)
-                },
+                onRemoveClick = onRemoveClick,
+                onIncreaseClick = onIncreaseClick,
+                onDecreaseClick = onDecreaseClick,
+            )
+        },
+        bottomBar = {
+            BlueButtonBottomBar(
+                text = stringResource(R.string.cart_total_price_format, totalPrice),
+                enabled = orderButtonEnabled,
+                onClick = onOrderClick
             )
         }
     )
 }
 
-
 @Preview
 @Composable
 private fun ProductCartScreenPreview() {
+    val cartItems by remember {
+        mutableStateOf(
+            listOf(
+                CartItem(
+                    product = ProductRepository.getProductById(1),
+                    count = 2,
+                ),
+            )
+        )
+    }
     ShoppingCartTheme {
         ProductCartScreen(
-            onBackButtonClick = {}
+            cartItems = cartItems,
+            totalPrice = cartItems.sumOf { it.totalPrice },
+            orderButtonEnabled = true,
+            onBackButtonClick = { },
+            onRemoveClick = { },
+            onIncreaseClick = { },
+            onDecreaseClick = { },
+            onOrderClick = { },
         )
     }
 }

@@ -9,11 +9,11 @@ import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.data.model.Product
-import nextstep.shoppingcart.ui.component.ProductListContent
+import nextstep.shoppingcart.ui.component.ProductList
 import org.junit.Rule
 import org.junit.Test
 
-class ProductListContentTest {
+class ProductListTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -48,7 +48,7 @@ class ProductListContentTest {
     @Test
     fun `주어진_상품의_갯수만큼_표시된다`() {
         composeTestRule.setContent {
-            ProductListContent(
+            ProductList(
                 modifier = Modifier.testTag("ProductListContent"),
                 productList = productList,
                 onProductClick = {}
@@ -66,7 +66,7 @@ class ProductListContentTest {
         var selectedProduct: Product? = null
 
         composeTestRule.setContent {
-            ProductListContent(
+            ProductList(
                 modifier = Modifier.testTag("ProductListContent"),
                 productList = productList,
                 onProductClick = {

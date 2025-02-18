@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.data.model.Product
 import nextstep.shoppingcart.data.repository.ProductRepository
-import nextstep.shoppingcart.ui.component.ProductListContent
+import nextstep.shoppingcart.ui.component.ProductList
 import nextstep.shoppingcart.ui.component.ProductListTopAppBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -28,7 +28,7 @@ internal fun ProductListScreen(
             )
         },
         content = { innerPadding ->
-            ProductListContent(
+            ProductList(
                 modifier = Modifier.padding(innerPadding),
                 productList = productList,
                 onProductClick = onItemClick

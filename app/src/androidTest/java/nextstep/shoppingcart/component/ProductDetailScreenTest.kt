@@ -6,12 +6,12 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.data.model.Product
-import nextstep.shoppingcart.ui.component.ProductDetailContent
+import nextstep.shoppingcart.ui.ProductDetailScreen
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class ProductDetailContentTest {
+class ProductDetailScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -29,9 +29,10 @@ class ProductDetailContentTest {
     fun setUp() {
         isButtonClicked = false
         composeTestRule.setContent {
-            ProductDetailContent(
+            ProductDetailScreen(
                 product = product,
-                onAddCartClick = { isButtonClicked = true }
+                onBackButtonClick = {},
+                onAddCartClick = { isButtonClicked = true },
             )
         }
     }

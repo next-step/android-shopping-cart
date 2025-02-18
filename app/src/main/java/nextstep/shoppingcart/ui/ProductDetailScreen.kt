@@ -11,6 +11,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.model.Product
 import nextstep.shoppingcart.data.repository.ProductRepository
 import nextstep.shoppingcart.ui.component.BackNavigationAppBar
+import nextstep.shoppingcart.ui.component.BlueButtonBottomBar
 import nextstep.shoppingcart.ui.component.ProductDetailContent
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -33,7 +34,12 @@ internal fun ProductDetailScreen(
             ProductDetailContent(
                 modifier = Modifier.padding(innerPadding),
                 product = product,
-                onAddCartClick = onAddCartClick
+            )
+        },
+        bottomBar = {
+            BlueButtonBottomBar(
+                text = stringResource(R.string.add_shopping_cart),
+                onClick = { onAddCartClick(product) },
             )
         }
     )

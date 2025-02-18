@@ -22,6 +22,18 @@ class ProductCartScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
+    private val orderButtonNode
+        get() = composeTestRule
+            .onNodeWithText("주문하기", substring = true)
+
+    private val cartItemNode
+        get() = composeTestRule
+            .onNodeWithTag("ProductCartItem")
+
+    private val decreaseButtonNode
+        get() = composeTestRule
+            .onNodeWithTag("상품1_decrease_button")
+
     private val product =
         Product(
             id = 1,
@@ -67,8 +79,7 @@ class ProductCartScreenTest {
             .onNodeWithTag("상품1_remove_button")
             .performClick()
 
-        composeTestRule
-            .onNodeWithTag("ProductCartItem")
+        cartItemNode
             .assertIsNotDisplayed()
     }
 
@@ -105,8 +116,7 @@ class ProductCartScreenTest {
                 )
             }
 
-        composeTestRule
-            .onNodeWithTag("상품1_decrease_button")
+        decreaseButtonNode
             .performClick()
 
         composeTestRule
@@ -125,12 +135,10 @@ class ProductCartScreenTest {
                 )
             }
 
-        composeTestRule
-            .onNodeWithTag("상품1_decrease_button")
+        decreaseButtonNode
             .performClick()
 
-        composeTestRule
-            .onNodeWithTag("ProductCartItem")
+        cartItemNode
             .assertIsNotDisplayed()
     }
 
@@ -161,8 +169,7 @@ class ProductCartScreenTest {
                 )
             }
 
-        composeTestRule
-            .onNodeWithText("주문하기(0원)")
+        orderButtonNode
             .assertIsNotEnabled()
     }
 
@@ -177,8 +184,7 @@ class ProductCartScreenTest {
                 )
             }
 
-        composeTestRule
-            .onNodeWithText("주문하기(2,000원)")
+        orderButtonNode
             .assertIsEnabled()
     }
 }

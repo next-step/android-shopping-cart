@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -16,7 +18,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -70,6 +72,7 @@ internal fun ProductCartItem(
         ) {
             ProductImage(
                 url = cartItem.productImageUrl,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .width(136.dp)
                     .height(84.dp)
@@ -94,7 +97,6 @@ internal fun ProductCartItem(
                     cartItem = cartItem,
                     onIncreaseClick = { onIncreaseClick(cartItem.product) },
                     onDecreaseClick = { onDecreaseClick(cartItem.product) },
-                    onRemoveClick = { onRemoveClick(cartItem.product) },
                 )
             }
         }
@@ -140,7 +142,6 @@ private fun ProductCartItemTitle(
 @Composable
 private fun ProductCounter(
     cartItem: CartItem,
-    onRemoveClick: () -> Unit,
     onIncreaseClick: (Product) -> Unit,
     onDecreaseClick: (Product) -> Unit,
     modifier: Modifier = Modifier
@@ -155,20 +156,18 @@ private fun ProductCounter(
             textAlign = TextAlign.Center
         )
     }
+    val buttonSize = 42.dp
     Row(
         modifier = modifier
     ) {
-        TextButton(
+        Box(
             modifier = Modifier
-                .size(42.dp)
-                .testTag("${cartItem.productName}_decrease_button"),
-            onClick = {
-                if (cartItem.count > 1) {
+                .size(buttonSize)
+                .testTag("${cartItem.productName}_decrease_button")
+                .clickable {
                     onDecreaseClick(cartItem.product)
-                } else {
-                    onRemoveClick()
-                }
-            }
+                },
+            contentAlignment = Alignment.Center
         ) {
             Text(
                 text = stringResource(R.string.decrease_symbol),
@@ -176,7 +175,7 @@ private fun ProductCounter(
             )
         }
         Box(
-            modifier = Modifier.size(42.dp)
+            modifier = Modifier.sizeIn(minWidth = buttonSize, minHeight = buttonSize)
         ) {
             Text(
                 modifier = Modifier
@@ -187,11 +186,12 @@ private fun ProductCounter(
                 text = cartItem.count.toString(),
             )
         }
-        TextButton(
+        Box(
             modifier = Modifier
-                .size(42.dp)
-                .testTag("${cartItem.productName}_increase_button"),
-            onClick = { onIncreaseClick(cartItem.product) }
+                .size(buttonSize)
+                .testTag("${cartItem.productName}_increase_button")
+                .clickable { onIncreaseClick(cartItem.product) },
+            contentAlignment = Alignment.Center,
         ) {
             Text(
                 text = stringResource(R.string.increase_symbol),

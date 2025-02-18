@@ -14,12 +14,13 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 internal fun ProductImage(
     url: String,
+    contentScale: ContentScale,
     modifier: Modifier = Modifier
 ) {
     SubcomposeAsyncImage(
         modifier = modifier,
         model = url,
-        contentScale = ContentScale.Crop,
+        contentScale = contentScale,
         contentDescription = url,
         loading = {
             CircularProgressIndicator()
@@ -37,6 +38,6 @@ internal fun ProductImage(
 @Composable
 private fun ProductImagePreview() {
     ShoppingCartTheme {
-        ProductImage("")
+        ProductImage("", ContentScale.Crop)
     }
 }

@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.data.model.Product
 
 @Composable
-internal fun ProductListContent(
+internal fun ProductList(
     productList: List<Product>,
     onProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
@@ -41,7 +41,7 @@ internal fun ProductListContent(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListContentPreview() {
-    ProductListContent(
+    ProductList(
         productList = (0..100).map {
             Product(
                 id = it,
