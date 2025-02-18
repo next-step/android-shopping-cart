@@ -2,7 +2,7 @@ package nextstep.shoppingcart
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.toMutableStateList
-import androidx.compose.ui.test.isDisplayed
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -37,8 +37,7 @@ class CartListScreenTest {
         //then
         composeTestRule
             .onNodeWithText("주문하기(${cartList.sumOf { it.totalPrice }.getFormattedPrice()})")
-            .assertExists()
-            .isDisplayed()
+            .assertIsDisplayed()
     }
 
     @Test

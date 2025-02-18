@@ -1,5 +1,6 @@
 package nextstep.shoppingcart
 
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.model.Product
@@ -28,7 +29,9 @@ class ProductItemTest {
         }
 
         //then
-        composeTestRule.onNodeWithText("test").assertExists()
+        composeTestRule
+            .onNodeWithText("test")
+            .assertIsDisplayed()
     }
 
     @Test
@@ -47,6 +50,8 @@ class ProductItemTest {
         }
 
         //then
-        composeTestRule.onNodeWithText("12000").assertExists()
+        composeTestRule
+            .onNodeWithText("12000")
+            .assertIsDisplayed()
     }
 }

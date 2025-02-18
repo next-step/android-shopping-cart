@@ -32,7 +32,6 @@ class CartAmountTest {
         //then
         composeTestRule
             .onNodeWithContentDescription("${cart.product.id}_add_icon")
-            .assertExists()
             .assertIsDisplayed()
     }
 
@@ -51,7 +50,6 @@ class CartAmountTest {
         //then
         composeTestRule
             .onNodeWithContentDescription("${cart.product.id}_remove_icon")
-            .assertExists()
             .assertIsDisplayed()
     }
 
@@ -70,7 +68,6 @@ class CartAmountTest {
         //then
         composeTestRule
             .onNodeWithText("5")
-            .assertExists()
             .assertIsDisplayed()
     }
 

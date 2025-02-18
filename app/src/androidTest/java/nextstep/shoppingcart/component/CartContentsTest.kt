@@ -31,7 +31,6 @@ class CartContentsTest {
         //then
         composeTestRule
             .onNodeWithText("${cart.totalPrice.getFormattedPrice()}원")
-            .assertExists()
             .assertIsDisplayed()
     }
 }

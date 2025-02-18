@@ -32,7 +32,6 @@ class CartTitleTest {
         //then
         composeTestRule
             .onNodeWithContentDescription("${cart.product.id}_delete_icon")
-            .assertExists()
             .assertIsDisplayed()
 
     }
@@ -52,7 +51,6 @@ class CartTitleTest {
         //then
         composeTestRule
             .onNodeWithText("상품2")
-            .assertExists()
             .assertIsDisplayed()
     }
 
