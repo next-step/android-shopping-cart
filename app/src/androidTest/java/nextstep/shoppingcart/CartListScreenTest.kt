@@ -43,16 +43,12 @@ class CartListScreenTest {
     @Test
     fun `주어진_CartList에서_특정상품의_갯수를_추가하였을때_올바르게_추가되어야_한다`() {
         //given
-        var cartListState = mutableStateListOf<Cart>().apply {
-            addAll(
-                listOf(
-                    Cart(Product(1, "상품1", 1000, ""), 1),
-                    Cart(Product(2, "상품2", 2000, ""), 2),
-                    Cart(Product(3, "상품3", 3000, ""), 3),
-                    Cart(Product(4, "상품4", 4000, ""), 4),
-                )
-            )
-        }
+        var cartListState = mutableStateListOf(
+            Cart(Product(1, "상품1", 1000, ""), 1),
+            Cart(Product(2, "상품2", 2000, ""), 2),
+            Cart(Product(3, "상품3", 3000, ""), 3),
+            Cart(Product(4, "상품4", 4000, ""), 4),
+        )
         val selectCart = cartListState[0]
 
         composeTestRule.setContent {
@@ -78,15 +74,11 @@ class CartListScreenTest {
     @Test
     fun `주어진_CartList에서_특정상품의_갯수를_제거하였을때_올바르게_제거되어야_한다`() {
         //given
-        var cartListState = mutableStateListOf<Cart>().apply {
-            addAll(
-                listOf(
-                    Cart(Product(1, "상품1", 1000, ""), 1),
-                    Cart(Product(2, "상품2", 2000, ""), 2),
-                    Cart(Product(3, "상품3", 3000, ""), 3),
-                )
-            )
-        }
+        var cartListState = mutableStateListOf(
+            Cart(Product(1, "상품1", 1000, ""), 1),
+            Cart(Product(2, "상품2", 2000, ""), 2),
+            Cart(Product(3, "상품3", 3000, ""), 3),
+        )
         val selectCart = cartListState[1]
 
         composeTestRule.setContent {
@@ -114,14 +106,10 @@ class CartListScreenTest {
     @Test
     fun `주어진_CartList에서_특정상품의_갯수를_1개인_상태에서_제거하였을때_삭제되어야_한다`() {
         //given
-        var cartListState = mutableStateListOf<Cart>().apply {
-            addAll(
-                listOf(
-                    Cart(Product(1, "상품1", 1000, ""), 1),
-                    Cart(Product(2, "상품2", 2000, ""), 2),
-                )
-            )
-        }
+        var cartListState = mutableStateListOf(
+            Cart(Product(1, "상품1", 1000, ""), 1),
+            Cart(Product(2, "상품2", 2000, ""), 2),
+        )
         val selectCart = cartListState[0]
 
         composeTestRule.setContent {
@@ -146,17 +134,13 @@ class CartListScreenTest {
     @Test
     fun `주어진_CartList에서_특정상품을_삭제하면_리스트에서_삭제되어야_한다`() {
         //given
-        var cartListState = mutableStateListOf<Cart>().apply {
-            addAll(
-                listOf(
-                    Cart(Product(1, "상품1", 1000, ""), 1),
-                    Cart(Product(2, "상품2", 2000, ""), 2),
-                    Cart(Product(3, "상품3", 3000, ""), 3),
-                    Cart(Product(4, "상품4", 4000, ""), 4),
-                    Cart(Product(5, "상품5", 5000, ""), 5),
-                )
-            )
-        }
+        var cartListState = mutableStateListOf(
+            Cart(Product(1, "상품1", 1000, ""), 1),
+            Cart(Product(2, "상품2", 2000, ""), 2),
+            Cart(Product(3, "상품3", 3000, ""), 3),
+            Cart(Product(4, "상품4", 4000, ""), 4),
+            Cart(Product(5, "상품5", 5000, ""), 5),
+        )
         val selectCart = cartListState[3]
 
         composeTestRule.setContent {
