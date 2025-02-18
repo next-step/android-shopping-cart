@@ -1,12 +1,14 @@
 package nextstep.shoppingcart.util
 
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 
 
 object CartUtil {
-    private val _items: MutableList<Cart> = mutableListOf()
-    val items: List<Cart> get() = _items.toList()
+    private val _items = mutableStateListOf<Cart>()
+    val items: SnapshotStateList<Cart> get() = _items
 
     val totalPrice: Int get() = _items.sumOf { it.totalPrice }
 
@@ -37,5 +39,9 @@ object CartUtil {
     fun removeAll(product: Product): List<Cart> {
         _items.removeAll { it.product == product }
         return items
+    }
+
+    fun getProductCount(product: Product): Int {
+        return items.find { it.product.id == product.id }?.count ?: 0
     }
 }
