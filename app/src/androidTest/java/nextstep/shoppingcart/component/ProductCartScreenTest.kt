@@ -2,7 +2,9 @@ package nextstep.shoppingcart.component
 
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
@@ -148,5 +150,35 @@ class ProductCartScreenTest {
         composeTestRule
             .onAllNodesWithTag("ProductCartItem")
             .assertCountEquals(3)
+    }
+
+    @Test
+    fun `담겨진_상품이_없으면_주문하기_버튼이_비활성화_된다`() {
+        composeTestRule
+            .setContent {
+                ProductCartScreen(
+                    onBackButtonClick = { }
+                )
+            }
+
+        composeTestRule
+            .onNodeWithText("주문하기(0원)")
+            .assertIsNotEnabled()
+    }
+
+    @Test
+    fun `담겨진_상품이_있으면_주문하기_버튼이_활성화_된다`() {
+        CartRepository.addOne(product)
+
+        composeTestRule
+            .setContent {
+                ProductCartScreen(
+                    onBackButtonClick = { }
+                )
+            }
+
+        composeTestRule
+            .onNodeWithText("주문하기(2,000원)")
+            .assertIsEnabled()
     }
 }
