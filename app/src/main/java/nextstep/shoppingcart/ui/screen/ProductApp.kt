@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.repository.CartRepository
@@ -39,7 +40,7 @@ fun ProductApp() {
 
     val fakeItemList = FakeData.products
     var seletedProduct by remember { mutableStateOf<Product?>(null) }
-
+    var cartItemList by remember { mutableStateOf<List<CartItem>>(emptyList())}
 
     Scaffold(
         topBar = {
@@ -91,6 +92,7 @@ fun ProductApp() {
                     product = seletedProduct!!,
                     addProductClick = { product ->
                         CartRepository.addOne(product)
+                        cartItemList = CartRepository.items
                         navController.navigate(ProductDestination.ShoppingCart.name)
                     }
                 )
@@ -98,7 +100,21 @@ fun ProductApp() {
             composable(
                 route = ProductDestination.ShoppingCart.name,
             ) { backStackEntry ->
-                ShoppingCartScreen()
+                ShoppingCartScreen(
+                    cartItemList = cartItemList,
+                    onMinusCartItem = { cartItem ->
+                        CartRepository.removeOne(cartItem.product)
+                        cartItemList = CartRepository.items
+                    },
+                    onPlusCartItem = { cartItem ->
+                        CartRepository.addOne(cartItem.product)
+                        cartItemList = CartRepository.items
+                    },
+                    onCartItemDelete = { cartItem ->
+                        CartRepository.removeAll(cartItem.product)
+                        cartItemList = CartRepository.items
+                    }
+                )
             }
         }
     }
