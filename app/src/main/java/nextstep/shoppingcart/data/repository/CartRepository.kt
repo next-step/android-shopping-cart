@@ -15,8 +15,10 @@ class CartRepository(
     private val cartLocalDataSource: CartLocalDataSource,
 ) {
 
-    fun getItems(): Flow<CartItem> = cartLocalDataSource.items.map {
-        it.toUi()
+    fun getItems(): Flow<List<CartItem>> = cartLocalDataSource.itemsFlow.map { items ->
+        items.map {
+            it.toUi()
+        }
     }
 
     fun addOne(product: Product) {
@@ -29,5 +31,11 @@ class CartRepository(
 
     fun removeAll(product: Product) {
         cartLocalDataSource.removeAll(product.toEntity())
+    }
+
+    companion object {
+        fun inject(): CartRepository {
+            return CartRepository(CartLocalDataSource())
+        }
     }
 }
