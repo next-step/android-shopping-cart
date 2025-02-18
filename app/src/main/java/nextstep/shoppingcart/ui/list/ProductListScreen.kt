@@ -28,6 +28,7 @@ import nextstep.shoppingcart.designsystem.theme.TopBarTextColor
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.navigation.RouteType
 import nextstep.shoppingcart.ui.list.component.ProductItem
+import nextstep.shoppingcart.util.CartUtil
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,6 +36,7 @@ import nextstep.shoppingcart.ui.list.component.ProductItem
 fun ProductListScreen(
     modifier: Modifier = Modifier,
     productList: List<Product> = emptyList(),
+    cartUtil: CartUtil = CartUtil,
     onRoute: (RouteType) -> Unit = {}
 ) {
     Scaffold(
@@ -75,7 +77,10 @@ fun ProductListScreen(
             ) { item ->
                 ProductItem(
                     item = item,
-                    onClick = { onRoute(RouteType.ToDetail(item)) }
+                    count = cartUtil.getProductCount(item),
+                    onClick = { onRoute(RouteType.ToDetail(item)) },
+                    onAdd = cartUtil::addOne,
+                    onRemove = cartUtil::removeOne
                 )
             }
         }
