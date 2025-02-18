@@ -15,6 +15,7 @@ import nextstep.shoppingcart.model.products
 @Composable
 fun ProductsList(
     products: List<Product>,
+    onClickProductItem: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -27,6 +28,7 @@ fun ProductsList(
         items(products) { item ->
             ProductsItem(
                 product = item,
+                onClick = onClickProductItem
             )
         }
     }
@@ -36,6 +38,7 @@ fun ProductsList(
 @Composable
 private fun ProductsListPreview() {
     ProductsList(
-        products = products
+        products = products,
+        onClickProductItem = {}
     )
 }

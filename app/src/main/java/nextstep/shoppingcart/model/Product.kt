@@ -9,6 +9,14 @@ data class Product(
 ) {
     val formattedPrice: String
         get() = String.format(Locale.getDefault(), "%,d원", price)
+
+    companion object {
+        val mock = Product(
+            imageUrl = "",
+            name = "상품 이름입니다",
+            price = 20000
+        )
+    }
 }
 
 val products: List<Product> = listOf(
