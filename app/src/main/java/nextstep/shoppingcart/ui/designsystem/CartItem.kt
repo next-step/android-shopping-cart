@@ -104,7 +104,7 @@ fun CartListItem(
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = stringResource(R.string.product_price_format, cartItem.product.price),
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.End,
                 )
                 QuantityHandler(
