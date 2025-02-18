@@ -103,7 +103,7 @@ class ProductDetailScreenTest {
             .assertIsDisplayed()
 
         composeTestRule
-            .onNodeWithText("14000원")
+            .onNodeWithText("14,000원")
             .assertIsDisplayed()
     }
 
