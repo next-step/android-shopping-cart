@@ -74,7 +74,7 @@ fun ProductDetailScreen(
 }
 
 @Composable
-fun TitleSector(
+private fun TitleSector(
     title: String,
     modifier: Modifier = Modifier,
 ) {
@@ -88,7 +88,7 @@ fun TitleSector(
 }
 
 @Composable
-fun PriceSector(
+private fun PriceSector(
     price: Int,
     modifier: Modifier = Modifier,
     formatter: MoneyFormatter = DefaultMoneyFormatter,
