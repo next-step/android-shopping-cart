@@ -46,10 +46,12 @@ fun CartListItem(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.outline,
             )
-            .padding(18.dp),
-        ) {
+            // IconButton에 의해 상단에 12dp( (48 - 24) / 2 )의 padding이 생기는데, 이것을 고려하여 top padding 18dp에서 12dp를 빼줬습니다.
+            .padding(start = 18.dp, end = 18.dp, top = 6.dp, bottom = 18.dp),
+    ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -130,7 +132,7 @@ private fun CartListItemPreview() {
                 product = Product(
                     id = "Ronell",
                     imageUrl = "Stephani",
-                    name = "[든든] 동원 스위트콘 스위트콘 스위트콘 스위트콘",
+                    name = "[든든] 동원 스위트콘 스위트콘",
                     price = 999_999_999
                 ), count = 999_999
             ),
