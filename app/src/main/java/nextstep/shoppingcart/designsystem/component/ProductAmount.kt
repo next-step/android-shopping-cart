@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.cart.component
+package nextstep.shoppingcart.designsystem.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -24,11 +24,12 @@ import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 
 @Composable
-fun CartAmount(
-    item: Cart,
+fun ProductAmount(
+    item: Product,
+    count: Int,
     modifier: Modifier = Modifier,
-    onAdd: (Cart) -> Unit = {},
-    onRemove: (Cart) -> Unit = {}
+    onAdd: (Product) -> Unit = {},
+    onRemove: (Product) -> Unit = {}
 ) {
     Row(
         modifier.fillMaxWidth(),
@@ -39,14 +40,14 @@ fun CartAmount(
         IconButton(onClick = { onRemove(item) }) {
             Icon(
                 painterResource(R.drawable.ic_remove),
-                contentDescription = "${item.product.id}_remove_icon"
+                contentDescription = "${item.id}_remove_icon"
             )
         }
         Text(
-            text = item.count.toString(),
+            text = count.toString(),
             modifier = Modifier
                 .weight(1f, fill = false)
-                .setContentDescription("${item.product.id}_cart_count"),
+                .setContentDescription("${item.id}_cart_count"),
             textAlign = TextAlign.Center,
             fontSize = 22.sp,
             color = Color.Black,
@@ -56,7 +57,7 @@ fun CartAmount(
         IconButton(onClick = { onAdd(item) }) {
             Icon(
                 Icons.Default.Add,
-                contentDescription = "${item.product.id}_add_icon"
+                contentDescription = "${item.id}_add_icon"
             )
         }
     }
@@ -70,6 +71,6 @@ private fun CartAmountPreview() {
         4
     )
     ShoppingCartTheme {
-        CartAmount(cart)
+        ProductAmount(cart.product, count = cart.count)
     }
 }

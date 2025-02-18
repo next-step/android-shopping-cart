@@ -7,12 +7,12 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.cart.component.CartAmount
+import nextstep.shoppingcart.designsystem.component.ProductAmount
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
-class CartAmountTest {
+class ProductAmountTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -26,7 +26,7 @@ class CartAmountTest {
         )
         //when
         composeTestRule.setContent {
-            CartAmount(cart)
+            ProductAmount(item = cart.product, count = cart.count)
         }
 
         //then
@@ -44,7 +44,7 @@ class CartAmountTest {
         )
         //when
         composeTestRule.setContent {
-            CartAmount(cart)
+            ProductAmount(item = cart.product, count = cart.count)
         }
 
         //then
@@ -62,7 +62,7 @@ class CartAmountTest {
         )
         //when
         composeTestRule.setContent {
-            CartAmount(cart)
+            ProductAmount(item = cart.product, count = cart.count)
         }
 
         //then
@@ -80,7 +80,10 @@ class CartAmountTest {
         )
         var isSendAddEvent = false
         composeTestRule.setContent {
-            CartAmount(cart, onAdd = { isSendAddEvent = true })
+            ProductAmount(
+                item = cart.product,
+                count = cart.count,
+                onAdd = { isSendAddEvent = true })
         }
 
         //when
@@ -102,7 +105,10 @@ class CartAmountTest {
         )
         var isSendRemoveEvent = false
         composeTestRule.setContent {
-            CartAmount(cart, onRemove = { isSendRemoveEvent = true })
+            ProductAmount(
+                item = cart.product,
+                count = cart.count,
+                onRemove = { isSendRemoveEvent = true })
         }
 
         //when
