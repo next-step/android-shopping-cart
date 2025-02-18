@@ -52,7 +52,7 @@ fun BasketScreen(
 
     // Q. 화면이 파괴되면 Composable도 recomposition에서 제외되므로, Fragment에서 처럼 repeatOnLifecycle 등으로 Lifecycle을 지정하지 않아도 되나요?
     LaunchedEffect(Unit) {
-        cartRepository.getItems().onEach {
+        cartRepository.getItems().collect {
             state = state.copy(cartItems = it)
         }
     }
