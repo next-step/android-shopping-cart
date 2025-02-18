@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.dummyProducts
@@ -18,7 +17,7 @@ class ProductListActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 val updatedTime by remember { Cart.updateTime }
-                val items by remember(updatedTime) { mutableStateOf(dummyProducts.toProductWithCartCount()) }
+                val items = remember(updatedTime) { dummyProducts.toProductWithCartCount() }
 
                 ProductListScreen(items)
             }

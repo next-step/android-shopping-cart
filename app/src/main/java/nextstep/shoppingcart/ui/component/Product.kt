@@ -75,8 +75,7 @@ private fun ProductThumbnail(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier,
-        contentAlignment = Alignment.BottomEnd
+        modifier = modifier
     ) {
         Thumbnail(
             id = model.id,
@@ -88,7 +87,11 @@ private fun ProductThumbnail(
         )
 
         if (count == 0) {
-            Box(modifier = Modifier.padding(12.dp)) {
+            Box(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .align(Alignment.BottomEnd)
+            ) {
                 Icon(
                     modifier = Modifier
                         .clip(shape = CircleShape)
@@ -103,9 +106,8 @@ private fun ProductThumbnail(
         } else {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 12.dp),
-                contentAlignment = Alignment.Center
+                    .padding(bottom = 12.dp)
+                    .align(Alignment.BottomCenter),
             ) {
 
                 CountControlButton(

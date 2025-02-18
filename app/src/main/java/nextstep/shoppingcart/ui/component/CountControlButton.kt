@@ -43,11 +43,10 @@ fun CountControlButton(
     require(count >= 0) { "count must be zero or positive" }
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .testTag("countControlButton")
             .clip(shape = RoundedCornerShape(size = 4.dp))
-            .background(color = Color.White)
-            .then(modifier),
+            .background(color = Color.White),
 
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -88,17 +87,12 @@ fun CountControlButton(
 @Composable
 private fun CountControlButtonsPreview() {
     ShoppingCartTheme {
-        Column(
-            modifier = Modifier.padding(10.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
-        ) {
-            var count by remember { mutableIntStateOf(3) }
+        var count by remember { mutableIntStateOf(3) }
 
-            CountControlButton(
-                count = count,
-                onAddClick = { count = count.inc() },
-                onRemoveClick = { count = count.dec() },
-            )
-        }
+        CountControlButton(
+            count = count,
+            onAddClick = { count = count.inc() },
+            onRemoveClick = { count = count.dec() },
+        )
     }
 }
