@@ -40,7 +40,7 @@ class CartLocalDataSource {
                 if (item.count > 1) {
                     items.map { current ->
                         if (current.product == product) {
-                            current.copy(count = current.count + 1)
+                            current.copy(count = current.count - 1)
                         } else {
                             current
                         }
