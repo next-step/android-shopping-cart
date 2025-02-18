@@ -41,7 +41,4 @@ object CartUtil {
         return items
     }
 
-    fun getProductCount(product: Product): Int {
-        return items.find { it.product.id == product.id }?.count ?: 0
-    }
 }

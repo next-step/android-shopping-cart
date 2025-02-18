@@ -77,7 +77,7 @@ fun ProductListScreen(
             ) { item ->
                 ProductItem(
                     item = item,
-                    count = cartUtil.getProductCount(item),
+                    count = cartUtil.items.find { it.product.id == item.id }?.count ?: 0,
                     onClick = { onRoute(RouteType.ToDetail(item)) },
                     onAdd = cartUtil::addOne,
                     onRemove = cartUtil::removeOne
