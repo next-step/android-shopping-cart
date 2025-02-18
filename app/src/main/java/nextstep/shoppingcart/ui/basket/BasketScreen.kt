@@ -34,7 +34,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.repository.CartRepository
@@ -56,10 +55,12 @@ fun BasketScreen(
 
     // 초기 로딩 시간이 0.5초 보다 오래 걸리는 경우에만 로딩바 보여주기
     LaunchedEffect(state.isInitialLoading) {
-        delay(500L)
-        state = state.copy(
-            isLoadingShow = true,
-        )
+        if (state.isInitialLoading) {
+            delay(500L)
+            state = state.copy(
+                isLoadingShow = true,
+            )
+        }
     }
 
     // Q. 화면이 파괴되면 Composable도 recomposition에서 제외되므로, Fragment에서 처럼 repeatOnLifecycle 등으로 Lifecycle을 지정하지 않아도 되나요?
