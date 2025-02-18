@@ -3,15 +3,12 @@ package nextstep.shoppingcart.ui.screen
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
@@ -21,10 +18,9 @@ import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.ui.screen.component.CenterAppBar
 import nextstep.shoppingcart.ui.screen.component.BackAppBar
-import androidx.compose.runtime.setValue
 import nextstep.shoppingcart.ui.screen.component.BackIconButton
+import nextstep.shoppingcart.ui.screen.component.CenterAppBar
 
 enum class ProductDestination(@StringRes val title: Int) {
     ProductList(title = R.string.appbar_product_title),
