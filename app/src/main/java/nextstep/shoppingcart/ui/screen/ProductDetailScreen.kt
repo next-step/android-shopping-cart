@@ -18,21 +18,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.screen.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Black33
 import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.Gray10
 import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
 import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
-import nextstep.shoppingcart.R
-import nextstep.shoppingcart.ui.screen.component.ProductImage
 
 @Composable
 fun ProductDetailScreen(

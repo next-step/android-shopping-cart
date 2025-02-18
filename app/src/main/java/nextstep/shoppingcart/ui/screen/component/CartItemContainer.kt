@@ -201,15 +201,6 @@ fun QuantityAdjusButton(
 
 @Preview(showBackground = true)
 @Composable
-private fun ProductImagePreview() {
-    ProductImage(
-        imageUrl = "https://www.picsum.photos/200",
-        contentDescription = "Cart Product Image",
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
 private fun CartItemInfoPreview() {
     CartItemInfo(
         price = 10000,
