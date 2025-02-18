@@ -82,7 +82,6 @@ fun ProductDetailScreen(
                     modifier = Modifier
                         .padding(contentPadding),
                     product = uiState.product,
-                    navigateToCart = { id -> navigateToCart(id) }
                 )
             }
         }

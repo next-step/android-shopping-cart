@@ -22,7 +22,6 @@ import nextstep.shoppingcart.model.Product
 @Composable
 fun ProductDetailContent(
     product: Product,
-    navigateToCart: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.verticalScroll(rememberScrollState())) {
@@ -59,6 +58,5 @@ private fun ProductDetailContentPreview() {
             price = "10000",
             productId = "id1"
         ),
-        {}
     )
 }
