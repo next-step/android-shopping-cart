@@ -36,6 +36,7 @@ import kotlinx.coroutines.flow.onEach
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.designsystem.CartListItem
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -153,7 +154,55 @@ private fun BasketTopBar(
 private fun BasketScreenPreview() {
     ShoppingCartTheme {
         BasketScreen(
-            state = BasketState(),
+            state = BasketState(
+                cartItems = listOf(
+                    CartItem(
+                        product = Product(
+                            id = "Ilene",
+                            imageUrl = "Linden",
+                            name = "Ignacio",
+                            price = 8650
+                        ),
+                        count = 9757,
+                    ),
+                    CartItem(
+                        product = Product(
+                            id = "Stacy",
+                            imageUrl = "Rhyan",
+                            name = "Lester",
+                            price = 3533
+                        ),
+                        count = 3012,
+                    ),
+                    CartItem(
+                        product = Product(
+                            id = "A",
+                            imageUrl = "Rhyan",
+                            name = "Lester",
+                            price = 3533
+                        ),
+                        count = 3012,
+                    ),
+                    CartItem(
+                        product = Product(
+                            id = "B",
+                            imageUrl = "Rhyan",
+                            name = "Lester",
+                            price = 3533
+                        ),
+                        count = 3012,
+                    ),
+                    CartItem(
+                        product = Product(
+                            id = "C",
+                            imageUrl = "Rhyan",
+                            name = "Lester",
+                            price = 3533
+                        ),
+                        count = 3012,
+                    ),
+                )
+            ),
             navigateBack = {},
             onRemoveCartItemClick = {},
             onIncreaseQuantityClick = {},
