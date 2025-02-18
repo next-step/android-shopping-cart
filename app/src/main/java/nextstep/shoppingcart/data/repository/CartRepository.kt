@@ -11,7 +11,7 @@ import nextstep.shoppingcart.model.Product
 /**
  * 구현을 간소화하기 위해 interface 대신 구현체 바로 사용
  */
-class CartRepository(
+class CartRepository private constructor(
     private val cartLocalDataSource: CartLocalDataSource,
 ) {
 
@@ -34,8 +34,26 @@ class CartRepository(
     }
 
     companion object {
+        // 참고자료 : https://bladecoder.medium.com/kotlin-singletons-with-argument-194ef06edd9e
+        @Volatile
+        private var instance: CartRepository? = null
+
         fun inject(): CartRepository {
-            return CartRepository(CartLocalDataSource())
+            val existInstance = instance
+            if (existInstance != null) {
+                return existInstance
+            }
+
+            return synchronized(this) {
+                val doubleCheckExistInstance = instance
+                if (doubleCheckExistInstance != null) {
+                    doubleCheckExistInstance
+                } else {
+                    val created = CartRepository(CartLocalDataSource())
+                    instance = created
+                    created
+                }
+            }
         }
     }
 }
