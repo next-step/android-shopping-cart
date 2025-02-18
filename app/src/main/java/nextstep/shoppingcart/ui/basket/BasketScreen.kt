@@ -32,12 +32,16 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.designsystem.CartListItem
+import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -50,13 +54,34 @@ fun BasketScreen(
         mutableStateOf(BasketState())
     }
 
-    // Q. 화면이 파괴되면 Composable도 recomposition에서 제외되므로, Fragment에서 처럼 repeatOnLifecycle 등으로 Lifecycle을 지정하지 않아도 되나요?
-    LaunchedEffect(Unit) {
-        cartRepository.getItems().collect {
-            state = state.copy(cartItems = it)
-        }
+    // 초기 로딩 시간이 0.5초 보다 오래 걸리는 경우에만 로딩바 보여주기
+    LaunchedEffect(state.isInitialLoading) {
+        delay(500L)
+        state = state.copy(
+            isLoadingShow = true,
+        )
     }
 
+    // Q. 화면이 파괴되면 Composable도 recomposition에서 제외되므로, Fragment에서 처럼 repeatOnLifecycle 등으로 Lifecycle을 지정하지 않아도 되나요?
+    LaunchedEffect(Unit) {
+        cartRepository.getItems()
+            .onStart {
+                state = state.copy(
+                    isInitialLoading = false,
+                )
+            }
+            .distinctUntilChanged()
+            .collect {
+                state = state.copy(cartItems = it)
+            }
+    }
+
+    if (state.isInitialLoading) {
+        if (state.isLoadingShow) {
+            InitialCircularLoading()
+        }
+        return
+    }
     BasketScreen(
         state = state,
         navigateBack = navigateBack,

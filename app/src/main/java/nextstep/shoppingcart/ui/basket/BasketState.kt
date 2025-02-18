@@ -6,6 +6,8 @@ import nextstep.shoppingcart.model.CartItem
 
 @Parcelize
 data class BasketState(
+    val isInitialLoading: Boolean = true,
+    val isLoadingShow: Boolean = false,
     val cartItems: List<CartItem> = emptyList(),
 ) : Parcelable {
     val totalPrice: Int

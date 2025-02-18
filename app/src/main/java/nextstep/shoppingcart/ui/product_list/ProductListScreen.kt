@@ -50,6 +50,7 @@ import kotlinx.coroutines.launch
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.repository.ProductRepository
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
 import nextstep.shoppingcart.ui.designsystem.ProductListItem
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -83,15 +84,7 @@ fun ProductListScreen(
 
     if (state.isInitialLoading) {
         if (state.isLoadingShow) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background),
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
+            InitialCircularLoading()
         }
         return
     }
