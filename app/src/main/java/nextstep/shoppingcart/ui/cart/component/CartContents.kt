@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.rememberAsyncImagePainter
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.designsystem.component.ProductImage
 import nextstep.shoppingcart.designsystem.theme.ShoppingCartTheme
@@ -42,7 +43,10 @@ fun CartContents(
             modifier = Modifier
                 .fillMaxHeight()
                 .weight(1f, fill = false),
-            contentScale = ContentScale.Fit
+            painter = rememberAsyncImagePainter(
+                model = item.product.imageUrl,
+                contentScale = ContentScale.Fit
+            )
         )
         Column(
             modifier = Modifier
