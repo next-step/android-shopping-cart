@@ -25,8 +25,8 @@ import nextstep.shoppingcart.model.Product
 
 @Composable
 fun CartTitle(
-    item: Cart,
-    onDelete: (Cart) -> Unit = {}
+    item: Product,
+    onDelete: (Product) -> Unit = {}
 ) {
     Row(
         modifier = Modifier
@@ -35,7 +35,7 @@ fun CartTitle(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = item.product.name,
+            text = item.name,
             modifier = Modifier
                 .weight(1f, fill = false),
             maxLines = 1,
@@ -48,7 +48,7 @@ fun CartTitle(
             onClick = { onDelete(item) },
             modifier = Modifier.size(24.dp)
         ) {
-            Icon(Icons.Default.Close, contentDescription = "${item.product.id}_delete_icon")
+            Icon(Icons.Default.Close, contentDescription = "${item.id}_delete_icon")
         }
     }
 }
@@ -62,7 +62,7 @@ private fun CartTitlePreview() {
         4
     )
     ShoppingCartTheme {
-        CartTitle(cart)
+        CartTitle(cart.product)
     }
 
 }

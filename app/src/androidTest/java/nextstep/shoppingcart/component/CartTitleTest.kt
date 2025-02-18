@@ -26,7 +26,7 @@ class CartTitleTest {
         )
         //when
         composeTestRule.setContent {
-            CartTitle(cart)
+            CartTitle(cart.product)
         }
 
         //then
@@ -45,7 +45,7 @@ class CartTitleTest {
         )
         //when
         composeTestRule.setContent {
-            CartTitle(cart)
+            CartTitle(cart.product)
         }
 
         //then
@@ -63,7 +63,7 @@ class CartTitleTest {
         )
         var isSendDeleteEvent = false
         composeTestRule.setContent {
-            CartTitle(cart, onDelete = { isSendDeleteEvent = true })
+            CartTitle(cart.product, onDelete = { isSendDeleteEvent = true })
         }
 
         //when

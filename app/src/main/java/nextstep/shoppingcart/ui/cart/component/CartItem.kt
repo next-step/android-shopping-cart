@@ -30,7 +30,7 @@ fun CartItem(
             .border(1.dp, Gray10, RoundedCornerShape(4.dp))
             .padding(18.dp)
     ) {
-        CartTitle(item = item, onDelete = onDelete)
+        CartTitle(item = item.product, onDelete = { onDelete(item) })
         CartContents(item = item, onAdd = onAdd, onRemove = onRemove)
     }
 }
