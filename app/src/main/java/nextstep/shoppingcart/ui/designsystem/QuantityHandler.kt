@@ -32,7 +32,7 @@ fun QuantityHandler(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         IconButton(
-            onClick = onIncreaseQuantityClick,
+            onClick = onDecreaseQuantityClick,
         ) {
             Image(
                 painter = painterResource(R.drawable.baseline_remove_24),
@@ -43,7 +43,7 @@ fun QuantityHandler(
             text = quantity.toString(),
         )
         IconButton(
-            onClick = onDecreaseQuantityClick,
+            onClick = onIncreaseQuantityClick,
         ) {
             Icon(
                 imageVector = Icons.Default.Add,
