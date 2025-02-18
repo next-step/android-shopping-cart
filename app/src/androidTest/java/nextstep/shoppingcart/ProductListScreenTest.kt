@@ -69,8 +69,12 @@ class ProductListScreenTest {
         }
 
         //then
-        composeTestRule.onNodeWithText("테스트 상품1").assertExists()
-        composeTestRule.onNodeWithText("테스트 상품2").assertExists()
+        composeTestRule
+            .onNodeWithText("테스트 상품1")
+            .assertIsDisplayed()
+        composeTestRule
+            .onNodeWithText("테스트 상품2")
+            .assertIsDisplayed()
     }
 
     @Test
@@ -90,7 +94,9 @@ class ProductListScreenTest {
         }
 
         //when
-        composeTestRule.onNodeWithText("테스트 상품").performClick()
+        composeTestRule
+            .onNodeWithText("테스트 상품")
+            .performClick()
 
 
         //then

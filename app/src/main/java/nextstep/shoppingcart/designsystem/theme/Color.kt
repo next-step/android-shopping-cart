@@ -18,3 +18,5 @@ val TopBarTextColor = Color(0xFF1D1B20)
 val DividerColor = Color(0xFFAAAAAA)
 
 val Blue50 = Color(0xFF2196F3)
+
+val Gray10 = Color(0xFFAAAAAA)

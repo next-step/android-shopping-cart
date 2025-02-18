@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
@@ -43,7 +44,9 @@ class LazyVerticalGridTest {
         }
 
         //then
-        composeTestRule.onNodeWithText("PET-보틀-정사각형정사각형정사각형정사각형1").assertExists()
+        composeTestRule
+            .onNodeWithText("PET-보틀-정사각형정사각형정사각형정사각형1")
+            .assertIsDisplayed()
     }
 
     @Test

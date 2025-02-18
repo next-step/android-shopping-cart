@@ -82,7 +82,7 @@ fun ProductListScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
     val products = listOf(

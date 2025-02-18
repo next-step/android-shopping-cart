@@ -2,7 +2,6 @@ package nextstep.shoppingcart.designsystem.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.CircularProgressIndicator
@@ -23,29 +22,37 @@ import nextstep.shoppingcart.model.Product
 fun ProductImage(
     item: Product,
     modifier: Modifier = Modifier,
-    painter: AsyncImagePainter = rememberAsyncImagePainter(item.imageUrl)
+    painter: AsyncImagePainter = rememberAsyncImagePainter(
+        model = item.imageUrl,
+        contentScale = ContentScale.Crop
+    ),
 ) {
     val state by painter.state.collectAsState()
 
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(1f), contentAlignment = Alignment.Center
-    ) {
-        when (state) {
-            is AsyncImagePainter.State.Loading, AsyncImagePainter.State.Empty -> {
+    when (state) {
+        is AsyncImagePainter.State.Loading, AsyncImagePainter.State.Empty -> {
+            Box(
+                modifier = modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
                 CircularProgressIndicator(modifier = Modifier.testTag("product_image_loading"))
             }
+        }
 
-            is AsyncImagePainter.State.Error -> Text("product_image_error")
-            is AsyncImagePainter.State.Success -> {
-                Image(
-                    painter = painter,
-                    contentDescription = "product_image",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
+        is AsyncImagePainter.State.Error ->
+            Box(
+                modifier = modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text("product_image_error")
             }
+
+        is AsyncImagePainter.State.Success -> {
+            Image(
+                painter = painter,
+                contentDescription = "product_image",
+                modifier = modifier.fillMaxSize(),
+            )
         }
     }
 }

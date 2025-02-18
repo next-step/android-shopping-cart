@@ -64,7 +64,6 @@ class ProductImageTest {
 
         //then
         composeTestRule.onNodeWithTag("product_image_loading")
-            .assertExists()
             .assertIsDisplayed()
     }
 
@@ -102,7 +101,6 @@ class ProductImageTest {
 
         //then
         composeTestRule.onNodeWithTag("product_image_loading")
-            .assertExists()
             .assertIsDisplayed()
     }
 
@@ -150,7 +148,6 @@ class ProductImageTest {
 
         //then
         composeTestRule.onNodeWithContentDescription("product_image")
-            .assertExists()
             .assertIsDisplayed()
     }
 
@@ -196,7 +193,6 @@ class ProductImageTest {
 
         //then
         composeTestRule.onNodeWithText("product_image_error")
-            .assertExists()
             .assertIsDisplayed()
     }
 }

@@ -2,6 +2,7 @@ package nextstep.shoppingcart.ui.list.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -17,6 +18,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.mockProducts
 import nextstep.shoppingcart.designsystem.component.ProductImage
 import nextstep.shoppingcart.designsystem.theme.TextColor
+import nextstep.shoppingcart.ext.getFormattedPrice
 import nextstep.shoppingcart.model.Product
 
 @Composable
@@ -31,7 +33,10 @@ fun ProductItem(
             .clickable { onClick(item) }
     ) {
 
-        ProductImage(item = item)
+        ProductImage(
+            item = item,
+            modifier = Modifier.aspectRatio(1f)
+        )
 
         Text(
             modifier = Modifier
@@ -47,7 +52,7 @@ fun ProductItem(
 
         Text(
             modifier = Modifier.padding(horizontal = 4.dp),
-            text = stringResource(R.string.price, item.getFormattedPrice()),
+            text = stringResource(R.string.price, item.price.getFormattedPrice()),
             color = TextColor,
             fontSize = 16.sp
         )
@@ -55,7 +60,7 @@ fun ProductItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ProductItemPreview() {
     ProductItem(item = mockProducts[0])
