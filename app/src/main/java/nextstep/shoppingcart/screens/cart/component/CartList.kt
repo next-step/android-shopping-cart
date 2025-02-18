@@ -54,7 +54,7 @@ internal fun CartList(
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(vertical = 16.dp),
+        contentPadding = PaddingValues(vertical = 16.dp, horizontal = 18.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier,
     ) {
@@ -64,9 +64,7 @@ internal fun CartList(
                 onAddOneClick = { onAddOneClick(cartItem.product) },
                 onRemoveOneClick = { onRemoveOneClick(cartItem.product) },
                 onRemoveAllClick = { onRemoveAllClick(cartItem.product) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 18.dp),
+                modifier = Modifier.fillMaxWidth(),
             )
         }
     }
