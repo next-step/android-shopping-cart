@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.repository.CartRepository
 import nextstep.shoppingcart.ui.screen.component.DefaultAppBar
 import nextstep.shoppingcart.ui.screen.component.BackIconButton
 import nextstep.shoppingcart.ui.screen.component.CenterAppBar
@@ -38,7 +39,7 @@ fun ProductApp() {
 
     val fakeItemList = FakeData.products
     var seletedProduct by remember { mutableStateOf<Product?>(null) }
-    var addCartProduct by remember { mutableStateOf<Product?>(null) }
+
 
     Scaffold(
         topBar = {
@@ -89,7 +90,7 @@ fun ProductApp() {
                 ProductDetailScreen(
                     product = seletedProduct!!,
                     addProductClick = { product ->
-                        addCartProduct = product
+                        CartRepository.addOne(product)
                         navController.navigate(ProductDestination.ShoppingCart.name)
                     }
                 )
