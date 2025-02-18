@@ -1,28 +1,27 @@
 package nextstep.shoppingcart.data
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import nextstep.shoppingcart.domain.model.Cart
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.domain.repository.CartRepository
 
 object InMemoryCartRepository : CartRepository {
-    private var cart: Cart = Cart()
+    val cart: MutableState<Cart> = mutableStateOf(Cart())
 
     override fun getCart(): Cart {
-        return cart
+        return cart.value
     }
 
-    override fun addOne(product: Product): Cart {
-        cart = cart.addOne(product)
-        return cart
+    override fun addOne(product: Product) {
+        cart.value = cart.value.addOne(product)
     }
 
-    override fun removeOne(product: Product): Cart {
-        cart = cart.removeOne(product)
-        return cart
+    override fun removeOne(product: Product) {
+        cart.value = cart.value.removeOne(product)
     }
 
-    override fun removeAll(product: Product): Cart {
-        cart = cart.removeAll(product)
-        return cart
+    override fun removeAll(product: Product) {
+        cart.value = cart.value.removeAll(product)
     }
 }
