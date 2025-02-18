@@ -57,7 +57,7 @@ fun CartItemContainer(
             Spacer(modifier = Modifier.height(6.dp))
             CartItemBottomSector(
                 imageUrl = cartItem.product.imageUrl,
-                price = cartItem.product.price,
+                price = cartItem.totalPrice,
                 count = cartItem.count,
                 onMinusCartItem = onMinusCartItem,
                 onPlusCartItem = onPlusCartItem,
