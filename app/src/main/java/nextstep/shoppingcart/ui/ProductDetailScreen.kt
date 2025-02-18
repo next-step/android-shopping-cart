@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -8,9 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,9 +23,9 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.detail.ProductDetailUiState
 import nextstep.shoppingcart.ui.component.ProductDetailContent
-import nextstep.shoppingcart.ui.component.ProductListTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductDetailScreen(
     uiState: ProductDetailUiState,
@@ -48,10 +52,18 @@ fun ProductDetailScreen(
                 modifier = modifier
                     .fillMaxSize(),
                 topBar = {
-                    ProductListTopBar(
-                        topBarTitle = "상품 상세",
-                        leftIcon = Icons.AutoMirrored.Filled.ArrowBack,
-                        onLeftIconClicked = { onBackButtonClick() })
+                    TopAppBar(
+                        title = { Text(text = "상품 상세") },
+                        navigationIcon = {
+                            Icon(
+                                modifier = Modifier
+                                    .clickable { onBackButtonClick() }
+                                    .padding(16.dp),
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "상품 상세 뒤로가기 버튼"
+                            )
+                        },
+                    )
                 },
                 bottomBar = {
                     Button(
