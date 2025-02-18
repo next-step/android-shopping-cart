@@ -4,19 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import nextstep.shoppingcart.model.product.ProductListUiState
+import nextstep.shoppingcart.model.productList.ProductListUiState
+import nextstep.shoppingcart.model.productTestDataList
 import nextstep.shoppingcart.ui.ProductListScreen
-import nextstep.shoppingcart.ui.getProductsTestData
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val uiState = ProductListUiState.Products(getProductsTestData())
+        val uiState = ProductListUiState.ProductList(productTestDataList)
         setContent {
             ShoppingCartTheme {
                 ProductListScreen(
-                    listUiState = uiState,
+                    uiState = uiState,
                     navigateToProductDetail = { id -> navigateToProductDetail(id) },
                     navigateToCart = { navigateToCart() },
                 )

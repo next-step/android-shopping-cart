@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import nextstep.shoppingcart.model.product.Product
+import nextstep.shoppingcart.model.Product
 
 @Composable
 fun Product(

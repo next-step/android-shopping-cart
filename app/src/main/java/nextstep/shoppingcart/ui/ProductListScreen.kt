@@ -10,26 +10,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.model.product.Product
-import nextstep.shoppingcart.model.product.ProductListUiState
+import nextstep.shoppingcart.model.productList.ProductListUiState
+import nextstep.shoppingcart.model.productTestDataList
 import nextstep.shoppingcart.ui.component.ProductListContents
 import nextstep.shoppingcart.ui.component.ProductListTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductListScreen(
-    listUiState: ProductListUiState,
+    uiState: ProductListUiState,
     modifier: Modifier = Modifier,
     navigateToProductDetail: (String) -> Unit = {},
     navigateToCart: () -> Unit = {},
 ) {
-    when (listUiState) {
+    when (uiState) {
 
         ProductListUiState.Loading -> {
             CircularProgressIndicator()
         }
 
-        is ProductListUiState.Products -> {
+        is ProductListUiState.ProductList -> {
             Scaffold(
                 modifier = modifier
                     .fillMaxSize(),
@@ -44,7 +44,7 @@ fun ProductListScreen(
                     modifier = Modifier
                         .padding(contentPadding)
                         .padding(horizontal = 12.dp),
-                    productItems = listUiState.products,
+                    productItems = uiState.products,
                     navigateToProductDetail = { id -> navigateToProductDetail(id) },
                 )
             }
@@ -63,7 +63,7 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    val uiState = ProductListUiState.Products(getProductsTestData())
+    val uiState = ProductListUiState.ProductList(productTestDataList)
     ShoppingCartTheme {
         ProductListScreen(uiState)
     }
@@ -78,17 +78,3 @@ private fun ProductListScreenLoadingPreview() {
     }
 }
 
-fun getProductsTestData(): List<Product> {
-    val list = mutableListOf<Product>()
-    for (i in 1..30) {
-        list.add(
-            Product(
-                name = "PET 보틀 - 음료수,정사각형 음료수,정사각형 음료수,정사각형 음료수",
-                imageUrl = "https://i.namu.wiki/i/rwoGbf-OhaV1A1I77FtQEWojKsa-i9J0HZ0E3tFfr4gdi7fCHRh7DwaqLkLzKdruftxpu_twLfkhwgMxc3QrvgY9HhwbwB7W_YPGbkjpCIxFO9abcyQSLgM8NVUkKJ6WPegKkT35ukb0NXXRHeMW1zGcxZz_9zx63o9Pnat6I3Q.webp",
-                price = "10000",
-                productId = "id${i}"
-            )
-        )
-    }
-    return list.toList()
-}
