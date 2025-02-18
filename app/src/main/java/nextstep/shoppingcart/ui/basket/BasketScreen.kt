@@ -47,7 +47,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun BasketScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    cartRepository: CartRepository = CartRepository.inject(),
+    cartRepository: CartRepository = CartRepository.getInstance(),
 ) {
     var state by rememberSaveable {
         mutableStateOf(BasketState())

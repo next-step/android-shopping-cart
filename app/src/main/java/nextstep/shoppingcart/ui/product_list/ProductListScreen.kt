@@ -54,7 +54,7 @@ fun ProductListScreen(
     onBasketClick: () -> Unit,
     onProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
-    productRepository: ProductRepository = ProductRepository.inject(),
+    productRepository: ProductRepository = ProductRepository.getInstance(),
 ) {
     var state by rememberSaveable {
         mutableStateOf(ProductListState())

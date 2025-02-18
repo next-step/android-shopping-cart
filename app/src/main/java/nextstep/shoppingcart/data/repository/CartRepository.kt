@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.map
 import nextstep.shoppingcart.data.datasource.CartLocalDataSource
 import nextstep.shoppingcart.data.mapper.toEntity
 import nextstep.shoppingcart.data.mapper.toUi
+import nextstep.shoppingcart.data.util.SingletonHolder
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 
@@ -33,27 +34,9 @@ class CartRepository private constructor(
         cartLocalDataSource.removeAll(product.toEntity())
     }
 
-    companion object {
-        // 참고자료 : https://bladecoder.medium.com/kotlin-singletons-with-argument-194ef06edd9e
-        @Volatile
-        private var instance: CartRepository? = null
-
-        fun inject(): CartRepository {
-            val existInstance = instance
-            if (existInstance != null) {
-                return existInstance
-            }
-
-            return synchronized(this) {
-                val doubleCheckExistInstance = instance
-                if (doubleCheckExistInstance != null) {
-                    doubleCheckExistInstance
-                } else {
-                    val created = CartRepository(CartLocalDataSource())
-                    instance = created
-                    created
-                }
-            }
+    companion object : SingletonHolder<CartRepository>(
+        creator = {
+            CartRepository(CartLocalDataSource())
         }
-    }
+    )
 }

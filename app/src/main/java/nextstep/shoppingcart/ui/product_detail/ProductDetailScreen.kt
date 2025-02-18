@@ -41,7 +41,7 @@ fun ProductDetailScreen(
     navigateBack: () -> Unit,
     onAddBasketClick: () -> Unit,
     modifier: Modifier = Modifier,
-    cartRepository: CartRepository = CartRepository.inject(),
+    cartRepository: CartRepository = CartRepository.getInstance(),
 ) {
     val state by remember {
         mutableStateOf(ProductDetailState(product = product))
