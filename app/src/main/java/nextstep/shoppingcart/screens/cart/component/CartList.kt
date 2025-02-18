@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,6 +35,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.components.ItemCounter
 import nextstep.shoppingcart.data.FakeProductRepository
 import nextstep.shoppingcart.domain.model.Cart
 import nextstep.shoppingcart.domain.model.CartItem
@@ -113,7 +113,7 @@ private fun CartItem(
                     style = Typography.bodyLarge,
                     modifier = Modifier.fillMaxWidth()
                 )
-                CartItemCounter(
+                ItemCounter(
                     count = cartItem.count.value,
                     onRemoveOneClick = onRemoveOneClick,
                     onAddOneClick = onAddOneClick,
@@ -159,50 +159,6 @@ private fun CartItemImage(product: Product, modifier: Modifier = Modifier) {
         contentScale = ContentScale.Crop,
         modifier = modifier,
     )
-}
-
-@Composable
-private fun CartItemCounter(
-    count: Int,
-    onRemoveOneClick: () -> Unit,
-    onAddOneClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        IconButton(
-            onClick = onRemoveOneClick,
-            modifier = Modifier
-                .weight(1f)
-                .aspectRatio(1f)
-        ) {
-            Text(
-                text = stringResource(R.string.cart_item_counter_minus),
-                style = Typography.titleLarge.copy(fontWeight = FontWeight.W700),
-            )
-        }
-        Text(
-            text = count.toString(),
-            modifier = Modifier
-                .weight(1f)
-                .aspectRatio(1f)
-                .wrapContentSize(),
-            style = Typography.titleLarge,
-        )
-        IconButton(
-            onClick = onAddOneClick,
-            modifier = Modifier
-                .weight(1f)
-                .aspectRatio(1f)
-        ) {
-            Text(
-                text = stringResource(R.string.cart_item_counter_plus),
-                style = Typography.titleLarge.copy(fontWeight = FontWeight.W700),
-            )
-        }
-    }
 }
 
 @Preview
