@@ -24,21 +24,14 @@ fun ProductScreen(
     onProductClick: (Product) -> Unit = { },
     productList: List<Product>,
 ) {
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        Column {
-            ProductListSection(
-                products = productList,
-                onProductClick = onProductClick
-            )
-        }
-    }
+    ProductListSection(
+        products = productList,
+        onProductClick = onProductClick
+    )
 }
 
 @Composable
-fun ProductListSection(
+private fun ProductListSection(
     modifier: Modifier = Modifier,
     products: List<Product>,
     onProductClick: (Product) -> Unit,
