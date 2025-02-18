@@ -3,6 +3,7 @@ package nextstep.shoppingcart
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -11,7 +12,6 @@ import nextstep.shoppingcart.ext.getFormattedPrice
 import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.cart.CartListScreen
-import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
@@ -66,9 +66,10 @@ class CartListScreenTest {
             .onNodeWithContentDescription("${selectCart.product.id}_add_icon")
             .performClick()
 
-
         //then
-        assertTrue(cartListState.first { it.product.id == selectCart.product.id }.count == (selectCart.count + 1))
+        composeTestRule
+            .onNodeWithText("${selectCart.count + 1}")
+            .assertIsDisplayed()
     }
 
     @Test
@@ -100,7 +101,9 @@ class CartListScreenTest {
 
 
         //then
-        assertTrue(cartListState.first { it.product.id == selectCart.product.id }.count == (selectCart.count - 1))
+        composeTestRule
+            .onNodeWithText("${selectCart.count - 1}")
+            .assertIsDisplayed()
     }
 
     @Test
@@ -114,10 +117,9 @@ class CartListScreenTest {
 
         composeTestRule.setContent {
             CartListScreen(cartListState, onRemove = { item ->
-                cartListState = cartListState.toMutableList().apply {
-                    remove(item)
-                    add(item.copy(count = item.count - 1))
-                }.filter { it.count != 0 }.toMutableStateList()
+                if (item.count == 1) {
+                    cartListState.remove(item)
+                }
             })
         }
 
@@ -128,7 +130,9 @@ class CartListScreenTest {
 
 
         //then
-        assertTrue(cartListState.find { it.product.id == selectCart.product.id } == null)
+        composeTestRule
+            .onNodeWithText(selectCart.product.name)
+            .assertIsNotDisplayed()
     }
 
     @Test
@@ -145,8 +149,7 @@ class CartListScreenTest {
 
         composeTestRule.setContent {
             CartListScreen(cartListState, onDelete = { item ->
-                cartListState =
-                    cartListState.toMutableList().filter { it != item }.toMutableStateList()
+                cartListState.remove(item)
             })
         }
 
@@ -155,8 +158,9 @@ class CartListScreenTest {
             .onNodeWithContentDescription("${selectCart.product.id}_delete_icon")
             .performClick()
 
-
         //then
-        assertTrue(cartListState.find { it.product.id == selectCart.product.id } == null)
+        composeTestRule
+            .onNodeWithText(selectCart.product.name)
+            .assertIsNotDisplayed()
     }
 }
