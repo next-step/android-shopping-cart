@@ -5,6 +5,7 @@
     <string name="appbar_shopping_cart_title">장바구니</string>
 
     <string name="cart_add_button">장바구니 담기</string>
+    <string name="cart_order_button">주문하기</string>
 
     <string name="cart_plus_item_button">+</string>
     <string name="cart_minus_item_button">-</string>
