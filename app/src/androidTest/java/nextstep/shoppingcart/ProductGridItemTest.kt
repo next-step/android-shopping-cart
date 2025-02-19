@@ -21,10 +21,12 @@ class ProductGridItemTest {
         composeTestRule.setContent {
             ProductGridItem(
                 Product(
+                    id = 1,
                     name = "",
                     price = price,
                     imageUrl = "",
-                )
+                ),
+                onClickItem = {},
             )
         }
 

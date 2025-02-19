@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.catalog.widget
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -17,18 +18,26 @@ import nextstep.shoppingcart.util.DataUtil.dummyProducts
 @Composable
 fun CatalogContent(
     products: List<Product>,
+    navigateToDetail: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(top = 13.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
             .padding(horizontal = 16.dp)
             .fillMaxSize(),
     ) {
-        items(products) { product ->
-            ProductGridItem(product)
+        items(
+            items = products,
+            key = { it.id },
+        ) { product ->
+            ProductGridItem(
+                product = product,
+                onClickItem = navigateToDetail,
+            )
         }
     }
 }
@@ -36,5 +45,8 @@ fun CatalogContent(
 @Preview(showBackground = true)
 @Composable
 private fun CatalogContentPreview() {
-    CatalogContent(products = dummyProducts)
+    CatalogContent(
+        products = dummyProducts,
+        navigateToDetail = {},
+    )
 }

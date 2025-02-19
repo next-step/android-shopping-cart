@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.catalog.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,17 +16,19 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.TypoTokens.Bold16
 import nextstep.shoppingcart.ui.theme.TypoTokens.Normal16
+import nextstep.shoppingcart.util.ImageUtil.getUrlIfNotPreview
 import nextstep.shoppingcart.util.NumberFormatUtil.toPrice
 
 @Composable
 fun ProductGridItem(
     product: Product,
+    onClickItem: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.clickable { onClickItem.invoke(product) }) {
         AsyncImage(
-            model = product.imageUrl,
-            contentDescription = null,
+            model = getUrlIfNotPreview(product.imageUrl),
+            contentDescription = "${product.name} image",
             contentScale = ContentScale.Crop,
             placeholder = painterResource(R.drawable.woori),
             modifier = Modifier
@@ -48,9 +51,13 @@ fun ProductGridItem(
 @Preview(showBackground = true)
 @Composable
 private fun ProductGridItemPreview() {
-    ProductGridItem(Product(
-        name = "엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마",
-        price = 1000,
-        imageUrl = "https://picsum.photos/id/30/1280/901"
-    ))
+    ProductGridItem(
+        product = Product(
+            id = 1,
+            name = "엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마엄청난글자수를보여주마",
+            price = 1000,
+            imageUrl = "https://picsum.photos/id/30/1280/901"
+        ),
+        onClickItem = {},
+    )
 }
