@@ -56,7 +56,7 @@ private fun DetailContentPreview() {
             Product(
                 id = 1,
                 name = "상품",
-                price = 5000000,
+                price = 40000,
                 imageUrl = "https://picsum.photos/id/30/1280/901",
             )
         )

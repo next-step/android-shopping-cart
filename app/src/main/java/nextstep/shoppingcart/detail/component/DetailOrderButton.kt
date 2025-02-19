@@ -24,7 +24,8 @@ fun DetailOrderButton(modifier: Modifier = Modifier) {
     ) {
         Text(
             stringResource(R.string.detail_put_in_cart),
-            style = Bold20.copy(color = Color.White),
+            style = Bold20,
+            color = Color.White,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
