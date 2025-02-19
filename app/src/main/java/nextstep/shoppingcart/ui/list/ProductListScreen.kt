@@ -16,6 +16,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -39,6 +40,10 @@ fun ProductListScreen(
     cartUtil: CartUtil = CartUtil,
     onRoute: (RouteType) -> Unit = {}
 ) {
+    val productCountMap = remember(cartUtil.totalPrice) {
+        cartUtil.items.associate { it.product.id to it.count }
+    }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -77,7 +82,7 @@ fun ProductListScreen(
             ) { item ->
                 ProductItem(
                     item = item,
-                    count = cartUtil.items.find { it.product.id == item.id }?.count ?: 0,
+                    count = productCountMap[item.id] ?: 0,
                     onClick = { onRoute(RouteType.ToDetail(item)) },
                     onAdd = cartUtil::addOne,
                     onRemove = cartUtil::removeOne
