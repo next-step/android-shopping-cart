@@ -38,7 +38,7 @@ class LazyVerticalGridTest {
         composeTestRule.setContent {
             LazyVerticalGrid(columns = GridCells.Fixed(2)) {
                 items(mockProducts) {
-                    ProductItem(item = it)
+                    ProductItem(item = it, count = 0)
                 }
             }
         }
@@ -70,7 +70,8 @@ class LazyVerticalGridTest {
                 items(mockProducts) {
                     ProductItem(
                         modifier = Modifier.testTag("product"),
-                        item = it
+                        item = it,
+                        count = 0
                     )
                 }
             }

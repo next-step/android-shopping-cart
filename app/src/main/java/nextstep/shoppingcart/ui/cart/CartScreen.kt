@@ -11,10 +11,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,8 +26,6 @@ fun CartScreen(
     modifier: Modifier = Modifier,
     onBack: () -> Unit = {}
 ) {
-    var cartItems by remember { mutableStateOf(CartUtil.items) }
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -55,21 +49,18 @@ fun CartScreen(
         modifier = modifier.fillMaxSize()
     ) { contentPadding ->
         CartListScreen(
-            items = cartItems,
+            items = CartUtil.items,
             modifier = Modifier
                 .padding(contentPadding)
                 .fillMaxSize(),
             onDelete = { item ->
                 CartUtil.removeAll(item.product)
-                cartItems = CartUtil.items
             },
             onAdd = { item ->
                 CartUtil.addOne(item.product)
-                cartItems = CartUtil.items
             },
             onRemove = { item ->
                 CartUtil.removeOne(item.product)
-                cartItems = CartUtil.items
             }
         )
     }

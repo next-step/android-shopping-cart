@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.rememberAsyncImagePainter
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.designsystem.component.ProductAmount
 import nextstep.shoppingcart.designsystem.component.ProductImage
 import nextstep.shoppingcart.designsystem.theme.ShoppingCartTheme
 import nextstep.shoppingcart.ext.getFormattedPrice
@@ -65,11 +66,12 @@ fun CartContents(
                     color = Color.Black,
                 )
             }
-            CartAmount(
-                item = item,
+            ProductAmount(
+                item = item.product,
+                count = item.count,
                 modifier = modifier.weight(1f),
-                onAdd = onAdd,
-                onRemove = onRemove
+                onAdd = { onAdd(item) },
+                onRemove = { onRemove(item) }
             )
         }
     }

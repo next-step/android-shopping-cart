@@ -25,7 +25,7 @@ class ProductItemTest {
 
         //when
         composeTestRule.setContent {
-            ProductItem(item = mockProduct)
+            ProductItem(item = mockProduct, count = 0)
         }
 
         //then
@@ -46,12 +46,12 @@ class ProductItemTest {
 
         //when
         composeTestRule.setContent {
-            ProductItem(item = mockProduct)
+            ProductItem(item = mockProduct, count = 0)
         }
 
         //then
         composeTestRule
-            .onNodeWithText("12000")
+            .onNodeWithText("12,000원")
             .assertIsDisplayed()
     }
 }
