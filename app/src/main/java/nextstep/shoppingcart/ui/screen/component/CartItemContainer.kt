@@ -67,7 +67,7 @@ fun CartItemContainer(
 }
 
 @Composable
-fun CartItemTopSector(
+private fun CartItemTopSector(
     title: String,
     onCartItemDelete: () -> Unit,
     modifier: Modifier = Modifier,
@@ -91,7 +91,7 @@ fun CartItemTopSector(
 }
 
 @Composable
-fun CartItemBottomSector(
+private fun CartItemBottomSector(
     imageUrl: String,
     price: Int,
     count: Int,
@@ -126,7 +126,7 @@ fun CartItemBottomSector(
 }
 
 @Composable
-fun CartItemInfo(
+private fun CartItemInfo(
     price: Int,
     count: Int,
     onMinusCartItem: () -> Unit,
@@ -154,7 +154,7 @@ fun CartItemInfo(
 }
 
 @Composable
-fun CartQuantitySector(
+private fun CartQuantitySector(
     count: Int,
     onMinusCartItem: () -> Unit,
     onPlusCartItem: () -> Unit,
@@ -182,7 +182,7 @@ fun CartQuantitySector(
 }
 
 @Composable
-fun QuantityAdjusButton(
+private fun QuantityAdjusButton(
     buttonTitle: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
