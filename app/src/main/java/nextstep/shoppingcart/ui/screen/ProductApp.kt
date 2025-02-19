@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
@@ -15,11 +16,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.repository.CartRepository
+import nextstep.shoppingcart.ui.screen.component.DefaultAppBar
+import nextstep.shoppingcart.ui.screen.component.BackIconButton
 import nextstep.shoppingcart.ui.screen.component.CenterAppBar
-import nextstep.shoppingcart.ui.screen.component.CustomAppBar
-import androidx.compose.runtime.setValue
 
 enum class ProductDestination(@StringRes val title: Int) {
     ProductList(title = R.string.appbar_product_title),
@@ -37,7 +40,7 @@ fun ProductApp() {
 
     val fakeItemList = FakeData.products
     var seletedProduct by remember { mutableStateOf<Product?>(null) }
-    var addCartProduct by remember { mutableStateOf<Product?>(null) }
+    var cartItemList by remember { mutableStateOf<List<CartItem>>(emptyList())}
 
     Scaffold(
         topBar = {
@@ -49,10 +52,17 @@ fun ProductApp() {
                     }
                 )
             } else {
-                CustomAppBar(
+                DefaultAppBar(
                     title = stringResource(id = currentScreen.title),
-                    canNavigateBack = navController.previousBackStackEntry != null,
-                    backButton = { navController.popBackStack() }
+                    navigationIcon = {
+                        navController.previousBackStackEntry?.let {
+                            BackIconButton(
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
+                    },
                 )
             }
         }
@@ -81,7 +91,8 @@ fun ProductApp() {
                 ProductDetailScreen(
                     product = seletedProduct!!,
                     addProductClick = { product ->
-                        addCartProduct = product
+                        CartRepository.addOne(product)
+                        cartItemList = CartRepository.items
                         navController.navigate(ProductDestination.ShoppingCart.name)
                     }
                 )
@@ -89,7 +100,21 @@ fun ProductApp() {
             composable(
                 route = ProductDestination.ShoppingCart.name,
             ) { backStackEntry ->
-                ShoppingCartScreen()
+                ShoppingCartScreen(
+                    cartItemList = cartItemList,
+                    onMinusCartItem = { cartItem ->
+                        CartRepository.removeOne(cartItem.product)
+                        cartItemList = CartRepository.items
+                    },
+                    onPlusCartItem = { cartItem ->
+                        CartRepository.addOne(cartItem.product)
+                        cartItemList = CartRepository.items
+                    },
+                    onCartItemDelete = { cartItem ->
+                        CartRepository.removeAll(cartItem.product)
+                        cartItemList = CartRepository.items
+                    }
+                )
             }
         }
     }

@@ -10,28 +10,23 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
+import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.ui.screen.component.BlueRectangleButton
+import nextstep.shoppingcart.ui.screen.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Black33
-import nextstep.shoppingcart.ui.theme.Blue50
-import nextstep.shoppingcart.ui.theme.GrayA
+import nextstep.shoppingcart.ui.theme.Gray10
 import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
 import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
-import nextstep.shoppingcart.R
 
 @Composable
 fun ProductDetailScreen(
@@ -43,10 +38,9 @@ fun ProductDetailScreen(
         modifier = modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.Start,
     ) {
-        AsyncImage(
-            model = product.imageUrl,
+        ProductImage(
+            imageUrl = product.imageUrl,
             contentDescription = "Product Image",
-            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
@@ -60,7 +54,7 @@ fun ProductDetailScreen(
                 .fillMaxWidth()
                 .padding(top = 18.dp)
                 .height(1.dp)
-                .background(GrayA),
+                .background(Gray10),
         )
         PriceSector(
             price = product.price,
@@ -69,12 +63,13 @@ fun ProductDetailScreen(
         Spacer(modifier = Modifier.weight(1f))
         ShoppingCartAddButton(
             onClick = { addProductClick(product) },
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
 
 @Composable
-fun TitleSector(
+private fun TitleSector(
     title: String,
     modifier: Modifier = Modifier,
 ) {
@@ -88,7 +83,7 @@ fun TitleSector(
 }
 
 @Composable
-fun PriceSector(
+private fun PriceSector(
     price: Int,
     modifier: Modifier = Modifier,
     formatter: MoneyFormatter = DefaultMoneyFormatter,
@@ -118,20 +113,11 @@ fun ShoppingCartAddButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Button(
+    BlueRectangleButton(
+        buttonTitle = stringResource(id = R.string.cart_add_button),
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(Blue50),
-        modifier = modifier.fillMaxWidth(),
-        shape = RectangleShape
-    ) {
-        Text(
-            modifier = Modifier.padding(vertical = 15.dp),
-            text = stringResource(id = R.string.cart_add_button),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.W700,
-            color = Color.White,
-        )
-    }
+        modifier = modifier,
+    )
 }
 
 @Preview(showBackground = true)
