@@ -14,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -31,10 +30,9 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductCartScreen(
-    model: List<CartProductModel>,
+    items: List<CartProductModel>,
     onBackButtonClick: () -> Unit,
 ) {
-    var items by remember { mutableStateOf(model) }
     val totalPrice by remember(items) { mutableIntStateOf(Cart.totalPrice) }
     val enableOrder by remember(items) { mutableStateOf(Cart.totalPrice > 0) }
 
@@ -69,7 +67,6 @@ fun ProductCartScreen(
                 ) { model ->
                     CartProduct(
                         model = model,
-                        listUpdate = { items = it },
                     )
                 }
             }
@@ -92,7 +89,7 @@ fun ProductCartScreen(
 private fun ProductListScreenPreview() {
     ShoppingCartTheme {
         ProductCartScreen(
-            model = dummyCartProductList,
+            items = dummyCartProductList,
             onBackButtonClick = {},
         )
     }

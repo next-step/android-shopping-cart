@@ -12,7 +12,7 @@ val dummyProducts = listOf(
         id = 1,
         imageUrl = "https://fastly.picsum.photos/id/903/200/200.jpg?hmac=lxHKyjlQqAkKyuVGkgUCO_jdWkg3osj3nTuULFHZxH8",
         name = "우유",
-        price = 1000
+        price = 1000,
     ),
     ProductModel(
         id = 2,

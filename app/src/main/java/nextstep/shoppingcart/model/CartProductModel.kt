@@ -31,7 +31,7 @@ val dummyCartProductList = listOf(
     ),
     CartProductModel(
         product = ProductModel(
-            id = 3,
+            id = 1,
             imageUrl = "https://i.namu.wiki/i/Gj5s8EAX_AiQRQIeOK7MYO9WDI9jv2VxIoG4fsfOL9JNYbZLGrWYmR3YX-8RFQ45_rElsB1AJ6oXc6AHiP-VcnMDzD0i39q10gcbK4rkkcTZcBxp9eDuCyw6xz6pgeLMy48xKcFniW2FshY48NV4Wg.webp",
             name = "커피우유",
             price = 2500

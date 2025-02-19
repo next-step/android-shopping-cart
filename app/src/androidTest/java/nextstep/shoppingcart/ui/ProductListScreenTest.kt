@@ -7,6 +7,7 @@ import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.model.ProductModel
+import nextstep.shoppingcart.model.toProductWithCartCount
 import org.junit.Rule
 import org.junit.Test
 
@@ -46,7 +47,7 @@ class ProductListScreenTest {
         // given
         composeTestRule.setContent {
             ProductListScreen(
-                products = products,
+                items = products.toProductWithCartCount()
             )
         }
 

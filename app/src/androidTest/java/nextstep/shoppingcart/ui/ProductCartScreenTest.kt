@@ -1,5 +1,10 @@
 package nextstep.shoppingcart.ui
 
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
@@ -22,18 +27,34 @@ class ProductCartScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val productName = "사이다"
-    private val productPrice = 2_000
     private val product = ProductModel(
         id = 1,
-        imageUrl = "Donovan",
-        name = productName,
-        price = productPrice,
+        name = "사이다",
+        price = 2_000,
+        imageUrl = "http://www.bing.com/search?q=nominavi",
     )
+
+    private val addButton get() = composeTestRule.onNodeWithContentDescription("담기")
+    private val removeButton get() = composeTestRule.onNodeWithContentDescription("제거")
+    private val clearButton get() = composeTestRule.onNodeWithContentDescription("삭제")
+
+    private var items by mutableStateOf(Cart.items)
 
     @Before
     fun setup() {
         Cart.init()
+    }
+
+    private fun setContentScreen() {
+        composeTestRule.setContent {
+            val updatedTime by remember { Cart.updateTime }
+            LaunchedEffect(updatedTime) { items = Cart.items }
+
+            ProductCartScreen(
+                items = items,
+                onBackButtonClick = {},
+            )
+        }
     }
 
     @Test
@@ -42,17 +63,14 @@ class ProductCartScreenTest {
         dummyProducts.forEach {
             Cart.addOne(it)
         }
-        composeTestRule.setContent {
-            ProductCartScreen(
-                model = Cart.items,
-                onBackButtonClick = {},
-            )
-        }
+        setContentScreen()
 
         // then
-        Cart.items.forEach { item ->
-            composeTestRule
-                .onNodeWithTag("productCartLazyColumn")
+        val productList = composeTestRule
+            .onNodeWithTag("productCartLazyColumn")
+
+        items.forEach { item ->
+            productList
                 .performScrollToNode(hasText(item.name))
                 .assertIsDisplayed()
         }
@@ -62,16 +80,11 @@ class ProductCartScreenTest {
     fun 장바구니에_담긴_상품이_하나라도_있다면_장바구니담기_버튼_활성화_되고_총합이_노출() {
         // given
         Cart.addOne(product)
-        composeTestRule.setContent {
-            ProductCartScreen(
-                model = Cart.items,
-                onBackButtonClick = {},
-            )
-        }
+        setContentScreen()
 
         // then
         composeTestRule
-            .onNodeWithText("주문하기(${String.format("%,d원", productPrice)})")
+            .onNodeWithText("주문하기(2,000원)")
             .assertIsDisplayed()
             .assertIsEnabled()
     }
@@ -80,24 +93,18 @@ class ProductCartScreenTest {
     @Test
     fun 담긴_상품의_삭제_버튼_클릭시_목록에서_아이템_목록에서_미노출_되고_변경된_총합_노출() {
         // given
-        repeat(2) { Cart.addOne(product) }
-        composeTestRule.setContent {
-            ProductCartScreen(
-                model = Cart.items,
-                onBackButtonClick = {},
-            )
-        }
+        Cart.addOne(product)
+        setContentScreen()
+
         // when
-        composeTestRule
-            .onNodeWithContentDescription("삭제")
-            .performClick()
+        clearButton.performClick()
 
         // then
         composeTestRule
-            .onNodeWithText(productName)
+            .onNodeWithText("사이다")
             .assertIsNotDisplayed()
         composeTestRule
-            .onNodeWithText("주문하기(${String.format("%,d원", 0)})")
+            .onNodeWithText("주문하기(0원)")
             .assertIsDisplayed()
             .assertIsNotEnabled()
     }
@@ -105,22 +112,15 @@ class ProductCartScreenTest {
     @Test
     fun 담긴_상품의_수량이_2_이상일_경우_제거_버튼_클릭시_변경된_총합_노출() {
         // given
-        val count = 3
-        repeat(count) { Cart.addOne(product) }
-        composeTestRule.setContent {
-            ProductCartScreen(
-                model = Cart.items,
-                onBackButtonClick = {},
-            )
-        }
+        repeat(3) { Cart.addOne(product) }
+        setContentScreen()
+
         // when
-        composeTestRule
-            .onNodeWithContentDescription("제거")
-            .performClick()
+        removeButton.performClick()
 
         // then
         composeTestRule
-            .onNodeWithText("주문하기(${String.format("%,d원", productPrice * count.dec())})")
+            .onNodeWithText("주문하기(4,000원)")
             .assertIsDisplayed()
             .assertIsEnabled()
     }
@@ -129,56 +129,38 @@ class ProductCartScreenTest {
     fun 담긴_상품의_갯수가_1_일_경우_제거_버튼_클릭시_아이템_목록에서_미노출_되고_변경된_총합_노출() {
         // given
         Cart.addOne(product)
-        composeTestRule.setContent {
-            ProductCartScreen(
-                model = Cart.items,
-                onBackButtonClick = {},
-            )
-        }
+        setContentScreen()
+
         // when
-        composeTestRule
-            .onNodeWithContentDescription("제거")
-            .performClick()
+        removeButton.performClick()
 
         // then
-        composeTestRule.onNodeWithText(productName)
+        composeTestRule.onNodeWithText("사이다")
             .assertIsNotDisplayed()
         composeTestRule
-            .onNodeWithText("주문하기(${String.format("%,d원", 0)})")
+            .onNodeWithText("주문하기(0원)")
             .assertIsDisplayed()
     }
 
     @Test
     fun 담긴_상품의_담기_버튼_클릭시_수량_1_증가되고_변경된_총합_노출() {
         // given
-        val count = 3
-        repeat(count) { Cart.addOne(product) }
-        composeTestRule.setContent {
-            ProductCartScreen(
-                model = Cart.items,
-                onBackButtonClick = {},
-            )
-        }
+        Cart.addOne(product)
+        setContentScreen()
+
         // when
-        composeTestRule
-            .onNodeWithContentDescription("담기")
-            .performClick()
+        addButton.performClick()
 
         // then
         composeTestRule
-            .onNodeWithText("주문하기(${String.format("%,d원", productPrice * count.inc())})")
+            .onNodeWithText("주문하기(4,000원)")
             .assertIsDisplayed()
     }
 
     @Test
     fun 담긴상품이_하나도_없다면_장바구니담기_버튼_비활성화() {
         // given
-        composeTestRule.setContent {
-            ProductCartScreen(
-                model = Cart.items,
-                onBackButtonClick = {},
-            )
-        }
+        setContentScreen()
 
         // then
         composeTestRule
