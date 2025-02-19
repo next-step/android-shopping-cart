@@ -8,6 +8,7 @@ import androidx.compose.ui.test.onChildAt
 import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import nextstep.shoppingcart.data.model.Cart
 import nextstep.shoppingcart.data.model.Product
 import nextstep.shoppingcart.ui.component.ProductList
 import org.junit.Rule
@@ -51,6 +52,7 @@ class ProductListTest {
             ProductList(
                 modifier = Modifier.testTag("ProductListContent"),
                 productList = productList,
+                cart = Cart(emptyList()),
                 onProductClick = {}
             )
         }
@@ -69,6 +71,7 @@ class ProductListTest {
             ProductList(
                 modifier = Modifier.testTag("ProductListContent"),
                 productList = productList,
+                cart = Cart(emptyList()),
                 onProductClick = {
                     selectedProduct = it
                 }

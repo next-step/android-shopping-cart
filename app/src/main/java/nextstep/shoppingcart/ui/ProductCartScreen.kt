@@ -27,25 +27,18 @@ internal fun ProductCartScreen(
     onBackButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var cartItems by remember { mutableStateOf(CartRepository.cartItems) }
-    val totalPrice = remember(cartItems) { CartRepository.totalPrice }
-    val orderButtonEnabled: Boolean by remember(totalPrice) { derivedStateOf { totalPrice > 0 } }
+    var cart by remember { CartRepository.cartState }
+    val orderButtonEnabled: Boolean by remember(cart) { derivedStateOf { cart.totalPrice > 0 } }
 
     ProductCartScreen(
         modifier = modifier.fillMaxSize(),
-        cartItems = cartItems,
-        totalPrice = totalPrice,
+        cartItems = cart.items,
+        totalPrice = cart.totalPrice,
         orderButtonEnabled = orderButtonEnabled,
         onBackButtonClick = onBackButtonClick,
-        onRemoveClick = {
-            cartItems = CartRepository.removeAll(it)
-        },
-        onIncreaseClick = {
-            cartItems = CartRepository.addOne(it)
-        },
-        onDecreaseClick = {
-            cartItems = CartRepository.removeOne(it)
-        },
+        onRemoveClick = { cart = CartRepository.removeAll(it) },
+        onIncreaseClick = { cart = CartRepository.addOne(it) },
+        onDecreaseClick = { cart = CartRepository.removeOne(it) },
         onOrderClick = { /*todo*/ },
     )
 }

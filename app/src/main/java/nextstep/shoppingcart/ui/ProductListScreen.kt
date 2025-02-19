@@ -4,9 +4,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.data.model.Cart
 import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.data.repository.ProductRepository
 import nextstep.shoppingcart.ui.component.ProductList
 import nextstep.shoppingcart.ui.component.ProductListTopAppBar
@@ -17,6 +22,29 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 internal fun ProductListScreen(
     productList: List<Product>,
     onTopBarButtonClick: () -> Unit,
+    onItemClick: (Product) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var cart by remember { CartRepository.cartState }
+
+    ProductListScreen(
+        modifier = modifier,
+        productList = productList,
+        cart = cart,
+        onTopBarButtonClick = onTopBarButtonClick,
+        onIncreaseClick = { cart = CartRepository.addOne(it) },
+        onDecreaseClick = { cart = CartRepository.removeOne(it) },
+        onItemClick = onItemClick,
+    )
+}
+
+@Composable
+internal fun ProductListScreen(
+    productList: List<Product>,
+    cart: Cart,
+    onTopBarButtonClick: () -> Unit,
+    onIncreaseClick: (Product) -> Unit,
+    onDecreaseClick: (Product) -> Unit,
     onItemClick: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -31,7 +59,10 @@ internal fun ProductListScreen(
             ProductList(
                 modifier = Modifier.padding(innerPadding),
                 productList = productList,
-                onProductClick = onItemClick
+                cart = cart,
+                onIncreaseClick = onIncreaseClick,
+                onDecreaseClick = onDecreaseClick,
+                onProductClick = onItemClick,
             )
         }
     )

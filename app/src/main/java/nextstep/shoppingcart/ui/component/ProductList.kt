@@ -10,12 +10,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.data.model.Cart
 import nextstep.shoppingcart.data.model.Product
+import nextstep.shoppingcart.data.repository.CartRepository
 
 @Composable
 internal fun ProductList(
     productList: List<Product>,
-    onProductClick: (Product) -> Unit,
+    cart: Cart,
+    onIncreaseClick: (Product) -> Unit = {},
+    onDecreaseClick: (Product) -> Unit = {},
+    onProductClick: (Product) -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -32,6 +37,9 @@ internal fun ProductList(
         ) { product ->
             ProductItem(
                 product = product,
+                count = cart.getCountByProductId(product.id),
+                onIncreaseClick = onIncreaseClick,
+                onDecreaseClick = onDecreaseClick,
                 onProductClick = onProductClick,
             )
         }
@@ -50,6 +58,6 @@ private fun ProductListContentPreview() {
                 price = 3124
             )
         },
-        onProductClick = {}
+        cart = CartRepository.cartState.value,
     )
 }
