@@ -1,16 +1,13 @@
 package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -31,7 +28,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -59,7 +55,7 @@ internal fun ProductCartItem(
                 shape = ShapeDefaults.ExtraSmall
             )
             .padding(18.dp)
-            .testTag("ProductCartItem"),
+            .testTag(cartItem.productName),
     ) {
         ProductCartItemTitle(
             modifier = Modifier.fillMaxWidth(),
@@ -93,8 +89,8 @@ internal fun ProductCartItem(
                         letterSpacing = 0.5.sp,
                     )
                 )
-                ProductCounter(
-                    cartItem = cartItem,
+                ProductCartCounter(
+                    count = cartItem.count,
                     onIncreaseClick = { onIncreaseClick(cartItem.product) },
                     onDecreaseClick = { onDecreaseClick(cartItem.product) },
                 )
@@ -128,7 +124,7 @@ private fun ProductCartItemTitle(
         IconButton(
             modifier = Modifier
                 .size(24.dp)
-                .testTag("${cartItem.productName}_remove_button"),
+                .testTag("remove_button"),
             onClick = { onRemoveClick(cartItem.product) }
         ) {
             Icon(
@@ -138,69 +134,6 @@ private fun ProductCartItemTitle(
         }
     }
 }
-
-@Composable
-private fun ProductCounter(
-    cartItem: CartItem,
-    onIncreaseClick: (Product) -> Unit,
-    onDecreaseClick: (Product) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val textStyle = remember {
-        TextStyle(
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp,
-            lineHeight = 18.67.sp,
-            letterSpacing = 0.5.sp,
-            color = Color.Black,
-            textAlign = TextAlign.Center
-        )
-    }
-    val buttonSize = 42.dp
-    Row(
-        modifier = modifier
-    ) {
-        Box(
-            modifier = Modifier
-                .size(buttonSize)
-                .testTag("${cartItem.productName}_decrease_button")
-                .clickable {
-                    onDecreaseClick(cartItem.product)
-                },
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = stringResource(R.string.decrease_symbol),
-                style = textStyle
-            )
-        }
-        Box(
-            modifier = Modifier.sizeIn(minWidth = buttonSize, minHeight = buttonSize)
-        ) {
-            Text(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .testTag("${cartItem.productName}_count"),
-                style = textStyle,
-                fontWeight = FontWeight.Normal,
-                text = cartItem.count.toString(),
-            )
-        }
-        Box(
-            modifier = Modifier
-                .size(buttonSize)
-                .testTag("${cartItem.productName}_increase_button")
-                .clickable { onIncreaseClick(cartItem.product) },
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(
-                text = stringResource(R.string.increase_symbol),
-                style = textStyle
-            )
-        }
-    }
-}
-
 
 @Preview(showBackground = true)
 @Composable
