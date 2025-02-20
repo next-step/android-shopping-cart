@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.common
+package nextstep.shoppingcart.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.common
+package nextstep.shoppingcart.ui.components
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon

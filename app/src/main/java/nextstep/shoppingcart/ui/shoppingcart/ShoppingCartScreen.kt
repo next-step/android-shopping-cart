@@ -36,7 +36,7 @@ import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.components.BottomAppBar
+import nextstep.shoppingcart.ui.components.ShoppingCartButton
 import nextstep.shoppingcart.ui.components.CommonTopAppBar
 import nextstep.shoppingcart.ui.components.NumberCounter
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -63,7 +63,7 @@ fun ShoppingCartScreen(
             )
         },
         bottomBar = {
-            BottomAppBar(
+            ShoppingCartButton(
                 text = stringResource(
                     R.string.shopping_cart_bottom_bar_total_price_format,
                     totalPrice

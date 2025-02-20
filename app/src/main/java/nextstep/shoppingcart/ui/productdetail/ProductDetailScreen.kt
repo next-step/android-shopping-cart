@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.components.BottomAppBar
+import nextstep.shoppingcart.ui.components.ShoppingCartButton
 import nextstep.shoppingcart.ui.components.CommonTopAppBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -48,7 +48,7 @@ fun ProductDetailScreen(
             )
         },
         bottomBar = {
-            BottomAppBar(
+            ShoppingCartButton(
                 text = stringResource(R.string.product_detail_btn_add_product_in_cart),
                 onClick = onAddProductClick,
             )
