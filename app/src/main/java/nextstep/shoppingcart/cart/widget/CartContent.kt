@@ -18,8 +18,8 @@ import nextstep.shoppingcart.model.Product
 @Composable
 fun CartContent(
     cartItems: List<CartItem>,
-    onClickDeleteItemButton: (Product) -> Unit,
-    onClickIncreaseCountButton: () -> Unit,
+    onClickDeleteItemButton: (CartItem) -> Unit,
+    onClickIncreaseCountButton: (CartItem) -> Unit,
     onClickDecreaseCountButton: () -> Unit,
     modifier: Modifier = Modifier
 ) {

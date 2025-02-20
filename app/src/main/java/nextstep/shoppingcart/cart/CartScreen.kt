@@ -20,7 +20,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun CartScreen(
     currentCartItems: List<CartItem>,
     popBackStack: () -> Unit,
-    deleteItem: (Product) -> Unit,
+    deleteItem: (CartItem) -> Unit,
+    increaseItemCount: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var cartItems by remember { mutableStateOf(currentCartItems) }
@@ -35,9 +36,12 @@ fun CartScreen(
             cartItems = cartItems,
             onClickDeleteItemButton = {
                 deleteItem(it)
-                cartItems = cartItems.filter { cartItem -> cartItem.product.id != it.id }
+                cartItems = cartItems.removeItem(it)
             },
-            onClickIncreaseCountButton = {},
+            onClickIncreaseCountButton = {
+                increaseItemCount(it)
+                cartItems = cartItems.addCountItem(it)
+            },
             onClickDecreaseCountButton = {},
             modifier = Modifier.padding(paddingValue),
         )
@@ -71,6 +75,21 @@ private fun CartScreenPreview() {
             ),
             popBackStack = {},
             deleteItem = {},
+            increaseItemCount = {},
         )
+    }
+}
+
+private fun List<CartItem>.removeItem(item: CartItem): List<CartItem> {
+    return this.filter { cartItem -> cartItem.product.id != item.product.id }
+}
+
+private fun List<CartItem>.addCountItem(item: CartItem): List<CartItem> {
+    return this.map { cartItem ->
+        if (cartItem.product.id == item.product.id) {
+            cartItem.copy(count = cartItem.count + 1)
+        } else {
+            cartItem
+        }
     }
 }

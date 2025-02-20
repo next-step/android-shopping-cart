@@ -38,8 +38,8 @@ import nextstep.shoppingcart.util.NumberFormatUtil.toPrice
 @Composable
 fun CartProductItem(
     cartItem: CartItem,
-    onClickDeleteItemButton: (Product) -> Unit,
-    onClickIncreaseCountButton: () -> Unit,
+    onClickDeleteItemButton: (CartItem) -> Unit,
+    onClickIncreaseCountButton: (CartItem) -> Unit,
     onClickDecreaseCountButton: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -59,7 +59,7 @@ fun CartProductItem(
                 modifier = Modifier.weight(1f)
             )
             IconButton(
-                onClick = { onClickDeleteItemButton.invoke(cartItem.product) },
+                onClick = { onClickDeleteItemButton.invoke(cartItem) },
                 modifier = Modifier
                     .size(24.dp)
                     .testTag("${cartItem.product.id}deleteButton")
@@ -106,12 +106,14 @@ fun CartProductItem(
                         )
                     }
                     Text(
-                        cartItem.product.price.toPrice(),
+                        cartItem.count.toString(),
                         style = Normal16,
                     )
                     IconButton(
-                        onClick = onClickIncreaseCountButton,
-                        modifier = Modifier.size(24.dp)
+                        onClick = { onClickIncreaseCountButton.invoke(cartItem) },
+                        modifier = Modifier
+                            .size(24.dp)
+                            .testTag("${cartItem.product.id}increaseButton")
                     ) {
                         Icon(
                             Icons.Filled.Add,
