@@ -82,7 +82,7 @@ fun CartProductItem(
             )
             Column(horizontalAlignment = Alignment.End) {
                 Text(
-                    cartItem.product.price.toPrice(),
+                    cartItem.totalPrice.toPrice(),
                     style = Normal16,
                 )
                 Row(
@@ -90,6 +90,7 @@ fun CartProductItem(
                         .padding(top = 6.dp)
                         .width(126.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     IconButton(
                         onClick = onClickDecreaseCountButton,
