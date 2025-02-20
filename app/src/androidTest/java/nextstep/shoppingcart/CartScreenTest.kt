@@ -1,5 +1,7 @@
 package nextstep.shoppingcart
 
+import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -139,4 +141,42 @@ class CartScreenTest {
             .assertExists()
     }
 
+    @Test
+    fun 장바구니에_담은_상품의_개수가_99개면_증가_버튼은_비활성화_된다() {
+        // given
+        val cartItems = listOf(
+            CartItem(
+                product = Product(
+                    id = 1,
+                    name = "상품1",
+                    price = 1000,
+                    imageUrl = "",
+                ),
+                count = 98
+            )
+        )
+
+        // when
+        composeTestRule.setContent {
+            CartScreen(
+                currentCartItems = cartItems,
+                popBackStack = {},
+                deleteItem = {},
+                increaseItemCount = {},
+            )
+        }
+
+        composeTestRule
+            .onNodeWithTag("1increaseButton")
+            .assertIsEnabled()
+
+        composeTestRule
+            .onNodeWithTag("1increaseButton")
+            .performClick()
+
+        // then
+        composeTestRule
+            .onNodeWithTag("1increaseButton")
+            .assertIsNotEnabled()
+    }
 }

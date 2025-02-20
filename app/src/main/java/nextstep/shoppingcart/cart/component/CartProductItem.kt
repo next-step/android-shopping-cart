@@ -109,8 +109,10 @@ fun CartProductItem(
                         cartItem.count.toString(),
                         style = Normal16,
                     )
+
                     IconButton(
                         onClick = { onClickIncreaseCountButton.invoke(cartItem) },
+                        enabled = cartItem.count < 99,
                         modifier = Modifier
                             .size(24.dp)
                             .testTag("${cartItem.product.id}increaseButton")
