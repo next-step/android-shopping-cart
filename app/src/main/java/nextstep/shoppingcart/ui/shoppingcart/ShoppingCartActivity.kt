@@ -6,7 +6,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import nextstep.shoppingcart.model.Cart
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ShoppingCartActivity : ComponentActivity() {
@@ -14,13 +19,24 @@ class ShoppingCartActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
+                var cartItems by remember { mutableStateOf(Cart.items) }
+
                 enableEdgeToEdge()
                 ShoppingCartScreen(
-                    cartItems = Cart.items,
+                    cartItems = cartItems,
                     onBackButtonClick = ::finish,
-                    onAddProductClick = Cart::addOne,
-                    onRemoveProductClick = Cart::removeOne,
-                    onRemoveAllProductClick = Cart::removeAll,
+                    onAddProductClick = { product: Product ->
+                        Cart.addOne(product)
+                        cartItems = Cart.items
+                    },
+                    onRemoveProductClick = { product: Product ->
+                        Cart.removeOne(product)
+                        cartItems = Cart.items
+                    },
+                    onRemoveAllProductClick = { product: Product ->
+                        Cart.removeAll(product)
+                        cartItems = Cart.items
+                    },
                 )
             }
         }
