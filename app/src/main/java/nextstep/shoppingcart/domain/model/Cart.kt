@@ -49,4 +49,8 @@ class Cart(
 
         return Cart(items - itemForRemoveAll)
     }
+
+    fun find(product: Product): CartItem? {
+        return items.find { it.product.id == product.id }
+    }
 }

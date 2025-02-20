@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import nextstep.shoppingcart.data.FakeProductRepository
+import nextstep.shoppingcart.data.InMemoryCartRepository
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.screens.MainScreen
@@ -21,6 +22,9 @@ class MainActivity : ComponentActivity() {
             ShoppingCartTheme {
                 MainScreen(
                     products = products,
+                    cart = InMemoryCartRepository.cart.value,
+                    onAddOneClick = InMemoryCartRepository::addOne,
+                    onRemoveOneClick = InMemoryCartRepository::removeOne,
                     onActionCartClick = ::startCartActivity,
                     onProductClick = ::startProductDetailActivity,
                 )

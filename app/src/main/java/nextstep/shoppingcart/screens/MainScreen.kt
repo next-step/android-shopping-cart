@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,6 +16,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.topbar.CenterTitleTopBar
 import nextstep.shoppingcart.components.topbar.TopBarActionType
 import nextstep.shoppingcart.data.FakeProductRepository
+import nextstep.shoppingcart.domain.model.Cart
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -25,6 +25,9 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 internal fun MainScreen(
     products: Products,
+    cart: Cart,
+    onAddOneClick: (Product) -> Unit,
+    onRemoveOneClick: (Product) -> Unit,
     onActionCartClick: () -> Unit,
     onProductClick: (Product) -> Unit,
 ) {
@@ -38,13 +41,18 @@ internal fun MainScreen(
                 scrollBehavior = scrollBehavior,
             )
         },
-        modifier = Modifier.fillMaxSize().nestedScroll(scrollBehavior.nestedScrollConnection),
-        containerColor = Color.White
+        modifier = Modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        containerColor = Color.White,
     ) { paddingValues ->
         ProductListScreen(
             products = products,
+            cart = cart,
+            onAddOneClick = onAddOneClick,
+            onRemoveOneClick = onRemoveOneClick,
             onProductClick = onProductClick,
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier.padding(paddingValues),
         )
     }
 }
@@ -55,7 +63,10 @@ private fun MainScreenPreview() {
     ShoppingCartTheme {
         MainScreen(
             products = FakeProductRepository.getAllProducts(),
+            cart = Cart(),
             onActionCartClick = {},
+            onAddOneClick = {},
+            onRemoveOneClick = {},
             onProductClick = {},
         )
     }
