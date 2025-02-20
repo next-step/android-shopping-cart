@@ -10,8 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
-import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 
 @Composable
 fun ProductItemContainer(
@@ -19,7 +17,6 @@ fun ProductItemContainer(
     price: Int,
     imageUrl: String,
     modifier: Modifier = Modifier,
-    formatter: MoneyFormatter = DefaultMoneyFormatter,
 ) {
     Column(
         horizontalAlignment = Alignment.Start,
@@ -37,9 +34,7 @@ fun ProductItemContainer(
             fontSize = 16.sp,
             fontWeight = FontWeight.W700,
         )
-        Text(
-            text = "${formatter.format(price)}원",
-        )
+        PriceText(price = price)
     }
 }
 

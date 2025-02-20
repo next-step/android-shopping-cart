@@ -126,19 +126,18 @@ private fun CartItemInfo(
     price: Int,
     count: Int,
     modifier: Modifier = Modifier,
-    formatter: MoneyFormatter = DefaultMoneyFormatter,
     onMinusCartItem: () -> Unit,
     onPlusCartItem: () -> Unit,
 ) {
     Column(
+        modifier = modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.End,
-        verticalArrangement = Arrangement.Bottom,
-        modifier = modifier.fillMaxHeight()
+        verticalArrangement = Arrangement.Bottom
     ) {
-        Text(
-            text = "${formatter.format(price)}원",
+        PriceText(
+            price = price,
             fontSize = 16.sp,
-            fontWeight = FontWeight.W400
+            fontWeight = FontWeight.W400,
         )
         CartQuantitySector(
             count = count,
