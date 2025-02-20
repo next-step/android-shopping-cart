@@ -17,7 +17,6 @@ import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.repository.CartRepository
-import nextstep.shoppingcart.repository.CartRepository.addOne
 import nextstep.shoppingcart.ui.screen.ShoppingCartScreen
 import org.junit.Before
 import org.junit.Rule
@@ -51,15 +50,15 @@ class ShoppingCartScreenTest {
 
             ShoppingCartScreen(
                 cartItemList = cartItemList,
-                onMinusCartItem = { cartItem ->
+                onMinusCartItemClick = { cartItem ->
                     CartRepository.removeOne(cartItem.product)
                     cartItemList = CartRepository.items
                 },
-                onPlusCartItem = { cartItem ->
+                onPlusCartItemClick = { cartItem ->
                     CartRepository.addOne(cartItem.product)
                     cartItemList = CartRepository.items
                 },
-                onCartItemDelete = { cartItem ->
+                onCartItemDeleteClick = { cartItem ->
                     CartRepository.removeAll(cartItem.product)
                     cartItemList = CartRepository.items
                 },
@@ -119,7 +118,7 @@ class ShoppingCartScreenTest {
     fun 담긴_상품의_수량을_감소시키면_상품_가격에_반영된다() {
         // 상품1 수량 추가
         repeat(2) {
-            addOne(Product(
+            CartRepository.addOne(Product(
                 imageUrl = "https://example.com",
                 title = PRODUCT_ONE,
                 price = 1000,
