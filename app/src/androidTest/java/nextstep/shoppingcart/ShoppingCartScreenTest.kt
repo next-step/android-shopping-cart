@@ -1,6 +1,13 @@
 package nextstep.shoppingcart
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.shoppingcart.ShoppingCartScreen
 import org.junit.Rule
 import org.junit.Test
 
@@ -10,27 +17,29 @@ internal class ShoppingCartScreenTest {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun 담긴_상품_가격의_총합이_노출된다() {
-        //   ...
-    }
+    fun 상품의_가격_총합이_노출된다() {
+        // given: .
+        val cartItem = CartItem(
+            Product(
+                id = 1L,
+                name = "[든든] 동원 스위트콘",
+                price = 99_800L,
+                imageUrl = "https://picsum.photos/200"
+            ),
+            count = 1
+        )
+        composeTestRule.setContent {
+            ShoppingCartScreen(
+                cartItems = listOf(cartItem),
+                totalPrice = cartItem.product.price,
+                onBackButtonClick = {},
+                onAddProductClick = {},
+                onRemoveProductClick = {},
+                onRemoveAllProductClick = {}
+            )
+        }
 
-    @Test
-    fun 담긴_상품을_제거할_수_있다() {
-        // ...
-    }
-
-    @Test
-    fun 담긴_상품의_수량을_증가시키면_상품_가격에_반영된다() {
-        //   ...
-    }
-
-    @Test
-    fun 담긴_상품의_수량을_감소시키면_상품_가격에_반영된다() {
-        //  ...
-    }
-
-    @Test
-    fun 담긴_상품의_수량을_1보다_적게_하면_상품이_삭제된다() {
-        // ...
+        // when: UI에서 특정 텍스트(가격 정보)가 보이는지 확인
+        composeTestRule.onNodeWithText("주문하기(99,800원)").assertExists()
     }
 }
