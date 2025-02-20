@@ -230,4 +230,44 @@ class CartScreenTest {
             .onNodeWithText("99,000원")
             .assertExists()
     }
+
+    @Test
+    fun 담긴_상품의_수량을_1보다_적게_하면_상품이_삭제된다() {
+        // given
+        val cartItems = listOf(
+            CartItem(
+                product = Product(
+                    id = 1,
+                    name = "상품1",
+                    price = 1000,
+                    imageUrl = "",
+                ),
+                count = 1
+            )
+        )
+
+        composeTestRule.setContent {
+            CartScreen(
+                currentCartItems = cartItems,
+                popBackStack = {},
+                deleteItem = {},
+                increaseItemCount = {},
+                decreaseItemCount = {},
+            )
+        }
+
+        // when
+        composeTestRule
+            .onNodeWithTag("1")
+            .assertExists()
+
+        composeTestRule
+            .onNodeWithTag("1decreaseButton")
+            .performClick()
+
+        // then
+        composeTestRule
+            .onNodeWithTag("1")
+            .assertDoesNotExist()
+    }
 }

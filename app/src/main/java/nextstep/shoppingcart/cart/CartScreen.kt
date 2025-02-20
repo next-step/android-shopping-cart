@@ -45,6 +45,11 @@ fun CartScreen(
             },
             onClickDecreaseCountButton = {
                 decreaseItemCount(it)
+                if (it.count == 1) {
+                    deleteItem(it)
+                    cartItems = cartItems.removeItem(it)
+                    return@CartContent
+                }
                 cartItems = cartItems.adjustCountItem(it, -1)
             },
             modifier = Modifier.padding(paddingValue),
