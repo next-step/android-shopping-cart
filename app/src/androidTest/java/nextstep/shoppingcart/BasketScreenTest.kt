@@ -4,17 +4,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertTextEquals
-import androidx.compose.ui.test.filterToOne
+import androidx.compose.ui.test.filter
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onSiblings
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.ui.basket.BasketScreen
 import nextstep.shoppingcart.ui.basket.BasketState
@@ -55,8 +53,37 @@ internal class BasketScreenTest {
                             }
                         )
                     },
-                    onIncreaseQuantityClick = {},
-                    onDecreaseQuantityClick = {},
+                    onIncreaseQuantityClick = { increaseItem ->
+                        state = state.copy(
+                            cartItems = state.cartItems.map { item ->
+                                if (item == increaseItem) {
+                                    item.copy(count = item.count + 1)
+                                } else {
+                                    item
+                                }
+                            }
+                        )
+                    },
+                    onDecreaseQuantityClick = { decreaseItem ->
+                        val newCartItems = state.cartItems.let { items ->
+                            items.find { it.product == decreaseItem.product }?.let { item ->
+                                if (item.count > 1) {
+                                    items.map { current ->
+                                        if (current.product == decreaseItem.product) {
+                                            current.copy(count = current.count - 1)
+                                        } else {
+                                            current
+                                        }
+                                    }
+                                } else {
+                                    items.filterNot { it.product == decreaseItem.product }
+                                }
+                            } ?: items
+                        }
+                        state = state.copy(
+                            cartItems = newCartItems,
+                        )
+                    },
                 )
             }
         }
@@ -83,12 +110,32 @@ internal class BasketScreenTest {
 
     @Test
     fun 담긴_상품의_수량을_증가시키면_상품_가격에_반영된다() {
+        // 맨 처음 상품의 수량을 증가시킨다.
+        composeTestRule
+            .onNodeWithTag("Item 0")
+            .onChildren()
+            .filter(hasContentDescription("수량을 1 증가시킵니다."))
+            .onFirst()
+            .performClick()
 
+        composeTestRule
+            .onNodeWithTag("orderButton")
+            .assertTextEquals("주문하기(10,100원)")
     }
 
     @Test
     fun 담긴_상품의_수량을_감소시키면_상품_가격에_반영된다() {
+        // 맨 처음 상품의 수량을 증가시킨다.
+        composeTestRule
+            .onNodeWithTag("Item 0")
+            .onChildren()
+            .filter(hasContentDescription("수량을 1 감소시킵니다."))
+            .onFirst()
+            .performClick()
 
+        composeTestRule
+            .onNodeWithTag("orderButton")
+            .assertTextEquals("주문하기(9,900원)")
     }
 
     @Test
