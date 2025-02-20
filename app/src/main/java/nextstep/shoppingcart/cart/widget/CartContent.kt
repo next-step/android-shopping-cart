@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.cart.component.CartOrderButton
 import nextstep.shoppingcart.cart.component.CartProductItem
 import nextstep.shoppingcart.model.CartItem
-import nextstep.shoppingcart.model.Product
 
 @Composable
 fun CartContent(
@@ -35,7 +34,7 @@ fun CartContent(
             }
         }
         CartOrderButton(
-            price = 0,
+            price = cartItems.totalPrice(),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 10.dp),
@@ -52,4 +51,8 @@ private fun CartContentPreview() {
         onClickIncreaseCountButton = {},
         onClickDecreaseCountButton = {},
     )
+}
+
+private fun List<CartItem>.totalPrice(): Int {
+    return this.sumOf { it.totalPrice }
 }
