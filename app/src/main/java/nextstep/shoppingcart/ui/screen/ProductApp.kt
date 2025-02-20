@@ -102,15 +102,15 @@ fun ProductApp() {
             ) { backStackEntry ->
                 ShoppingCartScreen(
                     cartItemList = cartItemList,
-                    onMinusCartItem = { cartItem ->
+                    onMinusCartItemClick = { cartItem ->
                         CartRepository.removeOne(cartItem.product)
                         cartItemList = CartRepository.items
                     },
-                    onPlusCartItem = { cartItem ->
+                    onPlusCartItemClick = { cartItem ->
                         CartRepository.addOne(cartItem.product)
                         cartItemList = CartRepository.items
                     },
-                    onCartItemDelete = { cartItem ->
+                    onCartItemDeleteClick = { cartItem ->
                         CartRepository.removeAll(cartItem.product)
                         cartItemList = CartRepository.items
                     }

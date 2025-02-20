@@ -25,9 +25,9 @@ import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 fun ShoppingCartScreen(
     cartItemList: List<CartItem>,
     modifier: Modifier = Modifier,
-    onMinusCartItem: (CartItem) -> Unit,
-    onPlusCartItem: (CartItem) -> Unit,
-    onCartItemDelete: (CartItem) -> Unit,
+    onMinusCartItemClick: (CartItem) -> Unit,
+    onPlusCartItemClick: (CartItem) -> Unit,
+    onCartItemDeleteClick: (CartItem) -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -37,9 +37,9 @@ fun ShoppingCartScreen(
             modifier = Modifier
                 .padding(horizontal = 18.dp)
                 .weight(1f),
-            onMinusCartItem = onMinusCartItem,
-            onPlusCartItem = onPlusCartItem,
-            onCartItemDelete = onCartItemDelete,
+            onMinusCartItemClick = onMinusCartItemClick,
+            onPlusCartItemClick = onPlusCartItemClick,
+            onCartItemDeleteClick = onCartItemDeleteClick,
         )
         OrderButton(
             totalMoney = CartRepository.totalPrice,
@@ -53,9 +53,9 @@ fun ShoppingCartScreen(
 private fun CartItemProductList(
     cartItemList: List<CartItem>,
     modifier: Modifier = Modifier,
-    onMinusCartItem: (CartItem) -> Unit,
-    onPlusCartItem: (CartItem) -> Unit,
-    onCartItemDelete: (CartItem) -> Unit,
+    onMinusCartItemClick: (CartItem) -> Unit,
+    onPlusCartItemClick: (CartItem) -> Unit,
+    onCartItemDeleteClick: (CartItem) -> Unit,
 ) {
     LazyColumn(
         modifier = modifier,
@@ -65,9 +65,9 @@ private fun CartItemProductList(
         items(cartItemList) { cartItem ->
             CartItemContainer(
                 cartItem = cartItem,
-                onMinusCartItem = { onMinusCartItem(cartItem) },
-                onPlusCartItem = { onPlusCartItem(cartItem) },
-                onCartItemDelete = { onCartItemDelete(cartItem) },
+                onMinusCartItem = { onMinusCartItemClick(cartItem) },
+                onPlusCartItem = { onPlusCartItemClick(cartItem) },
+                onCartItemDelete = { onCartItemDeleteClick(cartItem) },
             )
         }
     }
@@ -113,9 +113,9 @@ private fun CartItemProductListPreview() {
                 count = 1,
             ),
         ),
-        onMinusCartItem = { },
-        onPlusCartItem = { },
-        onCartItemDelete = { },
+        onMinusCartItemClick = { },
+        onPlusCartItemClick = { },
+        onCartItemDeleteClick = { },
     )
 }
 
@@ -150,8 +150,8 @@ private fun ShoppingCartScreenPreview() {
                 count = 1,
             ),
         ),
-        onMinusCartItem = { },
-        onPlusCartItem = { },
-        onCartItemDelete = { },
+        onMinusCartItemClick = { },
+        onPlusCartItemClick = { },
+        onCartItemDeleteClick = { },
     )
 }
