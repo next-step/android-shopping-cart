@@ -8,10 +8,13 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.component.BottomLargeButton
 
 @Composable
-fun DetailOrderButton(modifier: Modifier = Modifier) {
+fun DetailOrderButton(
+    onClickButton: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     BottomLargeButton(
         text = stringResource(R.string.detail_put_in_cart),
-        onClickButton = {},
+        onClickButton = onClickButton,
         modifier = modifier,
     )
 }
@@ -19,5 +22,5 @@ fun DetailOrderButton(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun DetailOrderButtonPreview() {
-    DetailOrderButton()
+    DetailOrderButton({})
 }

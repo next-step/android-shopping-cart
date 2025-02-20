@@ -3,7 +3,6 @@ package nextstep.shoppingcart.detail.widget
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
@@ -21,6 +20,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun DetailContent(
     product: Product,
+    onClickOrderButton: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxSize()) {
@@ -43,7 +43,10 @@ fun DetailContent(
                 .padding(horizontal = 18.dp)
         )
         Spacer(modifier = Modifier.weight(1f))
-        DetailOrderButton(modifier = Modifier.padding(bottom = 10.dp))
+        DetailOrderButton(
+            onClickButton = { onClickOrderButton(product) },
+            modifier = Modifier.padding(bottom = 10.dp),
+        )
     }
 }
 
@@ -57,7 +60,8 @@ private fun DetailContentPreview() {
                 name = "상품",
                 price = 40000,
                 imageUrl = "https://picsum.photos/id/30/1280/901",
-            )
+            ),
+            onClickOrderButton = {},
         )
     }
 }
