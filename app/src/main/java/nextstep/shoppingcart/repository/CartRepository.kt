@@ -38,6 +38,11 @@ object CartRepository {
         return items
     }
 
+    fun getItemCount(product: Product): Int {
+        val count = _items.find { it.product == product }?.count
+        return count ?: 0
+    }
+
     fun clear() {
         _items.clear()
     }

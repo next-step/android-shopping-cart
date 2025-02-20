@@ -79,9 +79,26 @@ fun ProductApp() {
             ) {
                 ProductScreen(
                     productList = fakeItemList,
+                    cartItemList = cartItemList,
                     onProductClick = { product ->
                         seletedProduct = product
                         navController.navigate(ProductDestination.ProductDetail.name)
+                    },
+                    onPlusCircleClick = { product ->
+                        CartRepository.addOne(product)
+                        cartItemList = CartRepository.items
+                    },
+                    onMinusCartItemClick = { product ->
+                        if(CartRepository.getItemCount(product) < 1) {
+                            cartItemList = CartRepository.items
+                        } else {
+                            CartRepository.removeOne(product)
+                            cartItemList = CartRepository.items
+                        }
+                    },
+                    onPlusCartItemClick = { product ->
+                        CartRepository.addOne(product)
+                        cartItemList = CartRepository.items
                     }
                 )
             }
