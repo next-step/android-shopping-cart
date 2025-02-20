@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ShoppingCartActivity : ComponentActivity() {
@@ -15,7 +16,11 @@ class ShoppingCartActivity : ComponentActivity() {
             ShoppingCartTheme {
                 enableEdgeToEdge()
                 ShoppingCartScreen(
+                    cartItems = Cart.items,
                     onBackButtonClick = ::finish,
+                    onAddProductClick = Cart::addOne,
+                    onRemoveProductClick = Cart::removeOne,
+                    onRemoveAllProductClick = Cart::removeAll,
                 )
             }
         }
