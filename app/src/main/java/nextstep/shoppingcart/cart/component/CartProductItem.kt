@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.TypoTokens.Bold20
 import nextstep.shoppingcart.ui.theme.TypoTokens.Normal16
@@ -35,7 +36,7 @@ import nextstep.shoppingcart.util.NumberFormatUtil.toPrice
 
 @Composable
 fun CartProductItem(
-    product: Product,
+    cartItem: CartItem,
     onClickDeleteItemButton: () -> Unit,
     onClickIncreaseCountButton: () -> Unit,
     onClickDecreaseCountButton: () -> Unit,
@@ -51,7 +52,7 @@ fun CartProductItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                product.name,
+                cartItem.product.name,
                 style = Bold20,
                 modifier = Modifier.weight(1f)
             )
@@ -73,15 +74,15 @@ fun CartProductItem(
                 .padding(top = 6.dp)
         ) {
             AsyncImage(
-                model = getUrlIfNotPreview(product.imageUrl),
-                contentDescription = "${product.name} image",
+                model = getUrlIfNotPreview(cartItem.product.imageUrl),
+                contentDescription = "${cartItem.product.name} image",
                 contentScale = ContentScale.Crop,
                 placeholder = painterResource(R.drawable.woori),
                 modifier = Modifier.size(width = 136.dp, height = 84.dp),
             )
             Column(horizontalAlignment = Alignment.End) {
                 Text(
-                    product.price.toPrice(),
+                    cartItem.product.price.toPrice(),
                     style = Normal16,
                 )
                 Row(
@@ -100,7 +101,7 @@ fun CartProductItem(
                         )
                     }
                     Text(
-                        product.price.toPrice(),
+                        cartItem.product.price.toPrice(),
                         style = Normal16,
                     )
                     IconButton(
@@ -122,11 +123,14 @@ fun CartProductItem(
 @Composable
 private fun CartProductItemPreview() {
     CartProductItem(
-        product = Product(
-            id = 1,
-            name = "상품",
-            price = 5000000,
-            imageUrl = "https://picsum.photos/id/30/1280/901",
+        cartItem = CartItem(
+            product = Product(
+                id = 1,
+                name = "상품",
+                price = 5000000,
+                imageUrl = "https://picsum.photos/id/30/1280/901",
+            ),
+            count = 1,
         ),
         onClickDeleteItemButton = {},
         onClickIncreaseCountButton = {},
