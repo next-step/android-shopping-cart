@@ -31,30 +31,8 @@ internal class BasketScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    @Test
-    fun 담긴_상품_가격의_총합이_노출된다() {
-        composeTestRule.setContent {
-            ShoppingCartTheme {
-                BasketScreen(
-                    state = BasketState(
-                        isInitialLoading = false,
-                        isLoadingShow = false,
-                        cartItems = defaultItems,
-                    ),
-                    navigateBack = {},
-                    onRemoveCartItemClick = {},
-                    onIncreaseQuantityClick = {},
-                    onDecreaseQuantityClick = {},
-                )
-            }
-        }
-        composeTestRule
-            .onNodeWithTag("orderButton")
-            .assertTextEquals("주문하기(10,000원)")
-    }
-
-    @Test
-    fun 담긴_상품을_제거할_수_있다() {
+    @Before
+    fun setup() {
         composeTestRule.setContent {
             ShoppingCartTheme {
                 var state by remember {
@@ -82,7 +60,17 @@ internal class BasketScreenTest {
                 )
             }
         }
+    }
 
+    @Test
+    fun 담긴_상품_가격의_총합이_노출된다() {
+        composeTestRule
+            .onNodeWithTag("orderButton")
+            .assertTextEquals("주문하기(10,000원)")
+    }
+
+    @Test
+    fun 담긴_상품을_제거할_수_있다() {
         // 맨 처음 상품을 제거한다.
         composeTestRule
             .onNodeWithContentDescription("Item 0 장바구니 아이템을 삭제합니다.")
