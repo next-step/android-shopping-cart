@@ -71,9 +71,17 @@ internal fun ProductDetail(
                 .fillMaxWidth()
                 .aspectRatio(ratio = 1f)
         )
-        ProductTitle(title = product.name)
+        ProductTitle(
+            title = product.name,
+            modifier = Modifier.padding(18.dp),
+        )
         HorizontalDivider(color = GrayAAAAAA)
-        ProductPrice(price = product.price.value)
+        ProductPrice(
+            price = product.price.value,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(18.dp),
+        )
         Spacer(Modifier.weight(1f))
         MainButton(
             text = stringResource(R.string.product_detail_add_cart),
@@ -87,21 +95,19 @@ internal fun ProductDetail(
 }
 
 @Composable
-private fun ProductTitle(title: String) {
+private fun ProductTitle(title: String, modifier: Modifier = Modifier) {
     Text(
         text = title,
         style = Typography.headlineSmall.copy(fontWeight = FontWeight.W700),
-        modifier = Modifier.padding(18.dp),
+        modifier = modifier,
     )
 }
 
 @Composable
-private fun ProductPrice(price: Int) {
+private fun ProductPrice(price: Int, modifier: Modifier = Modifier) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(18.dp),
+        modifier = modifier,
     ) {
         Text(
             text = stringResource(R.string.price),
@@ -135,5 +141,45 @@ private fun ProductDetailScreenWithProductNotFoundPreview() {
             onAddCartClick = {},
             onBackClick = {},
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductDetailPreview() {
+    ShoppingCartTheme {
+        ProductDetail(
+            product = FakeProductRepository.getFirstProduct(),
+            onAddCartClick = {},
+            addCartEnabled = true,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductDetailWithProductNotFoundPreview() {
+    ShoppingCartTheme {
+        ProductDetail(
+            product = Product.NotFound,
+            onAddCartClick = {},
+            addCartEnabled = false,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductTitlePreview() {
+    ShoppingCartTheme {
+        ProductTitle(title = "Wireless Mouse")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductPricePreview() {
+    ShoppingCartTheme {
+        ProductPrice(price = 10000)
     }
 }
