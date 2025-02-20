@@ -31,4 +31,31 @@ class ProductListItemTest {
             .onNodeWithContentDescription("추가")
             .assertIsDisplayed()
     }
+
+    @Test
+    fun 상품이_장바구니에_1개_이상_담긴다면_수량조절_버튼이_표시된다() {
+        // given
+        composeTestRule.setContent {
+            ProductListItem(
+                product = FakeProductRepository.getFirstProduct(),
+                count = 1,
+                onAddOneClick = {},
+                onRemoveOneClick = {},
+                onProductClick = {},
+            )
+        }
+
+        // then
+        composeTestRule
+            .onNodeWithText("+")
+            .assertIsDisplayed()
+
+        composeTestRule
+            .onNodeWithText("1")
+            .assertIsDisplayed()
+
+        composeTestRule
+            .onNodeWithText("−")
+            .assertIsDisplayed()
+    }
 }
