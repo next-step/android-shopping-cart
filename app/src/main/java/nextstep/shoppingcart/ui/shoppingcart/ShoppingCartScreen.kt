@@ -36,13 +36,15 @@ import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.common.CommonTopAppBar
-import nextstep.shoppingcart.ui.common.NumberCounter
+import nextstep.shoppingcart.ui.components.BottomAppBar
+import nextstep.shoppingcart.ui.components.CommonTopAppBar
+import nextstep.shoppingcart.ui.components.NumberCounter
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ShoppingCartScreen(
     cartItems: List<CartItem>,
+    totalPrice: Long,
     onBackButtonClick: () -> Unit,
     onAddProductClick: (Product) -> Unit,
     onRemoveProductClick: (Product) -> Unit,
@@ -60,6 +62,15 @@ fun ShoppingCartScreen(
                 onBackButtonClick = onBackButtonClick
             )
         },
+        bottomBar = {
+            BottomAppBar(
+                text = stringResource(
+                    R.string.shopping_cart_bottom_bar_total_price_format,
+                    totalPrice
+                ),
+                onClick = {}
+            )
+        }
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier.padding(innerPadding),
@@ -197,7 +208,8 @@ private fun ShoppingCartScreenPreview() {
             },
             onAddProductClick = {},
             onRemoveProductClick = {},
-            onRemoveAllProductClick = {}
+            onRemoveAllProductClick = {},
+            totalPrice = 99800L
         )
     }
 }

@@ -1,8 +1,6 @@
 package nextstep.shoppingcart.ui.productdetail
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,19 +10,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,9 +25,9 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.common.CommonTopAppBar
+import nextstep.shoppingcart.ui.components.BottomAppBar
+import nextstep.shoppingcart.ui.components.CommonTopAppBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
-import nextstep.shoppingcart.ui.theme.blue50
 
 @Composable
 fun ProductDetailScreen(
@@ -56,23 +48,10 @@ fun ProductDetailScreen(
             )
         },
         bottomBar = {
-            Button(
+            BottomAppBar(
+                text = stringResource(R.string.product_detail_btn_add_product_in_cart),
                 onClick = onAddProductClick,
-                colors = ButtonDefaults.buttonColors().copy(
-                    containerColor = blue50,
-                    contentColor = Color.White
-                ),
-                shape = RectangleShape,
-                contentPadding = PaddingValues(16.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Text(
-                    text = stringResource(R.string.product_detail_btn_add_product_in_cart),
-                    fontSize = 20.sp,
-                    fontWeight = W700,
-                )
-            }
+            )
         }
     ) { innerPadding ->
         ProductDetailContent(

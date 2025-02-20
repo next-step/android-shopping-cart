@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -20,23 +21,30 @@ class ShoppingCartActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 var cartItems by remember { mutableStateOf(Cart.items) }
+                var totalPrice by remember { mutableLongStateOf(Cart.totalPrice) }
+
+                fun updateCarts() {
+                    cartItems = Cart.items
+                    totalPrice = Cart.totalPrice
+                }
 
                 enableEdgeToEdge()
                 ShoppingCartScreen(
                     cartItems = cartItems,
+                    totalPrice = totalPrice,
                     onBackButtonClick = ::finish,
                     onAddProductClick = { product: Product ->
                         Cart.addOne(product)
-                        cartItems = Cart.items
+                        updateCarts()
                     },
                     onRemoveProductClick = { product: Product ->
                         Cart.removeOne(product)
-                        cartItems = Cart.items
+                        updateCarts()
                     },
                     onRemoveAllProductClick = { product: Product ->
                         Cart.removeAll(product)
-                        cartItems = Cart.items
-                    },
+                        updateCarts()
+                    }
                 )
             }
         }
