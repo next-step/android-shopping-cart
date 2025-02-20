@@ -23,8 +23,8 @@ import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 
 @Composable
 fun ShoppingCartScreen(
-    modifier: Modifier = Modifier,
     cartItemList: List<CartItem>,
+    modifier: Modifier = Modifier,
     onMinusCartItem: (CartItem) -> Unit,
     onPlusCartItem: (CartItem) -> Unit,
     onCartItemDelete: (CartItem) -> Unit,
@@ -34,12 +34,12 @@ fun ShoppingCartScreen(
     ) {
         CartItemProductList(
             cartItemList = cartItemList,
-            onMinusCartItem = onMinusCartItem,
-            onPlusCartItem = onPlusCartItem,
-            onCartItemDelete = onCartItemDelete,
             modifier = Modifier
                 .padding(horizontal = 18.dp)
                 .weight(1f),
+            onMinusCartItem = onMinusCartItem,
+            onPlusCartItem = onPlusCartItem,
+            onCartItemDelete = onCartItemDelete,
         )
         OrderButton(
             totalMoney = CartRepository.totalPrice,
@@ -52,10 +52,10 @@ fun ShoppingCartScreen(
 @Composable
 private fun CartItemProductList(
     cartItemList: List<CartItem>,
+    modifier: Modifier = Modifier,
     onMinusCartItem: (CartItem) -> Unit,
     onPlusCartItem: (CartItem) -> Unit,
     onCartItemDelete: (CartItem) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     LazyColumn(
         modifier = modifier,
@@ -76,9 +76,9 @@ private fun CartItemProductList(
 @Composable
 private fun OrderButton(
     totalMoney: Int,
-    onClick: () -> Unit,
-    formatter: MoneyFormatter = DefaultMoneyFormatter,
     modifier: Modifier = Modifier,
+    formatter: MoneyFormatter = DefaultMoneyFormatter,
+    onClick: () -> Unit,
 ) {
     BlueRectangleButton(
         buttonTitle = "${stringResource(id = R.string.cart_order_button)}(${
@@ -86,8 +86,8 @@ private fun OrderButton(
                 totalMoney
             )
         }원)",
-        onClick = onClick,
         modifier = modifier,
+        onClick = onClick,
     )
 }
 

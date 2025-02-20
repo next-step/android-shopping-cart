@@ -35,10 +35,10 @@ import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 @Composable
 fun CartItemContainer(
     cartItem: CartItem,
+    modifier: Modifier = Modifier,
     onCartItemDelete: () -> Unit,
     onMinusCartItem: () -> Unit,
     onPlusCartItem: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
@@ -66,8 +66,8 @@ fun CartItemContainer(
 @Composable
 private fun CartItemTopSector(
     title: String,
-    onCartItemDelete: () -> Unit,
     modifier: Modifier = Modifier,
+    onCartItemDelete: () -> Unit,
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -91,9 +91,9 @@ private fun CartItemBottomSector(
     imageUrl: String,
     price: Int,
     count: Int,
+    modifier: Modifier = Modifier,
     onMinusCartItem: () -> Unit,
     onPlusCartItem: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
@@ -112,11 +112,11 @@ private fun CartItemBottomSector(
         CartItemInfo(
             price = price,
             count = count,
-            onMinusCartItem = onMinusCartItem,
-            onPlusCartItem = onPlusCartItem,
             modifier = modifier
                 .weight(1f)
-                .padding(end = 10.dp)
+                .padding(end = 10.dp),
+            onMinusCartItem = onMinusCartItem,
+            onPlusCartItem = onPlusCartItem
         )
     }
 }
@@ -125,15 +125,15 @@ private fun CartItemBottomSector(
 private fun CartItemInfo(
     price: Int,
     count: Int,
+    modifier: Modifier = Modifier,
+    formatter: MoneyFormatter = DefaultMoneyFormatter,
     onMinusCartItem: () -> Unit,
     onPlusCartItem: () -> Unit,
-    formatter: MoneyFormatter = DefaultMoneyFormatter,
-    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.End,
-        verticalArrangement = Arrangement.Bottom
+        verticalArrangement = Arrangement.Bottom,
+        modifier = modifier.fillMaxHeight()
     ) {
         Text(
             text = "${formatter.format(price)}원",
@@ -142,9 +142,9 @@ private fun CartItemInfo(
         )
         CartQuantitySector(
             count = count,
+            modifier = Modifier.fillMaxWidth(),
             onMinusCartItem = onMinusCartItem,
-            onPlusCartItem = onPlusCartItem,
-            modifier = Modifier.fillMaxWidth()
+            onPlusCartItem = onPlusCartItem
         )
     }
 }
@@ -152,14 +152,14 @@ private fun CartItemInfo(
 @Composable
 private fun CartQuantitySector(
     count: Int,
+    modifier: Modifier = Modifier,
     onMinusCartItem: () -> Unit,
     onPlusCartItem: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = modifier
     ) {
         QuantityAdjusButton(
             buttonTitle = stringResource(id = R.string.cart_minus_item_button),
@@ -180,14 +180,14 @@ private fun CartQuantitySector(
 @Composable
 private fun QuantityAdjusButton(
     buttonTitle: String,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
     IconButton(
-        onClick = onClick,
         modifier = modifier
             .clip(RoundedCornerShape(4.dp))
-            .padding(4.dp)
+            .padding(4.dp),
+        onClick = onClick
     ) {
         Text(
             text = buttonTitle,

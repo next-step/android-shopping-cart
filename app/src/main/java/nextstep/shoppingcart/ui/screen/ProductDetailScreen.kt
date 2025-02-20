@@ -31,12 +31,12 @@ import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 @Composable
 fun ProductDetailScreen(
     product: Product,
-    addProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
+    addProductClick: (Product) -> Unit,
 ) {
     Column(
-        modifier = modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.Start,
+        modifier = modifier.fillMaxHeight(),
     ) {
         ProductImage(
             imageUrl = product.imageUrl,
@@ -109,14 +109,14 @@ private fun PriceSector(
 }
 
 @Composable
-fun ShoppingCartAddButton(
-    onClick: () -> Unit,
+private fun ShoppingCartAddButton(
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     BlueRectangleButton(
         buttonTitle = stringResource(id = R.string.cart_add_button),
-        onClick = onClick,
         modifier = modifier,
+        onClick = onClick,
     )
 }
 

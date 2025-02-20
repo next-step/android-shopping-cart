@@ -11,8 +11,8 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun DefaultAppBar(
     title: String,
-    navigationIcon: @Composable (() -> Unit)?,
     modifier: Modifier = Modifier,
+    navigationIcon: @Composable (() -> Unit)?,
 ) {
     TopAppBar(
         title = {

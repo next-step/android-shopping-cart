@@ -18,12 +18,12 @@ fun ProductItemContainer(
     title: String,
     price: Int,
     imageUrl: String,
-    formatter: MoneyFormatter = DefaultMoneyFormatter,
     modifier: Modifier = Modifier,
+    formatter: MoneyFormatter = DefaultMoneyFormatter,
 ) {
     Column(
-        modifier = modifier,
         horizontalAlignment = Alignment.Start,
+        modifier = modifier,
     ) {
         ProductImage(
             imageUrl = imageUrl,

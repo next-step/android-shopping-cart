@@ -16,14 +16,15 @@ import androidx.compose.ui.tooling.preview.Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CenterAppBar(
-    modifier: Modifier = Modifier,
     title: String,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     CenterAlignedTopAppBar(
         title = {
             Text(text = title)
         },
+        modifier = modifier,
         actions = {
             IconButton(
                 onClick = onClick

@@ -10,12 +10,12 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun BackIconButton(
-    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
+    onBackClick: () -> Unit,
 ) {
     IconButton(
-        onClick = onBackClick,
         modifier = modifier,
+        onClick = onBackClick,
     ) {
         Icon(Icons.Filled.ArrowBack, contentDescription = "Back Button")
     }

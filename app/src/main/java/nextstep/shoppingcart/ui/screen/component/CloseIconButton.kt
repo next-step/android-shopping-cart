@@ -10,9 +10,9 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun CloseIconButton(
-    onClick: () -> Unit,
     contentDescription: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     IconButton(
         modifier = modifier,

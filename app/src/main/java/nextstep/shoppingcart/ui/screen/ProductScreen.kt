@@ -19,8 +19,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductScreen(
-    onProductClick: (Product) -> Unit = { },
     productList: List<Product>,
+    onProductClick: (Product) -> Unit = { },
 ) {
     ProductListSection(
         products = productList,
@@ -30,18 +30,18 @@ fun ProductScreen(
 
 @Composable
 private fun ProductListSection(
-    modifier: Modifier = Modifier,
     products: List<Product>,
+    modifier: Modifier = Modifier,
     onProductClick: (Product) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 18.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         contentPadding = PaddingValues(vertical = 13.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 18.dp),
     ) {
         items(products) { product ->
             ProductItemContainer(
