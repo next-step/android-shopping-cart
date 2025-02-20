@@ -103,11 +103,6 @@ private fun PriceSector(
             fontSize = 24.sp,
             fontColor = Black33,
         )
-        PriceText(
-            price = price,
-            fontSize = 24.sp,
-            fontColor = Black33,
-        )
     }
 }
 

@@ -12,14 +12,14 @@ import androidx.compose.ui.tooling.preview.Preview
 fun DefaultAppBar(
     title: String,
     modifier: Modifier = Modifier,
-    navigationIcon: @Composable (() -> Unit)?,
+    navigationIcon: @Composable (() -> Unit) = {},
 ) {
     TopAppBar(
         title = {
             Text(title)
         },
         modifier = modifier,
-        navigationIcon = { navigationIcon }
+        navigationIcon = navigationIcon
     )
 }
 
@@ -28,6 +28,5 @@ fun DefaultAppBar(
 private fun DefaultAppBarPreview() {
     DefaultAppBar(
         title = "상품 상세",
-        navigationIcon = { }
     )
 }
