@@ -16,13 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -40,6 +35,8 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.ItemCounter
 import nextstep.shoppingcart.components.ProductImage
+import nextstep.shoppingcart.components.buttons.ShoppingCartFloatingActionButton
+import nextstep.shoppingcart.components.buttons.ShoppingCartFloatingActionButtonType
 import nextstep.shoppingcart.components.topbars.CenterTitleTopBar
 import nextstep.shoppingcart.components.topbars.TopBarActionType
 import nextstep.shoppingcart.data.FakeProductRepository
@@ -144,16 +141,16 @@ private fun ProductImageAndCounter(
                 .aspectRatio(ratio = 1f)
         )
         if (count == null) {
-            FloatingActionButton(
+            ShoppingCartFloatingActionButton(
+                buttonType = ShoppingCartFloatingActionButtonType.ADD,
                 onClick = onAddOneClick,
-                containerColor = Color.White,
-                shape = CircleShape,
                 modifier = Modifier
-                    .padding(end = 12.dp, bottom = 12.dp)
+                    .padding(
+                        end = 12.dp,
+                        bottom = 12.dp,
+                    )
                     .align(Alignment.BottomEnd),
-            ) {
-                Icon(Icons.Filled.Add, null)
-            }
+            )
         } else {
             ItemCounter(
                 count = count,
