@@ -110,7 +110,6 @@ internal class BasketScreenTest {
 
     @Test
     fun 담긴_상품의_수량을_증가시키면_상품_가격에_반영된다() {
-        // 맨 처음 상품의 수량을 증가시킨다.
         composeTestRule
             .onNodeWithTag("Item 0")
             .onChildren()
@@ -125,7 +124,6 @@ internal class BasketScreenTest {
 
     @Test
     fun 담긴_상품의_수량을_감소시키면_상품_가격에_반영된다() {
-        // 맨 처음 상품의 수량을 증가시킨다.
         composeTestRule
             .onNodeWithTag("Item 0")
             .onChildren()
