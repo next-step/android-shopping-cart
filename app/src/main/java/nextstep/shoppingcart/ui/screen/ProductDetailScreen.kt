@@ -26,8 +26,6 @@ import nextstep.shoppingcart.ui.screen.component.PriceText
 import nextstep.shoppingcart.ui.screen.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Black33
 import nextstep.shoppingcart.ui.theme.Gray10
-import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
-import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 
 @Composable
 fun ProductDetailScreen(
@@ -36,8 +34,8 @@ fun ProductDetailScreen(
     addProductClick: (Product) -> Unit,
 ) {
     Column(
-        horizontalAlignment = Alignment.Start,
         modifier = modifier.fillMaxHeight(),
+        horizontalAlignment = Alignment.Start,
     ) {
         ProductImage(
             imageUrl = product.imageUrl,
@@ -76,10 +74,10 @@ private fun TitleSector(
 ) {
     Text(
         text = title,
+        modifier = modifier,
         fontSize = 24.sp,
         fontWeight = FontWeight.W700,
         color = Black33,
-        modifier = modifier,
     )
 }
 

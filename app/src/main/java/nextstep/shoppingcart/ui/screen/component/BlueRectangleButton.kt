@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.ui.screen.component
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -22,17 +21,17 @@ fun BlueRectangleButton(
     onClick: () -> Unit,
 ) {
     Button(
+        modifier = modifier,
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors(Blue50),
-        modifier = modifier,
         onClick = onClick
     ) {
         Text(
             text = buttonTitle,
+            modifier = Modifier.padding(vertical = 15.dp),
             fontSize = 20.sp,
             fontWeight = FontWeight.W700,
             color = Color.White,
-            modifier = Modifier.padding(vertical = 15.dp),
         )
     }
 }

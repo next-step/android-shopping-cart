@@ -36,12 +36,12 @@ private fun ProductListSection(
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        verticalArrangement = Arrangement.spacedBy(20.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        contentPadding = PaddingValues(vertical = 13.dp),
         modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 18.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(vertical = 13.dp),
     ) {
         items(products) { product ->
             ProductItemContainer(

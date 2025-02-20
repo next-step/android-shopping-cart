@@ -19,8 +19,8 @@ fun ProductItemContainer(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        horizontalAlignment = Alignment.Start,
         modifier = modifier,
+        horizontalAlignment = Alignment.Start,
     ) {
         ProductImage(
             imageUrl = imageUrl,

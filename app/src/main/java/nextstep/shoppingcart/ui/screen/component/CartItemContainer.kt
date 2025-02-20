@@ -29,8 +29,6 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.Gray10
-import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
-import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 
 @Composable
 fun CartItemContainer(
@@ -156,9 +154,9 @@ private fun CartQuantitySector(
     onPlusCartItem: () -> Unit,
 ) {
     Row(
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         QuantityAdjusButton(
             buttonTitle = stringResource(id = R.string.cart_minus_item_button),

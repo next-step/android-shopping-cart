@@ -93,7 +93,7 @@ private fun OrderButton(
 
 @Preview(showBackground = true)
 @Composable
-fun CartItemProductListPreview() {
+private fun CartItemProductListPreview() {
     CartItemProductList(
         cartItemList = listOf(
             CartItem(
@@ -121,7 +121,7 @@ fun CartItemProductListPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun OrderButtonPreview() {
+private fun OrderButtonPreview() {
     OrderButton(
         totalMoney = 35000,
         onClick = { },
@@ -130,7 +130,7 @@ fun OrderButtonPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun ShoppingCartScreenPreview() {
+private fun ShoppingCartScreenPreview() {
     ShoppingCartScreen(
         cartItemList = listOf(
             CartItem(
