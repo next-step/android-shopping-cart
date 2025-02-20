@@ -14,6 +14,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.ProductAppMoveActionTest.Companion.SHOPPING_CART_ICON_DESCRIPTION
 import nextstep.shoppingcart.ProductListScreenTest.Companion.PLUS_FLOATING_BUTTON_DESCRIPTION
+import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.repository.CartRepository
 import nextstep.shoppingcart.ui.screen.ProductApp
 import org.junit.Before
@@ -134,12 +135,12 @@ class ProductShoppingCartTest {
     }
 
     companion object {
-        private const val PRODUCT_ONE = "개꿀아이템1"
-        private const val PRODUCT_TWO = "개꿀아이템2"
-
         private const val ORDER_BUTTON_TITLE = "주문하기"
         private const val REMOVE_BUTTON_DESCRIPTION = "Remove Button"
         private const val ADD_BUTTON_TITLE = "+"
         private const val MINUS_BUTTON_TITLE = "-"
+
+        private val PRODUCT_ONE = FakeData.products[0].title
+        private val PRODUCT_TWO = FakeData.products[1].title
     }
 }
