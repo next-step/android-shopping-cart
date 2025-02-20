@@ -3,6 +3,6 @@ package nextstep.shoppingcart.util
 import java.text.DecimalFormat
 
 object NumberFormatUtil {
-
-    fun Int.toPrice(): String = DecimalFormat("#,###").format(this) + "원"
+    fun Int.toCommaFormat(): String = DecimalFormat("#,###").format(this)
+    fun Int.toPrice(): String = toCommaFormat() + "원"
 }

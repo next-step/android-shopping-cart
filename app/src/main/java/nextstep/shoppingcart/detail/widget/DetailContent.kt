@@ -43,8 +43,7 @@ fun DetailContent(
                 .padding(horizontal = 18.dp)
         )
         Spacer(modifier = Modifier.weight(1f))
-        DetailOrderButton()
-        Spacer(modifier = Modifier.height(10.dp))
+        DetailOrderButton(modifier = Modifier.padding(bottom = 10.dp))
     }
 }
 
