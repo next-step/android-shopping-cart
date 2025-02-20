@@ -20,7 +20,7 @@ import nextstep.shoppingcart.data.FakeProductRepository
 import nextstep.shoppingcart.domain.model.Cart
 import nextstep.shoppingcart.domain.model.CartItem
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.features.cart.component.CartList
+import nextstep.shoppingcart.features.cart.components.CartList
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable

@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.features.cart.component
+package nextstep.shoppingcart.features.cart.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
