@@ -21,22 +21,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
-import com.bumptech.glide.integration.compose.placeholder
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.ItemCounter
+import nextstep.shoppingcart.components.ProductImage
 import nextstep.shoppingcart.data.FakeProductRepository
 import nextstep.shoppingcart.domain.model.CartItem
 import nextstep.shoppingcart.domain.model.Count
-import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.theme.GrayAAAAAA
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.ui.theme.Typography
@@ -105,8 +101,10 @@ private fun CartItemContent(
     onAddOneClick: () -> Unit,
 ) {
     Row {
-        CartItemImage(
-            product = cartItem.product,
+        ProductImage(
+            imageUrl = cartItem.product.imageUrl,
+            contentDescription = cartItem.product.name,
+            contentScale = ContentScale.Fit,
             modifier = Modifier
                 .weight(1f)
                 .aspectRatio(1.6f),
@@ -123,19 +121,6 @@ private fun CartItemContent(
             )
         }
     }
-}
-
-@Composable
-@OptIn(ExperimentalGlideComposeApi::class)
-private fun CartItemImage(product: Product, modifier: Modifier = Modifier) {
-    GlideImage(
-        model = product.imageUrl,
-        contentDescription = product.name,
-        loading = placeholder(R.drawable.ic_launcher_background),
-        failure = placeholder(ColorPainter(GrayAAAAAA)),
-        contentScale = ContentScale.Crop,
-        modifier = modifier,
-    )
 }
 
 @Composable
@@ -190,15 +175,6 @@ private fun CartItemContentPreview() {
         )
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-private fun CartItemImagePreview() {
-    ShoppingCartTheme {
-        CartItemImage(product = FakeProductRepository.getFirstProduct())
-    }
-}
-
 
 @Preview(showBackground = true)
 @Composable

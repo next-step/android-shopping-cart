@@ -15,17 +15,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.ColorPainter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
-import com.bumptech.glide.integration.compose.placeholder
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.MainButton
+import nextstep.shoppingcart.components.ProductImage
 import nextstep.shoppingcart.components.topbar.StartTitleTopBar
 import nextstep.shoppingcart.components.topbar.TopBarNavigationType
 import nextstep.shoppingcart.data.FakeProductRepository
@@ -68,7 +64,13 @@ internal fun ProductDetail(
     addCartEnabled: Boolean = true,
 ) {
     Column(modifier = modifier) {
-        ProductImage(product = product)
+        ProductImage(
+            imageUrl = product.imageUrl,
+            contentDescription = product.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(ratio = 1f)
+        )
         ProductTitle(title = product.name)
         HorizontalDivider(color = GrayAAAAAA)
         ProductPrice(price = product.price.value)
@@ -77,24 +79,11 @@ internal fun ProductDetail(
             text = stringResource(R.string.product_detail_add_cart),
             onClick = onAddCartClick,
             enabled = addCartEnabled,
-            modifier = Modifier.fillMaxWidth().height(54.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(54.dp),
         )
     }
-}
-
-@Composable
-@OptIn(ExperimentalGlideComposeApi::class)
-private fun ProductImage(product: Product) {
-    GlideImage(
-        model = product.imageUrl,
-        contentDescription = product.name,
-        contentScale = ContentScale.Crop,
-        loading = placeholder(R.drawable.ic_launcher_background),
-        failure = placeholder(ColorPainter(GrayAAAAAA)),
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1.0f),
-    )
 }
 
 @Composable
