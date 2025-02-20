@@ -13,11 +13,12 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.cart.component.CartOrderButton
 import nextstep.shoppingcart.cart.component.CartProductItem
 import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.Product
 
 @Composable
 fun CartContent(
     cartItems: List<CartItem>,
-    onClickDeleteItemButton: () -> Unit,
+    onClickDeleteItemButton: (Product) -> Unit,
     onClickIncreaseCountButton: () -> Unit,
     onClickDecreaseCountButton: () -> Unit,
     modifier: Modifier = Modifier

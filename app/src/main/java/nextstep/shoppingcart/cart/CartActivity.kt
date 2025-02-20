@@ -14,8 +14,9 @@ class CartActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 CartScreen(
-                    cart = Cart,
+                    currentCartItems = Cart.items,
                     popBackStack = { finish() },
+                    deleteItem = { Cart.removeAll(it) },
                 )
             }
         }
