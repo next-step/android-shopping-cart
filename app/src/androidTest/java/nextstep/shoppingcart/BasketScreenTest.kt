@@ -1,14 +1,27 @@
 package nextstep.shoppingcart
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.filterToOne
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onSiblings
+import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.ui.basket.BasketScreen
 import nextstep.shoppingcart.ui.basket.BasketState
 import nextstep.shoppingcart.ui.model.CartItem
 import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import java.util.UUID
@@ -42,7 +55,42 @@ internal class BasketScreenTest {
 
     @Test
     fun 담긴_상품을_제거할_수_있다() {
+        composeTestRule.setContent {
+            ShoppingCartTheme {
+                var state by remember {
+                    mutableStateOf(
+                        BasketState(
+                            isInitialLoading = false,
+                            isLoadingShow = false,
+                            cartItems = defaultItems,
+                        )
+                    )
+                }
 
+                BasketScreen(
+                    state = state,
+                    navigateBack = {},
+                    onRemoveCartItemClick = { removeItem ->
+                        state = state.copy(
+                            cartItems = state.cartItems.filterNot { item ->
+                                item == removeItem
+                            }
+                        )
+                    },
+                    onIncreaseQuantityClick = {},
+                    onDecreaseQuantityClick = {},
+                )
+            }
+        }
+
+        // 맨 처음 상품을 제거한다.
+        composeTestRule
+            .onNodeWithContentDescription("Item 0 장바구니 아이템을 삭제합니다.")
+            .performClick()
+
+        composeTestRule
+            .onNodeWithText("Item 0")
+            .assertDoesNotExist()
     }
 
     @Test
