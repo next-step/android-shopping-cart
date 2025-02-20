@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.repository.CartRepository
 import nextstep.shoppingcart.ui.screen.component.ProductContainer
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -58,7 +59,7 @@ private fun ProductListSection(
         contentPadding = PaddingValues(vertical = 13.dp),
     ) {
         items(products) { product ->
-            val cartItemCount = cartItems.find { it.product == product }?.count ?: 0
+            val cartItemCount = CartRepository.getItemCount(product, cartItems)
 
             ProductContainer(
                 imageUrl = product.imageUrl,
