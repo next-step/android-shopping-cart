@@ -9,4 +9,6 @@
 
     <string name="cart_plus_item_button">+</string>
     <string name="cart_minus_item_button">-</string>
+
+    <string name="quantity_toggle">Quantity Toggle</string>
 </resources>
