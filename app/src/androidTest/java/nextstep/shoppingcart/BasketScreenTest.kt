@@ -138,7 +138,16 @@ internal class BasketScreenTest {
 
     @Test
     fun 담긴_상품의_수량을_1보다_적게_하면_상품이_삭제된다() {
+        composeTestRule
+            .onNodeWithTag("Item 0")
+            .onChildren()
+            .filter(hasContentDescription("수량을 1 감소시킵니다."))
+            .onFirst()
+            .performClick()
 
+        composeTestRule
+            .onNodeWithText("Item 0")
+            .assertDoesNotExist()
     }
 
     companion object {
