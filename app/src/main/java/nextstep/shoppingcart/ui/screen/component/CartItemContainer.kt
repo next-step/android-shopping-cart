@@ -134,7 +134,7 @@ private fun CartItemInfo(
             fontSize = 16.sp,
             fontWeight = FontWeight.W400,
         )
-        QuantityAdjusContainer(
+        QuantityAdjustContainer(
             count = count,
             modifier = Modifier.fillMaxWidth(),
             onMinusCartItemClick = onMinusCartItem,

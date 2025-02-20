@@ -86,7 +86,7 @@ private fun AnimatedQuantityAdjustContainer(
         modifier = modifier
     ) { isAdjusting ->
         if (isAdjusting) {
-            QuantityAdjusContainer(
+            QuantityAdjustContainer(
                 count = count,
                 modifier = Modifier
                     .padding(horizontal = 3.dp)

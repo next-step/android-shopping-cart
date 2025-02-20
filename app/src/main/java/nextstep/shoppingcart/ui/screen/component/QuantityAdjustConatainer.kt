@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 
 @Composable
-fun QuantityAdjusContainer(
+fun QuantityAdjustContainer(
     count: Int,
     modifier: Modifier = Modifier,
     onMinusCartItemClick: () -> Unit,
@@ -68,7 +68,7 @@ private fun QuantityAdjusButton(
 @Preview(showBackground = true)
 @Composable
 private fun CartQuantitySectorPreview() {
-    QuantityAdjusContainer(
+    QuantityAdjustContainer(
         count = 2,
         onMinusCartItemClick = {
 
