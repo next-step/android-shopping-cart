@@ -19,7 +19,7 @@ fun DefaultAppBar(
             Text(title)
         },
         modifier = modifier,
-        navigationIcon = navigationIcon?: {}
+        navigationIcon = { navigationIcon }
     )
 }
 
