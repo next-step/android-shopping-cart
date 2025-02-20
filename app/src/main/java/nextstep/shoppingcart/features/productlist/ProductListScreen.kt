@@ -21,17 +21,18 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.topbars.CenterTitleTopBar
 import nextstep.shoppingcart.components.topbars.TopBarActionType
 import nextstep.shoppingcart.data.FakeProductRepository
-import nextstep.shoppingcart.domain.model.Cart
+import nextstep.shoppingcart.domain.model.CartItem
+import nextstep.shoppingcart.domain.model.Count
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.domain.model.Products
 import nextstep.shoppingcart.features.productlist.components.ProductListItem
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ProductListScreen(
-    products: Products,
-    cart: Cart,
+    items: Map<Product, CartItem?>,
     onAddOneClick: (Product) -> Unit,
     onRemoveOneClick: (Product) -> Unit,
     onActionCartClick: () -> Unit,
@@ -62,11 +63,11 @@ internal fun ProductListScreen(
         ) {
             items(
                 key = { it.id },
-                items = products.value
+                items = items.keys.toList()
             ) { product ->
                 ProductListItem(
                     product = product,
-                    count = cart.find(product)?.count?.value,
+                    count = items[product]?.count?.value,
                     onAddOneClick = { onAddOneClick(product) },
                     onRemoveOneClick = { onRemoveOneClick(product) },
                     onProductClick = { onProductClick(product) },
@@ -80,25 +81,16 @@ internal fun ProductListScreen(
 @Composable
 private fun ProductListScreenPreview() {
     ShoppingCartTheme {
-        LazyVerticalGrid(
-            modifier = Modifier.padding(horizontal = 18.dp),
-            columns = GridCells.Fixed(2),
-            verticalArrangement = Arrangement.spacedBy(20.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(
-                key = { it.id },
-                items = FakeProductRepository.getAllProducts().value
-            ) { product ->
-                ProductListItem(
-                    product = product,
-                    count = Cart().find(product)?.count?.value,
-                    onAddOneClick = {},
-                    onRemoveOneClick = {},
-                    onProductClick = {},
-                )
-            }
-        }
+        ProductListScreen(
+            items = FakeProductRepository.getAllProducts().value.associateWith { product ->
+                if (product.id % 2 == 0) null
+                else CartItem(product, count = Count.of(Random.nextInt(1..5)))
+            },
+            onAddOneClick = {},
+            onRemoveOneClick = {},
+            onActionCartClick = {},
+            onProductClick = { }
+        )
     }
 }
 
