@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.model
+package nextstep.shoppingcart.ui.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

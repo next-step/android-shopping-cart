@@ -1,7 +1,7 @@
-package nextstep.shoppingcart.data.mapper
+package nextstep.shoppingcart.ui.mapper
 
 import nextstep.shoppingcart.data.model.CartItemEntity
-import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.ui.model.CartItem
 
 fun CartItemEntity.toUi(): CartItem {
     return CartItem(

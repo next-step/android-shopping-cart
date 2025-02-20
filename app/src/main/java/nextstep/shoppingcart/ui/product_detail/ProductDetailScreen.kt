@@ -31,8 +31,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.repository.CartRepository
-import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.designsystem.ProductDetailItem
+import nextstep.shoppingcart.ui.mapper.toEntity
+import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -51,7 +52,7 @@ fun ProductDetailScreen(
         state = state,
         navigateBack = navigateBack,
         onAddBasketClick = {
-            cartRepository.addOne(product)
+            cartRepository.addOne(product.toEntity())
             onAddBasketClick()
         },
         modifier = modifier,

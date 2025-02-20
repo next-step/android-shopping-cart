@@ -2,7 +2,7 @@ package nextstep.shoppingcart.ui.basket
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.ui.model.CartItem
 
 @Parcelize
 data class BasketState(

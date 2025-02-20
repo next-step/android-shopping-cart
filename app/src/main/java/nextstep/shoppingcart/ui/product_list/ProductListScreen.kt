@@ -44,9 +44,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.repository.ProductRepository
-import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
 import nextstep.shoppingcart.ui.designsystem.ProductListItem
+import nextstep.shoppingcart.ui.mapper.toUi
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -74,7 +75,7 @@ fun ProductListScreen(
     // 따라서 초기로딩이 되지 않은 경우에만 호출되도록 관련 state를 key로 설정
     LaunchedEffect(state.isInitialLoading) {
         state = state.copy(
-            products = productRepository.fetch(),
+            products = productRepository.fetch().map { it.toUi() },
             isInitialLoading = false,
         )
     }

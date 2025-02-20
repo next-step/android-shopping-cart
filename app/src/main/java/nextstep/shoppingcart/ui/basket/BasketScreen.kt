@@ -37,10 +37,12 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.onStart
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.repository.CartRepository
-import nextstep.shoppingcart.model.CartItem
-import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.designsystem.CartListItem
 import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
+import nextstep.shoppingcart.ui.mapper.toEntity
+import nextstep.shoppingcart.ui.mapper.toUi
+import nextstep.shoppingcart.ui.model.CartItem
+import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -72,8 +74,8 @@ fun BasketScreen(
                 )
             }
             .distinctUntilChanged()
-            .collect {
-                state = state.copy(cartItems = it)
+            .collect { items ->
+                state = state.copy(cartItems = items.map { it.toUi() })
             }
     }
 
@@ -86,9 +88,9 @@ fun BasketScreen(
     BasketScreen(
         state = state,
         navigateBack = navigateBack,
-        onRemoveCartItemClick = { cartRepository.removeAll(it.product) },
-        onIncreaseQuantityClick = { cartRepository.addOne(it.product) },
-        onDecreaseQuantityClick = { cartRepository.removeOne(it.product) },
+        onRemoveCartItemClick = { cartRepository.removeAll(it.product.toEntity()) },
+        onIncreaseQuantityClick = { cartRepository.addOne(it.product.toEntity()) },
+        onDecreaseQuantityClick = { cartRepository.removeOne(it.product.toEntity()) },
         modifier = modifier,
     )
 }
