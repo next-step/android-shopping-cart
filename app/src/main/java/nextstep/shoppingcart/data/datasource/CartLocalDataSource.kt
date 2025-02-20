@@ -18,8 +18,8 @@ class CartLocalDataSource {
 
     fun addOne(product: ProductEntity) {
         _itemsFlow.update { items ->
-            val existingItem = items.find { it.product == product }
-            if (existingItem == null) {
+            val isExistingItem = items.any { it.product == product }
+            if (isExistingItem) {
                 items + CartItemEntity(product, 1)
             } else {
                 items.map { item ->
