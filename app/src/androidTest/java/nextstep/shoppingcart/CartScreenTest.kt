@@ -13,7 +13,7 @@ import nextstep.shoppingcart.domain.model.CartItem
 import nextstep.shoppingcart.domain.model.Count
 import nextstep.shoppingcart.domain.model.Price
 import nextstep.shoppingcart.domain.model.Product
-import nextstep.shoppingcart.screens.cart.CartScreen
+import nextstep.shoppingcart.features.cart.CartScreen
 import org.junit.Rule
 import org.junit.Test
 

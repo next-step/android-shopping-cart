@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.components.topbar
+package nextstep.shoppingcart.components.topbars
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons

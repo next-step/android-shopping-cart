@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.screens
+package nextstep.shoppingcart.features.productdetail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.MainButton
 import nextstep.shoppingcart.components.ProductImage
-import nextstep.shoppingcart.components.topbar.StartTitleTopBar
-import nextstep.shoppingcart.components.topbar.TopBarNavigationType
+import nextstep.shoppingcart.components.topbars.StartTitleTopBar
+import nextstep.shoppingcart.components.topbars.TopBarNavigationType
 import nextstep.shoppingcart.data.FakeProductRepository
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.theme.GrayAAAAAA

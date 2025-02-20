@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.features.productlist
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +9,11 @@ import nextstep.shoppingcart.data.FakeProductRepository
 import nextstep.shoppingcart.data.InMemoryCartRepository
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.domain.model.Products
-import nextstep.shoppingcart.screens.MainScreen
+import nextstep.shoppingcart.features.cart.CartActivity
+import nextstep.shoppingcart.features.productdetail.ProductDetailActivity
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
-class MainActivity : ComponentActivity() {
+class ProductListActivity : ComponentActivity() {
     private val products: Products = FakeProductRepository.getAllProducts()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             enableEdgeToEdge()
             ShoppingCartTheme {
-                MainScreen(
+                ProductListScreen(
                     products = products,
                     cart = InMemoryCartRepository.cart.value,
                     onAddOneClick = InMemoryCartRepository::addOne,
