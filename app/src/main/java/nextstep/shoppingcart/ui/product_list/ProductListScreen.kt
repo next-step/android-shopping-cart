@@ -51,7 +51,7 @@ import nextstep.shoppingcart.ui.mapper.toUi
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun ProductListScreen(
+fun ProductListScreenRoot(
     onBasketClick: () -> Unit,
     onProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,

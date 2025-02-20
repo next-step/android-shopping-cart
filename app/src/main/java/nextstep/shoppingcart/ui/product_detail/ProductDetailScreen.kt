@@ -37,7 +37,7 @@ import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun ProductDetailScreen(
+fun ProductDetailScreenRoot(
     product: Product,
     navigateBack: () -> Unit,
     onAddBasketClick: () -> Unit,
@@ -130,7 +130,7 @@ private fun ProductDetailTopAppBar(
 @Composable
 private fun ProductDetailScreenPreview() {
     ShoppingCartTheme {
-        ProductDetailScreen(
+        ProductDetailScreenRoot(
             product = Product(
                 id = "",
                 imageUrl = "",

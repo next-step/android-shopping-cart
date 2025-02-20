@@ -46,7 +46,7 @@ import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun BasketScreen(
+fun BasketScreenRoot(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     cartRepository: CartRepository = CartRepository.getInstance(),
