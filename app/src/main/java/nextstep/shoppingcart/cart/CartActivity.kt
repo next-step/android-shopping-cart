@@ -18,6 +18,7 @@ class CartActivity : ComponentActivity() {
                     popBackStack = { finish() },
                     deleteItem = { Cart.removeAll(it.product) },
                     increaseItemCount = { Cart.addOne(it.product) },
+                    decreaseItemCount = { Cart.removeOne(it.product) },
                 )
             }
         }

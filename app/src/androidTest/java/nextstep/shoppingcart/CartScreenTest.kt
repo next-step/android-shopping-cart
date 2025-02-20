@@ -76,6 +76,7 @@ class CartScreenTest {
                 popBackStack = {},
                 deleteItem = {},
                 increaseItemCount = {},
+                decreaseItemCount = {},
             )
         }
 
@@ -115,6 +116,7 @@ class CartScreenTest {
                 popBackStack = {},
                 deleteItem = {},
                 increaseItemCount = {},
+                decreaseItemCount = {},
             )
         }
 
@@ -163,6 +165,7 @@ class CartScreenTest {
                 popBackStack = {},
                 deleteItem = {},
                 increaseItemCount = {},
+                decreaseItemCount = {},
             )
         }
 
@@ -178,5 +181,53 @@ class CartScreenTest {
         composeTestRule
             .onNodeWithTag("1increaseButton")
             .assertIsNotEnabled()
+    }
+
+    @Test
+    fun 담긴_상품의_수량을_감소시키면_상품_가격에_반영된다() {
+        // given
+        val cartItems = listOf(
+            CartItem(
+                product = Product(
+                    id = 1,
+                    name = "상품1",
+                    price = 1000,
+                    imageUrl = "",
+                ),
+                count = 100
+            )
+        )
+
+        composeTestRule.setContent {
+            CartScreen(
+                currentCartItems = cartItems,
+                popBackStack = {},
+                deleteItem = {},
+                increaseItemCount = {},
+                decreaseItemCount = {},
+            )
+        }
+
+        // when
+        composeTestRule
+            .onNodeWithText("99")
+            .assertDoesNotExist()
+
+        composeTestRule
+            .onNodeWithText("99,000원")
+            .assertDoesNotExist()
+
+        composeTestRule
+            .onNodeWithTag("1decreaseButton")
+            .performClick()
+
+        // then
+        composeTestRule
+            .onNodeWithText("99")
+            .assertExists()
+
+        composeTestRule
+            .onNodeWithText("99,000원")
+            .assertExists()
     }
 }

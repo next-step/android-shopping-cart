@@ -40,7 +40,7 @@ fun CartProductItem(
     cartItem: CartItem,
     onClickDeleteItemButton: (CartItem) -> Unit,
     onClickIncreaseCountButton: (CartItem) -> Unit,
-    onClickDecreaseCountButton: () -> Unit,
+    onClickDecreaseCountButton: (CartItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -97,8 +97,10 @@ fun CartProductItem(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     IconButton(
-                        onClick = onClickDecreaseCountButton,
-                        modifier = Modifier.size(24.dp)
+                        onClick = { onClickDecreaseCountButton.invoke(cartItem) },
+                        modifier = Modifier
+                            .size(24.dp)
+                            .testTag("${cartItem.product.id}decreaseButton")
                     ) {
                         Icon(
                             Icons.Filled.Delete,

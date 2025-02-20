@@ -20,7 +20,7 @@ fun CartContent(
     cartItems: List<CartItem>,
     onClickDeleteItemButton: (CartItem) -> Unit,
     onClickIncreaseCountButton: (CartItem) -> Unit,
-    onClickDecreaseCountButton: () -> Unit,
+    onClickDecreaseCountButton: (CartItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier.fillMaxSize()) {

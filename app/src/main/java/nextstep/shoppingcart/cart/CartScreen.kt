@@ -22,6 +22,7 @@ fun CartScreen(
     popBackStack: () -> Unit,
     deleteItem: (CartItem) -> Unit,
     increaseItemCount: (CartItem) -> Unit,
+    decreaseItemCount: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var cartItems by remember { mutableStateOf(currentCartItems) }
@@ -40,9 +41,12 @@ fun CartScreen(
             },
             onClickIncreaseCountButton = {
                 increaseItemCount(it)
-                cartItems = cartItems.addCountItem(it)
+                cartItems = cartItems.adjustCountItem(it, 1)
             },
-            onClickDecreaseCountButton = {},
+            onClickDecreaseCountButton = {
+                decreaseItemCount(it)
+                cartItems = cartItems.adjustCountItem(it, -1)
+            },
             modifier = Modifier.padding(paddingValue),
         )
     }
@@ -76,6 +80,7 @@ private fun CartScreenPreview() {
             popBackStack = {},
             deleteItem = {},
             increaseItemCount = {},
+            decreaseItemCount = {},
         )
     }
 }
@@ -84,10 +89,10 @@ private fun List<CartItem>.removeItem(item: CartItem): List<CartItem> {
     return this.filter { cartItem -> cartItem.product.id != item.product.id }
 }
 
-private fun List<CartItem>.addCountItem(item: CartItem): List<CartItem> {
+private fun List<CartItem>.adjustCountItem(item: CartItem, amount: Int): List<CartItem> {
     return this.map { cartItem ->
         if (cartItem.product.id == item.product.id) {
-            cartItem.copy(count = cartItem.count + 1)
+            cartItem.copy(count = cartItem.count + amount)
         } else {
             cartItem
         }
