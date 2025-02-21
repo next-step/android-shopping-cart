@@ -43,7 +43,7 @@ internal fun ProductListItem(
     Column(
         modifier = modifier.clickable(onClick = onProductClick),
     ) {
-        ProductImageAndCounter(
+        ProductDisplayPanel(
             product = product,
             count = count,
             onAddOneClick = onAddOneClick,
@@ -62,7 +62,7 @@ internal fun ProductListItem(
 }
 
 @Composable
-private fun ProductImageAndCounter(
+private fun ProductDisplayPanel(
     product: Product,
     count: Int?,
     onAddOneClick: () -> Unit,
@@ -122,6 +122,7 @@ private fun ProductPrice(price: Int, modifier: Modifier = Modifier) {
     )
 }
 
+
 class ProductWithCountPreviewParameterProvider : PreviewParameterProvider<Int?> {
     override val values = sequenceOf(null, 0, 1, 10)
 }
@@ -146,10 +147,10 @@ private fun ProductListItemPreview(
 
 @Preview(showBackground = true)
 @Composable
-private fun ProductImageAndCounterPreview() {
+private fun ProductDisplayPanelPreview() {
     ShoppingCartTheme {
         Column {
-            ProductImageAndCounter(
+            ProductDisplayPanel(
                 product = FakeProductRepository.getFirstProduct(),
                 count = null,
                 onAddOneClick = {},
