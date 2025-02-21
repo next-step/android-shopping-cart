@@ -112,10 +112,7 @@ private fun CartItemContent(
         Spacer(Modifier.width(26.dp))
         Column(modifier = Modifier.weight(1f)) {
             Spacer(Modifier.height(24.dp))
-            CartItemPrice(
-                price = cartItem.product.price.value,
-                modifier = Modifier.fillMaxWidth(),
-            )
+            CartItemPrice(price = cartItem.product.price.value)
             ItemCounter(
                 count = cartItem.count.value,
                 onRemoveOneClick = onRemoveOneClick,
@@ -127,15 +124,12 @@ private fun CartItemContent(
 }
 
 @Composable
-private fun CartItemPrice(
-    price: Int,
-    modifier: Modifier = Modifier,
-) {
+private fun CartItemPrice(price: Int, modifier: Modifier = Modifier) {
     Text(
         text = stringResource(R.string.price_format, price),
         textAlign = TextAlign.End,
         style = Typography.bodyLarge,
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
     )
 }
 
