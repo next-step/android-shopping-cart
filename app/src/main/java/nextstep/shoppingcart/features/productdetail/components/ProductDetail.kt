@@ -47,9 +47,7 @@ internal fun ProductDetail(
         HorizontalDivider(color = GrayAAAAAA)
         ProductPrice(
             price = product.price.value,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(18.dp),
+            modifier = Modifier.padding(18.dp),
         )
         Spacer(Modifier.weight(1f))
         MainButton(
@@ -76,7 +74,7 @@ private fun ProductTitle(title: String, modifier: Modifier = Modifier) {
 private fun ProductPrice(price: Int, modifier: Modifier = Modifier) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
     ) {
         Text(
             text = stringResource(R.string.price),
