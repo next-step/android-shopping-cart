@@ -18,10 +18,10 @@ import nextstep.shoppingcart.data.repository.CartRepository
 internal fun ProductList(
     productList: List<Product>,
     cart: Cart,
+    modifier: Modifier = Modifier,
     onIncreaseClick: (Product) -> Unit = {},
     onDecreaseClick: (Product) -> Unit = {},
     onProductClick: (Product) -> Unit = {},
-    modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
         modifier = modifier
@@ -58,6 +58,6 @@ private fun ProductListContentPreview() {
                 price = 3124
             )
         },
-        cart = CartRepository.cartState.value,
+        cart = CartRepository.cartState,
     )
 }

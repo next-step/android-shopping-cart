@@ -5,6 +5,8 @@ data class Cart(
 ) {
     val totalPrice: Int get() = items.sumOf { it.totalPrice }
 
+    val isEmpty: Boolean get() = items.isEmpty()
+
     fun getCountByProductId(id: Int) =
         items.find { it.productId == id }?.count ?: 0
 }

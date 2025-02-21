@@ -43,7 +43,7 @@ class ProductCartScreenTest {
     )
 
     @Test
-    fun `뒤로가기_버튼_클릭_이벤트를_받는다`() {
+    fun `뒤로가기_버튼을_클릭할_수_있다`() {
         var clicked = false
         composeTestRule
             .setContent {
@@ -91,7 +91,7 @@ class ProductCartScreenTest {
     }
 
     @Test
-    fun `제거_버튼을_클릭한_상품의_정보를_가져온다`() {
+    fun `특정_항목의_제거_버튼을_클릭할_수_있다`() {
         var removeProduct: Product? = null
 
         composeTestRule
@@ -117,7 +117,7 @@ class ProductCartScreenTest {
     }
 
     @Test
-    fun `수량조절_버튼을_클릭한_상품의_정보를_가져온다`() {
+    fun `특정_항목의_수량조절_버튼을_클릭할_수_있다`() {
         var increaseProduct: Product? = null
         var decreaseProduct: Product? = null
 

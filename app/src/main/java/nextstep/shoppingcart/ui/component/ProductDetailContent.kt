@@ -61,7 +61,6 @@ internal fun ProductDetailContent(
             color = Color(0xFF333333),
         )
         HorizontalDivider(
-            modifier = Modifier.fillMaxWidth(),
             color = Color(0xFFAAAAAA),
         )
         PriceBar(

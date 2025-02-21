@@ -4,9 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.data.model.Cart
@@ -25,15 +22,15 @@ internal fun ProductListScreen(
     onItemClick: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var cart by remember { CartRepository.cartState }
+    val cart = CartRepository.cartState
 
     ProductListScreen(
         modifier = modifier,
         productList = productList,
         cart = cart,
         onTopBarButtonClick = onTopBarButtonClick,
-        onIncreaseClick = { cart = CartRepository.addOne(it) },
-        onDecreaseClick = { cart = CartRepository.removeOne(it) },
+        onIncreaseClick = { CartRepository.addOne(it) },
+        onDecreaseClick = { CartRepository.removeOne(it) },
         onItemClick = onItemClick,
     )
 }

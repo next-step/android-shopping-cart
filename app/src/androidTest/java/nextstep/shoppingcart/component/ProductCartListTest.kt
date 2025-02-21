@@ -41,7 +41,7 @@ class ProductCartListTest {
     }
 
     @Test
-    fun `지우기_버튼을_누르면_해당하는_상품정보를_가져온다`() {
+    fun `특정_항목의_지우기_버튼을_클릭할_수_있다`() {
         var removeProduct: Product? = null
 
         composeTestRule.setContent {
@@ -61,7 +61,7 @@ class ProductCartListTest {
     }
 
     @Test
-    fun `증가_버튼을_누르면_해당하는_상품정보를_가져온다`() {
+    fun `특정_항목의_증가_버튼을_클릭할_수_있다`() {
         var increaseProduct: Product? = null
 
         composeTestRule.setContent {
@@ -82,7 +82,7 @@ class ProductCartListTest {
     }
 
     @Test
-    fun `감소_버튼을_누르면_해당하는_상품정보를_가져온다`() {
+    fun `특정_항목의_감소_버튼을_클릭할_수_있다`() {
         var decreaseProduct: Product? = null
 
         composeTestRule.setContent {

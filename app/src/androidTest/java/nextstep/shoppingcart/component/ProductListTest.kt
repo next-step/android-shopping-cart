@@ -64,7 +64,7 @@ class ProductListTest {
     }
 
     @Test
-    fun `클릭한_상품의_정보를_가져온다`() {
+    fun `특정_상품을_클릭할_수_있다`() {
         var selectedProduct: Product? = null
 
         composeTestRule.setContent {

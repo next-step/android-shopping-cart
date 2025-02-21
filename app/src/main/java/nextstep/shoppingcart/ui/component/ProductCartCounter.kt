@@ -34,16 +34,14 @@ internal fun ProductCartCounter(
     onDecreaseClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val textStyle = remember {
-        TextStyle(
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp,
-            lineHeight = 18.67.sp,
-            letterSpacing = 0.5.sp,
-            color = Color.Black,
-            textAlign = TextAlign.Center
-        )
-    }
+    val textStyle = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 22.sp,
+        lineHeight = 18.67.sp,
+        letterSpacing = 0.5.sp,
+        color = Color.Black,
+        textAlign = TextAlign.Center
+    )
     val buttonSize = 42.dp
     Row(
         modifier = modifier
@@ -52,20 +50,14 @@ internal fun ProductCartCounter(
                 shape = ShapeDefaults.ExtraSmall
             )
     ) {
-        Box(
+        CounterButton(
             modifier = Modifier
                 .size(buttonSize)
-                .testTag("decrease_button")
-                .clickable {
-                    onDecreaseClick()
-                },
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = stringResource(R.string.decrease_symbol),
-                style = textStyle
-            )
-        }
+                .testTag("decrease_button"),
+            text = stringResource(R.string.decrease_symbol),
+            onClick = onDecreaseClick,
+            textStyle = textStyle
+        )
         Box(
             modifier = Modifier.sizeIn(minWidth = buttonSize, minHeight = buttonSize)
         ) {
@@ -78,25 +70,40 @@ internal fun ProductCartCounter(
                 text = count.toString(),
             )
         }
-        Box(
+        CounterButton(
             modifier = Modifier
                 .size(buttonSize)
-                .testTag("increase_button")
-                .clickable { onIncreaseClick() },
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(
-                text = stringResource(R.string.increase_symbol),
-                style = textStyle
-            )
-        }
+                .testTag("increase_button"),
+            text = stringResource(R.string.increase_symbol),
+            onClick = onIncreaseClick,
+            textStyle = textStyle
+        )
     }
 }
+
+@Composable
+private fun CounterButton(
+    text: String,
+    textStyle: TextStyle,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier.clickable(onClick = onClick),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = text,
+            style = textStyle
+        )
+    }
+}
+
 
 @Preview
 @Composable
 private fun ProductCartCounterPreview() {
-    var count by remember { mutableStateOf(0) }
+    var count by remember { mutableStateOf(1000) }
     ShoppingCartTheme {
         ProductCartCounter(
             count = count,

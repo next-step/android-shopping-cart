@@ -51,46 +51,15 @@ internal fun ProductItem(
                 onProductClick(product)
             }
     ) {
-        Box(
+        ImageWithCartCounter(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f),
-        ) {
-            ProductImage(
-                modifier = Modifier.fillMaxSize(),
-                url = product.imageUrl,
-                contentScale = ContentScale.Crop,
-            )
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(12.dp)
-            ) {
-                if (count > 0) {
-                    ProductCartCounter(
-                        count,
-                        onIncreaseClick = { onIncreaseClick(product) },
-                        onDecreaseClick = { onDecreaseClick(product) }
-                    )
-                } else {
-                    IconButton(
-                        modifier = Modifier
-                            .size(42.dp)
-                            .background(
-                                color = Color.White,
-                                shape = CircleShape,
-                            )
-                            .testTag("add_cart_button"),
-                        onClick = { onIncreaseClick(product) }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Add,
-                            contentDescription = "add_cart_icon"
-                        )
-                    }
-                }
-            }
-        }
+            product = product,
+            count = count,
+            onIncreaseClick = onIncreaseClick,
+            onDecreaseClick = onDecreaseClick,
+        )
         Text(
             text = product.name,
             maxLines = 1,
@@ -114,6 +83,54 @@ internal fun ProductItem(
                 letterSpacing = 0.5.sp
             )
         )
+    }
+}
+
+@Composable
+private fun ImageWithCartCounter(
+    product: Product,
+    count: Int,
+    onIncreaseClick: (Product) -> Unit,
+    onDecreaseClick: (Product) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+    ) {
+        ProductImage(
+            modifier = Modifier.fillMaxSize(),
+            url = product.imageUrl,
+            contentScale = ContentScale.Crop,
+        )
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(12.dp)
+        ) {
+            if (count > 0) {
+                ProductCartCounter(
+                    count,
+                    onIncreaseClick = { onIncreaseClick(product) },
+                    onDecreaseClick = { onDecreaseClick(product) }
+                )
+            } else {
+                IconButton(
+                    modifier = Modifier
+                        .size(42.dp)
+                        .background(
+                            color = Color.White,
+                            shape = CircleShape,
+                        )
+                        .testTag("add_cart_button"),
+                    onClick = { onIncreaseClick(product) }
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Add,
+                        contentDescription = "add_cart_icon"
+                    )
+                }
+            }
+        }
     }
 }
 
