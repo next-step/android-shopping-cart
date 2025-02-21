@@ -19,6 +19,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.ItemCounter
@@ -120,30 +122,20 @@ private fun ProductPrice(price: Int, modifier: Modifier = Modifier) {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun ProductWithCountZeroPreview() {
-    ShoppingCartTheme {
-        Column {
-            ProductListItem(
-                product = FakeProductRepository.getFirstProduct(),
-                count = null,
-                onAddOneClick = {},
-                onRemoveOneClick = {},
-                onProductClick = {},
-            )
-        }
-    }
+class ProductWithCountPreviewParameterProvider : PreviewParameterProvider<Int?> {
+    override val values = sequenceOf(null, 0, 1, 10)
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun ProductWithCountOnePreview() {
+private fun ProductListItemPreview(
+    @PreviewParameter(ProductWithCountPreviewParameterProvider::class) count: Int?,
+) {
     ShoppingCartTheme {
         Column {
             ProductListItem(
                 product = FakeProductRepository.getFirstProduct(),
-                count = 2,
+                count = count,
                 onAddOneClick = {},
                 onRemoveOneClick = {},
                 onProductClick = {},
