@@ -30,16 +30,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.ui.designsystem.ProductDetailItem
+import nextstep.shoppingcart.ui.mapper.toEntity
+import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun ProductDetailScreen(
+fun ProductDetailScreenRoot(
     product: Product,
     navigateBack: () -> Unit,
     onAddBasketClick: () -> Unit,
     modifier: Modifier = Modifier,
+    cartRepository: CartRepository = CartRepository.getInstance(),
 ) {
     val state by remember {
         mutableStateOf(ProductDetailState(product = product))
@@ -48,7 +51,10 @@ fun ProductDetailScreen(
     ProductDetailScreen(
         state = state,
         navigateBack = navigateBack,
-        onAddBasketClick = onAddBasketClick,
+        onAddBasketClick = {
+            cartRepository.addOne(product.toEntity())
+            onAddBasketClick()
+        },
         modifier = modifier,
     )
 }
@@ -124,8 +130,9 @@ private fun ProductDetailTopAppBar(
 @Composable
 private fun ProductDetailScreenPreview() {
     ShoppingCartTheme {
-        ProductDetailScreen(
+        ProductDetailScreenRoot(
             product = Product(
+                id = "",
                 imageUrl = "",
                 name = "PET-보틀-정사각형 정사각형 정사각형 ",
                 price = 10_000

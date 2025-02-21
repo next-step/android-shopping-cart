@@ -1,14 +1,11 @@
 package nextstep.shoppingcart.ui.designsystem
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -32,7 +29,7 @@ import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import coil3.compose.SubcomposeAsyncImage
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -146,6 +143,7 @@ private fun ProductListItemPreview() {
     ShoppingCartTheme {
         ProductListItem(
             product = Product(
+                id = "",
                 imageUrl = "",
                 name = LoremIpsum(100).values.joinToString(""),
                 price = 999_999_999,
@@ -162,6 +160,7 @@ private fun ProductDetailPreview() {
     ShoppingCartTheme {
         ProductDetailItem(
             product = Product(
+                id = "",
                 imageUrl = "",
                 name = LoremIpsum(100).values.joinToString(""),
                 price = 999_999_999,

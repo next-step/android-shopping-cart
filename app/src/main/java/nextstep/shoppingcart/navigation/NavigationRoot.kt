@@ -10,10 +10,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
-import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.basket.BasketScreen
-import nextstep.shoppingcart.ui.product_detail.ProductDetailScreen
-import nextstep.shoppingcart.ui.product_list.ProductListScreen
+import nextstep.shoppingcart.ui.model.Product
+import nextstep.shoppingcart.ui.basket.BasketScreenRoot
+import nextstep.shoppingcart.ui.product_detail.ProductDetailScreenRoot
+import nextstep.shoppingcart.ui.product_list.ProductListScreenRoot
 
 @Composable
 fun NavigationRoot(
@@ -34,9 +34,16 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
         startDestination = ProductList,
     ) {
         composable<ProductList> {
-            ProductListScreen(
+            ProductListScreenRoot(
                 onProductClick = {
-                    navController.navigate(ProductDetail(it.imageUrl, it.name, it.price))
+                    navController.navigate(
+                        ProductDetail(
+                            id = it.id,
+                            imageUrl = it.imageUrl,
+                            name = it.name,
+                            price = it.price,
+                        )
+                    )
                 },
                 onBasketClick = {
                     navController.navigate(Basket)
@@ -47,8 +54,9 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
         composable<ProductDetail> { backstackEntry ->
             val productDetail = backstackEntry.toRoute<ProductDetail>()
 
-            ProductDetailScreen(
+            ProductDetailScreenRoot(
                 product = Product(
+                    id = productDetail.id,
                     imageUrl = productDetail.imageUrl,
                     name = productDetail.name,
                     price = productDetail.price
@@ -68,7 +76,7 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
         }
 
         composable<Basket> {
-            BasketScreen(
+            BasketScreenRoot(
                 navigateBack = {
                     navController.popBackStack()
                 }
