@@ -60,7 +60,6 @@ internal fun CartItem(
         CartItemTitle(
             title = cartItem.product.name,
             onRemoveAllClick = onRemoveAllClick,
-            modifier = Modifier.fillMaxWidth(),
         )
         CartItemContent(
             cartItem = cartItem,
@@ -79,7 +78,7 @@ private fun CartItemTitle(
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
     ) {
         Text(
             text = title,
