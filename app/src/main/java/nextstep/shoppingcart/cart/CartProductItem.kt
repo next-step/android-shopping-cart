@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -62,7 +63,9 @@ fun CartProductItem(
                 overflow = TextOverflow.Ellipsis
             )
             IconButton(
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier
+                    .size(24.dp)
+                    .testTag(stringResource(R.string.delete)),
                 onClick = onCloseClick
             ) {
                 Icon(
@@ -92,7 +95,9 @@ fun CartProductItem(
                     .align(Alignment.Bottom)
             ) {
                 Text(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag(stringResource(R.string.product_price)),
                     text = stringResource(R.string.format_price_won, cartItem.totalPrice),
                     textAlign = TextAlign.End
                 )
@@ -121,7 +126,9 @@ private fun CounterButton(
         Box(
             modifier = Modifier
                 .size(42.dp)
-                .clickable(onClick = onMinusClick),
+                .clickable(onClick = onMinusClick)
+                .testTag(stringResource(R.string.minus))
+            ,
             contentAlignment = Alignment.Center
         ) {
             Text(
@@ -131,7 +138,9 @@ private fun CounterButton(
         }
 
         Box(
-            modifier = Modifier.size(42.dp),
+            modifier = Modifier
+                .size(42.dp)
+                .testTag(stringResource(R.string.product_count)),
             contentAlignment = Alignment.Center
         ) {
             Text(
@@ -143,7 +152,8 @@ private fun CounterButton(
         Box(
             modifier = Modifier
                 .size(42.dp)
-                .clickable(onClick = onPlusClick),
+                .clickable(onClick = onPlusClick)
+                .testTag(stringResource(R.string.plus)),
             contentAlignment = Alignment.Center
         ) {
             Text(

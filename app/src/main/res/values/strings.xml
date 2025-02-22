@@ -13,4 +13,6 @@
     <string name="delete">삭제</string>
     <string name="minus">-</string>
     <string name="plus">+</string>
+    <string name="product_price">상품 가격</string>
+    <string name="product_count">상품 갯수</string>
 </resources>
