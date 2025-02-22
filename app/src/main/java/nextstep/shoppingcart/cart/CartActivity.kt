@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import nextstep.shoppingcart.cart.data.Cart
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class CartActivity : ComponentActivity() {
@@ -13,7 +14,11 @@ class CartActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 CartScreen(
+                    currentCartItems = Cart.items,
                     popBackStack = { finish() },
+                    deleteItem = { Cart.removeAll(it.product) },
+                    increaseItemCount = { Cart.addOne(it.product) },
+                    decreaseItemCount = { Cart.removeOne(it.product) },
                 )
             }
         }

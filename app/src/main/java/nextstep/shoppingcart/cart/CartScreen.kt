@@ -4,24 +4,56 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.cart.widget.CartContent
 import nextstep.shoppingcart.cart.widget.CartTopBar
+import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun CartScreen(
+    currentCartItems: List<CartItem>,
     popBackStack: () -> Unit,
+    deleteItem: (CartItem) -> Unit,
+    increaseItemCount: (CartItem) -> Unit,
+    decreaseItemCount: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var cartItems by remember { mutableStateOf(currentCartItems) }
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
             CartTopBar(popBackStack)
         },
     ) { paddingValue ->
-        CartContent(modifier = Modifier.padding(paddingValue))
+        CartContent(
+            cartItems = cartItems,
+            onClickDeleteItemButton = {
+                deleteItem(it)
+                cartItems = cartItems.removeItem(it)
+            },
+            onClickIncreaseCountButton = {
+                increaseItemCount(it)
+                cartItems = cartItems.adjustCountItem(it, 1)
+            },
+            onClickDecreaseCountButton = {
+                decreaseItemCount(it)
+                if (it.count == 1) {
+                    deleteItem(it)
+                    cartItems = cartItems.removeItem(it)
+                    return@CartContent
+                }
+                cartItems = cartItems.adjustCountItem(it, -1)
+            },
+            modifier = Modifier.padding(paddingValue),
+        )
     }
 }
 
@@ -29,6 +61,45 @@ fun CartScreen(
 @Composable
 private fun CartScreenPreview() {
     ShoppingCartTheme {
-        CartScreen({})
+        CartScreen(
+            currentCartItems = listOf(
+                CartItem(
+                    product = Product(
+                        id = 1,
+                        name = "상품1",
+                        price = 1000,
+                        imageUrl = "",
+                    ),
+                    count = 100
+                ),
+                CartItem(
+                    product = Product(
+                        id = 2,
+                        name = "상품2",
+                        price = 2000,
+                        imageUrl = "",
+                    ),
+                    count = 200
+                ),
+            ),
+            popBackStack = {},
+            deleteItem = {},
+            increaseItemCount = {},
+            decreaseItemCount = {},
+        )
+    }
+}
+
+private fun List<CartItem>.removeItem(item: CartItem): List<CartItem> {
+    return this.filter { cartItem -> cartItem.product.id != item.product.id }
+}
+
+private fun List<CartItem>.adjustCountItem(item: CartItem, amount: Int): List<CartItem> {
+    return this.map { cartItem ->
+        if (cartItem.product.id == item.product.id) {
+            cartItem.copy(count = cartItem.count + amount)
+        } else {
+            cartItem
+        }
     }
 }
