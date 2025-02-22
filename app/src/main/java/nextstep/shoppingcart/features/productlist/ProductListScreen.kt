@@ -67,7 +67,7 @@ internal fun ProductListScreen(
             ) { product ->
                 ProductListItem(
                     product = product,
-                    count = items[product]?.count?.value,
+                    count = items[product]?.count?.value ?: 0,
                     onAddOneClick = { onAddOneClick(product) },
                     onRemoveOneClick = { onRemoveOneClick(product) },
                     onProductClick = { onProductClick(product) },

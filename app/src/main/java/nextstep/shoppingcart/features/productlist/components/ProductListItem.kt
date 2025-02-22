@@ -34,7 +34,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 internal fun ProductListItem(
     product: Product,
-    count: Int?,
+    count: Int,
     onAddOneClick: () -> Unit,
     onRemoveOneClick: () -> Unit,
     onProductClick: () -> Unit,
@@ -64,7 +64,7 @@ internal fun ProductListItem(
 @Composable
 private fun ProductDisplayPanel(
     product: Product,
-    count: Int?,
+    count: Int,
     onAddOneClick: () -> Unit,
     onRemoveOneClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -77,7 +77,7 @@ private fun ProductDisplayPanel(
                 .fillMaxWidth()
                 .aspectRatio(ratio = 1f)
         )
-        if (count == null) {
+        if (count == 0) {
             ShoppingCartFloatingActionButton(
                 buttonType = ShoppingCartFloatingActionButtonType.ADD,
                 onClick = onAddOneClick,
@@ -123,40 +123,38 @@ private fun ProductPrice(price: Int, modifier: Modifier = Modifier) {
 }
 
 
-class ProductWithCountPreviewParameterProvider : PreviewParameterProvider<Int?> {
-    override val values = sequenceOf(null, 0, 1, 10)
+class ProductWithCountPreviewParameterProvider : PreviewParameterProvider<Int> {
+    override val values = sequenceOf(0, 1, 10)
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun ProductListItemPreview(
-    @PreviewParameter(ProductWithCountPreviewParameterProvider::class) count: Int?,
+    @PreviewParameter(ProductWithCountPreviewParameterProvider::class) count: Int,
 ) {
     ShoppingCartTheme {
-        Column {
-            ProductListItem(
-                product = FakeProductRepository.getFirstProduct(),
-                count = count,
-                onAddOneClick = {},
-                onRemoveOneClick = {},
-                onProductClick = {},
-            )
-        }
+        ProductListItem(
+            product = FakeProductRepository.getFirstProduct(),
+            count = count,
+            onAddOneClick = {},
+            onRemoveOneClick = {},
+            onProductClick = {},
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun ProductDisplayPanelPreview() {
+private fun ProductDisplayPanelPreview(
+    @PreviewParameter(ProductWithCountPreviewParameterProvider::class) count: Int,
+) {
     ShoppingCartTheme {
-        Column {
-            ProductDisplayPanel(
-                product = FakeProductRepository.getFirstProduct(),
-                count = null,
-                onAddOneClick = {},
-                onRemoveOneClick = {},
-            )
-        }
+        ProductDisplayPanel(
+            product = FakeProductRepository.getFirstProduct(),
+            count = count,
+            onAddOneClick = {},
+            onRemoveOneClick = {},
+        )
     }
 }
 
