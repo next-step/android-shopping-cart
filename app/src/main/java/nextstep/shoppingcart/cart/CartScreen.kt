@@ -21,13 +21,15 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun CartScreen(
+    totalPrice: Int,
     cartItems: List<CartItem>,
     onBackPressed: () -> Unit,
     onButtonClick: () -> Unit,
+    onRemoveClick: (CartItem) -> Unit,
+    onPlusClick: (CartItem) -> Unit,
+    onMinusClick: (CartItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val totalPrice = remember(key1 = cartItems) { cartItems.sumOf { it.totalPrice } }
-
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -50,9 +52,9 @@ fun CartScreen(
             items(cartItems, key = { it.product.id }) { cartItem ->
                 CartProductItem(
                     cartItem = cartItem,
-                    onCloseClick = { /*TODO*/ },
-                    onPlusClick = { /*TODO*/ },
-                    onMinusClick = { /*TODO*/ }
+                    onCloseClick = { onRemoveClick(cartItem) },
+                    onPlusClick = { onPlusClick(cartItem) },
+                    onMinusClick = { onMinusClick(cartItem) }
                 )
             }
         }
@@ -66,7 +68,11 @@ private fun CartScreenPreview() {
         CartScreen(
             cartItems = listOf(dummyCartItem, dummyCartItem),
             onBackPressed = {},
-            onButtonClick = {}
+            onButtonClick = {},
+            totalPrice = 12345,
+            onRemoveClick = {},
+            onPlusClick = {},
+            onMinusClick = {}
         )
     }
 }

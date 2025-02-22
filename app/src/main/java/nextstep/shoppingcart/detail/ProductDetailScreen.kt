@@ -29,7 +29,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductDetailScreen(
     product: Product,
-    onButtonClick: () -> Unit,
+    onButtonClick: (Product) -> Unit,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -43,7 +43,7 @@ fun ProductDetailScreen(
         bottomBar = {
             ShoppingCartButton(
                 text = stringResource(R.string.add_to_cart),
-                onClick = onButtonClick
+                onClick = { onButtonClick(product) }
             )
         }
     ) { innerPadding ->
