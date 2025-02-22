@@ -26,7 +26,9 @@ internal fun MainButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxWidth()
+            .height(54.dp),
         enabled = enabled,
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors().copy(
