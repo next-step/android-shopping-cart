@@ -56,7 +56,7 @@ class ProductGridItemTest {
                 ),
                 count = 0,
                 isAdded = isAdded,
-                onClickExpandButton = {},
+                onClickAddCartButton = {},
                 onClickIncreaseCountButton = {},
                 onClickDecreaseCountButton = {}
             )
@@ -83,7 +83,7 @@ class ProductGridItemTest {
                 ),
                 count = 0,
                 isAdded = isAdded,
-                onClickExpandButton = {},
+                onClickAddCartButton = {},
                 onClickIncreaseCountButton = {},
                 onClickDecreaseCountButton = {}
             )

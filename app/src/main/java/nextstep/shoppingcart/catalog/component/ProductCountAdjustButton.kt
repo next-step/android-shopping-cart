@@ -39,7 +39,7 @@ fun ProductCountAdjustButton(
             text = count.toString(),
             style = Normal22,
         )
-        IconButton(onClick = onClickIncreaseCountButton,) {
+        IconButton(onClick = onClickIncreaseCountButton) {
             Icon(
                 Icons.Filled.Add,
                 contentDescription = Icons.Filled.Add.name,

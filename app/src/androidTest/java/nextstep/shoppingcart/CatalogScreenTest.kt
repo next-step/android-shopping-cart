@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.catalog.CatalogScreen
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
@@ -112,5 +113,40 @@ class CatalogScreenTest {
         // then
         composeTestRule.onNodeWithText("30")
             .assertExists()
+    }
+
+    @Test
+    fun `담기_버튼을_클릭하면_해당_상품이_장바구니에_추가된다`() {
+        // given
+        val cartDataSource = FakeCartDataSourceImpl()
+
+        val product = Product(
+            id = 1,
+            name = "상품1",
+            price = 1000,
+            imageUrl = "",
+        )
+
+        composeTestRule.setContent {
+            CatalogScreen(
+                products = listOf(product),
+                cartDataSource = cartDataSource,
+                navigateToDetail = {},
+                navigateToCart = {},
+            )
+        }
+
+        // when
+        composeTestRule.onNodeWithTag("1AddButton")
+            .performClick()
+
+        // then
+        composeTestRule.onNodeWithTag("1AdjustButton", true)
+            .assertExists()
+
+        composeTestRule.onNodeWithTag("1AddButton", true)
+            .assertDoesNotExist()
+
+        assert(cartDataSource.hasProduct(product))
     }
 }
