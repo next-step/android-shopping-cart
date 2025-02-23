@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -68,7 +69,8 @@ fun ShoppingCartScreen(
                     R.string.shopping_cart_bottom_bar_total_price_format,
                     totalPrice
                 ),
-                onClick = {}
+                onClick = {},
+                modifier = Modifier.fillMaxWidth()
             )
         }
     ) { innerPadding ->

@@ -16,7 +16,11 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.ui.theme.blue50
 
 @Composable
-fun ShoppingCartButton(text: String, onClick: () -> Unit) {
+fun ShoppingCartButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors().copy(
@@ -25,8 +29,7 @@ fun ShoppingCartButton(text: String, onClick: () -> Unit) {
         ),
         shape = RectangleShape,
         contentPadding = PaddingValues(16.dp),
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
     ) {
         Text(
             text = text,
@@ -41,6 +44,7 @@ fun ShoppingCartButton(text: String, onClick: () -> Unit) {
 private fun BottomAppBarPreview() {
     ShoppingCartButton(
         text = "장바구니 담기",
-        onClick = {}
+        onClick = {},
+        modifier = Modifier.fillMaxWidth()
     )
 }
