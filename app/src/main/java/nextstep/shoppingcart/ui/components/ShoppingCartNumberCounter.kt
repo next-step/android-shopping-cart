@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,17 +29,13 @@ fun NumberCounter(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = CenterVertically
     ) {
-        IconButton(
+
+        NumberCounterIconButton(
+            icon = painterResource(id = R.drawable.ic_remove),
             onClick = onRemoveClick,
-            modifier = Modifier
-                .clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp))
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_remove),
-                contentDescription = "빼기",
-                modifier = Modifier.size(24.dp)
-            )
-        }
+            contentDescription = "빼기",
+            modifier = Modifier.clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp))
+        )
 
         Box(
             modifier = Modifier.size(42.dp),
@@ -52,19 +46,17 @@ fun NumberCounter(
                 fontSize = 22.sp
             )
         }
-        IconButton(
+
+        NumberCounterIconButton(
+            icon = painterResource(id = R.drawable.ic_add),
             onClick = onAddClick,
-            modifier = Modifier
-                .clip(RoundedCornerShape(topEnd = 4.dp, bottomEnd = 4.dp))
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_add),
-                contentDescription = "추가",
-                modifier = Modifier.size(24.dp)
-            )
-        }
+            contentDescription = "추가",
+            modifier = Modifier.clip(RoundedCornerShape(topEnd = 4.dp, bottomEnd = 4.dp))
+        )
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
