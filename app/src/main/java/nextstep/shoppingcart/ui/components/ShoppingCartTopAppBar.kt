@@ -13,7 +13,7 @@ import nextstep.shoppingcart.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommonTopAppBar(
+fun ShoppingCartTopAppBar(
     title: String,
     onBackButtonClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -35,7 +35,7 @@ fun CommonTopAppBar(
 @Preview
 @Composable
 private fun ShoppingCartTopAppBarPreview() {
-    CommonTopAppBar(
+    ShoppingCartTopAppBar(
         title = "App Bar Title",
         onBackButtonClick = {}
     )

@@ -36,10 +36,10 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.components.CommonTopAppBar
+import nextstep.shoppingcart.ui.components.ShoppingCartTopAppBar
 import nextstep.shoppingcart.ui.components.ShoppingCartButton
 import nextstep.shoppingcart.ui.components.ShoppingCartImage
-import nextstep.shoppingcart.ui.components.ShoppingCartNumberCounter
+import nextstep.shoppingcart.ui.components.ShoppingCartCounter
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -58,7 +58,7 @@ fun ShoppingCartScreen(
             .navigationBarsPadding()
             .statusBarsPadding(),
         topBar = {
-            CommonTopAppBar(
+            ShoppingCartTopAppBar(
                 title = stringResource(R.string.shopping_cart_app_bar_title),
                 onBackButtonClick = onBackButtonClick
             )
@@ -144,7 +144,7 @@ private fun CartItemDetailsSection(
                 textAlign = TextAlign.End,
             )
             Spacer(modifier = Modifier.height(8.dp))
-            ShoppingCartNumberCounter(
+            ShoppingCartCounter(
                 count = cartItem.count,
                 onAddClick = onAddProductClick,
                 onRemoveClick = onRemoveProductClick

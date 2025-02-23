@@ -17,7 +17,7 @@ class ShoppingCartNumberCounterTest {
         var count = 1
 
         composeTestRule.setContent {
-            ShoppingCartNumberCounter(
+            ShoppingCartCounter(
                 count = count,
                 onAddClick = { count++ },
                 onRemoveClick = { count-- },
@@ -37,7 +37,7 @@ class ShoppingCartNumberCounterTest {
         var count = 3
 
         composeTestRule.setContent {
-            ShoppingCartNumberCounter(
+            ShoppingCartCounter(
                 count = count,
                 onAddClick = { count++ },
                 onRemoveClick = { count-- },

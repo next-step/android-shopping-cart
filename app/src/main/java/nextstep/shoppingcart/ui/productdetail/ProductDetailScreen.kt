@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.components.CommonTopAppBar
+import nextstep.shoppingcart.ui.components.ShoppingCartTopAppBar
 import nextstep.shoppingcart.ui.components.ShoppingCartButton
 import nextstep.shoppingcart.ui.components.ShoppingCartImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -42,7 +42,7 @@ fun ProductDetailScreen(
             .navigationBarsPadding()
             .statusBarsPadding(),
         topBar = {
-            CommonTopAppBar(
+            ShoppingCartTopAppBar(
                 title = stringResource(R.string.product_detail_app_bar_title),
                 onBackButtonClick = onBackButtonClick
             )

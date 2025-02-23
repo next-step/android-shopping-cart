@@ -15,7 +15,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.theme.PurpleGrey40
 
 @Composable
-fun ShoppingCartNumberCounterIconButton(
+fun ShoppingCartCounterIconButton(
     icon: Painter,
     onClick: () -> Unit,
     contentDescription: String,
@@ -35,8 +35,8 @@ fun ShoppingCartNumberCounterIconButton(
 
 @Preview(showBackground = true)
 @Composable
-private fun NumberCounterIconButtonPreview() {
-    ShoppingCartNumberCounterIconButton(
+private fun ShoppingCartCounterIconButtonPreview() {
+    ShoppingCartCounterIconButton(
         icon = painterResource(id = R.drawable.ic_add),
         onClick = {},
         contentDescription = "더하기",

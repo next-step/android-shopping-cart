@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 
 @Composable
-fun ShoppingCartNumberCounter(
+fun ShoppingCartCounter(
     count: Int,
     onAddClick: () -> Unit,
     onRemoveClick: () -> Unit,
@@ -30,7 +30,7 @@ fun ShoppingCartNumberCounter(
         verticalAlignment = CenterVertically
     ) {
 
-        ShoppingCartNumberCounterIconButton(
+        ShoppingCartCounterIconButton(
             icon = painterResource(id = R.drawable.ic_remove),
             onClick = onRemoveClick,
             contentDescription = "빼기",
@@ -45,7 +45,7 @@ fun ShoppingCartNumberCounter(
                 .wrapContentSize(Alignment.Center)
         )
 
-        ShoppingCartNumberCounterIconButton(
+        ShoppingCartCounterIconButton(
             icon = painterResource(id = R.drawable.ic_add),
             onClick = onAddClick,
             contentDescription = "더하기",
@@ -57,8 +57,8 @@ fun ShoppingCartNumberCounter(
 
 @Preview(showBackground = true)
 @Composable
-private fun ItemCounterPreview() {
-    ShoppingCartNumberCounter(
+private fun ShoppingCartCounterPreview() {
+    ShoppingCartCounter(
         count = 1,
         onAddClick = {},
         onRemoveClick = {}
