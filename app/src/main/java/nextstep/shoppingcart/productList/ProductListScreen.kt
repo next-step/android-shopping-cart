@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.productList
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold

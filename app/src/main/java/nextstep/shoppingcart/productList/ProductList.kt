@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.productList
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues

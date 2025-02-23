@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.productList
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
