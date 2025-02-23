@@ -6,10 +6,20 @@ import nextstep.shoppingcart.cart.data.CartDataSource
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 
-class FakeCartDataSource(
+class FakeCartDataSourceImpl(
     override val items: SnapshotStateList<CartItem> = mutableStateListOf()
 ) : CartDataSource {
     override val totalPrice: Int get() = items.sumOf { it.totalPrice }
+
+    override fun getCount(product: Product): Int {
+        println("장바구니에 있는 아이템: ${items.find { it.product.id == product.id }}")
+        return items.find { product.id == it.product.id }?.count ?: 0
+    }
+
+    override fun hasProduct(product: Product): Boolean {
+        println("장바구니에 있는지 여부: ${getCount(product) > 0}")
+        return getCount(product) > 0
+    }
 
     override fun addOne(product: Product): List<CartItem> {
         val item = items.find { it.product == product }

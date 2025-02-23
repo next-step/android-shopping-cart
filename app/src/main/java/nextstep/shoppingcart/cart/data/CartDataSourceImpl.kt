@@ -10,6 +10,14 @@ object CartDataSourceImpl: CartDataSource {
 
     override val totalPrice: Int get() = items.sumOf { it.totalPrice }
 
+    override fun getCount(product: Product): Int {
+        return items.find { it.product.id == product.id }?.count ?: 0
+    }
+
+    override fun hasProduct(product: Product): Boolean {
+        return getCount(product) > 0
+    }
+
     override fun addOne(product: Product): List<CartItem> {
         val item = items.find { it.product == product }
         if (item == null) {

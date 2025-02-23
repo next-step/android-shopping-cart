@@ -10,4 +10,6 @@ interface CartDataSource {
     fun addOne(product: Product): List<CartItem>
     fun removeOne(product: Product): List<CartItem>
     fun removeAll(product: Product): List<CartItem>
+    fun getCount(product: Product): Int
+    fun hasProduct(product: Product): Boolean
 }

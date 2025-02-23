@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.cart.data.CartDataSource
+import nextstep.shoppingcart.cart.data.CartDataSourceImpl
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.TypoTokens.Bold16
 import nextstep.shoppingcart.ui.theme.TypoTokens.Normal16
@@ -16,6 +18,7 @@ import nextstep.shoppingcart.util.NumberFormatUtil.toPrice
 @Composable
 fun ProductGridItem(
     product: Product,
+    cartDataSource: CartDataSource,
     onClickItem: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -23,7 +26,7 @@ fun ProductGridItem(
         ProductQuantityAdjustImage(
             product = product,
             count = 0,
-            isAdded = true,
+            isAdded = cartDataSource.hasProduct(product),
             onClickExpandButton = {},
             onClickIncreaseCountButton = {},
             onClickDecreaseCountButton = {},
@@ -53,5 +56,6 @@ private fun ProductGridItemPreview() {
             imageUrl = "https://picsum.photos/id/30/1280/901"
         ),
         onClickItem = {},
+        cartDataSource = CartDataSourceImpl,
     )
 }

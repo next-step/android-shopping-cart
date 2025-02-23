@@ -11,7 +11,7 @@ import nextstep.shoppingcart.cart.CartScreen
 import nextstep.shoppingcart.cart.component.CartProductItem
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.testdouble.FakeCartDataSource
+import nextstep.shoppingcart.testdouble.FakeCartDataSourceImpl
 import org.junit.Rule
 import org.junit.Test
 
@@ -69,7 +69,7 @@ class CartScreenTest {
                 ),
                 count = 200
             ))
-        val cartDataSource = FakeCartDataSource(items)
+        val cartDataSource = FakeCartDataSourceImpl(items)
 
         composeTestRule.setContent {
             CartScreen(
@@ -111,7 +111,7 @@ class CartScreenTest {
                 count = 80
             )
         )
-        val cartDataSource = FakeCartDataSource(cartItems)
+        val cartDataSource = FakeCartDataSourceImpl(cartItems)
 
         composeTestRule.setContent {
             CartScreen(
@@ -161,7 +161,7 @@ class CartScreenTest {
                 count = 98
             )
         )
-        val cartDataSource = FakeCartDataSource(cartItems)
+        val cartDataSource = FakeCartDataSourceImpl(cartItems)
 
         // when
         composeTestRule.setContent {
@@ -203,7 +203,7 @@ class CartScreenTest {
                 count = 100
             )
         )
-        val cartDataSource = FakeCartDataSource(cartItems)
+        val cartDataSource = FakeCartDataSourceImpl(cartItems)
 
         composeTestRule.setContent {
             CartScreen(
@@ -253,7 +253,7 @@ class CartScreenTest {
                 count = 1
             )
         )
-        val cartDataSource = FakeCartDataSource(cartItems)
+        val cartDataSource = FakeCartDataSourceImpl(cartItems)
 
         composeTestRule.setContent {
             CartScreen(
