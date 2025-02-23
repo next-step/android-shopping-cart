@@ -1,7 +1,6 @@
 package nextstep.shoppingcart.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
@@ -37,7 +36,7 @@ fun ShoppingCartNumberCounter(
             contentDescription = "빼기",
             modifier = Modifier.clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp))
         )
-        
+
         Text(
             text = count.toString(),
             fontSize = 22.sp,
@@ -49,7 +48,7 @@ fun ShoppingCartNumberCounter(
         ShoppingCartNumberCounterIconButton(
             icon = painterResource(id = R.drawable.ic_add),
             onClick = onAddClick,
-            contentDescription = "추가",
+            contentDescription = "더하기",
             modifier = Modifier.clip(RoundedCornerShape(topEnd = 4.dp, bottomEnd = 4.dp))
         )
     }

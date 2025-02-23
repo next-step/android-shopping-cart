@@ -1,13 +1,9 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.ui.shoppingcart
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.shoppingcart.ShoppingCartScreen
 import org.junit.Rule
 import org.junit.Test
 
