@@ -6,7 +6,7 @@ import androidx.compose.ui.test.performClick
 import org.junit.Rule
 import org.junit.Test
 
-class ShoppingCartNumberCounterTest {
+class ShoppingCartCounterTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -34,7 +34,7 @@ class ShoppingCartNumberCounterTest {
     @Test
     fun 빼기_버튼을_누르면_수가_감소한다() {
         // given
-        var count = 3
+        var count = 0
 
         composeTestRule.setContent {
             ShoppingCartCounter(
@@ -48,6 +48,6 @@ class ShoppingCartNumberCounterTest {
         composeTestRule.onNodeWithContentDescription("빼기").performClick()
 
         // then
-        assert(count == 2)
+        assert(count == -1)
     }
 }

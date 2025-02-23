@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -37,10 +36,10 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.components.ShoppingCartTopAppBar
 import nextstep.shoppingcart.ui.components.ShoppingCartButton
-import nextstep.shoppingcart.ui.components.ShoppingCartImage
 import nextstep.shoppingcart.ui.components.ShoppingCartCounter
+import nextstep.shoppingcart.ui.components.ShoppingCartImage
+import nextstep.shoppingcart.ui.components.ShoppingCartTopAppBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
