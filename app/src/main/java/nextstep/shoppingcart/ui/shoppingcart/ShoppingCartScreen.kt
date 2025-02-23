@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -147,7 +148,8 @@ private fun CartItemDetailsSection(
             ShoppingCartCounter(
                 count = cartItem.count,
                 onAddClick = onAddProductClick,
-                onRemoveClick = onRemoveProductClick
+                onRemoveClick = onRemoveProductClick,
+                modifier = Modifier.clip(RoundedCornerShape(4.dp))
             )
         }
     }

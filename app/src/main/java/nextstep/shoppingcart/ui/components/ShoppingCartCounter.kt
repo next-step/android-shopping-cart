@@ -34,7 +34,6 @@ fun ShoppingCartCounter(
             icon = painterResource(id = R.drawable.ic_remove),
             onClick = onRemoveClick,
             contentDescription = "빼기",
-            modifier = Modifier.clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp))
         )
 
         Text(
@@ -49,7 +48,6 @@ fun ShoppingCartCounter(
             icon = painterResource(id = R.drawable.ic_add),
             onClick = onAddClick,
             contentDescription = "더하기",
-            modifier = Modifier.clip(RoundedCornerShape(topEnd = 4.dp, bottomEnd = 4.dp))
         )
     }
 }
@@ -61,6 +59,6 @@ private fun ShoppingCartCounterPreview() {
     ShoppingCartCounter(
         count = 1,
         onAddClick = {},
-        onRemoveClick = {}
+        onRemoveClick = {},
     )
 }
