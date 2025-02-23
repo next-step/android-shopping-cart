@@ -51,7 +51,6 @@ fun ProductDetailScreen(
             ShoppingCartButton(
                 text = stringResource(R.string.product_detail_btn_add_product_in_cart),
                 onClick = onAddProductClick,
-                modifier = Modifier.fillMaxWidth()
             )
         }
     ) { innerPadding ->

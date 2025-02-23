@@ -71,7 +71,6 @@ fun ShoppingCartScreen(
                     totalPrice
                 ),
                 onClick = {},
-                modifier = Modifier.fillMaxWidth()
             )
         }
     ) { innerPadding ->

@@ -29,7 +29,7 @@ fun ShoppingCartButton(
         ),
         shape = RectangleShape,
         contentPadding = PaddingValues(16.dp),
-        modifier = modifier
+        modifier = modifier.fillMaxWidth()
     ) {
         Text(
             text = text,
@@ -45,6 +45,5 @@ private fun BottomAppBarPreview() {
     ShoppingCartButton(
         text = "장바구니 담기",
         onClick = {},
-        modifier = Modifier.fillMaxWidth()
     )
 }
