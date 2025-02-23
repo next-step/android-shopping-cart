@@ -5,6 +5,9 @@
     <string name="navigate_back">뒤로가기</string>
     <string name="price">금액</string>
 
+    <!-- Components -->
+    <string name="floating_action_button_type_add_description">추가</string>
+
     <!-- Format -->
     <string name="price_format">%,d원</string>
 
@@ -22,4 +25,5 @@
     <string name="cart_item_counter_plus">+</string>
     <string name="cart_item_remove_all_decription">장바구니 상품 삭제</string>
     <string name="cart_item_order_button_text_format">주문하기(%,d원)</string>
+
 </resources>

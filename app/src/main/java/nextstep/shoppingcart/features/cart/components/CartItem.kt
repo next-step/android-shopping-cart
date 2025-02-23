@@ -1,10 +1,9 @@
-package nextstep.shoppingcart.screens.cart.component
+package nextstep.shoppingcart.features.cart.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -12,8 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -24,54 +21,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
-import com.bumptech.glide.integration.compose.placeholder
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.components.ItemCounter
+import nextstep.shoppingcart.components.ProductImage
 import nextstep.shoppingcart.data.FakeProductRepository
-import nextstep.shoppingcart.domain.model.Cart
 import nextstep.shoppingcart.domain.model.CartItem
 import nextstep.shoppingcart.domain.model.Count
-import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.ui.theme.GrayAAAAAA
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.ui.theme.Typography
 
 @Composable
-internal fun CartList(
-    cart: Cart,
-    onAddOneClick: (Product) -> Unit,
-    onRemoveOneClick: (Product) -> Unit,
-    onRemoveAllClick: (Product) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    LazyColumn(
-        contentPadding = PaddingValues(vertical = 16.dp, horizontal = 18.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = modifier,
-    ) {
-        items(key = { it.product.id }, items = cart.items) { cartItem ->
-            CartItem(
-                cartItem = cartItem,
-                onAddOneClick = { onAddOneClick(cartItem.product) },
-                onRemoveOneClick = { onRemoveOneClick(cartItem.product) },
-                onRemoveAllClick = { onRemoveAllClick(cartItem.product) },
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-    }
-}
-
-@Composable
-private fun CartItem(
+internal fun CartItem(
     cartItem: CartItem,
     onAddOneClick: () -> Unit,
     onRemoveOneClick: () -> Unit,
@@ -93,7 +60,6 @@ private fun CartItem(
         CartItemTitle(
             title = cartItem.product.name,
             onRemoveAllClick = onRemoveAllClick,
-            modifier = Modifier.fillMaxWidth(),
         )
         CartItemContent(
             cartItem = cartItem,
@@ -112,7 +78,7 @@ private fun CartItemTitle(
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
     ) {
         Text(
             text = title,
@@ -134,8 +100,10 @@ private fun CartItemContent(
     onAddOneClick: () -> Unit,
 ) {
     Row {
-        CartItemImage(
-            product = cartItem.product,
+        ProductImage(
+            imageUrl = cartItem.product.imageUrl,
+            contentDescription = cartItem.product.name,
+            contentScale = ContentScale.Fit,
             modifier = Modifier
                 .weight(1f)
                 .aspectRatio(1.6f),
@@ -143,7 +111,7 @@ private fun CartItemContent(
         Spacer(Modifier.width(26.dp))
         Column(modifier = Modifier.weight(1f)) {
             Spacer(Modifier.height(24.dp))
-            CartItemPrice(cartItem.product.price.value)
+            CartItemPrice(price = cartItem.product.price.value)
             ItemCounter(
                 count = cartItem.count.value,
                 onRemoveOneClick = onRemoveOneClick,
@@ -155,44 +123,13 @@ private fun CartItemContent(
 }
 
 @Composable
-@OptIn(ExperimentalGlideComposeApi::class)
-private fun CartItemImage(product: Product, modifier: Modifier = Modifier) {
-    GlideImage(
-        model = product.imageUrl,
-        contentDescription = product.name,
-        loading = placeholder(R.drawable.ic_launcher_background),
-        failure = placeholder(ColorPainter(GrayAAAAAA)),
-        contentScale = ContentScale.Crop,
-        modifier = modifier,
-    )
-}
-
-@Composable
-private fun CartItemPrice(price: Int) {
+private fun CartItemPrice(price: Int, modifier: Modifier = Modifier) {
     Text(
         text = stringResource(R.string.price_format, price),
         textAlign = TextAlign.End,
         style = Typography.bodyLarge,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
     )
-}
-
-@Preview
-@Composable
-private fun CartListPreview() {
-    ShoppingCartTheme {
-        CartList(
-            cart = Cart(
-                initialItems = FakeProductRepository
-                    .getAllProducts()
-                    .value
-                    .map { CartItem(it) }
-            ),
-            onAddOneClick = {},
-            onRemoveOneClick = {},
-            onRemoveAllClick = {},
-        )
-    }
 }
 
 @Preview
@@ -208,5 +145,40 @@ private fun CartItemPreview() {
             onRemoveAllClick = {},
             onRemoveOneClick = {},
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun CartItemTitlePreview() {
+    ShoppingCartTheme {
+        CartItemTitle(
+            title = "Wireless Mouse",
+            onRemoveAllClick = {},
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun CartItemContentPreview() {
+    ShoppingCartTheme {
+        CartItemContent(
+            onAddOneClick = { },
+            cartItem = CartItem(
+                product = FakeProductRepository.getFirstProduct(),
+                count = Count.ONE
+            ),
+            onRemoveOneClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun CartItemPricePreview() {
+    ShoppingCartTheme {
+        CartItemPrice(price = 10000)
     }
 }

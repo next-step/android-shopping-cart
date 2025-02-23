@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.features.productdetail
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,8 @@ import nextstep.shoppingcart.data.InMemoryCartRepository
 import nextstep.shoppingcart.domain.model.Product
 import nextstep.shoppingcart.domain.repository.CartRepository
 import nextstep.shoppingcart.domain.repository.ProductRepository
-import nextstep.shoppingcart.screens.ProductDetailScreen
+import nextstep.shoppingcart.features.cart.CartActivity
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {
     private val productId: Int by lazy {
@@ -28,14 +29,16 @@ class ProductDetailActivity : ComponentActivity() {
 
         setContent {
             enableEdgeToEdge()
-            ProductDetailScreen(
-                product = product,
-                onAddCartClick = {
-                    cartRepository.addOne(product)
-                    startCartActivity()
-                },
-                onBackClick = onBackPressedDispatcher::onBackPressed
-            )
+            ShoppingCartTheme {
+                ProductDetailScreen(
+                    product = product,
+                    onAddCartClick = {
+                        cartRepository.addOne(product)
+                        startCartActivity()
+                    },
+                    onBackClick = onBackPressedDispatcher::onBackPressed
+                )
+            }
         }
     }
 
