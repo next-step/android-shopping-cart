@@ -15,6 +15,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun CartScreen(
     cartItems: List<CartItem>,
+    totalPrice: Int,
     popBackStack: () -> Unit,
     deleteItem: (CartItem) -> Unit,
     increaseItemCount: (CartItem) -> Unit,
@@ -29,6 +30,7 @@ fun CartScreen(
     ) { paddingValue ->
         CartContent(
             cartItems = cartItems,
+            totalPrice = totalPrice,
             onClickDeleteItemButton = { deleteItem(it) },
             onClickIncreaseCountButton = { increaseItemCount(it) },
             onClickDecreaseCountButton = { decreaseItemCount(it) },
@@ -62,6 +64,7 @@ private fun CartScreenPreview() {
                     count = 200
                 ),
             ),
+            totalPrice = 0,
             popBackStack = {},
             deleteItem = {},
             increaseItemCount = {},
