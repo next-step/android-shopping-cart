@@ -28,8 +28,8 @@ fun ProductGridItem(
             count = cartDataSource.getCount(product),
             isAdded = cartDataSource.hasProduct(product),
             onClickAddCartButton = { cartDataSource.addOne(it) },
-            onClickIncreaseCountButton = {},
-            onClickDecreaseCountButton = {},
+            onClickIncreaseCountButton = { cartDataSource.addOne(product) },
+            onClickDecreaseCountButton = { cartDataSource.removeOne(product) },
             modifier = Modifier.fillMaxWidth(),
         )
         Text(

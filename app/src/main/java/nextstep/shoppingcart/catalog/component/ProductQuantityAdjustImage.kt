@@ -25,8 +25,8 @@ fun ProductQuantityAdjustImage(
     isAdded: Boolean,
     count: Int,
     onClickAddCartButton: (Product) -> Unit,
-    onClickIncreaseCountButton: () -> Unit,
-    onClickDecreaseCountButton: () -> Unit,
+    onClickIncreaseCountButton: (Product) -> Unit,
+    onClickDecreaseCountButton: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier) {
@@ -41,8 +41,8 @@ fun ProductQuantityAdjustImage(
         if (isAdded) {
             ProductCountAdjustButton(
                 count = count,
-                onClickIncreaseCountButton = onClickIncreaseCountButton,
-                onClickDecreaseCountButton = onClickDecreaseCountButton,
+                onClickIncreaseCountButton = { onClickIncreaseCountButton.invoke(product) },
+                onClickDecreaseCountButton = { onClickDecreaseCountButton.invoke(product) },
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(bottom = 12.dp)
