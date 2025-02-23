@@ -72,7 +72,7 @@ class CartScreenTest {
 
         composeTestRule.setContent {
             CartScreen(
-                currentCartItems = cartItems,
+                cartItems = cartItems,
                 popBackStack = {},
                 deleteItem = {},
                 increaseItemCount = {},
@@ -112,7 +112,7 @@ class CartScreenTest {
 
         composeTestRule.setContent {
             CartScreen(
-                currentCartItems = cartItems,
+                cartItems = cartItems,
                 popBackStack = {},
                 deleteItem = {},
                 increaseItemCount = {},
@@ -161,7 +161,7 @@ class CartScreenTest {
         // when
         composeTestRule.setContent {
             CartScreen(
-                currentCartItems = cartItems,
+                cartItems = cartItems,
                 popBackStack = {},
                 deleteItem = {},
                 increaseItemCount = {},
@@ -200,7 +200,7 @@ class CartScreenTest {
 
         composeTestRule.setContent {
             CartScreen(
-                currentCartItems = cartItems,
+                cartItems = cartItems,
                 popBackStack = {},
                 deleteItem = {},
                 increaseItemCount = {},
@@ -248,7 +248,7 @@ class CartScreenTest {
 
         composeTestRule.setContent {
             CartScreen(
-                currentCartItems = cartItems,
+                cartItems = cartItems,
                 popBackStack = {},
                 deleteItem = {},
                 increaseItemCount = {},
