@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Shopping Cart</string>
     <string name="format_price_won">%,d원</string>
+    <string name="order_format_price_won">주문하기(%,d원)</string>
     <string name="product_list">상품 목록</string>
     <string name="shopping_cart">장바구니</string>
     <string name="product_detail">상품 상세</string>
@@ -9,4 +10,9 @@
     <string name="price">금액</string>
     <string name="title_activity_product_detail">ProductDetailActivity</string>
     <string name="title_activity_cart">CartActivity</string>
+    <string name="delete">삭제</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="product_price">상품 가격</string>
+    <string name="product_count">상품 갯수</string>
 </resources>

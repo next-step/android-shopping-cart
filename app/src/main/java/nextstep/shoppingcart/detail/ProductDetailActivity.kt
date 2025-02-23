@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import nextstep.shoppingcart.cart.Cart
 import nextstep.shoppingcart.cart.CartActivity
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.getProductById
@@ -21,6 +22,7 @@ class ProductDetailActivity : ComponentActivity() {
                 ProductDetailScreen(
                     product = getProductById(id),
                     onButtonClick = {
+                        Cart.addOne(it)
                         startActivity(Intent(this, CartActivity::class.java))
                     },
                     onBackPressed = { finish() }

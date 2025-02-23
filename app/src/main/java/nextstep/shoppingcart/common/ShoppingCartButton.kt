@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.detail
+package nextstep.shoppingcart.common
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,20 +19,19 @@ import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun ProductDetailBottomButton(
+fun ShoppingCartButton(
+    text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Button(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(54.dp),
+        modifier = modifier.fillMaxWidth().height(54.dp),
         onClick = onClick,
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors().copy(containerColor = Blue50, contentColor = Color.White)
     ) {
         Text(
-            text = stringResource(R.string.add_to_cart),
+            text = text,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold
         )
@@ -41,9 +40,10 @@ fun ProductDetailBottomButton(
 
 @Preview
 @Composable
-private fun ProductDetailBottomButtonPreview() {
+private fun ShoppingCartButtonPreview() {
     ShoppingCartTheme {
-        ProductDetailBottomButton(
+        ShoppingCartButton(
+            text = stringResource(R.string.add_to_cart),
             onClick = {}
         )
     }

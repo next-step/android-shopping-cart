@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.productlist
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -10,17 +9,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.ColorPainter
-import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.common.ProductImage
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -33,20 +28,10 @@ fun ProductItem(
     Column(
         modifier = modifier.clickable(onClick = onClick)
     ) {
-        if (LocalInspectionMode.current) {
-            Image(
-                modifier = Modifier.aspectRatio(1f),
-                painter = painterResource(R.drawable.ic_launcher_background),
-                contentDescription = null
-            )
-        } else {
-            AsyncImage(
-                modifier = Modifier.aspectRatio(1f),
-                placeholder = ColorPainter(Color.LightGray),
-                model = product.imageUrl,
-                contentDescription = null
-            )
-        }
+        ProductImage(
+            modifier = modifier.aspectRatio(1f),
+            imageUrl = product.imageUrl
+        )
         Column(
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
         ) {

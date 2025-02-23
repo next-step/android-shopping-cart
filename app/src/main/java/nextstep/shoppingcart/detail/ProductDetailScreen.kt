@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.detail
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,25 +14,22 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.ColorPainter
-import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.common.ShoppingCartButton
+import nextstep.shoppingcart.common.ProductImage
 import nextstep.shoppingcart.common.ShoppingCartAppBar
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.theme.LightGray
+import nextstep.shoppingcart.ui.theme.Gray10
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductDetailScreen(
     product: Product,
-    onButtonClick: () -> Unit,
+    onButtonClick: (Product) -> Unit,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -45,7 +41,10 @@ fun ProductDetailScreen(
             )
         },
         bottomBar = {
-            ProductDetailBottomButton(onClick = onButtonClick)
+            ShoppingCartButton(
+                text = stringResource(R.string.add_to_cart),
+                onClick = { onButtonClick(product) }
+            )
         }
     ) { innerPadding ->
         Column(
@@ -53,20 +52,10 @@ fun ProductDetailScreen(
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
         ) {
-            if (LocalInspectionMode.current) {
-                Image(
-                    modifier = Modifier.aspectRatio(1f),
-                    painter = painterResource(R.drawable.ic_launcher_background),
-                    contentDescription = null
-                )
-            } else {
-                AsyncImage(
-                    modifier = Modifier.aspectRatio(1f),
-                    placeholder = ColorPainter(Color.LightGray),
-                    model = product.imageUrl,
-                    contentDescription = null
-                )
-            }
+            ProductImage(
+                modifier = Modifier.aspectRatio(1f),
+                imageUrl = product.imageUrl
+            )
 
             Text(
                 modifier = Modifier.padding(18.dp),
@@ -76,26 +65,37 @@ fun ProductDetailScreen(
             )
 
             HorizontalDivider(
-                color = LightGray
+                color = Gray10
             )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(18.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.price),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-
-                Text(
-                    text = stringResource(R.string.format_price_won, product.price),
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
+            ProductDetailField(
+                modifier = Modifier.padding(18.dp),
+                title = stringResource(R.string.price),
+                content = stringResource(R.string.format_price_won, product.price)
+            )
         }
+    }
+}
+
+@Composable
+private fun ProductDetailField(
+    title: String,
+    content: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+        Text(
+            text = content,
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
 
