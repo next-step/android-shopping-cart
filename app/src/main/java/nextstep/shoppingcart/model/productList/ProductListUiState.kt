@@ -1,7 +1,8 @@
-package nextstep.shoppingcart.ui.theme.shopping.model
+package nextstep.shoppingcart.model.productList
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import nextstep.shoppingcart.model.Product
 
 @Stable
 sealed interface ProductListUiState {
@@ -15,9 +16,8 @@ sealed interface ProductListUiState {
     @Immutable
     data object Error : ProductListUiState
 
-
     @Immutable
-    data class Products(
+    data class ProductList(
         val products: List<Product>,
     ) : ProductListUiState
 }

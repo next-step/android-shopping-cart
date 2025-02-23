@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.theme.shopping.component
+package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -6,17 +6,23 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.ui.theme.shopping.getProductsTestData
-import nextstep.shoppingcart.ui.theme.shopping.model.Product
+import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.model.productTestDataList
 
 @Composable
-fun ProductListContents(productItems: List<Product>, modifier: Modifier = Modifier) {
+fun ProductListContents(
+    productItems: List<Product>,
+    navigateToProductDetail: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(2),
     ) {
         items(items = productItems, key = { it.productId }) { item ->
-            Product(item)
+            Product(
+                product = item,
+                navigateToProductDetail = { id -> navigateToProductDetail(id) })
         }
     }
 }
@@ -24,5 +30,8 @@ fun ProductListContents(productItems: List<Product>, modifier: Modifier = Modifi
 @Preview(showBackground = true)
 @Composable
 private fun ProductListContentsPreview() {
-    ProductListContents(productItems = getProductsTestData())
+    ProductListContents(
+        productItems = productTestDataList,
+        navigateToProductDetail = {},
+    )
 }

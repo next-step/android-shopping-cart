@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.theme.shopping.component
+package nextstep.shoppingcart.ui.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
