@@ -52,7 +52,7 @@ private fun CartScreenPreview() {
                         price = 1000,
                         imageUrl = "",
                     ),
-                    count = 100
+                    count = 80
                 ),
                 CartItem(
                     product = Product(

@@ -5,12 +5,12 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 
-object Cart {
-    val items: SnapshotStateList<CartItem> = mutableStateListOf()
+object CartDataSourceImpl: CartDataSource {
+    override val items: SnapshotStateList<CartItem> = mutableStateListOf()
 
-    val totalPrice: Int get() = items.sumOf { it.totalPrice }
+    override val totalPrice: Int get() = items.sumOf { it.totalPrice }
 
-    fun addOne(product: Product): List<CartItem> {
+    override fun addOne(product: Product): List<CartItem> {
         val item = items.find { it.product == product }
         if (item == null) {
             items.add(CartItem(product, 1))
@@ -21,7 +21,7 @@ object Cart {
         return items
     }
 
-    fun removeOne(product: Product): List<CartItem> {
+    override fun removeOne(product: Product): List<CartItem> {
         items.find { it.product == product }
             ?.let { item ->
                 if (item.count > 1) {
@@ -34,7 +34,7 @@ object Cart {
         return items
     }
 
-    fun removeAll(product: Product): List<CartItem> {
+    override fun removeAll(product: Product): List<CartItem> {
         items.removeAll { it.product == product }
         return items
     }

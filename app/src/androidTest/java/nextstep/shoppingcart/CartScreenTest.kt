@@ -1,5 +1,6 @@
 package nextstep.shoppingcart
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -10,6 +11,7 @@ import nextstep.shoppingcart.cart.CartScreen
 import nextstep.shoppingcart.cart.component.CartProductItem
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.testdouble.FakeCartDataSource
 import org.junit.Rule
 import org.junit.Test
 
@@ -49,16 +51,15 @@ class CartScreenTest {
     @Test
     fun 아이템_제거_아이콘을_클릭하여_담긴_상품을_제거할_수_있다() {
         // given
-        val cartItems = listOf(
-            CartItem(
-                product = Product(
-                    id = 1,
-                    name = "상품1",
-                    price = 1000,
-                    imageUrl = "",
-                ),
-                count = 100
+        val items = mutableStateListOf(CartItem(
+            product = Product(
+                id = 1,
+                name = "상품1",
+                price = 1000,
+                imageUrl = "",
             ),
+            count = 100
+        ),
             CartItem(
                 product = Product(
                     id = 2,
@@ -67,14 +68,15 @@ class CartScreenTest {
                     imageUrl = "",
                 ),
                 count = 200
-            )
-        )
+            ))
+        val cartDataSource = FakeCartDataSource(items)
 
         composeTestRule.setContent {
             CartScreen(
-                cartItems = cartItems,
+                cartItems = cartDataSource.items,
+                totalPrice = 0,
                 popBackStack = {},
-                deleteItem = {},
+                deleteItem = { cartDataSource.removeOne(it.product) },
                 increaseItemCount = {},
                 decreaseItemCount = {},
             )
@@ -98,7 +100,7 @@ class CartScreenTest {
     @Test
     fun 담긴_상품의_수량을_증가시키면_상품_가격에_반영된다() {
         // given
-        val cartItems = listOf(
+        val cartItems = mutableStateListOf(
             CartItem(
                 product = Product(
                     id = 1,
@@ -106,28 +108,30 @@ class CartScreenTest {
                     price = 1000,
                     imageUrl = "",
                 ),
-                count = 100
+                count = 80
             )
         )
+        val cartDataSource = FakeCartDataSource(cartItems)
 
         composeTestRule.setContent {
             CartScreen(
-                cartItems = cartItems,
+                cartItems = cartDataSource.items,
+                totalPrice = cartDataSource.totalPrice,
                 popBackStack = {},
                 deleteItem = {},
-                increaseItemCount = {},
+                increaseItemCount = { cartDataSource.addOne(it.product) },
                 decreaseItemCount = {},
             )
         }
 
         // when
         composeTestRule
-            .onNodeWithText("101")
-            .assertDoesNotExist()
+            .onNodeWithText("80")
+            .assertExists()
 
         composeTestRule
-            .onNodeWithText("101,000원")
-            .assertDoesNotExist()
+            .onNodeWithText("80,000원")
+            .assertExists()
 
         composeTestRule
             .onNodeWithTag("1increaseButton")
@@ -135,18 +139,18 @@ class CartScreenTest {
 
         // then
         composeTestRule
-            .onNodeWithText("101")
+            .onNodeWithText("81")
             .assertExists()
 
         composeTestRule
-            .onNodeWithText("101,000원")
+            .onNodeWithText("81,000원")
             .assertExists()
     }
 
     @Test
     fun 장바구니에_담은_상품의_개수가_99개면_증가_버튼은_비활성화_된다() {
         // given
-        val cartItems = listOf(
+        val cartItems = mutableStateListOf(
             CartItem(
                 product = Product(
                     id = 1,
@@ -157,14 +161,16 @@ class CartScreenTest {
                 count = 98
             )
         )
+        val cartDataSource = FakeCartDataSource(cartItems)
 
         // when
         composeTestRule.setContent {
             CartScreen(
-                cartItems = cartItems,
+                cartItems = cartDataSource.items,
+                totalPrice = 0,
                 popBackStack = {},
                 deleteItem = {},
-                increaseItemCount = {},
+                increaseItemCount = { cartDataSource.addOne(it.product) },
                 decreaseItemCount = {},
             )
         }
@@ -186,7 +192,7 @@ class CartScreenTest {
     @Test
     fun 담긴_상품의_수량을_감소시키면_상품_가격에_반영된다() {
         // given
-        val cartItems = listOf(
+        val cartItems = mutableStateListOf(
             CartItem(
                 product = Product(
                     id = 1,
@@ -197,14 +203,16 @@ class CartScreenTest {
                 count = 100
             )
         )
+        val cartDataSource = FakeCartDataSource(cartItems)
 
         composeTestRule.setContent {
             CartScreen(
-                cartItems = cartItems,
+                cartItems = cartDataSource.items,
+                totalPrice = cartDataSource.totalPrice,
                 popBackStack = {},
                 deleteItem = {},
                 increaseItemCount = {},
-                decreaseItemCount = {},
+                decreaseItemCount = { cartDataSource.removeOne(it.product) },
             )
         }
 
@@ -234,7 +242,7 @@ class CartScreenTest {
     @Test
     fun 담긴_상품의_수량을_1보다_적게_하면_상품이_삭제된다() {
         // given
-        val cartItems = listOf(
+        val cartItems = mutableStateListOf(
             CartItem(
                 product = Product(
                     id = 1,
@@ -245,14 +253,16 @@ class CartScreenTest {
                 count = 1
             )
         )
+        val cartDataSource = FakeCartDataSource(cartItems)
 
         composeTestRule.setContent {
             CartScreen(
                 cartItems = cartItems,
+                totalPrice = cartDataSource.totalPrice,
                 popBackStack = {},
                 deleteItem = {},
                 increaseItemCount = {},
-                decreaseItemCount = {},
+                decreaseItemCount = { cartDataSource.removeOne(it.product) },
             )
         }
 
