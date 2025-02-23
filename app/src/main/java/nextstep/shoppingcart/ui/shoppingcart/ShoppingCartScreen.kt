@@ -105,12 +105,12 @@ private fun CartItemCard(
             .border(1.dp, Color.Gray, RoundedCornerShape(8.dp))
             .padding(16.dp)
     ) {
-        CartItemHeader(
+        CartItemTitleSection(
             title = cartItem.product.name,
             onRemoveAllProductClick = onRemoveAllProductClick,
         )
         Spacer(modifier = Modifier.height(8.dp))
-        CartItemBody(
+        CartItemDetailsSection(
             cartItem = cartItem,
             onAddProductClick = onAddProductClick,
             onRemoveProductClick = onRemoveProductClick
@@ -119,7 +119,7 @@ private fun CartItemCard(
 }
 
 @Composable
-private fun CartItemBody(
+private fun CartItemDetailsSection(
     cartItem: CartItem,
     onAddProductClick: () -> Unit,
     onRemoveProductClick: () -> Unit,
@@ -154,7 +154,7 @@ private fun CartItemBody(
 }
 
 @Composable
-fun CartItemHeader(
+fun CartItemTitleSection(
     title: String,
     onRemoveAllProductClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -172,7 +172,6 @@ fun CartItemHeader(
             modifier = Modifier.clickable(onClick = onRemoveAllProductClick)
         )
     }
-
 }
 
 @Preview(showBackground = true)
