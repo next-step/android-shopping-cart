@@ -3,6 +3,7 @@ package nextstep.shoppingcart
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.catalog.CatalogScreen
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
@@ -76,6 +77,40 @@ class CatalogScreenTest {
             .assertDoesNotExist()
 
         composeTestRule.onNodeWithTag("1AddButton", true)
+            .assertExists()
+    }
+
+    @Test
+    fun `상품이_장바구니에_담겨있으면_장바구니에_담겨있는_개수가_표시된다`() {
+        // given
+        val product = Product(
+            id = 1,
+            name = "상품1",
+            price = 1000,
+            imageUrl = "",
+        )
+        val count = 30
+
+        // when
+        val cartItems = mutableStateListOf(
+            CartItem(
+                product = product,
+                count = count
+            )
+        )
+        val cartDataSource = FakeCartDataSourceImpl(cartItems)
+
+        composeTestRule.setContent {
+            CatalogScreen(
+                products = listOf(product),
+                cartDataSource = cartDataSource,
+                navigateToDetail = {},
+                navigateToCart = {},
+            )
+        }
+
+        // then
+        composeTestRule.onNodeWithText("30")
             .assertExists()
     }
 }

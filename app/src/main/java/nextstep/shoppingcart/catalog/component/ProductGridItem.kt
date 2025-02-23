@@ -25,7 +25,7 @@ fun ProductGridItem(
     Column(modifier = modifier.clickable { onClickItem.invoke(product) }) {
         ProductQuantityAdjustImage(
             product = product,
-            count = 0,
+            count = cartDataSource.getCount(product),
             isAdded = cartDataSource.hasProduct(product),
             onClickExpandButton = {},
             onClickIncreaseCountButton = {},
