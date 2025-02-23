@@ -22,11 +22,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.components.ShoppingCartButton
 import nextstep.shoppingcart.ui.components.CommonTopAppBar
+import nextstep.shoppingcart.ui.components.ShoppingCartButton
+import nextstep.shoppingcart.ui.components.ShoppingCartImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -68,8 +68,8 @@ private fun ProductDetailContent(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.verticalScroll(rememberScrollState())) {
-        AsyncImage(
-            model = product.imageUrl,
+        ShoppingCartImage(
+            imageUrl = product.imageUrl,
             contentDescription = "상품 상세 이미지",
             error = painterResource(id = R.drawable.ic_launcher_background),
             placeholder = painterResource(id = R.drawable.ic_launcher_background),
