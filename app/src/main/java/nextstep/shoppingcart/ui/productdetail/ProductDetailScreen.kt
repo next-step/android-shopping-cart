@@ -57,9 +57,7 @@ fun ProductDetailScreen(
     ) { innerPadding ->
         ProductDetailContent(
             product = product,
-            modifier = Modifier
-                .padding(paddingValues = innerPadding)
-                .verticalScroll(rememberScrollState())
+            modifier = Modifier.padding(paddingValues = innerPadding)
         )
     }
 }
@@ -69,7 +67,7 @@ private fun ProductDetailContent(
     product: Product,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.verticalScroll(rememberScrollState())) {
         AsyncImage(
             model = product.imageUrl,
             contentDescription = "상품 상세 이미지",
