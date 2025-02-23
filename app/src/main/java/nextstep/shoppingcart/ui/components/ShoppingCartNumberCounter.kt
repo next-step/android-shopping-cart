@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,16 +37,14 @@ fun ShoppingCartNumberCounter(
             contentDescription = "빼기",
             modifier = Modifier.clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp))
         )
-
-        Box(
-            modifier = Modifier.size(42.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = count.toString(),
-                fontSize = 22.sp
-            )
-        }
+        
+        Text(
+            text = count.toString(),
+            fontSize = 22.sp,
+            modifier = Modifier
+                .size(42.dp)
+                .wrapContentSize(Alignment.Center)
+        )
 
         ShoppingCartNumberCounterIconButton(
             icon = painterResource(id = R.drawable.ic_add),
@@ -55,7 +54,6 @@ fun ShoppingCartNumberCounter(
         )
     }
 }
-
 
 
 @Preview(showBackground = true)
