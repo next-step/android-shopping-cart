@@ -14,5 +14,6 @@
 
     <!-- shopping cart -->
     <string name="shopping_cart_app_bar_title">장바구니</string>
+    <string name="shopping_cart_bottom_bar_total_price_format">주문하기(%,d원)</string>
 
 </resources>
