@@ -38,7 +38,7 @@ import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.components.ShoppingCartButton
 import nextstep.shoppingcart.ui.components.CommonTopAppBar
-import nextstep.shoppingcart.ui.components.NumberCounter
+import nextstep.shoppingcart.ui.components.ShoppingCartNumberCounter
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -142,7 +142,7 @@ private fun CartItemBody(
                 textAlign = TextAlign.End,
             )
             Spacer(modifier = Modifier.height(8.dp))
-            NumberCounter(
+            ShoppingCartNumberCounter(
                 count = cartItem.count,
                 onAddClick = onAddProductClick,
                 onRemoveClick = onRemoveProductClick

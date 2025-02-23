@@ -7,7 +7,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,7 +15,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.ui.theme.PurpleGrey40
 
 @Composable
-fun NumberCounterIconButton(
+fun ShoppingCartNumberCounterIconButton(
     icon: Painter,
     onClick: () -> Unit,
     contentDescription: String,
@@ -37,7 +36,7 @@ fun NumberCounterIconButton(
 @Preview(showBackground = true)
 @Composable
 private fun NumberCounterIconButtonPreview() {
-    NumberCounterIconButton(
+    ShoppingCartNumberCounterIconButton(
         icon = painterResource(id = R.drawable.ic_add),
         onClick = {},
         contentDescription = "더하기",

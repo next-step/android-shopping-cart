@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 
 @Composable
-fun NumberCounter(
+fun ShoppingCartNumberCounter(
     count: Int,
     onAddClick: () -> Unit,
     onRemoveClick: () -> Unit,
@@ -30,7 +30,7 @@ fun NumberCounter(
         verticalAlignment = CenterVertically
     ) {
 
-        NumberCounterIconButton(
+        ShoppingCartNumberCounterIconButton(
             icon = painterResource(id = R.drawable.ic_remove),
             onClick = onRemoveClick,
             contentDescription = "빼기",
@@ -47,7 +47,7 @@ fun NumberCounter(
             )
         }
 
-        NumberCounterIconButton(
+        ShoppingCartNumberCounterIconButton(
             icon = painterResource(id = R.drawable.ic_add),
             onClick = onAddClick,
             contentDescription = "추가",
@@ -61,7 +61,7 @@ fun NumberCounter(
 @Preview(showBackground = true)
 @Composable
 private fun ItemCounterPreview() {
-    NumberCounter(
+    ShoppingCartNumberCounter(
         count = 1,
         onAddClick = {},
         onRemoveClick = {}
