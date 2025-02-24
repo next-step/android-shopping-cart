@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.model.productTestDataList
+import nextstep.shoppingcart.ProductsTestData
 import nextstep.shoppingcart.productlist.component.ProductListContents
 import nextstep.shoppingcart.productlist.model.ProductListUiState
 import nextstep.shoppingcart.ui.component.ProductListTopBar
@@ -63,7 +63,7 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    val uiState = ProductListUiState.ProductList(productTestDataList)
+    val uiState = ProductListUiState.ProductList(ProductsTestData.productTestDataList)
     ShoppingCartTheme {
         ProductListScreen(uiState, {}, {})
     }

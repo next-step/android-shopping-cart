@@ -6,8 +6,8 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.ProductsTestData
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.model.productTestDataList
 import nextstep.shoppingcart.ui.component.Product
 
 @Composable
@@ -32,7 +32,7 @@ fun ProductListContents(
 @Composable
 private fun ProductListContentsPreview() {
     ProductListContents(
-        productItems = productTestDataList,
+        productItems = ProductsTestData.productTestDataList,
         navigateToProductDetail = {},
     )
 }
