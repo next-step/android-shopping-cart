@@ -15,13 +15,8 @@ class CartActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 CartScreen(
-                    totalPrice = Cart.totalPrice,
-                    cartItems = Cart.items,
                     onBackPressed = { finish() },
-                    onButtonClick = { finish() },
-                    onRemoveClick = { Cart.removeAll(it.product) },
-                    onPlusClick = { Cart.addOne(it.product)} ,
-                    onMinusClick = { Cart.removeOne(it.product)} ,
+                    onButtonClick = { finish() }
                 )
             }
         }
