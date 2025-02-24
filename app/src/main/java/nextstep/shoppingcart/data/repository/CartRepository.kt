@@ -1,15 +1,22 @@
 package nextstep.shoppingcart.data.repository
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import nextstep.shoppingcart.data.model.Cart
 import nextstep.shoppingcart.data.model.CartItem
 import nextstep.shoppingcart.data.model.Product
 
 object CartRepository {
     private val _cartItems: MutableList<CartItem> = mutableListOf()
-    val cartItems: List<CartItem> get() = _cartItems.toList()
 
-    val totalPrice: Int get() = _cartItems.sumOf { it.totalPrice }
+    private val _cart: Cart
+        get() = Cart(_cartItems.toList())
 
-    fun addOne(product: Product): List<CartItem> {
+    var cartState by mutableStateOf(_cart)
+        private set
+
+    fun addOne(product: Product) {
         val item = _cartItems.find { it.product == product }
         if (item == null) {
             _cartItems.add(CartItem(product, 1))
@@ -17,10 +24,10 @@ object CartRepository {
             val index = _cartItems.indexOf(item)
             _cartItems[index] = item.copy(count = item.count + 1)
         }
-        return cartItems
+        cartState = _cart
     }
 
-    fun removeOne(product: Product): List<CartItem> {
+    fun removeOne(product: Product) {
         _cartItems.find { it.product == product }
             ?.let { item ->
                 if (item.count > 1) {
@@ -30,15 +37,11 @@ object CartRepository {
                     _cartItems.remove(item)
                 }
             }
-        return cartItems
+        cartState = _cart
     }
 
-    fun removeAll(product: Product): List<CartItem> {
+    fun removeAll(product: Product) {
         _cartItems.removeAll { it.product == product }
-        return cartItems
-    }
-
-    fun reset() {
-        _cartItems.clear()
+        cartState = _cart
     }
 }

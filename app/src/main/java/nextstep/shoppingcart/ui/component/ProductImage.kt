@@ -7,6 +7,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.SubcomposeAsyncImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -14,20 +16,25 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 internal fun ProductImage(
     url: String,
+    contentScale: ContentScale,
     modifier: Modifier = Modifier
 ) {
     SubcomposeAsyncImage(
         modifier = modifier,
         model = url,
-        contentScale = ContentScale.Crop,
+        contentScale = contentScale,
         contentDescription = url,
         loading = {
-            CircularProgressIndicator()
+            CircularProgressIndicator(
+                modifier.semantics {
+                    contentDescription = url
+                }
+            )
         },
         error = {
             Icon(
                 imageVector = Icons.Filled.Warning,
-                contentDescription = null
+                contentDescription = url
             )
         }
     )
@@ -37,6 +44,6 @@ internal fun ProductImage(
 @Composable
 private fun ProductImagePreview() {
     ShoppingCartTheme {
-        ProductImage("")
+        ProductImage("", ContentScale.Crop)
     }
 }
