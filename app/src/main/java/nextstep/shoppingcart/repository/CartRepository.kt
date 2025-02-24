@@ -42,10 +42,6 @@ object CartRepository {
         _items.value = _items.value.filter { it.product != product }
     }
 
-    fun getItemCount(product: Product): Int {
-        return _items.value.find { it.product == product }?.count ?: 0
-    }
-
     fun getItemCount(product: Product, cartItems: List<CartItem>): Int {
         val count = cartItems.find { it.product == product }?.count
         return count ?: 0
