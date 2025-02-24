@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.ProductsTestData
 import nextstep.shoppingcart.productlist.component.ProductListContents
 import nextstep.shoppingcart.productlist.model.ProductListUiState
-import nextstep.shoppingcart.ui.component.ProductListTopBar
+import nextstep.shoppingcart.ui.component.ProductCenterAlignedTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -34,7 +34,7 @@ fun ProductListScreen(
                 modifier = modifier
                     .fillMaxSize(),
                 topBar = {
-                    ProductListTopBar(
+                    ProductCenterAlignedTopBar(
                         topBarTitle = "상품 목록",
                         rightIcon = Icons.Filled.ShoppingCart,
                         onRightIconClicked = { navigateToCart() })
