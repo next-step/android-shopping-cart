@@ -89,12 +89,11 @@ fun ProductApp() {
                         cartItemList = CartRepository.items
                     },
                     onMinusCartItemClick = { product ->
-                        if(CartRepository.getItemCount(product, cartItemList) < 1) {
-                            cartItemList = CartRepository.items
-                        } else {
+                        if(CartRepository.getItemCount(product, cartItemList) > 1) {
                             CartRepository.removeOne(product)
-                            cartItemList = CartRepository.items
                         }
+
+                        cartItemList = CartRepository.items
                     },
                     onPlusCartItemClick = { product ->
                         CartRepository.addOne(product)
