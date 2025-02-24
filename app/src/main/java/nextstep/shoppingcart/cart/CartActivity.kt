@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.cart
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

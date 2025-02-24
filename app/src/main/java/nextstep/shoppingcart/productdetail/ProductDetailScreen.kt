@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui
+package nextstep.shoppingcart.productdetail
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,8 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.model.detail.ProductDetailUiState
-import nextstep.shoppingcart.ui.component.ProductDetailContent
+import nextstep.shoppingcart.productdetail.component.ProductDetailContent
+import nextstep.shoppingcart.productdetail.model.ProductDetailUiState
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -92,7 +92,8 @@ fun ProductDetailScreen(
 @Composable
 private fun ProductDetailScreenPreview() {
     ShoppingCartTheme {
-        ProductDetailScreen(ProductDetailUiState.ProductDetail(
+        ProductDetailScreen(
+            ProductDetailUiState.ProductDetail(
             product = Product(
                 name = "PET 보틀 - 음료수,정사각형 음료수,정사각형 음료수,정사각형 음료수",
                 imageUrl = "https://i.namu.wiki/i/rwoGbf-OhaV1A1I77FtQEWojKsa-i9J0HZ0E3tFfr4gdi7fCHRh7DwaqLkLzKdruftxpu_twLfkhwgMxc3QrvgY9HhwbwB7W_YPGbkjpCIxFO9abcyQSLgM8NVUkKJ6WPegKkT35ukb0NXXRHeMW1zGcxZz_9zx63o9Pnat6I3Q.webp",

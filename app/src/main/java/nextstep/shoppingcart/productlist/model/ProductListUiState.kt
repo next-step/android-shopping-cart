@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.model.productList
+package nextstep.shoppingcart.productlist.model
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable

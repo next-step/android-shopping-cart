@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.productdetail
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import nextstep.shoppingcart.model.detail.ProductDetailUiState
+import nextstep.shoppingcart.cart.CartActivity
 import nextstep.shoppingcart.model.productTestDataList
-import nextstep.shoppingcart.ui.ProductDetailScreen
+import nextstep.shoppingcart.productdetail.model.ProductDetailUiState
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {

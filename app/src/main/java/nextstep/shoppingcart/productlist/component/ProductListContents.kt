@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.ui.component
+package nextstep.shoppingcart.productlist.component
 
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.productTestDataList
+import nextstep.shoppingcart.ui.component.Product
 
 @Composable
 fun ProductListContents(
