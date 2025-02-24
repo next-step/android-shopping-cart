@@ -20,8 +20,6 @@ class CartLocalDataSource {
         _itemsFlow.update { items ->
             val isExistingItem = items.any { it.product == product }
             if (isExistingItem) {
-                items + CartItemEntity(product, 1)
-            } else {
                 items.map { item ->
                     if (item.product == product) {
                         item.copy(count = item.count + 1)
@@ -29,6 +27,8 @@ class CartLocalDataSource {
                         item
                     }
                 }
+            } else {
+                items + CartItemEntity(product, 1)
             }
         }
 
