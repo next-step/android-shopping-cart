@@ -3,7 +3,6 @@ package nextstep.shoppingcart
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.filter
 import androidx.compose.ui.test.hasAnySibling
-import androidx.compose.ui.test.hasParent
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
@@ -13,7 +12,6 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.ProductAppMoveActionTest.Companion.SHOPPING_CART_ICON_DESCRIPTION
-import nextstep.shoppingcart.ProductListScreenTest.Companion.PLUS_FLOATING_BUTTON_DESCRIPTION
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.repository.CartRepository
 import nextstep.shoppingcart.ui.screen.ProductApp
@@ -30,22 +28,12 @@ class ProductShoppingCartTest {
     fun setUp() {
         CartRepository.clear()
 
+        CartRepository.addOne(FakeData.products[0])
+        CartRepository.addOne(FakeData.products[1])
+
         composeTestRule.setContent {
             ProductApp()
         }
-
-        // 상품1, 상품2 담기
-        // 플로팅 버튼 클릭
-        composeTestRule.onAllNodesWithContentDescription(PLUS_FLOATING_BUTTON_DESCRIPTION)
-            .filter(hasParent(hasText(PRODUCT_ONE)))
-            .onFirst()
-            .performClick()
-
-        // 플로팅 버튼 클릭
-        composeTestRule.onAllNodesWithContentDescription(PLUS_FLOATING_BUTTON_DESCRIPTION)
-            .filter(hasParent(hasText(PRODUCT_TWO)))
-            .onFirst()
-            .performClick()
 
         // 앱바의 쇼핑카트 아이콘 클릭
         composeTestRule.onNodeWithContentDescription(SHOPPING_CART_ICON_DESCRIPTION).performClick()
