@@ -30,10 +30,10 @@ import nextstep.shoppingcart.ui.theme.Gray10
 @Composable
 fun CartItemContainer(
     cartItem: CartItem,
-    modifier: Modifier = Modifier,
     onCartItemDelete: () -> Unit,
     onMinusCartItem: () -> Unit,
     onPlusCartItem: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier

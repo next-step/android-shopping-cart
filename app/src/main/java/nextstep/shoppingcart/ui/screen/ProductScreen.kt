@@ -42,11 +42,11 @@ fun ProductScreen(
 private fun ProductListSection(
     products: List<Product>,
     cartItems: List<CartItem>,
-    modifier: Modifier = Modifier,
     onProductClick: (Product) -> Unit,
     onPlusCircleClick: (Product) -> Unit,
     onMinusCartItemClick: (Product) -> Unit,
     onPlusCartItemClick: (Product) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
 
     LazyVerticalGrid(

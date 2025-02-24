@@ -17,8 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun CenterAppBar(
     title: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
 ) {
     CenterAlignedTopAppBar(
         title = {

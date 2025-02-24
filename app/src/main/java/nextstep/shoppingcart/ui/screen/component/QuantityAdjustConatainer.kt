@@ -20,9 +20,9 @@ import nextstep.shoppingcart.R
 @Composable
 fun QuantityAdjustContainer(
     count: Int,
-    modifier: Modifier = Modifier,
     onMinusCartItemClick: () -> Unit,
     onPlusCartItemClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier,

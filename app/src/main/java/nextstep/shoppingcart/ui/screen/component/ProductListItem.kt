@@ -34,10 +34,10 @@ fun ProductContainer(
     count: Int,
     imageUrl: String,
     isQuantityAdjusting: Boolean,
-    modifier: Modifier = Modifier,
     onPlusCircleClick: () -> Unit,
     onMinusCartItemClick: () -> Unit,
     onPlusCartItemClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
 
     Column(

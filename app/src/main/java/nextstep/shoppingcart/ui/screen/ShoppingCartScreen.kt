@@ -24,10 +24,10 @@ import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 @Composable
 fun ShoppingCartScreen(
     cartItemList: List<CartItem>,
-    modifier: Modifier = Modifier,
     onMinusCartItemClick: (CartItem) -> Unit,
     onPlusCartItemClick: (CartItem) -> Unit,
     onCartItemDeleteClick: (CartItem) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier,
@@ -52,10 +52,10 @@ fun ShoppingCartScreen(
 @Composable
 private fun CartItemProductList(
     cartItemList: List<CartItem>,
-    modifier: Modifier = Modifier,
     onMinusCartItemClick: (CartItem) -> Unit,
     onPlusCartItemClick: (CartItem) -> Unit,
     onCartItemDeleteClick: (CartItem) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     LazyColumn(
         modifier = modifier,
@@ -76,9 +76,9 @@ private fun CartItemProductList(
 @Composable
 private fun OrderButton(
     totalMoney: Int,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     formatter: MoneyFormatter = DefaultMoneyFormatter,
-    onClick: () -> Unit,
 ) {
     BlueRectangleButton(
         buttonTitle = "${stringResource(id = R.string.cart_order_button)}(${

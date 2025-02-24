@@ -17,14 +17,14 @@ import nextstep.shoppingcart.ui.theme.Blue50
 @Composable
 fun BlueRectangleButton(
     buttonTitle: String,
-    modifier: Modifier = Modifier,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Button(
+        onClick = onClick,
         modifier = modifier,
         shape = RectangleShape,
-        colors = ButtonDefaults.buttonColors(Blue50),
-        onClick = onClick
+        colors = ButtonDefaults.buttonColors(Blue50)
     ) {
         Text(
             text = buttonTitle,

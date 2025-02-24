@@ -30,8 +30,8 @@ import nextstep.shoppingcart.ui.theme.Gray10
 @Composable
 fun ProductDetailScreen(
     product: Product,
-    modifier: Modifier = Modifier,
     addProductClick: (Product) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.fillMaxHeight(),
@@ -108,13 +108,13 @@ private fun PriceSector(
 
 @Composable
 private fun ShoppingCartAddButton(
-    modifier: Modifier = Modifier,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     BlueRectangleButton(
         buttonTitle = stringResource(id = R.string.cart_add_button),
-        modifier = modifier,
         onClick = onClick,
+        modifier = modifier,
     )
 }
 
