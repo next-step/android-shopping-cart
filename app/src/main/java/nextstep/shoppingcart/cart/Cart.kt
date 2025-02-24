@@ -39,4 +39,12 @@ object Cart {
         _items.removeAll { it.product == product }
         return items
     }
+
+    fun getProductCount(product: Product): Int {
+        return _items.find { it.product.id == product.id }?.count ?: 0
+    }
+
+    fun clear() {
+        _items.clear()
+    }
 }

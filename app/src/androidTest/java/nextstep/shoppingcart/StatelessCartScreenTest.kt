@@ -18,7 +18,7 @@ import org.junit.Rule
 import org.junit.Test
 import java.util.UUID
 
-internal class CartScreenTest {
+internal class StatelessCartScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
     private var cartItems by mutableStateOf(listOf<CartItem>())
