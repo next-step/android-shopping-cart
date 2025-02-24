@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -16,13 +17,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.repository.CartRepository
-import nextstep.shoppingcart.ui.screen.component.DefaultAppBar
 import nextstep.shoppingcart.ui.screen.component.BackIconButton
 import nextstep.shoppingcart.ui.screen.component.CenterAppBar
+import nextstep.shoppingcart.ui.screen.component.DefaultAppBar
 
 enum class ProductDestination(@StringRes val title: Int) {
     ProductList(title = R.string.appbar_product_title),
@@ -40,7 +40,8 @@ fun ProductApp() {
 
     val fakeItemList = FakeData.products
     var seletedProduct by remember { mutableStateOf<Product?>(null) }
-    var cartItemList by remember { mutableStateOf<List<CartItem>>(emptyList())}
+
+    val cartItemList by CartRepository.items.collectAsState()
 
     Scaffold(
         topBar = {
@@ -86,18 +87,12 @@ fun ProductApp() {
                     },
                     onPlusCircleClick = { product ->
                         CartRepository.addOne(product)
-                        cartItemList = CartRepository.items
                     },
                     onMinusCartItemClick = { product ->
-                        if(CartRepository.getItemCount(product, cartItemList) > 1) {
-                            CartRepository.removeOne(product)
-                        }
-
-                        cartItemList = CartRepository.items
+                        CartRepository.removeOne(product)
                     },
                     onPlusCartItemClick = { product ->
                         CartRepository.addOne(product)
-                        cartItemList = CartRepository.items
                     }
                 )
             }
@@ -108,7 +103,6 @@ fun ProductApp() {
                     product = seletedProduct!!,
                     addProductClick = { product ->
                         CartRepository.addOne(product)
-                        cartItemList = CartRepository.items
                         navController.navigate(ProductDestination.ShoppingCart.name)
                     }
                 )
@@ -120,15 +114,12 @@ fun ProductApp() {
                     cartItemList = cartItemList,
                     onMinusCartItemClick = { cartItem ->
                         CartRepository.removeOne(cartItem.product)
-                        cartItemList = CartRepository.items
                     },
                     onPlusCartItemClick = { cartItem ->
                         CartRepository.addOne(cartItem.product)
-                        cartItemList = CartRepository.items
                     },
                     onCartItemDeleteClick = { cartItem ->
                         CartRepository.removeAll(cartItem.product)
-                        cartItemList = CartRepository.items
                     }
                 )
             }
