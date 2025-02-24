@@ -19,9 +19,9 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductListScreen(
     uiState: ProductListUiState,
+    navigateToProductDetail: (String) -> Unit,
+    navigateToCart: () -> Unit,
     modifier: Modifier = Modifier,
-    navigateToProductDetail: (String) -> Unit = {},
-    navigateToCart: () -> Unit = {},
 ) {
     when (uiState) {
 
@@ -65,7 +65,7 @@ fun ProductListScreen(
 private fun ProductListScreenPreview() {
     val uiState = ProductListUiState.ProductList(productTestDataList)
     ShoppingCartTheme {
-        ProductListScreen(uiState)
+        ProductListScreen(uiState, {}, {})
     }
 }
 
@@ -74,7 +74,7 @@ private fun ProductListScreenPreview() {
 private fun ProductListScreenLoadingPreview() {
     val uiState = ProductListUiState.Loading
     ShoppingCartTheme {
-        ProductListScreen(uiState)
+        ProductListScreen(uiState, {}, {})
     }
 }
 
