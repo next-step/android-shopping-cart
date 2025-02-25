@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.component.ProductImage
 import nextstep.shoppingcart.data.Product
 
 
@@ -30,13 +31,11 @@ fun ProductItem(
         color = Color.White
     ) {
         Column {
-            AsyncImage(
-                model = product.imageUrl,
-                contentDescription = "Product Image",
-                contentScale = ContentScale.Crop,
+            ProductImage(
+                imageUrl = product.imageUrl,
+                ratio = (156.0f / 158),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio((156.0f / 158))
             )
             Text(
                 text = product.name,
