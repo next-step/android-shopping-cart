@@ -25,7 +25,7 @@ fun ShoppingCartCounter(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.clip(RoundedCornerShape(4.dp)),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = CenterVertically
     ) {
