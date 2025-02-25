@@ -12,28 +12,43 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.FakeData
 import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.ui.screen.component.ProductItemContainer
+import nextstep.shoppingcart.repository.CartRepository
+import nextstep.shoppingcart.ui.screen.component.ProductContainer
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductScreen(
-    onProductClick: (Product) -> Unit = { },
     productList: List<Product>,
+    cartItemList: List<CartItem>,
+    onProductClick: (Product) -> Unit,
+    onPlusCircleClick: (Product) -> Unit,
+    onMinusCartItemClick: (Product) -> Unit,
+    onPlusCartItemClick: (Product) -> Unit,
 ) {
     ProductListSection(
         products = productList,
-        onProductClick = onProductClick
+        cartItems = cartItemList,
+        onProductClick = onProductClick,
+        onPlusCircleClick = onPlusCircleClick,
+        onMinusCartItemClick = onMinusCartItemClick,
+        onPlusCartItemClick = onPlusCartItemClick
     )
 }
 
 @Composable
 private fun ProductListSection(
-    modifier: Modifier = Modifier,
     products: List<Product>,
+    cartItems: List<CartItem>,
     onProductClick: (Product) -> Unit,
+    onPlusCircleClick: (Product) -> Unit,
+    onMinusCartItemClick: (Product) -> Unit,
+    onPlusCartItemClick: (Product) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = modifier
@@ -44,13 +59,20 @@ private fun ProductListSection(
         contentPadding = PaddingValues(vertical = 13.dp),
     ) {
         items(products) { product ->
-            ProductItemContainer(
+            val cartItemCount = CartRepository.getItemCount(product, cartItems)
+
+            ProductContainer(
                 imageUrl = product.imageUrl,
                 title = product.title,
                 price = product.price,
+                count = cartItemCount,
+                isQuantityAdjusting = cartItemCount > 0,
                 modifier = Modifier.clickable(
                     onClick = { onProductClick(product) }
-                )
+                ),
+                onPlusCircleClick = { onPlusCircleClick(product) },
+                onMinusCartItemClick = { onMinusCartItemClick(product) },
+                onPlusCartItemClick = { onPlusCartItemClick(product) }
             )
         }
     }
@@ -62,7 +84,11 @@ private fun ProductListPreview() {
     val fakeItemList = FakeData.products
     ProductListSection(
         products = fakeItemList,
-        onProductClick = { }
+        cartItems = emptyList(),
+        onProductClick = { },
+        onPlusCircleClick = { },
+        onMinusCartItemClick = { },
+        onPlusCartItemClick = { }
     )
 }
 
@@ -71,7 +97,12 @@ private fun ProductListPreview() {
 private fun ProductScreenPreview() {
     ShoppingCartTheme {
         ProductScreen(
-            productList = FakeData.products
+            productList = FakeData.products,
+            cartItemList = emptyList(),
+            onProductClick = { },
+            onPlusCircleClick = { },
+            onMinusCartItemClick = { },
+            onPlusCartItemClick = { }
         )
     }
 }

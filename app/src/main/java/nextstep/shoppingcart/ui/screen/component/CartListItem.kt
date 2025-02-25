@@ -14,23 +14,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.Gray10
-import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
-import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 
 @Composable
 fun CartItemContainer(
@@ -66,8 +61,8 @@ fun CartItemContainer(
 @Composable
 private fun CartItemTopSector(
     title: String,
-    onCartItemDelete: () -> Unit,
     modifier: Modifier = Modifier,
+    onCartItemDelete: () -> Unit,
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -91,9 +86,9 @@ private fun CartItemBottomSector(
     imageUrl: String,
     price: Int,
     count: Int,
+    modifier: Modifier = Modifier,
     onMinusCartItem: () -> Unit,
     onPlusCartItem: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
@@ -112,11 +107,11 @@ private fun CartItemBottomSector(
         CartItemInfo(
             price = price,
             count = count,
-            onMinusCartItem = onMinusCartItem,
-            onPlusCartItem = onPlusCartItem,
             modifier = modifier
                 .weight(1f)
-                .padding(end = 10.dp)
+                .padding(end = 10.dp),
+            onMinusCartItem = onMinusCartItem,
+            onPlusCartItem = onPlusCartItem
         )
     }
 }
@@ -125,74 +120,25 @@ private fun CartItemBottomSector(
 private fun CartItemInfo(
     price: Int,
     count: Int,
+    modifier: Modifier = Modifier,
     onMinusCartItem: () -> Unit,
     onPlusCartItem: () -> Unit,
-    formatter: MoneyFormatter = DefaultMoneyFormatter,
-    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.End,
         verticalArrangement = Arrangement.Bottom
     ) {
-        Text(
-            text = "${formatter.format(price)}원",
+        PriceText(
+            price = price,
             fontSize = 16.sp,
-            fontWeight = FontWeight.W400
-        )
-        CartQuantitySector(
-            count = count,
-            onMinusCartItem = onMinusCartItem,
-            onPlusCartItem = onPlusCartItem,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-}
-
-@Composable
-private fun CartQuantitySector(
-    count: Int,
-    onMinusCartItem: () -> Unit,
-    onPlusCartItem: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        QuantityAdjusButton(
-            buttonTitle = stringResource(id = R.string.cart_minus_item_button),
-            onClick = onMinusCartItem,
-        )
-        Text(
-            text = count.toString(),
-            fontSize = 22.sp,
             fontWeight = FontWeight.W400,
         )
-        QuantityAdjusButton(
-            buttonTitle = stringResource(id = R.string.cart_plus_item_button),
-            onClick = onPlusCartItem,
-        )
-    }
-}
-
-@Composable
-private fun QuantityAdjusButton(
-    buttonTitle: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    IconButton(
-        onClick = onClick,
-        modifier = modifier
-            .clip(RoundedCornerShape(4.dp))
-            .padding(4.dp)
-    ) {
-        Text(
-            text = buttonTitle,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.W700,
+        QuantityAdjustContainer(
+            count = count,
+            modifier = Modifier.fillMaxWidth(),
+            onMinusCartItemClick = onMinusCartItem,
+            onPlusCartItemClick = onPlusCartItem
         )
     }
 }
@@ -207,31 +153,6 @@ private fun CartItemInfoPreview() {
 
         },
         onPlusCartItem = {
-
-        },
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun CartQuantitySectorPreview() {
-    CartQuantitySector(
-        count = 2,
-        onMinusCartItem = {
-
-        },
-        onPlusCartItem = {
-
-        },
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun QuantityAdjusButtonPreview() {
-    QuantityAdjusButton(
-        buttonTitle = "+",
-        onClick = {
 
         },
     )

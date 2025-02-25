@@ -23,23 +23,23 @@ import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 
 @Composable
 fun ShoppingCartScreen(
-    modifier: Modifier = Modifier,
     cartItemList: List<CartItem>,
-    onMinusCartItem: (CartItem) -> Unit,
-    onPlusCartItem: (CartItem) -> Unit,
-    onCartItemDelete: (CartItem) -> Unit,
+    onMinusCartItemClick: (CartItem) -> Unit,
+    onPlusCartItemClick: (CartItem) -> Unit,
+    onCartItemDeleteClick: (CartItem) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier,
     ) {
         CartItemProductList(
             cartItemList = cartItemList,
-            onMinusCartItem = onMinusCartItem,
-            onPlusCartItem = onPlusCartItem,
-            onCartItemDelete = onCartItemDelete,
             modifier = Modifier
                 .padding(horizontal = 18.dp)
                 .weight(1f),
+            onMinusCartItemClick = onMinusCartItemClick,
+            onPlusCartItemClick = onPlusCartItemClick,
+            onCartItemDeleteClick = onCartItemDeleteClick,
         )
         OrderButton(
             totalMoney = CartRepository.totalPrice,
@@ -52,9 +52,9 @@ fun ShoppingCartScreen(
 @Composable
 private fun CartItemProductList(
     cartItemList: List<CartItem>,
-    onMinusCartItem: (CartItem) -> Unit,
-    onPlusCartItem: (CartItem) -> Unit,
-    onCartItemDelete: (CartItem) -> Unit,
+    onMinusCartItemClick: (CartItem) -> Unit,
+    onPlusCartItemClick: (CartItem) -> Unit,
+    onCartItemDeleteClick: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -65,9 +65,9 @@ private fun CartItemProductList(
         items(cartItemList) { cartItem ->
             CartItemContainer(
                 cartItem = cartItem,
-                onMinusCartItem = { onMinusCartItem(cartItem) },
-                onPlusCartItem = { onPlusCartItem(cartItem) },
-                onCartItemDelete = { onCartItemDelete(cartItem) },
+                onMinusCartItem = { onMinusCartItemClick(cartItem) },
+                onPlusCartItem = { onPlusCartItemClick(cartItem) },
+                onCartItemDelete = { onCartItemDeleteClick(cartItem) },
             )
         }
     }
@@ -77,8 +77,8 @@ private fun CartItemProductList(
 private fun OrderButton(
     totalMoney: Int,
     onClick: () -> Unit,
-    formatter: MoneyFormatter = DefaultMoneyFormatter,
     modifier: Modifier = Modifier,
+    formatter: MoneyFormatter = DefaultMoneyFormatter,
 ) {
     BlueRectangleButton(
         buttonTitle = "${stringResource(id = R.string.cart_order_button)}(${
@@ -86,14 +86,14 @@ private fun OrderButton(
                 totalMoney
             )
         }원)",
-        onClick = onClick,
         modifier = modifier,
+        onClick = onClick,
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun CartItemProductListPreview() {
+private fun CartItemProductListPreview() {
     CartItemProductList(
         cartItemList = listOf(
             CartItem(
@@ -113,15 +113,15 @@ fun CartItemProductListPreview() {
                 count = 1,
             ),
         ),
-        onMinusCartItem = { },
-        onPlusCartItem = { },
-        onCartItemDelete = { },
+        onMinusCartItemClick = { },
+        onPlusCartItemClick = { },
+        onCartItemDeleteClick = { },
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun OrderButtonPreview() {
+private fun OrderButtonPreview() {
     OrderButton(
         totalMoney = 35000,
         onClick = { },
@@ -130,7 +130,7 @@ fun OrderButtonPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun ShoppingCartScreenPreview() {
+private fun ShoppingCartScreenPreview() {
     ShoppingCartScreen(
         cartItemList = listOf(
             CartItem(
@@ -150,8 +150,8 @@ fun ShoppingCartScreenPreview() {
                 count = 1,
             ),
         ),
-        onMinusCartItem = { },
-        onPlusCartItem = { },
-        onCartItemDelete = { },
+        onMinusCartItemClick = { },
+        onPlusCartItemClick = { },
+        onCartItemDeleteClick = { },
     )
 }

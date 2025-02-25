@@ -22,11 +22,10 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.screen.component.BlueRectangleButton
+import nextstep.shoppingcart.ui.screen.component.PriceText
 import nextstep.shoppingcart.ui.screen.component.ProductImage
 import nextstep.shoppingcart.ui.theme.Black33
 import nextstep.shoppingcart.ui.theme.Gray10
-import nextstep.shoppingcart.ui.utils.formatter.DefaultMoneyFormatter
-import nextstep.shoppingcart.ui.utils.formatter.MoneyFormatter
 
 @Composable
 fun ProductDetailScreen(
@@ -75,10 +74,10 @@ private fun TitleSector(
 ) {
     Text(
         text = title,
+        modifier = modifier,
         fontSize = 24.sp,
         fontWeight = FontWeight.W700,
         color = Black33,
-        modifier = modifier,
     )
 }
 
@@ -86,7 +85,6 @@ private fun TitleSector(
 private fun PriceSector(
     price: Int,
     modifier: Modifier = Modifier,
-    formatter: MoneyFormatter = DefaultMoneyFormatter,
 ) {
     Row(
         modifier = modifier,
@@ -100,16 +98,16 @@ private fun PriceSector(
         Spacer(
             modifier = Modifier.weight(1f),
         )
-        Text(
-            text = "${formatter.format(price)}원",
+        PriceText(
+            price = price,
             fontSize = 24.sp,
-            color = Black33,
+            fontColor = Black33,
         )
     }
 }
 
 @Composable
-fun ShoppingCartAddButton(
+private fun ShoppingCartAddButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {

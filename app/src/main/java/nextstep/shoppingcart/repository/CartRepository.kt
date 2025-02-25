@@ -1,44 +1,53 @@
 package nextstep.shoppingcart.repository
 
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.Product
 
 object CartRepository {
-    private val _items: MutableList<CartItem> = mutableListOf()
-    val items: List<CartItem> get() = _items.toList()
+    private val _items = MutableStateFlow<List<CartItem>>(emptyList()) // StateFlow 사용
+    val items: StateFlow<List<CartItem>> = _items.asStateFlow() // 구독 가능하게 제공
 
-    val totalPrice: Int get() = _items.sumOf { it.totalPrice }
+    val totalPrice: Int get() = _items.value.sumOf { it.totalPrice }
 
-    fun addOne(product: Product): List<CartItem> {
-        val item = _items.find { it.product == product }
+    fun addOne(product: Product) {
+        val currentItems = _items.value.toMutableList()
+        val item = currentItems.find { it.product == product }
         if (item == null) {
-            _items.add(CartItem(product, 1))
+            currentItems.add(CartItem(product, 1))
         } else {
-            val index = _items.indexOf(item)
-            _items[index] = item.copy(count = item.count + 1)
+            val index = currentItems.indexOf(item)
+            currentItems[index] = item.copy(count = item.count + 1)
         }
-        return items
+        _items.value = currentItems // 값 갱신
     }
 
-    fun removeOne(product: Product): List<CartItem> {
-        _items.find { it.product == product }
+    fun removeOne(product: Product) {
+        val currentItems = _items.value.toMutableList()
+        currentItems.find { it.product == product }
             ?.let { item ->
                 if (item.count > 1) {
-                    val index = _items.indexOf(item)
-                    _items[index] = item.copy(count = item.count - 1)
+                    val index = currentItems.indexOf(item)
+                    currentItems[index] = item.copy(count = item.count - 1)
                 } else {
-                    _items.remove(item)
+                    currentItems.remove(item)
                 }
             }
-        return items
+        _items.value = currentItems // 값 갱신
     }
 
-    fun removeAll(product: Product): List<CartItem> {
-        _items.removeAll { it.product == product }
-        return items
+    fun removeAll(product: Product) {
+        _items.value = _items.value.filter { it.product != product }
+    }
+
+    fun getItemCount(product: Product, cartItems: List<CartItem>): Int {
+        val count = cartItems.find { it.product == product }?.count
+        return count ?: 0
     }
 
     fun clear() {
-        _items.clear()
+        _items.value = emptyList() // 전체 초기화
     }
 }
