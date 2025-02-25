@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,7 +21,12 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun CartProductTitle(name: String, onRemoveCart: () -> Unit, modifier: Modifier = Modifier) {
+fun CartProductTopArea(
+    name: String, onRemoveCart: () -> Unit,
+    rightIcon: ImageVector,
+    rightIconContentDescription: String,
+    modifier: Modifier = Modifier
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.fillMaxWidth(),
@@ -31,17 +37,19 @@ fun CartProductTitle(name: String, onRemoveCart: () -> Unit, modifier: Modifier 
             maxLines = 1,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.weight(0.8f)
         )
         Icon(
-            imageVector = Icons.Filled.Clear,
-            contentDescription = "${name} 삭제버튼",
+            imageVector = rightIcon,
+            contentDescription = rightIconContentDescription,
             modifier = Modifier
                 .size(24.dp)
                 .clickable {
                     onRemoveCart()
-                }
-        )
+                },
+
+            )
     }
 }
 
@@ -49,6 +57,9 @@ fun CartProductTitle(name: String, onRemoveCart: () -> Unit, modifier: Modifier 
 @Composable
 private fun CartProductTitlePreview() {
     ShoppingCartTheme {
-        CartProductTitle("[든든] 동원 스위트콘", {})
+        CartProductTopArea(
+            "[든든] 동원 스위트콘 스위트콘스위트콘 스위트콘스위트콘스위트콘스위트콘", {}, rightIcon = Icons.Filled.Clear,
+            rightIconContentDescription = "삭제버튼",
+        )
     }
 }
