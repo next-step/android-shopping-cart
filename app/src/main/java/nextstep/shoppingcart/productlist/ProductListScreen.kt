@@ -4,15 +4,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.ProductsTestData
+import nextstep.shoppingcart.data.ProductsTestData
 import nextstep.shoppingcart.productlist.component.ProductListContents
 import nextstep.shoppingcart.productlist.model.ProductListUiState
+import nextstep.shoppingcart.ui.component.CommonEmptyScreen
+import nextstep.shoppingcart.ui.component.CommonErrorScreen
+import nextstep.shoppingcart.ui.component.CommonLoading
 import nextstep.shoppingcart.ui.component.ProductCenterAlignedTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -25,9 +27,7 @@ fun ProductListScreen(
 ) {
     when (uiState) {
 
-        ProductListUiState.Loading -> {
-            CircularProgressIndicator()
-        }
+        ProductListUiState.Loading -> CommonLoading()
 
         is ProductListUiState.ProductList -> {
             Scaffold(
@@ -50,13 +50,9 @@ fun ProductListScreen(
             }
         }
 
-        ProductListUiState.Error -> {
-            // Error 뷰
-        }
+        ProductListUiState.Error -> CommonErrorScreen(onRetryButtonClick = {})
 
-        ProductListUiState.Empty -> {
-            // Empty 뷰
-        }
+        ProductListUiState.Empty -> CommonEmptyScreen()
     }
 }
 
