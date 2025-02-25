@@ -10,6 +10,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import nextstep.shoppingcart.cart.component.CartContent
 import nextstep.shoppingcart.cart.model.CartUiState
 import nextstep.shoppingcart.cart.model.CartViewModel
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.ProductBackButtonTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -73,7 +74,7 @@ private fun CartScreenPreview() {
     ShoppingCartTheme {
         CartScreen(
             onBackButtonClick = {},
-            viewModel = CartViewModel(repository = nextstep.shoppingcart.Cart),
+            viewModel = CartViewModel(repository = Cart),
         )
     }
 }

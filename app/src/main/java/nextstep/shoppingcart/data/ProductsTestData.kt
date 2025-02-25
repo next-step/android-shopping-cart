@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.data
 
 import nextstep.shoppingcart.model.Product
 

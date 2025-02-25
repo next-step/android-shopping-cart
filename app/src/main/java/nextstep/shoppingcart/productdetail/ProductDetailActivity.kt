@@ -10,9 +10,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import nextstep.shoppingcart.Cart
-import nextstep.shoppingcart.ProductsTestData.productTestDataList
 import nextstep.shoppingcart.cart.CartActivity
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.data.ProductsTestData.productTestDataList
 import nextstep.shoppingcart.productdetail.model.ProductDetailUiState
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 

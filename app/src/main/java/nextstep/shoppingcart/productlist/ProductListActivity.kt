@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import nextstep.shoppingcart.ProductsTestData
 import nextstep.shoppingcart.cart.CartActivity
+import nextstep.shoppingcart.data.ProductsTestData
 import nextstep.shoppingcart.productdetail.ProductDetailActivity
 import nextstep.shoppingcart.productlist.model.ProductListUiState
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
