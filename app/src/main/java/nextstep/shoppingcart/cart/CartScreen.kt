@@ -4,27 +4,42 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.Cart
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import nextstep.shoppingcart.cart.component.CartContent
-import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.cart.model.CartUiState
+import nextstep.shoppingcart.cart.model.CartViewModel
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.ProductBackButtonTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun CartScreen(onBackButtonClick: () -> Unit, modifier: Modifier = Modifier) {
-    val cartItem by remember { mutableStateOf(Cart.items) }
-    CartScreen(cartItem = cartItem, onBackButtonClick = { onBackButtonClick() })
+fun CartScreen(
+    viewModel: CartViewModel,
+    onBackButtonClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+    CartScreen(
+        uiState = uiState.value,
+        onBackButtonClick = onBackButtonClick,
+        onAddOneToCart = { product -> viewModel.addOne(product) },
+        onRemoveOneFromCart = { product -> viewModel.removeOne(product) },
+        onClearCartItem = { product -> viewModel.removeAll(product) },
+        onOrderButtonClick = {},
+        modifier = modifier
+    )
 }
 
 @Composable
 private fun CartScreen(
     onBackButtonClick: () -> Unit,
-    cartItem: List<CartItem>,
+    uiState: CartUiState,
+    onAddOneToCart: (Product) -> Unit,
+    onRemoveOneFromCart: (Product) -> Unit,
+    onClearCartItem: (Product) -> Unit,
+    onOrderButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -38,8 +53,17 @@ private fun CartScreen(
             )
         },
     ) { contentPadding ->
-        //  CartScreen(modifier = Modifier.padding(contentPadding), cartItem)
-        CartContent(modifier = modifier.padding(contentPadding), cartItem = cartItem)
+        CartContent(
+            modifier = modifier
+                .padding(contentPadding)
+                .fillMaxSize(),
+            cartItem = uiState.cartItems,
+            onAddOneToCart = onAddOneToCart,
+            onRemoveOneFromCart = onRemoveOneFromCart,
+            onClearCartItem = onClearCartItem,
+            totalPrice = uiState.totalPrice,
+            onOrderButtonClick = onOrderButtonClick
+        )
     }
 }
 
@@ -47,6 +71,9 @@ private fun CartScreen(
 @Composable
 private fun CartScreenPreview() {
     ShoppingCartTheme {
-        CartScreen({})
+        CartScreen(
+            onBackButtonClick = {},
+            viewModel = CartViewModel(repository = nextstep.shoppingcart.Cart),
+        )
     }
 }
