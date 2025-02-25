@@ -29,7 +29,7 @@ fun ProductListScreen(
 
         ProductListUiState.Loading -> CommonLoading()
 
-        is ProductListUiState.ProductList -> {
+        is ProductListUiState.Success -> {
             Scaffold(
                 modifier = modifier
                     .fillMaxSize(),
@@ -59,7 +59,7 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    val uiState = ProductListUiState.ProductList(ProductsTestData.productTestDataList)
+    val uiState = ProductListUiState.Success(ProductsTestData.productTestDataList)
     ShoppingCartTheme {
         ProductListScreen(uiState, {}, {})
     }

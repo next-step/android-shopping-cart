@@ -17,7 +17,7 @@ sealed interface ProductListUiState {
     data object Error : ProductListUiState
 
     @Immutable
-    data class ProductList(
+    data class Success(
         val products: List<Product>,
     ) : ProductListUiState
 }

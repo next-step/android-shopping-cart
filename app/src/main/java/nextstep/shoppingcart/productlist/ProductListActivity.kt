@@ -13,7 +13,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 class ProductListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val uiState = ProductListUiState.ProductList(ProductsTestData.productTestDataList)
+        val uiState = ProductListUiState.Success(ProductsTestData.productTestDataList)
         setContent {
             ShoppingCartTheme {
                 ProductListScreen(
