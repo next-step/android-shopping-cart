@@ -22,7 +22,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun CartProductTopArea(
-    name: String, onRemoveCart: () -> Unit,
+    name: String,
+    onRemoveCart: () -> Unit,
     rightIcon: ImageVector,
     rightIconContentDescription: String,
     modifier: Modifier = Modifier

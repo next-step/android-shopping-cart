@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -95,6 +96,7 @@ private fun CartProductPrice(
             Box(
                 modifier = Modifier
                     .size(42.dp)
+                    .testTag("onRemoveOneFromCart ${cartItem.product.name}")
                     .clickable {
                         onRemoveOneFromCart(cartItem.product)
                     }, contentAlignment = Alignment.Center
@@ -113,6 +115,7 @@ private fun CartProductPrice(
             Box(
                 modifier = Modifier
                     .size(42.dp)
+                    .testTag("addOneToCart ${cartItem.product.name}")
                     .clickable {
                         onAddOneToCart(cartItem.product)
                     }, contentAlignment = Alignment.Center
