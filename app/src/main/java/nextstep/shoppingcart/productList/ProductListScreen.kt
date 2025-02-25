@@ -12,6 +12,7 @@ import nextstep.shoppingcart.data.Product
 fun ProductListScreen(
     products: List<Product> = emptyList(),
     onCartButtonClick: () -> Unit = {},
+    onItemClick: (Product) -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -22,6 +23,7 @@ fun ProductListScreen(
     ) { innerPadding ->
         ProductList(
             products = products,
+            onItemClick = onItemClick,
             modifier = modifier.padding(innerPadding),
         )
     }

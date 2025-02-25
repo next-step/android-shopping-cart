@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.cart.CartActivity
 import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.productDetail.ProductDetailActivity
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductListActivity : ComponentActivity() {
@@ -24,6 +25,9 @@ class ProductListActivity : ComponentActivity() {
             ShoppingCartTheme {
                 ProductListScreen(
                     products = products,
+                    onItemClick = { product ->
+                        ProductDetailActivity.start(this, product)
+                    },
                     onCartButtonClick = {
                         CartActivity.start(this)
                     },
