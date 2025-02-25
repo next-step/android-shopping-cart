@@ -20,31 +20,14 @@ class ShoppingCartActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
-                var cartItems by remember { mutableStateOf(Cart.items) }
-                var totalPrice by remember { mutableLongStateOf(Cart.totalPrice) }
-
-                fun updateCarts() {
-                    cartItems = Cart.items
-                    totalPrice = Cart.totalPrice
-                }
-
                 enableEdgeToEdge()
                 ShoppingCartScreen(
-                    cartItems = cartItems,
-                    totalPrice = totalPrice,
+                    cartItems = Cart.items,
+                    totalPrice = Cart.totalPrice.value,
                     onBackButtonClick = ::finish,
-                    onAddProductClick = { product: Product ->
-                        Cart.addOne(product)
-                        updateCarts()
-                    },
-                    onRemoveProductClick = { product: Product ->
-                        Cart.removeOne(product)
-                        updateCarts()
-                    },
-                    onRemoveAllProductClick = { product: Product ->
-                        Cart.removeAll(product)
-                        updateCarts()
-                    }
+                    onAddProductClick = Cart::addOne,
+                    onRemoveProductClick = Cart::removeOne,
+                    onRemoveAllProductClick = Cart::removeAll
                 )
             }
         }

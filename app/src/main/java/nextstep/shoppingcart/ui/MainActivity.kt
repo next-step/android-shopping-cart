@@ -4,11 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableLongStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import nextstep.shoppingcart.FakeProductsRepository
 import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
@@ -23,21 +18,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 enableEdgeToEdge()
-                var cartItems by remember { mutableStateOf(Cart.items) }
-
                 ProductsScreen(
                     products = FakeProductsRepository.getProducts(),
                     onProductClick = { product -> handleProductClick(product) },
                     onShoppingCartActionClick = ::handleShoppingCartActionClick,
-                    cartItems = cartItems,
-                    onProductAddClick = { product ->
-                        Cart.addOne(product)
-                        cartItems = Cart.items
-                    },
-                    onProductRemoveClick = {
-                        Cart.removeOne(it)
-                        cartItems = Cart.items
-                    }
+                    cartItems = Cart.items,
+                    onProductAddClick = Cart::addOne,
+                    onProductRemoveClick = Cart::removeOne
                 )
             }
         }
