@@ -12,102 +12,116 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+import nextstep.shoppingcart.util.translateNumberMoneyFormat
 
 @Composable
 fun CartProduct(
     cartItem: CartItem,
-    onAddOneToCart: () -> Unit,
-    onRemoveOneFromCart: () -> Unit,
-    onClearCartItem: () -> Unit,
+    onAddOneToCart: (Product) -> Unit,
+    onRemoveOneFromCart: (Product) -> Unit,
+    onClearCartItem: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier
-    ) {
+    Column(modifier = modifier) {
         Spacer(modifier = Modifier.size(18.dp))
-        CartProductTitle(
+        CartProductTopArea(
             name = cartItem.product.name,
-            onRemoveCart = { onClearCartItem() },
+            onRemoveCart = { onClearCartItem(cartItem.product) },
+            rightIcon = Icons.Filled.Clear,
+            rightIconContentDescription = "${cartItem.product.name} 삭제버튼",
             modifier = Modifier.padding(horizontal = 18.dp)
         )
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(top = 6.dp)
+            modifier = Modifier.padding(top = 6.dp, start = 18.dp, end = 18.dp, bottom = 18.dp)
         ) {
-            AsyncImage(
-                model = cartItem.product.imageUrl,
-                contentDescription = null,
+            ProductImage(
+                imageUrl = cartItem.product.imageUrl,
+                contentDescription = "${cartItem.product.name} 이미지",
                 modifier = Modifier
                     .fillMaxHeight()
                     .aspectRatio(136f / 84f)
-                    .padding(start = 18.dp, bottom = 18.dp, top = 6.dp),
-                contentScale = ContentScale.Crop
             )
-            Column(
+            CartProductPrice(cartItem, onRemoveOneFromCart, onAddOneToCart)
+        }
+    }
+}
+
+@Composable
+private fun CartProductPrice(
+    cartItem: CartItem,
+    onRemoveOneFromCart: (Product) -> Unit,
+    onAddOneToCart: (Product) -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Box(
+            modifier = Modifier
+                .weight(1f, fill = true)
+                .align(Alignment.End),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Text(
+                text = translateNumberMoneyFormat(cartItem.totalPrice),
+                fontSize = 16.sp,
+            )
+        }
+
+        Row(
+            modifier = Modifier
+                .width(126.dp)
+                .align(Alignment.End)
+                .weight(1f, fill = true),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .size(42.dp)
+                    .clickable {
+                        onRemoveOneFromCart(cartItem.product)
+                    }, contentAlignment = Alignment.Center
             ) {
                 Text(
-                    modifier = Modifier
-                        .align(Alignment.End)
-                        .padding(end = 18.dp)
-                        .weight(1f, fill = true),
-                    text = cartItem.product.formattedPrice,
-                    fontSize = 16.sp
+                    text = "−",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
                 )
-                Row(
-                    modifier = Modifier
-                        .width(126.dp)
-                        .align(Alignment.End)
-                        .weight(1f, fill = true),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(42.dp)
-                            .clickable {
-                                onRemoveOneFromCart()
-                            }, contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "-",
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                    Text(
-                        text = cartItem.count.toString(),
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Box(
-                        modifier = Modifier
-                            .size(42.dp)
-                            .clickable {
-                                onAddOneToCart()
-                            }, contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "+",
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
+            }
+            Text(
+                text = cartItem.count.toString(),
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Box(
+                modifier = Modifier
+                    .size(42.dp)
+                    .clickable {
+                        onAddOneToCart(cartItem.product)
+                    }, contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "+",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
     }
@@ -128,10 +142,15 @@ private fun CartProductPreview() {
             ),
             {},
             {},
-            modifier = Modifier.border(
-                width = 1.dp,
-                color = Color.Gray.copy(alpha = 0.1f)
-            ), onClearCartItem = {}
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 18.dp)
+                .aspectRatio(324f / 150f)
+                .border(
+                    shape = RoundedCornerShape(4.dp),
+                    width = 1.dp,
+                    color = Color.Gray.copy(alpha = 0.1f)
+                ), onClearCartItem = {}
         )
     }
 }
