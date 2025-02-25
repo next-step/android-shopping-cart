@@ -10,6 +10,7 @@ import nextstep.shoppingcart.data.Product
 
 @Composable
 fun ProductListScreen(
+    onCartButtonClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val products = List(10) {
@@ -22,7 +23,9 @@ fun ProductListScreen(
 
     Scaffold(
         containerColor = Color.White,
-        topBar = { ProductListTopAppBar() }
+        topBar = {
+            ProductListTopAppBar(onCartButtonClick = onCartButtonClick)
+        }
     ) { innerPadding ->
         ProductList(
             products = products,
