@@ -11,8 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.cart.data.CartDataSource
-import nextstep.shoppingcart.cart.data.CartDataSourceImpl
 import nextstep.shoppingcart.catalog.component.ProductGridItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.util.DataUtil.dummyProducts
@@ -20,8 +18,12 @@ import nextstep.shoppingcart.util.DataUtil.dummyProducts
 @Composable
 fun CatalogContent(
     products: List<Product>,
-    cartDataSource: CartDataSource,
-    navigateToDetail: (Product) -> Unit,
+    getCount: (Product) -> Int,
+    checkIsAdded: (Product) -> Boolean,
+    onClickProductItem: (Product) -> Unit,
+    onClickAddCartButton: (Product) -> Unit,
+    onClickIncreaseCountButton: (Product) -> Unit,
+    onClickDecreaseCountButton: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -39,8 +41,12 @@ fun CatalogContent(
         ) { product ->
             ProductGridItem(
                 product = product,
-                cartDataSource = cartDataSource,
-                onClickItem = navigateToDetail,
+                count = getCount(product),
+                isAdded = checkIsAdded(product),
+                onClickProductItem = onClickProductItem,
+                onClickAddCartButton = onClickAddCartButton,
+                onClickIncreaseCountButton = onClickIncreaseCountButton,
+                onClickDecreaseCountButton = onClickDecreaseCountButton,
             )
         }
     }
@@ -51,7 +57,11 @@ fun CatalogContent(
 private fun CatalogContentPreview() {
     CatalogContent(
         products = dummyProducts,
-        cartDataSource = CartDataSourceImpl,
-        navigateToDetail = {},
+        getCount = { 0 },
+        checkIsAdded = { true },
+        onClickProductItem = {},
+        onClickAddCartButton = {},
+        onClickIncreaseCountButton = {},
+        onClickDecreaseCountButton = {},
     )
 }

@@ -6,7 +6,6 @@ import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.catalog.component.ProductGridItem
 import nextstep.shoppingcart.catalog.component.ProductQuantityAdjustImage
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.testdouble.FakeCartDataSourceImpl
 import org.junit.Rule
 import org.junit.Test
 
@@ -29,8 +28,12 @@ class ProductGridItemTest {
                     price = price,
                     imageUrl = "",
                 ),
-                cartDataSource = FakeCartDataSourceImpl(),
-                onClickItem = {},
+                count = 0,
+                isAdded = true,
+                onClickProductItem = {},
+                onClickAddCartButton = {},
+                onClickIncreaseCountButton = {},
+                onClickDecreaseCountButton = {},
             )
         }
 

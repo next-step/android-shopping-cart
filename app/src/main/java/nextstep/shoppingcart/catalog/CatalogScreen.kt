@@ -28,8 +28,12 @@ fun CatalogScreen(
     ) { paddingValues ->
         CatalogContent(
             products = products,
-            navigateToDetail = navigateToDetail,
-            cartDataSource = cartDataSource,
+            getCount = { cartDataSource.getCount(it) },
+            checkIsAdded = { cartDataSource.hasProduct(it) },
+            onClickProductItem = navigateToDetail,
+            onClickAddCartButton = { cartDataSource.addOne(it) },
+            onClickIncreaseCountButton = { cartDataSource.addOne(it) } ,
+            onClickDecreaseCountButton = { cartDataSource.removeOne(it) },
             modifier = Modifier.padding(paddingValues),
         )
     }

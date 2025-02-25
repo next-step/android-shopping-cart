@@ -8,8 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.cart.data.CartDataSource
-import nextstep.shoppingcart.cart.data.CartDataSourceImpl
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.TypoTokens.Bold16
 import nextstep.shoppingcart.ui.theme.TypoTokens.Normal16
@@ -18,18 +16,22 @@ import nextstep.shoppingcart.util.NumberFormatUtil.toPrice
 @Composable
 fun ProductGridItem(
     product: Product,
-    cartDataSource: CartDataSource,
-    onClickItem: (Product) -> Unit,
+    count: Int,
+    isAdded: Boolean,
+    onClickAddCartButton: (Product) -> Unit,
+    onClickIncreaseCountButton: (Product) -> Unit,
+    onClickDecreaseCountButton: (Product) -> Unit,
+    onClickProductItem: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.clickable { onClickItem.invoke(product) }) {
+    Column(modifier = modifier.clickable { onClickProductItem.invoke(product) }) {
         ProductQuantityAdjustImage(
             product = product,
-            count = cartDataSource.getCount(product),
-            isAdded = cartDataSource.hasProduct(product),
-            onClickAddCartButton = { cartDataSource.addOne(it) },
-            onClickIncreaseCountButton = { cartDataSource.addOne(product) },
-            onClickDecreaseCountButton = { cartDataSource.removeOne(product) },
+            count = count,
+            isAdded = isAdded,
+            onClickAddCartButton = onClickAddCartButton,
+            onClickIncreaseCountButton = onClickIncreaseCountButton,
+            onClickDecreaseCountButton = onClickDecreaseCountButton,
             modifier = Modifier.fillMaxWidth(),
         )
         Text(
@@ -55,7 +57,11 @@ private fun ProductGridItemPreview() {
             price = 1000,
             imageUrl = "https://picsum.photos/id/30/1280/901"
         ),
-        onClickItem = {},
-        cartDataSource = CartDataSourceImpl,
+        count = 1,
+        isAdded = true,
+        onClickAddCartButton = {},
+        onClickIncreaseCountButton = {},
+        onClickDecreaseCountButton = {},
+        onClickProductItem = {},
     )
 }
