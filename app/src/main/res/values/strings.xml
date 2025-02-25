@@ -2,4 +2,5 @@
     <string name="app_name">Shopping Cart</string>
     <string name="price_comma">%,d원</string>
     <string name="title_activity_product_detail">ProductDetailActivity</string>
+    <string name="product_detail">상품 상세</string>
 </resources>
