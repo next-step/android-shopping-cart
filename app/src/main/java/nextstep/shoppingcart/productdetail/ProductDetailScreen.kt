@@ -1,19 +1,12 @@
 package nextstep.shoppingcart.productdetail
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.productdetail.component.ProductDetailContent
 import nextstep.shoppingcart.productdetail.model.ProductDetailUiState
@@ -52,23 +45,12 @@ fun ProductDetailScreen(
                         contentDescription = "상품 상세 뒤로가기 버튼"
                     )
                 },
-                bottomBar = {
-                    Button(
-                        shape = MaterialTheme.shapes.large,
-                        onClick = { navigateToCart(uiState.product.productId) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .navigationBarsPadding()
-                            .height(54.dp),
-                    ) {
-                        Text("장바구니 담기", fontSize = 20.sp)
-                    }
-                }
             ) { contentPadding ->
                 ProductDetailContent(
                     modifier = Modifier
                         .padding(contentPadding),
                     product = uiState.product,
+                    onAddToCartButtonClick = { navigateToCart(uiState.product.productId) }
                 )
             }
         }
