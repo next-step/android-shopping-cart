@@ -25,6 +25,7 @@ import nextstep.shoppingcart.component.ProductImage
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.Black33
 import nextstep.shoppingcart.ui.theme.Blue50
+import nextstep.shoppingcart.ui.theme.Gray40
 
 
 @Composable
@@ -59,7 +60,7 @@ fun ProductDetailScreen(
                     .padding(18.dp),
             )
             HorizontalDivider(
-                color = Color(0xFFAAAAAA),
+                color = Gray40,
                 thickness = 1.dp,
                 modifier = Modifier
                     .fillMaxWidth(),
