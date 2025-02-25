@@ -21,11 +21,13 @@ import nextstep.shoppingcart.data.Product
 @Composable
 fun ProductItem(
     product: Product,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
 ) {
     Surface(
         modifier = modifier,
-        color = Color.White
+        color = Color.White,
+        onClick = onClick
     ) {
         Column {
             ProductImage(
