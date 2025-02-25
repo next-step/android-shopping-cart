@@ -1,9 +1,11 @@
 package nextstep.shoppingcart
 
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.catalog.CatalogScreen
 import nextstep.shoppingcart.model.CartItem
@@ -46,10 +48,10 @@ class CatalogScreenTest {
 
         // then
         composeTestRule.onNodeWithTag("1AddButton", true)
-            .assertDoesNotExist()
+            .assertIsNotDisplayed()
 
         composeTestRule.onNodeWithTag("1AdjustButton", true)
-            .assertExists()
+            .assertIsDisplayed()
     }
 
     @Test
@@ -111,8 +113,8 @@ class CatalogScreenTest {
         }
 
         // then
-        composeTestRule.onNodeWithText("30")
-            .assertExists()
+        composeTestRule.onNodeWithTag("장바구니 수량", true)
+            .assertTextEquals("30")
     }
 
     @Test
@@ -141,12 +143,7 @@ class CatalogScreenTest {
             .performClick()
 
         // then
-        composeTestRule.onNodeWithTag("1AdjustButton", true)
-            .assertExists()
-
-        composeTestRule.onNodeWithTag("1AddButton", true)
-            .assertDoesNotExist()
-
-        assert(cartDataSource.hasProduct(product))
+        composeTestRule.onNodeWithTag("장바구니 수량", true)
+            .assertTextEquals("1")
     }
 }

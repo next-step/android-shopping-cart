@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -38,6 +39,7 @@ fun ProductCountAdjustButton(
         Text(
             text = count.toString(),
             style = Normal22,
+            modifier = Modifier.testTag("장바구니 수량")
         )
         IconButton(onClick = onClickIncreaseCountButton) {
             Icon(
