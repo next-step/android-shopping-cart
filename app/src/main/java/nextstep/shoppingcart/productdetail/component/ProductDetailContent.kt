@@ -16,14 +16,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.ProductBottomButton
+import nextstep.shoppingcart.ui.component.ProductImage
 import nextstep.shoppingcart.util.translateNumberMoneyFormat
 
 @Composable
@@ -38,13 +37,12 @@ fun ProductDetailContent(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-            AsyncImage(
-                model = product.imageUrl,
-                contentDescription = null,
+            ProductImage(
+                imageUrl = product.imageUrl,
+                contentDescription = "${product.name} 이미지",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(1f),
-                contentScale = ContentScale.Crop
+                    .aspectRatio(1f)
             )
             Text(
                 product.name,

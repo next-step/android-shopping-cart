@@ -7,13 +7,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.util.translateNumberMoneyFormat
 
 @Composable
 fun Product(
@@ -22,13 +21,12 @@ fun Product(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.clickable { navigateToProductDetail(product.productId) }) {
-        AsyncImage(
-            model = product.imageUrl,
-            contentDescription = null,
+        ProductImage(
+            imageUrl = product.imageUrl,
+            contentDescription = "${product.name} 이미지",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 6.dp),
-            contentScale = ContentScale.Crop
         )
         Text(
             product.name,
@@ -36,7 +34,7 @@ fun Product(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
-        Text(product.formattedPrice)
+        Text(translateNumberMoneyFormat(product.price))
     }
 }
 
