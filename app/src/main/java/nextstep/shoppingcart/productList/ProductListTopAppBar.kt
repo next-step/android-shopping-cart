@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun ProductListTopAppBar(
     onCartButtonClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
         title = {
@@ -26,18 +26,18 @@ fun ProductListTopAppBar(
         },
         actions = {
             IconButton(
-                onClick = onCartButtonClick
+                onClick = onCartButtonClick,
             ) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
-                    contentDescription = "Cart"
+                    contentDescription = "Cart",
                 )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color.White
+            containerColor = Color.White,
         ),
-        modifier = modifier
+        modifier = modifier,
     )
 }
 

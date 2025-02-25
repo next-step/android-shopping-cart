@@ -11,17 +11,17 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun CartScreen(
     onBackButtonClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
         topBar = {
             CartTopAppBar(onBackButtonClick = onBackButtonClick)
         },
-        containerColor = Color.White
+        containerColor = Color.White,
     ) { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
         ) {
 
         }

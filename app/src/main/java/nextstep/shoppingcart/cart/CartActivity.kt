@@ -15,9 +15,7 @@ class CartActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 CartScreen(
-                    onBackButtonClick = {
-                        finish()
-                    }
+                    onBackButtonClick = { finish() },
                 )
             }
         }

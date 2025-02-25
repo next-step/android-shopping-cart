@@ -38,16 +38,16 @@ fun ProductDetailScreen(
         containerColor = Color.White,
         topBar = {
             ProductDetailTopAppBar(onBackButtonClick = onBackButtonClick)
-        }
+        },
     ) { innerPadding ->
         Column(
-            modifier = modifier.padding(innerPadding)
+            modifier = modifier.padding(innerPadding),
         ) {
             ProductImage(
                 imageUrl = product.imageUrl,
                 ratio = 1f,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             )
             Text(
                 text = product.name,
@@ -56,19 +56,19 @@ fun ProductDetailScreen(
                 color = Black33,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(18.dp)
+                    .padding(18.dp),
             )
             HorizontalDivider(
                 color = Color(0xFFAAAAAA),
                 thickness = 1.dp,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             )
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(18.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
                     text = stringResource(R.string.price_label),
@@ -90,7 +90,7 @@ fun ProductDetailScreen(
                 onClick = { onAddCartClick(product) },
                 shape = RectangleShape,
                 colors = ButtonDefaults.elevatedButtonColors(
-                    containerColor = Blue50
+                    containerColor = Blue50,
                 )
             ) {
                 Text(
@@ -98,7 +98,7 @@ fun ProductDetailScreen(
                     fontSize = 20.sp,
                     color = Color.White,
                     fontWeight = FontWeight.W700,
-                    modifier = Modifier.padding(15.dp)
+                    modifier = Modifier.padding(15.dp),
                 )
             }
         }
@@ -111,10 +111,10 @@ private fun ProductDetailScreenPreview() {
     val product = Product(
         name = "PET보틀-원형(500ml)",
         price = 10000,
-        imageUrl = ""
+        imageUrl = "",
     )
 
     ProductDetailScreen(
-        product = product
+        product = product,
     )
 }

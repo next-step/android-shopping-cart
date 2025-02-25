@@ -16,7 +16,7 @@ class ProductListActivity : ComponentActivity() {
                 ProductListScreen(
                     onCartButtonClick = {
                         CartActivity.start(this)
-                    }
+                    },
                 )
             }
         }

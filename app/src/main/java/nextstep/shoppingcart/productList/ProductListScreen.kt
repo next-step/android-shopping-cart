@@ -11,13 +11,13 @@ import nextstep.shoppingcart.data.Product
 @Composable
 fun ProductListScreen(
     onCartButtonClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val products = List(10) {
         Product(
             "상품이름",
             "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
-            10_000
+            10_000,
         )
     }
 
@@ -25,11 +25,11 @@ fun ProductListScreen(
         containerColor = Color.White,
         topBar = {
             ProductListTopAppBar(onCartButtonClick = onCartButtonClick)
-        }
+        },
     ) { innerPadding ->
         ProductList(
             products = products,
-            modifier = modifier.padding(innerPadding)
+            modifier = modifier.padding(innerPadding),
         )
     }
 }

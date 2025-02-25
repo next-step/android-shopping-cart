@@ -31,14 +31,14 @@ class ProductDetailActivity : ComponentActivity() {
                     product = Product(
                         name = productName,
                         price = productPrice,
-                        imageUrl = productImage
+                        imageUrl = productImage,
                     ),
                     onBackButtonClick = {
                         finish()
                     },
                     onAddCartClick = { _ ->
                         // TODO - 장바구니 담기
-                    }
+                    },
                 )
             }
         }
@@ -67,7 +67,7 @@ private fun ProductDetailActivityPreview() {
             product = Product(
                 name = "상품",
                 price = 10000,
-                imageUrl = ""
+                imageUrl = "",
             ),
         )
     }

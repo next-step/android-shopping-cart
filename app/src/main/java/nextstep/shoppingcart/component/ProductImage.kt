@@ -14,7 +14,7 @@ import nextstep.shoppingcart.R
 fun ProductImage(
     imageUrl: String = "",
     ratio: Float,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     if (imageUrl.isNotEmpty()) {
         AsyncImage(
@@ -23,7 +23,7 @@ fun ProductImage(
             contentScale = ContentScale.Crop,
             modifier = modifier
                 .fillMaxWidth()
-                .aspectRatio(ratio)
+                .aspectRatio(ratio),
         )
     } else {
         Image(
@@ -32,7 +32,7 @@ fun ProductImage(
             contentScale = ContentScale.Crop,
             modifier = modifier
                 .fillMaxWidth()
-                .aspectRatio(ratio)
+                .aspectRatio(ratio),
         )
     }
 }

@@ -16,7 +16,7 @@ import nextstep.shoppingcart.productDetail.ProductDetailActivity
 @Composable
 fun ProductList(
     products: List<Product> = emptyList(),
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
 
@@ -25,7 +25,7 @@ fun ProductList(
         contentPadding = PaddingValues(horizontal = 18.dp, vertical = 13.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
-        modifier = modifier
+        modifier = modifier,
     ) {
         items(products.size) { index ->
             ProductItem(
@@ -46,11 +46,11 @@ private fun ProductListPreview() {
         Product(
             "상품이름",
             "",
-            10_000
+            10_000,
         )
     }
 
     ProductList(
-        products = products
+        products = products,
     )
 }

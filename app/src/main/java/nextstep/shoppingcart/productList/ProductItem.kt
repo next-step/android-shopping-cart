@@ -27,14 +27,14 @@ fun ProductItem(
     Surface(
         modifier = modifier,
         color = Color.White,
-        onClick = onClick
+        onClick = onClick,
     ) {
         Column {
             ProductImage(
                 imageUrl = product.imageUrl,
                 ratio = (156.0f / 158),
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             )
             Text(
                 text = product.name,
@@ -44,13 +44,13 @@ fun ProductItem(
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .padding(horizontal = 4.dp)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             )
             Text(
                 text = stringResource(R.string.price_comma, product.price),
                 modifier = Modifier
                     .padding(horizontal = 4.dp)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             )
         }
     }
@@ -62,10 +62,10 @@ private fun ProductItemPreview() {
     val product = Product(
         name = "상품이름",
         imageUrl = "",
-        price = 10000
+        price = 10000,
     )
 
     ProductItem(
-        product = product
+        product = product,
     )
 }
