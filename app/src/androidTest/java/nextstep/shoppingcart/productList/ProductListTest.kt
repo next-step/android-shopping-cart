@@ -1,10 +1,9 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.productList
 
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.productList.ProductList
 import org.junit.Rule
 import org.junit.Test
 
