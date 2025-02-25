@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.ProductBottomButton
+import nextstep.shoppingcart.util.translateNumberMoneyFormat
 
 @Composable
 fun ProductDetailContent(
@@ -55,7 +56,7 @@ fun ProductDetailContent(
             ProductInfoTowText(
                 modifier = Modifier.padding(18.dp),
                 leftText = "금액",
-                rightText = product.formattedPrice
+                rightText = translateNumberMoneyFormat(product.price)
             )
 
         }
