@@ -1,4 +1,4 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.productdetail
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import nextstep.shoppingcart.model.detail.ProductDetailUiState
-import nextstep.shoppingcart.model.productTestDataList
-import nextstep.shoppingcart.ui.ProductDetailScreen
+import nextstep.shoppingcart.cart.CartActivity
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.data.ProductsTestData.productTestDataList
+import nextstep.shoppingcart.productdetail.model.ProductDetailUiState
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {
@@ -34,8 +35,8 @@ class ProductDetailActivity : ComponentActivity() {
             ShoppingCartTheme {
                 ProductDetailScreen(
                     uiState = product,
-                    navigateToCart = {
-                        //TODO step3 장바구니 담기 구현
+                    navigateToCart = { id ->
+                        Cart.addOne(productTestDataList.find { it.productId == id }!!)
                         navigateToCart()
                     },
                     onBackButtonClick = { onBackPressedDispatcher.onBackPressed() })
