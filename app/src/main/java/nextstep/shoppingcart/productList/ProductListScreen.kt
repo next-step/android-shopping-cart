@@ -10,23 +10,21 @@ import nextstep.shoppingcart.data.Product
 
 @Composable
 fun ProductListScreen(
-    modifier: Modifier = Modifier
+    products: List<Product> = emptyList(),
+    onCartButtonClick: () -> Unit = {},
+    onItemClick: (Product) -> Unit = {},
+    modifier: Modifier = Modifier,
 ) {
-    val products = List(10) {
-        Product(
-            "상품이름",
-            "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
-            10_000
-        )
-    }
-
     Scaffold(
         containerColor = Color.White,
-        topBar = { ProductListTopAppBar() }
+        topBar = {
+            ProductListTopAppBar(onCartButtonClick = onCartButtonClick)
+        },
     ) { innerPadding ->
         ProductList(
             products = products,
-            modifier = modifier.padding(innerPadding)
+            onItemClick = onItemClick,
+            modifier = modifier.padding(innerPadding),
         )
     }
 }
@@ -34,5 +32,13 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    ProductListScreen()
+    val products = List(10) {
+        Product(
+            "상품이름",
+            "",
+            10_000,
+        )
+    }
+
+    ProductListScreen(products)
 }

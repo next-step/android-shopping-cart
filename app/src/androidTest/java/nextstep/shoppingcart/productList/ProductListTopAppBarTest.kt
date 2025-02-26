@@ -1,8 +1,7 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.productList
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import nextstep.shoppingcart.productList.ProductListTopAppBar
 import org.junit.Rule
 import org.junit.Test
 

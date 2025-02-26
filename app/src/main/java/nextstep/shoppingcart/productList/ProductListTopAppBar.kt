@@ -16,25 +16,28 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductListTopAppBar(modifier: Modifier = Modifier) {
+fun ProductListTopAppBar(
+    onCartButtonClick: () -> Unit = {},
+    modifier: Modifier = Modifier,
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(text = "상품 목록")
         },
         actions = {
             IconButton(
-                onClick = { /*TODO*/ }
+                onClick = onCartButtonClick,
             ) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
-                    contentDescription = "Back"
+                    contentDescription = "Cart",
                 )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color.White
+            containerColor = Color.White,
         ),
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
