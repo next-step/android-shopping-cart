@@ -7,17 +7,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import nextstep.shoppingcart.cart.component.CartContent
 import nextstep.shoppingcart.cart.model.CartUiState
 import nextstep.shoppingcart.cart.model.CartViewModel
-import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.ProductBackButtonTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun CartScreen(
-    viewModel: CartViewModel,
+    viewModel: CartViewModel = viewModel(),
     onBackButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -74,7 +74,6 @@ private fun CartScreenPreview() {
     ShoppingCartTheme {
         CartScreen(
             onBackButtonClick = {},
-            viewModel = CartViewModel(repository = Cart),
         )
     }
 }

@@ -23,7 +23,6 @@ class CartScreenTest {
     fun setup() {
         composeTestRule.setContent {
             CartScreen(
-                viewModel = viewModel,
                 onBackButtonClick = {},
             )
         }
