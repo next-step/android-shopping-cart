@@ -24,7 +24,8 @@ class ProductListScreenTest {
             ProductListScreen(
                 uiState = fakeUiState.value,
                 navigateToProductDetail = {},
-                navigateToCart = {})
+                navigateToCart = {}
+            )
         }
     }
 
