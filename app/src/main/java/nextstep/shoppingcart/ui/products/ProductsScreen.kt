@@ -144,7 +144,7 @@ private fun ProductItem(
             )
             Icon(
                 painter = painterResource(R.drawable.ic_add),
-                contentDescription = "상품 추가",
+                contentDescription = "상품 첫 추가",
                 modifier = Modifier
                     .padding(12.dp)
                     .size(42.dp)
