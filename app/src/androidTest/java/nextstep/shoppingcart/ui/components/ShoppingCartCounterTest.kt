@@ -20,7 +20,7 @@ class ShoppingCartCounterTest {
             ShoppingCartCounter(
                 count = count,
                 onAddClick = { count++ },
-                onRemoveClick = { count-- },
+                onRemoveClick = {},
             )
         }
 
@@ -34,13 +34,15 @@ class ShoppingCartCounterTest {
     @Test
     fun 빼기_버튼을_누르면_수가_감소한다() {
         // given
-        var count = 0
+        var count = 3
 
         composeTestRule.setContent {
             ShoppingCartCounter(
                 count = count,
-                onAddClick = { count++ },
-                onRemoveClick = { count-- },
+                onAddClick = {},
+                onRemoveClick = {
+                    if (count > 0) count--
+                }
             )
         }
 
@@ -48,6 +50,28 @@ class ShoppingCartCounterTest {
         composeTestRule.onNodeWithContentDescription("빼기").performClick()
 
         // then
-        assert(count == -1)
+        assert(count == 2)
+    }
+
+    @Test
+    fun 수가_0이면_빼기_버튼을_눌러도_감소하지_않는다() {
+        // given
+        var count = 0
+
+        composeTestRule.setContent {
+            ShoppingCartCounter(
+                count = count,
+                onAddClick = {},
+                onRemoveClick = {
+                    if (count > 0) count--
+                }
+            )
+        }
+
+        // when
+        composeTestRule.onNodeWithContentDescription("빼기").performClick()
+
+        // then
+        assert(count == 0)
     }
 }
