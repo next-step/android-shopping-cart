@@ -17,7 +17,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductListTopBar(
+fun ProductCenterAlignedTopBar(
     topBarTitle: String,
     leftIcon: ImageVector? = null,
     leftIconContentDescription: String = "",
@@ -65,6 +65,6 @@ fun ProductListTopBar(
 @Composable
 private fun ProductListTopBarPreview() {
     ShoppingCartTheme {
-        ProductListTopBar(topBarTitle = "상품 목록", rightIcon = Icons.Filled.ShoppingCart)
+        ProductCenterAlignedTopBar(topBarTitle = "상품 목록", rightIcon = Icons.Filled.ShoppingCart)
     }
 }
