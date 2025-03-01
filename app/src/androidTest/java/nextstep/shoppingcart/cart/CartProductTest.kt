@@ -23,6 +23,7 @@ class CartProductTest {
     fun 장바구니_상품_이름이_노출된다() {
         val cartItem = CartItem(
             product = Product(
+                id = 1,
                 name = "상품1",
                 price = 1000,
                 imageUrl = "https://example.com/image1.jpg",
@@ -48,6 +49,7 @@ class CartProductTest {
     fun 장바구니_상품이_이름이_없으면_상품이름이_노출되지_않는다() {
         val cartItem = CartItem(
             product = Product(
+                id = 1,
                 name = "",
                 price = 1000,
                 imageUrl = "https://example.com/image1.jpg",
@@ -73,6 +75,7 @@ class CartProductTest {
     fun 장바구니_상품_이미지가_노출된다() {
         val cartItem = CartItem(
             product = Product(
+                id = 1,
                 name = "상품1",
                 price = 1000,
                 imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
@@ -98,6 +101,7 @@ class CartProductTest {
     fun 장바구니_상품_가격이_노출된다() {
         val cartItem = CartItem(
             product = Product(
+                id = 1,
                 name = "상품1",
                 price = 1000,
                 imageUrl = "https://example.com/image1.jpg",
@@ -123,6 +127,7 @@ class CartProductTest {
     fun 장바구니_개수에_맞는_가격이_노출되어야한다() {
         val cartItem = CartItem(
             product = Product(
+                id = 1,
                 name = "상품1",
                 price = 1000,
                 imageUrl = "",
@@ -150,6 +155,7 @@ class CartProductTest {
         composeTestRule.setContent {
             var cartItem by remember { mutableStateOf(CartItem(
                 product = Product(
+                    id = 1,
                     name = "상품1",
                     price = 1000,
                     imageUrl = "",
@@ -182,6 +188,7 @@ class CartProductTest {
         composeTestRule.setContent {
             var cartItem by remember { mutableStateOf(CartItem(
                 product = Product(
+                    id = 1,
                     name = "상품1",
                     price = 1000,
                     imageUrl = "",
@@ -214,6 +221,7 @@ class CartProductTest {
         composeTestRule.setContent {
             var cartItem by remember { mutableStateOf(CartItem(
                 product = Product(
+                    id = 1,
                     name = "상품1",
                     price = 1000,
                     imageUrl = "",
@@ -246,6 +254,7 @@ class CartProductTest {
         composeTestRule.setContent {
             var cartItem by remember { mutableStateOf(CartItem(
                 product = Product(
+                    id = 1,
                     name = "상품1",
                     price = 1000,
                     imageUrl = "",

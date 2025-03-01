@@ -15,6 +15,7 @@ class ProductListTest {
     fun 리스트에_6개의_아이템이_노출된다() {
         // given
         val product = Product(
+            id = 1,
             name = "테스트",
             price = 10000,
             imageUrl = ""

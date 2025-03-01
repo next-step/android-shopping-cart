@@ -20,12 +20,14 @@ class CartScreenTest {
     val composeTestRule = createComposeRule()
 
     private val product1 = Product(
+        id = 1,
         name = "상품1",
         price = 10000,
         imageUrl = ""
     )
 
     private val product2 = Product(
+        id = 2,
         name = "상품2",
         price = 5000,
         imageUrl = ""
