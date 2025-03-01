@@ -94,7 +94,10 @@ fun CartProduct(
                         .align(Alignment.Bottom)
                 ) {
                     Text(
-                        text = stringResource(R.string.price_comma, cartItem.product.price),
+                        text = stringResource(
+                            R.string.price_comma,
+                            (cartItem.product.price * cartItem.count)
+                        ),
                         modifier = Modifier
                             .align(Alignment.End),
                         fontSize = 16.sp,
