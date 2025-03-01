@@ -13,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,6 +21,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.CtaButton
 import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.CartItem
+import nextstep.shoppingcart.data.Product
 
 @Composable
 fun CartScreen(
@@ -63,7 +65,8 @@ fun CartScreen(
                 onClick = { /* TODO 주문하기 */ },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(54.dp),
+                    .height(54.dp)
+                    .testTag("orderButton"),
             )
         }
     }
@@ -72,6 +75,16 @@ fun CartScreen(
 @Preview(showBackground = true)
 @Composable
 private fun CartScreenPreview() {
+    Cart.addOne(
+        Product(name = "상품1", price = 1000, imageUrl = "https://example.com/image1.jpg")
+    )
+    Cart.addOne(
+        Product(name = "상품2", price = 1000, imageUrl = "https://example.com/image1.jpg")
+    )
+    Cart.addOne(
+        Product(name = "상품3", price = 1000, imageUrl = "https://example.com/image1.jpg")
+    )
+
     CartScreen(
         cartItems = Cart.items,
         totalPrice = Cart.totalPrice,

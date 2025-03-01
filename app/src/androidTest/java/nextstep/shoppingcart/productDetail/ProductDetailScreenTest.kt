@@ -20,7 +20,11 @@ class ProductDetailScreenTest {
         )
 
         composeTestRule.setContent {
-            ProductDetailScreen(product = product)
+            ProductDetailScreen(
+                product = product,
+                onBackButtonClick = {},
+                onAddCartClick = {},
+            )
         }
 
         // then
@@ -39,7 +43,11 @@ class ProductDetailScreenTest {
         )
 
         composeTestRule.setContent {
-            ProductDetailScreen(product = product)
+            ProductDetailScreen(
+                product = product,
+                onBackButtonClick = {},
+                onAddCartClick = {},
+            )
         }
 
         // then
@@ -58,7 +66,11 @@ class ProductDetailScreenTest {
         )
 
         composeTestRule.setContent {
-            ProductDetailScreen(product = product)
+            ProductDetailScreen(
+                product = product,
+                onBackButtonClick = {},
+                onAddCartClick = {},
+            )
         }
 
         // then

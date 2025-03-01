@@ -21,7 +21,10 @@ class ProductItemTest {
 
         // when
         composeTestRule.setContent {
-            ProductItem(product)
+            ProductItem(
+                product = product,
+                onClick = {}
+            )
         }
 
         // then
@@ -41,7 +44,10 @@ class ProductItemTest {
 
         // when
         composeTestRule.setContent {
-            ProductItem(product)
+            ProductItem(
+                product = product,
+                onClick = {}
+            )
         }
 
         // then

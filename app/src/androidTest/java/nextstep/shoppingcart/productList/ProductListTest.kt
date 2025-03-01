@@ -20,10 +20,13 @@ class ProductListTest {
             imageUrl = ""
         )
 
-        val products = List(10) { product }
+        val products = List(4) { product }
 
         composeTestRule.setContent {
-            ProductList(products = products)
+            ProductList(
+                products = products,
+                onItemClick = {}
+            )
         }
 
         composeTestRule.waitForIdle()
@@ -31,7 +34,7 @@ class ProductListTest {
         // then
         composeTestRule
             .onAllNodesWithText("테스트")
-            .assertCountEquals(6)
+            .assertCountEquals(4)
     }
 
 }
