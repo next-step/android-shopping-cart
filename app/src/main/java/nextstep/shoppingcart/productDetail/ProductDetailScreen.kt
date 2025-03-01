@@ -7,15 +7,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,10 +21,10 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.CtaButton
 import nextstep.shoppingcart.component.ProductImage
+import nextstep.shoppingcart.component.ProductPrice
 import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.Black33
-import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.Gray40
 
 
@@ -64,7 +61,6 @@ fun ProductDetailScreen(
             )
             HorizontalDivider(
                 color = Gray40,
-                thickness = 1.dp,
                 modifier = Modifier
                     .fillMaxWidth(),
             )
@@ -80,11 +76,9 @@ fun ProductDetailScreen(
                     color = Black33,
                     fontWeight = FontWeight.W400,
                 )
-                Text(
-                    text = stringResource(R.string.price_comma, product.price),
-                    fontSize = 20.sp,
-                    color = Black33,
-                    fontWeight = FontWeight.W400,
+                ProductPrice(
+                    price = product.price,
+                    fontSize = 20.sp
                 )
             }
             Spacer(modifier = Modifier.weight(1f))

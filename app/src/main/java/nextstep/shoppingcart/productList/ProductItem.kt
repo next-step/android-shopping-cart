@@ -8,13 +8,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.R
+import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.component.ProductImage
+import nextstep.shoppingcart.component.ProductPrice
 import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 
@@ -47,11 +47,12 @@ fun ProductItem(
                     .padding(horizontal = 4.dp)
                     .fillMaxWidth(),
             )
-            Text(
-                text = stringResource(R.string.price_comma, product.price),
+            ProductPrice(
+                price = product.price,
                 modifier = Modifier
                     .padding(horizontal = 4.dp)
                     .fillMaxWidth(),
+                fontSize = 16.sp
             )
         }
     }

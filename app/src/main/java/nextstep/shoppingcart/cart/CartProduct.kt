@@ -22,15 +22,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.ProductImage
+import nextstep.shoppingcart.component.ProductPrice
 import nextstep.shoppingcart.component.QuantityController
 import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.DummyProduct
@@ -96,15 +95,11 @@ fun CartProduct(
                         .weight(1f)
                         .align(Alignment.Bottom)
                 ) {
-                    Text(
-                        text = stringResource(
-                            R.string.price_comma,
-                            (cartItem.product.price * cartItem.count)
-                        ),
+                    ProductPrice(
+                        price = cartItem.product.price,
                         modifier = Modifier
                             .align(Alignment.End),
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.W400,
                     )
                     QuantityController(
                         count = cartItem.count,
