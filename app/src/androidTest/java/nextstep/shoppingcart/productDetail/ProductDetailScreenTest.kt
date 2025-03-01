@@ -35,7 +35,7 @@ class ProductDetailScreenTest {
     }
 
     @Test
-    fun 상품의_금액이_10_000원이_노출되어야_한다() {
+    fun 상품의_금액이_포맷에_맞게_노출되어야_한다() {
         // given
         val product = Product(
             id = 1,
