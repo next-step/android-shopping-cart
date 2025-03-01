@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -30,7 +31,6 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.utils.formatPrice
-import java.util.Locale
 
 @Composable
 fun CartProductItem(
@@ -69,7 +69,7 @@ fun CartProductItem(
                 )
                 IconButton(
                     onClick = onClickRemoveAll,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(24.dp).testTag("remove")
                 ) {
                     Icon(Icons.Filled.Close, null)
                 }
@@ -98,6 +98,7 @@ fun CartProductItem(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(top = 18.dp)
+                        .testTag("price")
                 )
 
                 Row(
