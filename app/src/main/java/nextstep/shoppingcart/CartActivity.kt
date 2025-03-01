@@ -17,6 +17,11 @@ class CartActivity : ComponentActivity() {
                     onClickBack = {
                         finish()
                     },
+                    onClickOrder = {
+
+                    },
+                    cartItems = listOf(),
+                    totalPrice = 0
                 )
             }
         }
