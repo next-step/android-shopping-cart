@@ -1,6 +1,6 @@
 package nextstep.shoppingcart.model
 
-import java.util.Locale
+import nextstep.shoppingcart.utils.formatPrice
 
 data class Product(
     val imageUrl: String,
@@ -8,7 +8,7 @@ data class Product(
     val price: Int
 ) {
     val formattedPrice: String
-        get() = String.format(Locale.getDefault(), "%,d원", price)
+        get() = price.formatPrice()
 
     companion object {
         val mock = Product(

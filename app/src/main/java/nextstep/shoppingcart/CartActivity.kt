@@ -19,9 +19,7 @@ class CartActivity : ComponentActivity() {
                     },
                     onClickOrder = {
 
-                    },
-                    cartItems = listOf(),
-                    totalPrice = 0
+                    }
                 )
             }
         }

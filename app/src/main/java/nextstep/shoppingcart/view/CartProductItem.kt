@@ -29,6 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.utils.formatPrice
+import java.util.Locale
 
 @Composable
 fun CartProductItem(
@@ -89,8 +91,9 @@ fun CartProductItem(
                         .align(Alignment.TopStart)
                 )
 
+
                 Text(
-                    text = cartItem.product.formattedPrice,
+                    text = (cartItem.product.price * cartItem.count).formatPrice(),
                     fontSize = 16.sp,
                     modifier = Modifier
                         .align(Alignment.TopEnd)

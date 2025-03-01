@@ -9,26 +9,33 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.products
+import nextstep.shoppingcart.utils.formatPrice
 import nextstep.shoppingcart.view.CartProductItem
 import nextstep.shoppingcart.view.DefaultButton
 import nextstep.shoppingcart.view.DefaultNavigationBackTopBar
-import java.util.Locale
 
 @Composable
 fun CartScreen(
-    totalPrice: Int,
-    cartItems: List<CartItem>,
     onClickBack: () -> Unit,
     onClickOrder: () -> Unit
 ) {
+    var cartItems by remember { mutableStateOf(Cart.items) }
+    val totalPrice by remember(cartItems) { mutableIntStateOf(Cart.totalPrice) }
+
     Scaffold(
         topBar = {
             DefaultNavigationBackTopBar(
@@ -42,7 +49,16 @@ fun CartScreen(
             totalPrice = totalPrice,
             modifier = Modifier
                 .padding(paddingValues),
-            onClickOrder = onClickOrder
+            onClickOrder = onClickOrder,
+            onClickRemoveOne = { cartItem ->
+                cartItems = Cart.removeOne(cartItem.product)
+            },
+            onClickAddOne = { cartItem ->
+                cartItems = Cart.addOne(cartItem.product)
+            },
+            onClickRemoveAll = { cartItem ->
+                cartItems = Cart.removeAll(cartItem.product)
+            }
         )
     }
 }
@@ -53,41 +69,37 @@ private fun CartContent(
     totalPrice: Int,
     modifier: Modifier = Modifier,
     onClickOrder: () -> Unit = { },
+    onClickRemoveOne: (CartItem) -> Unit = { },
+    onClickAddOne: (CartItem) -> Unit = { },
+    onClickRemoveAll: (CartItem) -> Unit = { },
 ) {
     Box(
         modifier = modifier
     ) {
-        CartProductsList(
-            cartItems = cartItems
-        )
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentPadding = PaddingValues(horizontal = 18.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(cartItems) { cartItem ->
+                CartProductItem(
+                    cartItem = cartItem,
+                    onClickRemoveOne = { onClickRemoveOne(cartItem) },
+                    onClickAddOne = { onClickAddOne(cartItem) },
+                    onClickRemoveAll = { onClickRemoveAll(cartItem) }
+                )
+            }
+        }
 
         DefaultButton(
             text = stringResource(
                 id = R.string.cart_order_button,
-                String.format(Locale.getDefault(), "%,d원", totalPrice)
+                totalPrice.formatPrice()
             ),
             onClick = onClickOrder,
             modifier = Modifier.align(Alignment.BottomCenter)
         )
-    }
-}
-
-@Composable
-private fun CartProductsList(
-    cartItems: List<CartItem>,
-    modifier: Modifier = Modifier,
-) {
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        items(cartItems) {
-            CartProductItem(
-                cartItem = it
-            )
-        }
     }
 }
 

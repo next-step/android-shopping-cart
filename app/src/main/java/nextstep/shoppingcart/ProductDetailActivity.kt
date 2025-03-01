@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.screen.ProductDetailScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -38,7 +39,8 @@ class ProductDetailActivity : ComponentActivity() {
                     onClickBack = {
                         finish()
                     },
-                    onClickAddToCart = {
+                    onClickAddToCart = { product ->
+                        Cart.addOne(product)
                         goToCart()
                     }
                 )
