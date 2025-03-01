@@ -22,7 +22,7 @@ import nextstep.shoppingcart.ui.theme.Black40
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartTopAppBar(
-    onBackButtonClick: () -> Unit = {},
+    onBackButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     TopAppBar(
@@ -55,5 +55,7 @@ fun CartTopAppBar(
 @Preview(showBackground = true)
 @Composable
 private fun CartTopAppBarPreview() {
-    CartTopAppBar()
+    CartTopAppBar(
+        onBackButtonClick = {},
+    )
 }

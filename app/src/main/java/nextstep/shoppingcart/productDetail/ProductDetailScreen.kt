@@ -33,8 +33,8 @@ import nextstep.shoppingcart.ui.theme.Gray40
 @Composable
 fun ProductDetailScreen(
     product: Product,
-    onBackButtonClick: () -> Unit = {},
-    onAddCartClick: (Product) -> Unit = {},
+    onBackButtonClick: () -> Unit,
+    onAddCartClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -109,5 +109,7 @@ private fun ProductDetailScreenPreview() {
 
     ProductDetailScreen(
         product = product,
+        onBackButtonClick = {},
+        onAddCartClick = {},
     )
 }

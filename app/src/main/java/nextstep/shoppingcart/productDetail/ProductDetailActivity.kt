@@ -70,6 +70,8 @@ private fun ProductDetailActivityPreview() {
                 price = 10000,
                 imageUrl = "",
             ),
+            onBackButtonClick = {},
+            onAddCartClick = {},
         )
     }
 }

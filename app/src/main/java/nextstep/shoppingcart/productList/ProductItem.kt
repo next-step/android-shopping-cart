@@ -22,7 +22,7 @@ import nextstep.shoppingcart.data.Product
 fun ProductItem(
     product: Product,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit,
 ) {
     Surface(
         modifier = modifier,
@@ -67,5 +67,6 @@ private fun ProductItemPreview() {
 
     ProductItem(
         product = product,
+        onClick = {},
     )
 }

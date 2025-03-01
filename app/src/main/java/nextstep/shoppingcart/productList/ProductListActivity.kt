@@ -39,6 +39,10 @@ private fun ProductListActivityPreview() {
     val products = Cart.productItemDummyList
 
     ShoppingCartTheme {
-        ProductListScreen(products = products)
+        ProductListScreen(
+            products = products,
+            onItemClick = {},
+            onCartButtonClick = {},
+        )
     }
 }
