@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.CtaButton
 import nextstep.shoppingcart.component.ProductImage
+import nextstep.shoppingcart.component.ProductName
 import nextstep.shoppingcart.component.ProductPrice
 import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
@@ -50,14 +51,12 @@ fun ProductDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
             )
-            Text(
-                text = product.name,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.W700,
-                color = Black33,
+            ProductName(
+                name = product.name,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(18.dp),
+                    .padding(18.dp)
+                    .fillMaxWidth(),
+                fontSize = 24.sp
             )
             HorizontalDivider(
                 color = Gray40,

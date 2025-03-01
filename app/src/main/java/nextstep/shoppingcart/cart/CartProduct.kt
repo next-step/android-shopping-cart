@@ -16,19 +16,16 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.component.ProductImage
+import nextstep.shoppingcart.component.ProductName
 import nextstep.shoppingcart.component.ProductPrice
 import nextstep.shoppingcart.component.QuantityController
 import nextstep.shoppingcart.data.CartItem
@@ -58,15 +55,10 @@ fun CartProduct(
             Row(
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(
-                    text = cartItem.product.name,
+                ProductName(
+                    name = cartItem.product.name,
                     modifier = Modifier.weight(1f),
-                    fontSize = 20.sp,
-                    lineHeight = 24.sp,
-                    fontWeight = FontWeight.W700,
-                    textAlign = TextAlign.Start,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    fontSize = 20.sp
                 )
                 IconButton(
                     onClick = { onDeleteButtonClick(cartItem) },
