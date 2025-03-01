@@ -41,4 +41,57 @@ object Cart {
         _items.removeAll { it.product == product }
         return items
     }
+
+    val productItemDummyList = listOf(
+        Product(
+            name = "상품1",
+            imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
+            price = 10_000,
+        ),
+        Product(
+            name = "상품2",
+            imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
+            price = 7_000,
+        ),
+        Product(
+            name = "상품3",
+            imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
+            price = 15_000,
+        ),
+        Product(
+            name = "상품4",
+            imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
+            price = 21_000,
+        ),
+        Product(
+            name = "상품5",
+            imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
+            price = 4_500,
+        ),
+        Product(
+            name = "상품6",
+            imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
+            price = 30_000,
+        ),
+        Product(
+            name = "상품7",
+            imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
+            price = 2_000,
+        ),
+        Product(
+            name = "상품8",
+            imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
+            price = 20_000,
+        ),
+        Product(
+            name = "상품9",
+            imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
+            price = 50_000,
+        ),
+        Product(
+            name = "상품10",
+            imageUrl = "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
+            price = 100_000,
+        ),
+    )
 }
