@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 
 @Composable
@@ -33,7 +34,7 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    val products = Cart.productItemDummyList
+    val products = DummyProduct.productDummyList
 
     ProductListScreen(
         products = products,

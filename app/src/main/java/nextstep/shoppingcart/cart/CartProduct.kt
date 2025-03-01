@@ -33,7 +33,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.ProductImage
 import nextstep.shoppingcart.component.QuantityController
 import nextstep.shoppingcart.data.CartItem
-import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.ui.theme.Gray40
 
 @Composable
@@ -71,7 +71,9 @@ fun CartProduct(
                 )
                 IconButton(
                     onClick = { onDeleteButtonClick(cartItem) },
-                    modifier = Modifier.size(24.dp).testTag("delete_button"),
+                    modifier = Modifier
+                        .size(24.dp)
+                        .testTag("delete_button"),
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Close,
@@ -121,11 +123,7 @@ fun CartProduct(
 @Composable
 private fun CartProductPreview() {
     val cartItem = CartItem(
-        product = Product(
-            name = "Product Name",
-            price = 1000,
-            imageUrl = "",
-        ),
+        product = DummyProduct.product1,
         count = 1
     )
 

@@ -21,7 +21,7 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.CtaButton
 import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.CartItem
-import nextstep.shoppingcart.data.Product
+import nextstep.shoppingcart.data.DummyProduct
 
 @Composable
 fun CartScreen(
@@ -75,15 +75,9 @@ fun CartScreen(
 @Preview(showBackground = true)
 @Composable
 private fun CartScreenPreview() {
-    Cart.addOne(
-        Product(name = "상품1", price = 1000, imageUrl = "https://example.com/image1.jpg")
-    )
-    Cart.addOne(
-        Product(name = "상품2", price = 1000, imageUrl = "https://example.com/image1.jpg")
-    )
-    Cart.addOne(
-        Product(name = "상품3", price = 1000, imageUrl = "https://example.com/image1.jpg")
-    )
+    Cart.addOne(DummyProduct.product1)
+    Cart.addOne(DummyProduct.product2)
+    Cart.addOne(DummyProduct.product3)
 
     CartScreen(
         cartItems = Cart.items,

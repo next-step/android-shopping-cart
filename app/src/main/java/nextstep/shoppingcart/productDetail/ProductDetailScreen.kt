@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.CtaButton
 import nextstep.shoppingcart.component.ProductImage
+import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.Black33
 import nextstep.shoppingcart.ui.theme.Blue50
@@ -101,11 +102,7 @@ fun ProductDetailScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductDetailScreenPreview() {
-    val product = Product(
-        name = "PET보틀-원형(500ml)",
-        price = 10000,
-        imageUrl = "",
-    )
+    val product = DummyProduct.product1
 
     ProductDetailScreen(
         product = product,

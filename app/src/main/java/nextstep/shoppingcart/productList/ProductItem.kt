@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.component.ProductImage
+import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 
 
@@ -59,11 +60,7 @@ fun ProductItem(
 @Preview(showBackground = true)
 @Composable
 private fun ProductItemPreview() {
-    val product = Product(
-        name = "상품이름",
-        imageUrl = "",
-        price = 10000,
-    )
+    val product = DummyProduct.product1
 
     ProductItem(
         product = product,

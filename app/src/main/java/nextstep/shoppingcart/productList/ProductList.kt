@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 
 @Composable
@@ -40,13 +41,7 @@ fun ProductList(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListPreview() {
-    val products = List(10) {
-        Product(
-            "상품이름",
-            "",
-            10_000,
-        )
-    }
+    val products = DummyProduct.productDummyList
 
     ProductList(
         products = products,
