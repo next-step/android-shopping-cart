@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -36,8 +37,8 @@ class ProductDetailActivity : ComponentActivity() {
                     onBackButtonClick = {
                         finish()
                     },
-                    onAddCartClick = { _ ->
-                        // TODO - 장바구니 담기
+                    onAddCartClick = { product ->
+                        Cart.addOne(product)
                     },
                 )
             }
