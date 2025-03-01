@@ -38,9 +38,9 @@ import nextstep.shoppingcart.ui.theme.Gray40
 @Composable
 fun CartProduct(
     cartItem: CartItem,
-    onDeleteButtonClick: () -> Unit,
-    onMinusButtonClick: () -> Unit,
-    onPlusButtonClick: () -> Unit,
+    onDeleteButtonClick: (CartItem) -> Unit,
+    onMinusButtonClick: (CartItem) -> Unit,
+    onPlusButtonClick: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -69,7 +69,7 @@ fun CartProduct(
                     overflow = TextOverflow.Ellipsis
                 )
                 IconButton(
-                    onClick = onDeleteButtonClick,
+                    onClick = { onDeleteButtonClick(cartItem) },
                     modifier = Modifier.size(24.dp),
                 ) {
                     Icon(
@@ -102,14 +102,13 @@ fun CartProduct(
                     )
                     QuantityController(
                         count = cartItem.count,
-                        onMinusClick = onMinusButtonClick,
-                        onPlusClick = onPlusButtonClick,
+                        onMinusClick = { onMinusButtonClick(cartItem) },
+                        onPlusClick = { onPlusButtonClick(cartItem) },
                         modifier = Modifier
                             .align(Alignment.End)
                     )
                 }
             }
-
         }
     }
 }
@@ -125,7 +124,6 @@ private fun CartProductPreview() {
         ),
         count = 1
     )
-
 
     CartProduct(
         cartItem = cartItem,
