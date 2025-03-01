@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -21,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.component.CtaButton
 import nextstep.shoppingcart.component.ProductImage
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.Black33
@@ -85,23 +87,13 @@ fun ProductDetailScreen(
                 )
             }
             Spacer(modifier = Modifier.weight(1f))
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth(),
+            CtaButton(
+                text = "장바구니 담기",
                 onClick = { onAddCartClick(product) },
-                shape = RectangleShape,
-                colors = ButtonDefaults.elevatedButtonColors(
-                    containerColor = Blue50,
-                )
-            ) {
-                Text(
-                    text = "장바구니 담기",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    fontWeight = FontWeight.W700,
-                    modifier = Modifier.padding(15.dp),
-                )
-            }
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(54.dp),
+            )
         }
     }
 }
