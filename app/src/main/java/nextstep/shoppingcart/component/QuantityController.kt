@@ -14,8 +14,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun QuantityController(
@@ -36,6 +38,8 @@ fun QuantityController(
         ) {
             Text(
                 text = "-",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.W700,
             )
         }
         Box(
@@ -44,6 +48,8 @@ fun QuantityController(
         ) {
             Text(
                 text = count.toString(),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.W400,
             )
         }
         TextButton(
@@ -55,6 +61,8 @@ fun QuantityController(
         ) {
             Text(
                 text = "+",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.W700,
             )
         }
     }
