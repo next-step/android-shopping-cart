@@ -107,16 +107,16 @@ private fun CartContent(
 @Composable
 private fun CartContentPreview() {
     CartContent(
-        cartItems = listOf(
-            CartItem(product = products[0], count = 2),
-            CartItem(product = products[1], count = 3),
-            CartItem(product = products[2], count = 1),
-            CartItem(product = products[3], count = 1),
-            CartItem(product = products[4], count = 1),
-            CartItem(product = products[5], count = 1),
-            CartItem(product = products[6], count = 1),
-        ),
-        totalPrice = 40000,
-        modifier = Modifier
+        cartItems = buildList {
+            products.forEach { product ->
+                add(CartItem(product, 1))
+            }
+        },
+        totalPrice = products.sumOf { it.price },
+        modifier = Modifier,
+        onClickOrder = { },
+        onClickRemoveOne = { },
+        onClickAddOne = { },
+        onClickRemoveAll = { }
     )
 }
