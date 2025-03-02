@@ -17,6 +17,9 @@ class CartActivity : ComponentActivity() {
                     onClickBack = {
                         finish()
                     },
+                    onClickOrder = {
+
+                    }
                 )
             }
         }
