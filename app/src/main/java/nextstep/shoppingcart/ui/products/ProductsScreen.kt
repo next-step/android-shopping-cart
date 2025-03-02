@@ -36,11 +36,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.components.ShoppingCartCounter
+import nextstep.shoppingcart.ui.components.ShoppingCartImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.ui.theme.grey10
 import nextstep.shoppingcart.ui.theme.grey40
@@ -133,14 +133,14 @@ private fun ProductItem(
             .clickable(onClick = onClick)
     ) {
         Box {
-            AsyncImage(
-                model = product.imageUrl,
+            ShoppingCartImage(
+                imageUrl = product.imageUrl,
                 contentDescription = "상품 이미지",
+                placeholder = painterResource(R.drawable.ic_launcher_background),
+                error = painterResource(R.drawable.ic_launcher_background),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(1f),
-                placeholder = painterResource(R.drawable.ic_launcher_background),
-                error = painterResource(R.drawable.ic_launcher_background)
+                    .aspectRatio(1f)
             )
             Icon(
                 painter = painterResource(R.drawable.ic_add),
@@ -190,14 +190,14 @@ private fun ProductItem(
             .clickable(onClick = onClick)
     ) {
         Box {
-            AsyncImage(
-                model = product.imageUrl,
+            ShoppingCartImage(
+                imageUrl = product.imageUrl,
                 contentDescription = "상품 이미지",
+                placeholder = painterResource(R.drawable.ic_launcher_background),
+                error = painterResource(R.drawable.ic_launcher_background),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(1f),
-                placeholder = painterResource(R.drawable.ic_launcher_background),
-                error = painterResource(R.drawable.ic_launcher_background)
+                    .aspectRatio(1f)
             )
             ShoppingCartCounter(
                 count = cartCount,
