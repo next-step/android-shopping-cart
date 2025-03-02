@@ -67,11 +67,11 @@ fun CartScreen(
 private fun CartContent(
     cartItems: List<CartItem>,
     totalPrice: Int,
+    onClickOrder: () -> Unit,
+    onClickRemoveOne: (CartItem) -> Unit,
+    onClickAddOne: (CartItem) -> Unit,
+    onClickRemoveAll: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
-    onClickOrder: () -> Unit = { },
-    onClickRemoveOne: (CartItem) -> Unit = { },
-    onClickAddOne: (CartItem) -> Unit = { },
-    onClickRemoveAll: (CartItem) -> Unit = { },
 ) {
     Box(
         modifier = modifier

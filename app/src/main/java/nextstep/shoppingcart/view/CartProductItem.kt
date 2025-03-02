@@ -35,10 +35,10 @@ import nextstep.shoppingcart.utils.formatPrice
 @Composable
 fun CartProductItem(
     cartItem: CartItem,
+    onClickRemoveAll: () -> Unit,
+    onClickAddOne: () -> Unit,
+    onClickRemoveOne: () -> Unit,
     modifier: Modifier = Modifier,
-    onClickRemoveAll: () -> Unit = { },
-    onClickAddOne: () -> Unit = { },
-    onClickRemoveOne: () -> Unit = { }
 ) {
     Card(
         shape = RoundedCornerShape(4.dp),
@@ -144,6 +144,9 @@ private fun CartProductItemPreview() {
         cartItem = CartItem(
             product = nextstep.shoppingcart.model.Product.mock,
             count = 2
-        )
+        ),
+        onClickRemoveAll = { },
+        onClickAddOne = { },
+        onClickRemoveOne = { }
     )
 }
