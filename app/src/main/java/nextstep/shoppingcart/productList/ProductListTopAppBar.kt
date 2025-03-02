@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListTopAppBar(
-    onCartButtonClick: () -> Unit = {},
+    onCartButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
@@ -44,5 +44,7 @@ fun ProductListTopAppBar(
 @Preview
 @Composable
 private fun ProductListTopAppBarPreview() {
-    ProductListTopAppBar()
+    ProductListTopAppBar(
+        onCartButtonClick = {},
+    )
 }

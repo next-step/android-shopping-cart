@@ -14,13 +14,18 @@ class ProductDetailScreenTest {
     fun 상품의_이름이_테스트가_노출되어야_한다() {
         // given
         val product = Product(
+            id = 1,
             name = "테스트",
             price = 10000,
             imageUrl = ""
         )
 
         composeTestRule.setContent {
-            ProductDetailScreen(product = product)
+            ProductDetailScreen(
+                product = product,
+                onBackButtonClick = {},
+                onAddCartClick = {},
+            )
         }
 
         // then
@@ -30,16 +35,21 @@ class ProductDetailScreenTest {
     }
 
     @Test
-    fun 상품의_금액이_10_000원이_노출되어야_한다() {
+    fun 상품의_금액이_포맷에_맞게_노출되어야_한다() {
         // given
         val product = Product(
+            id = 1,
             name = "테스트",
             price = 10000,
             imageUrl = ""
         )
 
         composeTestRule.setContent {
-            ProductDetailScreen(product = product)
+            ProductDetailScreen(
+                product = product,
+                onBackButtonClick = {},
+                onAddCartClick = {},
+            )
         }
 
         // then
@@ -52,13 +62,18 @@ class ProductDetailScreenTest {
     fun 버튼의_이름이_장바구니_담기_로_노출되어야_한다() {
         // given
         val product = Product(
+            id = 1,
             name = "테스트",
             price = 10000,
             imageUrl = ""
         )
 
         composeTestRule.setContent {
-            ProductDetailScreen(product = product)
+            ProductDetailScreen(
+                product = product,
+                onBackButtonClick = {},
+                onAddCartClick = {},
+            )
         }
 
         // then

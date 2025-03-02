@@ -13,7 +13,9 @@ class ProductDetailTopAppBarTest {
     fun TopAppBar의_title이_상품_상세_이어야_한다() {
         // given
         composeTestRule.setContent {
-            ProductDetailTopAppBar()
+            ProductDetailTopAppBar(
+                onBackButtonClick = {},
+            )
         }
 
         // then

@@ -14,6 +14,7 @@ class ProductItemTest {
     fun product의_name이_상품일_때_상품_텍스트가_노출되어야_한다() {
         // given
         val product = Product(
+            id = 1,
             name = "상품",
             price = 10000,
             imageUrl = ""
@@ -21,7 +22,10 @@ class ProductItemTest {
 
         // when
         composeTestRule.setContent {
-            ProductItem(product)
+            ProductItem(
+                product = product,
+                onClick = {}
+            )
         }
 
         // then
@@ -34,6 +38,7 @@ class ProductItemTest {
     fun product의_price가_10000일_때_10_000원_텍스트가_노출되어야_한다() {
         // given
         val product = Product(
+            id = 1,
             name = "상품",
             price = 10000,
             imageUrl = ""
@@ -41,7 +46,10 @@ class ProductItemTest {
 
         // when
         composeTestRule.setContent {
-            ProductItem(product)
+            ProductItem(
+                product = product,
+                onClick = {}
+            )
         }
 
         // then

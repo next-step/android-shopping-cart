@@ -13,7 +13,9 @@ class ProductListTopAppBarTest {
     fun ProductListTopAppBar의_title이_상품_목록_이어야_한다() {
         // given
         composeTestRule.setContent {
-            ProductListTopAppBar()
+            ProductListTopAppBar(
+                onCartButtonClick = {},
+            )
         }
 
         // then

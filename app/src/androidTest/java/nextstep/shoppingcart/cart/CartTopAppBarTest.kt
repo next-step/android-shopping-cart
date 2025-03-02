@@ -13,7 +13,9 @@ class CartTopAppBarTest {
     fun TopAppBar의_title이_장바구니_이어야_한다() {
         // given
         composeTestRule.setContent {
-            CartTopAppBar()
+            CartTopAppBar(
+                onBackButtonClick = {},
+            )
         }
 
         // then

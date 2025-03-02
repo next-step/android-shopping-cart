@@ -6,13 +6,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 
 @Composable
 fun ProductListScreen(
-    products: List<Product> = emptyList(),
-    onCartButtonClick: () -> Unit = {},
-    onItemClick: (Product) -> Unit = {},
+    products: List<Product>,
+    onCartButtonClick: () -> Unit,
+    onItemClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -32,13 +34,11 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    val products = List(10) {
-        Product(
-            "상품이름",
-            "",
-            10_000,
-        )
-    }
+    val products = DummyProduct.productDummyList
 
-    ProductListScreen(products)
+    ProductListScreen(
+        products = products,
+        onCartButtonClick = {},
+        onItemClick = {},
+    )
 }

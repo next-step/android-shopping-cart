@@ -6,4 +6,5 @@
     <string name="product_detail">상품 상세</string>
     <string name="title_activity_cart">CartActivity</string>
     <string name="cart">장바구니</string>
+    <string name="order">주문하기(%,d원)</string>
 </resources>

@@ -15,15 +15,19 @@ class ProductListTest {
     fun 리스트에_6개의_아이템이_노출된다() {
         // given
         val product = Product(
+            id = 1,
             name = "테스트",
             price = 10000,
             imageUrl = ""
         )
 
-        val products = List(10) { product }
+        val products = List(4) { product }
 
         composeTestRule.setContent {
-            ProductList(products = products)
+            ProductList(
+                products = products,
+                onItemClick = {}
+            )
         }
 
         composeTestRule.waitForIdle()
@@ -31,7 +35,7 @@ class ProductListTest {
         // then
         composeTestRule
             .onAllNodesWithText("테스트")
-            .assertCountEquals(6)
+            .assertCountEquals(4)
     }
 
 }

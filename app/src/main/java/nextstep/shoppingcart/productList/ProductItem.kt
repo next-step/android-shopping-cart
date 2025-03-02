@@ -8,13 +8,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.R
+import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.component.ProductImage
+import nextstep.shoppingcart.component.ProductName
+import nextstep.shoppingcart.component.ProductPrice
+import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 
 
@@ -22,7 +24,7 @@ import nextstep.shoppingcart.data.Product
 fun ProductItem(
     product: Product,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit,
 ) {
     Surface(
         modifier = modifier,
@@ -36,21 +38,20 @@ fun ProductItem(
                 modifier = Modifier
                     .fillMaxWidth(),
             )
-            Text(
-                text = product.name,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-                fontWeight = FontWeight.W700,
+            ProductName(
+                name = product.name,
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .padding(horizontal = 4.dp)
                     .fillMaxWidth(),
+                fontSize = 16.sp,
             )
-            Text(
-                text = stringResource(R.string.price_comma, product.price),
+            ProductPrice(
+                price = product.price,
                 modifier = Modifier
                     .padding(horizontal = 4.dp)
                     .fillMaxWidth(),
+                fontSize = 16.sp
             )
         }
     }
@@ -59,13 +60,10 @@ fun ProductItem(
 @Preview(showBackground = true)
 @Composable
 private fun ProductItemPreview() {
-    val product = Product(
-        name = "상품이름",
-        imageUrl = "",
-        price = 10000,
-    )
+    val product = DummyProduct.product1
 
     ProductItem(
         product = product,
+        onClick = {},
     )
 }

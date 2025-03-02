@@ -7,20 +7,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {
-    private val productImage: String by lazy {
-        intent.getStringExtra(PRODUCT_IMAGE) ?: ""
-    }
+    private val product: Product by lazy {
+        val productId = intent.getIntExtra(PRODUCT_ID, -1)
 
-    private val productName: String by lazy {
-        intent.getStringExtra(PRODUCT_NAME) ?: ""
-    }
+        if (productId == -1) throw IllegalArgumentException("productId is required")
 
-    private val productPrice: Int by lazy {
-        intent.getIntExtra(PRODUCT_PRICE, 0)
+        DummyProduct.productDummyList.firstOrNull { product ->
+            product.id == productId
+        } ?: throw IllegalArgumentException("product is not find")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,16 +28,12 @@ class ProductDetailActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 ProductDetailScreen(
-                    product = Product(
-                        name = productName,
-                        price = productPrice,
-                        imageUrl = productImage,
-                    ),
+                    product = product,
                     onBackButtonClick = {
                         finish()
                     },
-                    onAddCartClick = { _ ->
-                        // TODO - 장바구니 담기
+                    onAddCartClick = { product ->
+                        Cart.addOne(product)
                     },
                 )
             }
@@ -45,15 +41,11 @@ class ProductDetailActivity : ComponentActivity() {
     }
 
     companion object {
-        const val PRODUCT_IMAGE = "product_image"
-        const val PRODUCT_NAME = "product_name"
-        const val PRODUCT_PRICE = "product_price"
+        const val PRODUCT_ID = "product_id"
 
         fun start(context: Context, product: Product) {
             context.startActivity(Intent(context, ProductDetailActivity::class.java).apply {
-                putExtra(PRODUCT_IMAGE, product.imageUrl)
-                putExtra(PRODUCT_NAME, product.name)
-                putExtra(PRODUCT_PRICE, product.price)
+                putExtra(PRODUCT_ID, product.id)
             })
         }
     }
@@ -64,11 +56,9 @@ class ProductDetailActivity : ComponentActivity() {
 private fun ProductDetailActivityPreview() {
     ShoppingCartTheme {
         ProductDetailScreen(
-            product = Product(
-                name = "상품",
-                price = 10000,
-                imageUrl = "",
-            ),
+            product = DummyProduct.product1,
+            onBackButtonClick = {},
+            onAddCartClick = {},
         )
     }
 }

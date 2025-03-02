@@ -6,6 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.cart.CartActivity
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.data.CartItem
+import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 import nextstep.shoppingcart.productDetail.ProductDetailActivity
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -13,13 +16,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 class ProductListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val products = List(10) {
-            Product(
-                "상품이름",
-                "https://images.mypetlife.co.kr/content/uploads/2023/03/30102633/AdobeStock_297354202-1024x683.jpeg",
-                10_000,
-            )
-        }
+        val products = DummyProduct.productDummyList
 
         setContent {
             ShoppingCartTheme {
@@ -40,15 +37,13 @@ class ProductListActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 private fun ProductListActivityPreview() {
-    val products = List(10) {
-        Product(
-            "상품이름",
-            "",
-            10_000,
-        )
-    }
+    val products = DummyProduct.productDummyList
 
     ShoppingCartTheme {
-        ProductListScreen(products = products)
+        ProductListScreen(
+            products = products,
+            onItemClick = {},
+            onCartButtonClick = {},
+        )
     }
 }
