@@ -68,7 +68,7 @@ class ProductsScreenTest {
         // then
         assert(cart.items.size == 1)
         assert(cart.items[0].product == fakeProducts[0])
-        assert(cart.items[0].count == 1)
+        assert(cart.items[0].count.value == 1)
     }
 
     @Test
@@ -95,7 +95,7 @@ class ProductsScreenTest {
         // then
         assert(cart.items.size == 1)
         assert(cart.items[0].product == fakeProducts[0])
-        assert(cart.items[0].count == 2)
+        assert(cart.items[0].count.value == 2)
     }
 
 

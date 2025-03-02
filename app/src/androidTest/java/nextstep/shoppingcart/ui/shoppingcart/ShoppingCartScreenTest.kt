@@ -4,6 +4,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import nextstep.shoppingcart.model.CartCount
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import org.junit.Rule
@@ -25,7 +26,7 @@ internal class ShoppingCartScreenTest {
                     price = 50_000L,
                     imageUrl = "https://picsum.photos/200"
                 ),
-                count = 1
+                count = CartCount.INIT_COUNT
             ),
             CartItem(
                 Product(
@@ -34,7 +35,7 @@ internal class ShoppingCartScreenTest {
                     price = 49_800L,
                     imageUrl = "https://picsum.photos/200"
                 ),
-                count = 1
+                count = CartCount.INIT_COUNT
             )
         )
         composeTestRule.setContent {
@@ -60,7 +61,7 @@ internal class ShoppingCartScreenTest {
             price = 10_000L,
             imageUrl = "https://picsum.photos/200"
         )
-        val cartItems = mutableListOf(CartItem(product = item, count = 3))
+        val cartItems = mutableListOf(CartItem(product = item, count = CartCount(3)))
         val onRemoveAllProductClick: (Product) -> Unit = { product ->
             cartItems.removeIf { it.product == product }
         }

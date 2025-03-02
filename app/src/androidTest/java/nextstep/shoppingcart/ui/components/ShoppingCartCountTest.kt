@@ -3,10 +3,11 @@ package nextstep.shoppingcart.ui.components
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
+import nextstep.shoppingcart.model.CartCount
 import org.junit.Rule
 import org.junit.Test
 
-class ShoppingCartCounterTest {
+class ShoppingCartCountTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -14,12 +15,12 @@ class ShoppingCartCounterTest {
     @Test
     fun 더하기_버튼을_누르면_수가_증가한다() {
         // given
-        var count = 1
+        var cartCount = CartCount.INIT_COUNT
 
         composeTestRule.setContent {
             ShoppingCartCounter(
-                count = count,
-                onAddClick = { count++ },
+                counter = cartCount,
+                onAddClick = { cartCount++ },
                 onRemoveClick = {},
             )
         }
@@ -28,21 +29,19 @@ class ShoppingCartCounterTest {
         composeTestRule.onNodeWithContentDescription("더하기").performClick()
 
         // then
-        assert(count == 2)
+        assert(cartCount.value == 2)
     }
 
     @Test
     fun 빼기_버튼을_누르면_수가_감소한다() {
         // given
-        var count = 3
+        var counter = CartCount(3)
 
         composeTestRule.setContent {
             ShoppingCartCounter(
-                count = count,
+                counter = counter,
                 onAddClick = {},
-                onRemoveClick = {
-                    if (count > 0) count--
-                }
+                onRemoveClick = { counter-- }
             )
         }
 
@@ -50,21 +49,19 @@ class ShoppingCartCounterTest {
         composeTestRule.onNodeWithContentDescription("빼기").performClick()
 
         // then
-        assert(count == 2)
+        assert(counter.value == 2)
     }
 
     @Test
-    fun 수가_0이면_빼기_버튼을_눌러도_감소하지_않는다() {
+    fun 수가_1이면_빼기_버튼을_눌러도_감소하지_않는다() {
         // given
-        var count = 0
+        var counter = CartCount.INIT_COUNT
 
         composeTestRule.setContent {
             ShoppingCartCounter(
-                count = count,
+                counter = CartCount.INIT_COUNT,
                 onAddClick = {},
-                onRemoveClick = {
-                    if (count > 0) count--
-                }
+                onRemoveClick = { counter-- },
             )
         }
 
@@ -72,6 +69,6 @@ class ShoppingCartCounterTest {
         composeTestRule.onNodeWithContentDescription("빼기").performClick()
 
         // then
-        assert(count == 0)
+        assert(counter.value == 1)
     }
 }

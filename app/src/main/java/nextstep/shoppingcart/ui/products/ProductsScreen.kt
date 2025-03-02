@@ -37,6 +37,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.CartCount
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.components.ShoppingCartCounter
@@ -69,17 +70,17 @@ fun ProductsScreen(
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
             items(products) { product ->
-                val count = cartItems.find { it.product == product }?.count ?: 0
-                if (count == 0) {
-                    ProductItem(
+                val cartItem = cartItems.find { it.product == product }
+                when {
+                    cartItem == null -> ProductItem(
                         product = product,
                         onAddClick = { onProductAddClick(product) },
                         onClick = { onProductClick(product) },
                     )
-                } else {
-                    ProductItem(
+
+                    else -> ProductItem(
                         product = product,
-                        cartCount = count,
+                        counter = cartItem.count,
                         onAddClick = { onProductAddClick(product) },
                         onRemoveClick = { onProductRemoveClick(product) },
                         onClick = { onProductClick(product) },
@@ -178,7 +179,7 @@ private fun ProductItem(
 @Composable
 private fun ProductItem(
     product: Product,
-    cartCount: Int,
+    counter: CartCount,
     onAddClick: () -> Unit,
     onRemoveClick: () -> Unit,
     onClick: () -> Unit,
@@ -200,7 +201,7 @@ private fun ProductItem(
                     .aspectRatio(1f)
             )
             ShoppingCartCounter(
-                count = cartCount,
+                counter = counter,
                 onAddClick = onAddClick,
                 onRemoveClick = onRemoveClick,
                 modifier = Modifier
@@ -246,7 +247,7 @@ private fun ProductsScreenPreview() {
             },
             onProductClick = {},
             onShoppingCartActionClick = {},
-            cartItems = listOf(CartItem(Product(1L, "상품1", 10000L, ""), 1)),
+            cartItems = listOf(CartItem(Product(1L, "상품1", 10000L, ""), CartCount.INIT_COUNT)),
             onProductAddClick = {},
             onProductRemoveClick = {}
         )
@@ -297,7 +298,7 @@ private fun ProductItemPreview() {
         ),
         onClick = {},
         onAddClick = {},
-        cartCount = 5,
+        counter = CartCount(5),
         onRemoveClick = {},
         modifier = Modifier.width(200.dp)
     )

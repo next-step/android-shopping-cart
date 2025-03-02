@@ -12,10 +12,10 @@ object Cart {
     fun addOne(product: Product): List<CartItem> {
         val item = items.find { it.product == product }
         if (item == null) {
-            items.add(CartItem(product, 1))
+            items.add(CartItem(product, CartCount.INIT_COUNT))
         } else {
             val index = items.indexOf(item)
-            items[index] = item.copy(count = item.count + 1)
+            items[index] = item.addOne()
         }
         return items
     }
@@ -23,11 +23,11 @@ object Cart {
     fun removeOne(product: Product): List<CartItem> {
         items.find { it.product == product }
             ?.let { item ->
-                if (item.count > 1) {
-                    val index = items.indexOf(item)
-                    items[index] = item.copy(count = item.count - 1)
-                } else {
+                if (item.count == CartCount.INIT_COUNT) {
                     items.remove(item)
+                } else {
+                    val index = items.indexOf(item)
+                    items[index] = item.removeOne()
                 }
             }
         return items

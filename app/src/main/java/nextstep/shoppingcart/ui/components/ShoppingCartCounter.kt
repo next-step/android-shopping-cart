@@ -16,10 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.CartCount
 
 @Composable
 fun ShoppingCartCounter(
-    count: Int,
+    counter: CartCount,
     onAddClick: () -> Unit,
     onRemoveClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -37,7 +38,7 @@ fun ShoppingCartCounter(
         )
 
         Text(
-            text = count.toString(),
+            text = counter.value.toString(),
             fontSize = 22.sp,
             modifier = Modifier
                 .size(42.dp)
@@ -57,8 +58,9 @@ fun ShoppingCartCounter(
 @Composable
 private fun ShoppingCartCounterPreview() {
     ShoppingCartCounter(
-        count = 1,
+        counter = CartCount.INIT_COUNT,
         onAddClick = {},
         onRemoveClick = {},
     )
 }
+
