@@ -42,8 +42,7 @@ fun CartProductItem(
 ) {
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = modifier
-            .fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         colors = CardColors(
             containerColor = Color.White,
             contentColor = Color.Black,
@@ -52,19 +51,13 @@ fun CartProductItem(
         ),
         border = BorderStroke(1.dp, Color.Gray)
     ) {
-        Column(
-            modifier = Modifier.padding(18.dp)
-        ) {
+        Column(modifier = Modifier.padding(18.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = cartItem.product.name,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
+                CartProductName(
+                    name = cartItem.product.name,
                     modifier = Modifier.weight(1f)
                 )
                 IconButton(
@@ -75,64 +68,97 @@ fun CartProductItem(
                 }
             }
 
-            Spacer(
-                modifier = Modifier.size(6.dp)
-            )
+            Spacer(modifier = Modifier.size(6.dp))
 
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                AsyncImage(
-                    model = cartItem.product.imageUrl,
-                    contentDescription = "product image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(width = 136.dp, height = 84.dp)
-                        .align(Alignment.TopStart)
+            Box(modifier = Modifier.fillMaxWidth()) {
+                CartProductImage(
+                    imageUrl = cartItem.product.imageUrl,
+                    modifier = Modifier.align(Alignment.TopStart)
                 )
-
-
-                Text(
-                    text = (cartItem.product.price * cartItem.count).formatPrice(),
-                    fontSize = 16.sp,
+                CartProductPrice(
+                    price = cartItem.product.price * cartItem.count,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(top = 18.dp)
-                        .testTag("price")
                 )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
+                CartProductCount(
+                    count = cartItem.count,
+                    onClickAddOne = onClickAddOne,
+                    onClickRemoveOne = onClickRemoveOne,
                     modifier = Modifier.align(Alignment.BottomEnd)
-                ) {
-                    IconButton(
-                        onClick = onClickRemoveOne,
-                        modifier = Modifier.size(42.dp)
-                    ) {
-                        Text(
-                            text = "-",
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                    Text(
-                        text = cartItem.count.toString(),
-                        fontSize = 22.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(horizontal = 18.dp)
-                    )
-                    IconButton(
-                        onClick = onClickAddOne,
-                        modifier = Modifier.size(42.dp)
-                    ) {
-                        Text(
-                            text = "+",
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold,
-                        )
-                    }
-                }
+                )
             }
+        }
+    }
+}
+
+@Composable
+private fun CartProductName(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = name,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+        modifier = modifier
+    )
+}
+
+@Composable
+private fun CartProductImage(imageUrl: String, modifier: Modifier = Modifier) {
+    AsyncImage(
+        model = imageUrl,
+        contentDescription = "product image",
+        contentScale = ContentScale.Crop,
+        modifier = modifier.size(width = 136.dp, height = 84.dp)
+    )
+}
+
+@Composable
+private fun CartProductPrice(price: Int, modifier: Modifier = Modifier) {
+    Text(
+        text = price.formatPrice(),
+        fontSize = 16.sp,
+        modifier = modifier.testTag("price")
+    )
+}
+
+@Composable
+private fun CartProductCount(
+    count: Int,
+    onClickAddOne: () -> Unit,
+    onClickRemoveOne: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+    ) {
+        IconButton(
+            onClick = onClickRemoveOne,
+            modifier = Modifier.size(42.dp)
+        ) {
+            Text(
+                text = "-",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+        Text(
+            text = count.toString(),
+            fontSize = 22.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 18.dp)
+        )
+        IconButton(
+            onClick = onClickAddOne,
+            modifier = Modifier.size(42.dp)
+        ) {
+            Text(
+                text = "+",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold,
+            )
         }
     }
 }
