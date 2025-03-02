@@ -285,7 +285,6 @@ private fun ProductItemPreview(
     )
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun ProductItemPreview() {
@@ -303,4 +302,3 @@ private fun ProductItemPreview() {
         modifier = Modifier.width(200.dp)
     )
 }
-
