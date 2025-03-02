@@ -1,7 +1,9 @@
 package nextstep.shoppingcart.ui.products
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -20,7 +24,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -30,9 +36,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.CartCount
+import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.components.ShoppingCartCounter
+import nextstep.shoppingcart.ui.components.ShoppingCartImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.ui.theme.grey10
 import nextstep.shoppingcart.ui.theme.grey40
@@ -40,7 +49,10 @@ import nextstep.shoppingcart.ui.theme.grey40
 @Composable
 fun ProductsScreen(
     products: List<Product>,
+    cartItems: List<CartItem>,
     onProductClick: (Product) -> Unit,
+    onProductAddClick: (Product) -> Unit,
+    onProductRemoveClick: (Product) -> Unit,
     onShoppingCartActionClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -58,10 +70,22 @@ fun ProductsScreen(
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
             items(products) { product ->
-                ProductItem(
-                    product = product,
-                    onClick = { onProductClick(product) },
-                )
+                val cartItem = cartItems.find { it.product == product }
+                when {
+                    cartItem == null -> ProductItem(
+                        product = product,
+                        onAddClick = { onProductAddClick(product) },
+                        onClick = { onProductClick(product) },
+                    )
+
+                    else -> ProductItem(
+                        product = product,
+                        counter = cartItem.count,
+                        onAddClick = { onProductAddClick(product) },
+                        onRemoveClick = { onProductRemoveClick(product) },
+                        onClick = { onProductClick(product) },
+                    )
+                }
             }
         }
     }
@@ -100,6 +124,7 @@ private fun ProductsTopAppBar(
 @Composable
 private fun ProductItem(
     product: Product,
+    onAddClick: () -> Unit,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -108,15 +133,84 @@ private fun ProductItem(
             .fillMaxWidth()
             .clickable(onClick = onClick)
     ) {
-        AsyncImage(
-            model = product.imageUrl,
-            contentDescription = "상품 이미지",
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f),
-            placeholder = painterResource(R.drawable.ic_launcher_background),
-            error = painterResource(R.drawable.ic_launcher_background)
+        Box {
+            ShoppingCartImage(
+                imageUrl = product.imageUrl,
+                contentDescription = "상품 이미지",
+                placeholder = painterResource(R.drawable.ic_launcher_background),
+                error = painterResource(R.drawable.ic_launcher_background),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+            )
+            Icon(
+                painter = painterResource(R.drawable.ic_add),
+                contentDescription = "상품 첫 추가",
+                modifier = Modifier
+                    .padding(12.dp)
+                    .size(42.dp)
+                    .background(color = White, shape = CircleShape)
+                    .clickable(onClick = onAddClick)
+                    .padding(8.dp)
+                    .align(Alignment.BottomEnd)
+            )
+        }
+        Text(
+            text = product.name,
+            color = grey40,
+            fontSize = 16.sp,
+            maxLines = 1,
+            fontWeight = FontWeight.W700,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(),
         )
+        Text(
+            text = stringResource(R.string.all_price_format).format(product.price),
+            color = grey40,
+            fontSize = 16.sp,
+            maxLines = 1,
+            fontWeight = FontWeight.W400,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+private fun ProductItem(
+    product: Product,
+    counter: CartCount,
+    onAddClick: () -> Unit,
+    onRemoveClick: () -> Unit,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+    ) {
+        Box {
+            ShoppingCartImage(
+                imageUrl = product.imageUrl,
+                contentDescription = "상품 이미지",
+                placeholder = painterResource(R.drawable.ic_launcher_background),
+                error = painterResource(R.drawable.ic_launcher_background),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+            )
+            ShoppingCartCounter(
+                counter = counter,
+                onAddClick = onAddClick,
+                onRemoveClick = onRemoveClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 12.dp, start = 12.dp, end = 12.dp)
+                    .background(color = White, shape = RoundedCornerShape(4.dp))
+            )
+        }
         Text(
             text = product.name,
             color = grey40,
@@ -152,7 +246,10 @@ private fun ProductsScreenPreview() {
                 )
             },
             onProductClick = {},
-            onShoppingCartActionClick = {}
+            onShoppingCartActionClick = {},
+            cartItems = listOf(CartItem(Product(1L, "상품1", 10000L, ""), CartCount.INIT_COUNT)),
+            onProductAddClick = {},
+            onProductRemoveClick = {}
         )
     }
 }
@@ -183,6 +280,25 @@ private fun ProductItemPreview(
             imageUrl = "https://picsum.photos/200",
         ),
         onClick = {},
+        onAddClick = {},
+        modifier = Modifier.width(200.dp)
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductItemPreview() {
+    ProductItem(
+        Product(
+            id = 1L,
+            name = "상품",
+            price = 10000L,
+            imageUrl = "https://picsum.photos/200",
+        ),
+        onClick = {},
+        onAddClick = {},
+        counter = CartCount(5),
+        onRemoveClick = {},
         modifier = Modifier.width(200.dp)
     )
 }

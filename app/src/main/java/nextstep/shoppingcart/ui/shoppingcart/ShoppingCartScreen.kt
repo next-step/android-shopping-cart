@@ -23,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -34,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.model.CartCount
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.components.ShoppingCartButton
@@ -144,10 +144,9 @@ private fun CartItemDetailsSection(
             )
             Spacer(modifier = Modifier.height(8.dp))
             ShoppingCartCounter(
-                count = cartItem.count,
+                counter = cartItem.count,
                 onAddClick = onAddProductClick,
                 onRemoveClick = onRemoveProductClick,
-                modifier = Modifier.clip(RoundedCornerShape(4.dp))
             )
         }
     }
@@ -179,12 +178,13 @@ fun CartItemTitleSection(
 private fun CartItemPreview() {
     CartItemCard(
         cartItem = CartItem(
-            Product(
-                1L,
-                "[든든] 동원 스위트콘",
-                99_800L,
+            product = Product(
+                id = 1L,
+                name = "[든든] 동원 스위트콘",
+                price = 99_800L,
                 imageUrl = "https://picsum.photos/200"
-            ), 1
+            ),
+            count = CartCount.INIT_COUNT
         ),
         onAddProductClick = {},
         onRemoveProductClick = {},
@@ -199,12 +199,13 @@ private fun ShoppingCartScreenPreview() {
             onBackButtonClick = {},
             cartItems = List(10) {
                 CartItem(
-                    Product(
-                        it.toLong(),
-                        "[든든] 동원 스위트콘",
-                        99_800L,
+                    product = Product(
+                        id = it.toLong(),
+                        name = "[든든] 동원 스위트콘",
+                        price = 99_800L,
                         imageUrl = "https://picsum.photos/200"
-                    ), 1
+                    ),
+                    count = CartCount.INIT_COUNT
                 )
             },
             onAddProductClick = {},
@@ -214,4 +215,3 @@ private fun ShoppingCartScreenPreview() {
         )
     }
 }
-

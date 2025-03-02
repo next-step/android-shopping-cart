@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import nextstep.shoppingcart.FakeProductsRepository
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.productdetail.ProductDetailActivity
 import nextstep.shoppingcart.ui.products.ProductsScreen
@@ -21,6 +22,9 @@ class MainActivity : ComponentActivity() {
                     products = FakeProductsRepository.getProducts(),
                     onProductClick = { product -> handleProductClick(product) },
                     onShoppingCartActionClick = ::handleShoppingCartActionClick,
+                    cartItems = Cart.items,
+                    onProductAddClick = Cart::addOne,
+                    onProductRemoveClick = Cart::removeOne
                 )
             }
         }
