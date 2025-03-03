@@ -17,6 +17,7 @@ import nextstep.shoppingcart.model.CartItem
 @Composable
 fun CartContent(
     cartItems: List<CartItem>,
+    totalPrice: Int,
     onClickDeleteItemButton: (CartItem) -> Unit,
     onClickIncreaseCountButton: (CartItem) -> Unit,
     onClickDecreaseCountButton: (CartItem) -> Unit,
@@ -34,7 +35,7 @@ fun CartContent(
             }
         }
         CartOrderButton(
-            price = cartItems.totalPrice(),
+            price = totalPrice,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 10.dp),
@@ -47,12 +48,9 @@ fun CartContent(
 private fun CartContentPreview() {
     CartContent(
         cartItems = emptyList(),
+        totalPrice = 0,
         onClickDeleteItemButton = {},
         onClickIncreaseCountButton = {},
         onClickDecreaseCountButton = {},
     )
-}
-
-private fun List<CartItem>.totalPrice(): Int {
-    return this.sumOf { it.totalPrice }
 }

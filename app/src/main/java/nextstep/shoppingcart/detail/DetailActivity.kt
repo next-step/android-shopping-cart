@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
-import nextstep.shoppingcart.cart.data.Cart
+import nextstep.shoppingcart.cart.data.CartDataSourceImpl
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.getProduct
 import nextstep.shoppingcart.model.putProduct
@@ -26,7 +26,7 @@ class DetailActivity : ComponentActivity() {
                 if (product != null) {
                     DetailScreen(
                         product = product,
-                        cart = Cart,
+                        cart = CartDataSourceImpl,
                         popBackstack = { finish() },
                     )
                 } else {

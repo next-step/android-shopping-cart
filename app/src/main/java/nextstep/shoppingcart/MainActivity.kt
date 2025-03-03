@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import nextstep.shoppingcart.cart.CartActivity
+import nextstep.shoppingcart.cart.data.CartDataSourceImpl
 import nextstep.shoppingcart.catalog.CatalogScreen
 import nextstep.shoppingcart.detail.DetailActivity
 import nextstep.shoppingcart.model.Product
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
 
                 CatalogScreen(
                     products = products,
+                    cartDataSource = CartDataSourceImpl,
                     navigateToDetail = { startDetailActivity(it) },
                     navigateToCart = { startCartActivity() },
                 )
