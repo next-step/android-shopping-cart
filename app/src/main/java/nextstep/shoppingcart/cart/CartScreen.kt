@@ -21,6 +21,23 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun CartScreen(
+    onBackPressed: () -> Unit,
+    onButtonClick: () -> Unit,
+) {
+
+    CartScreen(
+        totalPrice = Cart.totalPrice,
+        cartItems = Cart.items,
+        onBackPressed = onBackPressed,
+        onButtonClick = onButtonClick,
+        onRemoveClick = { Cart.removeAll(it.product) },
+        onPlusClick = { Cart.addOne(it.product)} ,
+        onMinusClick = { Cart.removeOne(it.product)} ,
+    )
+}
+
+@Composable
+fun CartScreen(
     totalPrice: Int,
     cartItems: List<CartItem>,
     onBackPressed: () -> Unit,

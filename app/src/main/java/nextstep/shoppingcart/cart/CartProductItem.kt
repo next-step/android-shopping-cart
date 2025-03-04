@@ -2,8 +2,6 @@ package nextstep.shoppingcart.cart
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +29,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.common.CounterButton
 import nextstep.shoppingcart.common.ProductImage
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.dummyCartItem
@@ -113,56 +112,7 @@ fun CartProductItem(
     }
 }
 
-@Composable
-private fun CounterButton(
-    quantity: Int,
-    onPlusClick: () -> Unit,
-    onMinusClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.background(color = Color.White, shape = RoundedCornerShape(4.dp))
-    ) {
-        Box(
-            modifier = Modifier
-                .size(42.dp)
-                .clickable(onClick = onMinusClick)
-                .testTag(stringResource(R.string.minus))
-            ,
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = stringResource(R.string.minus),
-                style = MaterialTheme.typography.titleLarge
-            )
-        }
 
-        Box(
-            modifier = Modifier
-                .size(42.dp)
-                .testTag(stringResource(R.string.product_count)),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = quantity.toString(),
-                style = MaterialTheme.typography.titleLarge
-            )
-        }
-
-        Box(
-            modifier = Modifier
-                .size(42.dp)
-                .clickable(onClick = onPlusClick)
-                .testTag(stringResource(R.string.plus)),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = stringResource(R.string.plus),
-                style = MaterialTheme.typography.titleLarge
-            )
-        }
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
@@ -171,18 +121,6 @@ private fun CartItemPreview() {
         CartProductItem(
             cartItem = dummyCartItem,
             onCloseClick = {},
-            onPlusClick = {},
-            onMinusClick = {}
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun CounterButtonPreview() {
-    ShoppingCartTheme {
-        CounterButton(
-            quantity = 1,
             onPlusClick = {},
             onMinusClick = {}
         )

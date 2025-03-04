@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.cart.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -39,7 +40,14 @@ fun ProductListScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(productList, key = { it.id }) {
-                ProductItem(product = it, onClick = { onProductClick(it.id) })
+                ProductItem(
+                    product = it,
+                    count = Cart.getProductCount(it),
+                    onClick = { onProductClick(it.id) },
+                    onAddClick = { Cart.addOne(it) },
+                    onPlusClick = { Cart.addOne(it) },
+                    onMinusClick = { Cart.removeOne(it) }
+                )
             }
         }
     }
