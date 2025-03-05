@@ -14,6 +14,7 @@ data class ProductDetail(
     val imageUrl: String,
     val name: String,
     val price: Int,
+    val cartQuantity: Int,
 )
 
 @Serializable

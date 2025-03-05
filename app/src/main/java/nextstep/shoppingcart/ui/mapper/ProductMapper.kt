@@ -9,6 +9,7 @@ fun ProductEntity.toUi(): Product {
         imageUrl = imageUrl,
         name = name,
         price = price,
+        cartQuantity = cartQuantity,
     )
 }
 
@@ -17,6 +18,7 @@ fun Product.toEntity(): ProductEntity {
         id = id,
         imageUrl = imageUrl,
         name = name,
-        price = price
+        price = price,
+        cartQuantity = cartQuantity,
     )
 }

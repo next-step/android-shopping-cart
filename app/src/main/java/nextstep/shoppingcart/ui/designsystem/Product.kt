@@ -147,6 +147,7 @@ private fun ProductListItemPreview() {
                 imageUrl = "",
                 name = LoremIpsum(100).values.joinToString(""),
                 price = 999_999_999,
+                cartQuantity = 0,
             )
         )
     }
@@ -164,6 +165,7 @@ private fun ProductDetailPreview() {
                 imageUrl = "",
                 name = LoremIpsum(100).values.joinToString(""),
                 price = 999_999_999,
+                cartQuantity = 0,
             ),
             modifier = Modifier.verticalScroll(rememberScrollState()),
         )

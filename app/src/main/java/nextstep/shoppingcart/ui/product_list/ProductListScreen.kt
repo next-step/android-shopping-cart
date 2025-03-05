@@ -41,13 +41,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.repository.ProductRepository
-import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
 import nextstep.shoppingcart.ui.designsystem.ProductListItem
 import nextstep.shoppingcart.ui.mapper.toUi
+import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
@@ -61,23 +62,39 @@ fun ProductListScreenRoot(
         mutableStateOf(ProductListState())
     }
 
-    // 초기 로딩 시간이 0.5초 보다 오래 걸리는 경우에만 로딩바 보여주기
-    LaunchedEffect(state.isInitialLoading) {
+    // 초기 데이터 로딩
+    LaunchedEffect(Unit) {
+        // 초기에만 로딩되도록 조건문 추가
+        // Navigation에 의해 Composition이 파괴되고 다시 생성될 때, 다시 목록을 불러오지 않도록 방지
         if (state.isInitialLoading) {
-            delay(500L)
-            state = state.copy(
-                isLoadingShow = true,
-            )
+            productRepository.fetch()
         }
     }
 
-    // Unit으로 설정할 경우, configuration change가 발생해도 호출된다.
-    // 따라서 초기로딩이 되지 않은 경우에만 호출되도록 관련 state를 key로 설정
-    LaunchedEffect(state.isInitialLoading) {
-        state = state.copy(
-            products = productRepository.fetch().map { it.toUi() },
-            isInitialLoading = false,
-        )
+    LaunchedEffect(Unit) {
+        productRepository.products
+            .onStart {
+                state = state.copy(
+                    isInitialLoading = false,
+                )
+            }
+            .collect {
+                state = state.copy(
+                    products = it.map { it.toUi() },
+                )
+            }
+    }
+
+    // 초기 로딩 시간이 0.5초 보다 오래 걸리는 경우에만 로딩바 보여주기
+    LaunchedEffect(Unit) {
+        if (state.isInitialLoading) {
+            delay(500L)
+            if (state.isInitialLoading) {
+                state = state.copy(
+                    isLoadingShow = true,
+                )
+            }
+        }
     }
 
     if (state.isInitialLoading) {
@@ -216,34 +233,39 @@ private fun ProductListScreenPreview() {
             state = ProductListState(
                 products = listOf(
                     Product(
-                        id = "",
+                        id = "1",
                         imageUrl = "",
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
-                        price = 10_000
+                        price = 10_000,
+                        cartQuantity = 0,
                     ),
                     Product(
-                        id = "",
+                        id = "2",
                         imageUrl = "",
                         name = "PET-보틀-세모",
-                        price = 10_000_000
+                        price = 10_000_000,
+                        cartQuantity = 10,
                     ),
                     Product(
-                        id = "",
+                        id = "3",
                         imageUrl = "",
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
                         price = 1_000_000_000,
+                        cartQuantity = 10,
                     ),
                     Product(
-                        id = "",
+                        id = "4",
                         imageUrl = "",
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
-                        price = 10_000
+                        price = 10_000,
+                        cartQuantity = 0,
                     ),
                     Product(
-                        id = "",
+                        id = "5",
                         imageUrl = "",
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
-                        price = 10_000
+                        price = 10_000,
+                        cartQuantity = 0,
                     ),
                 )
             ),

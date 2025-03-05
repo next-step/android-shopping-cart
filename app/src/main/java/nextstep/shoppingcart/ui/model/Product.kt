@@ -9,4 +9,8 @@ data class Product(
     val imageUrl: String,
     val name: String,
     val price: Int,
-): Parcelable
+    val cartQuantity: Int,
+): Parcelable {
+    val totalPrice: Int
+        get() = price * cartQuantity
+}

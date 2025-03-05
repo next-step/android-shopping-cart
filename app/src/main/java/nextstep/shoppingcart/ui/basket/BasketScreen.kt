@@ -35,14 +35,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.data.repository.CartRepository
+import nextstep.shoppingcart.data.repository.ProductRepository
 import nextstep.shoppingcart.ui.designsystem.CartListItem
 import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
 import nextstep.shoppingcart.ui.mapper.toEntity
 import nextstep.shoppingcart.ui.mapper.toUi
-import nextstep.shoppingcart.ui.model.CartItem
 import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -50,14 +50,14 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun BasketScreenRoot(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    cartRepository: CartRepository = CartRepository.getInstance(),
+    productRepository: ProductRepository = ProductRepository.getInstance(),
 ) {
     var state by rememberSaveable {
         mutableStateOf(BasketState())
     }
 
     // 초기 로딩 시간이 0.5초 보다 오래 걸리는 경우에만 로딩바 보여주기
-    LaunchedEffect(state.isInitialLoading) {
+    LaunchedEffect(Unit) {
         if (state.isInitialLoading) {
             delay(500L)
             state = state.copy(
@@ -66,17 +66,20 @@ fun BasketScreenRoot(
         }
     }
 
-    // Q. 화면이 파괴되면 Composable도 recomposition에서 제외되므로, Fragment에서 처럼 repeatOnLifecycle 등으로 Lifecycle을 지정하지 않아도 되나요?
     LaunchedEffect(Unit) {
-        cartRepository.getItems()
+        productRepository.products
             .onStart {
                 state = state.copy(
                     isInitialLoading = false,
                 )
             }
-            .distinctUntilChanged()
+            .map { items ->
+                items.filter {
+                    it.cartQuantity > 0
+                }
+            }
             .collect { items ->
-                state = state.copy(cartItems = items.map { it.toUi() })
+                state = state.copy(products = items.map { it.toUi() })
             }
     }
 
@@ -89,9 +92,9 @@ fun BasketScreenRoot(
     BasketScreen(
         state = state,
         navigateBack = navigateBack,
-        onRemoveCartItemClick = { cartRepository.removeAll(it.product.toEntity()) },
-        onIncreaseQuantityClick = { cartRepository.addOne(it.product.toEntity()) },
-        onDecreaseQuantityClick = { cartRepository.removeOne(it.product.toEntity()) },
+        onRemoveCartItemClick = { productRepository.update(it.copy(cartQuantity = 0).toEntity()) },
+        onIncreaseQuantityClick = { productRepository.update(it.copy(cartQuantity = it.cartQuantity + 1).toEntity()) },
+        onDecreaseQuantityClick = { productRepository.update(it.copy(cartQuantity = it.cartQuantity - 1).toEntity()) },
         modifier = modifier,
     )
 }
@@ -100,9 +103,9 @@ fun BasketScreenRoot(
 internal fun BasketScreen(
     state: BasketState,
     navigateBack: () -> Unit,
-    onRemoveCartItemClick: (CartItem) -> Unit,
-    onIncreaseQuantityClick: (CartItem) -> Unit,
-    onDecreaseQuantityClick: (CartItem) -> Unit,
+    onRemoveCartItemClick: (Product) -> Unit,
+    onIncreaseQuantityClick: (Product) -> Unit,
+    onDecreaseQuantityClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -122,9 +125,9 @@ internal fun BasketScreen(
                     .weight(1f),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(state.cartItems, key = { it.product.id }) {
+                items(state.products, key = { it.id }) {
                     CartListItem(
-                        cartItem = it,
+                        item = it,
                         onRemoveCartItemClick = onRemoveCartItemClick,
                         onIncreaseQuantityClick = onIncreaseQuantityClick,
                         onDecreaseQuantityClick = onDecreaseQuantityClick,
@@ -185,53 +188,43 @@ private fun BasketScreenPreview() {
     ShoppingCartTheme {
         BasketScreen(
             state = BasketState(
-                cartItems = listOf(
-                    CartItem(
-                        product = Product(
-                            id = "Ilene",
-                            imageUrl = "Linden",
-                            name = "Ignacio",
-                            price = 8650
-                        ),
-                        count = 9757,
+                products = listOf(
+                    Product(
+                        id = "Ilene",
+                        imageUrl = "Linden",
+                        name = "Ignacio",
+                        price = 8650,
+                        cartQuantity = 9757,
                     ),
-                    CartItem(
-                        product = Product(
-                            id = "Stacy",
-                            imageUrl = "Rhyan",
-                            name = "Lester",
-                            price = 3533
-                        ),
-                        count = 3012,
+                    Product(
+                        id = "Stacy",
+                        imageUrl = "Rhyan",
+                        name = "Lester",
+                        price = 3533,
+                        cartQuantity = 3012,
                     ),
-                    CartItem(
-                        product = Product(
-                            id = "A",
-                            imageUrl = "Rhyan",
-                            name = "Lester",
-                            price = 3533
-                        ),
-                        count = 3012,
+                    Product(
+                        id = "A",
+                        imageUrl = "Rhyan",
+                        name = "Lester",
+                        price = 3533,
+                        cartQuantity = 3012,
                     ),
-                    CartItem(
-                        product = Product(
-                            id = "B",
-                            imageUrl = "Rhyan",
-                            name = "Lester",
-                            price = 3533
-                        ),
-                        count = 3012,
+                    Product(
+                        id = "B",
+                        imageUrl = "Rhyan",
+                        name = "Lester",
+                        price = 3533,
+                        cartQuantity = 3012,
                     ),
-                    CartItem(
-                        product = Product(
-                            id = "C",
-                            imageUrl = "Rhyan",
-                            name = "Lester",
-                            price = 3533
-                        ),
-                        count = 3012,
+                    Product(
+                        id = "C",
+                        imageUrl = "Rhyan",
+                        name = "Lester",
+                        price = 3533,
+                        cartQuantity = 3012,
                     ),
-                )
+                ),
             ),
             navigateBack = {},
             onRemoveCartItemClick = {},
