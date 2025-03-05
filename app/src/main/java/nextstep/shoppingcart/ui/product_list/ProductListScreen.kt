@@ -81,6 +81,7 @@ fun ProductListScreenRoot(
             .collect {
                 state = state.copy(
                     products = it.map { it.toUi() },
+                    selectedItemCount = it.sumOf { it.cartQuantity },
                 )
             }
     }
