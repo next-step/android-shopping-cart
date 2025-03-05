@@ -34,7 +34,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import nextstep.shoppingcart.R
@@ -93,8 +92,16 @@ fun BasketScreenRoot(
         state = state,
         navigateBack = navigateBack,
         onRemoveCartItemClick = { productRepository.update(it.copy(cartQuantity = 0).toEntity()) },
-        onIncreaseQuantityClick = { productRepository.update(it.copy(cartQuantity = it.cartQuantity + 1).toEntity()) },
-        onDecreaseQuantityClick = { productRepository.update(it.copy(cartQuantity = it.cartQuantity - 1).toEntity()) },
+        onIncreaseQuantityClick = {
+            productRepository.update(
+                it.copy(cartQuantity = it.cartQuantity + 1).toEntity()
+            )
+        },
+        onDecreaseQuantityClick = {
+            productRepository.update(
+                it.copy(cartQuantity = it.cartQuantity - 1).toEntity()
+            )
+        },
         modifier = modifier,
     )
 }
