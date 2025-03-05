@@ -5,6 +5,7 @@ package nextstep.shoppingcart.ui.product_list
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -47,6 +48,9 @@ import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.repository.ProductRepository
 import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
 import nextstep.shoppingcart.ui.designsystem.ProductListItem
+import nextstep.shoppingcart.ui.designsystem.QuantityHandler
+import nextstep.shoppingcart.ui.designsystem.QuantityHandlerOnlyPlus
+import nextstep.shoppingcart.ui.mapper.toEntity
 import nextstep.shoppingcart.ui.mapper.toUi
 import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -108,6 +112,16 @@ fun ProductListScreenRoot(
         state = state,
         onBasketClick = onBasketClick,
         onProductClick = onProductClick,
+        onIncreaseQuantityClick = {
+            productRepository.update(
+                it.copy(cartQuantity = it.cartQuantity + 1).toEntity()
+            )
+        },
+        onDecreaseQuantityClick = {
+            productRepository.update(
+                it.copy(cartQuantity = it.cartQuantity - 1).toEntity()
+            )
+        },
         modifier = modifier,
     )
 }
@@ -117,6 +131,8 @@ private fun ProductListScreen(
     state: ProductListState,
     onBasketClick: () -> Unit,
     onProductClick: (Product) -> Unit,
+    onIncreaseQuantityClick: (Product) -> Unit,
+    onDecreaseQuantityClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val lazyState = rememberLazyGridState()
@@ -171,11 +187,32 @@ private fun ProductListScreen(
             items(state.products) { product ->
                 ProductListItem(
                     product = product,
+                    quantityHandler = {
+                        if (product.cartQuantity < 1) {
+                            QuantityHandlerOnlyPlus(
+                                onIncreaseQuantityClick = {
+                                    onIncreaseQuantityClick(product)
+                                },
+                                modifier = it,
+                            )
+                        } else {
+                            QuantityHandler(
+                                quantity = product.cartQuantity,
+                                onIncreaseQuantityClick = {
+                                    onIncreaseQuantityClick(product)
+                                },
+                                onDecreaseQuantityClick = {
+                                    onDecreaseQuantityClick(product)
+                                },
+                                modifier = it,
+                            )
+                        }
+                    },
                     modifier = Modifier.clickable(
                         onClick = {
                             onProductClick(product)
                         }
-                    )
+                    ),
                 )
             }
         }
@@ -270,12 +307,10 @@ private fun ProductListScreenPreview() {
                     ),
                 )
             ),
-            onProductClick = {
-                // no-op. just for preview
-            },
-            onBasketClick = {
-                // no-op. just for preview
-            },
+            onProductClick = {},
+            onBasketClick = {},
+            onIncreaseQuantityClick = {},
+            onDecreaseQuantityClick = {},
         )
     }
 }
