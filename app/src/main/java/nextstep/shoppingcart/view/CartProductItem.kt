@@ -23,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -81,7 +80,7 @@ fun CartProductItem(
                         .align(Alignment.TopEnd)
                         .padding(top = 18.dp)
                 )
-                CartProductCount(
+                ProductCount(
                     count = cartItem.count,
                     onClickAddOne = onClickAddOne,
                     onClickRemoveOne = onClickRemoveOne,
@@ -121,46 +120,6 @@ private fun CartProductPrice(price: Int, modifier: Modifier = Modifier) {
         fontSize = 16.sp,
         modifier = modifier.testTag("price")
     )
-}
-
-@Composable
-private fun CartProductCount(
-    count: Int,
-    onClickAddOne: () -> Unit,
-    onClickRemoveOne: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-    ) {
-        IconButton(
-            onClick = onClickRemoveOne,
-            modifier = Modifier.size(42.dp)
-        ) {
-            Text(
-                text = "-",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
-        Text(
-            text = count.toString(),
-            fontSize = 22.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 18.dp)
-        )
-        IconButton(
-            onClick = onClickAddOne,
-            modifier = Modifier.size(42.dp)
-        ) {
-            Text(
-                text = "+",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
-            )
-        }
-    }
 }
 
 @Preview(showBackground = true)

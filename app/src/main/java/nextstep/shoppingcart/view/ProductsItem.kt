@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
@@ -33,8 +34,11 @@ import nextstep.shoppingcart.model.Product
 @Composable
 fun ProductsItem(
     product: Product,
+    count: Int,
     onClickItem: (Product) -> Unit,
     onClickAdd: () -> Unit,
+    onClickAddOne: () -> Unit,
+    onclickRemoveOne: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -51,16 +55,28 @@ fun ProductsItem(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.aspectRatio(1f)
             )
-            IconButton(
-                onClick = onClickAdd,
-                modifier = Modifier
-                    .padding(12.dp)
-                    .align(Alignment.BottomEnd)
-                    .clip(CircleShape)
-                    .background(Color.White)
-                    .size(42.dp)
-            ) {
-                Icon(Icons.Filled.Add, null)
+            if (count > 0) {
+                ProductCount(
+                    count = count,
+                    onClickAddOne = onClickAddOne,
+                    onClickRemoveOne = onclickRemoveOne,
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 12.dp)
+                        .background(Color.White, shape = RoundedCornerShape(4.dp))
+                )
+            } else {
+                IconButton(
+                    onClick = onClickAdd,
+                    modifier = Modifier
+                        .padding(12.dp)
+                        .align(Alignment.BottomEnd)
+                        .clip(CircleShape)
+                        .background(Color.White)
+                        .size(42.dp)
+                ) {
+                    Icon(Icons.Filled.Add, null)
+                }
             }
         }
         Spacer(
@@ -85,14 +101,34 @@ fun ProductsItem(
 
 @Preview(showBackground = true)
 @Composable
-private fun ProductsItemPreview() {
+private fun ProductsItemCountZeroPreview() {
     ProductsItem(
         product = Product(
             imageUrl = "",
             name = "상품명상품명상품명상품명상품명상품명상품명상품명",
             price = 10000
         ),
+        count = 0,
         onClickItem = {},
-        onClickAdd = {}
+        onClickAdd = {},
+        onClickAddOne = {},
+        onclickRemoveOne = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductsItemCountOnePreview() {
+    ProductsItem(
+        product = Product(
+            imageUrl = "",
+            name = "상품명상품명상품명상품명상품명상품명상품명상품명",
+            price = 10000
+        ),
+        count = 1,
+        onClickItem = {},
+        onClickAdd = {},
+        onClickAddOne = {},
+        onclickRemoveOne = {}
     )
 }
