@@ -1,15 +1,26 @@
 package nextstep.shoppingcart.view
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -22,22 +33,36 @@ import nextstep.shoppingcart.model.Product
 @Composable
 fun ProductsItem(
     product: Product,
-    onClick: (Product) -> Unit,
+    onClickItem: (Product) -> Unit,
+    onClickAdd: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
             .width(158.dp)
             .clickable {
-                onClick(product)
+                onClickItem(product)
             }
     ) {
-        AsyncImage(
-            model = product.imageUrl,
-            contentDescription = "product image",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.aspectRatio(1f)
-        )
+        Box {
+            AsyncImage(
+                model = product.imageUrl,
+                contentDescription = "product image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.aspectRatio(1f)
+            )
+            IconButton(
+                onClick = onClickAdd,
+                modifier = Modifier
+                    .padding(12.dp)
+                    .align(Alignment.BottomEnd)
+                    .clip(CircleShape)
+                    .background(Color.White)
+                    .size(42.dp)
+            ) {
+                Icon(Icons.Filled.Add, null)
+            }
+        }
         Spacer(
             modifier = Modifier.height(8.dp)
         )
@@ -58,7 +83,7 @@ fun ProductsItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ProductsItemPreview() {
     ProductsItem(
@@ -67,6 +92,7 @@ private fun ProductsItemPreview() {
             name = "상품명상품명상품명상품명상품명상품명상품명상품명",
             price = 10000
         ),
-        onClick = {}
+        onClickItem = {},
+        onClickAdd = {}
     )
 }

@@ -28,7 +28,8 @@ fun ProductsList(
         items(products) { item ->
             ProductsItem(
                 product = item,
-                onClick = onClickProductItem
+                onClickItem = onClickProductItem,
+                onClickAdd = {}
             )
         }
     }
