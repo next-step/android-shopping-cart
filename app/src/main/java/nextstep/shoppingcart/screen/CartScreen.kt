@@ -30,10 +30,10 @@ import nextstep.shoppingcart.view.DefaultNavigationBackTopBar
 
 @Composable
 fun CartScreen(
+    cartItems: List<CartItem>,
     onClickBack: () -> Unit,
     onClickOrder: () -> Unit
 ) {
-    var cartItems by remember { mutableStateOf(Cart.items) }
     val totalPrice by remember(cartItems) { mutableIntStateOf(Cart.totalPrice) }
 
     Scaffold(
@@ -51,13 +51,13 @@ fun CartScreen(
                 .padding(paddingValues),
             onClickOrder = onClickOrder,
             onClickRemoveOne = { cartItem ->
-                cartItems = Cart.removeOne(cartItem.product)
+                Cart.removeOne(cartItem.product)
             },
             onClickAddOne = { cartItem ->
-                cartItems = Cart.addOne(cartItem.product)
+                Cart.addOne(cartItem.product)
             },
             onClickRemoveAll = { cartItem ->
-                cartItems = Cart.removeAll(cartItem.product)
+                Cart.removeAll(cartItem.product)
             }
         )
     }

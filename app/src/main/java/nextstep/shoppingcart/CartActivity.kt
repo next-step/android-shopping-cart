@@ -3,6 +3,7 @@ package nextstep.shoppingcart
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.screen.CartScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -14,6 +15,7 @@ class CartActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 CartScreen(
+                    cartItems = Cart.items,
                     onClickBack = {
                         finish()
                     },

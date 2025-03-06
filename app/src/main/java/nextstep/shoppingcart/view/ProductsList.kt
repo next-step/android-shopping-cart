@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.model.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.model.products
 
@@ -28,11 +29,17 @@ fun ProductsList(
         items(products) { item ->
             ProductsItem(
                 product = item,
-                count = 0,
+                count = Cart.getCount(item),
                 onClickItem = onClickProductItem,
-                onClickAdd = {},
-                onClickAddOne = {},
-                onclickRemoveOne = {}
+                onClickAdd = {
+                    Cart.addOne(item)
+                },
+                onClickAddOne = {
+                    Cart.addOne(item)
+                },
+                onclickRemoveOne = {
+                    Cart.removeOne(item)
+                }
             )
         }
     }

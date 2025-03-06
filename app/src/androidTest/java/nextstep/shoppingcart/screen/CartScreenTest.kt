@@ -27,6 +27,7 @@ internal class CartScreenTest {
         composeTestRule.setContent {
             ShoppingCartTheme {
                 CartScreen(
+                    cartItems = Cart.items,
                     onClickBack = { },
                     onClickOrder = { },
                 )
