@@ -41,6 +41,14 @@ object Cart {
         _items.removeAll { it.product == product }
         return items
     }
+
+    fun getCartCount(product: Product): Int {
+        return _items.find { it.product == product }?.count ?: 0
+    }
+
+    fun getTotalCartCount(): Int {
+        return _items.sumOf { it.count }
+    }
 }
 
 object DummyProduct {
