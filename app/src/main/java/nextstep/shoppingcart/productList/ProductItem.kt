@@ -57,8 +57,8 @@ fun ProductItem(
                 if (count > 0) {
                     QuantityController(
                         count = count,
-                        onMinusClick = onPlusClick,
-                        onPlusClick = onMinusClick,
+                        onMinusClick = onMinusClick,
+                        onPlusClick = onPlusClick,
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
                             .padding(bottom = 12.dp)
