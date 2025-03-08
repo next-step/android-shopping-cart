@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ProductListTopAppBar(
     title: String,
-    actions: @Composable RowScope.() -> Unit,
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
@@ -31,15 +30,6 @@ fun ProductListTopAppBar(
                 color = Color(0xFF1D1B20)
             )
         },
-        actions = actions
-    )
-}
-
-@Preview
-@Composable
-private fun ProductListTopAppBarPreview() {
-    ProductListTopAppBar(
-        title = "상품 목록",
         actions = {
             Icon(
                 imageVector = Icons.Filled.ShoppingCart,
@@ -48,5 +38,13 @@ private fun ProductListTopAppBarPreview() {
                 tint = Color.Black
             )
         }
+    )
+}
+
+@Preview
+@Composable
+private fun ProductListTopAppBarPreview() {
+    ProductListTopAppBar(
+        title = "상품 목록"
     )
 }

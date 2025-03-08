@@ -20,16 +20,7 @@ fun ProductListScreen(
 ) {
     Scaffold(
         topBar = {
-            ProductListTopAppBar(
-                title = "상품 목록",
-                actions = {
-                    Icon(
-                        imageVector = Icons.Filled.ShoppingCart,
-                        contentDescription = "장바구니",
-                        modifier = Modifier.padding(12.dp),
-                    )
-                }
-            )
+            ProductListTopAppBar(title = "상품 목록")
         }
     ) { innerPadding ->
         ProductList(
