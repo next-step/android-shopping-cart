@@ -1,18 +1,15 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.list
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.component.ProductList
-import nextstep.shoppingcart.component.ProductListTopAppBar
-import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.R
+import nextstep.shoppingcart.list.component.ProductList
+import nextstep.shoppingcart.list.component.ProductListTopAppBar
+import nextstep.shoppingcart.list.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable

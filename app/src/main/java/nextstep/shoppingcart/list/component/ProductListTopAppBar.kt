@@ -1,6 +1,5 @@
-package nextstep.shoppingcart.component
+package nextstep.shoppingcart.list.component
 
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart

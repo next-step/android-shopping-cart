@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.component
+package nextstep.shoppingcart.list.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.list.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable

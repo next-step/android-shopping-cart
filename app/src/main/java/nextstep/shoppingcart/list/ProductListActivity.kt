@@ -1,9 +1,9 @@
-package nextstep.shoppingcart
+package nextstep.shoppingcart.list
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.list.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductListActivity : ComponentActivity() {

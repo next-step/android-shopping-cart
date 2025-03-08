@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.component
+package nextstep.shoppingcart.list.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.list.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable

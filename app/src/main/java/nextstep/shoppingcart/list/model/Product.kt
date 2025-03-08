@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.model
+package nextstep.shoppingcart.list.model
 
 data class Product(
     val id: Int,
