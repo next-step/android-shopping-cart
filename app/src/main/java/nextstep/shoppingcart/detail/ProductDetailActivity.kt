@@ -8,7 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
-class DetailActivity : ComponentActivity() {
+class ProductDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,7 +21,7 @@ class DetailActivity : ComponentActivity() {
     companion object {
         private const val PRODUCT_ID = "productId"
         fun intent(context: Context, productId: Int): Intent {
-            return Intent(context, DetailActivity::class.java).apply {
+            return Intent(context, ProductDetailActivity::class.java).apply {
                 putExtra(PRODUCT_ID, productId)
             }
         }
