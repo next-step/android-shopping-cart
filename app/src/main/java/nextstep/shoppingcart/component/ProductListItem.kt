@@ -41,7 +41,7 @@ fun ProductListItem(
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 4.dp, end = 23.dp),
+                .padding(start = 4.dp),
             text = product.name,
             style = TextStyle(
                 fontWeight = FontWeight.W700,
