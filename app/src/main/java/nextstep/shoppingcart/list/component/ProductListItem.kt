@@ -2,7 +2,6 @@ package nextstep.shoppingcart.list.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,8 +16,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.common.component.ProductImage
 import nextstep.shoppingcart.list.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -30,11 +29,10 @@ fun ProductListItem(
     Column(
         modifier = modifier
     ) {
-        AsyncImage(
+        ProductImage(
             modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f),
-            model = product.imageUrl,
+                .fillMaxWidth(),
+            imageUrl = product.imageUrl,
             contentDescription = product.name,
         )
         Spacer(modifier = Modifier.height(8.dp))
