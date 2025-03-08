@@ -12,20 +12,28 @@ import nextstep.shoppingcart.data.Product
 
 @Composable
 fun ProductListScreen(
-    products: List<Product>,
+    productAndCountList: List<Pair<Product, Int>>,
+    totalCount: Int,
     onCartButtonClick: () -> Unit,
     onItemClick: (Product) -> Unit,
+    onPlushClick: (Product) -> Unit,
+    onMinusClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         containerColor = Color.White,
         topBar = {
-            ProductListTopAppBar(onCartButtonClick = onCartButtonClick)
+            ProductListTopAppBar(
+                count = totalCount,
+                onCartButtonClick = onCartButtonClick
+            )
         },
     ) { innerPadding ->
         ProductList(
-            products = products,
+            productAndCountList = productAndCountList,
             onItemClick = onItemClick,
+            onPlusClick = onPlushClick,
+            onMinusClick = onMinusClick,
             modifier = modifier.padding(innerPadding),
         )
     }
@@ -34,11 +42,16 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    val products = DummyProduct.productDummyList
+    val productAndCountList = DummyProduct.productDummyList.map {
+        it to (Cart.getCartCount(it))
+    }
 
     ProductListScreen(
-        products = products,
+        productAndCountList = productAndCountList,
+        totalCount = 0,
         onCartButtonClick = {},
         onItemClick = {},
+        onPlushClick = {},
+        onMinusClick = {},
     )
 }

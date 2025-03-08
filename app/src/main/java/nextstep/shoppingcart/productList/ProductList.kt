@@ -10,13 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 
 @Composable
 fun ProductList(
-    products: List<Product> = emptyList(),
+    productAndCountList: List<Pair<Product, Int>> = emptyList(),
     onItemClick: (Product) -> Unit,
+    onPlusClick: (Product) -> Unit,
+    onMinusClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -26,12 +29,19 @@ fun ProductList(
         verticalArrangement = Arrangement.spacedBy(20.dp),
         modifier = modifier,
     ) {
-        items(products) {
+        items(productAndCountList) {
             ProductItem(
-                product = it,
+                product = it.first,
+                count = it.second,
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    onItemClick(it)
+                    onItemClick(it.first)
+                },
+                onPlusClick = {
+                    onPlusClick(it.first)
+                },
+                onMinusClick = {
+                    onMinusClick(it.first)
                 },
             )
         }
@@ -41,10 +51,14 @@ fun ProductList(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListPreview() {
-    val products = DummyProduct.productDummyList
+    val productAndCountList = DummyProduct.productDummyList.map {
+        it to (Cart.getCartCount(it))
+    }
 
     ProductList(
-        products = products,
+        productAndCountList = productAndCountList,
         onItemClick = {},
+        onPlusClick = {},
+        onMinusClick = {},
     )
 }
