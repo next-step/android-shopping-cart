@@ -14,6 +14,9 @@ class CartActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ShoppingCartTheme {
+                CartScreen(
+                    onBack = ::finish
+                )
             }
         }
     }
