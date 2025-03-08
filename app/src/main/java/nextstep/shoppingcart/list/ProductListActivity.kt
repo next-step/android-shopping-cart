@@ -3,7 +3,7 @@ package nextstep.shoppingcart.list
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import nextstep.shoppingcart.list.model.Product
+import nextstep.shoppingcart.common.Products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductListActivity : ComponentActivity() {
@@ -12,14 +12,7 @@ class ProductListActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 ProductListScreen(
-                    products = List(10) {
-                        Product(
-                            id = it,
-                            imageUrl = "https://picsum.photos/id/1/300/300",
-                            name = "PET보틀-정사각형 어쩌구",
-                            price = 10000
-                        )
-                    }
+                    products = Products.items
                 )
             }
         }
