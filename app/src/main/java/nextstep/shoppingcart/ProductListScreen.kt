@@ -7,6 +7,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.component.ProductList
@@ -21,7 +22,7 @@ fun ProductListScreen(
 ) {
     Scaffold(
         topBar = {
-            ProductListTopAppBar(title = "상품 목록")
+            ProductListTopAppBar(title = stringResource(R.string.product_list))
         }
     ) { innerPadding ->
         ProductList(
