@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductList(
@@ -34,14 +35,16 @@ fun ProductList(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListPreview() {
-    ProductList(
-        products = List(10) {
-            Product(
-                id = it,
-                imageUrl = "https://picsum.photos/id/1/300/300",
-                name = "PET보틀-정사각형 어쩌구",
-                price = 10000
-            )
-        },
-    )
+    ShoppingCartTheme {
+        ProductList(
+            products = List(10) {
+                Product(
+                    id = it,
+                    imageUrl = "https://picsum.photos/id/1/300/300",
+                    name = "PET보틀-정사각형 어쩌구",
+                    price = 10000
+                )
+            },
+        )
+    }
 }

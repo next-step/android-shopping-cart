@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.component.ProductList
 import nextstep.shoppingcart.component.ProductListTopAppBar
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductListScreen(
@@ -33,14 +34,16 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    ProductListScreen(
-        products = List(10) {
-            Product(
-                id = it,
-                imageUrl = "https://picsum.photos/id/1/300/300",
-                name = "PET보틀-정사각형 어쩌구",
-                price = 10000
-            )
-        }
-    )
+    ShoppingCartTheme {
+        ProductListScreen(
+            products = List(10) {
+                Product(
+                    id = it,
+                    imageUrl = "https://picsum.photos/id/1/300/300",
+                    name = "PET보틀-정사각형 어쩌구",
+                    price = 10000
+                )
+            }
+        )
+    }
 }

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,7 +45,9 @@ fun ProductListTopAppBar(
 @Preview
 @Composable
 private fun ProductListTopAppBarPreview() {
-    ProductListTopAppBar(
-        title = "상품 목록"
-    )
+    ShoppingCartTheme {
+        ProductListTopAppBar(
+            title = "상품 목록"
+        )
+    }
 }

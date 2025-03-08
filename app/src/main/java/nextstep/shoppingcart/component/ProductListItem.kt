@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductListItem(
@@ -72,12 +73,14 @@ fun ProductListItem(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListItemPreview() {
-    ProductListItem(
-        product = Product(
-            id = 0,
-            imageUrl = "https://picsum.photos/id/1/300/300",
-            name = "상품명",
-            price = 10000
+    ShoppingCartTheme {
+        ProductListItem(
+            product = Product(
+                id = 0,
+                imageUrl = "https://picsum.photos/id/1/300/300",
+                name = "상품명",
+                price = 10000
+            )
         )
-    )
+    }
 }
