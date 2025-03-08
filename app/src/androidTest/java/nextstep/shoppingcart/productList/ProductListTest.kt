@@ -3,6 +3,8 @@ package nextstep.shoppingcart.productList
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 import org.junit.Rule
 import org.junit.Test
@@ -23,10 +25,16 @@ class ProductListTest {
 
         val products = List(4) { product }
 
+        val productAndCountList = products.map {
+            it to (Cart.getCartCount(it))
+        }
+
         composeTestRule.setContent {
             ProductList(
-                products = products,
-                onItemClick = {}
+                productAndCountList = productAndCountList,
+                onItemClick = {},
+                onPlusClick = {},
+                onMinusClick = {},
             )
         }
 

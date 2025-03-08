@@ -14,6 +14,7 @@ class ProductListTopAppBarTest {
         // given
         composeTestRule.setContent {
             ProductListTopAppBar(
+                count = 0,
                 onCartButtonClick = {},
             )
         }

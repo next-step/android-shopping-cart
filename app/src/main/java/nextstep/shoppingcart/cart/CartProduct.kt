@@ -88,7 +88,7 @@ fun CartProduct(
                         .align(Alignment.Bottom)
                 ) {
                     ProductPrice(
-                        price = cartItem.product.price,
+                        price = (cartItem.product.price * cartItem.count),
                         modifier = Modifier
                             .align(Alignment.End),
                         fontSize = 16.sp,

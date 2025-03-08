@@ -24,7 +24,10 @@ class ProductItemTest {
         composeTestRule.setContent {
             ProductItem(
                 product = product,
-                onClick = {}
+                count = 0,
+                onClick = {},
+                onPlusClick = {},
+                onMinusClick = {}
             )
         }
 
@@ -48,7 +51,10 @@ class ProductItemTest {
         composeTestRule.setContent {
             ProductItem(
                 product = product,
-                onClick = {}
+                count = 0,
+                onClick = {},
+                onPlusClick = {},
+                onMinusClick = {}
             )
         }
 
