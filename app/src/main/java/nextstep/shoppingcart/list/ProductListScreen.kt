@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.cart.CartActivity
 import nextstep.shoppingcart.list.component.ProductList
 import nextstep.shoppingcart.list.component.ProductListTopAppBar
 import nextstep.shoppingcart.list.model.Product
@@ -17,9 +19,16 @@ fun ProductListScreen(
     products: List<Product>,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+
     Scaffold(
         topBar = {
-            ProductListTopAppBar(title = stringResource(R.string.product_list))
+            ProductListTopAppBar(
+                title = stringResource(R.string.product_list),
+                navigateToCart = {
+                    context.startActivity(CartActivity.intent(context))
+                }
+            )
         }
     ) { innerPadding ->
         ProductList(
