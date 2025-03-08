@@ -1,7 +1,10 @@
 package nextstep.shoppingcart.productList
 
+import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -17,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListTopAppBar(
+    count: Int,
     onCartButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -28,10 +32,26 @@ fun ProductListTopAppBar(
             IconButton(
                 onClick = onCartButtonClick,
             ) {
-                Icon(
-                    imageVector = Icons.Filled.ShoppingCart,
-                    contentDescription = "Cart",
-                )
+                BadgedBox(
+                    modifier = modifier.clickable {
+                        onCartButtonClick()
+                    },
+                    badge = {
+                        if (count > 0) {
+                            Badge(
+                                containerColor = Color.Red,
+                                contentColor = Color.White
+                            ) {
+                                Text("$count")
+                            }
+                        }
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.ShoppingCart,
+                        contentDescription = "cart",
+                    )
+                }
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -41,10 +61,20 @@ fun ProductListTopAppBar(
     )
 }
 
-@Preview
+@Preview(name = "count 가 0일 때 상품 목록 TopAppBar 미리보기", showBackground = true)
 @Composable
-private fun ProductListTopAppBarPreview() {
+private fun P1() {
     ProductListTopAppBar(
+        count = 0,
+        onCartButtonClick = {},
+    )
+}
+
+@Preview(name = "count 가 0보다 클 때 상품 목록 TopAppBar 미리보기", showBackground = true)
+@Composable
+private fun P2() {
+    ProductListTopAppBar(
+        count = 1,
         onCartButtonClick = {},
     )
 }
