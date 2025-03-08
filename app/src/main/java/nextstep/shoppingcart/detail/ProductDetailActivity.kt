@@ -20,9 +20,7 @@ class ProductDetailActivity : ComponentActivity() {
             ShoppingCartTheme {
                 ProductDetailScreen(
                     product = Products.items[productId],
-                    addToCart = {
-
-                    }
+                    onBack = ::finish
                 )
             }
         }

@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -22,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.cart.CartActivity
 import nextstep.shoppingcart.common.component.BackTitleAppBar
 import nextstep.shoppingcart.common.component.ProductImage
 import nextstep.shoppingcart.list.model.Product
@@ -31,15 +33,17 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductDetailScreen(
     product: Product,
-    addToCart: () -> Unit,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+
     Scaffold(
         modifier = modifier,
         topBar = {
             BackTitleAppBar(
                 title = stringResource(R.string.product_detail),
-                onBack = {}
+                onBack = onBack
             )
         }
     ) { innerPadding ->
@@ -98,7 +102,9 @@ fun ProductDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Blue50)
-                    .clickable { addToCart() }
+                    .clickable {
+                        context.startActivity(CartActivity.intent(context))
+                    }
                     .padding(vertical = 15.dp)
                 ,
                 contentAlignment = Alignment.Center
@@ -127,7 +133,7 @@ private fun ProductDetailScreenPreview() {
                 name = "PET보틀-정사각형 어쩌구",
                 price = 10000
             ),
-            addToCart = {}
+            onBack = {}
         )
     }
 }
