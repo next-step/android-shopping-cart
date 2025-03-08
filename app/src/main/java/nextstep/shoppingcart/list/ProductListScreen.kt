@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.cart.CartActivity
+import nextstep.shoppingcart.detail.DetailActivity
 import nextstep.shoppingcart.list.component.ProductList
 import nextstep.shoppingcart.list.component.ProductListTopAppBar
 import nextstep.shoppingcart.list.model.Product
@@ -27,12 +28,15 @@ fun ProductListScreen(
                 title = stringResource(R.string.product_list),
                 navigateToCart = {
                     context.startActivity(CartActivity.intent(context))
-                }
+                },
             )
         }
     ) { innerPadding ->
         ProductList(
             modifier = modifier.padding(innerPadding),
+            navigateToDetail = { id ->
+                context.startActivity(DetailActivity.intent(context, id))
+            },
             products = products
         )
     }

@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.list.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -15,6 +16,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductList(
     products: List<Product>,
+    navigateToDetail: (id: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -27,6 +29,9 @@ fun ProductList(
         items(items = products, key = { it.id }) {
             ProductListItem(
                 product = it,
+                modifier = Modifier.clickable {
+                    navigateToDetail(it.id)
+                }
             )
         }
     }
@@ -45,6 +50,7 @@ private fun ProductListPreview() {
                     price = 10000
                 )
             },
+            navigateToDetail = {}
         )
     }
 }
