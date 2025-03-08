@@ -1,5 +1,8 @@
 package nextstep.shoppingcart.data
 
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
+
 data class CartItem(
     val product: Product,
     val count: Int,
@@ -8,46 +11,44 @@ data class CartItem(
 }
 
 object Cart {
-    private val _items: MutableList<CartItem> = mutableListOf()
-    val items: List<CartItem> get() = _items.toList()
-    
-    val totalPrice: Int get() = _items.sumOf { it.totalPrice }
+    val items: SnapshotStateList<CartItem> = mutableStateListOf()
+    val totalPrice: Int get() = items.sumOf { it.totalPrice }
 
     fun addOne(product: Product): List<CartItem> {
-        val item = _items.find { it.product == product }
+        val item = items.find { it.product == product }
         if (item == null) {
-            _items.add(CartItem(product, 1))
+            items.add(CartItem(product, 1))
         } else {
-            val index = _items.indexOf(item)
-            _items[index] = item.copy(count = item.count + 1)
+            val index = items.indexOf(item)
+            items[index] = item.copy(count = item.count + 1)
         }
         return items
     }
 
     fun removeOne(product: Product): List<CartItem> {
-        _items.find { it.product == product }
+        items.find { it.product == product }
             ?.let { item ->
                 if (item.count > 1) {
-                    val index = _items.indexOf(item)
-                    _items[index] = item.copy(count = item.count - 1)
+                    val index = items.indexOf(item)
+                    items[index] = item.copy(count = item.count - 1)
                 } else {
-                    _items.remove(item)
+                    items.remove(item)
                 }
             }
         return items
     }
 
     fun removeAll(product: Product): List<CartItem> {
-        _items.removeAll { it.product == product }
+        items.removeAll { it.product == product }
         return items
     }
 
     fun getCartCount(product: Product): Int {
-        return _items.find { it.product == product }?.count ?: 0
+        return items.find { it.product == product }?.count ?: 0
     }
 
     fun getTotalCartCount(): Int {
-        return _items.sumOf { it.count }
+        return items.sumOf { it.count }
     }
 }
 
