@@ -14,7 +14,7 @@ class ProductListTest {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun 리스트에_6개의_아이템이_노출된다() {
+    fun 상품_리스트가_4개면_4개의_아이템이_노출된다() {
         // given
         val product = Product(
             id = 1,
@@ -37,8 +37,6 @@ class ProductListTest {
                 onMinusClick = {},
             )
         }
-
-        composeTestRule.waitForIdle()
 
         // then
         composeTestRule
