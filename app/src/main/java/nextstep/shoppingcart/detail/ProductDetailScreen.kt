@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.detail
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
@@ -8,6 +9,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,6 +39,14 @@ fun ProductDetailScreen(
                 title = stringResource(R.string.product_detail),
                 onBack = onBack
             )
+        },
+        bottomBar = {
+            AddToCartButton(
+                label = stringResource(R.string.add_to_cart),
+                onClick = {
+                    context.startActivity(CartActivity.intent(context))
+                },
+            )
         }
     ) { innerPadding ->
         Column(
@@ -44,8 +54,10 @@ fun ProductDetailScreen(
         ) {
             ProductImage(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .aspectRatio(1f),
                 imageUrl = product.imageUrl,
+                contentScale = ContentScale.Crop,
                 contentDescription = product.name
             )
             ProductTitleText(
@@ -60,13 +72,6 @@ fun ProductDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(18.dp)
-                    .weight(1f)
-            )
-            AddToCartButton(
-                label = stringResource(R.string.add_to_cart),
-                onClick = {
-                    context.startActivity(CartActivity.intent(context))
-                },
             )
         }
     }
