@@ -28,7 +28,7 @@ fun QuantityController(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier
+        modifier = modifier.testTag("quantity_controller"),
     ) {
         CountTextButton(
             text = "-",
