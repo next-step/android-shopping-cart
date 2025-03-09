@@ -51,17 +51,21 @@ fun CartScreen(
                 contentPadding = PaddingValues(horizontal = 18.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(Cart.items) {
+                items(
+                    count = Cart.items.size,
+                    key = { Cart.items[it].product.id },
+                ) { index ->
+                    val cartItem = Cart.items[index]
                     CartProduct(
-                        cartItem = it,
-                        onDeleteButtonClick = { cartItem ->
-                            Cart.removeAll(cartItem.product)
+                        cartItem = cartItem,
+                        onDeleteButtonClick = {
+                            Cart.removeAll(it.product)
                         },
-                        onMinusButtonClick = { cartItem ->
-                            Cart.removeOne(cartItem.product)
+                        onMinusButtonClick = {
+                            Cart.removeOne(it.product)
                         },
-                        onPlusButtonClick = { cartItem ->
-                            Cart.addOne(cartItem.product)
+                        onPlusButtonClick = {
+                            Cart.addOne(it.product)
                         },
                     )
                 }
