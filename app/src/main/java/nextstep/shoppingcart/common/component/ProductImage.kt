@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.common.component
 
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
