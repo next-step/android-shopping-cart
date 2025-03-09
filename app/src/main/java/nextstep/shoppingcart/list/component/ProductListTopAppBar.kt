@@ -20,7 +20,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductListTopAppBar(
     title: String,
-    navigateToCart: () -> Unit,
+    onClickCart: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     CenterAlignedTopAppBar(
@@ -34,7 +34,7 @@ fun ProductListTopAppBar(
         },
         actions = {
             IconButton(
-                onClick = navigateToCart
+                onClick = onClickCart
             ) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
@@ -52,7 +52,7 @@ private fun ProductListTopAppBarPreview() {
     ShoppingCartTheme {
         ProductListTopAppBar(
             title = "상품 목록",
-            navigateToCart = {}
+            onClickCart = {}
         )
     }
 }

@@ -16,7 +16,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductList(
     products: List<Product>,
-    navigateToDetail: (id: Int) -> Unit,
+    onProductClick: (id: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -30,7 +30,7 @@ fun ProductList(
             ProductListItem(
                 product = it,
                 modifier = Modifier.clickable {
-                    navigateToDetail(it.id)
+                    onProductClick(it.id)
                 }
             )
         }
@@ -50,7 +50,7 @@ private fun ProductListPreview() {
                     price = 10000
                 )
             },
-            navigateToDetail = {}
+            onProductClick = {}
         )
     }
 }

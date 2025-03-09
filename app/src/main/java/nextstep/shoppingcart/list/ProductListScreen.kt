@@ -26,7 +26,7 @@ fun ProductListScreen(
         topBar = {
             ProductListTopAppBar(
                 title = stringResource(R.string.product_list),
-                navigateToCart = {
+                onClickCart = {
                     context.startActivity(CartActivity.intent(context))
                 },
             )
@@ -34,7 +34,7 @@ fun ProductListScreen(
     ) { innerPadding ->
         ProductList(
             modifier = modifier.padding(innerPadding),
-            navigateToDetail = { id ->
+            onProductClick = { id ->
                 context.startActivity(ProductDetailActivity.intent(context, id))
             },
             products = products
