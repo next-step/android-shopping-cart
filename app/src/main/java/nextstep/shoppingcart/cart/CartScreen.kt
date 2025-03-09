@@ -7,12 +7,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.cart.model.CartItem
 import nextstep.shoppingcart.common.component.BackTitleAppBar
+import nextstep.shoppingcart.common.component.BottomButton
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun CartScreen(
+    cartItems: List<CartItem>,
+    totalPrice: Int,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -22,6 +26,12 @@ fun CartScreen(
             BackTitleAppBar(
                 title = stringResource(R.string.cart),
                 onBack = onBack
+            )
+        },
+        bottomBar = {
+            BottomButton(
+                label = stringResource(R.string.order_price_format, totalPrice),
+                onClick = {}
             )
         }
     ) { _ ->
@@ -34,7 +44,9 @@ fun CartScreen(
 private fun CartScreenPreview() {
     ShoppingCartTheme {
         CartScreen(
-            onBack = {}
+            onBack = {},
+            cartItems = emptyList(),
+            totalPrice = 100000,
         )
     }
 }
