@@ -20,8 +20,8 @@ object Cart {
         return items
     }
 
-    fun removeOne(product: Product): List<CartItem> {
-        _items.find { it.product == product }
+    fun removeOne(productId: Int): List<CartItem> {
+        _items.find { it.product.id == productId }
             ?.let { item ->
                 if (item.count > 1) {
                     val index = _items.indexOf(item)
@@ -33,8 +33,20 @@ object Cart {
         return items
     }
 
-    fun removeAll(product: Product): List<CartItem> {
-        _items.removeAll { it.product == product }
+    fun removeAll(productId: Int): List<CartItem> {
+        _items.removeAll { it.product.id == productId }
         return items
+    }
+
+    fun changeCount(productId: Int, count: Int) {
+        _items.find { it.product.id == productId }
+            ?.let { item ->
+                if (count < 1) {
+                    _items.remove(item)
+                    return
+                }
+                val index = _items.indexOf(item)
+                _items[index] = item.copy(count = count)
+            }
     }
 }

@@ -16,7 +16,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun CartList(
     cartItems: List<CartItem>,
     onClickItemRemove: (id: Int) -> Unit,
-    onChangeCount: (id: Int, count: Int) -> Unit,
+    onChangeItemCount: (id: Int, count: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -34,7 +34,7 @@ fun CartList(
                     onClickItemRemove(it.product.id)
                 },
                 onChangeCount = { count ->
-                    onChangeCount(it.product.id, count)
+                    onChangeItemCount(it.product.id, count)
                 }
             )
         }
@@ -76,7 +76,7 @@ private fun CartListPreview() {
                 ),
             ),
             onClickItemRemove = {},
-            onChangeCount = { _, _ -> }
+            onChangeItemCount = { _, _ -> }
         )
     }
 }
