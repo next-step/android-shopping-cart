@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import nextstep.shoppingcart.Cart
 import nextstep.shoppingcart.cart.CartActivity
 import nextstep.shoppingcart.common.Products
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -23,6 +24,7 @@ class ProductDetailActivity : ComponentActivity() {
                     product = Products.items[productId],
                     onBack = ::finish,
                     onClickBottomButton = {
+                        Cart.addOne(Products.items[productId])
                         startActivity(CartActivity.intent(this))
                     }
                 )
