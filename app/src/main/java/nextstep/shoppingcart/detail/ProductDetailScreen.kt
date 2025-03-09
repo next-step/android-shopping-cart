@@ -28,10 +28,9 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun ProductDetailScreen(
     product: Product,
     onBack: () -> Unit,
+    onClickBottomButton: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -43,9 +42,7 @@ fun ProductDetailScreen(
         bottomBar = {
             AddToCartButton(
                 label = stringResource(R.string.add_to_cart),
-                onClick = {
-                    context.startActivity(CartActivity.intent(context))
-                },
+                onClick = onClickBottomButton,
             )
         }
     ) { innerPadding ->
@@ -88,7 +85,8 @@ private fun ProductDetailScreenPreview() {
                 name = "PET보틀-정사각형 어쩌구",
                 price = 10000
             ),
-            onBack = {}
+            onBack = {},
+            onClickBottomButton = {}
         )
     }
 }
