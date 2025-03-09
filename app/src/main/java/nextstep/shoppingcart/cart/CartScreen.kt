@@ -1,12 +1,18 @@
 package nextstep.shoppingcart.cart
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.Cart
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.cart.component.CartList
 import nextstep.shoppingcart.cart.model.CartItem
@@ -14,6 +20,32 @@ import nextstep.shoppingcart.common.component.BackTitleAppBar
 import nextstep.shoppingcart.common.component.BottomButton
 import nextstep.shoppingcart.list.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
+
+@Composable
+fun CartScreen(
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val items = remember { mutableStateOf(Cart.items) }
+    val totalPrice = remember { mutableIntStateOf(Cart.totalPrice) }
+
+    CartScreen(
+        cartItems = items.value,
+        totalPrice = totalPrice.intValue,
+        onBack = onBack,
+        onClickItemRemove = {
+            Cart.removeAll(it)
+            items.value = Cart.items
+            totalPrice.intValue = Cart.totalPrice
+        },
+        onChangeItemCount = { id, count ->
+            Cart.changeCount(id, count)
+            items.value = Cart.items
+            totalPrice.intValue = Cart.totalPrice
+        },
+        modifier = modifier.background(Color.White),
+    )
+}
 
 @Composable
 fun CartScreen(
