@@ -84,7 +84,7 @@ fun CartListItem(
                 horizontalAlignment = Alignment.End
             ) {
                 CartPriceText(
-                    price = cartItem.product.price
+                    price = cartItem.totalPrice
                 )
                 Stepper(
                     count = cartItem.count,
