@@ -68,23 +68,13 @@ fun ProductItem(
                             )
                     )
                 } else {
-                    IconButton(
+                    ProductAddIconButton(
                         onClick = onPlusClick,
                         modifier = Modifier
-                            .testTag("product_add_button")
+                            .align(Alignment.BottomEnd)
                             .padding(bottom = 12.dp, end = 12.dp)
-                            .clip(shape = CircleShape)
-                            .size(42.dp)
-                            .background(color = Color.White)
-                            .align(Alignment.BottomEnd),
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(24.dp),
-                            imageVector = Icons.Filled.Add,
-                            contentDescription = "product_add_button",
-                            tint = Color.Black,
-                        )
-                    }
+                            .testTag("product_add_button"),
+                    )
                 }
             }
             ProductName(
@@ -103,6 +93,27 @@ fun ProductItem(
                 fontSize = 16.sp,
             )
         }
+    }
+}
+
+@Composable
+private fun ProductAddIconButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = modifier
+            .clip(shape = CircleShape)
+            .size(42.dp)
+            .background(color = Color.White),
+    ) {
+        Icon(
+            modifier = Modifier.size(24.dp),
+            imageVector = Icons.Filled.Add,
+            contentDescription = "product_add_button",
+            tint = Color.Black,
+        )
     }
 }
 
