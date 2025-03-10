@@ -4,7 +4,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import nextstep.shoppingcart.data.model.CartItemEntity
-import nextstep.shoppingcart.data.model.ProductEntity
 
 class CartLocalDataSource {
 
@@ -22,13 +21,4 @@ class CartLocalDataSource {
 
         _itemsFlow.value = LinkedHashMap(currentMap)
     }
-
-    fun delete(products: List<ProductEntity>) {
-        val currentMap = _itemsFlow.value.toMutableMap()
-        products.forEach { product ->
-            currentMap.remove(product.id)
-        }
-        _itemsFlow.value = LinkedHashMap(currentMap)
-    }
-
 }

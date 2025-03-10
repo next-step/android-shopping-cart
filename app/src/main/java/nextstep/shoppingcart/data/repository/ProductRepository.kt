@@ -3,7 +3,6 @@ package nextstep.shoppingcart.data.repository
 import nextstep.shoppingcart.data.datasource.ProductLocalDataSource
 import nextstep.shoppingcart.data.datasource.ProductRemoteDataSource
 import nextstep.shoppingcart.data.mapper.toEntity
-import nextstep.shoppingcart.data.model.ProductEntity
 import nextstep.shoppingcart.data.util.SingletonHolder
 
 class ProductRepository private constructor(
@@ -17,10 +16,6 @@ class ProductRepository private constructor(
      */
     suspend fun fetch() {
         productLocalDataSource.replaceAll(productRemoteDataSource.fetch().map { it.toEntity() })
-    }
-
-    fun update(product: ProductEntity) {
-        productLocalDataSource.update(product)
     }
 
     companion object : SingletonHolder<ProductRepository>(
