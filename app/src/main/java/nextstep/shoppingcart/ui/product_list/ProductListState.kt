@@ -10,4 +10,4 @@ data class ProductListState(
     val isLoadingShow: Boolean = false,
     val products: List<Product> = emptyList(),
     val selectedItemCount: Int = 0,
-): Parcelable
+) : Parcelable

@@ -45,7 +45,7 @@ fun ProductListItem(
         modifier = modifier
             .fillMaxWidth()
     ) {
-        Box() {
+        Box {
             SubcomposeAsyncImage(
                 modifier = Modifier.aspectRatio(1 / 1f),
                 model = product.imageUrl,

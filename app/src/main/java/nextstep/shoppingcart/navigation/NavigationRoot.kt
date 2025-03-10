@@ -10,8 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
-import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.basket.BasketScreenRoot
+import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.product_detail.ProductDetailScreenRoot
 import nextstep.shoppingcart.ui.product_list.ProductListScreenRoot
 
