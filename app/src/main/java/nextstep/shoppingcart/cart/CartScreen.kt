@@ -52,20 +52,19 @@ fun CartScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 items(
-                    count = Cart.items.size,
-                    key = { Cart.items[it].product.id },
-                ) { index ->
-                    val cartItem = Cart.items[index]
+                    items = Cart.items.toList(),
+                    key = { it.product.id },
+                ) {
                     CartProduct(
-                        cartItem = cartItem,
-                        onDeleteButtonClick = {
-                            Cart.removeAll(it.product)
+                        cartItem = it,
+                        onDeleteButtonClick = { cartItem ->
+                            Cart.removeAll(cartItem.product)
                         },
-                        onMinusButtonClick = {
-                            Cart.removeOne(it.product)
+                        onMinusButtonClick = { cartItem ->
+                            Cart.removeOne(cartItem.product)
                         },
-                        onPlusButtonClick = {
-                            Cart.addOne(it.product)
+                        onPlusButtonClick = { cartItem ->
+                            Cart.addOne(cartItem.product)
                         },
                     )
                 }
