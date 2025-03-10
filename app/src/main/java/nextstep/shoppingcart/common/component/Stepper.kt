@@ -30,6 +30,7 @@ private object StepperDefaults {
     val fontSize = 22.sp
     val lineHeight = 18.67.sp
     val letterSpacing = 0.5.sp
+    val roundedRadius = 4.dp
 }
 
 @Composable
@@ -49,8 +50,15 @@ fun Stepper(
             onClick = {
                 if (count - step >= minimum) onChangeCount(count - STEP)
             },
-            buttonType = StepperButtonType.LEFT,
-            modifier = Modifier.size(StepperDefaults.buttonSize)
+            modifier = Modifier
+                .size(StepperDefaults.buttonSize)
+                .clip(
+                    RoundedCornerShape(
+                        topStart = StepperDefaults.roundedRadius,
+                        bottomStart = StepperDefaults.roundedRadius
+                    )
+                )
+                .background(Color.White)
         )
         Box(
             modifier = Modifier
@@ -64,54 +72,31 @@ fun Stepper(
             )
         }
         StepperButton(
+            modifier = Modifier
+                .size(StepperDefaults.buttonSize)
+                .clip(
+                    RoundedCornerShape(
+                        topEnd = StepperDefaults.roundedRadius,
+                        bottomEnd = StepperDefaults.roundedRadius
+                    )
+                )
+                .background(Color.White),
             label = stringResource(R.string.plus),
             onClick = {
                 if (count + step <= maximum) onChangeCount(count + STEP)
             },
-            buttonType = StepperButtonType.RIGHT,
-            modifier = Modifier.size(StepperDefaults.buttonSize)
         )
     }
-}
-
-private enum class StepperButtonType(
-    val topStart: Int,
-    val topEnd: Int,
-    val bottomStart: Int,
-    val bottomEnd: Int
-) {
-    RIGHT(
-        topStart = 0,
-        topEnd = 4,
-        bottomStart = 0,
-        bottomEnd = 4
-    ),
-    LEFT(
-        topStart = 4,
-        topEnd = 0,
-        bottomStart = 4,
-        bottomEnd = 0
-    )
 }
 
 @Composable
 private fun StepperButton(
     label: String,
     onClick: () -> Unit,
-    buttonType: StepperButtonType,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
-            .clip(
-                RoundedCornerShape(
-                    topStart = buttonType.topStart.dp,
-                    topEnd = buttonType.topEnd.dp,
-                    bottomStart = buttonType.bottomStart.dp,
-                    bottomEnd = buttonType.bottomEnd.dp
-                )
-            )
-            .background(Color.White)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
