@@ -9,6 +9,5 @@ fun ProductResponse.toEntity(): ProductEntity {
         imageUrl = imageUrl,
         name = name,
         price = price,
-        cartQuantity = 0,
     )
 }

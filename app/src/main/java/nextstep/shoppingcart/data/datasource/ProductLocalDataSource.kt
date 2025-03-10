@@ -9,9 +9,8 @@ import nextstep.shoppingcart.data.model.ProductEntity
 /**
  * Room과 같은 역할을 한다고 가정하고 작성했습니다.
  */
-class ProductLocalDataSource {
+class ProductLocalDataSource() {
 
-    // MutableList로 구현하면 Flow<List<CartItemEntity>>로 반환할 방법이 없어서 MutableStateFlow로 변경했습니다.
     private val _itemsFlow = MutableStateFlow<List<ProductEntity>>(emptyList())
     val itemsFlow: Flow<List<ProductEntity>> = _itemsFlow.asStateFlow()
 
@@ -28,12 +27,6 @@ class ProductLocalDataSource {
     }
 
     fun replaceAll(items: List<ProductEntity>) {
-        _itemsFlow.update { beforeItems ->
-            items.map { item ->
-                item.copy(
-                    cartQuantity = beforeItems.firstOrNull { it.id == item.id }?.cartQuantity ?: 0
-                )
-            }
-        }
+        _itemsFlow.value = items
     }
 }

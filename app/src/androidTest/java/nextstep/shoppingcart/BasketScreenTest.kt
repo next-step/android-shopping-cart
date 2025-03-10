@@ -16,6 +16,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.ui.basket.BasketScreen
 import nextstep.shoppingcart.ui.basket.BasketState
+import nextstep.shoppingcart.ui.model.CartItem
 import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import org.junit.Before
@@ -37,7 +38,7 @@ internal class BasketScreenTest {
                         BasketState(
                             isInitialLoading = false,
                             isLoadingShow = false,
-                            products = defaultItems,
+                            cartItems = defaultItems,
                         )
                     )
                 }
@@ -47,16 +48,19 @@ internal class BasketScreenTest {
                     navigateBack = {},
                     onRemoveCartItemClick = { removeItem ->
                         state = state.copy(
-                            products = state.products.filterNot { item ->
-                                item == removeItem
+                            cartItems = state.cartItems.filterNot { item ->
+                                item.product == removeItem
                             }
                         )
                     },
                     onIncreaseQuantityClick = { increaseItem ->
                         state = state.copy(
-                            products = state.products.map { item ->
-                                if (item == increaseItem) {
-                                    item.copy(cartQuantity = item.cartQuantity + 1)
+                            cartItems = state.cartItems.map { item ->
+                                if (item.product == increaseItem) {
+                                    item.copy(
+                                        product = item.product.copy(cartQuantity = item.quantity + 1),
+                                        quantity = item.quantity + 1,
+                                    )
                                 } else {
                                     item
                                 }
@@ -64,23 +68,23 @@ internal class BasketScreenTest {
                         )
                     },
                     onDecreaseQuantityClick = { decreaseItem ->
-                        val newCartItems = state.products.let { items ->
-                            items.find { it == decreaseItem }?.let { item ->
-                                if (item.cartQuantity > 1) {
+                        val newCartItems = state.cartItems.let { items ->
+                            items.find { it.product == decreaseItem }?.let { item ->
+                                if (item.quantity > 1) {
                                     items.map { current ->
-                                        if (current == decreaseItem) {
-                                            current.copy(cartQuantity = current.cartQuantity - 1)
+                                        if (current.product == decreaseItem) {
+                                            current.copy(quantity = current.quantity - 1)
                                         } else {
                                             current
                                         }
                                     }
                                 } else {
-                                    items.filterNot { it == decreaseItem }
+                                    items.filterNot { it.product == decreaseItem }
                                 }
                             } ?: items
                         }
                         state = state.copy(
-                            products = newCartItems,
+                            cartItems = newCartItems,
                         )
                     },
                 )
@@ -151,12 +155,15 @@ internal class BasketScreenTest {
 
     companion object {
         private val defaultItems = List(100) {
-            Product(
-                id = UUID.randomUUID().toString(),
-                imageUrl = "",
-                name = "Item $it",
-                price = 100,
-                cartQuantity = 1,
+            CartItem(
+                product = Product(
+                    id = UUID.randomUUID().toString(),
+                    imageUrl = "",
+                    name = "Item $it",
+                    price = 100,
+                    cartQuantity = 1,
+                ),
+                quantity = 1,
             )
         }
     }

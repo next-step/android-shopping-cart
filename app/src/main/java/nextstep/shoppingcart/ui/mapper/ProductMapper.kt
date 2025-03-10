@@ -3,7 +3,7 @@ package nextstep.shoppingcart.ui.mapper
 import nextstep.shoppingcart.data.model.ProductEntity
 import nextstep.shoppingcart.ui.model.Product
 
-fun ProductEntity.toUi(): Product {
+fun ProductEntity.toUi(cartQuantity: Int): Product {
     return Product(
         id = id,
         imageUrl = imageUrl,
@@ -19,6 +19,5 @@ fun Product.toEntity(): ProductEntity {
         imageUrl = imageUrl,
         name = name,
         price = price,
-        cartQuantity = cartQuantity,
     )
 }

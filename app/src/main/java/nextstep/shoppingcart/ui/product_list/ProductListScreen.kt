@@ -41,9 +41,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.model.CartItemEntity
+import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.data.repository.ProductRepository
 import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
 import nextstep.shoppingcart.ui.designsystem.ProductListItem
@@ -60,6 +63,7 @@ fun ProductListScreenRoot(
     onProductClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
     productRepository: ProductRepository = ProductRepository.getInstance(),
+    cartRepository: CartRepository = CartRepository.getInstance(),
 ) {
     var state by rememberSaveable {
         mutableStateOf(ProductListState())
@@ -75,18 +79,27 @@ fun ProductListScreenRoot(
     }
 
     LaunchedEffect(Unit) {
-        productRepository.products
-            .onStart {
-                state = state.copy(
-                    isInitialLoading = false,
-                )
+        // 상품 목록 Flow
+        val productFlow = productRepository.products
+
+        // 장바구니 flow
+        val cartFlow = cartRepository.items
+
+        combine(productFlow, cartFlow) { products, cartMap ->
+            products.map { product ->
+                val count = cartMap[product.id]?.quantity ?: 0
+                product.toUi(count)
             }
-            .collect {
-                state = state.copy(
-                    products = it.map { it.toUi() },
-                    selectedItemCount = it.sumOf { it.cartQuantity },
-                )
-            }
+        }.onStart {
+            state = state.copy(
+                isInitialLoading = false,
+            )
+        }.collect {
+            state = state.copy(
+                products = it,
+                selectedItemCount = it.sumOf { it.cartQuantity },
+            )
+        }
     }
 
     // 초기 로딩 시간이 0.5초 보다 오래 걸리는 경우에만 로딩바 보여주기
@@ -112,13 +125,19 @@ fun ProductListScreenRoot(
         onBasketClick = onBasketClick,
         onProductClick = onProductClick,
         onIncreaseQuantityClick = {
-            productRepository.update(
-                it.copy(cartQuantity = it.cartQuantity + 1).toEntity()
+            cartRepository.update(
+                CartItemEntity(
+                    product = it.copy(cartQuantity = it.cartQuantity + 1).toEntity(),
+                    quantity = it.cartQuantity + 1,
+                )
             )
         },
         onDecreaseQuantityClick = {
-            productRepository.update(
-                it.copy(cartQuantity = it.cartQuantity - 1).toEntity()
+            cartRepository.update(
+                CartItemEntity(
+                    product = it.copy(cartQuantity = it.cartQuantity - 1).toEntity(),
+                    quantity = it.cartQuantity - 1,
+                )
             )
         },
         modifier = modifier,

@@ -12,6 +12,9 @@ class ProductRepository private constructor(
 ) {
     val products = productLocalDataSource.itemsFlow
 
+    /**
+     * 장바구니에 담긴 상품이 fetch한 상품 목록에 없을 경우도 대응해야 하지만 pass
+     */
     suspend fun fetch() {
         productLocalDataSource.replaceAll(productRemoteDataSource.fetch().map { it.toEntity() })
     }

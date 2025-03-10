@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.ui.model
 
 import android.os.Parcelable
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -10,7 +11,7 @@ data class Product(
     val name: String,
     val price: Int,
     val cartQuantity: Int,
-): Parcelable {
-    val totalPrice: Int
-        get() = price * cartQuantity
+) : Parcelable {
+    @IgnoredOnParcel
+    val totalPrice: Int = price * cartQuantity
 }

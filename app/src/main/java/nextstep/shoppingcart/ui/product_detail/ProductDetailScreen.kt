@@ -30,7 +30,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.data.repository.ProductRepository
+import nextstep.shoppingcart.data.model.CartItemEntity
+import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.ui.designsystem.ProductDetailItem
 import nextstep.shoppingcart.ui.mapper.toEntity
 import nextstep.shoppingcart.ui.model.Product
@@ -42,7 +43,7 @@ fun ProductDetailScreenRoot(
     navigateBack: () -> Unit,
     onAddBasketClick: () -> Unit,
     modifier: Modifier = Modifier,
-    productRepository: ProductRepository = ProductRepository.getInstance(),
+    cartRepository: CartRepository = CartRepository.getInstance(),
 ) {
     val state by remember {
         mutableStateOf(ProductDetailState(product = product))
@@ -52,8 +53,11 @@ fun ProductDetailScreenRoot(
         state = state,
         navigateBack = navigateBack,
         onAddBasketClick = {
-            productRepository.update(
-                product.copy(cartQuantity = product.cartQuantity + 1).toEntity()
+            cartRepository.update(
+                CartItemEntity(
+                    product = product.copy(cartQuantity = product.cartQuantity + 1).toEntity(),
+                    quantity = product.cartQuantity + 1,
+                )
             )
             onAddBasketClick()
         },

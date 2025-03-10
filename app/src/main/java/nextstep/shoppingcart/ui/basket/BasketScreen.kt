@@ -34,14 +34,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import nextstep.shoppingcart.R
-import nextstep.shoppingcart.data.repository.ProductRepository
+import nextstep.shoppingcart.data.model.CartItemEntity
+import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.ui.designsystem.CartListItem
 import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
 import nextstep.shoppingcart.ui.mapper.toEntity
 import nextstep.shoppingcart.ui.mapper.toUi
+import nextstep.shoppingcart.ui.model.CartItem
 import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -49,7 +50,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun BasketScreenRoot(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    productRepository: ProductRepository = ProductRepository.getInstance(),
+    cartRepository: CartRepository = CartRepository.getInstance(),
 ) {
     var state by rememberSaveable {
         mutableStateOf(BasketState())
@@ -66,19 +67,14 @@ fun BasketScreenRoot(
     }
 
     LaunchedEffect(Unit) {
-        productRepository.products
+        cartRepository.items
             .onStart {
                 state = state.copy(
                     isInitialLoading = false,
                 )
             }
-            .map { items ->
-                items.filter {
-                    it.cartQuantity > 0
-                }
-            }
             .collect { items ->
-                state = state.copy(products = items.map { it.toUi() })
+                state = state.copy(cartItems = items.values.map { it.toUi() })
             }
     }
 
@@ -91,15 +87,28 @@ fun BasketScreenRoot(
     BasketScreen(
         state = state,
         navigateBack = navigateBack,
-        onRemoveCartItemClick = { productRepository.update(it.copy(cartQuantity = 0).toEntity()) },
+        onRemoveCartItemClick = {
+            cartRepository.update(
+                CartItemEntity(
+                    product = it.copy(cartQuantity = 0).toEntity(),
+                    quantity = 0,
+                )
+            )
+        },
         onIncreaseQuantityClick = {
-            productRepository.update(
-                it.copy(cartQuantity = it.cartQuantity + 1).toEntity()
+            cartRepository.update(
+                CartItemEntity(
+                    product = it.copy(cartQuantity = it.cartQuantity + 1).toEntity(),
+                    quantity = it.cartQuantity + 1,
+                )
             )
         },
         onDecreaseQuantityClick = {
-            productRepository.update(
-                it.copy(cartQuantity = it.cartQuantity - 1).toEntity()
+            cartRepository.update(
+                CartItemEntity(
+                    product = it.copy(cartQuantity = it.cartQuantity - 1).toEntity(),
+                    quantity = it.cartQuantity - 1,
+                )
             )
         },
         modifier = modifier,
@@ -132,9 +141,9 @@ internal fun BasketScreen(
                     .weight(1f),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(state.products, key = { it.id }) {
+                items(state.cartItems, key = { it.product.id }) {
                     CartListItem(
-                        item = it,
+                        item = it.product,
                         onRemoveCartItemClick = onRemoveCartItemClick,
                         onIncreaseQuantityClick = onIncreaseQuantityClick,
                         onDecreaseQuantityClick = onDecreaseQuantityClick,
@@ -195,41 +204,56 @@ private fun BasketScreenPreview() {
     ShoppingCartTheme {
         BasketScreen(
             state = BasketState(
-                products = listOf(
-                    Product(
-                        id = "Ilene",
-                        imageUrl = "Linden",
-                        name = "Ignacio",
-                        price = 8650,
-                        cartQuantity = 9757,
+                cartItems = listOf(
+                    CartItem(
+                        product = Product(
+                            id = "Ilene",
+                            imageUrl = "Linden",
+                            name = "Ignacio",
+                            price = 8650,
+                            cartQuantity = 9757,
+                        ),
+                        quantity = 3012,
                     ),
-                    Product(
-                        id = "Stacy",
-                        imageUrl = "Rhyan",
-                        name = "Lester",
-                        price = 3533,
-                        cartQuantity = 3012,
+                    CartItem(
+                        product = Product(
+                            id = "Stacy",
+                            imageUrl = "Rhyan",
+                            name = "Lester",
+                            price = 3533,
+                            cartQuantity = 3012,
+                        ),
+                        quantity = 3012,
                     ),
-                    Product(
-                        id = "A",
-                        imageUrl = "Rhyan",
-                        name = "Lester",
-                        price = 3533,
-                        cartQuantity = 3012,
+                    CartItem(
+                        product = Product(
+                            id = "A",
+                            imageUrl = "Rhyan",
+                            name = "Lester",
+                            price = 3533,
+                            cartQuantity = 3012,
+                        ),
+                        quantity = 3012,
                     ),
-                    Product(
-                        id = "B",
-                        imageUrl = "Rhyan",
-                        name = "Lester",
-                        price = 3533,
-                        cartQuantity = 3012,
+                    CartItem(
+                        product = Product(
+                            id = "B",
+                            imageUrl = "Rhyan",
+                            name = "Lester",
+                            price = 3533,
+                            cartQuantity = 3012,
+                        ),
+                        quantity = 3012,
                     ),
-                    Product(
-                        id = "C",
-                        imageUrl = "Rhyan",
-                        name = "Lester",
-                        price = 3533,
-                        cartQuantity = 3012,
+                    CartItem(
+                        product = Product(
+                            id = "C",
+                            imageUrl = "Rhyan",
+                            name = "Lester",
+                            price = 3533,
+                            cartQuantity = 3012,
+                        ),
+                        quantity = 3012,
                     ),
                 ),
             ),
