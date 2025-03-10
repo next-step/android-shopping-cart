@@ -29,57 +29,32 @@ fun CartScreen(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            CartTopAppBar(onBackButtonClick = {
-                if (context is CartActivity) {
-                    context.finish()
-                }
-            })
-        },
-        containerColor = Color.White,
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier.padding(innerPadding),
-        ) {
-            LazyColumn(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxSize(),
-                contentPadding = PaddingValues(horizontal = 18.dp, vertical = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                items(
-                    items = Cart.items.toList(),
-                    key = { it.product.id },
-                ) {
-                    CartProduct(
-                        cartItem = it,
-                        onDeleteButtonClick = { cartItem ->
-                            Cart.removeAll(cartItem.product)
-                        },
-                        onMinusButtonClick = { cartItem ->
-                            Cart.removeOne(cartItem.product)
-                        },
-                        onPlusButtonClick = { cartItem ->
-                            Cart.addOne(cartItem.product)
-                        },
-                    )
-                }
-            }
-
-            CtaButton(
-                text = stringResource(R.string.order, Cart.totalPrice),
-                onClick = { /* TODO 주문하기 */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(54.dp)
-                    .testTag("orderButton"),
-            )
+    val onBackButtonClick: () -> Unit = {
+        if (context is CartActivity) {
+            context.finish()
         }
     }
+    val onDeleteButtonClick: (CartItem) -> Unit = { cartItem ->
+        Cart.removeAll(cartItem.product)
+    }
+
+    val onMinusButtonClick: (CartItem) -> Unit = { cartItem ->
+        Cart.removeOne(cartItem.product)
+    }
+
+    val onPlusButtonClick: (CartItem) -> Unit = { cartItem ->
+        Cart.addOne(cartItem.product)
+    }
+
+    CartScreen(
+        cartItems = Cart.items.toList(),
+        totalPrice = Cart.totalPrice,
+        onBackButtonClick = onBackButtonClick,
+        onDeleteButtonClick = onDeleteButtonClick,
+        onMinusButtonClick = onMinusButtonClick,
+        onPlusButtonClick = onPlusButtonClick,
+        modifier = modifier,
+    )
 }
 
 
@@ -110,7 +85,10 @@ fun CartScreen(
                 contentPadding = PaddingValues(horizontal = 18.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(cartItems) {
+                items(
+                    items = cartItems,
+                    key = { it.product.id },
+                ) {
                     CartProduct(
                         cartItem = it,
                         onDeleteButtonClick = onDeleteButtonClick,
