@@ -1,8 +1,8 @@
 package nextstep.shoppingcart.common.component
 
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -11,12 +11,13 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun ProductImage(
     imageUrl: String,
     contentDescription: String,
+    contentScale: ContentScale,
     modifier: Modifier = Modifier
 ) {
     AsyncImage(
-        modifier = modifier
-            .aspectRatio(1f),
+        modifier = modifier,
         model = imageUrl,
+        contentScale = contentScale,
         contentDescription = contentDescription
     )
 }
@@ -28,6 +29,7 @@ private fun ProductImagePreview() {
         ProductImage(
             imageUrl = "https://picsum.photos/id/1/300/300",
             contentDescription = "",
+            contentScale = ContentScale.Crop,
         )
     }
 }

@@ -6,6 +6,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class CartActivity : ComponentActivity() {
@@ -15,7 +18,8 @@ class CartActivity : ComponentActivity() {
         setContent {
             ShoppingCartTheme {
                 CartScreen(
-                    onBack = ::finish
+                    onBack = ::finish,
+                    modifier = Modifier.background(Color.White),
                 )
             }
         }

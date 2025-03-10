@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.detail.component
+package nextstep.shoppingcart.common.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,7 +17,7 @@ import nextstep.shoppingcart.ui.theme.Blue50
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun AddToCartButton(
+fun BottomButton(
     label: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -42,9 +42,9 @@ fun AddToCartButton(
 
 @Preview
 @Composable
-private fun AddToCartButtonPreview() {
+private fun BottomButtonPreview() {
     ShoppingCartTheme {
-        AddToCartButton(
+        BottomButton(
             label = "장바구니 담기",
             onClick = {}
         )
