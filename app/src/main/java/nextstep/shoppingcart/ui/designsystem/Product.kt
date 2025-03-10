@@ -37,7 +37,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductListItem(
     product: Product,
-    quantityHandler: @Composable (modifier: Modifier) -> Unit,
+    onIncreaseQuantityClick: (Product) -> Unit,
+    onDecreaseQuantityClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -67,16 +68,29 @@ fun ProductListItem(
                     }
                 }
             )
-            val quantityModifier = if (product.cartQuantity < 1) {
-                Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(8.dp)
+            if (product.cartQuantity < 1) {
+                QuantityHandlerOnlyPlus(
+                    onIncreaseQuantityClick = {
+                        onIncreaseQuantityClick(product)
+                    },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(8.dp),
+                )
             } else {
-                Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 8.dp)
+                QuantityHandler(
+                    quantity = product.cartQuantity,
+                    onIncreaseQuantityClick = {
+                        onIncreaseQuantityClick(product)
+                    },
+                    onDecreaseQuantityClick = {
+                        onDecreaseQuantityClick(product)
+                    },
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 8.dp),
+                )
             }
-            quantityHandler(quantityModifier)
         }
         Text(
             text = product.name,
@@ -164,7 +178,8 @@ private fun ProductListItemPreview() {
                 price = 999_999_999,
                 cartQuantity = 0,
             ),
-            quantityHandler = {},
+            onIncreaseQuantityClick = {},
+            onDecreaseQuantityClick = {},
         )
     }
 }

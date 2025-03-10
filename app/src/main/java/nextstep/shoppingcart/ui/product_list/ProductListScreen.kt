@@ -50,8 +50,6 @@ import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.data.repository.ProductRepository
 import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
 import nextstep.shoppingcart.ui.designsystem.ProductListItem
-import nextstep.shoppingcart.ui.designsystem.QuantityHandler
-import nextstep.shoppingcart.ui.designsystem.QuantityHandlerOnlyPlus
 import nextstep.shoppingcart.ui.mapper.toEntity
 import nextstep.shoppingcart.ui.mapper.toUi
 import nextstep.shoppingcart.ui.model.Product
@@ -205,27 +203,8 @@ private fun ProductListScreen(
             items(state.products) { product ->
                 ProductListItem(
                     product = product,
-                    quantityHandler = {
-                        if (product.cartQuantity < 1) {
-                            QuantityHandlerOnlyPlus(
-                                onIncreaseQuantityClick = {
-                                    onIncreaseQuantityClick(product)
-                                },
-                                modifier = it,
-                            )
-                        } else {
-                            QuantityHandler(
-                                quantity = product.cartQuantity,
-                                onIncreaseQuantityClick = {
-                                    onIncreaseQuantityClick(product)
-                                },
-                                onDecreaseQuantityClick = {
-                                    onDecreaseQuantityClick(product)
-                                },
-                                modifier = it,
-                            )
-                        }
-                    },
+                    onIncreaseQuantityClick = onIncreaseQuantityClick,
+                    onDecreaseQuantityClick = onDecreaseQuantityClick,
                     modifier = Modifier.clickable(
                         onClick = {
                             onProductClick(product)
