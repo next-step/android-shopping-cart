@@ -2,7 +2,6 @@ package nextstep.shoppingcart
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -16,6 +15,9 @@ import org.junit.Test
 class CartScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    private val minusButton get() = composeTestRule.onNodeWithText("−")
+    private val plusButton get() = composeTestRule.onNodeWithText("+")
 
     private val items = mutableStateOf(emptyList<CartItem>())
     private val totalPrice = mutableStateOf(0)
@@ -72,7 +74,7 @@ class CartScreenTest {
         )
 
         // when
-        composeTestRule.onNodeWithText("+").performClick()
+        plusButton.performClick()
 
         // then
         composeTestRule.onNodeWithText("2").assertExists()
@@ -95,7 +97,7 @@ class CartScreenTest {
         )
 
         // when
-        composeTestRule.onNodeWithText("−").performClick()
+        minusButton.performClick()
 
         // then
         composeTestRule.onNodeWithText("1").assertExists()
@@ -118,7 +120,7 @@ class CartScreenTest {
         )
 
         // when
-        composeTestRule.onAllNodesWithText("−")[0].performClick()
+        minusButton.performClick()
 
         // then
         composeTestRule.onNodeWithText("PET보틀 어쩌구").assertDoesNotExist()

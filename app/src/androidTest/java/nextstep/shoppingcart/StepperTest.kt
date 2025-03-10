@@ -14,6 +14,9 @@ class StepperTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
+    private val minusButton get() = composeTestRule.onNodeWithText("−")
+    private val plusButton get() = composeTestRule.onNodeWithText("+")
+
     private val count = mutableStateOf(1)
     private val minimum = 0
     private val maximum = 100
@@ -40,7 +43,7 @@ class StepperTest {
         count.value = 1
 
         // when
-        composeTestRule.onNodeWithText("−").performClick()
+        minusButton.performClick()
 
         // then
         assertTrue(count.value == 0)
@@ -53,7 +56,7 @@ class StepperTest {
         count.value = 1
 
         // when
-        composeTestRule.onNodeWithText("+").performClick()
+        plusButton.performClick()
 
         // then
         assertTrue(count.value == 2)
@@ -66,7 +69,7 @@ class StepperTest {
         count.value = minimum
 
         // when
-        composeTestRule.onNodeWithText("−").performClick()
+        minusButton.performClick()
 
         // then
         assertTrue(count.value == 0)
@@ -79,7 +82,7 @@ class StepperTest {
         count.value = maximum
 
         // when
-        composeTestRule.onNodeWithText("+").performClick()
+        plusButton.performClick()
 
         // then
         assertTrue(count.value == 100)
