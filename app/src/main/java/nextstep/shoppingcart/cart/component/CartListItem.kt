@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,8 +23,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.cart.model.CartItem
 import nextstep.shoppingcart.common.component.ProductImage
@@ -54,9 +58,15 @@ fun CartListItem(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            CartItemTitleText(
+            Text(
                 modifier = Modifier.weight(1f),
-                title = cartItem.product.name
+                text = cartItem.product.name,
+                style = TextStyle(
+                    fontWeight = FontWeight.W700,
+                    fontSize = 20.sp,
+                    lineHeight = 24.sp,
+                    letterSpacing = 0.5.sp
+                )
             )
             IconButton(
                 modifier = Modifier.size(24.dp),
@@ -83,8 +93,14 @@ fun CartListItem(
                 modifier = Modifier.align(Alignment.Bottom),
                 horizontalAlignment = Alignment.End
             ) {
-                CartPriceText(
-                    price = cartItem.totalPrice
+                Text(
+                    text = stringResource(R.string.price_format, cartItem.totalPrice),
+                    style = TextStyle(
+                        fontWeight = FontWeight.W400,
+                        fontSize = 16.sp,
+                        lineHeight = 26.67.sp,
+                        letterSpacing = 0.5.sp
+                    ),
                 )
                 Stepper(
                     count = cartItem.count,
