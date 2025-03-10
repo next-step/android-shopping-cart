@@ -36,11 +36,10 @@ import nextstep.shoppingcart.data.Product
 @Composable
 fun ProductItem(
     product: Product,
-    count: Int,
-    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     onPlusClick: () -> Unit,
     onMinusClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier = modifier,
@@ -55,9 +54,9 @@ fun ProductItem(
                     modifier = Modifier
                         .fillMaxWidth(),
                 )
-                if (count > 0) {
+                if (product.count > 0) {
                     QuantityController(
-                        count = count,
+                        count = product.count,
                         onMinusClick = onMinusClick,
                         onPlusClick = onPlusClick,
                         modifier = Modifier
@@ -71,7 +70,8 @@ fun ProductItem(
                 } else {
                     IconButton(
                         onClick = onPlusClick,
-                        modifier = Modifier.testTag("product_add_button")
+                        modifier = Modifier
+                            .testTag("product_add_button")
                             .padding(bottom = 12.dp, end = 12.dp)
                             .clip(shape = CircleShape)
                             .size(42.dp)
@@ -106,20 +106,23 @@ fun ProductItem(
     }
 }
 
-private class ProductItemPreviewParameterProvider : PreviewParameterProvider<Int> {
-    override val values = sequenceOf(0, 1)
+private class ProductItemPreviewParameterProvider : PreviewParameterProvider<Product> {
+    val product1 = DummyProduct.product1
+    val product2 = DummyProduct.product2.apply { count = 1 }
+
+    override val values = sequenceOf(
+        product1,
+        product2
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun ProductItemPreview(
-    @PreviewParameter(ProductItemPreviewParameterProvider::class) count: Int,
+    @PreviewParameter(ProductItemPreviewParameterProvider::class) product: Product,
 ) {
-    val product = DummyProduct.product1
-
     ProductItem(
         product = product,
-        count = count,
         onClick = {},
         onPlusClick = {},
         onMinusClick = {},

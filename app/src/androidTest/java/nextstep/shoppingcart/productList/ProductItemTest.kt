@@ -32,7 +32,6 @@ class ProductItemTest {
         composeTestRule.setContent {
             ProductItem(
                 product = product,
-                count = 0,
                 onClick = {},
                 onPlusClick = {},
                 onMinusClick = {}
@@ -51,7 +50,6 @@ class ProductItemTest {
         composeTestRule.setContent {
             ProductItem(
                 product = product,
-                count = 0,
                 onClick = {},
                 onPlusClick = {},
                 onMinusClick = {}
@@ -70,7 +68,6 @@ class ProductItemTest {
         composeTestRule.setContent {
             ProductItem(
                 product = product,
-                count = 0,
                 onClick = {},
                 onPlusClick = {},
                 onMinusClick = {}
@@ -86,10 +83,11 @@ class ProductItemTest {
     @Test
     fun product의_count가_3이면_장바구니_추가_버튼이_보이지_않아야_한다() {
         // given
+        val product = this.product.copy(count = 3)
+
         composeTestRule.setContent {
             ProductItem(
                 product = product,
-                count = 3,
                 onClick = {},
                 onPlusClick = {},
                 onMinusClick = {}
@@ -106,10 +104,11 @@ class ProductItemTest {
     @Test
     fun product의_count가_3이면_장바구니_수량_조절_컴포넌트가_보여야_한다() {
         // given
+        val product = this.product.copy(count = 3)
+
         composeTestRule.setContent {
             ProductItem(
                 product = product,
-                count = 3,
                 onClick = {},
                 onPlusClick = {},
                 onMinusClick = {}
@@ -125,10 +124,11 @@ class ProductItemTest {
     @Test
     fun product의_count가_0이면_장바구니_수량_조절_컴포넌트가_보이지_않아야_한다() {
         // given
+        val product = this.product.copy()
+
         composeTestRule.setContent {
             ProductItem(
                 product = product,
-                count = 0,
                 onClick = {},
                 onPlusClick = {},
                 onMinusClick = {}

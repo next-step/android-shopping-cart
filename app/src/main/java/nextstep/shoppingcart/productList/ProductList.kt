@@ -10,13 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.DummyProduct
 import nextstep.shoppingcart.data.Product
 
 @Composable
 fun ProductList(
-    productAndCountList: List<Pair<Product, Int>> = emptyList(),
+    products: List<Product>,
     onItemClick: (Product) -> Unit,
     onPlusClick: (Product) -> Unit,
     onMinusClick: (Product) -> Unit,
@@ -29,20 +28,19 @@ fun ProductList(
         verticalArrangement = Arrangement.spacedBy(20.dp),
         modifier = modifier,
     ) {
-        items(productAndCountList) {
+        items(products) { product->
             ProductItem(
-                product = it.first,
-                count = it.second,
-                modifier = Modifier.fillMaxWidth(),
+                product = product,
                 onClick = {
-                    onItemClick(it.first)
+                    onItemClick(product)
                 },
                 onPlusClick = {
-                    onPlusClick(it.first)
+                    onPlusClick(product)
                 },
                 onMinusClick = {
-                    onMinusClick(it.first)
+                    onMinusClick(product)
                 },
+                modifier = Modifier.fillMaxWidth(),
             )
         }
     }
@@ -51,12 +49,10 @@ fun ProductList(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListPreview() {
-    val productAndCountList = DummyProduct.productDummyList.map {
-        it to (Cart.getCartCount(it))
-    }
+    val products = DummyProduct.productDummyList
 
     ProductList(
-        productAndCountList = productAndCountList,
+        products = products,
         onItemClick = {},
         onPlusClick = {},
         onMinusClick = {},
