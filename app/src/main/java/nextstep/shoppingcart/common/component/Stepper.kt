@@ -48,7 +48,8 @@ fun Stepper(
         StepperButton(
             label = stringResource(R.string.minus),
             onClick = {
-                if (count - step >= minimum) onChangeCount(count - STEP)
+                if (count - step in minimum..maximum) onChangeCount(count - STEP)
+                else if (count !in minimum..maximum) onChangeCount(count.coerceIn(minimum..maximum))
             },
             modifier = Modifier
                 .size(StepperDefaults.buttonSize)
@@ -83,7 +84,8 @@ fun Stepper(
                 .background(Color.White),
             label = stringResource(R.string.plus),
             onClick = {
-                if (count + step <= maximum) onChangeCount(count + STEP)
+                if (count + step in minimum..maximum) onChangeCount(count + STEP)
+                else if (count !in minimum..maximum) onChangeCount(count.coerceIn(minimum..maximum))
             },
         )
     }
@@ -129,13 +131,13 @@ private fun StepperText(
 @Preview
 @Composable
 private fun StepperPreview() {
-    val count = remember { mutableIntStateOf(1) }
+    val count = remember { mutableIntStateOf(0) }
     ShoppingCartTheme {
         Stepper(
             count = count.intValue,
             onChangeCount = { count.intValue = it },
             minimum = 0,
-            maximum = 999,
+            maximum = 10,
             modifier = Modifier
         )
     }
