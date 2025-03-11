@@ -28,21 +28,13 @@ fun QuantityController(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier
+        modifier = modifier.testTag("quantity_controller"),
     ) {
-        TextButton(
+        CountTextButton(
+            text = "-",
             onClick = onMinusClick,
-            modifier = Modifier.size(42.dp).testTag("minus_button"),
-            colors = ButtonDefaults.textButtonColors(
-                contentColor = Color.Black,
-            ),
-        ) {
-            Text(
-                text = "-",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.W700,
-            )
-        }
+            modifier = Modifier.testTag("minus_button"),
+        )
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier.size(42.dp),
@@ -54,19 +46,32 @@ fun QuantityController(
                 modifier = Modifier.testTag("quantity_text"),
             )
         }
-        TextButton(
+        CountTextButton(
+            text = "+",
             onClick = onPlusClick,
-            modifier = Modifier.size(42.dp).testTag("plus_button"),
-            colors = ButtonDefaults.textButtonColors(
-                contentColor = Color.Black,
-            ),
-        ) {
-            Text(
-                text = "+",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.W700,
-            )
-        }
+            modifier = Modifier.testTag("plus_button"),
+        )
+    }
+}
+
+@Composable
+private fun CountTextButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    TextButton(
+        onClick = onClick,
+        modifier = modifier.size(42.dp),
+        colors = ButtonDefaults.textButtonColors(
+            contentColor = Color.Black,
+        ),
+    ) {
+        Text(
+            text = text,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.W700,
+        )
     }
 }
 

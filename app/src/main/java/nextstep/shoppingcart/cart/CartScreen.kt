@@ -13,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,6 +23,40 @@ import nextstep.shoppingcart.component.CtaButton
 import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.CartItem
 import nextstep.shoppingcart.data.DummyProduct
+
+@Composable
+fun CartScreen(
+    modifier: Modifier = Modifier,
+) {
+    val context = LocalContext.current
+    val onBackButtonClick: () -> Unit = {
+        if (context is CartActivity) {
+            context.finish()
+        }
+    }
+    val onDeleteButtonClick: (CartItem) -> Unit = { cartItem ->
+        Cart.removeAll(cartItem.product)
+    }
+
+    val onMinusButtonClick: (CartItem) -> Unit = { cartItem ->
+        Cart.removeOne(cartItem.product)
+    }
+
+    val onPlusButtonClick: (CartItem) -> Unit = { cartItem ->
+        Cart.addOne(cartItem.product)
+    }
+
+    CartScreen(
+        cartItems = Cart.items.toList(),
+        totalPrice = Cart.totalPrice,
+        onBackButtonClick = onBackButtonClick,
+        onDeleteButtonClick = onDeleteButtonClick,
+        onMinusButtonClick = onMinusButtonClick,
+        onPlusButtonClick = onPlusButtonClick,
+        modifier = modifier,
+    )
+}
+
 
 @Composable
 fun CartScreen(
@@ -50,7 +85,10 @@ fun CartScreen(
                 contentPadding = PaddingValues(horizontal = 18.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(cartItems) {
+                items(
+                    items = cartItems,
+                    key = { it.product.id },
+                ) {
                     CartProduct(
                         cartItem = it,
                         onDeleteButtonClick = onDeleteButtonClick,
@@ -75,13 +113,17 @@ fun CartScreen(
 @Preview(showBackground = true)
 @Composable
 private fun CartScreenPreview() {
-    Cart.addOne(DummyProduct.product1)
-    Cart.addOne(DummyProduct.product2)
-    Cart.addOne(DummyProduct.product3)
+    val cartItems = listOf(
+        CartItem(DummyProduct.product1, 1),
+        CartItem(DummyProduct.product2, 2),
+        CartItem(DummyProduct.product3, 3),
+    )
+
+    val totalPrice = cartItems.sumOf { it.product.price * it.count }
 
     CartScreen(
-        cartItems = Cart.items,
-        totalPrice = Cart.totalPrice,
+        cartItems = cartItems,
+        totalPrice = totalPrice,
         onBackButtonClick = {},
         onDeleteButtonClick = {},
         onMinusButtonClick = {},

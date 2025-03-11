@@ -1,16 +1,11 @@
 package nextstep.shoppingcart.cart
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.Product
-import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -46,14 +41,7 @@ class CartScreenTest {
         Cart.addOne(product2)
 
         composeTestRule.setContent {
-            CartScreen(
-                cartItems = Cart.items,
-                totalPrice = Cart.totalPrice,
-                onBackButtonClick = {},
-                onDeleteButtonClick = {},
-                onMinusButtonClick = {},
-                onPlusButtonClick = {},
-            )
+            CartScreen()
         }
 
         // then
@@ -68,29 +56,7 @@ class CartScreenTest {
         Cart.addOne(product1)
 
         composeTestRule.setContent {
-            ShoppingCartTheme {
-                var cartItems by remember { mutableStateOf(Cart.items) }
-
-                CartScreen(
-                    cartItems = cartItems,
-                    totalPrice = Cart.totalPrice,
-                    onBackButtonClick = {
-
-                    },
-                    onDeleteButtonClick = {
-                        Cart.removeAll(it.product)
-                        cartItems = Cart.items
-                    },
-                    onMinusButtonClick = {
-                        Cart.removeOne(it.product)
-                        cartItems = Cart.items
-                    },
-                    onPlusButtonClick = {
-                        Cart.addOne(it.product)
-                        cartItems = Cart.items
-                    },
-                )
-            }
+            CartScreen()
         }
 
         // then
@@ -113,29 +79,7 @@ class CartScreenTest {
         Cart.addOne(product1)
 
         composeTestRule.setContent {
-            ShoppingCartTheme {
-                var cartItems by remember { mutableStateOf(Cart.items) }
-
-                CartScreen(
-                    cartItems = cartItems,
-                    totalPrice = Cart.totalPrice,
-                    onBackButtonClick = {
-
-                    },
-                    onDeleteButtonClick = {
-                        Cart.removeAll(it.product)
-                        cartItems = Cart.items
-                    },
-                    onMinusButtonClick = {
-                        Cart.removeOne(it.product)
-                        cartItems = Cart.items
-                    },
-                    onPlusButtonClick = {
-                        Cart.addOne(it.product)
-                        cartItems = Cart.items
-                    },
-                )
-            }
+            CartScreen()
         }
 
         // then
@@ -159,29 +103,7 @@ class CartScreenTest {
         Cart.addOne(product1)
 
         composeTestRule.setContent {
-            ShoppingCartTheme {
-                var cartItems by remember { mutableStateOf(Cart.items) }
-
-                CartScreen(
-                    cartItems = cartItems,
-                    totalPrice = Cart.totalPrice,
-                    onBackButtonClick = {
-
-                    },
-                    onDeleteButtonClick = {
-                        Cart.removeAll(it.product)
-                        cartItems = Cart.items
-                    },
-                    onMinusButtonClick = {
-                        Cart.removeOne(it.product)
-                        cartItems = Cart.items
-                    },
-                    onPlusButtonClick = {
-                        Cart.addOne(it.product)
-                        cartItems = Cart.items
-                    },
-                )
-            }
+            CartScreen()
         }
 
         // then
@@ -204,29 +126,7 @@ class CartScreenTest {
         Cart.addOne(product1)
 
         composeTestRule.setContent {
-            ShoppingCartTheme {
-                var cartItems by remember { mutableStateOf(Cart.items) }
-
-                CartScreen(
-                    cartItems = cartItems,
-                    totalPrice = Cart.totalPrice,
-                    onBackButtonClick = {
-
-                    },
-                    onDeleteButtonClick = {
-                        Cart.removeAll(it.product)
-                        cartItems = Cart.items
-                    },
-                    onMinusButtonClick = {
-                        Cart.removeOne(it.product)
-                        cartItems = Cart.items
-                    },
-                    onPlusButtonClick = {
-                        Cart.addOne(it.product)
-                        cartItems = Cart.items
-                    },
-                )
-            }
+            CartScreen()
         }
 
         // then
