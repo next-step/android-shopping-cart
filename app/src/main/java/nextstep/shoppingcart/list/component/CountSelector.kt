@@ -35,10 +35,11 @@ fun CountSelector(
         if (count == 0) {
             AddButton(
                 onClick = { onChangeCount(1) },
-                modifier = Modifier.size(42.dp)
+                modifier = Modifier.size(42.dp).align(Alignment.BottomEnd)
             )
         } else {
             Stepper(
+                modifier = Modifier.align(Alignment.Center),
                 count = count,
                 onChangeCount = onChangeCount,
                 minimum = 0,
