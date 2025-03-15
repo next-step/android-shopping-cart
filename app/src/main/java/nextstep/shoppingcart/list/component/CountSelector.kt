@@ -30,7 +30,6 @@ fun CountSelector(
 ) {
     Box(
         modifier = modifier,
-        contentAlignment = Alignment.CenterEnd
     ) {
         if (count == 0) {
             AddButton(
