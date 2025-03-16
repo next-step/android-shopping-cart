@@ -1,7 +1,6 @@
 package nextstep.shoppingcart.cart.component
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,14 +19,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.ProductImage
+import nextstep.shoppingcart.ui.component.QuantityControl
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 import nextstep.shoppingcart.util.translateNumberMoneyFormat
 
@@ -87,7 +85,8 @@ private fun CartProductPrice(
         }
 
         QuantityControl(
-            cartItem = cartItem,
+            item = cartItem.product,
+            count = cartItem.count,
             onDecreaseProductQuantity = onRemoveOneFromCart,
             onIncreaseProductQuantity = onAddOneToCart,
             modifier = Modifier
@@ -95,54 +94,6 @@ private fun CartProductPrice(
                 .align(Alignment.End)
                 .weight(1f, fill = true)
         )
-    }
-}
-
-@Composable
-private fun QuantityControl(
-    cartItem: CartItem,
-    onDecreaseProductQuantity: (Product) -> Unit,
-    onIncreaseProductQuantity: (Product) -> Unit,
-    modifier: Modifier
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box(
-            modifier = Modifier
-                .size(42.dp)
-                .testTag("onRemoveOneFromCart ${cartItem.product.name}")
-                .clickable {
-                    onDecreaseProductQuantity(cartItem.product)
-                }, contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "−",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
-        Text(
-            text = cartItem.count.toString(),
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold
-        )
-        Box(
-            modifier = Modifier
-                .size(42.dp)
-                .testTag("addOneToCart ${cartItem.product.name}")
-                .clickable {
-                    onIncreaseProductQuantity(cartItem.product)
-                },
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "+",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
     }
 }
 
