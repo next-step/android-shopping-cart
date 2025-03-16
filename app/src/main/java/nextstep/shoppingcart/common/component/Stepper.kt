@@ -48,8 +48,7 @@ fun Stepper(
         StepperButton(
             label = stringResource(R.string.minus),
             onClick = {
-                if (count - step in minimum..maximum) onChangeCount(count - STEP)
-                else if (count !in minimum..maximum) onChangeCount(count.coerceIn(minimum..maximum))
+                onChangeCount((count - step).coerceIn(minimum..maximum))
             },
             modifier = Modifier
                 .size(StepperDefaults.buttonSize)
@@ -84,8 +83,7 @@ fun Stepper(
                 .background(Color.White),
             label = stringResource(R.string.plus),
             onClick = {
-                if (count + step in minimum..maximum) onChangeCount(count + STEP)
-                else if (count !in minimum..maximum) onChangeCount(count.coerceIn(minimum..maximum))
+                onChangeCount((count + step).coerceIn(minimum..maximum))
             },
         )
     }

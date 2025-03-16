@@ -11,4 +11,5 @@
     <string name="plus">+</string>
     <string name="remove">삭제</string>
     <string name="order_price_format">주문하기(%,d원)</string>
+    <string name="add">추가</string>
 </resources>

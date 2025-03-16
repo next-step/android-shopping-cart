@@ -1,13 +1,18 @@
 package nextstep.shoppingcart.list.component
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -26,19 +31,35 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ProductListItem(
     product: Product,
+    count: Int,
+    onChangeCount: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
     ) {
-        ProductImage(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f),
-            imageUrl = product.imageUrl,
-            contentScale = ContentScale.Crop,
-            contentDescription = product.name,
-        )
+                .aspectRatio(1f)
+        ) {
+            ProductImage(
+                modifier = Modifier
+                    .fillMaxSize(),
+                imageUrl = product.imageUrl,
+                contentScale = ContentScale.Crop,
+                contentDescription = product.name,
+            )
+            CountSelector(
+                count = count,
+                onChangeCount = onChangeCount,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(18.dp)
+                    .align(Alignment.BottomEnd)
+            )
+        }
+
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             modifier = Modifier
@@ -76,13 +97,16 @@ fun ProductListItem(
 @Composable
 private fun ProductListItemPreview() {
     ShoppingCartTheme {
+        val count = remember { mutableIntStateOf(0) }
         ProductListItem(
             product = Product(
                 id = 0,
                 imageUrl = "https://picsum.photos/id/1/300/300",
                 name = "상품명",
-                price = 10000
-            )
+                price = 10000,
+            ),
+            count = count.intValue,
+            onChangeCount = { count.intValue = it }
         )
     }
 }
