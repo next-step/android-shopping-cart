@@ -17,9 +17,9 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun CartScreen(
-    viewModel: CartViewModel = viewModel(),
     onBackButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
+    viewModel: CartViewModel = viewModel()
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     CartScreen(
