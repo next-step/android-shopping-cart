@@ -37,10 +37,6 @@ class ProductListActivity : ComponentActivity() {
                         startActivity(CartActivity.intent(this))
                     },
                     onChangeCount = { id, count ->
-                        if (count == 1) {
-                            val item = Products.items.find { it.id == id }
-                            if (item != null) Cart.addOne(item)
-                        }
                         Cart.changeCount(id, count)
                     }
                 )

@@ -24,7 +24,7 @@ class ProductDetailActivity : ComponentActivity() {
                     product = Products.items[productId],
                     onBack = ::finish,
                     onClickBottomButton = {
-                        Cart.addOne(Products.items[productId])
+                        Cart.addOne(productId)
                         startActivity(CartActivity.intent(this))
                     }
                 )
