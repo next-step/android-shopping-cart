@@ -86,46 +86,62 @@ private fun CartProductPrice(
             )
         }
 
-        Row(
+        QuantityControl(
+            cartItem = cartItem,
+            onDecreaseProductQuantity = onRemoveOneFromCart,
+            onIncreaseProductQuantity = onAddOneToCart,
             modifier = Modifier
                 .width(126.dp)
                 .align(Alignment.End)
-                .weight(1f, fill = true),
-            verticalAlignment = Alignment.CenterVertically
+                .weight(1f, fill = true)
+        )
+    }
+}
+
+@Composable
+private fun QuantityControl(
+    cartItem: CartItem,
+    onDecreaseProductQuantity: (Product) -> Unit,
+    onIncreaseProductQuantity: (Product) -> Unit,
+    modifier: Modifier
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .size(42.dp)
+                .testTag("onRemoveOneFromCart ${cartItem.product.name}")
+                .clickable {
+                    onDecreaseProductQuantity(cartItem.product)
+                }, contentAlignment = Alignment.Center
         ) {
-            Box(
-                modifier = Modifier
-                    .size(42.dp)
-                    .testTag("onRemoveOneFromCart ${cartItem.product.name}")
-                    .clickable {
-                        onRemoveOneFromCart(cartItem.product)
-                    }, contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "−",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
             Text(
-                text = cartItem.count.toString(),
+                text = "−",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold
             )
-            Box(
-                modifier = Modifier
-                    .size(42.dp)
-                    .testTag("addOneToCart ${cartItem.product.name}")
-                    .clickable {
-                        onAddOneToCart(cartItem.product)
-                    }, contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "+",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+        }
+        Text(
+            text = cartItem.count.toString(),
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Box(
+            modifier = Modifier
+                .size(42.dp)
+                .testTag("addOneToCart ${cartItem.product.name}")
+                .clickable {
+                    onIncreaseProductQuantity(cartItem.product)
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "+",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
         }
     }
 }
