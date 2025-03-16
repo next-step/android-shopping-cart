@@ -1,9 +1,12 @@
 package nextstep.shoppingcart.cart.model
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.model.Product
 
@@ -15,21 +18,22 @@ class CartViewModel(private val repository: Cart = Cart) :
     val uiState: StateFlow<CartUiState> = _uiState.asStateFlow()
 
     init {
-        _uiState.value = CartUiState(repository.totalPrice, repository.items)
+        viewModelScope.launch {
+            repository.itemsFlow.collectLatest { cartItems ->
+                _uiState.value = CartUiState(repository.totalPrice, cartItems)
+            }
+        }
     }
 
     fun addOne(product: Product) {
         repository.addOne(product)
-        _uiState.value = CartUiState(repository.totalPrice, repository.items)
     }
 
     fun removeOne(product: Product) {
         repository.removeOne(product)
-        _uiState.value = CartUiState(repository.totalPrice, repository.items)
     }
 
     fun removeAll(product: Product) {
         repository.removeAll(product)
-        _uiState.value = CartUiState(repository.totalPrice, repository.items)
     }
 }
