@@ -52,4 +52,8 @@ object Cart {
         updateItemsFlow()
         return items
     }
+
+    fun clearCartItem() {
+        _items.clear()
+    }
 }
