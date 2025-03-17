@@ -2,11 +2,13 @@ package nextstep.shoppingcart
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.productlist.ProductListScreen
 import nextstep.shoppingcart.productlist.model.ProductListUiState
+import nextstep.shoppingcart.productlist.model.ProductWithCartInfo
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -24,7 +26,10 @@ class ProductListScreenTest {
             ProductListScreen(
                 uiState = fakeUiState.value,
                 navigateToProductDetail = {},
-                navigateToCart = {}
+                navigateToCart = {},
+                onDecreaseProductQuantity = {},
+                onIncreaseProductQuantity = {},
+                modifier = Modifier
             )
         }
     }
@@ -55,7 +60,7 @@ class ProductListScreenTest {
     fun 상품_리스트_로드_성공시_상품이_노출된다() {
         // when
         fakeUiState.value =
-            ProductListUiState.Success(products = productTestDataList)
+            ProductListUiState.Success(products = productTestDataList.map { ProductWithCartInfo(it) })
 
         // then
         composeTestRule
