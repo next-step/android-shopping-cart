@@ -1,1 +1,17 @@
 # android-shopping-cart
+
+## 기능 요구 사항
+
+상품 목록 화면을 구현한다.
+
+## 프로그래밍 요구 사항
+
+* 컴포즈 학습 집중을 위해 ViewModel, Hilt 등은 장바구니 미션에서 활용하지 않는다.
+* 상품 목록 화면을 구현할 때 Lazy 컴포넌트를 활용한다.
+* 컴포저블 함수가 너무 많은 일을 하지 않도록 분리하기 위해 노력해 본다.
+* 의미있는 단위의 함수를 모아 별도의 파일로 분리해본다.
+
+## 디자인 시안
+* [피그마](https://www.figma.com/design/OhrMuSgyoqk6nBty3BBA1u/%ED%95%99%EC%8A%B5-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A1%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-Compose-%EB%AF%B8%EC%85%98-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=371-895&p=f&t=ljye7ZenxIQB6KFL-0)
+
+
