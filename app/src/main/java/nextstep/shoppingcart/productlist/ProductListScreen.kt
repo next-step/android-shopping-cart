@@ -6,12 +6,18 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import nextstep.shoppingcart.data.ProductsTestData
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.productlist.component.ProductListContents
 import nextstep.shoppingcart.productlist.model.ProductListUiState
+import nextstep.shoppingcart.productlist.model.ProductListViewModel
+import nextstep.shoppingcart.productlist.model.ProductWithCartInfo
 import nextstep.shoppingcart.ui.component.CommonEmptyScreen
 import nextstep.shoppingcart.ui.component.CommonErrorScreen
 import nextstep.shoppingcart.ui.component.CommonLoading
@@ -20,10 +26,30 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductListScreen(
-    uiState: ProductListUiState,
     navigateToProductDetail: (String) -> Unit,
     navigateToCart: () -> Unit,
     modifier: Modifier = Modifier,
+    viewModel: ProductListViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    ProductListScreen(
+        uiState = uiState,
+        modifier = modifier,
+        navigateToCart = navigateToCart,
+        navigateToProductDetail = navigateToProductDetail,
+        onIncreaseProductQuantity = { product -> viewModel.addOne(product) },
+        onDecreaseProductQuantity = { product -> viewModel.removeOne(product) })
+}
+
+@Composable
+fun ProductListScreen(
+    modifier: Modifier,
+    uiState: ProductListUiState,
+    navigateToCart: () -> Unit,
+    navigateToProductDetail: (String) -> Unit,
+    onDecreaseProductQuantity: (Product) -> Unit,
+    onIncreaseProductQuantity: (Product) -> Unit,
 ) {
     when (uiState) {
 
@@ -46,6 +72,8 @@ fun ProductListScreen(
                         .padding(horizontal = 12.dp),
                     productItems = uiState.products,
                     navigateToProductDetail = { id -> navigateToProductDetail(id) },
+                    onDecreaseProductQuantity = onDecreaseProductQuantity,
+                    onIncreaseProductQuantity = onIncreaseProductQuantity,
                 )
             }
         }
@@ -59,9 +87,10 @@ fun ProductListScreen(
 @Preview(showBackground = true)
 @Composable
 private fun ProductListScreenPreview() {
-    val uiState = ProductListUiState.Success(ProductsTestData.productTestDataList)
+    val uiState =
+        ProductListUiState.Success(ProductsTestData.productTestDataList.map { ProductWithCartInfo(it) })
     ShoppingCartTheme {
-        ProductListScreen(uiState, {}, {})
+        ProductListScreen(Modifier, uiState, {}, {}, {}, {})
     }
 }
 
@@ -70,7 +99,7 @@ private fun ProductListScreenPreview() {
 private fun ProductListScreenLoadingPreview() {
     val uiState = ProductListUiState.Loading
     ShoppingCartTheme {
-        ProductListScreen(uiState, {}, {})
+        ProductListScreen(Modifier, uiState, {}, {}, {}, {})
     }
 }
 
