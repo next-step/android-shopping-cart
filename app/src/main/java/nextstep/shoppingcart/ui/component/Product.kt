@@ -15,40 +15,42 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.productlist.component.ProductQuantityControl
+import nextstep.shoppingcart.productlist.model.ProductWithCartInfo
 import nextstep.shoppingcart.util.translateNumberMoneyFormat
 
 @Composable
 fun Product(
-    product: Product,
+    product: ProductWithCartInfo,
     navigateToProductDetail: (String) -> Unit,
+    onDecreaseProductQuantity: (Product) -> Unit,
+    onIncreaseProductQuantity: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier.clickable { navigateToProductDetail(product.productId) }) {
+    Column(modifier = modifier.clickable { navigateToProductDetail(product.product.productId) }) {
         Box(contentAlignment = Alignment.BottomCenter) {
             ProductImage(
-                imageUrl = product.imageUrl,
-                contentDescription = "${product.name} 이미지",
+                imageUrl = product.product.imageUrl,
+                contentDescription = "${product.product.name} 이미지",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 6.dp),
             )
             ProductQuantityControl(
                 item = product,
-                quantity = 1,
-                onDecreaseProductQuantity = {},
-                onIncreaseProductQuantity = {},
+                onDecreaseProductQuantity = onDecreaseProductQuantity,
+                onIncreaseProductQuantity = onIncreaseProductQuantity,
                 modifier = Modifier,
             )
 
         }
 
         Text(
-            product.name,
+            product.product.name,
             fontWeight = FontWeight.Bold,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
-        Text(translateNumberMoneyFormat(product.price))
+        Text(translateNumberMoneyFormat(product.product.price))
     }
 }
 
@@ -56,12 +58,16 @@ fun Product(
 @Composable
 private fun ProductPreview() {
     Product(
-        product = Product(
-            name = "PET 보틀 - 정사각형 음료수,사각형 음료수",
-            imageUrl = "https://cdn.digitaltoday.co.kr/news/photo/202502/553394_517550_359.jpg",
-            price = 100000,
-            productId = "상세로이동"
+        product = ProductWithCartInfo(
+            product = Product(
+                name = "Dan Kelley",
+                imageUrl = "https://search.yahoo.com/search?p=morbi",
+                price = 8509,
+                productId = "mea"
+            ), cartCount = 6170
         ),
-        navigateToProductDetail = {}
+        navigateToProductDetail = {},
+        onDecreaseProductQuantity = {},
+        onIncreaseProductQuantity = {},
     )
 }

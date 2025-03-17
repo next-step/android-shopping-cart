@@ -9,32 +9,32 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.productlist.model.ProductWithCartInfo
 import nextstep.shoppingcart.ui.component.CrossButton
 import nextstep.shoppingcart.ui.component.QuantityControl
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ProductQuantityControl(
-    item: Product,
-    quantity: Int,
+    item: ProductWithCartInfo,
     onDecreaseProductQuantity: (Product) -> Unit,
     onIncreaseProductQuantity: (Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
     when {
-        quantity == 0 -> {
+        item.cartCount == 0 -> {
             CrossButton(
-                onClick = { onIncreaseProductQuantity(item) },
+                onClick = { onIncreaseProductQuantity(item.product) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(12.dp)
             )
         }
 
-        quantity > 0 -> {
+        item.cartCount > 0 -> {
             QuantityControl(
-                item = item,
-                count = quantity,
+                item = item.product,
+                count = item.cartCount,
                 onDecreaseProductQuantity = onDecreaseProductQuantity,
                 onIncreaseProductQuantity = onIncreaseProductQuantity,
                 modifier = modifier
@@ -50,15 +50,17 @@ fun ProductQuantityControl(
 private fun QuantityZero0Preview() {
     ShoppingCartTheme {
         ProductQuantityControl(
-            item = Product(
-                name = "Eileen Houston",
-                imageUrl = "https://www.google.com/#q=luptatum",
-                price = 2192,
-                productId = "qualisque"
-
-            ), quantity = 0, modifier = Modifier,
+            modifier = Modifier,
             onDecreaseProductQuantity = {},
-            onIncreaseProductQuantity = {}
+            onIncreaseProductQuantity = {},
+            item = ProductWithCartInfo(
+                product = Product(
+                    name = "Geraldine Jones",
+                    imageUrl = "http://www.bing.com/search?q=utamur",
+                    price = 5771,
+                    productId = "pulvinar"
+                ), cartCount = 0
+            ),
         )
     }
 }
@@ -68,15 +70,17 @@ private fun QuantityZero0Preview() {
 private fun QuantityNotZero0Preview() {
     ShoppingCartTheme {
         ProductQuantityControl(
-            item = Product(
-                name = "Gloria Donaldson",
-                imageUrl = "https://search.yahoo.com/search?p=semper",
-                price = 2567,
-                productId = "suavitate"
-            ),
-            quantity = 2322, modifier = Modifier,
+            modifier = Modifier,
             onDecreaseProductQuantity = {},
             onIncreaseProductQuantity = {},
+            item = ProductWithCartInfo(
+                product = Product(
+                    name = "Jody Patton",
+                    imageUrl = "http://www.bing.com/search?q=dictas",
+                    price = 8521,
+                    productId = "decore"
+                ), cartCount = 8656
+            ),
         )
     }
 }
