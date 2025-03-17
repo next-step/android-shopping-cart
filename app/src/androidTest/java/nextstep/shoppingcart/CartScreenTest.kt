@@ -30,7 +30,7 @@ class CartScreenTest {
     fun 장바구니에_10000원_상품_1개_추가시_상품명과_1과_포맷된_10000원이_노출된다() {
         // given: 장바구니에 상품이 없는 상태
         composeTestRule.setContent {
-            CartScreen(onBackButtonClick = {}, viewModel = viewModel)
+            CartScreen(viewModel = viewModel)
         }
 
         // when: 10000원 상품 1개를 장바구니에 추가
@@ -52,7 +52,7 @@ class CartScreenTest {
     fun 장바구니에_10000원_상품_2개_추가시_2와_포맷된_20000원이_노출된다() {
         // given: 장바구니에 10000원 상품 1개가 있는 상태
         composeTestRule.setContent {
-            CartScreen(onBackButtonClick = {}, viewModel = viewModel)
+            CartScreen(viewModel = viewModel)
         }
         viewModel.addOne(test1)
 
@@ -72,7 +72,7 @@ class CartScreenTest {
     fun 장바구니에_10000원_상품_1개_존재하고_1개_삭제버튼_클릭시_상품이_노출되지_않는다() {
         // given: 장바구니에 10000원 상품 1개가 있는 상태
         composeTestRule.setContent {
-            CartScreen(onBackButtonClick = {}, viewModel = viewModel)
+            CartScreen(viewModel = viewModel)
         }
         viewModel.addOne(test1)
 
@@ -92,7 +92,7 @@ class CartScreenTest {
     fun 장바구니_상품_전체삭제_버튼_클릭시_상품이_노출되지_않는다() {
         // given: 장바구니에 10000원 상품 4개가 있는 상태
         composeTestRule.setContent {
-            CartScreen(onBackButtonClick = {}, viewModel = viewModel)
+            CartScreen(viewModel = viewModel)
         }
         viewModel.addOne(test1)
         composeTestRule.onNodeWithTag("addOneToCart ${test1.name}").performClick()

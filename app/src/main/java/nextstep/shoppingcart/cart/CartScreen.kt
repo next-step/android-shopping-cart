@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.cart
 
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -17,14 +18,13 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun CartScreen(
-    onBackButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: CartViewModel = viewModel()
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+
     CartScreen(
         uiState = uiState.value,
-        onBackButtonClick = onBackButtonClick,
         onAddOneToCart = { product -> viewModel.addOne(product) },
         onRemoveOneFromCart = { product -> viewModel.removeOne(product) },
         onClearCartItem = { product -> viewModel.removeAll(product) },
@@ -35,7 +35,6 @@ fun CartScreen(
 
 @Composable
 private fun CartScreen(
-    onBackButtonClick: () -> Unit,
     uiState: CartUiState,
     onAddOneToCart: (Product) -> Unit,
     onRemoveOneFromCart: (Product) -> Unit,
@@ -43,13 +42,15 @@ private fun CartScreen(
     onOrderButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
             ProductBackButtonTopBar(
                 title = "장바구니",
-                onBackButtonClick = { onBackButtonClick() },
+                onBackButtonClick = { backDispatcher?.onBackPressed() },
                 contentDescription = "장바구니 뒤로가기 버튼"
             )
         },
@@ -72,8 +73,6 @@ private fun CartScreen(
 @Composable
 private fun CartScreenPreview() {
     ShoppingCartTheme {
-        CartScreen(
-            onBackButtonClick = {},
-        )
+        CartScreen()
     }
 }

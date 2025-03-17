@@ -12,9 +12,7 @@ class CartActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ShoppingCartTheme {
-                CartScreen(
-                    onBackButtonClick = { onBackPressedDispatcher.onBackPressed() },
-                )
+                CartScreen()
             }
         }
     }

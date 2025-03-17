@@ -38,8 +38,7 @@ class ProductDetailActivity : ComponentActivity() {
                     navigateToCart = { id ->
                         Cart.addOne(productTestDataList.find { it.productId == id }!!)
                         navigateToCart()
-                    },
-                    onBackButtonClick = { onBackPressedDispatcher.onBackPressed() })
+                    })
             }
         }
     }
