@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.cart.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -59,8 +58,6 @@ fun CartContent(
             onClick = { onOrderButtonClick() },
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color(0xFF2196F3))
-                .aspectRatio(360f / 54f)
                 .align(alignment = Alignment.BottomCenter)
         )
     }
@@ -76,7 +73,8 @@ private fun CartContentPreview() {
             onAddOneToCart = {},
             onRemoveOneFromCart = {},
             onClearCartItem = {},
-            totalPrice = 10, onOrderButtonClick = {},
+            totalPrice = 10,
+            onOrderButtonClick = {},
         )
     }
 }

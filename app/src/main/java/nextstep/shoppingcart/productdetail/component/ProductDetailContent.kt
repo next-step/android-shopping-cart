@@ -1,6 +1,5 @@
 package nextstep.shoppingcart.productdetail.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -64,8 +63,6 @@ fun ProductDetailContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .navigationBarsPadding()
-                .background(Color(0xFF2196F3))
-                .aspectRatio(360f / 54f)
                 .align(alignment = Alignment.BottomCenter)
         )
     }
