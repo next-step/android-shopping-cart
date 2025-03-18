@@ -8,22 +8,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.data.ProductsTestData
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.productlist.model.ProductWithCartInfo
 import nextstep.shoppingcart.ui.component.Product
 
 @Composable
 fun ProductListContents(
-    productItems: List<Product>,
+    productItems: List<ProductWithCartInfo>,
     navigateToProductDetail: (String) -> Unit,
+    onDecreaseProductQuantity: (Product) -> Unit,
+    onIncreaseProductQuantity: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(2),
     ) {
-        items(items = productItems, key = { it.productId }) { item ->
+        items(items = productItems, key = { it.product.productId }) { item ->
             Product(
                 product = item,
-                navigateToProductDetail = { id -> navigateToProductDetail(id) })
+                navigateToProductDetail = { id -> navigateToProductDetail(id) },
+                onDecreaseProductQuantity = onDecreaseProductQuantity,
+                onIncreaseProductQuantity = onIncreaseProductQuantity,
+            )
         }
     }
 }
@@ -32,7 +38,9 @@ fun ProductListContents(
 @Composable
 private fun ProductListContentsPreview() {
     ProductListContents(
-        productItems = ProductsTestData.productTestDataList,
+        productItems = ProductsTestData.productTestDataList.map { ProductWithCartInfo(it) },
         navigateToProductDetail = {},
+        onDecreaseProductQuantity = {},
+        onIncreaseProductQuantity = {},
     )
 }

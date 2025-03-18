@@ -23,6 +23,8 @@ fun ProductBottomButton(
 ) {
     Box(
         modifier = modifier
+            .background(Color(0xFF2196F3))
+            .aspectRatio(360f / 54f)
             .clickable { onClick() },
         contentAlignment = Alignment.Center
     ) {

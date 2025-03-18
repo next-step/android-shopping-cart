@@ -1,40 +1,61 @@
 package nextstep.shoppingcart.data
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 
 object Cart {
-    private val _items: MutableList<CartItem> = mutableListOf()
-    val items: List<CartItem> get() = _items.toList()
 
-    val totalPrice: Int get() = _items.sumOf { it.totalPrice }
+    private val _itemsFlow = MutableStateFlow<List<CartItem>>(emptyList())
+    val itemsFlow: Flow<List<CartItem>> = _itemsFlow.asStateFlow()
 
-    fun addOne(product: Product): List<CartItem> {
-        val item = _items.find { it.product == product }
-        if (item == null) {
-            _items.add(CartItem(product, 1))
-        } else {
-            val index = _items.indexOf(item)
-            _items[index] = item.copy(count = item.count + 1)
-        }
-        return items
-    }
+    val totalPrice: Int get() = _itemsFlow.value.sumOf { it.totalPrice }
 
-    fun removeOne(product: Product): List<CartItem> {
-        _items.find { it.product == product }
-            ?.let { item ->
-                if (item.count > 1) {
-                    val index = _items.indexOf(item)
-                    _items[index] = item.copy(count = item.count - 1)
-                } else {
-                    _items.remove(item)
+    fun addOne(product: Product) {
+        _itemsFlow.update { currentItems ->
+            val item = currentItems.find { it.product == product }
+            if (item == null) {
+                currentItems + CartItem(product, 1)
+            } else {
+                currentItems.map {
+                    if (it.product == product) {
+                        it.copy(count = it.count + 1)
+                    } else {
+                        it
+                    }
                 }
             }
-        return items
+        }
     }
 
-    fun removeAll(product: Product): List<CartItem> {
-        _items.removeAll { it.product == product }
-        return items
+    fun removeOne(product: Product) {
+        _itemsFlow.update { currentItems ->
+            currentItems.find { it.product == product }?.let { item ->
+                if (item.count > 1) {
+                    currentItems.map {
+                        if (it.product == product) {
+                            it.copy(count = it.count - 1)
+                        } else {
+                            it
+                        }
+                    }
+                } else {
+                    currentItems.filter { it.product != product }
+                }
+            } ?: currentItems
+        }
+    }
+
+    fun removeAll(product: Product) {
+        _itemsFlow.update { currentItems ->
+            currentItems.filter { it.product != product }
+        }
+    }
+
+    fun clearCartItem() {
+        _itemsFlow.value = emptyList()
     }
 }

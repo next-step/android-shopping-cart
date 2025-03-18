@@ -1,9 +1,9 @@
 package nextstep.shoppingcart.productdetail
 
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,31 +17,27 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun ProductDetailScreen(
     uiState: ProductDetailUiState,
     navigateToCart: (String) -> Unit,
-    onBackButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Text("ProductDetailScreen")
     when (uiState) {
         ProductDetailUiState.Empty -> {
-            //TODO Empty View
         }
 
         ProductDetailUiState.Error -> {
-            //TODO Error View
         }
 
         ProductDetailUiState.Loading -> {
-            //TODO Loading View
         }
 
         is ProductDetailUiState.ProductDetail -> {
+            val backDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
             Scaffold(
                 modifier = modifier
                     .fillMaxSize(),
                 topBar = {
                     ProductBackButtonTopBar(
                         title = "상품 상세",
-                        onBackButtonClick = { onBackButtonClick() },
+                        onBackButtonClick = { backDispatcher?.onBackPressed() },
                         contentDescription = "상품 상세 뒤로가기 버튼"
                     )
                 },
@@ -69,6 +65,6 @@ private fun ProductDetailScreenPreview() {
                     price = 10000,
                     productId = "id1"
                 )
-            ), {}, {})
+            ), {})
     }
 }

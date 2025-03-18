@@ -2,7 +2,6 @@ package nextstep.shoppingcart.productlist.model
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import nextstep.shoppingcart.model.Product
 
 @Stable
 sealed interface ProductListUiState {
@@ -18,6 +17,6 @@ sealed interface ProductListUiState {
 
     @Immutable
     data class Success(
-        val products: List<Product>,
+        val products: List<ProductWithCartInfo>,
     ) : ProductListUiState
 }
