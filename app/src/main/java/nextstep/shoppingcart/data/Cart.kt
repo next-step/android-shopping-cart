@@ -1,59 +1,54 @@
 package nextstep.shoppingcart.data
 
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 
 object Cart {
-    private val _items: SnapshotStateList<CartItem> = mutableStateListOf()
-    val items: List<CartItem> get() = _items.toList()
 
-    private val _itemsFlow = MutableSharedFlow<List<CartItem>>(replay = 1)
-    val itemsFlow: Flow<List<CartItem>> = _itemsFlow.asSharedFlow()
+    private val items: ArrayList<CartItem> = ArrayList()
 
-    val totalPrice: Int get() = _items.sumOf { it.totalPrice }
+    private val _itemsFlow = MutableStateFlow<List<CartItem>>(emptyList())
+    val itemsFlow: Flow<List<CartItem>> = _itemsFlow.asStateFlow()
+
+    val totalPrice: Int get() = items.sumOf { it.totalPrice }
 
     private fun updateItemsFlow() {
-        _itemsFlow.tryEmit(items)
+        _itemsFlow.value = items.toList()
     }
 
-    fun addOne(product: Product): List<CartItem> {
-        val item = _items.find { it.product == product }
+    fun addOne(product: Product) {
+        val item = items.find { it.product == product }
         if (item == null) {
-            _items.add(CartItem(product, 1))
+            items.add(CartItem(product, 1))
         } else {
-            val index = _items.indexOf(item)
-            _items[index] = item.copy(count = item.count + 1)
+            val index = items.indexOf(item)
+            items[index] = item.copy(count = item.count + 1)
         }
         updateItemsFlow()
-        return items
     }
 
-    fun removeOne(product: Product): List<CartItem> {
-        _items.find { it.product == product }
+    fun removeOne(product: Product) {
+        items.find { it.product == product }
             ?.let { item ->
                 if (item.count > 1) {
-                    val index = _items.indexOf(item)
-                    _items[index] = item.copy(count = item.count - 1)
+                    val index = items.indexOf(item)
+                    items[index] = item.copy(count = item.count - 1)
                 } else {
-                    _items.remove(item)
+                    items.remove(item)
                 }
             }
         updateItemsFlow()
-        return items
     }
 
-    fun removeAll(product: Product): List<CartItem> {
-        _items.removeAll { it.product == product }
+    fun removeAll(product: Product) {
+        items.removeAll { it.product == product }
         updateItemsFlow()
-        return items
     }
 
     fun clearCartItem() {
-        _items.clear()
+        items.clear()
     }
 }
