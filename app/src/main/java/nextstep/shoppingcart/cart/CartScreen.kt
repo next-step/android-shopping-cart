@@ -11,7 +11,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import nextstep.shoppingcart.cart.component.CartContent
 import nextstep.shoppingcart.cart.model.CartUiState
-import nextstep.shoppingcart.cart.model.CartViewModel
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.component.ProductBackButtonTopBar
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme

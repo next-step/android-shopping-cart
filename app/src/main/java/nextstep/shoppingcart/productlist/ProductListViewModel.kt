@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.productlist.model
+package nextstep.shoppingcart.productlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,6 +10,8 @@ import kotlinx.coroutines.launch
 import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.ProductsTestData
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.productlist.model.ProductListUiState
+import nextstep.shoppingcart.productlist.model.ProductWithCartInfo
 
 class ProductListViewModel(private val repository: Cart = Cart) :
     ViewModel() {

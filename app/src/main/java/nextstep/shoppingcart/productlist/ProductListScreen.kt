@@ -16,7 +16,6 @@ import nextstep.shoppingcart.data.ProductsTestData
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.productlist.component.ProductListContents
 import nextstep.shoppingcart.productlist.model.ProductListUiState
-import nextstep.shoppingcart.productlist.model.ProductListViewModel
 import nextstep.shoppingcart.productlist.model.ProductWithCartInfo
 import nextstep.shoppingcart.ui.component.CommonEmptyScreen
 import nextstep.shoppingcart.ui.component.CommonErrorScreen

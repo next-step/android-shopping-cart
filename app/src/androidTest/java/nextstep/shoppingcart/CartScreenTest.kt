@@ -6,7 +6,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.cart.CartScreen
-import nextstep.shoppingcart.cart.model.CartViewModel
+import nextstep.shoppingcart.cart.CartViewModel
 import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.model.Product
 import org.junit.Before

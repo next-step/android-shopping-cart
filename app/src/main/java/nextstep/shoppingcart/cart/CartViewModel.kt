@@ -1,4 +1,4 @@
-package nextstep.shoppingcart.cart.model
+package nextstep.shoppingcart.cart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import nextstep.shoppingcart.cart.model.CartUiState
 import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.model.Product
 
