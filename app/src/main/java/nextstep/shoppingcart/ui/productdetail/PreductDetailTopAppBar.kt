@@ -29,7 +29,6 @@ fun ProductDetailTopAppBar(
                 modifier = modifier,
                 text = stringResource(R.string.product_detail), maxLines = 1,
                 style = MaterialTheme.typography.titleLarge
-
             )
         },
         navigationIcon = {

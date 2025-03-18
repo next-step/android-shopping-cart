@@ -30,7 +30,6 @@ class ProductDetailActivity : ComponentActivity() {
             ShoppingCartTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
                 ) {
                     ProductDetailScreen(
                         product = product,
