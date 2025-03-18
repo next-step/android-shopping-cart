@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.productdetail
 
+import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -18,7 +19,10 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetailTopAppBar(modifier: Modifier = Modifier) {
+fun ProductDetailTopAppBar(
+    modifier: Modifier = Modifier,
+    onBackClick: () -> Unit = {},
+) {
     TopAppBar(
         title = {
             Text(
@@ -31,7 +35,8 @@ fun ProductDetailTopAppBar(modifier: Modifier = Modifier) {
         navigationIcon = {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = stringResource(R.string.back_button_content_description)
+                contentDescription = stringResource(R.string.back_button_content_description),
+                modifier = modifier.clickable(onClick = onBackClick)
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(

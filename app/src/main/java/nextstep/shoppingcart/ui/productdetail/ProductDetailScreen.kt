@@ -13,11 +13,12 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun ProductDetailScreen(
     product: Product,
     modifier: Modifier = Modifier,
+    onBackClick: () -> Unit = {}
 ) {
     Scaffold(
         modifier = modifier,
         topBar = {
-            ProductDetailTopAppBar()
+            ProductDetailTopAppBar(onBackClick = onBackClick)
         }
     ) { paddingValues ->
         ProductDetailColumn(
