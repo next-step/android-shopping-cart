@@ -3,11 +3,9 @@
 
     <string name="back_button_content_description">뒤로 가기</string>"
 
-    <string name="shopping_cart_title">상품 목록</string>
-    <string name="shopping_cart_icon_content_description">장바구니</string>
-    
-    <string name="product_detail_title">상품 상세</string>
-
+    <string name="shopping_list">상품 목록</string>
+    <string name="shopping_cart">장바구니</string>
+    <string name="product_detail">상품 상세</string>
     <string name="price_text">금액</string>
     <string name="add_to_cart_button_text">장바구니 담기</string>
 </resources>

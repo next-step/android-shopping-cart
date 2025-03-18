@@ -27,7 +27,7 @@ fun ProductDetailTopAppBar(
         title = {
             Text(
                 modifier = modifier,
-                text = stringResource(R.string.product_detail_title), maxLines = 1,
+                text = stringResource(R.string.product_detail), maxLines = 1,
                 style = MaterialTheme.typography.titleLarge
 
             )
