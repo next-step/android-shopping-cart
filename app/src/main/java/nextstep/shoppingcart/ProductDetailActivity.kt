@@ -1,5 +1,6 @@
 package nextstep.shoppingcart
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,7 +14,6 @@ import nextstep.shoppingcart.ui.productdetail.ProductDetailScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 class ProductDetailActivity : ComponentActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,10 @@ class ProductDetailActivity : ComponentActivity() {
                 ) {
                     ProductDetailScreen(
                         product = product,
-                        onBackClick = { finish() }
+                        onBackClick = { finish() },
+                        onAddToCartClick = {
+                            startActivity(Intent(this, ShoppingCartActivity::class.java))
+                        }
                     )
                 }
             }

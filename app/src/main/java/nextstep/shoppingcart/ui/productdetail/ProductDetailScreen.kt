@@ -13,7 +13,8 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun ProductDetailScreen(
     product: Product,
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = {},
+    onAddToCartClick: () -> Unit = {},
 ) {
     Scaffold(
         modifier = modifier,
@@ -23,7 +24,8 @@ fun ProductDetailScreen(
     ) { paddingValues ->
         ProductDetailColumn(
             product = product,
-            modifier = Modifier.fillMaxSize().padding(paddingValues)
+            modifier = Modifier.fillMaxSize().padding(paddingValues),
+            onAddToCartClick = onAddToCartClick
         )
     }
 }

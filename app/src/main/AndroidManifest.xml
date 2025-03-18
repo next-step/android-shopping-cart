@@ -27,7 +27,11 @@
         </activity>
 
         <activity android:name=".ProductDetailActivity"
-            android:exported="true">
+            android:exported="false">
+        </activity>
+
+        <activity android:name=".ShoppingCartActivity"
+            android:exported="false">
         </activity>
     </application>
 

@@ -29,6 +29,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun ProductDetailColumn(
     product: Product,
     modifier: Modifier = Modifier,
+    onAddToCartClick: () -> Unit = {}
 ) {
     Column(
         modifier = modifier,
@@ -63,9 +64,7 @@ fun ProductDetailColumn(
         }
 
         Button(
-            onClick = {
-
-            },
+            onClick = onAddToCartClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(54.dp),
