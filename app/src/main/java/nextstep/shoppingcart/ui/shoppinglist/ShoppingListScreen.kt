@@ -14,14 +14,15 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun ShoppingListScreen(
     modifier: Modifier = Modifier,
-    onItemClick: (Product) -> Unit = {}
+    onItemClick: (Product) -> Unit = {},
+    onShoppingCartClick: () -> Unit = {},
 ) {
     val productRepository = ProductRepository()
 
     Scaffold(
         modifier = modifier,
         topBar = {
-            ShoppingListTopAppBar()
+            ShoppingListTopAppBar(onShoppingCartClick = onShoppingCartClick)
         },
         content = { contentPadding ->
             ShoppingListColumn(

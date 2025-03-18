@@ -20,7 +20,10 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShoppingListTopAppBar(modifier: Modifier = Modifier) {
+fun ShoppingListTopAppBar(
+    modifier: Modifier = Modifier,
+    onShoppingCartClick: () -> Unit = {},
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -34,7 +37,7 @@ fun ShoppingListTopAppBar(modifier: Modifier = Modifier) {
             containerColor = Color.White
         ),
         actions = {
-            IconButton(onClick = { /* 검색 버튼 클릭 시 동작 */ }) {
+            IconButton(onClick = onShoppingCartClick) {
                 Icon(
                     imageVector = Icons.Filled.ShoppingCart,
                     contentDescription = stringResource(R.string.shopping_cart),

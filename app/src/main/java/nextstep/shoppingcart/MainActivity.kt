@@ -25,6 +25,9 @@ class MainActivity : ComponentActivity() {
                             startActivity(Intent(this, ProductDetailActivity::class.java).apply {
                                 putExtra("product", product)
                             })
+                        },
+                        onShoppingCartClick = {
+                            startActivity(Intent(this, ShoppingCartActivity::class.java))
                         }
                     )
                 }
