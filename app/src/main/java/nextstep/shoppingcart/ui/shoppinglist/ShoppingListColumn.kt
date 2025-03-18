@@ -7,8 +7,9 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import nextstep.shoppingcart.data.ProductRepository
+import nextstep.shoppingcart.data.ShoppingListPreviewParameterProvider
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -33,11 +34,12 @@ fun ShoppingListColumn(
 
 @Preview
 @Composable
-private fun ShoppingListColumnPreview() {
-    val listOfItems = ProductRepository().getProducts()
+private fun ShoppingListColumnPreview(
+    @PreviewParameter(ShoppingListPreviewParameterProvider::class) products: List<Product>
+) {
     ShoppingCartTheme {
         ShoppingListColumn(
-            listOfItems = listOfItems,
+            listOfItems = products,
         )
     }
 }
