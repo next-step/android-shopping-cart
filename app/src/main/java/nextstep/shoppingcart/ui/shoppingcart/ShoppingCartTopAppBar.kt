@@ -38,7 +38,10 @@ fun ShoppingCartTopAppBar(
                     contentDescription = stringResource(R.string.back_button_content_description),
                 )
             }
-        }
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = Color.White
+        )
     )
 }
 
