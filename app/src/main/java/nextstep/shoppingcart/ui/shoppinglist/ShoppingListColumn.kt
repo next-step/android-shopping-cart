@@ -18,6 +18,7 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 fun ShoppingListColumn(
     listOfItems: List<Product>,
     modifier: Modifier = Modifier,
+    onItemClick: (Product) -> Unit = {},
 ) {
     LazyVerticalGrid(
         modifier = modifier.padding(horizontal = 18.dp),
@@ -27,7 +28,8 @@ fun ShoppingListColumn(
     ) {
         items(items = listOfItems) { item ->
             ShoppingItem(
-                product = item
+                product = item,
+                onItemClick = onItemClick
             )
         }
     }
