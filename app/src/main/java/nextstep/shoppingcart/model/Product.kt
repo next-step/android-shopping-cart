@@ -6,13 +6,13 @@ import android.os.Parcelable
 data class Product(
     val imageUrl: String,
     val name: String,
-    val price: String
+    val price: Int
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readString() ?: ""
+        parcel.readInt()
     )
 
     override fun describeContents(): Int {
@@ -22,7 +22,7 @@ data class Product(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(imageUrl)
         parcel.writeString(name)
-        parcel.writeString(price)
+        parcel.writeInt(price)
     }
 
     companion object CREATOR : Parcelable.Creator<Product> {

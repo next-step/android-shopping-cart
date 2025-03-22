@@ -59,7 +59,7 @@ fun ProductDetailColumn(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = stringResource(R.string.price_text), fontSize = 20.sp)
-                Text(text = product.price, fontSize = 20.sp)
+                Text(text = "${product.price}원", fontSize = 20.sp)
             }
         }
 
@@ -91,7 +91,7 @@ private fun ProductDetailColumnPreview() {
             product = Product(
                 "https://s3-alpha-sig.figma.com/img/b9f2/403d/b915b1b22edac0877abb7b97129296b6?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=joZjFDjunU-KZYNAEeL7lnjo54w4dVJiTsJhbh759JvauNRzbduDrimn7b43hxZdqMBf~jJIZH~BCevsIRIh6FMlPblfLWCNJiGyoE1f7cl~Kl8MdS6iIQ~sesDO~bVQn8hi6ZzDq66BRvn5rB4wPVM-6IFO6y0V1fjWig77kDAkk5KaCs5c5Pr8zBw0oXtSz3FONDyxRz9c6wjHhXBY2gn~S5psw-fKr9j10ERWP3hw9wZeisOOV6wEdcTaCZkmUXcoaFJoDTWEd9sZXcZ0QAEa1uZgff~QJKNXLRVWHPSUGZVOmJAKHRbjv6AeQWvDpPbQLeCSYrRaKB0EqYvIhQ__",
                 "PET보틀-납작(2...",
-                "12,000원"
+                12000
             )
         )
     }
