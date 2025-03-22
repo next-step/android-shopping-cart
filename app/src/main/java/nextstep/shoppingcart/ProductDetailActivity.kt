@@ -1,5 +1,6 @@
 package nextstep.shoppingcart
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -29,6 +30,7 @@ class ProductDetailActivity : ComponentActivity() {
                     onBackClick = { finish() },
                     onAddToCartClick = {
                         Cart.addOne(product)
+                        startActivity(Intent(this, ShoppingCartActivity::class.java))
                     }
                 )
             }

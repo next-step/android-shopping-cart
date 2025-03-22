@@ -16,7 +16,9 @@ class ShoppingCartActivity : ComponentActivity() {
             ShoppingCartTheme {
                 ShoppingCartScreen(
                     onBackClick = { finish() },
-                    products = Cart.items
+                    onItemAdd = { product -> Cart.addOne(product) },
+                    onItemRemove = { product -> Cart.removeOne(product) },
+                    onDelete = { product -> Cart.removeAll(product) }
                 )
             }
         }

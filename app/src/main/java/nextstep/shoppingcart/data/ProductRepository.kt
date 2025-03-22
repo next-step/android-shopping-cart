@@ -35,6 +35,16 @@ class ProductRepository {
                 "PET보틀-납작(2...",
                 12000
             ),
+            Product(
+                "https://s3-alpha-sig.figma.com/img/fd20/b2b8/827d18cb936f84b3d7ab156b54952df7?Expires=1743379200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=mV~26532GM~FVWvuulYCjYZTlP9AhkSmZT7aeIbznHveYv5e0Vq8wh0FK6Ja7JvuV5Z7ixdE5KKw5J1B1rIG6i0ySx545Wft3ujyRHafo264bPrkohy6mDoaJx03my9weXbRtBZ0lygdiSwg9VJgBNSZDK7zWK6fawbfZNmy1ULnZznFzfgAe~GgSGBeOxkT6Fj13Gg8wiAXFLNy577pWqVGAEUTq-IZ-iL6513UJ-dYVCajNeA4158pmaEse7MzKg~bNUr6qoYEJ9fHUBHmuCNKSTnX3H2ojNDzJ~dYmcM30V44FoB-0wL~hUA4Iz-tl1GgAc4QbKXqqzpbEU~-0g__",
+                "[든든] 동원 스위트콘",
+                99800
+            ),
+            Product(
+                "https://s3-alpha-sig.figma.com/img/c207/5f9e/651a2553089d78809044bd63d7019dc8?Expires=1743379200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=PViwNeN7MlmTnKIYtXOB0Zkr7e-T4V-MflWL3Xi3KqFtoUgpZ55OXOFtsaaVOULytnqVIjakmr-7v5cu2YgBo-q9MF4cX-hfczCfB-izlhZ-psFH33~3X8rN7cUPhLBe7U3YwDnznADswr2MBkYIXsBi9b0yrip6MN6Eyp9rqxYN5XL3ogshLDXPRwiPROQaUhL8cdV63NwZvTB07dvw~Yj78W2Kpr7nPV6xrxj7jQ7OrwuZT1~KMJZv1kwCMLFgHfzwuj2pGYY5tHg1g1ldhVaH5ygPfGMfS-8yvxIrhl16s0Rh6RQZsLhXG0LSWmn05VOaD~8yJPIsrltICQpzhw__",
+                "PET보틀-원형(500ml)",
+                84400
+            ),
         )
     }
 }

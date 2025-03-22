@@ -6,22 +6,28 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import nextstep.shoppingcart.data.ShoppingCartPreviewParameterProvider
-import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.BottomButton
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ShoppingCartScreen(
     modifier: Modifier = Modifier,
-    products: List<CartItem> = emptyList(),
-    totalPrice: Int = 0,
     onBackClick: () -> Unit = {},
+    onItemAdd: (Product) -> Unit = {},
+    onItemRemove: (Product) -> Unit = {},
+    onDelete: (Product) -> Unit = {},
 ) {
+    val products = Cart.items
+    val totalPrice by remember { derivedStateOf { Cart.totalPrice } }
+
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -32,18 +38,18 @@ fun ShoppingCartScreen(
                 text = if (totalPrice > 0) "주문하기(${totalPrice}원)" else "주문하기"
             )
         }
-//        containerColor = Color.White
     ) { paddingValues ->
         Surface(
             modifier = modifier.padding(paddingValues),
-            contentColor = Color.White
+            color = Color.White
         ) {
             LazyColumn {
                 items(items = products) { item ->
                     CartItem(
                         item = item,
-                        onQuantityChange = {},
-                        onRemove = {}
+                        onAdd = onItemAdd,
+                        onRemove = onItemRemove,
+                        onDelete = onDelete
                     )
                 }
             }
@@ -53,12 +59,8 @@ fun ShoppingCartScreen(
 
 @Preview
 @Composable
-private fun ShoppingCartScreenPreview(
-    @PreviewParameter(ShoppingCartPreviewParameterProvider::class) items: List<CartItem>
-) {
+private fun ShoppingCartScreenPreview() {
     ShoppingCartTheme {
-        ShoppingCartScreen(
-            products = items
-        )
+        ShoppingCartScreen()
     }
 }

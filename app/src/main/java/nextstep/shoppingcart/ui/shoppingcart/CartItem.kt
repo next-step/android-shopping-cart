@@ -37,9 +37,10 @@ import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 @Composable
 fun CartItem(
     item: CartItem,
-    onQuantityChange: (Int) -> Unit,
-    onRemove: () -> Unit,
     modifier: Modifier = Modifier,
+    onAdd: (Product) -> Unit = {},
+    onRemove: (Product) -> Unit = {},
+    onDelete: (Product) -> Unit = {},
 ) {
     Card(
         modifier = modifier
@@ -61,7 +62,9 @@ fun CartItem(
                 Text(text = item.product.name, fontWeight = FontWeight.Bold, fontSize = 20.sp)
 
                 // 닫기 버튼
-                IconButton(onClick = onRemove) {
+                IconButton(onClick = {
+                    onDelete(item.product)
+                }) {
                     Icon(Icons.Default.Close, contentDescription = "삭제")
                 }
             }
@@ -77,7 +80,7 @@ fun CartItem(
                     placeholder = painterResource(R.drawable.ic_photo),
                     error = painterResource(R.drawable.ic_photo),
                     contentDescription = item.product.name,
-                    contentScale = ContentScale.FillHeight
+                    contentScale = ContentScale.Fit
                 )
 
                 Column(
@@ -90,7 +93,7 @@ fun CartItem(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
-                        IconButton(onClick = { onQuantityChange(item.count - 1) }) {
+                        IconButton(onClick = { onRemove(item.product) }) {
                             Icon(
                                 painter = painterResource(R.drawable.ic_remove),
                                 contentDescription = "빼기"
@@ -101,7 +104,7 @@ fun CartItem(
                             fontSize = 16.sp,
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
-                        IconButton(onClick = { onQuantityChange(item.count + 1) }) {
+                        IconButton(onClick = { onAdd(item.product) }) {
                             Icon(Icons.Filled.Add, contentDescription = "추가")
                         }
                     }
@@ -124,8 +127,6 @@ private fun CartItemPreview() {
                 ),
                 count = 1
             ),
-            onQuantityChange = {},
-            onRemove = {}
         )
     }
 }
