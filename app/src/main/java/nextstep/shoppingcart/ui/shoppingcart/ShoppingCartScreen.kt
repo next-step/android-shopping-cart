@@ -8,16 +8,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
-import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import nextstep.shoppingcart.data.ShoppingListPreviewParameterProvider
+import nextstep.shoppingcart.data.ShoppingCartPreviewParameterProvider
+import nextstep.shoppingcart.model.CartItem
+import nextstep.shoppingcart.ui.BottomButton
+import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ShoppingCartScreen(
     modifier: Modifier = Modifier,
-    products: List<Product> = emptyList(),
+    products: List<CartItem> = emptyList(),
+    totalPrice: Int = 0,
     onBackClick: () -> Unit = {},
 ) {
     Scaffold(
@@ -25,6 +26,11 @@ fun ShoppingCartScreen(
         topBar = {
             ShoppingCartTopAppBar(onBackClick = onBackClick)
         },
+        bottomBar = {
+            BottomButton(
+                text = if (totalPrice > 0) "주문하기(${totalPrice}원)" else "주문하기"
+            )
+        }
 //        containerColor = Color.White
     ) { paddingValues ->
         Surface(
@@ -48,7 +54,7 @@ fun ShoppingCartScreen(
 @Preview
 @Composable
 private fun ShoppingCartScreenPreview(
-    @PreviewParameter(ShoppingListPreviewParameterProvider::class) products: List<Product>
+    @PreviewParameter(ShoppingCartPreviewParameterProvider::class) items: List<CartItem>
 ) {
     ShoppingCartTheme {
         ShoppingCartScreen(
