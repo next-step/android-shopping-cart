@@ -100,6 +100,7 @@ fun CartItemView(
                     )
                     Spacer(modifier = Modifier.height(4.dp))
 
+                    // 상품 수량 변경 버튼
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
