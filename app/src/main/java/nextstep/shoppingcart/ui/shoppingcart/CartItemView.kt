@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -69,7 +70,10 @@ fun CartItemView(
                 IconButton(onClick = {
                     onDelete(item.product)
                 }) {
-                    Icon(Icons.Default.Close, contentDescription = "삭제")
+                    Icon(
+                        Icons.Default.Close,
+                        contentDescription = stringResource(R.string.delete_button_text)
+                    )
                 }
             }
 
@@ -103,7 +107,7 @@ fun CartItemView(
                         IconButton(onClick = { onRemove(item.product) }) {
                             Icon(
                                 painter = painterResource(R.drawable.ic_remove),
-                                contentDescription = "빼기"
+                                contentDescription = stringResource(R.string.remove_button_text)
                             )
                         }
                         Text(
@@ -112,7 +116,10 @@ fun CartItemView(
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
                         IconButton(onClick = { onAdd(item.product) }) {
-                            Icon(Icons.Filled.Add, contentDescription = "추가")
+                            Icon(
+                                Icons.Filled.Add,
+                                contentDescription = stringResource(R.string.add_button_text)
+                            )
                         }
                     }
                 }
