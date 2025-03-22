@@ -2,6 +2,7 @@ package nextstep.shoppingcart.ui.shoppingcart
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -38,10 +39,9 @@ fun ShoppingCartScreen(
             contentColor = Color.White
         ) {
             LazyColumn {
-                items(items = products) { product ->
+                items(items = products) { item ->
                     CartItem(
-                        product = product,
-                        quantity = 2,
+                        item = item,
                         onQuantityChange = {},
                         onRemove = {}
                     )
@@ -58,7 +58,7 @@ private fun ShoppingCartScreenPreview(
 ) {
     ShoppingCartTheme {
         ShoppingCartScreen(
-            products = products,
+            products = items
         )
     }
 }

@@ -1,14 +1,10 @@
 package nextstep.shoppingcart
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.productdetail.ProductDetailScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -28,17 +24,13 @@ class ProductDetailActivity : ComponentActivity() {
 
         setContent {
             ShoppingCartTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    ProductDetailScreen(
-                        product = product,
-                        onBackClick = { finish() },
-                        onAddToCartClick = {
-                            startActivity(Intent(this, ShoppingCartActivity::class.java))
-                        }
-                    )
-                }
+                ProductDetailScreen(
+                    product = product,
+                    onBackClick = { finish() },
+                    onAddToCartClick = {
+                        Cart.addOne(product)
+                    }
+                )
             }
         }
     }
