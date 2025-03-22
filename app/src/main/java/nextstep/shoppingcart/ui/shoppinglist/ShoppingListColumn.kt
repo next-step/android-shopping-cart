@@ -27,7 +27,7 @@ fun ShoppingListColumn(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         items(items = listOfItems) { item ->
-            ShoppingItem(
+            ShoppingItemView(
                 product = item,
                 onItemClick = onItemClick
             )

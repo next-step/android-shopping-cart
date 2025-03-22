@@ -8,4 +8,13 @@
     <string name="product_detail">상품 상세</string>
     <string name="price_text">금액</string>
     <string name="add_to_cart_button_text">장바구니 담기</string>
+
+    <string name="price_format_text">%s원</string>
+
+    <string name="add_button_text">추가</string>
+    <string name="remove_button_text">빼기</string>
+    <string name="delete_button_text">삭제</string>
+
+    <string name="order_button_text">주문하기</string>
+    <string name="order_button_text_with_price">주문하기(%s원)</string>
 </resources>

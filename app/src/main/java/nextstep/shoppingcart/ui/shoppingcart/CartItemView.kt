@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,7 +36,7 @@ import nextstep.shoppingcart.ui.theme.Gray10
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
-fun CartItem(
+fun CartItemView(
     item: CartItem,
     modifier: Modifier = Modifier,
     onAdd: (Product) -> Unit = {},
@@ -45,10 +46,13 @@ fun CartItem(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 18.dp, end = 18.dp, top = 16.dp),
+            .padding(horizontal = 18.dp, vertical = 8.dp),
         shape = RoundedCornerShape(8.dp),
         border = BorderStroke(1.dp, Gray10),
-        elevation = CardDefaults.cardElevation(4.dp)
+        elevation = CardDefaults.cardElevation(4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White,
+        )
     ) {
         Column(
             modifier = modifier.padding(18.dp)
@@ -86,7 +90,10 @@ fun CartItem(
                 Column(
                     horizontalAlignment = Alignment.End
                 ) {
-                    Text(text = "${item.product.price}원", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                    Text(
+                        text = item.product.getFormattedPrice(),
+                        fontSize = 20.sp
+                    )
                     Spacer(modifier = Modifier.height(4.dp))
 
                     Row(
@@ -101,7 +108,7 @@ fun CartItem(
                         }
                         Text(
                             text = item.count.toString(),
-                            fontSize = 16.sp,
+                            fontSize = 23.sp,
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
                         IconButton(onClick = { onAdd(item.product) }) {
@@ -118,7 +125,7 @@ fun CartItem(
 @Composable
 private fun CartItemPreview() {
     ShoppingCartTheme {
-        CartItem(
+        CartItemView(
             item = CartItem(
                 product = Product(
                     imageUrl = "https://s3-alpha-sig.figma.com/img/fd20/b2b8/827d18cb936f84b3d7ab156b54952df7?Expires=1743379200&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=mV~26532GM~FVWvuulYCjYZTlP9AhkSmZT7aeIbznHveYv5e0Vq8wh0FK6Ja7JvuV5Z7ixdE5KKw5J1B1rIG6i0ySx545Wft3ujyRHafo264bPrkohy6mDoaJx03my9weXbRtBZ0lygdiSwg9VJgBNSZDK7zWK6fawbfZNmy1ULnZznFzfgAe~GgSGBeOxkT6Fj13Gg8wiAXFLNy577pWqVGAEUTq-IZ-iL6513UJ-dYVCajNeA4158pmaEse7MzKg~bNUr6qoYEJ9fHUBHmuCNKSTnX3H2ojNDzJ~dYmcM30V44FoB-0wL~hUA4Iz-tl1GgAc4QbKXqqzpbEU~-0g__",

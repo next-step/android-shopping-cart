@@ -55,7 +55,7 @@ fun ProductDetailColumn(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = stringResource(R.string.price_text), fontSize = 20.sp)
-                Text(text = "${product.price}원", fontSize = 20.sp)
+                Text(text = product.getFormattedPrice(), fontSize = 20.sp)
             }
         }
 

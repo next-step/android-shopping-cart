@@ -1,5 +1,6 @@
 package nextstep.shoppingcart.ui.shoppinglist
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -21,7 +22,7 @@ fun ShoppingListScreen(
     val productRepository = ProductRepository()
 
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
         topBar = {
             ShoppingListTopAppBar(onShoppingCartClick = onShoppingCartClick)
         },

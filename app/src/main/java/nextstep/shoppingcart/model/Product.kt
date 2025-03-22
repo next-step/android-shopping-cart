@@ -2,6 +2,7 @@ package nextstep.shoppingcart.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.text.NumberFormat
 
 data class Product(
     val imageUrl: String,
@@ -33,5 +34,9 @@ data class Product(
         override fun newArray(size: Int): Array<Product?> {
             return arrayOfNulls(size)
         }
+    }
+
+    fun getFormattedPrice(): String {
+        return NumberFormat.getNumberInstance().format(price) + "원"
     }
 }

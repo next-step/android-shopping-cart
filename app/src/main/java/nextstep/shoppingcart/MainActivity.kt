@@ -4,9 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
 import nextstep.shoppingcart.ui.shoppinglist.ShoppingListScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -15,20 +12,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ShoppingCartTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    ShoppingListScreen(
-                        onItemClick = { product ->
-                            startActivity(Intent(this, ProductDetailActivity::class.java).apply {
-                                putExtra("product", product)
-                            })
-                        },
-                        onShoppingCartClick = {
-                            startActivity(Intent(this, ShoppingCartActivity::class.java))
-                        }
-                    )
-                }
+                ShoppingListScreen(
+                    onItemClick = { product ->
+                        startActivity(Intent(this, ProductDetailActivity::class.java).apply {
+                            putExtra("product", product)
+                        })
+                    },
+                    onShoppingCartClick = {
+                        startActivity(Intent(this, ShoppingCartActivity::class.java))
+                    }
+                )
             }
         }
     }
