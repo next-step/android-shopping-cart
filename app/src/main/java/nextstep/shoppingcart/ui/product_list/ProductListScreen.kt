@@ -7,6 +7,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -24,6 +25,9 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SecondaryScrollableTabRow
+import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -72,31 +76,53 @@ fun ProductListScreenRoot(
         // 초기에만 로딩되도록 조건문 추가
         // Navigation에 의해 Composition이 파괴되고 다시 생성될 때, 다시 목록을 불러오지 않도록 방지
         if (state.isInitialLoading) {
-            productRepository.fetch()
+            productRepository.fetchCategory()
         }
     }
 
+    // B마트처럼 탭이 전환되면 상품 목록 갱신하도록 하기
+    LaunchedEffect(state.selectedTabIndex) {
+        if (state.selectedTabIndex == ProductListState.TAB_NOT_SELECTED) {
+            return@LaunchedEffect
+        }
+        val category = state.categories.getOrNull(state.selectedTabIndex) ?: return@LaunchedEffect
+        productRepository.fetchProduct(category)
+    }
+
     LaunchedEffect(Unit) {
-        // 상품 목록 Flow
-        val productFlow = productRepository.products
-
-        // 장바구니 flow
-        val cartFlow = cartRepository.items
-
-        combine(productFlow, cartFlow) { products, cartMap ->
-            products.map { product ->
-                val count = cartMap[product.id]?.quantity ?: 0
-                product.toUi(count)
+        // 카테고리 목록 불러오기
+        launch {
+            productRepository.categories.collect { categories ->
+                if (categories.isNotEmpty()) {
+                    state = state.copy(
+                        categories = categories,
+                        selectedTabIndex = if (state.selectedTabIndex == ProductListState.TAB_NOT_SELECTED) 0 else state.selectedTabIndex,
+                    )
+                }
             }
-        }.onStart {
-            state = state.copy(
-                isInitialLoading = false,
-            )
-        }.collect {
-            state = state.copy(
-                products = it,
-                selectedItemCount = it.sumOf { it.cartQuantity },
-            )
+        }
+        launch {
+            // 상품 목록 Flow
+            val productFlow = productRepository.products
+
+            // 장바구니 flow
+            val cartFlow = cartRepository.items
+
+            combine(productFlow, cartFlow) { products, cartMap ->
+                products.map { product ->
+                    val count = cartMap[product.id]?.quantity ?: 0
+                    product.toUi(count)
+                }
+            }.onStart {
+                state = state.copy(
+                    isInitialLoading = false,
+                )
+            }.collect {
+                state = state.copy(
+                    products = it,
+                    selectedItemCount = it.sumOf { it.cartQuantity },
+                )
+            }
         }
     }
 
@@ -112,7 +138,7 @@ fun ProductListScreenRoot(
         }
     }
 
-    if (state.isInitialLoading) {
+    if (state.isInitialLoading || state.selectedTabIndex == ProductListState.TAB_NOT_SELECTED) {
         if (state.isLoadingShow) {
             InitialCircularLoading()
         }
@@ -138,6 +164,11 @@ fun ProductListScreenRoot(
                 )
             )
         },
+        onCategoryTabClick = {
+            state = state.copy(
+                selectedTabIndex = it
+            )
+        },
         modifier = modifier,
     )
 }
@@ -149,6 +180,7 @@ private fun ProductListScreen(
     onProductClick: (Product) -> Unit,
     onIncreaseQuantityClick: (Product) -> Unit,
     onDecreaseQuantityClick: (Product) -> Unit,
+    onCategoryTabClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val lazyState = rememberLazyGridState()
@@ -190,27 +222,50 @@ private fun ProductListScreen(
             }
         }
     ) { paddingValues ->
-        LazyVerticalGrid(
-            state = lazyState,
-            columns = GridCells.Fixed(2),
-            modifier = modifier
-                .padding(paddingValues)
-                .padding(horizontal = 18.dp, vertical = 13.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp),
-            contentPadding = PaddingValues(bottom = 100.dp)
-        ) {
-            items(state.products) { product ->
-                ProductListItem(
-                    product = product,
-                    onIncreaseQuantityClick = onIncreaseQuantityClick,
-                    onDecreaseQuantityClick = onDecreaseQuantityClick,
-                    modifier = Modifier.clickable(
+        Column(modifier = modifier.padding(paddingValues)) {
+            SecondaryScrollableTabRow(
+                selectedTabIndex = state.selectedTabIndex,
+                containerColor = Color.White,
+                edgePadding = 0.dp,
+                contentColor = Color.Black,
+            ) {
+                state.categories.forEachIndexed { index, title ->
+                    Tab(
+                        selected = state.selectedTabIndex == index,
                         onClick = {
-                            onProductClick(product)
+                            onCategoryTabClick(index)
+                        },
+                        text = {
+                            Text(
+                                text = title,
+                                maxLines = 1,
+                            )
                         }
-                    ),
-                )
+                    )
+                }
+            }
+
+            LazyVerticalGrid(
+                state = lazyState,
+                columns = GridCells.Fixed(2),
+                modifier = Modifier
+                    .padding(horizontal = 18.dp, vertical = 13.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp),
+                contentPadding = PaddingValues(bottom = 100.dp)
+            ) {
+                items(state.products) { product ->
+                    ProductListItem(
+                        product = product,
+                        onIncreaseQuantityClick = onIncreaseQuantityClick,
+                        onDecreaseQuantityClick = onDecreaseQuantityClick,
+                        modifier = Modifier.clickable(
+                            onClick = {
+                                onProductClick(product)
+                            }
+                        ),
+                    )
+                }
             }
         }
     }
@@ -266,6 +321,8 @@ private fun ProductListScreenPreview() {
     ShoppingCartTheme {
         ProductListScreen(
             state = ProductListState(
+                categories = listOf("PET", "BBBBBBBBBBBBBB", "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"),
+                selectedTabIndex = 0,
                 products = listOf(
                     Product(
                         id = "1",
@@ -273,6 +330,7 @@ private fun ProductListScreenPreview() {
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
                         price = 10_000,
                         cartQuantity = 0,
+                        category = "PET",
                     ),
                     Product(
                         id = "2",
@@ -280,6 +338,7 @@ private fun ProductListScreenPreview() {
                         name = "PET-보틀-세모",
                         price = 10_000_000,
                         cartQuantity = 10,
+                        category = "PET",
                     ),
                     Product(
                         id = "3",
@@ -287,6 +346,7 @@ private fun ProductListScreenPreview() {
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
                         price = 1_000_000_000,
                         cartQuantity = 10,
+                        category = "PET",
                     ),
                     Product(
                         id = "4",
@@ -294,6 +354,7 @@ private fun ProductListScreenPreview() {
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
                         price = 10_000,
                         cartQuantity = 0,
+                        category = "PET",
                     ),
                     Product(
                         id = "5",
@@ -301,6 +362,7 @@ private fun ProductListScreenPreview() {
                         name = "PET-보틀-정사각형 정사각형 정사각형 ",
                         price = 10_000,
                         cartQuantity = 0,
+                        category = "PET",
                     ),
                 )
             ),
@@ -308,6 +370,7 @@ private fun ProductListScreenPreview() {
             onBasketClick = {},
             onIncreaseQuantityClick = {},
             onDecreaseQuantityClick = {},
+            onCategoryTabClick = {},
         )
     }
 }

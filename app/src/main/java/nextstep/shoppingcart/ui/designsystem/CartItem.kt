@@ -134,6 +134,7 @@ private fun CartListItemPreview() {
                 imageUrl = "Stephani",
                 name = "[든든] 동원 스위트콘 스위트콘",
                 price = 999_999_999,
+                category = "",
                 cartQuantity = 999_999,
             ),
             onRemoveCartItemClick = { },

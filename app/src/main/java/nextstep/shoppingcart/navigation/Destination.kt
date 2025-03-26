@@ -13,6 +13,7 @@ data class ProductDetail(
     val id: String,
     val imageUrl: String,
     val name: String,
+    val category: String,
     val price: Int,
     val cartQuantity: Int,
 )

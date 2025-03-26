@@ -42,6 +42,7 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
                             imageUrl = it.imageUrl,
                             name = it.name,
                             price = it.price,
+                            category = it.category,
                             cartQuantity = it.cartQuantity,
                         )
                     )
@@ -61,6 +62,7 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
                     imageUrl = productDetail.imageUrl,
                     name = productDetail.name,
                     price = productDetail.price,
+                    category = productDetail.category,
                     cartQuantity = productDetail.cartQuantity,
                 ),
                 navigateBack = {

@@ -142,6 +142,7 @@ private fun ProductDetailScreenPreview() {
                 imageUrl = "",
                 name = "PET-보틀-정사각형 정사각형 정사각형 ",
                 price = 10_000,
+                category = "",
                 cartQuantity = 0,
             ),
             navigateBack = {

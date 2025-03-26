@@ -13,7 +13,14 @@ class ProductLocalDataSource {
     private val _itemsFlow = MutableStateFlow<List<ProductEntity>>(emptyList())
     val itemsFlow: Flow<List<ProductEntity>> = _itemsFlow.asStateFlow()
 
-    fun replaceAll(items: List<ProductEntity>) {
+    private val _categoryFlow = MutableStateFlow<List<String>>(emptyList())
+    val categoryFlow: Flow<List<String>> = _categoryFlow.asStateFlow()
+
+    fun replaceAllItems(items: List<ProductEntity>) {
         _itemsFlow.value = items
+    }
+
+    fun updateCategory(categories: List<String>) {
+        _categoryFlow.value = categories
     }
 }

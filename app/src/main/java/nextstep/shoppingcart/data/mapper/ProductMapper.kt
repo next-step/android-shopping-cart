@@ -8,6 +8,7 @@ fun ProductResponse.toEntity(): ProductEntity {
         id = id,
         imageUrl = imageUrl,
         name = name,
+        category = category,
         price = price,
     )
 }
