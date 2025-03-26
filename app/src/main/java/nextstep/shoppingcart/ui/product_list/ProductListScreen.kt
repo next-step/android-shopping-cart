@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -191,9 +192,13 @@ private fun ProductListScreen(
     onCategoryTabClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val lazyState = rememberLazyGridState()
     val scope = rememberCoroutineScope()
-    val showScrollToTopButton by remember {
+
+    val tabScrollStates = remember(state.categories) {
+        state.categories.indices.associateWith { LazyGridState() }
+    }
+    val lazyState = tabScrollStates[state.selectedTabIndex] ?: rememberLazyGridState()
+    val showScrollToTopButton by remember(lazyState) {
         derivedStateOf {
             lazyState.firstVisibleItemIndex >= 5
         }
