@@ -10,6 +10,7 @@ class CartRepository private constructor(
 ) {
 
     val items: Flow<LinkedHashMap<String, CartItemEntity>> = cartLocalDataSource.items
+    val cartTotalQuantity: Flow<Int> = cartLocalDataSource.cartTotalQuantity
 
     fun update(cartItem: CartItemEntity) {
         cartLocalDataSource.update(cartItem)

@@ -120,7 +120,15 @@ fun ProductListScreenRoot(
             }.collect {
                 state = state.copy(
                     products = it,
-                    selectedItemCount = it.sumOf { it.cartQuantity },
+                )
+            }
+        }
+
+        // 장바구니에 담긴 총 수량 불러오기
+        launch {
+            cartRepository.cartTotalQuantity.collect {
+                state = state.copy(
+                    selectedItemCount = it
                 )
             }
         }
