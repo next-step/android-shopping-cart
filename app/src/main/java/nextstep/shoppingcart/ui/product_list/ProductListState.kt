@@ -8,7 +8,7 @@ import nextstep.shoppingcart.ui.model.Product
 data class ProductListState(
     val isInitialLoading: Boolean = true,
     val isLoadingShow: Boolean = false,
-    val products: List<Product> = emptyList(),
+    val products: Map<String, List<Product>> = hashMapOf(),
     val selectedItemCount: Int = 0,
     val categories: List<String> = emptyList(),
     val selectedTabIndex: Int = TAB_NOT_SELECTED,
