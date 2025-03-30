@@ -1,13 +1,16 @@
 package nextstep.shoppingcart
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.shoppingcart.ShoppingCardScreen
+import nextstep.shoppingcart.ui.shoppingcart.ShoppingCartScreen
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -18,15 +21,28 @@ class CartScreenTest {
     val composeTestRule = createComposeRule()
 
     private val cartItems = mutableStateListOf<CartItem>()
+    var totalPrice by mutableIntStateOf(0)
+        private set
+
+    private fun updateTotalPrice() {
+        totalPrice = cartItems.sumOf { it.totalPrice }
+    }
 
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ShoppingCardScreen(
+            ShoppingCartScreen(
                 products = cartItems,
-                totalPrice = cartItems.sumOf { it.totalPrice },
-                onItemAdd = {
-                    cartItems.add(CartItem(it, 1))
+                totalPrice = totalPrice,
+                onItemAdd = { product ->
+                    val item = cartItems.find { it.product == product }
+                    if (item == null) {
+                        cartItems.add(CartItem(product, 1))
+                    } else {
+                        val index = cartItems.indexOf(item)
+                        cartItems[index] = item.copy(count = item.count + 1)
+                    }
+                    updateTotalPrice()
                 },
                 onItemRemove = {
                     cartItems.find { item -> item.product == it }?.let { cartItem ->
@@ -36,9 +52,11 @@ class CartScreenTest {
                         else
                             cartItems.remove(cartItem)
                     }
+                    updateTotalPrice()
                 },
                 onDelete = {
                     cartItems.removeIf { item -> item.product == it }
+                    updateTotalPrice()
                 },
                 onBackClick = {}
             )
@@ -51,6 +69,7 @@ class CartScreenTest {
         cartItems.add(CartItem(Product("", "상품1", 1000), 1))
         cartItems.add(CartItem(Product("", "상품2", 2000), 1))
         cartItems.add(CartItem(Product("", "상품3", 3000), 1))
+        updateTotalPrice()
         // when
         composeTestRule.waitForIdle()
         // then

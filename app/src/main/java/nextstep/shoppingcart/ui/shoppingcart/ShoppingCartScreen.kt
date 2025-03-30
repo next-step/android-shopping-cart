@@ -29,7 +29,7 @@ fun ShoppingCartScreen(
     val products = Cart.items
     val totalPrice = Cart.totalPrice
 
-    ShoppingCardScreen(
+    ShoppingCartScreen(
         onBackClick = onBackClick,
         totalPrice = totalPrice,
         products = products,
@@ -41,7 +41,7 @@ fun ShoppingCartScreen(
 }
 
 @Composable
-internal fun ShoppingCardScreen(
+internal fun ShoppingCartScreen(
     onBackClick: () -> Unit,
     totalPrice: Int,
     products: List<CartItem>,
@@ -84,7 +84,7 @@ internal fun ShoppingCardScreen(
 @Composable
 private fun ShoppingCartScreenPreview() {
     ShoppingCartTheme {
-        ShoppingCardScreen(
+        ShoppingCartScreen(
             onBackClick = {},
             totalPrice = 10000,
             products = listOf(CartItem(Product("", "Product", 10000), 1)),
