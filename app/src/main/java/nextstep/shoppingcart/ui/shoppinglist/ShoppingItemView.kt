@@ -3,7 +3,6 @@ package nextstep.shoppingcart.ui.shoppinglist
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,13 +25,11 @@ fun ShoppingItemView(
     onItemClick: (Product) -> Unit = {},
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .clickable(onClick = { onItemClick(product) }),
     ) {
         AsyncImage(
             modifier = modifier
-                .fillMaxWidth()
                 .aspectRatio(1f),
             model = product.imageUrl,
             placeholder = painterResource(R.drawable.ic_photo),
