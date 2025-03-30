@@ -1,12 +1,13 @@
 package nextstep.shoppingcart
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import nextstep.shoppingcart.data.Cart
+import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
-import nextstep.shoppingcart.ui.shoppingcart.ShoppingCartScreen
+import nextstep.shoppingcart.ui.shoppingcart.ShoppingCardScreen
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -16,13 +17,30 @@ class CartScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
+    private val cartItems = mutableStateListOf<CartItem>()
+
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ShoppingCartScreen(
-                onItemAdd = { product -> Cart.addOne(product) },
-                onItemRemove = { product -> Cart.removeOne(product) },
-                onDelete = { product -> Cart.removeAll(product) }
+            ShoppingCardScreen(
+                products = cartItems,
+                totalPrice = cartItems.sumOf { it.totalPrice },
+                onItemAdd = {
+                    cartItems.add(CartItem(it, 1))
+                },
+                onItemRemove = {
+                    cartItems.find { item -> item.product == it }?.let { cartItem ->
+                        val index = cartItems.indexOf(cartItem)
+                        if (cartItem.count > 1)
+                            cartItems[index] = cartItem.copy(count = cartItem.count - 1)
+                        else
+                            cartItems.remove(cartItem)
+                    }
+                },
+                onDelete = {
+                    cartItems.removeIf { item -> item.product == it }
+                },
+                onBackClick = {}
             )
         }
     }
@@ -30,10 +48,9 @@ class CartScreenTest {
     @Test
     fun 담긴_상품_가격의_총합이_노출된다() {
         // given: 1000원, 2000원, 3000원 상품이 장바구니에 추가되었을 때
-        Cart.clear()
-        Cart.addOne(Product("", "상품1", 1000))
-        Cart.addOne(Product("", "상품2", 2000))
-        Cart.addOne(Product("", "상품3", 3000))
+        cartItems.add(CartItem(Product("", "상품1", 1000), 1))
+        cartItems.add(CartItem(Product("", "상품2", 2000), 1))
+        cartItems.add(CartItem(Product("", "상품3", 3000), 1))
         // when
         composeTestRule.waitForIdle()
         // then
@@ -43,10 +60,9 @@ class CartScreenTest {
     @Test
     fun 담긴_상품을_제거할_수_있다() {
         // given: 1000원, 2000원, 3000원 상품이 장바구니에 있을 때
-        Cart.clear()
-        Cart.addOne(Product("", "상품1", 1000))
-        Cart.addOne(Product("", "상품2", 2000))
-        Cart.addOne(Product("", "상품3", 3000))
+        cartItems.add(CartItem(Product("", "상품1", 1000), 1))
+        cartItems.add(CartItem(Product("", "상품2", 2000), 1))
+        cartItems.add(CartItem(Product("", "상품3", 3000), 1))
         composeTestRule.waitForIdle()
 
         // when: 상품2를 장바구니에서 제거
@@ -62,8 +78,7 @@ class CartScreenTest {
     @Test
     fun 담긴_상품의_수량을_증가시키면_상품_가격에_반영된다() {
         // given: 가격이 1000원인 상품이 1개 있을 때
-        Cart.clear()
-        Cart.addOne(Product("", "상품1", 1000))
+        cartItems.add(CartItem(Product("", "상품1", 1000), 1))
         composeTestRule.waitForIdle()
 
         // when: 상품의 수량을 2개로 증가
@@ -77,10 +92,7 @@ class CartScreenTest {
     @Test
     fun 담긴_상품의_수량을_감소시키면_상품_가격에_반영된다() {
         // given: 가격이 1000원인 상품이 3개 있을 때
-        Cart.clear()
-        Cart.addOne(Product("", "상품1", 1000))
-        Cart.addOne(Product("", "상품1", 1000))
-        Cart.addOne(Product("", "상품1", 1000))
+        cartItems.add(CartItem(Product("", "상품1", 1000), 3))
         composeTestRule.waitForIdle()
 
         // when: 상품의 수량을 2개로 증가
@@ -94,8 +106,7 @@ class CartScreenTest {
     @Test
     fun 담긴_상품의_수량을_1보다_적게_하면_상품이_삭제된다() {
         // given: 가격이 1000원인 상품이 1개 있을 때
-        Cart.clear()
-        Cart.addOne(Product("", "상품1", 1000))
+        cartItems.add(CartItem(Product("", "상품1", 1000), 1))
         composeTestRule.waitForIdle()
 
         // when: 상품의 수량을 감소
