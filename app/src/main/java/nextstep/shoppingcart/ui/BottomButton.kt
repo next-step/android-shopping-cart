@@ -7,6 +7,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -31,7 +32,8 @@ fun BottomButton(
         elevation = ButtonDefaults.buttonElevation(4.dp),
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Blue50
+            containerColor = Blue50,
+            contentColor = Color.White
         )
     ) {
         Text(

@@ -34,7 +34,8 @@ fun ShoppingListTopAppBar(
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color.White
+            containerColor = Color.White,
+            titleContentColor = EerieBlack,
         ),
         actions = {
             IconButton(onClick = onShoppingCartClick) {
