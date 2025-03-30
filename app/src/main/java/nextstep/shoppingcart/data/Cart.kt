@@ -1,12 +1,21 @@
 package nextstep.shoppingcart.data
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.setValue
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 
 object Cart {
     val items = mutableStateListOf<CartItem>()
-    val totalPrice: Int get() = items.sumOf { it.totalPrice }
+
+    var totalPrice by mutableIntStateOf(0)
+        private set
+
+    private fun updateTotalPrice() {
+        totalPrice = items.sumOf { it.totalPrice }
+    }
 
     fun addOne(product: Product): List<CartItem> {
         val item = items.find { it.product == product }
@@ -16,6 +25,7 @@ object Cart {
             val index = items.indexOf(item)
             items[index] = item.copy(count = item.count + 1)
         }
+        updateTotalPrice()
         return items
     }
 
@@ -29,16 +39,19 @@ object Cart {
                     items.remove(item)
                 }
             }
+        updateTotalPrice()
         return items
     }
 
     fun removeAll(product: Product): List<CartItem> {
         items.removeAll { it.product == product }
+        updateTotalPrice()
         return items
     }
 
     fun clear(): List<CartItem> {
         items.clear()
+        updateTotalPrice()
         return items
     }
 }

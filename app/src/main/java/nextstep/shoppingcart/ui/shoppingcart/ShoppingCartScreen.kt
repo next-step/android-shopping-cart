@@ -30,7 +30,7 @@ fun ShoppingCartScreen(
     onDelete: (Product) -> Unit = {},
 ) {
     val products = Cart.items
-    val totalPrice by remember { mutableStateOf(Cart.totalPrice) }
+    val totalPrice = Cart.totalPrice
 
     ShoppingCardScreen(
         onBackClick = onBackClick,
