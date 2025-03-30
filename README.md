@@ -33,3 +33,8 @@
 - [x] 미사용 Modifier 제거
 - [x] Preview에서 Screnn을 제외한 컴포넌트의 의존성 제거
 - [x] List 자체를 lambda의 인자로 넘겨주어 할당해보기
+
+## [📌 3단계 리뷰 사항 반영]
+- [x] `derivedStateOf`의 필요 여부 검토
+- [x] Stateful 한 Screen과 Stateless한 Screen을 나누어 viewModel/repository에 대한 의존성 낮추기
+- [x] 파라미터로 전달하는 modifier는 최상위 Composable에서 할당 완료하기
