@@ -7,6 +7,7 @@ import nextstep.shoppingcart.ui.model.Product
 @Parcelize
 data class ProductListState(
     val isInitialLoading: Boolean = true,
+    val isLoading: Boolean = false,
     val isLoadingShow: Boolean = false,
     val products: Map<String, List<Product>> = hashMapOf(),
     val selectedItemCount: Int = 0,
