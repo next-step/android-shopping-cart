@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.ui.theme.EerieBlack
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -28,8 +29,8 @@ fun ProductDetailTopAppBar(
             Text(
                 modifier = modifier,
                 text = stringResource(R.string.product_detail), maxLines = 1,
-                style = MaterialTheme.typography.titleLarge
-
+                style = MaterialTheme.typography.titleLarge,
+                color = EerieBlack
             )
         },
         navigationIcon = {
@@ -37,6 +38,7 @@ fun ProductDetailTopAppBar(
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.back_button_content_description),
+                    tint = EerieBlack
                 )
             }
         },

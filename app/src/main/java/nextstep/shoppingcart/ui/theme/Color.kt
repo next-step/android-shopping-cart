@@ -12,3 +12,5 @@ val Pink40 = Color(0xFF7D5260)
 
 val EerieBlack = Color(0xFF1D1B20)
 val Blue50 = Color(0xFF2196F3)
+
+val Gray10 = Color(0xFFAAAAAA)

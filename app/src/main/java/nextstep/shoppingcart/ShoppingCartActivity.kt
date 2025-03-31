@@ -3,9 +3,7 @@ package nextstep.shoppingcart
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.ui.shoppingcart.ShoppingCartScreen
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -16,11 +14,12 @@ class ShoppingCartActivity : ComponentActivity() {
 
         setContent {
             ShoppingCartTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    ShoppingCartScreen(onBackClick = { finish() })
-                }
+                ShoppingCartScreen(
+                    onBackClick = { finish() },
+                    onItemAdd = { product -> Cart.addOne(product) },
+                    onItemRemove = { product -> Cart.removeOne(product) },
+                    onDelete = { product -> Cart.removeAll(product) }
+                )
             }
         }
     }

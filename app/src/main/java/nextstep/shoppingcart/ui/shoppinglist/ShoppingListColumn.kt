@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.ui.shoppinglist
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -27,9 +28,10 @@ fun ShoppingListColumn(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         items(items = listOfItems) { item ->
-            ShoppingItem(
+            ShoppingItemView(
                 product = item,
-                onItemClick = onItemClick
+                onItemClick = onItemClick,
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }
