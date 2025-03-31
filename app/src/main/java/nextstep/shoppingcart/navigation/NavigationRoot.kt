@@ -10,8 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
-import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.basket.BasketScreenRoot
+import nextstep.shoppingcart.ui.model.Product
 import nextstep.shoppingcart.ui.product_detail.ProductDetailScreenRoot
 import nextstep.shoppingcart.ui.product_list.ProductListScreenRoot
 
@@ -42,6 +42,8 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
                             imageUrl = it.imageUrl,
                             name = it.name,
                             price = it.price,
+                            category = it.category,
+                            cartQuantity = it.cartQuantity,
                         )
                     )
                 },
@@ -59,7 +61,9 @@ private fun NavGraphBuilder.productGraph(navController: NavController) {
                     id = productDetail.id,
                     imageUrl = productDetail.imageUrl,
                     name = productDetail.name,
-                    price = productDetail.price
+                    price = productDetail.price,
+                    category = productDetail.category,
+                    cartQuantity = productDetail.cartQuantity,
                 ),
                 navigateBack = {
                     navController.popBackStack()

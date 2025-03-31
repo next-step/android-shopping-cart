@@ -1,6 +1,6 @@
 package nextstep.shoppingcart.data.model
 
-data class ProductEntity(
+data class ProductResponse(
     val id: String,
     val imageUrl: String,
     val name: String,

@@ -49,15 +49,18 @@ internal class BasketScreenTest {
                     onRemoveCartItemClick = { removeItem ->
                         state = state.copy(
                             cartItems = state.cartItems.filterNot { item ->
-                                item == removeItem
+                                item.product == removeItem
                             }
                         )
                     },
                     onIncreaseQuantityClick = { increaseItem ->
                         state = state.copy(
                             cartItems = state.cartItems.map { item ->
-                                if (item == increaseItem) {
-                                    item.copy(count = item.count + 1)
+                                if (item.product == increaseItem) {
+                                    item.copy(
+                                        product = item.product.copy(cartQuantity = item.quantity + 1),
+                                        quantity = item.quantity + 1,
+                                    )
                                 } else {
                                     item
                                 }
@@ -66,17 +69,17 @@ internal class BasketScreenTest {
                     },
                     onDecreaseQuantityClick = { decreaseItem ->
                         val newCartItems = state.cartItems.let { items ->
-                            items.find { it.product == decreaseItem.product }?.let { item ->
-                                if (item.count > 1) {
+                            items.find { it.product == decreaseItem }?.let { item ->
+                                if (item.quantity > 1) {
                                     items.map { current ->
-                                        if (current.product == decreaseItem.product) {
-                                            current.copy(count = current.count - 1)
+                                        if (current.product == decreaseItem) {
+                                            current.copy(quantity = current.quantity - 1)
                                         } else {
                                             current
                                         }
                                     }
                                 } else {
-                                    items.filterNot { it.product == decreaseItem.product }
+                                    items.filterNot { it.product == decreaseItem }
                                 }
                             } ?: items
                         }
@@ -158,8 +161,9 @@ internal class BasketScreenTest {
                     imageUrl = "",
                     name = "Item $it",
                     price = 100,
+                    cartQuantity = 1,
                 ),
-                count = 1,
+                quantity = 1,
             )
         }
     }

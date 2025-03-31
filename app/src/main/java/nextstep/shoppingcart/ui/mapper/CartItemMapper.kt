@@ -5,7 +5,7 @@ import nextstep.shoppingcart.ui.model.CartItem
 
 fun CartItemEntity.toUi(): CartItem {
     return CartItem(
-        product = product.toUi(),
-        count = count,
+        product = product.toUi(quantity),
+        quantity = quantity,
     )
 }

@@ -3,59 +3,28 @@ package nextstep.shoppingcart.data.datasource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import nextstep.shoppingcart.data.model.CartItemEntity
-import nextstep.shoppingcart.data.model.ProductEntity
 
-/**
- * Room과 같은 역할을 한다고 가정하고 작성했습니다.
- */
 class CartLocalDataSource {
 
-    // MutableList로 구현하면 Flow<List<CartItemEntity>>로 반환할 방법이 없어서 MutableStateFlow로 변경했습니다.
-    private val _itemsFlow = MutableStateFlow<List<CartItemEntity>>(emptyList())
-    val itemsFlow: Flow<List<CartItemEntity>> = _itemsFlow.asStateFlow()
+    private val _itemsFlow = MutableStateFlow<LinkedHashMap<String, CartItemEntity>>(linkedMapOf())
+    val items: Flow<LinkedHashMap<String, CartItemEntity>> = _itemsFlow.asStateFlow()
 
-    fun addOne(product: ProductEntity) {
-        _itemsFlow.update { items ->
-            val isExistingItem = items.any { it.product == product }
-            if (isExistingItem) {
-                items + CartItemEntity(product, 1)
-            } else {
-                items.map { item ->
-                    if (item.product == product) {
-                        item.copy(count = item.count + 1)
-                    } else {
-                        item
-                    }
-                }
-            }
+    private val _cartTotalQuantity = MutableStateFlow(0)
+    val cartTotalQuantity: Flow<Int> = _cartTotalQuantity.asStateFlow()
+
+    fun update(itemEntity: CartItemEntity) {
+        val currentMap = _itemsFlow.value.toMutableMap()
+        val productId = itemEntity.product.id
+        val previousQuantity = (currentMap.remove(productId)?.quantity ?: 0)
+
+        if (itemEntity.quantity < 1) {
+            _cartTotalQuantity.value -= previousQuantity
+        } else {
+            _cartTotalQuantity.value += itemEntity.quantity - previousQuantity
+            currentMap[productId] = itemEntity
         }
 
-    }
-
-    fun removeOne(product: ProductEntity) {
-        _itemsFlow.update { items ->
-            items.find { it.product == product }?.let { item ->
-                if (item.count > 1) {
-                    items.map { current ->
-                        if (current.product == product) {
-                            current.copy(count = current.count - 1)
-                        } else {
-                            current
-                        }
-                    }
-                } else {
-                    items.filterNot { it.product == product }
-                }
-            } ?: items
-        }
-
-    }
-
-    fun removeAll(product: ProductEntity) {
-        _itemsFlow.update { items ->
-            items.filterNot { it.product == product }
-        }
+        _itemsFlow.value = LinkedHashMap(currentMap)
     }
 }

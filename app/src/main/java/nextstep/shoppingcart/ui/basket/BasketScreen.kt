@@ -34,9 +34,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.onStart
 import nextstep.shoppingcart.R
+import nextstep.shoppingcart.data.model.CartItemEntity
 import nextstep.shoppingcart.data.repository.CartRepository
 import nextstep.shoppingcart.ui.designsystem.CartListItem
 import nextstep.shoppingcart.ui.designsystem.InitialCircularLoading
@@ -57,7 +57,7 @@ fun BasketScreenRoot(
     }
 
     // 초기 로딩 시간이 0.5초 보다 오래 걸리는 경우에만 로딩바 보여주기
-    LaunchedEffect(state.isInitialLoading) {
+    LaunchedEffect(Unit) {
         if (state.isInitialLoading) {
             delay(500L)
             state = state.copy(
@@ -66,17 +66,15 @@ fun BasketScreenRoot(
         }
     }
 
-    // Q. 화면이 파괴되면 Composable도 recomposition에서 제외되므로, Fragment에서 처럼 repeatOnLifecycle 등으로 Lifecycle을 지정하지 않아도 되나요?
     LaunchedEffect(Unit) {
-        cartRepository.getItems()
+        cartRepository.items
             .onStart {
                 state = state.copy(
                     isInitialLoading = false,
                 )
             }
-            .distinctUntilChanged()
             .collect { items ->
-                state = state.copy(cartItems = items.map { it.toUi() })
+                state = state.copy(cartItems = items.values.map { it.toUi() })
             }
     }
 
@@ -89,9 +87,30 @@ fun BasketScreenRoot(
     BasketScreen(
         state = state,
         navigateBack = navigateBack,
-        onRemoveCartItemClick = { cartRepository.removeAll(it.product.toEntity()) },
-        onIncreaseQuantityClick = { cartRepository.addOne(it.product.toEntity()) },
-        onDecreaseQuantityClick = { cartRepository.removeOne(it.product.toEntity()) },
+        onRemoveCartItemClick = {
+            cartRepository.update(
+                CartItemEntity(
+                    product = it.copy(cartQuantity = 0).toEntity(),
+                    quantity = 0,
+                )
+            )
+        },
+        onIncreaseQuantityClick = {
+            cartRepository.update(
+                CartItemEntity(
+                    product = it.copy(cartQuantity = it.cartQuantity + 1).toEntity(),
+                    quantity = it.cartQuantity + 1,
+                )
+            )
+        },
+        onDecreaseQuantityClick = {
+            cartRepository.update(
+                CartItemEntity(
+                    product = it.copy(cartQuantity = it.cartQuantity - 1).toEntity(),
+                    quantity = it.cartQuantity - 1,
+                )
+            )
+        },
         modifier = modifier,
     )
 }
@@ -100,9 +119,9 @@ fun BasketScreenRoot(
 internal fun BasketScreen(
     state: BasketState,
     navigateBack: () -> Unit,
-    onRemoveCartItemClick: (CartItem) -> Unit,
-    onIncreaseQuantityClick: (CartItem) -> Unit,
-    onDecreaseQuantityClick: (CartItem) -> Unit,
+    onRemoveCartItemClick: (Product) -> Unit,
+    onIncreaseQuantityClick: (Product) -> Unit,
+    onDecreaseQuantityClick: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -124,7 +143,7 @@ internal fun BasketScreen(
             ) {
                 items(state.cartItems, key = { it.product.id }) {
                     CartListItem(
-                        cartItem = it,
+                        item = it.product,
                         onRemoveCartItemClick = onRemoveCartItemClick,
                         onIncreaseQuantityClick = onIncreaseQuantityClick,
                         onDecreaseQuantityClick = onDecreaseQuantityClick,
@@ -191,47 +210,57 @@ private fun BasketScreenPreview() {
                             id = "Ilene",
                             imageUrl = "Linden",
                             name = "Ignacio",
-                            price = 8650
+                            category = "Dummy",
+                            price = 8650,
+                            cartQuantity = 9757,
                         ),
-                        count = 9757,
+                        quantity = 3012,
                     ),
                     CartItem(
                         product = Product(
                             id = "Stacy",
                             imageUrl = "Rhyan",
                             name = "Lester",
-                            price = 3533
+                            category = "Dummy",
+                            price = 3533,
+                            cartQuantity = 3012,
                         ),
-                        count = 3012,
+                        quantity = 3012,
                     ),
                     CartItem(
                         product = Product(
                             id = "A",
                             imageUrl = "Rhyan",
                             name = "Lester",
-                            price = 3533
+                            category = "Dummy",
+                            price = 3533,
+                            cartQuantity = 3012,
                         ),
-                        count = 3012,
+                        quantity = 3012,
                     ),
                     CartItem(
                         product = Product(
                             id = "B",
                             imageUrl = "Rhyan",
                             name = "Lester",
-                            price = 3533
+                            category = "Dummy",
+                            price = 3533,
+                            cartQuantity = 3012,
                         ),
-                        count = 3012,
+                        quantity = 3012,
                     ),
                     CartItem(
                         product = Product(
                             id = "C",
                             imageUrl = "Rhyan",
                             name = "Lester",
-                            price = 3533
+                            category = "Dummy",
+                            price = 3533,
+                            cartQuantity = 3012,
                         ),
-                        count = 3012,
+                        quantity = 3012,
                     ),
-                )
+                ),
             ),
             navigateBack = {},
             onRemoveCartItemClick = {},

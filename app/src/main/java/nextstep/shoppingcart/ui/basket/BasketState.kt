@@ -1,6 +1,7 @@
 package nextstep.shoppingcart.ui.basket
 
 import android.os.Parcelable
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import nextstep.shoppingcart.ui.model.CartItem
 
@@ -10,6 +11,6 @@ data class BasketState(
     val isLoadingShow: Boolean = false,
     val cartItems: List<CartItem> = emptyList(),
 ) : Parcelable {
-    val totalPrice: Int
-        get() = cartItems.sumOf { it.totalPrice }
+    @IgnoredOnParcel
+    val totalPrice: Int = cartItems.sumOf { it.product.totalPrice }
 }
