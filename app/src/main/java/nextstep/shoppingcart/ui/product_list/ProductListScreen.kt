@@ -322,10 +322,13 @@ private fun ProductListScreen(
                     contentPadding = PaddingValues(bottom = 100.dp)
                 ) {
                     items(
-                        state.products.getOrDefault(
+                        items = state.products.getOrDefault(
                             state.categories[page],
                             emptyList()
-                        )
+                        ),
+                        key = {
+                            it.id
+                        }
                     ) { product ->
                         ProductListItem(
                             product = product,
