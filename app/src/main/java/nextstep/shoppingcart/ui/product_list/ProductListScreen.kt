@@ -50,7 +50,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.data.model.CartItemEntity
@@ -74,6 +76,26 @@ fun ProductListScreenRoot(
     var state by rememberSaveable {
         mutableStateOf(ProductListState())
     }
+
+    // 장바구니 State
+    val cartItems = cartRepository.items
+        .onEach { cartItems ->
+            val products = state.products as HashMap
+
+            for (category in products.keys) {
+                val items = mutableListOf<Product>()
+
+                for (item in products[category]!!) {
+                    val cartQuantity = cartItems[item.id]?.quantity ?: 0
+                    items.add(item.copy(cartQuantity = cartQuantity))
+                }
+                products[category] = items
+            }
+            state = state.copy(
+                products = products
+            )
+        }
+        .collectAsStateWithLifecycle(emptyMap())
 
     // 초기 데이터 로딩
     LaunchedEffect(Unit) {
@@ -102,11 +124,18 @@ fun ProductListScreenRoot(
         // 상품 목록
         val products = productRepository.getProduct(category).map { it.toUi() }
 
+        val productsWithQuantity = mutableListOf<Product>()
+
+        for (item in products) {
+            val cartQuantity = cartItems.value[item.id]?.quantity ?: 0
+            productsWithQuantity.add(item.copy(cartQuantity = cartQuantity))
+        }
+
         state = state.copy(
             isLoading = false,
             isLoadingShow = false,
             products = (state.products as HashMap).also {
-                it[category] = products
+                it[category] = productsWithQuantity
             },
         )
     }
@@ -121,25 +150,6 @@ fun ProductListScreenRoot(
                         selectedTabIndex = if (state.selectedTabIndex == ProductListState.TAB_NOT_SELECTED) 0 else state.selectedTabIndex,
                     )
                 }
-            }
-        }
-        launch {
-            // 장바구니 flow
-            cartRepository.items.collect { cartItems ->
-                val products = state.products as HashMap
-
-                for (category in products.keys) {
-                    val items = mutableListOf<Product>()
-
-                    for (item in products[category]!!) {
-                        val cartQuantity = cartItems[item.id]?.quantity ?: 0
-                        items.add(item.copy(cartQuantity = cartQuantity))
-                    }
-                    products[category] = items
-                }
-                state = state.copy(
-                    products = products
-                )
             }
         }
 
@@ -226,7 +236,7 @@ private fun ProductListScreen(
 ) {
     val scope = rememberCoroutineScope()
 
-    val tabScrollStates = rememberSaveable (state.categories) {
+    val tabScrollStates = rememberSaveable(state.categories) {
         state.categories.indices.associateWith { LazyGridState() }
     }
     val pagerState = rememberPagerState {
@@ -307,7 +317,12 @@ private fun ProductListScreen(
                     verticalArrangement = Arrangement.spacedBy(20.dp),
                     contentPadding = PaddingValues(bottom = 100.dp)
                 ) {
-                    items(state.products.getOrDefault(state.categories[page], emptyList())) { product ->
+                    items(
+                        state.products.getOrDefault(
+                            state.categories[page],
+                            emptyList()
+                        )
+                    ) { product ->
                         ProductListItem(
                             product = product,
                             onIncreaseQuantityClick = onIncreaseQuantityClick,
