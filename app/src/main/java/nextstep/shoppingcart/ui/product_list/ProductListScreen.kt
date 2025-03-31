@@ -87,7 +87,11 @@ fun ProductListScreenRoot(
 
                 for (item in products[category]!!) {
                     val cartQuantity = cartItems[item.id]?.quantity ?: 0
-                    items.add(item.copy(cartQuantity = cartQuantity))
+                    if (item.cartQuantity != cartQuantity) {
+                        items.add(item.copy(cartQuantity = cartQuantity))
+                    } else {
+                        items.add(item)
+                    }
                 }
                 products[category] = items
             }
