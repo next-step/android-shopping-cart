@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.ProductRepository
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
@@ -20,6 +21,7 @@ fun ShoppingListScreen(
     onShoppingCartClick: () -> Unit = {},
 ) {
     val productRepository = ProductRepository()
+    val cartItems = Cart.items
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -29,7 +31,8 @@ fun ShoppingListScreen(
         content = { contentPadding ->
             ShoppingListColumn(
                 modifier = Modifier.padding(contentPadding),
-                listOfItems = productRepository.getProducts(),
+                products = productRepository.getProducts(),
+                cartItems = cartItems,
                 onItemClick = onItemClick
             )
         },
