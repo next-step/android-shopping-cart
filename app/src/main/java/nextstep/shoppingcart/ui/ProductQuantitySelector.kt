@@ -40,10 +40,11 @@ fun ProductQuantitySelector(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        IconButton(onClick = { onRemove(item.product) }) {
+        IconButton(onClick = { onRemove(item.product) }, enabled = item.count > 1) {
             Icon(
                 painter = painterResource(R.drawable.ic_remove),
-                contentDescription = stringResource(R.string.remove_button_text)
+                contentDescription = stringResource(R.string.remove_button_text),
+                tint = if (item.count > 1) Color.Black else Color.LightGray
             )
         }
         Text(
@@ -54,10 +55,11 @@ fun ProductQuantitySelector(
                 .padding(horizontal = 8.dp),
             textAlign = TextAlign.Center
         )
-        IconButton(onClick = { onAdd(item.product) }) {
+        IconButton(onClick = { onAdd(item.product) }, enabled = item.count < item.product.maxBuyCount) {
             Icon(
                 Icons.Filled.Add,
-                contentDescription = stringResource(R.string.add_button_text)
+                contentDescription = stringResource(R.string.add_button_text),
+                tint = if (item.count < item.product.maxBuyCount) Color.Black else Color.LightGray
             )
         }
     }
