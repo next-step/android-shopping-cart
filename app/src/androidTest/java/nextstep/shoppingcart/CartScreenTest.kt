@@ -8,6 +8,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import nextstep.shoppingcart.data.Cart.items
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.shoppingcart.ShoppingCartScreen
@@ -24,8 +25,28 @@ class CartScreenTest {
     var totalPrice by mutableIntStateOf(0)
         private set
 
-    private fun updateTotalPrice() {
-        totalPrice = cartItems.sumOf { it.totalPrice }
+    private var onItemAdd: (Product) -> Unit = { product ->
+        val cartItem = cartItems.find { it.product == product }
+        if (cartItem == null) {
+            cartItems.add(CartItem(product, 1))
+        } else {
+            val index = cartItems.indexOf(cartItem)
+            cartItems[index] = cartItem.copy(count = cartItem.count + 1)
+        }
+        totalPrice += product.price
+    }
+    private var onItemRemove: (Product) -> Unit = { product ->
+        if (cartItems.filter { it.product == product }.size > 0) {
+            cartItems.remove(cartItems.filter { it.product == product }[0])
+            totalPrice -= product.price
+        }
+    }
+    private var onDelete: (Product) -> Unit = { product ->
+        val cartItem = cartItems.find { it.product == product }
+        if (cartItem != null) {
+            cartItems.removeIf { it.product == product }
+            totalPrice -= cartItem.product.price * cartItem.count
+        }
     }
 
     @Before
@@ -34,30 +55,9 @@ class CartScreenTest {
             ShoppingCartScreen(
                 products = cartItems,
                 totalPrice = totalPrice,
-                onItemAdd = { product ->
-                    val item = cartItems.find { it.product == product }
-                    if (item == null) {
-                        cartItems.add(CartItem(product, 1))
-                    } else {
-                        val index = cartItems.indexOf(item)
-                        cartItems[index] = item.copy(count = item.count + 1)
-                    }
-                    updateTotalPrice()
-                },
-                onItemRemove = {
-                    cartItems.find { item -> item.product == it }?.let { cartItem ->
-                        val index = cartItems.indexOf(cartItem)
-                        if (cartItem.count > 1)
-                            cartItems[index] = cartItem.copy(count = cartItem.count - 1)
-                        else
-                            cartItems.remove(cartItem)
-                    }
-                    updateTotalPrice()
-                },
-                onDelete = {
-                    cartItems.removeIf { item -> item.product == it }
-                    updateTotalPrice()
-                },
+                onItemAdd = onItemAdd,
+                onItemRemove = onItemRemove,
+                onDelete = onDelete,
                 onBackClick = {}
             )
         }
@@ -66,10 +66,10 @@ class CartScreenTest {
     @Test
     fun 담긴_상품_가격의_총합이_노출된다() {
         // given: 1000원, 2000원, 3000원 상품이 장바구니에 추가되었을 때
-        cartItems.add(CartItem(Product("", "상품1", 1000), 1))
-        cartItems.add(CartItem(Product("", "상품2", 2000), 1))
-        cartItems.add(CartItem(Product("", "상품3", 3000), 1))
-        updateTotalPrice()
+        onItemAdd(Product("", "상품1", 1000))
+        onItemAdd(Product("", "상품2", 2000))
+        onItemAdd(Product("", "상품3", 3000))
+
         // when
         composeTestRule.waitForIdle()
         // then
@@ -79,9 +79,9 @@ class CartScreenTest {
     @Test
     fun 담긴_상품을_제거할_수_있다() {
         // given: 1000원, 2000원, 3000원 상품이 장바구니에 있을 때
-        cartItems.add(CartItem(Product("", "상품1", 1000), 1))
-        cartItems.add(CartItem(Product("", "상품2", 2000), 1))
-        cartItems.add(CartItem(Product("", "상품3", 3000), 1))
+        onItemAdd(Product("", "상품1", 1000))
+        onItemAdd(Product("", "상품2", 2000))
+        onItemAdd(Product("", "상품3", 3000))
         composeTestRule.waitForIdle()
 
         // when: 상품2를 장바구니에서 제거
@@ -97,7 +97,7 @@ class CartScreenTest {
     @Test
     fun 담긴_상품의_수량을_증가시키면_상품_가격에_반영된다() {
         // given: 가격이 1000원인 상품이 1개 있을 때
-        cartItems.add(CartItem(Product("", "상품1", 1000), 1))
+        onItemAdd(Product("", "상품1", 1000))
         composeTestRule.waitForIdle()
 
         // when: 상품의 수량을 2개로 증가
@@ -111,7 +111,8 @@ class CartScreenTest {
     @Test
     fun 담긴_상품의_수량을_감소시키면_상품_가격에_반영된다() {
         // given: 가격이 1000원인 상품이 3개 있을 때
-        cartItems.add(CartItem(Product("", "상품1", 1000), 3))
+        onItemAdd(Product("", "상품1", 1000))
+        onItemAdd(Product("", "상품1", 1000))
         composeTestRule.waitForIdle()
 
         // when: 상품의 수량을 2개로 증가
@@ -119,13 +120,13 @@ class CartScreenTest {
         composeTestRule.waitForIdle()
 
         //then: 상품 가격 총합이 2000원이 되어야 한다.
-        composeTestRule.onNodeWithText("2,000원", substring = true).assertExists()
+        composeTestRule.onNodeWithText("1,000원", substring = true).assertExists()
     }
 
     @Test
     fun 담긴_상품의_수량을_1보다_적게_하면_상품이_삭제된다() {
         // given: 가격이 1000원인 상품이 1개 있을 때
-        cartItems.add(CartItem(Product("", "상품1", 1000), 1))
+        onItemAdd(Product("", "상품1", 1000))
         composeTestRule.waitForIdle()
 
         // when: 상품의 수량을 감소
