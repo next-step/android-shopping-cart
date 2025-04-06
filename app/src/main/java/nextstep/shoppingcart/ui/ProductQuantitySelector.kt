@@ -40,11 +40,10 @@ fun ProductQuantitySelector(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        IconButton(onClick = { onRemove(item.product) }, enabled = item.count > 1) {
+        IconButton(onClick = { onRemove(item.product) }) {
             Icon(
                 painter = painterResource(R.drawable.ic_remove),
-                contentDescription = stringResource(R.string.remove_button_text),
-                tint = if (item.count > 1) Color.Black else Color.LightGray
+                contentDescription = stringResource(R.string.remove_button_text)
             )
         }
         Text(
