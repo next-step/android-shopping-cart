@@ -11,13 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import nextstep.shoppingcart.data.Cart
 import nextstep.shoppingcart.data.ShoppingListPreviewParameterProvider
+import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
 @Composable
 fun ShoppingListColumn(
-    listOfItems: List<Product>,
+    products: List<Product>,
+    cartItems: List<CartItem>,
     modifier: Modifier = Modifier,
     onItemClick: (Product) -> Unit = {},
 ) {
@@ -27,11 +30,15 @@ fun ShoppingListColumn(
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        items(items = listOfItems) { item ->
+        items(items = products) { item ->
             ShoppingItemView(
                 product = item,
                 onItemClick = onItemClick,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                countInCart = cartItems.find { it.product == item }?.count ?: 0,
+                onAddCount = { Cart.addOne(it) },
+                onRemoveCount = { Cart.removeOne(it) },
+                onAddToCart = { Cart.addOne(it) }
             )
         }
     }
@@ -40,11 +47,12 @@ fun ShoppingListColumn(
 @Preview
 @Composable
 private fun ShoppingListColumnPreview(
-    @PreviewParameter(ShoppingListPreviewParameterProvider::class) products: List<Product>
+    @PreviewParameter(ShoppingListPreviewParameterProvider::class) products: List<Product>,
 ) {
     ShoppingCartTheme {
         ShoppingListColumn(
-            listOfItems = products,
+            products = products,
+            cartItems = listOf(CartItem(products[0], 1))
         )
     }
 }

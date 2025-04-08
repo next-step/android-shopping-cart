@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -33,6 +32,7 @@ import coil3.compose.AsyncImage
 import nextstep.shoppingcart.R
 import nextstep.shoppingcart.model.CartItem
 import nextstep.shoppingcart.model.Product
+import nextstep.shoppingcart.ui.ProductQuantitySelector
 import nextstep.shoppingcart.ui.theme.Gray10
 import nextstep.shoppingcart.ui.theme.ShoppingCartTheme
 
@@ -101,28 +101,12 @@ fun CartItemView(
                     Spacer(modifier = Modifier.height(4.dp))
 
                     // 상품 수량 변경 버튼
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        IconButton(onClick = { onRemove(item.product) }) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_remove),
-                                contentDescription = stringResource(R.string.remove_button_text)
-                            )
-                        }
-                        Text(
-                            text = item.count.toString(),
-                            fontSize = 23.sp,
-                            modifier = Modifier.padding(horizontal = 8.dp)
-                        )
-                        IconButton(onClick = { onAdd(item.product) }) {
-                            Icon(
-                                Icons.Filled.Add,
-                                contentDescription = stringResource(R.string.add_button_text)
-                            )
-                        }
-                    }
+                    ProductQuantitySelector(
+                        item = item,
+                        onAdd = onAdd,
+                        onRemove = onRemove,
+                        modifier = modifier
+                    )
                 }
             }
         }

@@ -7,13 +7,15 @@ import java.text.NumberFormat
 data class Product(
     val imageUrl: String,
     val name: String,
-    val price: Int
+    val price: Int,
+    val maxBuyCount: Int = 10,
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
-        parcel.readInt()
+        imageUrl = parcel.readString() ?: "",
+        name = parcel.readString() ?: "",
+        price = parcel.readInt(),
+        maxBuyCount = parcel.readInt()
     )
 
     override fun describeContents(): Int {
@@ -24,6 +26,7 @@ data class Product(
         parcel.writeString(imageUrl)
         parcel.writeString(name)
         parcel.writeInt(price)
+        parcel.writeInt(maxBuyCount)
     }
 
     companion object CREATOR : Parcelable.Creator<Product> {
